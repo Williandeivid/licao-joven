@@ -994,7 +994,10 @@ function goNextDay(lessonId){
 
   // Se é o último dia (sab), vai para próxima lição
   if(dayIdx === 6){
-    if(lessonId < 13) openLessonFromList(lessonId + 1);
+    if(lessonId < 13) {
+      openLessonFromList(lessonId + 1);
+      setTimeout(() => scrollToDay('dom'), 200);
+    }
   } else {
     // Vai para próximo dia
     const nextDayId = dayOrder[dayIdx + 1];
