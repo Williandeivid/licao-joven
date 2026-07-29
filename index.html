@@ -2615,7 +2615,7 @@ async function renderPlanSelector(){
     const pct = total ? Math.round(done/total*100) : 0;
     const isActive = activeBiblePlan === key;
     html += `<div class="plan-card ${isActive?'is-active-plan':''}">
-      <div class="plan-card-top"><span class="plan-card-name">${plan.name}${isActive?' <span class=\"active-badge\">★ Ativo</span>':''}</span><span class="plan-card-pct">${pct}%</span></div>
+      <div class="plan-card-top"><span class="plan-card-name">${plan.name}${isActive?' <span class=\"active-badge\">★ Recente</span>':''}</span><span class="plan-card-pct">${pct}%</span></div>
       <div class="plan-card-desc">${plan.desc}</div>
       <div class="plan-card-pace">${plan.pace}</div>
       <div class="plan-progress-track small"><div class="plan-progress-fill" style="width:${pct}%"></div></div>
