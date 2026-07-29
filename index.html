@@ -76,9 +76,9 @@
   .theme-toggle svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2;}
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  svg{filter:saturate(0);}
-  img{filter:saturate(0);}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; font-size:17px; line-height:1.6; padding-bottom:82px;}
+  /* Monocromatic icons only - not images or decorative SVGs */
+  .navtab svg, .timer-icon, .fav-star-btn svg, .celebrate-banner svg, .placeholder-box svg, .cal-streak-icon, .cal-view-icon svg, .cal-mini-icon, .stats-card svg, .header-icon, .gear-btn svg, .conta-avatar svg, .profile-avatar svg, .dayed-icon, .bible-subtab svg, .theme-toggle svg{filter:saturate(0);}
   body::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
     background:
