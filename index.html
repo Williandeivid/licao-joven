@@ -979,6 +979,7 @@ function toggleExpand(btn){
 
 // ============ NAVIGATION (Previous/Next) ============
 let swipeStartX = 0;
+let swipeListenersAttached = false;
 function goNextLesson(currentId){
   const nextId = currentId + 1;
   if(nextId <= 13) openLessonFromList(nextId);
@@ -989,16 +990,17 @@ function goPrevLesson(currentId){
 }
 function initSwipeNavigation(lessonId){
   const container = document.getElementById('detail-container');
-  if(!container) return;
-  container.addEventListener('touchstart', (e)=>{ swipeStartX = e.touches[0].clientX; }, false);
+  if(!container || swipeListenersAttached) return;
+  swipeListenersAttached = true;
+  container.addEventListener('touchstart', (e)=>{ swipeStartX = e.touches[0].clientX; }, {once: false});
   container.addEventListener('touchend', (e)=>{
     const swipeEndX = e.changedTouches[0].clientX;
     const diff = swipeStartX - swipeEndX;
-    if(Math.abs(diff) > 50){ // 50px threshold
-      if(diff > 0) goNextLesson(lessonId); // swipe left = next
-      else goPrevLesson(lessonId); // swipe right = previous
+    if(Math.abs(diff) > 50){
+      if(diff > 0) goNextLesson(lessonId);
+      else goPrevLesson(lessonId);
     }
-  }, false);
+  }, {once: false});
 }
 
 async function renderLessonDetail(lessonId, fromList){
