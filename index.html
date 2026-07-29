@@ -947,7 +947,7 @@ function renderDayCard(lessonId, day, idx, progress, content){
         <div class="options">${shuffledQ[i].opts.map((o,oi)=>`<button class="opt ${kahootClasses[oi]}" data-v="${String.fromCharCode(65+oi)}">${o}</button>`).join('')}</div>
       </div>`;
     });
-    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>Você levou <b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>Acertos: <b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span><button class="quiz-refazer-btn" onclick="refazerQuiz(${lessonId},'${d.id}')">🔄 Refazer</button></div>
+    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>Você levou <b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>Acertos: <b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span><button class="quiz-refazer-btn" onclick="refazerQuiz(${lessonId},'${day.id}')">🔄 Refazer</button></div>
     <button class="reveal-btn" onclick="toggleGabarito(this)">Ver gabarito completo</button>
     <div class="gabarito">${newAnswers.map((a,i)=>(i+1)+'-'+a).join(' · ')}</div>
     </div>`;
