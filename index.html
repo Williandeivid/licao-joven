@@ -614,12 +614,10 @@
     font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:700; text-transform:uppercase;
   }
   .navtab svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2;}
-  [data-theme="dark"] .navtab{ color:var(--ink-soft); }
-  [data-theme="reading"] .navtab{ color:var(--ink-soft); }
-  [data-theme="neutral"] .navtab{ color:var(--ink-soft); }
   .navtab.active{color:var(--violet); background:var(--tint-violet);}
-  [data-theme="dark"] .navtab{ color:#9090c0; }
-  [data-theme="dark"] .navtab.active{ color:#6c4ce0; background:rgba(108,76,224,0.12); }
+  [data-theme="dark"] .navtab.active{ color:var(--violet); background:rgba(108,76,224,0.12); }
+  [data-theme="reading"] .navtab.active{ color:var(--violet); background:var(--tint-violet); }
+  [data-theme="neutral"] .navtab.active{ color:var(--violet); background:var(--tint-violet); }
 
   /* ===== FASES 1,2,3: SPACED REPETITION + MENTAL MAP + FEEDBACK ===== */
   .streak-display{display:flex; align-items:center; gap:8px; font-family:'Unbounded', sans-serif; font-weight:800; font-size:1.1rem; color:var(--pink); padding:8px 14px; background:linear-gradient(90deg, rgba(255,93,143,0.1), rgba(166,226,46,0.1)); border-radius:12px;}
