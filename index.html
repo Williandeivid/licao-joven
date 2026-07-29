@@ -211,6 +211,8 @@
   .gabarito.show{display:block;}
   .quiz-result{ display:none; margin:20px 0; padding:18px 22px; border-radius:18px; background:linear-gradient(120deg, var(--violet), var(--pink)); color:#fff; font-family:'JetBrains Mono', monospace; font-size:13.5px; font-weight:700; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; box-shadow:0 14px 28px -14px rgba(255,93,143,0.5);}
   .quiz-result.show{display:flex;}
+  .quiz-refazer-btn{background:#fff; color:var(--violet); border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; font-size:0.9em; transition:all .2s;}
+  .quiz-refazer-btn:hover{transform:scale(1.05); box-shadow:0 4px 12px rgba(0,0,0,0.2);}
   .quiz-result .big{font-size:1.3rem; font-weight:800; font-family:'Unbounded', sans-serif; color:#fff;}
 
   .tf{margin-top:28px; padding-top:24px; border-top:2px dashed var(--border);}
@@ -780,7 +782,10 @@ async function loadProgress(lessonId){
   const key = 'progress:lesson'+lessonId;
   try{
     const res = await window.storage.get(key, false);
-    if(res && res.value) return JSON.parse(res.value);
+    if(res && res.value) {
+      try { return JSON.parse(res.value); }
+      catch(e) { console.warn('Dados corrompidos, resetando...'); return {days:{}, quiz:{}}; }
+    }
   }catch(e){ /* key doesn't exist yet or storage unavailable */ }
   return memoryFallback[key] || {days:{}, quiz:{}};
 }
@@ -942,7 +947,7 @@ function renderDayCard(lessonId, day, idx, progress, content){
         <div class="options">${shuffledQ[i].opts.map((o,oi)=>`<button class="opt ${kahootClasses[oi]}" data-v="${String.fromCharCode(65+oi)}">${o}</button>`).join('')}</div>
       </div>`;
     });
-    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>Você levou <b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>Acertos: <b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span></div>
+    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>Você levou <b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>Acertos: <b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span><button class="quiz-refazer-btn" onclick="refazerQuiz(${lessonId},'${d.id}')">🔄 Refazer</button></div>
     <button class="reveal-btn" onclick="toggleGabarito(this)">Ver gabarito completo</button>
     <div class="gabarito">${newAnswers.map((a,i)=>(i+1)+'-'+a).join(' · ')}</div>
     </div>`;
@@ -1136,7 +1141,10 @@ async function loadFavorites(){
   try{
     const res = await window.storage.get('bible-favorites', false);
     favoritesCache = res && res.value ? JSON.parse(res.value) : [];
-  }catch(e){ favoritesCache = []; }
+  }catch(e){
+    favoritesCache = [];
+    console.warn('Favoritos corrompidos, resetando...', e);
+  }
   return favoritesCache;
 }
 async function saveFavorites(){
@@ -1212,6 +1220,15 @@ async function marcarConcluido(btn){
   btn.classList.add('done');
   btn.textContent = '✓ Dia concluído';
   await saveProgress(lessonId, progress);
+}
+
+function refazerQuiz(lessonId, dayId){
+  const p = progressCache[lessonId] || {days:{}, quiz:{}};
+  if(!p.quiz) p.quiz = {};
+  delete p.quiz[dayId];
+  progressCache[lessonId] = p;
+  saveProgress(lessonId, p);
+  renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
 }
 
 function bindDayInteractions(lessonId, content, progress){
