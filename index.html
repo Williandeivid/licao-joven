@@ -901,7 +901,7 @@ function renderDayCard(lessonId, day, idx, progress, content){
   }
   if(day.summary){ html += `<p class="day-summary">${day.summary}</p>`; }
   if(day.id === 'dom'){
-    html += `<div class="week-base-note">📖 Texto-base da semana: <b onclick="openBibleReference('${content.bibleref}')" style="cursor:pointer; text-decoration:underline; color:var(--violet);">${content.bibleref}</b></div>`;
+    html += `<div class="week-base-note">Texto-base da semana: <b onclick="openBibleReference('${content.bibleref}')" style="cursor:pointer; text-decoration:underline; color:var(--violet);">${content.bibleref}</b></div>`;
   }
   html += day.body.join('\n');
 
