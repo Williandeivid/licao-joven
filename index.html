@@ -638,6 +638,20 @@
   .radial-mindmap h3{font-family:'Unbounded', sans-serif; font-weight:700; color:var(--ink); text-align:center; margin:0 0 16px;}
   .radial-mindmap svg{display:block; width:100%;}
 
+  /* ===== VERSION SELECTOR MODAL ===== */
+  .version-modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:100; align-items:center; justify-content:center;}
+  .version-modal.show{display:flex;}
+  .version-modal-content{background:var(--card); border-radius:20px; padding:28px 24px; max-width:320px; box-shadow:0 20px 60px rgba(0,0,0,0.3); text-align:center;}
+  .version-modal h2{font-family:'Unbounded', sans-serif; font-weight:800; color:var(--heading); margin:0 0 12px; font-size:1.4rem;}
+  .version-modal p{color:var(--ink-soft); margin:0 0 20px; font-size:14px;}
+  .version-modal-buttons{display:flex; gap:12px; flex-direction:column;}
+  .version-btn{background:var(--violet); color:#fff; border:none; padding:14px 20px; border-radius:12px; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:14px; cursor:pointer; transition:all .15s ease;}
+  .version-btn:hover{background:var(--violet-light); transform:translateY(-2px); box-shadow:0 6px 14px rgba(108,76,224,0.4);}
+  .version-btn.secondary{background:var(--tint-violet); color:var(--violet);}
+  .version-btn.secondary:hover{background:var(--border);}
+  .version-modal-close{background:var(--tint-violet); color:var(--ink-soft); border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:16px; margin-top:12px; transition:all .15s ease;}
+  .version-modal-close:hover{background:var(--border);}
+
   @keyframes pulse{0%{transform:scale(1); box-shadow:0 0 0 0 rgba(108,76,224,0.7);} 50%{transform:scale(1.05); box-shadow:0 0 0 8px rgba(108,76,224,0);} 100%{transform:scale(1); box-shadow:0 0 0 0 rgba(108,76,224,0);}}
 </style>
 </head>
@@ -881,7 +895,7 @@ function renderDayCard(lessonId, day, idx, progress, content){
   }
   if(day.summary){ html += `<p class="day-summary">${day.summary}</p>`; }
   if(day.id === 'dom'){
-    html += `<div class="week-base-note">📖 Texto-base da semana: <b>${content.bibleref}</b></div>`;
+    html += `<div class="week-base-note">📖 Texto-base da semana: <b onclick="openBibleReference('${content.bibleref}')" style="cursor:pointer; text-decoration:underline; color:var(--violet);">${content.bibleref}</b></div>`;
   }
   html += day.body.join('\n');
 
@@ -2746,6 +2760,43 @@ function renderBibleBooks(){
   container.innerHTML = html;
 }
 
+let pendingBibleChapter = null;
+
+function showBibleVersionModal(chapter){
+  pendingBibleChapter = chapter;
+  document.getElementById('version-modal').classList.add('show');
+}
+
+function closeBibleVersionModal(){
+  document.getElementById('version-modal').classList.remove('show');
+  pendingBibleChapter = null;
+}
+
+function selectBibleVersion(version){
+  bibleState.translation = version;
+  closeBibleVersionModal();
+  if(pendingBibleChapter !== null){
+    openBibleChapter(pendingBibleChapter);
+  }
+}
+
+function openBibleReference(ref){
+  // Parse "João 16" ou "João 16:1-5" → { livro, capítulo }
+  const parts = ref.trim().split(/[\s:]/);
+  if(parts.length < 2) return;
+
+  const bookName = parts[0];
+  const chapter = parseInt(parts[1]);
+  const book = BIBLE_BOOKS.find(b => b.name === bookName);
+
+  if(!book || !chapter) return;
+
+  bibleState.book = book.id;
+  bibleState.returnTo = 'read';
+  goBible();
+  showBibleVersionModal(chapter);
+}
+
 function openBibleBook(bookId){
   bibleState.returnTo = 'read';
   bibleState.book = bookId;
@@ -3065,5 +3116,19 @@ function generateRadialMindMap(lessonId) {
   goHome();
 })();
 </script>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="version-modal" class="version-modal">
+  <div class="version-modal-content">
+    <h2>Qual versão?</h2>
+    <p>Escolha a tradução que deseja ler</p>
+    <div class="version-modal-buttons">
+      <button class="version-btn" onclick="selectBibleVersion('ara')">📖 ARA (Almeida)</button>
+      <button class="version-btn secondary" onclick="selectBibleVersion('nvi')">📕 NVI</button>
+    </div>
+    <button class="version-modal-close" onclick="closeBibleVersionModal()">✕</button>
+  </div>
+</div>
+
 </body>
 </html>
