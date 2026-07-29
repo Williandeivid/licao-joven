@@ -599,6 +599,10 @@
   .plan-day-label{font-size:13.5px; color:var(--ink); line-height:1.4;}
 
   footer{text-align:center; padding:30px 20px 20px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ink-soft);}
+  .nav-btn{background:var(--violet); color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; font-weight:600; font-size:13px; transition:all 0.2s; display:inline-flex; align-items:center; gap:6px;}
+  .nav-btn:hover:not(:disabled){background:var(--violet-light); color:var(--text-primary);}
+  .nav-btn:disabled{opacity:0.3; cursor:not-allowed;}
+  @media(max-width:600px){.nav-btn{padding:8px 12px; font-size:12px;}}
 
   /* ===== BOTTOM NAV ===== */
   .bottomnav{
@@ -973,6 +977,30 @@ function toggleExpand(btn){
   btn.nextElementSibling.classList.toggle('open');
 }
 
+// ============ NAVIGATION (Previous/Next) ============
+let swipeStartX = 0;
+function goNextLesson(currentId){
+  const nextId = currentId + 1;
+  if(nextId <= 13) openLessonFromList(nextId);
+}
+function goPrevLesson(currentId){
+  const prevId = currentId - 1;
+  if(prevId >= 1) openLessonFromList(prevId);
+}
+function initSwipeNavigation(lessonId){
+  const container = document.getElementById('detail-container');
+  if(!container) return;
+  container.addEventListener('touchstart', (e)=>{ swipeStartX = e.touches[0].clientX; }, false);
+  container.addEventListener('touchend', (e)=>{
+    const swipeEndX = e.changedTouches[0].clientX;
+    const diff = swipeStartX - swipeEndX;
+    if(Math.abs(diff) > 50){ // 50px threshold
+      if(diff > 0) goNextLesson(lessonId); // swipe left = next
+      else goPrevLesson(lessonId); // swipe right = previous
+    }
+  }, false);
+}
+
 async function renderLessonDetail(lessonId, fromList){
   const meta = LESSONS_META.find(l=>l.id===lessonId);
   const content = LESSONS_CONTENT.find(l=>l.id===lessonId);
@@ -1033,7 +1061,13 @@ async function renderLessonDetail(lessonId, fromList){
   content.days.forEach((d, idx)=>{
     html += renderDayCard(lessonId, d, idx, progress, content);
   });
-  html += `</main><footer>Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · resumo de estudo pessoal</footer>`;
+  html += `</main><footer style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+    <div style="flex:1; text-align:center;">Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · resumo de estudo pessoal</div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+      <button class="nav-btn prev-btn" onclick="goPrevLesson(${lessonId})" style="opacity:${lessonId>1?1:0.3}; cursor:${lessonId>1?'pointer':'default'}" ${lessonId<=1?'disabled':''}><span>← Anterior</span></button>
+      <button class="nav-btn next-btn" onclick="goNextLesson(${lessonId})" style="opacity:${lessonId<13?1:0.3}; cursor:${lessonId<13?'pointer':'default'}" ${lessonId>=13?'disabled':''}><span>Próximo →</span></button>
+    </div>
+  </footer>`;
 
   container.innerHTML = html;
   // Auto-scroll para o dia de hoje
@@ -1049,6 +1083,7 @@ async function renderLessonDetail(lessonId, fromList){
   }
   bindDayInteractions(lessonId, content, progress);
   scheduleBibleCardAutoHide();
+  initSwipeNavigation(lessonId);
 }
 
 async function getBiblePlanHomeCard(){
