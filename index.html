@@ -895,7 +895,7 @@ function renderDayCard(lessonId, day, idx, progress, content){
   const done = !!(progress.days && progress.days[day.id]);
   const savedQuiz = progress.quiz && progress.quiz[day.id];
 
-  let html = `<section class="day" id="day-${day.id}" data-letter="${day.letter}" style="--dcolor:${colorVar}">`;
+  let html = `<section class="day" id="day-${day.id}" data-dayId="${day.id}" data-letter="${day.letter}" style="--dcolor:${colorVar}">`;
   html += `<div class="day-date">${day.date}</div><h2>${day.title}</h2>`;
   html += `<div class="keyideas">${day.keyideas}</div>`;
   html += `<div class="centraltexts">${day.centraltexts.map(t=>`<span>${t}</span>`).join('')}</div>`;
@@ -1036,8 +1036,17 @@ async function renderLessonDetail(lessonId, fromList){
   html += `</main><footer>Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · resumo de estudo pessoal</footer>`;
 
   container.innerHTML = html;
-  const firstDay = document.querySelector('.day');
-  if(firstDay) firstDay.classList.add('selected');
+  // Auto-scroll para o dia de hoje
+  const today = new Date();
+  const todayWeekDay = today.getDay(); // 0=dom, 1=seg, 2=ter, 3=qua, 4=qui, 5=sex, 6=sab
+  const dayMap = {0:'dom', 1:'seg', 2:'ter', 3:'qua', 4:'qui', 5:'sex', 6:'sab'};
+  const todayId = dayMap[todayWeekDay];
+  if(document.getElementById('day-'+todayId)) {
+    scrollToDay(todayId);
+  } else {
+    const firstDay = document.querySelector('.day');
+    if(firstDay) firstDay.classList.add('selected');
+  }
   bindDayInteractions(lessonId, content, progress);
   scheduleBibleCardAutoHide();
 }
