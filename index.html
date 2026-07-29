@@ -33,6 +33,38 @@
   [data-theme="dark"] body::before{ opacity:0.06; }
   [data-theme="dark"] .day-tirinha img{ opacity:0.92; }
 
+  /* ===== READING MODE (Confortável para leitura prolongada) ===== */
+  [data-theme="reading"]{
+    --bg:#faf9f7; --card:#ffffff;
+    --ink:#2c2c2c; --ink-soft:#808080;
+    --heading:#1a1a1a;
+    --border:#e0dfd9; --border2:#ede9e0;
+    --tint-violet:#f5f1e8; --tint-green:#eff4e8; --tint-amber:#fef7e8;
+    --violet:#8b7355; --violet-light:#d4c5b0;
+    --pink:#c97a88; --pink-light:#e8d4da;
+    --lime:#9ab83c; --lime-dark:#6d8c2a;
+    --sun:#b8956a; --sun-dark:#7a6b4f;
+    --coral:#a67c52; --red:#9d5a5a; --red-light:#e8d4d4;
+    --day1:#8b7355; --day2:#c97a88; --day3:#9ab83c; --day4:#b8956a; --day5:#a67c52; --day6:#9d7c8f; --day7:#8fa88c;
+  }
+  [data-theme="reading"] body::before{ opacity:0.02; }
+
+  /* ===== NEUTRAL MODE (Minimalista profissional com Teal accent) ===== */
+  [data-theme="neutral"]{
+    --bg:#fafafa; --card:#ffffff;
+    --ink:#2c2c2c; --ink-soft:#808080;
+    --heading:#1a1a1a;
+    --border:#e8e8e8; --border2:#f0f0f0;
+    --tint-violet:#f0f0f0; --tint-green:#f0f8f5; --tint-amber:#faf8f0;
+    --violet:#06b6d4; --violet-light:#a0e7e5;
+    --pink:#06b6d4; --pink-light:#d0f8f6;
+    --lime:#06b6d4; --lime-dark:#0891b2;
+    --sun:#06b6d4; --sun-dark:#0891b2;
+    --coral:#06b6d4; --red:#ef4763; --red-light:#ffe0e6;
+    --day1:#06b6d4; --day2:#0891b2; --day3:#06b6d4; --day4:#0891b2; --day5:#06b6d4; --day6:#06b6d4; --day7:#0891b2;
+  }
+  [data-theme="neutral"] body::before{ opacity:0; }
+
   .theme-toggle{
     position:fixed; top:14px; right:14px; z-index:60;
     width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
@@ -362,6 +394,12 @@
   .conta-switch .knob{position:absolute; top:2px; left:2px; width:22px; height:22px; border-radius:50%; background:#fff; transition:transform .2s ease; box-shadow:0 2px 4px rgba(0,0,0,0.2);}
   .conta-switch.on{background:var(--violet);}
   .conta-switch.on .knob{transform:translateX(20px);}
+  .theme-selector{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;}
+  .theme-option{background:var(--tint-violet); color:var(--violet); border:2px solid transparent; padding:12px 16px; border-radius:12px; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13px; cursor:pointer; transition:all .15s ease; text-align:center;}
+  .theme-option:hover{background:var(--border);}
+  .theme-option.active{background:var(--violet); color:#fff; border-color:var(--violet);}
+  [data-theme="dark"] .theme-option{background:rgba(108,76,224,0.12); color:#9090c0;}
+  [data-theme="dark"] .theme-option.active{background:#6c4ce0; color:#fff;}
   .profile-top{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
   .profile-avatar{width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
   .profile-avatar svg{width:24px; height:24px; stroke:#fff; fill:none; stroke-width:1.8;}
@@ -565,6 +603,7 @@
     padding:10px 16px calc(10px + env(safe-area-inset-bottom));
     transition:transform .28s ease;
   }
+  [data-theme="dark"] .bottomnav{ background:rgba(42,42,62,0.98); border-top-color:#332d54; }
   .bottomnav.hide-bar{ transform:translateY(100%);}
   .navtab{
     display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none;
@@ -1332,9 +1371,12 @@ async function renderConta(){
     </div>
 
     <div class="conta-card">
-      <div class="conta-row">
-        <div><div class="conta-row-title">Modo escuro</div><div class="conta-row-sub">Alterna a aparência do app</div></div>
-        <button class="conta-switch ${isDark?'on':''}" id="conta-theme-switch" onclick="toggleThemeFromConta()"><span class="knob"></span></button>
+      <div class="conta-section-title">Design</div>
+      <div class="theme-selector">
+        <button class="theme-option" data-theme="light" onclick="setTheme('light')" title="Light Mode">☀️ Claro</button>
+        <button class="theme-option" data-theme="dark" onclick="setTheme('dark')" title="Dark Mode">🌙 Escuro</button>
+        <button class="theme-option" data-theme="reading" onclick="setTheme('reading')" title="Reading Mode">📖 Leitura</button>
+        <button class="theme-option" data-theme="neutral" onclick="setTheme('neutral')" title="Neutral Mode">⚙️ Neutro</button>
       </div>
     </div>
 
@@ -2878,13 +2920,21 @@ const SUN_ICON = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2
 const MOON_ICON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
 
 function applyTheme(theme){
-  if(theme === 'dark'){
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('theme-icon').innerHTML = MOON_ICON;
-  } else {
+  const validThemes = ['light', 'dark', 'reading', 'neutral'];
+  if(!validThemes.includes(theme)) theme = 'light';
+
+  if(theme === 'light'){
     document.documentElement.removeAttribute('data-theme');
     document.getElementById('theme-icon').innerHTML = SUN_ICON;
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('theme-icon').innerHTML = theme === 'dark' ? MOON_ICON : SUN_ICON;
   }
+
+  // Atualizar botões ativos
+  document.querySelectorAll('.theme-option').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.theme === theme);
+  });
 }
 
 async function toggleTheme(){
@@ -2894,13 +2944,17 @@ async function toggleTheme(){
   try{ await window.storage.set('theme-preference', next, false); }catch(e){}
 }
 
+async function setTheme(theme){
+  applyTheme(theme);
+  try{ await window.storage.set('theme-preference', theme, false); }catch(e){}
+}
+
 async function loadTheme(){
   try{
     const res = await window.storage.get('theme-preference', false);
-    applyTheme(res && res.value === 'dark' ? 'dark' : 'light');
+    applyTheme(res && res.value ? res.value : 'light');
   }catch(e){
     applyTheme('light');
-    applyTheme(prefersDark ? 'dark' : 'light');
   }
 }
 
