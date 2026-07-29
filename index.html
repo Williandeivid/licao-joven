@@ -977,17 +977,49 @@ function toggleExpand(btn){
   btn.nextElementSibling.classList.toggle('open');
 }
 
-// ============ NAVIGATION (Previous/Next) ============
+// ============ NAVIGATION (Previous/Next by Day) ============
 let swipeStartX = 0;
 let swipeListenersAttached = false;
-function goNextLesson(currentId){
-  const nextId = currentId + 1;
-  if(nextId <= 13) openLessonFromList(nextId);
+const dayOrder = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+
+function getCurrentDayId(){
+  const selected = document.querySelector('.day.selected');
+  return selected ? selected.getAttribute('data-dayId') : 'dom';
 }
-function goPrevLesson(currentId){
-  const prevId = currentId - 1;
-  if(prevId >= 1) openLessonFromList(prevId);
+
+function goNextDay(lessonId){
+  const currentDayId = getCurrentDayId();
+  const dayIdx = dayOrder.indexOf(currentDayId);
+  if(dayIdx === -1) return;
+
+  // Se é o último dia (sab), vai para próxima lição
+  if(dayIdx === 6){
+    if(lessonId < 13) openLessonFromList(lessonId + 1);
+  } else {
+    // Vai para próximo dia
+    const nextDayId = dayOrder[dayIdx + 1];
+    scrollToDay(nextDayId);
+  }
 }
+
+function goPrevDay(lessonId){
+  const currentDayId = getCurrentDayId();
+  const dayIdx = dayOrder.indexOf(currentDayId);
+  if(dayIdx === -1) return;
+
+  // Se é o primeiro dia (dom), vai para lição anterior
+  if(dayIdx === 0){
+    if(lessonId > 1) {
+      openLessonFromList(lessonId - 1);
+      setTimeout(() => scrollToDay('sab'), 200);
+    }
+  } else {
+    // Vai para dia anterior
+    const prevDayId = dayOrder[dayIdx - 1];
+    scrollToDay(prevDayId);
+  }
+}
+
 function initSwipeNavigation(lessonId){
   const container = document.getElementById('detail-container');
   if(!container || swipeListenersAttached) return;
@@ -997,8 +1029,8 @@ function initSwipeNavigation(lessonId){
     const swipeEndX = e.changedTouches[0].clientX;
     const diff = swipeStartX - swipeEndX;
     if(Math.abs(diff) > 50){
-      if(diff > 0) goNextLesson(lessonId);
-      else goPrevLesson(lessonId);
+      if(diff > 0) goNextDay(lessonId);
+      else goPrevDay(lessonId);
     }
   }, {once: false});
 }
@@ -1066,8 +1098,8 @@ async function renderLessonDetail(lessonId, fromList){
   html += `</main><footer style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
     <div style="flex:1; text-align:center;">Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · resumo de estudo pessoal</div>
     <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-      <button class="nav-btn prev-btn" onclick="goPrevLesson(${lessonId})" style="opacity:${lessonId>1?1:0.3}; cursor:${lessonId>1?'pointer':'default'}" ${lessonId<=1?'disabled':''}><span>← Anterior</span></button>
-      <button class="nav-btn next-btn" onclick="goNextLesson(${lessonId})" style="opacity:${lessonId<13?1:0.3}; cursor:${lessonId<13?'pointer':'default'}" ${lessonId>=13?'disabled':''}><span>Próximo →</span></button>
+      <button class="nav-btn prev-btn" onclick="goPrevDay(${lessonId})" style="cursor:pointer;"><span>← Anterior</span></button>
+      <button class="nav-btn next-btn" onclick="goNextDay(${lessonId})" style="cursor:pointer;"><span>Próximo →</span></button>
     </div>
   </footer>`;
 
