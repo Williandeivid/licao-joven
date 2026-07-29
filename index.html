@@ -2677,19 +2677,14 @@ async function renderBiblePlan(){
   html += `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${plan.name}
     <div style="position:relative;">
       <button class="gear-btn" onclick="togglePlanMenuItems('${key}')" style="filter:saturate(0);"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
-      <div id="plan-menu-items-${key}" style="position:absolute;top:100%;right:0;background:var(--card);border:2px solid var(--border);border-radius:8px;padding:8px;min-width:180px;z-index:20;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
-        <button onclick="sharePlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;filter:saturate(0);">📤 Compartilhar</button>
-        <button onclick="configPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;filter:saturate(0);">⚙️ Configurações</button>
-        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;filter:saturate(0);">ℹ️ Informações</button>
-        <button onclick="stopPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:#ff6b6b;font-size:14px;border-radius:6px;filter:saturate(0);">⏹️ Parar Plano</button>
+      <div id="plan-menu-items-${key}" style="position:absolute;top:100%;right:0;background:var(--card);border:2px solid var(--border);border-radius:8px;padding:8px;min-width:200px;z-index:20;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+        <button onclick="sharePlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M12 2v10m5-5l-5-5-5 5"/></svg><span>Compartilhar</span></button>
+        <button onclick="configPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08 0l4.24-4.24"/></svg><span>Configurações</span></button>
+        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>Informações</span></button>
+        <button onclick="stopPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:#ff6b6b;font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><rect x="6" y="6" width="12" height="12"/></svg><span>Parar Plano</span></button>
       </div>
     </div>
   </h1><p>${plan.desc}</p></div>
-  <div class="plan-settings-panel" id="plan-settings-panel">
-    <label class="conta-row-title">Data de início do plano</label>
-    <input type="date" id="plan-startdate-input" value="${startDateStr}">
-    <button class="dayed-save" onclick="savePlanStartDateFromInput()">Salvar nova data</button>
-  </div>
   <div class="bible-wrap">
     <div class="bible-crumbs"><button onclick="renderPlanSelector()">← Todos os planos</button></div>
     <div class="plan-summary">
@@ -2783,9 +2778,19 @@ function sharePlanItem(key){
   alert('Compartilhar: '+plan.name);
 }
 
-function configPlanItem(key){
+async function configPlanItem(key){
   closePlanMenu(key);
-  document.getElementById('plan-settings-panel').classList.toggle('open');
+  const plan = BIBLE_PLANS[key];
+  const startDateStr = planStartDateCache[key] || await loadPlanStartDate(key);
+  const prog = await loadPlanProgress(key);
+  const scheduleIdx = computeCurrentDayIndex(startDateStr, plan.sequence.length);
+  const daysDone = Object.keys(prog.read).length;
+  const aheadBehind = daysDone - (scheduleIdx + 1);
+
+  const endDate = new Date(startDateStr);
+  endDate.setDate(endDate.getDate() + plan.sequence.length - 1);
+
+  alert(`CONFIGURAÇÕES DO PLANO\n\nDia ${scheduleIdx + 1} de ${plan.sequence.length}\n\nComeçou: ${new Date(startDateStr).toLocaleDateString('pt-BR')}\nTermina: ${endDate.toLocaleDateString('pt-BR')}\n\n${aheadBehind > 0 ? `${aheadBehind} dia(s) adiantado` : aheadBehind < 0 ? `${Math.abs(aheadBehind)} dia(s) atrasado` : 'Em dia!'}`);
 }
 
 function infoPlanItem(key){
