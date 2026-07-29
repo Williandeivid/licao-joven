@@ -2675,15 +2675,13 @@ async function renderBiblePlan(){
 
   let html = bibleSubtabsHTML('plan');
   html += `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${plan.name}
-    <div style="position:relative;">
-      <button class="gear-btn" onclick="togglePlanMenu()" style="position:relative; z-index:10;"><svg viewBox="0 0 24 24" style="width:20px; height:20px; stroke:currentColor; stroke-width:2; fill:none;"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
-      <div class="plan-menu" id="plan-menu" style="position:absolute; top:100%; right:0; background:var(--card); border:2px solid var(--border); border-radius:8px; padding:4px; min-width:180px; z-index:20; display:none; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
-        <button onclick="sharePlan('${key}')" style="width:100%; padding:10px; border:none; background:none; text-align:left; cursor:pointer; color:var(--ink); font-size:14px; border-radius:6px;">📤 Compartilhar</button>
-        <button onclick="resetPlanDate('${key}')" style="width:100%; padding:10px; border:none; background:none; text-align:left; cursor:pointer; color:var(--ink); font-size:14px; border-radius:6px;">🔄 Voltar para hoje</button>
-        <button onclick="togglePlanSettings()" style="width:100%; padding:10px; border:none; background:none; text-align:left; cursor:pointer; color:var(--ink); font-size:14px; border-radius:6px;">📅 Ajustar data</button>
-      </div>
-    </div>
+    <button class="gear-btn" onclick="togglePlanSettings()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
   </h1><p>${plan.desc}</p></div>
+  <div class="plan-settings-panel" id="plan-settings-panel">
+    <label class="conta-row-title">Data de início do plano</label>
+    <input type="date" id="plan-startdate-input" value="${startDateStr}">
+    <button class="dayed-save" onclick="savePlanStartDateFromInput()">Salvar nova data</button>
+  </div>
   <div class="bible-wrap">
     <div class="bible-crumbs"><button onclick="renderPlanSelector()">← Todos os planos</button></div>
     <div class="plan-summary">
@@ -2761,64 +2759,8 @@ async function openPlanChapterFromList(bookId, chapter){
   openBibleChapter(chapter);
 }
 
-function togglePlanMenu(){
-  const menu = document.getElementById('plan-menu');
-  if(menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-}
-
-function closePlanMenu(){
-  const menu = document.getElementById('plan-menu');
-  if(menu) menu.style.display = 'none';
-}
-
-async function sharePlan(key){
-  closePlanMenu();
-  const plan = BIBLE_PLANS[key];
-  const text = `Estou lendo ${plan.name} no plano bíblico "Lições Jovens Q3 2026"!`;
-  if(navigator.share){
-    try {
-      await navigator.share({title: 'Lições Jovens', text: text});
-    } catch(e){ console.log('Share cancelled'); }
-  } else {
-    alert(text);
-  }
-}
-
-async function resetPlanDate(key){
-  closePlanMenu();
-  const today = dateKey(new Date());
-  await savePlanStartDateKey(key, today);
-  planStartDateCache[key] = today;
-  renderBiblePlan();
-}
-
-async function adjustPlanDate(key){
-  closePlanMenu();
-  const plan = BIBLE_PLANS[key];
-  await loadPlanProgress(key);
-  const prog = planProgressCache[key];
-  const startDateStr = planStartDateCache[key] || await loadPlanStartDate(key);
-  const scheduleIdx = computeCurrentDayIndex(startDateStr, plan.totalDays);
-  const daysDone = plan.days.filter(d=>d.every(r=>prog.read[r.book+'-'+r.chapter])).length;
-  const aheadBehind = daysDone - (scheduleIdx + 1);
-
-  if(aheadBehind >= 0){
-    alert('Você está em dia! ✓');
-    return;
-  }
-
-  const daysToAdjust = Math.abs(aheadBehind);
-  const startDate = new Date(startDateStr);
-  startDate.setDate(startDate.getDate() - daysToAdjust);
-  const newStartDate = dateKey(startDate);
-  await savePlanStartDateKey(key, newStartDate);
-  planStartDateCache[key] = newStartDate;
-  renderBiblePlan();
-}
-
 function togglePlanSettings(){
-  const menu = document.getElementById('plan-menu');
-  if(menu) menu.style.display = 'none';
+  document.getElementById('plan-settings-panel').classList.toggle('open');
 }
 
 async function savePlanStartDateFromInput(){
