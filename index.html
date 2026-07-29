@@ -76,6 +76,8 @@
   .theme-toggle svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2;}
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  svg{filter:saturate(0);}
+  img{filter:saturate(0);}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; font-size:17px; line-height:1.6; padding-bottom:82px;}
   body::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
@@ -132,7 +134,8 @@
   main{max-width:760px; margin:0 auto; padding:40px 20px 60px; position:relative; z-index:1;}
 
   /* ===== DAY CARD ===== */
-  .day{ background:var(--card); border:none; border-radius:26px; padding:40px 32px 36px; margin-bottom:56px; position:relative; box-shadow:0 2px 0 rgba(28,23,53,0.04), 0 24px 48px -30px rgba(28,23,53,0.35);}
+  .day{ background:var(--card); border:none; border-radius:26px; padding:40px 32px 36px; margin-bottom:56px; position:relative; box-shadow:0 2px 0 rgba(28,23,53,0.04), 0 24px 48px -30px rgba(28,23,53,0.35); display:none;}
+  .day.selected{ display:block;}
   .day::after{ content:""; position:absolute; top:0; left:24px; right:24px; height:6px; border-radius:0 0 8px 8px; background:var(--dcolor, var(--violet));}
   .day::before{ content:attr(data-letter); position:absolute; top:-20px; left:32px; width:48px; height:48px; border-radius:16px; color:#fff; font-family:'Unbounded', sans-serif; font-weight:800; font-size:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px -6px rgba(28,23,53,0.4); transform:rotate(-6deg); background:var(--dcolor, var(--violet)); z-index:35;}
   .day-date{font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--pink); margin:10px 0 6px; font-weight:700;}
@@ -607,10 +610,13 @@
   .bottomnav.hide-bar{ transform:translateY(100%);}
   .navtab{
     display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none;
-    cursor:pointer; padding:6px 14px; border-radius:14px; color:#a89ee0; transition:all .15s ease;
+    cursor:pointer; padding:6px 14px; border-radius:14px; color:var(--violet); transition:all .15s ease;
     font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:700; text-transform:uppercase;
   }
   .navtab svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2;}
+  [data-theme="dark"] .navtab{ color:var(--violet); }
+  [data-theme="reading"] .navtab{ color:var(--violet); }
+  [data-theme="neutral"] .navtab{ color:var(--violet); }
   .navtab.active{color:var(--violet); background:var(--tint-violet);}
   [data-theme="dark"] .navtab{ color:#9090c0; }
   [data-theme="dark"] .navtab.active{ color:#6c4ce0; background:rgba(108,76,224,0.12); }
@@ -1027,6 +1033,8 @@ async function renderLessonDetail(lessonId, fromList){
   html += `</main><footer>Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · resumo de estudo pessoal</footer>`;
 
   container.innerHTML = html;
+  const firstDay = document.querySelector('.day');
+  if(firstDay) firstDay.classList.add('selected');
   bindDayInteractions(lessonId, content, progress);
   scheduleBibleCardAutoHide();
 }
@@ -1071,12 +1079,14 @@ function scheduleBibleCardAutoHide(){
     if(!el || !el.parentNode) return;
     el.classList.add('hbc-fadeout');
     setTimeout(()=>{ if(el && el.parentNode) el.remove(); }, 400);
-  }, 10000);
+  }, 5000);
 }
 
 function scrollToDay(dayId){
   const el = document.getElementById('day-'+dayId);
   if(!el) return;
+  document.querySelectorAll('.day').forEach(d => d.classList.remove('selected'));
+  el.classList.add('selected');
   const dash = document.querySelector('.dashboard');
   const offset = (dash ? dash.getBoundingClientRect().height : 0) + 16;
   const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -1387,10 +1397,10 @@ async function renderConta(){
     <div class="conta-card">
       <div class="conta-section-title">Design</div>
       <div class="theme-selector">
-        <button class="theme-option" data-theme="light" onclick="setTheme('light')" title="Light Mode">☀️ Claro</button>
-        <button class="theme-option" data-theme="dark" onclick="setTheme('dark')" title="Dark Mode">🌙 Escuro</button>
-        <button class="theme-option" data-theme="reading" onclick="setTheme('reading')" title="Reading Mode">📖 Leitura</button>
-        <button class="theme-option" data-theme="neutral" onclick="setTheme('neutral')" title="Neutral Mode">⚙️ Neutro</button>
+        <button class="theme-option" data-theme="light" onclick="setTheme('light')" title="Light Mode">Claro</button>
+        <button class="theme-option" data-theme="dark" onclick="setTheme('dark')" title="Dark Mode">Escuro</button>
+        <button class="theme-option" data-theme="reading" onclick="setTheme('reading')" title="Reading Mode">Leitura</button>
+        <button class="theme-option" data-theme="neutral" onclick="setTheme('neutral')" title="Neutral Mode">Neutro</button>
       </div>
     </div>
 
@@ -3123,8 +3133,8 @@ function generateRadialMindMap(lessonId) {
     <h2>Qual versão?</h2>
     <p>Escolha a tradução que deseja ler</p>
     <div class="version-modal-buttons">
-      <button class="version-btn" onclick="selectBibleVersion('ara')">📖 ARA (Almeida)</button>
-      <button class="version-btn secondary" onclick="selectBibleVersion('nvi')">📕 NVI</button>
+      <button class="version-btn" onclick="selectBibleVersion('ara')">ARA (Almeida)</button>
+      <button class="version-btn secondary" onclick="selectBibleVersion('nvi')">NVI</button>
     </div>
     <button class="version-modal-close" onclick="closeBibleVersionModal()">✕</button>
   </div>
