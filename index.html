@@ -1618,8 +1618,18 @@ async function goHome(){
   hideAllViews();
   document.getElementById('detail-container').style.display = 'block';
   document.getElementById('tab-home').classList.add('active');
-  await renderLessonDetail(getCurrentLessonId(), false);
+  const lessonId = getCurrentLessonId();
+  await renderLessonDetail(lessonId, false);
   window.scrollTo(0,0);
+  const today = new Date();
+  const todayWeekDay = today.getDay();
+  const dayMap = {0:'dom', 1:'seg', 2:'ter', 3:'qua', 4:'qui', 5:'sex', 6:'sab'};
+  const todayId = dayMap[todayWeekDay];
+  setTimeout(() => {
+    if(document.getElementById('day-'+todayId)) {
+      scrollToDay(todayId);
+    }
+  }, 100);
 }
 
 // Newest quarter goes FIRST in this array.
