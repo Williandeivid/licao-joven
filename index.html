@@ -39,13 +39,13 @@
     --ink:#2c2c2c; --ink-soft:#808080;
     --heading:#1a1a1a;
     --border:#e0dfd9; --border2:#ede9e0;
-    --tint-violet:#f5f1e8; --tint-green:#f5f1e8; --tint-amber:#f5f1e8;
-    --violet:#8b7355; --violet-light:#c9bfb0;
-    --pink:#8b7355; --pink-light:#e8e4dc;
-    --lime:#8b7355; --lime-dark:#6b5a47;
-    --sun:#8b7355; --sun-dark:#6b5a47;
-    --coral:#8b7355; --red:#8b7355; --red-light:#e8e4dc;
-    --day1:#8b7355; --day2:#8b7355; --day3:#8b7355; --day4:#8b7355; --day5:#8b7355; --day6:#8b7355; --day7:#8b7355;
+    --tint-violet:#f5f1e8; --tint-green:#f0e6d2; --tint-amber:#f0e6d2;
+    --violet:#9d7a54; --violet-light:#d4c4b0;
+    --pink:#9d7a54; --pink-light:#ead9c3;
+    --lime:#9d7a54; --lime-dark:#7a6447;
+    --sun:#9d7a54; --sun-dark:#7a6447;
+    --coral:#9d7a54; --red:#9d7a54; --red-light:#ead9c3;
+    --day1:#9d7a54; --day2:#9d7a54; --day3:#9d7a54; --day4:#9d7a54; --day5:#9d7a54; --day6:#9d7a54; --day7:#9d7a54;
   }
   [data-theme="reading"] body::before{ opacity:0.02; }
 
@@ -55,13 +55,13 @@
     --ink:#2c2c2c; --ink-soft:#808080;
     --heading:#1a1a1a;
     --border:#e8e8e8; --border2:#f0f0f0;
-    --tint-violet:#f0f8f8; --tint-green:#f0f8f8; --tint-amber:#f8f6f0;
-    --violet:#06b6d4; --violet-light:#a0e7e5;
-    --pink:#06b6d4; --pink-light:#d0f8f6;
-    --lime:#06b6d4; --lime-dark:#0891b2;
-    --sun:#06b6d4; --sun-dark:#0891b2;
-    --coral:#06b6d4; --red:#0891b2; --red-light:#d0f8f6;
-    --day1:#06b6d4; --day2:#06b6d4; --day3:#06b6d4; --day4:#06b6d4; --day5:#06b6d4; --day6:#06b6d4; --day7:#06b6d4;
+    --tint-violet:#e0f7f8; --tint-green:#e0f7f8; --tint-amber:#e0f7f8;
+    --violet:#0891b2; --violet-light:#a0e7e5;
+    --pink:#0891b2; --pink-light:#d0f8f6;
+    --lime:#0891b2; --lime-dark:#0891b2;
+    --sun:#0891b2; --sun-dark:#0891b2;
+    --coral:#0891b2; --red:#0891b2; --red-light:#d0f8f6;
+    --day1:#0891b2; --day2:#0891b2; --day3:#0891b2; --day4:#0891b2; --day5:#0891b2; --day6:#0891b2; --day7:#0891b2;
   }
   [data-theme="neutral"] body::before{ opacity:0; }
 
@@ -189,7 +189,7 @@
   .reflect li{margin-bottom:10px;}
 
   .quiz{margin-top:28px; padding-top:24px; border-top:2px dashed var(--border);}
-  .quiz-timer{ display:flex; gap:10px; align-items:center; font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:700; color:var(--heading); background:linear-gradient(90deg,var(--tint-green),#e0f7f4); border-radius:12px; padding:9px 16px; margin-bottom:18px;}
+  .quiz-timer{ display:flex; gap:10px; align-items:center; font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:700; color:var(--heading); background:var(--tint-green); border-radius:12px; padding:9px 16px; margin-bottom:18px;}
   .timer-icon{width:16px; height:16px; stroke:var(--lime-dark); fill:none; stroke-width:2.2; flex-shrink:0;}
   .quiz-timer .tval{font-weight:800; color:var(--pink);}
   .q-block{margin-bottom:22px;}
@@ -405,16 +405,16 @@
   [data-theme="dark"] .theme-option.active{background:#6c4ce0; color:#fff;}
   .profile-top{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
   .profile-avatar{width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
-  .profile-avatar svg{width:24px; height:24px; stroke:#fff; fill:none; stroke-width:1.8;}
+  .profile-avatar svg{width:24px; height:24px; stroke:var(--ink); fill:none; stroke-width:1.8;}
   .profile-name{flex:1; font-family:'Unbounded', sans-serif; font-weight:800; font-size:16px; color:#fff;}
   .profile-card .gear-btn{background:rgba(255,255,255,0.2);}
-  .profile-card .gear-btn svg{stroke:#fff;}
+  .profile-card .gear-btn svg{stroke:var(--violet);}
   .goals-row{display:flex; gap:8px;}
   .goal-chip{flex:1; background:rgba(255,255,255,0.15); border-radius:14px; padding:10px 8px; text-align:center;}
   .goal-mini-track{height:4px; background:rgba(255,255,255,0.25); border-radius:100px; margin-top:6px; overflow:hidden;}
   .goal-mini-fill{height:100%; background:#fff; border-radius:100px;}
   .celebrate-banner{display:flex; align-items:center; gap:12px; background:linear-gradient(120deg,var(--sun),var(--coral)); border-radius:18px; padding:14px 16px; margin-bottom:14px; box-shadow:0 14px 28px -16px rgba(255,157,60,0.5);}
-  .celebrate-banner svg{width:28px; height:28px; stroke:#5a2e00; fill:none; stroke-width:1.8; flex-shrink:0;}
+  .celebrate-banner svg{width:28px; height:28px; stroke:var(--sun-dark); fill:none; stroke-width:1.8; flex-shrink:0;}
   .celebrate-banner .cb-title{font-family:'Unbounded', sans-serif; font-weight:800; font-size:14px; color:#3a2000;}
   .celebrate-banner .cb-sub{font-family:'JetBrains Mono', monospace; font-size:11px; color:#5a3200; margin-top:2px;}
 
@@ -440,7 +440,7 @@
   .fav-star-btn{background:var(--tint-violet); border:none; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;}
   .fav-star-btn svg{width:16px; height:16px; stroke:var(--violet); fill:none; stroke-width:1.8;}
   .fav-star-btn.active{background:var(--sun);}
-  .fav-star-btn.active svg{stroke:#8a6410; fill:#8a6410;}
+  .fav-star-btn.active svg{stroke:var(--sun-dark); fill:var(--sun-dark);}
 
   .fav-list{display:flex; flex-direction:column; gap:6px;}
   .fav-item{display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--tint-violet); border-radius:12px; padding:11px 14px; cursor:pointer;}
