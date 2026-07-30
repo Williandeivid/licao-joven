@@ -536,6 +536,18 @@
   .ahead-behind.ahead{background:rgba(255,255,255,0.25); color:#fff;}
   .ahead-behind.behind{background:rgba(0,0,0,0.15); color:#fff;}
 
+  .week-pills{display:flex; justify-content:space-around; gap:4px; padding:12px 0; margin-bottom:8px;}
+  .week-pill{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 8px; background:var(--card); border:2px solid var(--border); border-radius:10px; cursor:pointer; transition:all 0.2s ease; font-weight:600; font-size:11px;}
+  .week-pill .wp-day{font-size:12px; font-weight:700; color:var(--ink);}
+  .week-pill .wp-mark{font-size:16px; font-weight:700; color:var(--ink-soft);}
+  .week-pill.today{border-color:var(--lime); background:var(--lime); color:#fff;}
+  .week-pill.today .wp-day{color:#fff;}
+  .week-pill.today .wp-mark{color:#fff;}
+  .week-pill.done .wp-mark{color:var(--primary); font-size:18px;}
+  .week-pill.viewed{background:var(--primary); color:#fff; border-color:var(--primary);}
+  .week-pill.viewed .wp-day{color:#fff;}
+  .week-pill.viewed .wp-mark{color:#fff;}
+
   .day-scroller{display:flex; gap:8px; overflow-x:auto; padding:4px 2px 14px; margin-bottom:6px; scrollbar-width:none;}
   .day-scroller::-webkit-scrollbar{display:none;}
   .day-chip{flex-shrink:0; width:58px; background:var(--card); border:2px solid var(--border); border-radius:14px; padding:10px 4px; display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer;}
@@ -544,6 +556,8 @@
   .day-chip.today{border-color:var(--coral);}
   .day-chip.viewed{background:var(--violet); border-color:var(--violet);}
   .day-chip.viewed .dc-num, .day-chip.viewed .dc-date{color:#fff;}
+  .day-scroller-expanded{display:flex; gap:8px; overflow-x:auto; padding:4px 2px 14px; margin-bottom:6px; scrollbar-width:none;}
+  .day-scroller-expanded::-webkit-scrollbar{display:none;}
 
   .day-chapter-list{display:flex; flex-direction:column; gap:8px; margin-bottom:20px;}
   .chapter-row{display:flex; align-items:center; gap:10px; background:var(--card); border-radius:14px; padding:4px; box-shadow:0 6px 16px -12px rgba(28,23,53,0.3);}
@@ -2689,8 +2703,8 @@ async function renderBiblePlan(){
       <button class="gear-btn" onclick="togglePlanMenuItems('${key}')" style="filter:saturate(0);"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
       <div id="plan-menu-items-${key}" style="position:absolute;top:100%;right:0;background:var(--card);border:2px solid var(--border);border-radius:8px;padding:8px;min-width:200px;z-index:20;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
         <button onclick="sharePlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M12 2v10m5-5l-5-5-5 5"/></svg><span>Compartilhar</span></button>
-        <button onclick="configPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m6.16 1.84l2.12-2.12M20 12h3m-1.84 6.16l2.12 2.12M12 20v3m-6.16-1.84l-2.12 2.12M4 12H1m1.84-6.16L1.72 3.72"/></svg><span>Configurações</span></button>
-        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:currentColor;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="19" r="1"/><path d="M10.5 5h3A3.5 3.5 0 0 1 17 8.5v2a1 1 0 0 1-1 1h-2V9a1 1 0 0 0-1-1h-1a1 1 0 0 0-1 1v2H8a1 1 0 0 1-1-1v-2A3.5 3.5 0 0 1 10.5 5z"/></svg><span>Informações</span></button>
+        <button onclick="configPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="2.5"/><path d="M12 1v4M12 19v4M6.22 6.22l2.83 2.83M14.95 14.95l2.83 2.83M1 12h4M19 12h4M6.22 17.78l2.83-2.83M14.95 9.05l2.83-2.83"/></svg><span>Configurações</span></button>
+        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span>Informações</span></button>
         <button onclick="stopPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:#ff6b6b;font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#ff6b6b;stroke-width:2;fill:#ff6b6b;filter:saturate(0);flex-shrink:0;"><rect x="6" y="6" width="12" height="12"/></svg><span>Parar Plano</span></button>
       </div>
     </div>
@@ -2704,7 +2718,42 @@ async function renderBiblePlan(){
       ${aheadBehind !== 0 ? `<div class="ahead-behind ${aheadBehind>0?'ahead':'behind'}">${aheadBehind>0?`${aheadBehind} dia${aheadBehind===1?'':'s'} adiantado`:`${Math.abs(aheadBehind)} dia${Math.abs(aheadBehind)===1?'':'s'} atrasado`}</div>` : ''}
     </div>
 
-    <div class="day-scroller" id="day-scroller">`;
+    <div class="bible-week-view" id="bible-week-view">`;
+
+  const dayOrder = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+  const dayLabels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+
+  // Encontra o domingo da semana atual
+  const today = new Date(); today.setHours(0,0,0,0);
+  const todayDow = today.getDay();
+  const sunday = new Date(today);
+  sunday.setDate(today.getDate() - todayDow);
+
+  html += `<div class="week-pills">`;
+  const startD = new Date(startDateStr+'T00:00:00');
+  for(let i=0;i<7;i++){
+    const weekDay = new Date(sunday);
+    weekDay.setDate(sunday.getDate() + i);
+    const dayIndex = Math.round((weekDay-startD)/86400000);
+
+    if(dayIndex >= 0 && dayIndex < totalDays){
+      const done = isDayDone(plan.days[dayIndex]);
+      const isToday = dayIndex === scheduleIdx;
+      const isViewed = dayIndex === viewedDayIndex;
+
+      html += `<button class="week-pill ${isToday?'today':''} ${done?'done':''} ${isViewed?'viewed':''}" onclick="viewPlanDay(${dayIndex})" title="${weekDay.toLocaleDateString('pt-BR')}">
+        <span class="wp-day">${dayLabels[i]}</span>
+        <span class="wp-mark">${done?'✓':'•'}</span>
+      </button>`;
+    }
+  }
+  html += `</div>
+
+  <div style="text-align:center;margin:12px 0;">
+    <button onclick="toggleBiblePlanExpanded()" style="background:none;border:none;color:var(--primary);cursor:pointer;font-size:12px;text-decoration:underline;padding:4px 8px;">Ver todos os dias ▼</button>
+  </div>
+
+  <div class="day-scroller-expanded" id="day-scroller-expanded" style="display:none;">`;
   for(let i=0;i<totalDays;i++){
     const done = isDayDone(plan.days[i]);
     const d = dayIndexToDate(startDateStr, i);
@@ -2715,6 +2764,8 @@ async function renderBiblePlan(){
     </button>`;
   }
   html += `</div>
+
+  <div class="day-scroller" id="day-scroller" style="display:none;">
 
     <div class="day-chapter-list" id="day-chapter-list"></div>
   </div><footer>Toque no número do dia pra ver a leitura daquele dia. Toque na bolinha pra marcar/desmarcar cada capítulo, ou no texto pra abrir e ler.</footer>`;
@@ -2728,7 +2779,24 @@ async function renderBiblePlan(){
 function viewPlanDay(idx){
   viewedDayIndex = idx;
   document.querySelectorAll('.day-chip').forEach((el,i)=>el.classList.toggle('viewed', i===idx));
+  document.querySelectorAll('.week-pill').forEach((el,i)=>el.classList.toggle('viewed', i===idx));
   renderDayChapterList();
+}
+
+function toggleBiblePlanExpanded(){
+  const weekView = document.getElementById('bible-week-view');
+  const expandedScroller = document.getElementById('day-scroller-expanded');
+  const button = event.target;
+
+  if(expandedScroller.style.display === 'none'){
+    expandedScroller.style.display = 'flex';
+    weekView.style.display = 'none';
+    button.textContent = 'Ver apenas esta semana ▲';
+  } else {
+    expandedScroller.style.display = 'none';
+    weekView.style.display = 'block';
+    button.textContent = 'Ver todos os dias ▼';
+  }
 }
 
 function renderDayChapterList(){
@@ -2800,7 +2868,102 @@ async function configPlanItem(key){
   const endDate = new Date(startDateStr);
   endDate.setDate(endDate.getDate() + plan.sequence.length - 1);
 
-  alert(`CONFIGURAÇÕES DO PLANO\n\nDia ${scheduleIdx + 1} de ${plan.sequence.length}\n\nComeçou: ${new Date(startDateStr).toLocaleDateString('pt-BR')}\nTermina: ${endDate.toLocaleDateString('pt-BR')}\n\n${aheadBehind > 0 ? `${aheadBehind} dia(s) adiantado` : aheadBehind < 0 ? `${Math.abs(aheadBehind)} dia(s) atrasado` : 'Em dia!'}`);
+  const startDate = new Date(startDateStr);
+  const progressPct = Math.round((scheduleIdx / plan.sequence.length) * 100);
+
+  const statusMsg = aheadBehind > 0 ? `${aheadBehind} Dia${aheadBehind > 1 ? 's' : ''} Adiantado` :
+                    aheadBehind < 0 ? `${Math.abs(aheadBehind)} Dia${Math.abs(aheadBehind) > 1 ? 's' : ''} Atrasado` :
+                    'Em Dia';
+  const statusColor = aheadBehind > 0 ? '#4ade80' : aheadBehind < 0 ? '#ff6b6b' : '#60a5fa';
+
+  // Gera grid de quadrados (até 52 semanas)
+  let squaresHtml = '';
+  const totalSquares = Math.ceil(plan.sequence.length / 7);
+  for(let i=0; i<totalSquares; i++){
+    const dayIdx = i * 7;
+    const isDone = dayIdx < scheduleIdx;
+    const isToday = dayIdx === scheduleIdx;
+    squaresHtml += `<div style="
+      width:8px;height:8px;border-radius:2px;
+      background:${isToday ? '#60a5fa' : isDone ? '#4ade80' : 'var(--border)'};
+      transition:all 0.2s ease;
+    "></div>`;
+  }
+
+  const modal = document.createElement('div');
+  modal.id = 'plan-config-modal';
+  modal.style.cssText = `
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;
+    z-index:10000;font-family:var(--font-family);overflow-y:auto;
+  `;
+
+  modal.innerHTML = `
+    <div style="
+      background:var(--bg);color:var(--ink);border-radius:12px;padding:24px;
+      max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);my-margin:20px 0;
+    ">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="margin:0;font-size:18px;font-weight:600;">Configurações do Plano</h2>
+        <button onclick="document.getElementById('plan-config-modal').remove()" style="
+          background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:0;line-height:1;
+        ">×</button>
+      </div>
+
+      <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+          <span style="font-size:14px;color:var(--ink-secondary);">Progresso</span>
+          <span style="font-size:18px;font-weight:600;color:var(--ink);">Dia ${scheduleIdx + 1} de ${plan.sequence.length}</span>
+        </div>
+
+        <div style="
+          background:var(--ink);height:6px;border-radius:3px;overflow:hidden;margin-bottom:16px;
+        ">
+          <div style="
+            background:linear-gradient(90deg, #60a5fa, #4ade80);
+            height:100%;width:${progressPct}%;transition:width 0.3s ease;
+          "></div>
+        </div>
+
+        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;">
+          ${squaresHtml}
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+          <div>
+            <span style="color:var(--ink-secondary);display:block;margin-bottom:4px;">Começou</span>
+            <span style="color:var(--ink);font-weight:500;display:block;">${startDate.toLocaleDateString('pt-BR')}</span>
+          </div>
+          <div>
+            <span style="color:var(--ink-secondary);display:block;margin-bottom:4px;">Termina</span>
+            <span style="color:var(--ink);font-weight:500;display:block;">${endDate.toLocaleDateString('pt-BR')}</span>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="alert('Trocar datas do plano')" style="
+        width:100%;padding:12px;background:var(--card);color:var(--primary);border:2px solid var(--primary);
+        border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;margin-bottom:12px;
+      ">Trocar Datas</button>
+
+      <div style="
+        background:var(--bg-secondary);border-radius:8px;padding:12px;
+        text-align:center;margin-bottom:20px;color:${statusColor};font-weight:600;font-size:14px;
+      ">
+        ${statusMsg}
+      </div>
+
+      <button onclick="document.getElementById('plan-config-modal').remove()" style="
+        width:100%;padding:12px;background:var(--primary);color:white;border:none;
+        border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;
+      ">Fechar</button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.remove();
+  });
 }
 
 function infoPlanItem(key){
