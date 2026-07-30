@@ -2718,42 +2718,7 @@ async function renderBiblePlan(){
       ${aheadBehind !== 0 ? `<div class="ahead-behind ${aheadBehind>0?'ahead':'behind'}">${aheadBehind>0?`${aheadBehind} dia${aheadBehind===1?'':'s'} adiantado`:`${Math.abs(aheadBehind)} dia${Math.abs(aheadBehind)===1?'':'s'} atrasado`}</div>` : ''}
     </div>
 
-    <div class="bible-week-view" id="bible-week-view">`;
-
-  const dayOrder = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
-  const dayLabels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
-
-  // Encontra o domingo da semana atual
-  const today = new Date(); today.setHours(0,0,0,0);
-  const todayDow = today.getDay();
-  const sunday = new Date(today);
-  sunday.setDate(today.getDate() - todayDow);
-
-  html += `<div class="week-pills">`;
-  const startD = new Date(startDateStr+'T00:00:00');
-  for(let i=0;i<7;i++){
-    const weekDay = new Date(sunday);
-    weekDay.setDate(sunday.getDate() + i);
-    const dayIndex = Math.round((weekDay-startD)/86400000);
-
-    if(dayIndex >= 0 && dayIndex < totalDays){
-      const done = isDayDone(plan.days[dayIndex]);
-      const isToday = dayIndex === scheduleIdx;
-      const isViewed = dayIndex === viewedDayIndex;
-
-      html += `<button class="week-pill ${isToday?'today':''} ${done?'done':''} ${isViewed?'viewed':''}" onclick="viewPlanDay(${dayIndex})" title="${weekDay.toLocaleDateString('pt-BR')}">
-        <span class="wp-day">${dayLabels[i]}</span>
-        <span class="wp-mark">${done?'✓':'•'}</span>
-      </button>`;
-    }
-  }
-  html += `</div>
-
-  <div style="text-align:center;margin:12px 0;">
-    <button onclick="toggleBiblePlanExpanded()" style="background:none;border:none;color:var(--primary);cursor:pointer;font-size:12px;text-decoration:underline;padding:4px 8px;">Ver todos os dias ▼</button>
-  </div>
-
-  <div class="day-scroller-expanded" id="day-scroller-expanded" style="display:none;">`;
+    <div class="day-scroller" id="day-scroller">`;
   for(let i=0;i<totalDays;i++){
     const done = isDayDone(plan.days[i]);
     const d = dayIndexToDate(startDateStr, i);
@@ -2764,8 +2729,6 @@ async function renderBiblePlan(){
     </button>`;
   }
   html += `</div>
-
-  <div class="day-scroller" id="day-scroller" style="display:none;">
 
     <div class="day-chapter-list" id="day-chapter-list"></div>
   </div><footer>Toque no número do dia pra ver a leitura daquele dia. Toque na bolinha pra marcar/desmarcar cada capítulo, ou no texto pra abrir e ler.</footer>`;
@@ -2779,24 +2742,7 @@ async function renderBiblePlan(){
 function viewPlanDay(idx){
   viewedDayIndex = idx;
   document.querySelectorAll('.day-chip').forEach((el,i)=>el.classList.toggle('viewed', i===idx));
-  document.querySelectorAll('.week-pill').forEach((el,i)=>el.classList.toggle('viewed', i===idx));
   renderDayChapterList();
-}
-
-function toggleBiblePlanExpanded(){
-  const weekView = document.getElementById('bible-week-view');
-  const expandedScroller = document.getElementById('day-scroller-expanded');
-  const button = event.target;
-
-  if(expandedScroller.style.display === 'none'){
-    expandedScroller.style.display = 'flex';
-    weekView.style.display = 'none';
-    button.textContent = 'Ver apenas esta semana ▲';
-  } else {
-    expandedScroller.style.display = 'none';
-    weekView.style.display = 'block';
-    button.textContent = 'Ver todos os dias ▼';
-  }
 }
 
 function renderDayChapterList(){
