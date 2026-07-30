@@ -28,7 +28,8 @@
     --heading:#f3efff;
     --border:#332d54; --border2:#2a2547;
     --tint-violet:#241f42; --tint-green:#1c2e1a; --tint-amber:#3a2f14;
-    --lime-dark:#c3f26a; --sun-dark:#ffd876; --red-light:#3a1c22;
+    --violet:#9d7aa6; --pink:#ff7f9f; --lime:#a6e22e;
+    --lime-dark:#c3f26a; --sun-dark:#ffd876; --coral:#ff7f9f; --red:#ff7f9f; --red-light:#3a1c22;
   }
   [data-theme="dark"] body::before{ opacity:0.06; }
   [data-theme="dark"] .day-tirinha img{ opacity:0.92; }
@@ -65,6 +66,232 @@
   }
   [data-theme="neutral"] body::before{ opacity:0; }
 
+  /* ===== RAINBOW PALETTES (Arco-íris) ===== */
+
+  /* PALETA 1: VIBRANTE */
+  [data-theme="rainbow-vibrant"] {
+    --bg:#ffffff; --card:#f8f9ff;
+    --ink:#1a1a3e; --ink-soft:#5a5a8a;
+    --heading:#0d0d2b;
+    --border:#e8e8ff; --border2:#f0f0ff;
+    --violet:#0066ff; --violet-light:#5c9fff;
+    --pink:#ff0066; --pink-light:#ff5c99;
+    --lime:#00b341; --lime-dark:#008a2f;
+    --sun:#ff8800; --sun-dark:#cc6600;
+    --coral:#ff3333; --red:#ff3333; --red-light:#ff7373;
+    --teal:#00d9ff; --tint-violet:#f0f4ff; --tint-green:#f0fff8; --tint-amber:#fff8f0;
+    --day1:#0066ff; --day2:#ff0066; --day3:#00b341; --day4:#ff8800; --day5:#ff3333; --day6:#7744ff; --day7:#00d9ff;
+  }
+  [data-theme="rainbow-vibrant"] body::before{ opacity:0.08; }
+
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-vibrant"] {
+      --bg:#0a0a14; --card:#141428;
+      --ink:#f0f0ff; --ink-soft:#b8b8d0;
+      --heading:#ffffff;
+      --border:#2a2a52; --border2:#1a1a3e;
+      --violet:#5c9fff; --violet-light:#8ab8ff;
+      --pink:#ff5c99; --pink-light:#ff8aad;
+      --lime:#4ecf70; --lime-dark:#7cff9f;
+      --sun:#ffb366; --sun-dark:#ffc980;
+      --coral:#ff7373; --red:#ff7373; --red-light:#ff9999;
+      --teal:#4fe6ff; --tint-violet:#1a1440; --tint-green:#0a2818; --tint-amber:#331800;
+    }
+    [data-theme="rainbow-vibrant"] body::before{ opacity:0.04; }
+  }
+
+  /* PALETA 2: SUTIL */
+  [data-theme="rainbow-subtle"] {
+    --bg:#ffffff; --card:#fafbff;
+    --ink:#1f2d4d; --ink-soft:#5a6a8a;
+    --heading:#0b1428;
+    --border:#e0e8f5; --border2:#eff2f8;
+    --violet:#1f5a96; --violet-light:#5b9fd4;
+    --pink:#b83a3a; --pink-light:#e87070;
+    --lime:#2a7f3f; --lime-dark:#5fc96d;
+    --sun:#d97a2f; --sun-dark:#e5a66b;
+    --coral:#8b2323; --red:#b83a3a; --red-light:#e87070;
+    --teal:#1b8a9e; --tint-violet:#f0f4f9; --tint-green:#f0f8f4; --tint-amber:#fff8f0;
+    --day1:#1f5a96; --day2:#b83a3a; --day3:#2a7f3f; --day4:#d97a2f; --day5:#5e4fa2; --day6:#1b8a9e; --day7:#0d5c7a;
+  }
+  [data-theme="rainbow-subtle"] body::before{ opacity:0.05; }
+
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-subtle"] {
+      --bg:#0f1620; --card:#161f2e;
+      --ink:#e8eef8; --ink-soft:#a8b5d0;
+      --heading:#ffffff;
+      --border:#2a3a4f; --border2:#1a2530;
+      --violet:#5b9fd4; --violet-light:#7dbde8;
+      --pink:#e87070; --pink-light:#f09999;
+      --lime:#5fc96d; --lime-dark:#8fdf99;
+      --sun:#e5a66b; --sun-dark:#f0c08f;
+      --coral:#d68b8b; --red:#e87070; --red-light:#f09999;
+      --teal:#4fb8d1; --tint-violet:#152140; --tint-green:#0f2818; --tint-amber:#2a1f0a;
+    }
+    [data-theme="rainbow-subtle"] body::before{ opacity:0.03; }
+  }
+
+  /* PALETA 3: PREMIUM */
+  [data-theme="rainbow-premium"] {
+    --bg:#ffffff; --card:#faf9f7;
+    --ink:#0b3d91; --ink-soft:#4a5a7a;
+    --heading:#000000;
+    --border:#dcd4cc; --border2:#e8dfd6;
+    --violet:#0b3d91; --violet-light:#6ba3d4;
+    --pink:#8b2323; --pink-light:#d68b8b;
+    --lime:#1b4d2d; --lime-dark:#5db876;
+    --sun:#a85a1a; --sun-dark:#e5a85c;
+    --coral:#6b3a2a; --red:#8b2323; --red-light:#d68b8b;
+    --teal:#0d5c7a; --tint-violet:#f5f1f0; --tint-green:#f0f8f4; --tint-amber:#fef8f0;
+    --day1:#0b3d91; --day2:#8b2323; --day3:#1b4d2d; --day4:#a85a1a; --day5:#40237e; --day6:#0d5c7a; --day7:#1a4d5c;
+  }
+  [data-theme="rainbow-premium"] body::before{ opacity:0.03; }
+
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-premium"] {
+      --bg:#1a1612; --card:#22211e;
+      --ink:#e8e4df; --ink-soft:#b0a89f;
+      --heading:#ffffff;
+      --border:#3a352f; --border2:#2a251f;
+      --violet:#6ba3d4; --violet-light:#89b8e8;
+      --pink:#d68b8b; --pink-light:#e8a5a5;
+      --lime:#5db876; --lime-dark:#7dd896;
+      --sun:#e5a85c; --sun-dark:#f0bf80;
+      --coral:#c89a7f; --red:#d68b8b; --red-light:#e8a5a5;
+      --teal:#5caeba; --tint-violet:#231f1a; --tint-green:#192822; --tint-amber:#3a2810;
+    }
+    [data-theme="rainbow-premium"] body::before{ opacity:0.02; }
+  }
+
+  /* PALETA 4: SUNSET */
+  [data-theme="rainbow-sunset"] {
+    --bg:#ffffff; --card:#fff9f5;
+    --ink:#6b2f1f; --ink-soft:#9a5a4a;
+    --heading:#3d1810;
+    --border:#e8d4cc; --border2:#f0e4d8;
+    --violet:#ff6b3d; --violet-light:#ffb5a0;
+    --pink:#ff3d6b; --pink-light:#ff9fc4;
+    --lime:#d97a2f; --lime-dark:#e5a66b;
+    --sun:#ffa500; --sun-dark:#ffb84d;
+    --coral:#ff6b3d; --red:#ff3d6b; --red-light:#ff9fc4;
+    --teal:#ff8866; --tint-violet:#fff0e8; --tint-green:#fff5f0; --tint-amber:#fffbf8;
+    --day1:#ff6b3d; --day2:#ff3d6b; --day3:#d97a2f; --day4:#ffa500; --day5:#ff8866; --day6:#cc4d3d; --day7:#ff7a3d;
+  }
+  [data-theme="rainbow-sunset"] body::before{ opacity:0.06; }
+
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-sunset"] {
+      --bg:#1a0f08; --card:#261510;
+      --ink:#ffc9b0; --ink-soft:#e0a090;
+      --heading:#ffeee0;
+      --border:#4a2a1f; --border2:#3a1f14;
+      --violet:#ffb5a0; --violet-light:#ffd4c0;
+      --pink:#ff9fc4; --pink-light:#ffc0d9;
+      --lime:#e5a66b; --lime-dark:#f5c499;
+      --sun:#ffb84d; --sun-dark:#ffd480;
+      --coral:#ffb5a0; --red:#ff9fc4; --red-light:#ffc0d9;
+      --teal:#ffa080; --tint-violet:#4a2015; --tint-green:#4a2a20; --tint-amber:#3a2815;
+    }
+    [data-theme="rainbow-sunset"] body::before{ opacity:0.03; }
+  }
+
+  /* PALETA 5: OCEAN */
+  [data-theme="rainbow-ocean"] {
+    --bg:#ffffff; --card:#f5fbff;
+    --ink:#0d3d6b; --ink-soft:#2a5a8a;
+    --heading:#001a3d;
+    --border:#cce8ff; --border2:#e0f0ff;
+    --violet:#0066ff; --violet-light:#5c9fff;
+    --pink:#0099cc; --pink-light:#5cbfd9;
+    --lime:#00a8cc; --lime-dark:#4dcde8;
+    --sun:#0088ff; --sun-dark:#5cb3ff;
+    --coral:#00aacc; --red:#0088ff; --red-light:#5cb3ff;
+    --teal:#00d4ff; --tint-violet:#e0f4ff; --tint-green:#e8f8ff; --tint-amber:#f0f5ff;
+    --day1:#0066ff; --day2:#0099cc; --day3:#00a8cc; --day4:#0088ff; --day5:#0077dd; --day6:#00ccff; --day7:#0099cc;
+  }
+  [data-theme="rainbow-ocean"] body::before{ opacity:0.07; }
+
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-ocean"] {
+      --bg:#050f1a; --card:#0a1828;
+      --ink:#a8d4ff; --ink-soft:#6ca8e0;
+      --heading:#e0f0ff;
+      --border:#1a4a7a; --border2:#0f2a5a;
+      --violet:#5c9fff; --violet-light:#8ab8ff;
+      --pink:#5cbfd9; --pink-light:#8fd4e8;
+      --lime:#4dcde8; --lime-dark:#7de0f5;
+      --sun:#5cb3ff; --sun-dark:#8ccaff;
+      --coral:#5cbfd9; --red:#5cb3ff; --red-light:#8ccaff;
+      --teal:#4fe6ff; --tint-violet:#0a2a50; --tint-green:#0a3a50; --tint-amber:#0a2540;
+    }
+    [data-theme="rainbow-ocean"] body::before{ opacity:0.03; }
+  }
+
+  /* PALETA 6: FOREST */
+  [data-theme="rainbow-forest"] {
+    --bg:#ffffff; --card:#f8faf6;
+    --ink:#1a3d1f; --ink-soft:#3a6a45;
+    --heading:#0d240f;
+    --border:#d4e8d9; --border2:#e8f0eb;
+    --violet:#2a7f3f; --violet-light:#5fc96d;
+    --pink:#2d6a3d; --pink-light:#6b9b7f;
+    --lime:#1b8a3d; --lime-dark:#4db874;
+    --sun:#6b8a2f; --sun-dark:#9ab45c;
+    --coral:#3a6a2f; --red:#2a7f3f; --red-light:#6b9b7f;
+    --teal:#1a9a5a; --tint-violet:#f0f8f4; --tint-green:#e8f8f0; --tint-amber:#f5f8f0;
+    --day1:#2a7f3f; --day2:#1b8a3d; --day3:#1a9a5a; --day4:#6b8a2f; --day5:#3a6a3d; --day6:#2d7a3d; --day7:#1a8a4a;
+  }
+  [data-theme="rainbow-forest"] body::before{ opacity:0.04; }
+
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-forest"] {
+      --bg:#0f1a10; --card:#1a221b;
+      --ink:#a8d4a8; --ink-soft:#7ab88a;
+      --heading:#e0ffe0;
+      --border:#2a5a3a; --border2:#1a3a2a;
+      --violet:#5fc96d; --violet-light:#8fdf99;
+      --pink:#6b9b7f; --pink-light:#9dbfa8;
+      --lime:#4db874; --lime-dark:#7dd896;
+      --sun:#9ab45c; --sun-dark:#b5cc80;
+      --coral:#6b9b7f; --red:#5fc96d; --red-light:#8fdf99;
+      --teal:#5cbf99; --tint-violet:#0f2a18; --tint-green:#0f3a20; --tint-amber:#1a2a14;
+    }
+    [data-theme="rainbow-forest"] body::before{ opacity:0.02; }
+  }
+
+  /* ROSA TEEN - Paleta Feminina Adolescente */
+  [data-theme="rosa-teen"] {
+    --bg:#fff5f9; --card:#ffe8f5;
+    --ink:#6b2d5c; --ink-soft:#a85a8f;
+    --heading:#4a1a3a;
+    --border:#f0d0e8; --border2:#f8e8f5;
+    --violet:#d946ef; --violet-light:#e879f9;
+    --pink:#ec4899; --pink-light:#f472b6;
+    --lime:#06b6d4; --lime-dark:#22d3ee;
+    --sun:#f59e0b; --sun-dark:#fbbf24;
+    --coral:#f472b6; --red:#ec4899; --red-light:#f9a8d4;
+    --teal:#14b8a6; --tint-violet:#faf0fe; --tint-green:#f0fffe; --tint-amber:#fffbf0;
+    --day1:#d946ef; --day2:#ec4899; --day3:#06b6d4; --day4:#f59e0b; --day5:#a855f7; --day6:#06b6d4; --day7:#ec4899;
+  }
+  [data-theme="rosa-teen"] body::before{ opacity:0.08; }
+
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rosa-teen"] {
+      --bg:#1a0f15; --card:#2a1525;
+      --ink:#f9b8d4; --ink-soft:#e879f9;
+      --heading:#fff5f9;
+      --border:#5a3a4a; --border2:#3a2035;
+      --violet:#e879f9; --violet-light:#f0a4ff;
+      --pink:#f472b6; --pink-light:#f9a8d4;
+      --lime:#22d3ee; --lime-dark:#67e8f9;
+      --sun:#fbbf24; --sun-dark:#fcd34d;
+      --coral:#f9a8d4; --red:#f472b6; --red-light:#f9a8d4;
+      --teal:#2dd4bf; --tint-violet:#3f1a40; --tint-green:#0a3a35; --tint-amber:#3f2a0f;
+    }
+    [data-theme="rosa-teen"] body::before{ opacity:0.04; }
+  }
+
   .theme-toggle{
     position:fixed; top:14px; right:14px; z-index:60;
     width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
@@ -74,6 +301,13 @@
   }
   [data-theme="dark"] .theme-toggle{ background:rgba(255,255,255,0.12); }
   .theme-toggle svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2;}
+  .palette-toggle{
+    width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(28,23,53,0.55); backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:center; color:#fff;
+    box-shadow:0 6px 16px -6px rgba(0,0,0,0.4);
+  }
+  [data-theme="dark"] .palette-toggle{ background:rgba(255,255,255,0.12); }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; font-size:17px; line-height:1.6; padding-bottom:82px;}
@@ -99,6 +333,10 @@
   .subtitle{ font-size:0.95rem; color:#c9c4f0; max-width:520px; margin:0 auto 18px; position:relative; z-index:1;}
   .keyword-seal{ display:inline-flex; align-items:center; gap:10px; position:relative; z-index:1; background:linear-gradient(90deg, var(--violet), var(--pink)); color:#fff; padding:9px 20px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; box-shadow:0 8px 24px -8px rgba(255,93,143,0.6);}
   .keyword-seal b{color:#fff; font-size:13.5px; font-family:'Unbounded', sans-serif;}
+  [data-theme="neutral"] .keyword-seal{ background:var(--violet); color:#fff; box-shadow:0 8px 24px -8px rgba(108,76,224,0.4); }
+  [data-theme="neutral"] .keyword-seal b{ color:#fff; }
+  [data-theme="rainbow-forest"] .keyword-seal{ background:var(--violet); color:#fff; box-shadow:0 8px 24px -8px rgba(95,201,109,0.4); }
+  [data-theme="rainbow-forest"] .keyword-seal b{ color:#fff; }
   .back-btn{
     position:relative; z-index:2; display:inline-flex; align-items:center; gap:6px;
     background:rgba(255,255,255,0.12); color:#fff; border:none; padding:8px 16px; border-radius:100px;
@@ -109,6 +347,26 @@
   /* ===== DASHBOARD (per lesson) ===== */
   .dashboard{ position:sticky; top:0; z-index:30; background:rgba(247,245,255,0.9); backdrop-filter:blur(10px); border-bottom:2px solid var(--border); padding:14px 16px 12px; transition:transform .28s ease;}
   [data-theme="dark"] .dashboard{ background:rgba(26,26,46,0.95); border-bottom-color:#332d54; }
+  [data-theme="rainbow-vibrant"] .dashboard,
+  [data-theme="rainbow-subtle"] .dashboard,
+  [data-theme="rainbow-premium"] .dashboard,
+  [data-theme="rainbow-sunset"] .dashboard,
+  [data-theme="rainbow-ocean"] .dashboard,
+  [data-theme="rainbow-forest"] .dashboard,
+  [data-theme="rosa-teen"] .dashboard{
+    background:rgba(247,245,255,0.9); border-bottom-color:#d4e8d9;
+  }
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-vibrant"] .dashboard,
+    [data-theme="rainbow-subtle"] .dashboard,
+    [data-theme="rainbow-premium"] .dashboard,
+    [data-theme="rainbow-sunset"] .dashboard,
+    [data-theme="rainbow-ocean"] .dashboard,
+    [data-theme="rainbow-forest"] .dashboard,
+    [data-theme="rosa-teen"] .dashboard{
+      background:rgba(26,26,46,0.95); border-bottom-color:#332d54;
+    }
+  }
   .dashboard.hide-bar{ transform:translateY(-100%);}
   .dash-inner{max-width:760px; margin:0 auto;}
   .home-bible-card{margin-top:14px; background:linear-gradient(120deg,var(--teal),#22b8a6); border-radius:18px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; box-shadow:0 14px 28px -16px rgba(47,214,200,0.5);}
@@ -147,6 +405,15 @@
   .day p{margin:0 0 16px; color:var(--ink);}
   mark.hl{ background:linear-gradient(180deg, transparent 55%, #b8e356 55%); color:#171335; font-weight:700; padding:0 2px; border-radius:3px; line-height:1.6; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
   [data-theme="dark"] mark.hl{ background:none; color:#c3f26a; padding:0; }
+  /* Highlights para novos temas do arco-íris - apenas texto colorido, sem fundo */
+  [data-theme="rainbow-vibrant"] mark.hl{ background:none; color:#c8ff41; padding:0; font-weight:700; }
+  [data-theme="rainbow-subtle"] mark.hl{ background:none; color:#d4af37; padding:0; font-weight:700; }
+  [data-theme="rainbow-premium"] mark.hl{ background:none; color:#daa520; padding:0; font-weight:700; }
+  [data-theme="rainbow-sunset"] mark.hl{ background:none; color:#ffb347; padding:0; font-weight:700; }
+  [data-theme="rainbow-ocean"] mark.hl{ background:none; color:#00ffff; padding:0; font-weight:700; }
+  [data-theme="rainbow-forest"] mark.hl{ background:none; color:#7fff00; padding:0; font-weight:700; }
+  [data-theme="rosa-teen"] mark.hl{ background:none; color:#d946ef; padding:0; font-weight:700; }
+  [data-theme="neutral"] mark.hl{ background:none; color:#0891b2; padding:0; font-weight:700; }
   .vref{ cursor:pointer; font-weight:400; color:var(--ink); background:var(--tint-violet); padding:1px 4px; margin:0 -1px; border-radius:5px; font-size:inherit; font-family:inherit; white-space:normal; border:none; box-shadow:none; text-decoration:none; transition:background .12s ease;}
   .vref:hover{background:var(--violet-light);}
   .vchip-wrap{display:inline; }
@@ -399,12 +666,18 @@
   .conta-switch .knob{position:absolute; top:2px; left:2px; width:22px; height:22px; border-radius:50%; background:#fff; transition:transform .2s ease; box-shadow:0 2px 4px rgba(0,0,0,0.2);}
   .conta-switch.on{background:var(--violet);}
   .conta-switch.on .knob{transform:translateX(20px);}
-  .theme-selector{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;}
+  .theme-selector{display:flex; gap:10px; margin-bottom:12px;}
   .theme-option{background:var(--tint-violet); color:var(--violet); border:2px solid transparent; padding:12px 16px; border-radius:12px; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13px; cursor:pointer; transition:all .15s ease; text-align:center;}
   .theme-option:hover{background:var(--border);}
   .theme-option.active{background:var(--violet); color:#fff; border-color:var(--violet);}
   [data-theme="dark"] .theme-option{background:rgba(108,76,224,0.12); color:#9090c0;}
   [data-theme="dark"] .theme-option.active{background:#6c4ce0; color:#fff;}
+  .theme-selector select{background:var(--card); color:var(--ink); border:2px solid var(--border); padding:10px 14px; border-radius:12px; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13px; cursor:pointer; transition:all .15s ease; flex:1; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='currentColor' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; padding-right:32px;}
+  .theme-selector select:hover{border-color:var(--violet);}
+  .theme-selector select:focus{outline:none; border-color:var(--violet); box-shadow:0 0 0 3px rgba(108,76,224,0.1);}
+  [data-theme="dark"] .theme-selector select{background-color:rgba(108,76,224,0.12); color:#9090c0; border-color:rgba(108,76,224,0.3);}
+  [data-theme="dark"] .theme-selector select:hover{border-color:#6c4ce0;}
+  [data-theme="dark"] .theme-selector select:focus{box-shadow:0 0 0 3px rgba(108,76,224,0.2);}
   .profile-top{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
   .profile-avatar{width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
   .profile-avatar svg{width:24px; height:24px; stroke:var(--ink); fill:none; stroke-width:1.8;}
@@ -518,7 +791,7 @@
     display:flex; align-items:center; justify-content:center; gap:7px;
   }
   .bible-subtab svg{width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0;}
-  .bible-subtab.active{background:var(--void); color:#fff;}
+  .bible-subtab.active{background:var(--card); border-color:var(--violet); border-width:2px; color:var(--violet);}
 
   /* ===== NEW: Reading plan ===== */
   .plan-summary{background:linear-gradient(120deg, var(--violet), var(--pink)); color:#fff; border-radius:22px; padding:22px 22px 20px; margin-bottom:18px; box-shadow:0 20px 40px -22px rgba(108,76,224,0.5);}
@@ -627,6 +900,26 @@
     transition:transform .28s ease;
   }
   [data-theme="dark"] .bottomnav{ background:rgba(42,42,62,0.98); border-top-color:#332d54; }
+  [data-theme="rainbow-vibrant"] .bottomnav,
+  [data-theme="rainbow-subtle"] .bottomnav,
+  [data-theme="rainbow-premium"] .bottomnav,
+  [data-theme="rainbow-sunset"] .bottomnav,
+  [data-theme="rainbow-ocean"] .bottomnav,
+  [data-theme="rainbow-forest"] .bottomnav,
+  [data-theme="rosa-teen"] .bottomnav{
+    background:rgba(255,255,255,0.92); border-top-color:#d4e8d9;
+  }
+  @media (prefers-color-scheme: dark) {
+    [data-theme="rainbow-vibrant"] .bottomnav,
+    [data-theme="rainbow-subtle"] .bottomnav,
+    [data-theme="rainbow-premium"] .bottomnav,
+    [data-theme="rainbow-sunset"] .bottomnav,
+    [data-theme="rainbow-ocean"] .bottomnav,
+    [data-theme="rainbow-forest"] .bottomnav,
+    [data-theme="rosa-teen"] .bottomnav{
+      background:rgba(42,42,62,0.98); border-top-color:#332d54;
+    }
+  }
   .bottomnav.hide-bar{ transform:translateY(100%);}
   .navtab{
     display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none;
@@ -681,9 +974,30 @@
 </head>
 <body>
 
-<button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()">
-  <svg id="theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button>
+<div style="position:fixed;top:14px;right:14px;z-index:60;display:flex;gap:8px;align-items:center;">
+  <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" title="Alternar Light/Dark">
+    <svg id="theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+
+  <button class="palette-toggle" id="palette-toggle-btn" onclick="togglePaletteMenu()" title="Selecionar Design">
+    <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><circle cx="7" cy="7" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="7" cy="17" r="2"/><circle cx="12" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+  </button>
+
+  <div id="palette-menu" style="position:fixed;bottom:100px;right:14px;background:var(--card);border:2px solid var(--border);border-radius:8px;padding:8px;min-width:180px;z-index:70;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+    <button onclick="setDesignTheme('light')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:#f7f5ff;border:1px solid #ccc;"></span>Claro</button>
+    <button onclick="setDesignTheme('dark')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:#100e1e;border:1px solid #666;"></span>Escuro</button>
+    <button onclick="setDesignTheme('reading')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:#faf9f7;border:1px solid #aaa;"></span>Leitura</button>
+    <button onclick="setDesignTheme('neutral')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:#fafafa;border:1px solid #999;"></span>Neutro</button>
+    <hr style="margin:6px 0;border:none;border-top:1px solid var(--border);">
+    <span style="font-size:11px;color:var(--ink-soft);padding:4px 8px;display:block;font-weight:600;">Arco-Íris</span>
+    <button onclick="setDesignTheme('rainbow-vibrant')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#0066ff,#ff0066,#00b341);border:1px solid #666;"></span>Vibrante</button>
+    <button onclick="setDesignTheme('rainbow-subtle')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#1f5a96,#b83a3a,#2a7f3f);border:1px solid #999;"></span>Sutil</button>
+    <button onclick="setDesignTheme('rainbow-premium')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#0b3d91,#8b2323,#1b4d2d);border:1px solid #333;"></span>Premium</button>
+    <button onclick="setDesignTheme('rainbow-sunset')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#ff6b3d,#ff3d6b,#ffa500);border:1px solid #ff6b3d;"></span>Sunset</button>
+    <button onclick="setDesignTheme('rainbow-ocean')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#0066ff,#0099cc,#00d4ff);border:1px solid #0066ff;"></span>Ocean</button>
+    <button onclick="setDesignTheme('rainbow-forest')" style="width:100%;padding:8px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:13px;border-radius:4px;display:flex;gap:8px;align-items:center;"><span style="width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#2a7f3f,#1b8a3d,#1a9a5a);border:1px solid #2a7f3f;"></span>Forest</button>
+  </div>
+</div>
 
 <div id="detail-container"></div>
 <div id="list-container" style="display:none;"></div>
@@ -1507,10 +1821,19 @@ async function renderConta(){
     <div class="conta-card">
       <div class="conta-section-title">Design</div>
       <div class="theme-selector">
-        <button class="theme-option" data-theme="light" onclick="setTheme('light')" title="Light Mode">Claro</button>
-        <button class="theme-option" data-theme="dark" onclick="setTheme('dark')" title="Dark Mode">Escuro</button>
-        <button class="theme-option" data-theme="reading" onclick="setTheme('reading')" title="Reading Mode">Leitura</button>
-        <button class="theme-option" data-theme="neutral" onclick="setTheme('neutral')" title="Neutral Mode">Neutro</button>
+        <select id="theme-select" onchange="setDesignTheme(this.value)">
+          <option value="light">Padrão</option>
+          <option value="dark">Escuro Padrão</option>
+          <option value="reading">Leitura</option>
+          <option value="neutral">Neutro</option>
+          <option value="rainbow-vibrant">Vibrante</option>
+          <option value="rainbow-subtle">Sutil</option>
+          <option value="rainbow-premium">Premium</option>
+          <option value="rainbow-sunset">Sunset</option>
+          <option value="rainbow-ocean">Ocean</option>
+          <option value="rainbow-forest">Forest</option>
+          <option value="rosa-teen">Rosa Teen</option>
+        </select>
       </div>
     </div>
 
@@ -2704,7 +3027,7 @@ async function renderBiblePlan(){
       <div id="plan-menu-items-${key}" style="position:absolute;top:100%;right:0;background:var(--card);border:2px solid var(--border);border-radius:8px;padding:8px;min-width:200px;z-index:20;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
         <button onclick="sharePlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M12 2v10m5-5l-5-5-5 5"/></svg><span>Compartilhar</span></button>
         <button onclick="configPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="2.5"/><path d="M12 1v4M12 19v4M6.22 6.22l2.83 2.83M14.95 14.95l2.83 2.83M1 12h4M19 12h4M6.22 17.78l2.83-2.83M14.95 9.05l2.83-2.83"/></svg><span>Configurações</span></button>
-        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span>Informações</span></button>
+        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">i</text></svg><span>Informações</span></button>
         <button onclick="stopPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:#ff6b6b;font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#ff6b6b;stroke-width:2;fill:#ff6b6b;filter:saturate(0);flex-shrink:0;"><rect x="6" y="6" width="12" height="12"/></svg><span>Parar Plano</span></button>
       </div>
     </div>
@@ -2732,9 +3055,9 @@ async function renderBiblePlan(){
   html += `</div>
       <button onclick="openBiblePlanCalendar('${key}', '${startDateStr}')" style="
         flex-shrink:0;width:32px;height:58px;border:2px solid var(--border);background:var(--card);border-radius:8px;
-        cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:18px;
+        cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);
         transition:all 0.2s ease;
-      " title="Abrir calendário">›</button>
+      " title="Abrir calendário"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
 
     <div class="day-chapter-list" id="day-chapter-list"></div>
@@ -2829,19 +3152,6 @@ async function configPlanItem(key){
                     'Em Dia';
   const statusColor = aheadBehind > 0 ? '#4ade80' : aheadBehind < 0 ? '#ff6b6b' : '#60a5fa';
 
-  // Gera grid de quadrados (até 52 semanas)
-  let squaresHtml = '';
-  const totalSquares = Math.ceil(plan.sequence.length / 7);
-  for(let i=0; i<totalSquares; i++){
-    const dayIdx = i * 7;
-    const isDone = dayIdx < scheduleIdx;
-    const isToday = dayIdx === scheduleIdx;
-    squaresHtml += `<div style="
-      width:8px;height:8px;border-radius:2px;
-      background:${isToday ? '#60a5fa' : isDone ? '#4ade80' : 'var(--border)'};
-      transition:all 0.2s ease;
-    "></div>`;
-  }
 
   const modal = document.createElement('div');
   modal.id = 'plan-config-modal';
@@ -2870,16 +3180,12 @@ async function configPlanItem(key){
         </div>
 
         <div style="
-          background:var(--ink);height:6px;border-radius:3px;overflow:hidden;margin-bottom:16px;
+          background:var(--ink);height:6px;border-radius:3px;overflow:hidden;margin-bottom:20px;
         ">
           <div style="
             background:linear-gradient(90deg, #60a5fa, #4ade80);
             height:100%;width:${progressPct}%;transition:width 0.3s ease;
           "></div>
-        </div>
-
-        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;">
-          ${squaresHtml}
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
@@ -2894,7 +3200,7 @@ async function configPlanItem(key){
         </div>
       </div>
 
-      <button onclick="alert('Trocar datas do plano')" style="
+      <button onclick="showChangeDatePicker('${key}')" style="
         width:100%;padding:12px;background:var(--card);color:var(--primary);border:2px solid var(--primary);
         border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;margin-bottom:12px;
       ">Trocar Datas</button>
@@ -2919,16 +3225,106 @@ async function configPlanItem(key){
   });
 }
 
+function showChangeDatePicker(key){
+  const plan = BIBLE_PLANS[key];
+  const currentDate = planStartDateCache[key] || dateKey(new Date());
+
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;
+    z-index:10002;font-family:var(--font-family);
+  `;
+
+  modal.innerHTML = `
+    <div style="
+      background:var(--bg);color:var(--ink);border-radius:12px;padding:24px;
+      max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    ">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="margin:0;font-size:18px;font-weight:600;">Trocar Data de Início</h2>
+        <button onclick="this.closest('[style*=position]').remove()" style="
+          background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:0;
+        ">×</button>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <label style="display:block;margin-bottom:8px;font-size:14px;font-weight:500;">Nova data de início:</label>
+        <input type="date" id="plan-date-input-${key}" value="${currentDate}" style="
+          width:100%;padding:10px;border:2px solid var(--border);border-radius:6px;
+          background:var(--card);color:var(--ink);font-size:14px;
+        " />
+      </div>
+
+      <button onclick="savePlanNewDate('${key}', document.getElementById('plan-date-input-${key}').value)" style="
+        width:100%;padding:12px;background:var(--primary);color:white;border:none;
+        border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;margin-bottom:8px;
+      ">Salvar Data</button>
+
+      <button onclick="this.closest('[style*=position]').remove()" style="
+        width:100%;padding:12px;background:var(--card);color:var(--ink);border:2px solid var(--border);
+        border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;
+      ">Cancelar</button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.remove();
+  });
+}
+
+async function savePlanNewDate(key, newDateStr){
+  if(!newDateStr) {
+    alert('Selecione uma data');
+    return;
+  }
+  await savePlanStartDateKey(key, newDateStr);
+  planStartDateCache[key] = newDateStr;
+  renderBiblePlan();
+  document.querySelectorAll('[style*=position:fixed]').forEach(el => el.remove());
+}
+
 function infoPlanItem(key){
   closePlanMenu(key);
   const plan = BIBLE_PLANS[key];
-  alert('Informações: '+plan.desc);
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;
+    z-index:10002;font-family:var(--font-family);
+  `;
+
+  modal.innerHTML = `
+    <div style="
+      background:var(--bg);color:var(--ink);border-radius:12px;padding:24px;
+      max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    ">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h2 style="margin:0;font-size:18px;font-weight:600;">Informações</h2>
+        <button onclick="this.closest('[style*=position]').remove()" style="
+          background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:0;
+        ">×</button>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink);">${plan.desc}</p>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.remove();
+  });
 }
 
-function openBiblePlanCalendar(key, startDateStr){
+window.planCalendarState = {};
+
+function openBiblePlanCalendar(key, startDateStr, monthOffset){
+  if(monthOffset === undefined) monthOffset = 0;
+
   const plan = BIBLE_PLANS[key];
   const today = new Date(); today.setHours(0,0,0,0);
   const currentMonth = new Date(today);
+  currentMonth.setMonth(currentMonth.getMonth() + monthOffset);
 
   function renderCalendar(monthDate){
     const year = monthDate.getFullYear();
@@ -2940,11 +3336,11 @@ function openBiblePlanCalendar(key, startDateStr){
 
     let html = `<div style="margin-bottom:16px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <button onclick="openBiblePlanCalendar('${key}', '${startDateStr}')" style="
+        <button onclick="openBiblePlanCalendar('${key}', '${startDateStr}', ${monthOffset-1})" style="
           background:none;border:none;color:var(--primary);cursor:pointer;font-size:14px;
         ">‹ Anterior</button>
         <span style="font-weight:600;">${monthDate.toLocaleDateString('pt-BR', {month:'long', year:'numeric'})}</span>
-        <button onclick="openBiblePlanCalendar('${key}', '${startDateStr}')" style="
+        <button onclick="openBiblePlanCalendar('${key}', '${startDateStr}', ${monthOffset+1})" style="
           background:none;border:none;color:var(--primary);cursor:pointer;font-size:14px;
         ">Próximo ›</button>
       </div>
@@ -2953,7 +3349,7 @@ function openBiblePlanCalendar(key, startDateStr){
 
     // Dias da semana
     ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'].forEach(day => {
-      html += `<div style="text-align:center;font-size:11px;font-weight:600;color:var(--ink-secondary);padding:4px;">${day}</div>`;
+      html += `<div style="text-align:center;font-size:11px;font-weight:600;color:var(--ink-soft);padding:4px;">${day}</div>`;
     });
 
     // Dias em branco antes do primeiro dia
@@ -2967,10 +3363,11 @@ function openBiblePlanCalendar(key, startDateStr){
       const cellDate = new Date(year, month, day); cellDate.setHours(0,0,0,0);
       const dayIndex = Math.round((cellDate-startD)/86400000);
       const isToday = cellDate.getTime() === today.getTime();
+      const isDone = dayIndex >= 0 && dayIndex < plan.progress;
 
       html += `<button onclick="viewPlanDay(${dayIndex})" style="
-        padding:6px;border-radius:6px;border:2px solid ${isToday?'var(--primary)':'var(--border)'};
-        background:${isToday?'var(--primary)':'var(--card)'};color:${isToday?'white':'var(--ink)'};
+        padding:6px;border-radius:6px;border:2px solid ${isToday?'var(--primary)':isDone?'var(--day1)':'var(--border)'};
+        background:${isToday?'var(--primary)':isDone?'var(--day1)':'var(--card)'};color:${isToday||isDone?'white':'var(--ink)'};
         cursor:pointer;font-weight:600;font-size:12px;transition:all 0.2s;
       " title="${cellDate.toLocaleDateString('pt-BR')}">
         ${day}
@@ -2981,7 +3378,12 @@ function openBiblePlanCalendar(key, startDateStr){
     return html;
   }
 
+  // Remove calendário anterior especificamente
+  const oldModals = document.querySelectorAll('[id*="calendar"]');
+  oldModals.forEach(el => el.remove());
+
   const modal = document.createElement('div');
+  modal.id = 'plan-calendar-modal';
   modal.style.cssText = `
     position:fixed;top:0;left:0;right:0;bottom:0;
     background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;
@@ -3371,6 +3773,42 @@ async function loadTheme(){
   }
 }
 
+// ===== DESIGN THEMES (Paletas Arco-Íris) =====
+function togglePaletteMenu(){
+  const menu = document.getElementById('palette-menu');
+  if(menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+async function setDesignTheme(designName){
+  const designs = ['light', 'dark', 'reading', 'neutral', 'rainbow-vibrant', 'rainbow-subtle', 'rainbow-premium', 'rainbow-sunset', 'rainbow-ocean', 'rainbow-forest', 'rosa-teen'];
+  if(!designs.includes(designName)) return;
+
+  document.documentElement.setAttribute('data-theme', designName);
+  try{ await window.storage.set('design-theme', designName, false); }catch(e){}
+
+  // Atualizar select dropdown
+  const select = document.getElementById('theme-select');
+  if(select) select.value = designName;
+
+  // Fechar menu
+  const menu = document.getElementById('palette-menu');
+  if(menu) menu.style.display = 'none';
+}
+
+async function loadDesignTheme(){
+  try{
+    const res = await window.storage.get('design-theme', false);
+    const theme = res && res.value ? res.value : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    const select = document.getElementById('theme-select');
+    if(select) select.value = theme;
+  }catch(e){
+    document.documentElement.setAttribute('data-theme', 'light');
+    const select = document.getElementById('theme-select');
+    if(select) select.value = 'light';
+  }
+}
+
 // ============ FASE 1: SPACED REPETITION - SM2 ============
 const QuizTracker = {
   load() { const data = localStorage.getItem('quiz_tracking_v3'); return data ? JSON.parse(data) : {}; },
@@ -3474,6 +3912,7 @@ function generateRadialMindMap(lessonId) {
 // ============ INIT ============
 (async function init(){
   await loadTheme();
+  await loadDesignTheme();
   await preloadAllProgress();
   goHome();
 })();
