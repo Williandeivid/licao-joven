@@ -521,8 +521,20 @@
   [data-theme="rainbow-forest"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #2a7f3f, #1f6830); color:#fff; box-shadow:0 8px 16px -8px rgba(42,127,63,0.5);}
   [data-theme="rosa-teen"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #ec4899, #d9307d); color:#fff; box-shadow:0 8px 16px -8px rgba(236,72,153,0.5);}
 
-  /* Resumo sempre roxo constante */
-  .source-tab.active[data-tab="resumo"]{background:#6c4ce0; color:#fff; box-shadow:0 8px 16px -8px rgba(108,76,224,0.5);}
+  /* Resumo com cores dinâmicas por design */
+  [data-theme="light"] .source-tab.active[data-tab="resumo"],
+  [data-theme="dark"] .source-tab.active[data-tab="resumo"],
+  [data-theme="reading"] .source-tab.active[data-tab="resumo"],
+  [data-theme="neutral"] .source-tab.active[data-tab="resumo"] {
+    background:linear-gradient(120deg, #6c4ce0, #5a3ab0); color:#fff; box-shadow:0 8px 16px -8px rgba(108,76,224,0.5);
+  }
+  [data-theme="rainbow-vibrant"] .source-tab.active[data-tab="resumo"]{background:linear-gradient(120deg, #ff0066, #cc0052); color:#fff; box-shadow:0 8px 16px -8px rgba(255,0,102,0.5);}
+  [data-theme="rainbow-subtle"] .source-tab.active[data-tab="resumo"]{background:linear-gradient(120deg, #d4791f, #b8681c); color:#fff; box-shadow:0 8px 16px -8px rgba(212,121,31,0.5);}
+  [data-theme="rainbow-premium"] .source-tab.active[data-tab="resumo"]{background:linear-gradient(120deg, #c2185b, #880e4f); color:#fff; box-shadow:0 8px 16px -8px rgba(194,24,91,0.5);}
+  [data-theme="rainbow-sunset"] .source-tab.active[data-tab="resumo"]{background:linear-gradient(120deg, #ff6b3d, #e5542f); color:#fff; box-shadow:0 8px 16px -8px rgba(255,107,61,0.5);}
+  [data-theme="rainbow-ocean"] .source-tab.active[data-tab="resumo"]{background:linear-gradient(120deg, #00d9ff, #00a8cc); color:#fff; box-shadow:0 8px 16px -8px rgba(0,217,255,0.5);}
+  [data-theme="rainbow-forest"] .source-tab.active[data-tab="resumo"]{background:linear-gradient(120deg, #7fff00, #5fd700); color:#fff; box-shadow:0 8px 16px -8px rgba(127,255,0,0.5);}
+  [data-theme="rosa-teen"] .source-tab.active[data-tab="resumo"]{background:linear-gradient(120deg, #ec4899, #be185d); color:#fff; box-shadow:0 8px 16px -8px rgba(236,72,153,0.5);}
 
   .source-panel{display:none;}
   .source-panel.active{display:block;}
@@ -4366,17 +4378,39 @@ async function fetchOfficialContent(lessonId, dayId){
 
     // Função auxiliar para converter referências bíblicas em links
     function formatBibleReferences(text) {
-      // Detecta padrões como "João 3:16", "Romanos 12:1-5", "2 Timóteo 3", etc.
-      return text.replace(/\b(1º?\s*)?([A-ZÁ][a-záé]*(?:\s+[A-ZÁ][a-záé]*)?)\s+(\d+)(?::(\d+(?:-\d+)?))?/g, (match, prefix, bookName, chapter, verses) => {
+      // Detecta padrões como "João 3:16", "Romanos 12:1-5", "2 Timóteo 3", "v.10", "v. 10-12", etc.
+
+      // Primeiro: livro + capítulo:versículos (João 3:16, 2 Timóteo 3:1-5, etc.)
+      text = text.replace(/\b(1º?\s*)?([A-ZÁ][a-záé]*(?:\s+[A-ZÁ][a-záé]*)?)\s+(\d+)(?::(\d+(?:-\d+)?))?/g, (match, prefix, bookName, chapter, verses) => {
         const fullBookName = (prefix ? prefix.trim() + ' ' : '') + bookName;
         return `<a href="javascript:openBibleReference('${fullBookName} ${chapter}${verses ? ':' + verses : ''}')" style="color:#6c4ce0;text-decoration:underline;cursor:pointer;">${match}</a>`;
       });
+
+      // Segundo: versículos avulsos (v. 10, v.11, v. 20, 21, 22, etc.)
+      // Padrão: "v. N", "v.N", "v. N-M", ou números consecutivos após "v."
+      text = text.replace(/v\.\s*(\d+(?:-\d+)?)/gi, (match, verses) => {
+        // Tenta encontrar o livro/capítulo anterior no texto
+        const beforeText = text.substring(Math.max(0, text.indexOf(match) - 100), text.indexOf(match));
+        const bookMatch = beforeText.match(/\b(1º?\s*)?([A-ZÁ][a-záé]*(?:\s+[A-ZÁ][a-záé]*)?)\s+(\d+)\b/);
+
+        if(bookMatch) {
+          const prefix = bookMatch[1];
+          const bookName = bookMatch[2];
+          const chapter = bookMatch[3];
+          const fullBookName = (prefix ? prefix.trim() + ' ' : '') + bookName;
+          return `<a href="javascript:openBibleReference('${fullBookName} ${chapter}:${verses}')" style="color:#6c4ce0;text-decoration:underline;cursor:pointer;">${match}</a>`;
+        }
+        return match;
+      });
+
+      return text;
     }
 
     // Depois: processar linha por linha
     const lines = content.split('\n');
     const processedLines = [];
     let inList = false;
+    let skipFirstH1 = true; // Remove título duplicado
 
     for(let line of lines) {
       const trimmed = line.trim();
@@ -4393,14 +4427,19 @@ async function fetchOfficialContent(lessonId, dayId){
         processedLines.push(`<h3 style="margin-top:18px;margin-bottom:12px;font-size:18px;font-weight:700;">${formatBibleReferences(trimmed.slice(3))}</h3>`);
       } else if(trimmed.startsWith('# ')) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
-        processedLines.push(`<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${formatBibleReferences(trimmed.slice(2))}</h2>`);
+        // Pula o primeiro h1 para evitar título duplicado
+        if(skipFirstH1) {
+          skipFirstH1 = false;
+        } else {
+          processedLines.push(`<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${formatBibleReferences(trimmed.slice(2))}</h2>`);
+        }
       }
       // Listas
       else if(trimmed.startsWith('- ')) {
         if(!inList) { processedLines.push('<ul style="margin:12px 0;padding-left:20px;">'); inList = true; }
         const text = trimmed.slice(2);
         let formatted = text
-          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*\*([^*]+)\*\*/g, '<mark class="hl"><strong>$1</strong></mark>')
           .replace(/\*([^*]+)\*/g, '<em>$1</em>')
           .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;">$1</a>');
         formatted = formatBibleReferences(formatted);
@@ -4416,7 +4455,7 @@ async function fetchOfficialContent(lessonId, dayId){
       else if(trimmed) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
         let formatted = trimmed
-          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*\*([^*]+)\*\*/g, '<mark class="hl"><strong>$1</strong></mark>')
           .replace(/\*([^*]+)\*/g, '<em>$1</em>')
           .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;text-decoration:underline;">$1</a>');
         formatted = formatBibleReferences(formatted);
