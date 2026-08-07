@@ -544,6 +544,10 @@
   .skeleton-line.title{height:24px; width:70%;}
   .skeleton-line.paragraph{width:100%; opacity:0.8;}
   .skeleton-line.paragraph:last-child{width:85%; opacity:0.6;}
+  /* #5 - Imagens responsivas */
+  .source-panel img{max-width:100%; height:auto; border-radius:8px; margin:12px 0;}
+  /* #6 - Citações com estilo melhorado */
+  .source-panel blockquote{border-left:4px solid var(--violet); padding-left:16px; margin:16px 0; color:var(--ink-soft); font-style:italic; line-height:1.7;}
   .day p{margin:0 0 16px; color:var(--ink);}
   mark.hl{ background:linear-gradient(180deg, transparent 55%, #b8e356 55%); color:#171335; font-weight:700; padding:0 2px; border-radius:3px; line-height:1.6; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
   [data-theme="dark"] mark.hl{ background:none; color:#c3f26a; padding:0; }
@@ -1402,10 +1406,21 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
     html += renderMindMap(content);
   }
 
-  html += `<div class="concluir-wrap">
+  html += `<div class="concluir-wrap" style="display:flex; gap:12px; align-items:center; justify-content:space-between;">
     <button class="btn-concluir ${done?'done':''}" data-lesson="${lessonId}" data-day="${day.id}" onclick="marcarConcluido(this)">
       ${done ? '✓ Dia concluído' : 'Concluir este dia'}
     </button>
+    <div class="menu-3pontos-wrap" style="position:relative;">
+      <button class="menu-3pontos-btn" onclick="toggleMenu3Pontos(this, '${lessonId}', '${day.id}')" style="background:none; border:none; font-size:20px; cursor:pointer; padding:8px; color:var(--ink-soft); display:flex; align-items:center;">⋮</button>
+      <div class="menu-3pontos" style="display:none; position:absolute; top:100%; right:0; background:var(--card); border:0.5px solid var(--border); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:1000; min-width:180px; overflow:hidden;">
+        <button onclick="exportarPDF('${lessonId}', '${day.id}')" style="width:100%; text-align:left; padding:12px 16px; border:none; background:none; cursor:pointer; font-size:14px; color:var(--ink); display:flex; align-items:center; gap:8px; transition:background 0.2s;">
+          <span style="font-size:16px;">📄</span> Baixar PDF
+        </button>
+        <button onclick="compartilharWhatsApp('${lessonId}', '${day.id}')" style="width:100%; text-align:left; padding:12px 16px; border:none; background:none; cursor:pointer; font-size:14px; color:var(--ink); display:flex; align-items:center; gap:8px; transition:background 0.2s;">
+          <span style="font-size:16px;">💬</span> Compartilhar
+        </button>
+      </div>
+    </div>
   </div>`;
 
   const hasExpandable = (day.reflect && day.reflect.length) || day.quiz || day.tf;
@@ -4292,10 +4307,31 @@ function updateAuthUI() {
 
 // ===== OFFICIAL SOURCE TABS CACHE & FUNCTIONS =====
 const officialContentCache = {};
+const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 dias em ms
+
+function getCachedOfficial(lessonId, dayId){
+  const key = `official-${lessonId}-${dayId}`;
+  const stored = localStorage.getItem(key);
+  if(!stored) return null;
+  try{
+    const {content, timestamp} = JSON.parse(stored);
+    if(Date.now() - timestamp < CACHE_TTL) return content;
+    localStorage.removeItem(key);
+  } catch(e){}
+  return null;
+}
+
+function setCachedOfficial(lessonId, dayId, content){
+  const key = `official-${lessonId}-${dayId}`;
+  localStorage.setItem(key, JSON.stringify({content, timestamp: Date.now()}));
+}
 
 async function fetchOfficialContent(lessonId, dayId){
   const cacheKey = `${lessonId}-${dayId}`;
   if(officialContentCache[cacheKey]) return officialContentCache[cacheKey];
+
+  const cached = getCachedOfficial(lessonId, dayId);
+  if(cached) return cached;
 
   try{
     const lessonNum = String(parseInt(lessonId)).padStart(2, '0');
@@ -4392,6 +4428,7 @@ async function fetchOfficialContent(lessonId, dayId){
     content = processedLines.join('');
 
     officialContentCache[cacheKey] = content;
+    setCachedOfficial(lessonId, dayId, content);
     return content;
   } catch(e){
     console.error('Erro ao buscar oficial:', e);
@@ -4433,6 +4470,10 @@ async function loadOfficialContent(lessonId, dayId){
   try {
     const content = await fetchOfficialContent(lessonId, dayId);
     if(panel) panel.innerHTML = content;
+
+    // #8 - Buscar semana toda em paralelo (dias futuros)
+    const dayIds = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+    Promise.all(dayIds.map(d => fetchOfficialContent(lessonId, d))).catch(e => console.log('Background fetch:', e));
   } catch(e) {
     console.error(`Erro ao carregar oficial para ${dayId}:`, e);
     panel.innerHTML = `<div style="padding:16px; background:var(--tint-violet); border-radius:12px; color:var(--ink-soft);">
@@ -4445,6 +4486,43 @@ async function loadOfficialContent(lessonId, dayId){
 // Auto-carregar oficial ao renderizar dia
 function autoLoadOfficialContent(lessonId, dayId){
   setTimeout(() => loadOfficialContent(lessonId, dayId), 100);
+}
+
+// #9 - Menu 3 pontos
+function toggleMenu3Pontos(btn, lessonId, dayId){
+  const menu = btn.nextElementSibling;
+  const isOpen = menu.style.display !== 'none';
+  document.querySelectorAll('.menu-3pontos').forEach(m => m.style.display = 'none');
+  menu.style.display = isOpen ? 'none' : 'block';
+}
+
+function compartilharWhatsApp(lessonId, dayId){
+  const day = document.getElementById(`day-${dayId}`);
+  if(!day) return;
+
+  const title = day.querySelector('h2')?.textContent || 'Lição';
+  const text = `📖 *${title}*\n\nLeia a lição completa no app Lições Jovem! 📱\n\nhttps://licoes-jovens.com`;
+  const encoded = encodeURIComponent(text);
+  window.open(`https://wa.me/?text=${encoded}`, '_blank');
+  toggleMenu3Pontos(document.querySelector('.menu-3pontos-btn'), lessonId, dayId);
+}
+
+function exportarPDF(lessonId, dayId){
+  const day = document.getElementById(`day-${dayId}`);
+  if(!day) return;
+
+  const title = day.querySelector('h2')?.textContent || 'Lição';
+  const content = day.querySelector('.source-panel.active')?.innerText || 'Conteúdo indisponível';
+
+  const text = `${title}\n\n${content}`;
+  const blob = new Blob([text], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `licao-${lessonId}-${dayId}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toggleMenu3Pontos(document.querySelector('.menu-3pontos-btn'), lessonId, dayId);
 }
 
 (async function init(){
