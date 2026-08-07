@@ -198,6 +198,87 @@
       --teal:#ffa080; --tint-violet:#4a2015; --tint-green:#4a2a20; --tint-amber:#3a2815;
     }
     [data-theme="rainbow-sunset"] body::before{ opacity:0.03; }
+
+  /* ===== READING MODES FOR BIBLE ===== */
+  [data-bible-reading-mode="night"]{
+    --reading-bg: #0a0a0a !important;
+    --reading-card: #1a1a1a !important;
+    --reading-ink: #f0f0f0 !important;
+    --reading-ink-soft: #aaaaaa !important;
+    --reading-border: #333333 !important;
+  }
+
+  [data-bible-reading-mode="sepia"]{
+    --reading-bg: #f4ede4 !important;
+    --reading-card: #fef6f0 !important;
+    --reading-ink: #5d4e37 !important;
+    --reading-ink-soft: #8b7d6b !important;
+    --reading-border: #e8dccf !important;
+  }
+
+  [data-bible-reading-mode="white"]{
+    --reading-bg: #ffffff !important;
+    --reading-card: #ffffff !important;
+    --reading-ink: #1a1a1a !important;
+    --reading-ink-soft: #666666 !important;
+    --reading-border: #e0e0e0 !important;
+  }
+
+  [data-bible-reading-mode="default"]{
+    --reading-bg: var(--bg);
+    --reading-card: var(--card);
+    --reading-ink: var(--ink);
+    --reading-ink-soft: var(--ink-soft);
+    --reading-border: var(--border);
+  }
+
+  [data-bible-reading-mode] #bible-container,
+  [data-bible-reading-mode] .bible-wrap,
+  [data-bible-reading-mode] .bible-verse {
+    background: var(--reading-bg, var(--bg)) !important;
+    color: var(--reading-ink, var(--ink)) !important;
+  }
+
+  [data-bible-reading-mode] .bible-verse-text,
+  [data-bible-reading-mode] .verse-content {
+    color: var(--reading-ink, var(--ink)) !important;
+  }
+
+  .lesson-source-toggle { color: #a855f7 !important; background: rgba(168,85,247,0.2) !important; border-color: #a855f7 !important; }
+  [data-bible-reading-mode="night"] .lesson-source-toggle { color: #c084fc !important; background: rgba(192,132,252,0.25) !important; border-color: #c084fc !important; }
+  [data-bible-reading-mode="sepia"] .lesson-source-toggle { color: #b8860b !important; background: rgba(184,134,11,0.15) !important; border-color: #b8860b !important; }
+  [data-bible-reading-mode="white"] .lesson-source-toggle { color: #7c3aed !important; background: rgba(124,58,237,0.15) !important; border-color: #7c3aed !important; }
+
+  [data-bible-reading-mode] .bible-verse-ref {
+    color: var(--reading-ink-soft, var(--ink-soft)) !important;
+  }
+
+  /* ===== READING MODES FOR LESSONS ===== */
+  [data-lesson-reading-mode="night"]{
+    --lesson-reading-bg: #0a0a0a !important;
+    --lesson-reading-ink: #f0f0f0 !important;
+  }
+
+  [data-lesson-reading-mode="sepia"]{
+    --lesson-reading-bg: #f4ede4 !important;
+    --lesson-reading-ink: #5d4e37 !important;
+  }
+
+  [data-lesson-reading-mode="white"]{
+    --lesson-reading-bg: #ffffff !important;
+    --lesson-reading-ink: #1a1a1a !important;
+  }
+
+  [data-lesson-reading-mode="default"]{
+    --lesson-reading-bg: var(--bg);
+    --lesson-reading-ink: var(--ink);
+  }
+
+  [data-lesson-reading-mode] .day,
+  [data-lesson-reading-mode] .day-content {
+    background: var(--lesson-reading-bg, var(--bg)) !important;
+    color: var(--lesson-reading-ink, var(--ink)) !important;
+  }
   }
 
   /* PALETA 5: OCEAN */
@@ -406,6 +487,45 @@
   .keyideas b{display:block; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--lime-dark); margin-bottom:6px;}
   .centraltexts{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px;}
   .centraltexts span{ font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:700; background:var(--void); color:var(--lime); padding:6px 13px; border-radius:100px;}
+
+  /* ===== SOURCE TABS (Oficial/Resumo) ===== */
+  .source-tabs{display:flex; gap:6px; background:var(--bg); padding:5px; border-radius:100px; margin-bottom:20px;}
+  .source-tab{flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 8px; border-radius:100px; border:none; cursor:pointer; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:11.5px; background:none; color:var(--ink-soft); transition:all .15s ease;}
+  .source-tab svg{width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0;}
+
+  /* Cores dinâmicas por design - Oficial */
+  [data-theme="light"] .source-tab.active[data-tab="oficial"],
+  [data-theme="dark"] .source-tab.active[data-tab="oficial"],
+  [data-theme="reading"] .source-tab.active[data-tab="oficial"],
+  [data-theme="neutral"] .source-tab.active[data-tab="oficial"] {
+    background:linear-gradient(120deg, #6c4ce0, #5a3ab0); color:#fff; box-shadow:0 8px 16px -8px rgba(108,76,224,0.5);
+  }
+  [data-theme="rainbow-vibrant"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #0066ff, #0052cc); color:#fff; box-shadow:0 8px 16px -8px rgba(0,102,255,0.5);}
+  [data-theme="rainbow-subtle"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #1f5a96, #1a4d7a); color:#fff; box-shadow:0 8px 16px -8px rgba(31,90,150,0.5);}
+  [data-theme="rainbow-premium"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #0b3d91, #082e6f); color:#fff; box-shadow:0 8px 16px -8px rgba(11,61,145,0.5);}
+  [data-theme="rainbow-sunset"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #ff6b3d, #e5542f); color:#fff; box-shadow:0 8px 16px -8px rgba(255,107,61,0.5);}
+  [data-theme="rainbow-ocean"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #0066ff, #0052cc); color:#fff; box-shadow:0 8px 16px -8px rgba(0,102,255,0.5);}
+  [data-theme="rainbow-forest"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #2a7f3f, #1f6830); color:#fff; box-shadow:0 8px 16px -8px rgba(42,127,63,0.5);}
+  [data-theme="rosa-teen"] .source-tab.active[data-tab="oficial"]{background:linear-gradient(120deg, #ec4899, #d9307d); color:#fff; box-shadow:0 8px 16px -8px rgba(236,72,153,0.5);}
+
+  /* Resumo sempre roxo constante */
+  .source-tab.active[data-tab="resumo"]{background:#6c4ce0; color:#fff; box-shadow:0 8px 16px -8px rgba(108,76,224,0.5);}
+
+  .source-panel{display:none;}
+  .source-panel.active{display:block;}
+
+  .official-live{display:flex; align-items:center; gap:7px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--ink-soft); background:var(--tint-violet); padding:7px 12px; border-radius:100px; margin-bottom:16px; width:fit-content;}
+  .official-live .dot{width:6px; height:6px; border-radius:50%; background:#6c4ce0; animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+  .source-panel[data-panel="oficial"] h4{font-family:'Unbounded',sans-serif; font-size:15px; color:var(--heading); margin:0 0 10px;}
+  .source-panel[data-panel="oficial"] h5{font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; margin:18px 0 8px;}
+  .source-panel p{font-size:15px; line-height:1.7; color:var(--ink); margin-bottom:13px;}
+
+  .official-footer{display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:14px; margin-top:6px; border-top:1px dashed var(--border);}
+  .official-source{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--ink-soft);}
+  .official-link{font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#6c4ce0; text-decoration:none; cursor:pointer;}
+  .official-link:hover{text-decoration:underline;}
   .day p{margin:0 0 16px; color:var(--ink);}
   mark.hl{ background:linear-gradient(180deg, transparent 55%, #b8e356 55%); color:#171335; font-weight:700; padding:0 2px; border-radius:3px; line-height:1.6; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
   [data-theme="dark"] mark.hl{ background:none; color:#c3f26a; padding:0; }
@@ -978,12 +1098,8 @@
 </head>
 <body>
 
-<div style="position:fixed;top:14px;right:14px;z-index:60;display:flex;gap:8px;align-items:center;">
-  <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" title="Alternar Light/Dark">
-    <svg id="theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  </button>
-
-  <button class="palette-toggle" id="palette-toggle-btn" onclick="togglePaletteMenu()" title="Selecionar Design">
+<div style="position:fixed;top:14px;right:14px;z-index:60;display:flex;gap:8px;align-items:center;display:none;">
+  <button class="palette-toggle" id="palette-toggle-btn" onclick="togglePaletteMenu()" title="Selecionar Design" style="display:none;">
     <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><circle cx="7" cy="7" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="7" cy="17" r="2"/><circle cx="12" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
   </button>
 
@@ -1003,6 +1119,7 @@
   </div>
 </div>
 
+<div id="lesson-floating-buttons" style="position:fixed;top:0;right:0;z-index:999999;"></div>
 <div id="detail-container"></div>
 <div id="list-container" style="display:none;"></div>
 <div id="stats-container" style="display:none;"></div>
@@ -1232,9 +1349,26 @@ function renderDayCard(lessonId, day, idx, progress, content){
   const savedQuiz = progress.quiz && progress.quiz[day.id];
 
   let html = `<section class="day" id="day-${day.id}" data-dayId="${day.id}" data-letter="${day.letter}" style="--dcolor:${colorVar}">`;
-  html += `<div class="day-date">${day.date}</div><h2>${day.title}</h2>`;
+  html += `<div class="day-date">${day.date}</div>`;
+  html += `<h2 style="margin:0;margin-bottom:16px;">${day.title}</h2>`;
   html += `<div class="keyideas">${day.keyideas}</div>`;
   html += `<div class="centraltexts">${day.centraltexts.map(t=>`<span>${t}</span>`).join('')}</div>`;
+
+  // Abas Oficial/Resumo
+  html += `<div class="source-tabs">
+    <button class="source-tab active" data-tab="oficial" onclick="switchSourceTab(this, '${day.id}', '${lessonId}')">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Oficial
+    </button>
+    <button class="source-tab" data-tab="resumo" onclick="switchSourceTab(this, '${day.id}', '${lessonId}')">
+      ✎ Resumo
+    </button>
+  </div>
+  <div class="source-panel active" data-panel="oficial" id="officialPanel-${day.id}">
+    <div class="official-live"><span class="dot"></span>Buscando ao vivo...</div>
+  </div>
+  <div class="source-panel" data-panel="resumo">`;
+
   if(day.id === 'dom' && content.tirinha){
     html += `<div class="day-tirinha"><img src="data:image/jpeg;base64,${content.tirinha}" alt="Tirinha da Lição ${lessonId}"><div class="cap">Tirinha original · ComTexto Bíblico, Lição ${lessonId}</div></div>`;
   }
@@ -1243,6 +1377,7 @@ function renderDayCard(lessonId, day, idx, progress, content){
     html += `<div class="week-base-note">Texto-base da semana: <b onclick="openBibleReference('${content.bibleref}')" style="cursor:pointer; text-decoration:underline; color:var(--violet);">${content.bibleref}</b></div>`;
   }
   html += day.body.join('\n');
+  html += `</div>`; // Fecha source-panel resumo
 
   if(day.id === 'sab'){
     html += renderMindMap(content);
@@ -1375,6 +1510,8 @@ async function renderLessonDetail(lessonId, fromList){
   const content = LESSONS_CONTENT.find(l=>l.id===lessonId);
   const progress = progressCache[lessonId] || {days:{}, quiz:{}};
   const container = document.getElementById('detail-container');
+  if(!container) return;
+  window.scrollTo(0, 0);
 
   let html = `<header class="hero">`;
   if(fromList) html += `<button class="back-btn" onclick="goList()">← Voltar para a lista</button><br>`;
@@ -1449,6 +1586,7 @@ async function renderLessonDetail(lessonId, fromList){
   } else {
     const firstDay = document.querySelector('.day');
     if(firstDay) firstDay.classList.add('selected');
+    if(firstDay) renderLessonFloatingButton(firstDay.dataset.dayId, content.days[0], lessonId);
   }
   bindDayInteractions(lessonId, content, progress);
   scheduleBibleCardAutoHide();
@@ -1645,6 +1783,68 @@ function refazerQuiz(lessonId, dayId){
 }
 
 function bindDayInteractions(lessonId, content, progress){
+  // Limpar listeners antigos para evitar duplicação
+  document.querySelectorAll('[id*="lesson-menu-btn"]').forEach(btn=>{
+    btn.replaceWith(btn.cloneNode(true));
+  });
+
+  // Setup lesson source selector
+  content.days.forEach(day=>{
+    const btn = document.getElementById('lesson-menu-btn-'+day.id);
+    if(btn){
+      // Criar menu dinamicamente
+      const menu = document.createElement('div');
+      menu.className = 'lesson-source-menu';
+      menu.style.cssText = 'display:none;position:fixed;top:60px;right:24px;background:var(--card);border:0.5px solid var(--border);border-radius:8px;min-width:150px;z-index:99999;box-shadow:0 4px 12px rgba(0,0,0,0.15);padding:4px 0;max-height:60vh;overflow-y:auto;';
+
+      // Versão da Lição
+      const lblVersion = document.createElement('div');
+      lblVersion.textContent = 'Versão da Lição';
+      lblVersion.style.cssText = 'padding:8px 12px;font-size:11px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.5px;';
+      menu.appendChild(lblVersion);
+
+      const btnFluida = document.createElement('button');
+      btnFluida.textContent = 'Fluida';
+      btnFluida.style.cssText = 'width:100%;text-align:left;padding:8px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;';
+      btnFluida.onclick = (e)=>{ e.stopPropagation(); setLessonSource('fluida'); menu.style.display='none'; };
+      btnFluida.onmouseover = ()=>{ btnFluida.style.background = 'var(--border2)'; };
+      btnFluida.onmouseout = ()=>{ btnFluida.style.background = 'none'; };
+
+      const btnOriginal = document.createElement('button');
+      btnOriginal.textContent = 'Original';
+      btnOriginal.style.cssText = 'width:100%;text-align:left;padding:8px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;';
+      btnOriginal.onclick = (e)=>{ e.stopPropagation(); setLessonSource('original'); menu.style.display='none'; };
+      btnOriginal.onmouseover = ()=>{ btnOriginal.style.background = 'var(--border2)'; };
+      btnOriginal.onmouseout = ()=>{ btnOriginal.style.background = 'none'; };
+
+      menu.appendChild(btnFluida);
+      menu.appendChild(btnOriginal);
+      btn.parentElement.appendChild(menu);
+
+      btn.style.opacity = '0.7';
+      btn.onmouseover = ()=>{ btn.style.opacity = '1'; };
+      btn.onmouseout = ()=>{ btn.style.opacity = '0.7'; };
+      btn.onclick = (e)=>{
+        e.stopPropagation();
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+      };
+
+      // Fechar ao clicar fora
+      const closeMenuHandler = (e)=>{
+        if(!e.target.closest('.lesson-source-menu') && !e.target.closest('.lesson-source-toggle')) {
+          menu.style.display = 'none';
+        }
+      };
+      document.addEventListener('click', closeMenuHandler);
+    }
+  });
+
+  // Auto-carregar conteúdo oficial para cada dia
+  content.days.forEach(day=>{
+    autoLoadOfficialContent(lessonId, day.id);
+  });
+
+  // Quiz bindings (original)
   content.days.forEach(day=>{
     if(!day.quiz) return;
     const quizEl = document.getElementById('quiz-'+lessonId+'-'+day.id);
@@ -1733,6 +1933,7 @@ function bindDayInteractions(lessonId, content, progress){
 function renderLessonList(){
   const currentId = getCurrentLessonId();
   const container = document.getElementById('list-container');
+  if(!container) return;
   let html = `<div class="list-header"><h1>Lições do Trimestre</h1><p>Toque em qualquer lição pra abrir — passadas, atual ou futuras.</p></div>`;
   html += `<div class="lesson-grid">`;
   LESSONS_META.forEach(l=>{
@@ -1808,6 +2009,7 @@ async function goConta(){
 
 async function renderConta(){
   const container = document.getElementById('conta-container');
+  if(!container) return;
   const goals = userGoals || {name:''};
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   await loadFavorites();
@@ -1999,6 +2201,7 @@ async function renderQuarterCover(){
   await loadUserGoals();
   const userName = (userGoals && userGoals.name) ? userGoals.name : '';
   const container = document.getElementById('list-container');
+  if(!container) return;
   let html = `<div class="quarters-header"><h1>Lições</h1><p>Escolha o trimestre de estudo.</p></div><div class="quarters-list">`;
   QUARTERS.forEach(q=>{
     const totalWeeks = q.lessonEnd - q.lessonStart + 1;
@@ -2463,6 +2666,7 @@ async function saveGoals(){
 
 function renderStats(){
   const container = document.getElementById('stats-container');
+  if(!container) return;
   const progressMap = buildProgressMap();
   const weekStreak = computeWeekStreak(progressMap);
   const totalStudied = Object.values(progressMap).filter(v=>v.studied).length;
@@ -2765,6 +2969,18 @@ const BIBLIAONLINE_SLUG = {
   TIT:'tt',PHM:'fm',HEB:'hb',JAS:'tg','1PE':'1pe','2PE':'2pe','1JN':'1jo','2JN':'2jo',
   '3JN':'3jo',JUD:'jd',REV:'ap',
 };
+const BOOK_ABBR_PT = {
+  GEN:'GN',EXO:'EX',LEV:'LV',NUM:'NM',DEU:'DT',JOS:'JS',JDG:'JZ',RUT:'RT',
+  '1SA':'1SM','2SA':'2SM','1KI':'1RS','2KI':'2RS','1CH':'1CR','2CH':'2CR',
+  EZR:'ED',NEH:'NE',EST:'ET',JOB:'JÓ',PSA:'SL',PRO:'PV',ECC:'EC',SNG:'CT',
+  ISA:'IS',JER:'JR',LAM:'LM',EZK:'EZ',DAN:'DN',HOS:'OS',JOL:'JL',AMO:'AM',
+  OBA:'OB',JON:'JN',MIC:'MQ',NAM:'NA',HAB:'HC',ZEP:'SF',HAG:'AG',ZEC:'ZC',MAL:'ML',
+  MAT:'MT',MRK:'MC',LUK:'LC',JHN:'JO',ACT:'ATOS',ROM:'RM','1CO':'1CO','2CO':'2CO',
+  GAL:'GL',EPH:'EF',PHP:'FP',COL:'CL','1TH':'1TS','2TH':'2TS','1TI':'1TM','2TI':'2TM',
+  TIT:'TT',PHM:'FM',HEB:'HB',JAS:'TG','1PE':'1PE','2PE':'2PE','1JN':'1JO','2JN':'2JO',
+  '3JN':'3JO',JUD:'JD',REV:'AP',
+};
+
 const BOOK_NAME_BY_ID = {};
 BIBLE_BOOKS.forEach(b=>{ BOOK_NAME_BY_ID[b.id] = b.name; });
 
@@ -2964,6 +3180,7 @@ async function goBiblePlan(){
 
 async function renderPlanSelector(){
   const container = document.getElementById('bible-container');
+  if(!container) return;
   await loadActiveBiblePlan();
   let html = bibleSubtabsHTML('plan');
   html += `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Plano Bíblico</h1><p>Escolha como você quer percorrer a Bíblia inteira.</p></div><div class="bible-wrap">`;
@@ -3070,7 +3287,7 @@ async function renderBiblePlan(){
         flex-shrink:0;width:32px;height:58px;border:2px solid var(--border);background:var(--card);border-radius:8px;
         cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);
         transition:all 0.2s ease;
-      " title="Abrir calendário"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      " title="Abrir calendário"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></button>
     </div>
 
     <div class="day-chapter-list" id="day-chapter-list"></div>
@@ -3087,7 +3304,6 @@ function viewPlanDay(idx){
   document.querySelectorAll('.day-chip').forEach((el,i)=>el.classList.toggle('viewed', i===idx));
   renderDayChapterList();
 }
-
 function renderDayChapterList(){
   const key = currentPlanKey;
   const plan = BIBLE_PLANS[key];
@@ -3295,7 +3511,6 @@ async function savePlanNewDate(key, newDateStr){
   await savePlanStartDateKey(key, newDateStr);
   planStartDateCache[key] = newDateStr;
   renderBiblePlan();
-  document.querySelectorAll('[style*=position:fixed]').forEach(el => el.remove());
 }
 
 function infoPlanItem(key){
@@ -3378,11 +3593,10 @@ function openBiblePlanCalendar(key, startDateStr, monthOffset){
       const isToday = cellDate.getTime() === today.getTime();
       const isDone = dayIndex >= 0 && dayIndex < plan.progress;
 
-      html += `<button onclick="viewPlanDay(${dayIndex})" style="
-        padding:6px;border-radius:6px;border:2px solid ${isToday?'var(--primary)':isDone?'var(--day1)':'var(--border)'};
-        background:${isToday?'var(--primary)':isDone?'var(--day1)':'var(--card)'};color:${isToday||isDone?'white':'var(--ink)'};
-        cursor:pointer;font-weight:600;font-size:12px;transition:all 0.2s;
-      " title="${cellDate.toLocaleDateString('pt-BR')}">
+      const borderColor = isToday ? 'var(--violet)' : isDone ? 'var(--day1)' : 'var(--border)';
+      const bgColor = isToday ? 'var(--violet)' : isDone ? 'var(--day1)' : 'var(--card)';
+      const textColor = isToday || isDone ? 'white' : 'var(--ink)';
+      html += `<button onclick="viewPlanDay(${dayIndex})" style="padding:6px;border-radius:6px;border:2px solid ${borderColor};background:${bgColor};color:${textColor};cursor:pointer;font-weight:600;font-size:12px;transition:all 0.2s;" title="${cellDate.toLocaleDateString('pt-BR')}">
         ${day}
       </button>`;
     }
@@ -3502,13 +3716,13 @@ function renderBookGrid(books){
   if(bibleViewMode === 'card'){
     return `<div class="book-cards">` + books.map(b=>
       `<button class="book-card cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')">
-        <span class="bc-abbr">${b.id}</span><span class="bc-name">${b.name}</span>
+        <span class="bc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="bc-name">${b.name}</span>
       </button>`).join('') + `</div>`;
   }
   if(bibleViewMode === 'periodic'){
     return `<div class="periodic-grid">` + books.map(b=>
       `<button class="periodic-cell cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')" title="${b.name}">
-        <span class="pc-abbr">${b.id}</span><span class="pc-name">${b.name}</span>
+        <span class="pc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="pc-name">${b.name}</span>
       </button>`).join('') + `</div>`;
   }
   return `<div class="book-grid">` + books.map(b=>
@@ -3517,6 +3731,7 @@ function renderBookGrid(books){
 
 function renderBibleBooks(){
   const container = document.getElementById('bible-container');
+  if(!container) return;
   let html = bibleSubtabsHTML('read');
   html += `<div class="bible-header">
     <h1><svg class="header-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Bíblia
@@ -3585,6 +3800,7 @@ function openBibleBook(bookId){
 function renderBibleChapters(){
   const book = BIBLE_BOOKS.find(b=>b.id===bibleState.book);
   const container = document.getElementById('bible-container');
+  if(!container) return;
   let html = `<div class="bible-header"><h1>${book.name}</h1><p>${book.ch} capítulo${book.ch>1?'s':''}</p></div>
   <div class="bible-wrap">
     <div class="bible-crumbs">${bibleState.returnTo==='plan' ? bibleCrumbHtml(book) : '<button onclick="goBible()">← Livros</button>'}</div>
@@ -3668,6 +3884,7 @@ async function openBibleChapter(chapter){
   bibleState.chapter = chapter;
   bibleState.translation = bibleState.translation || 'ara';
   const container = document.getElementById('bible-container');
+  if(!container) return;
   const book = BIBLE_BOOKS.find(b=>b.id===bibleState.book);
   container.innerHTML = `<div class="bible-wrap"><div class="bible-crumbs">
     ${bibleCrumbHtml(book)}
@@ -3711,6 +3928,7 @@ function switchTranslation(newT){
 
 function renderBibleChapterContent(book, chapter, result, translation){
   const container = document.getElementById('bible-container');
+  if(!container) return;
   const verses = result.verses || [];
   let html = `<div class="bible-wrap">
     <div class="bible-crumbs">
@@ -3725,6 +3943,15 @@ function renderBibleChapterContent(book, chapter, result, translation){
             <button class="${translation==='nvi'?'active':''}" onclick="switchTranslation('nvi')">NVI</button>
             <button class="${translation==='ara'?'active':''}" onclick="switchTranslation('ara')">ARA</button>
           </div>
+          <div style="position:relative;">
+            <button id="bible-reading-mode-toggle" style="background:none;border:none;cursor:pointer;color:var(--ink-soft);padding:4px 8px;opacity:0.7;font-size:18px;margin-left:8px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">⋮</button>
+            <div id="bible-reading-mode-menu" style="display:none;position:absolute;top:100%;right:0;background:var(--card);border:0.5px solid var(--border);border-radius:8px;min-width:130px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin-top:4px;">
+              <button onclick="setBibleReadingMode('default')" style="width:100%;text-align:left;padding:10px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;">Padrão</button>
+              <button onclick="setBibleReadingMode('night')" style="width:100%;text-align:left;padding:10px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;">🌙 Noturno</button>
+              <button onclick="setBibleReadingMode('sepia')" style="width:100%;text-align:left;padding:10px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;">📖 Sepia</button>
+              <button onclick="setBibleReadingMode('white')" style="width:100%;text-align:left;padding:10px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;">☀️ Branco</button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="translation-note">${result.note||''}</div>`;
@@ -3737,6 +3964,24 @@ function renderBibleChapterContent(book, chapter, result, translation){
     </div>
   </div></div>`;
   container.innerHTML = html;
+
+  // Inicializar menu de modos de leitura
+  setTimeout(()=>{
+    const toggle = document.getElementById('bible-reading-mode-toggle');
+    const menu = document.getElementById('bible-reading-mode-menu');
+    if(toggle && menu){
+      toggle.onclick = (e)=>{
+        e.stopPropagation();
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+      };
+      document.addEventListener('click', (e)=>{
+        if(!e.target.closest('#bible-reading-mode-toggle') && !e.target.closest('#bible-reading-mode-menu')){
+          menu.style.display = 'none';
+        }
+      });
+    }
+  }, 0);
+
   isFavorited(book.id, chapter, 0, 0).then(fav=>{
     const btn = document.getElementById('fav-star-btn-chapter');
     if(btn) btn.classList.toggle('active', fav);
@@ -4029,11 +4274,70 @@ function updateAuthUI() {
   }
 }
 
+// ===== OFFICIAL SOURCE TABS CACHE & FUNCTIONS =====
+const officialContentCache = {};
+
+async function fetchOfficialContent(lessonId, dayId){
+  const cacheKey = `${lessonId}-${dayId}`;
+  if(officialContentCache[cacheKey]) return officialContentCache[cacheKey];
+
+  try{
+    const dayMap = {dom:0, seg:1, ter:2, qua:3, qui:4, sex:5, sab:6};
+    const dayNum = dayMap[dayId];
+    const lessonNum = parseInt(lessonId);
+
+    // URL do repositório Adventech (exemplo)
+    const url = `https://raw.githubusercontent.com/adventech/sabbath-school-lessons/master/src/_pt/2026-03/info.yml`;
+    const response = await fetch(url);
+    if(!response.ok) throw new Error('Fetch falhou');
+
+    const html = await response.text();
+    officialContentCache[cacheKey] = html;
+    return html;
+  } catch(e){
+    console.error('Erro ao buscar oficial:', e);
+    return `<div style="padding:16px; background:var(--tint-violet); border-radius:12px; color:var(--ink-soft);">
+      <strong>Não foi possível carregar o conteúdo oficial.</strong><br>
+      Verifique sua conexão ou visite <a href="https://sabbathschoollessons.adventech.io" target="_blank" style="color:#6c4ce0; text-decoration:underline;">Adventech</a>
+    </div>`;
+  }
+}
+
+function switchSourceTab(btn, dayId, lessonId){
+  const day = btn.closest('.day');
+  if(!day) return;
+
+  day.querySelectorAll('.source-tab').forEach(b => b.classList.toggle('active', b === btn));
+  day.querySelectorAll('.source-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === btn.dataset.tab));
+
+  // Se clicou em Oficial e ainda não carregou, carrega agora
+  if(btn.dataset.tab === 'oficial' && !officialContentCache[`${lessonId}-${dayId}`]){
+    loadOfficialContent(lessonId, dayId);
+  }
+}
+
+async function loadOfficialContent(lessonId, dayId){
+  const panel = document.getElementById(`officialPanel-${dayId}`);
+  if(!panel) return;
+
+  const content = await fetchOfficialContent(lessonId, dayId);
+  panel.innerHTML = content;
+}
+
+// Auto-carregar oficial ao renderizar dia
+function autoLoadOfficialContent(lessonId, dayId){
+  setTimeout(() => loadOfficialContent(lessonId, dayId), 100);
+}
+
 (async function init(){
-  await loadTheme();
-  await loadDesignTheme();
-  await preloadAllProgress();
-  goHome();
+  try {
+    await loadTheme();
+    await loadDesignTheme();
+    await preloadAllProgress();
+    goHome();
+  } catch(e) {
+    console.error('Init error:', e);
+  }
 })();
 </script>
 
@@ -4049,6 +4353,294 @@ function updateAuthUI() {
     <button class="version-modal-close" onclick="closeBibleVersionModal()">✕</button>
   </div>
 </div>
+
+<!-- ADVENTECH LESSON VIEWER -->
+<div id="adventech-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; overflow-y: auto;">
+  <div style="max-width: 1000px; margin: 40px auto; background: var(--card); border-radius: 16px; padding: 40px; position: relative;">
+    <button id="adventech-close" onclick="closeAdventechViewer()" style="position: absolute; top: 20px; right: 20px; border: none; background: none; font-size: 24px; cursor: pointer;">✕</button>
+
+    <!-- Lesson Content (segue design da conta) -->
+    <div id="adventech-content" style="min-height: 300px; line-height: 1.8; color: var(--ink); font-size: 16px;">
+      <p style="text-align: center; color: var(--ink-soft);">Carregando lição oficial...</p>
+    </div>
+
+    <!-- Credit Footer -->
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-soft);">
+      <p>📚 <strong>Fonte oficial:</strong> <a id="adventech-source-link" href="" target="_blank" style="color: var(--violet); text-decoration: none;">Adventech — Escola Sabatina Jovem</a></p>
+      <p>© Conferência Geral da Igreja Adventista do Sétimo Dia. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Button to Open Adventech -->
+<button id="adventech-btn" onclick="openAdventechViewer()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: var(--violet); color: white; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(108, 76, 224, 0.3); z-index: 100; display: none;">📖</button>
+
+
+<script>
+// ===== ADVENTECH LESSON SERVICE =====
+class AdventechLessonService {
+  constructor() {
+    this.sessionCache = new Map();
+    this.baseUrl = 'https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/stage/src/pt';
+  }
+
+  async detectTrimestreCode(year = 2026, quarter = 3) {
+    // Para início, usar código padrão; expandir depois
+    const code = `${year}-${String(quarter).padStart(2, '0')}-cq`;
+
+    try {
+      const response = await fetch(`${this.baseUrl}/${code}/info.yml`, { method: 'HEAD' });
+      if (response.ok) return code;
+    } catch (e) {
+      console.warn(`Trimestre ${code} não encontrado`);
+    }
+
+    throw new Error(`Não consegui detectar o trimestre vigente`);
+  }
+
+  async fetchDay(trimastreCode, weekNumber, dayOfWeek) {
+    const cacheKey = `${trimastreCode}:${weekNumber}:${dayOfWeek}`;
+
+    if (this.sessionCache.has(cacheKey)) {
+      return this.sessionCache.get(cacheKey);
+    }
+
+    const weekStr = String(weekNumber).padStart(2, '0');
+    const dayStr = String(dayOfWeek).padStart(2, '0');
+    const mdUrl = `${this.baseUrl}/${trimastreCode}/${weekStr}/${dayStr}.md`;
+
+    try {
+      const response = await fetch(mdUrl);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const rawMarkdown = await response.text();
+      const html = this.markdownToHtml(rawMarkdown);
+
+      const lesson = {
+        dayNumber: dayOfWeek,
+        dayName: this.getDayName(dayOfWeek),
+        title: this.extractTitleFromMarkdown(rawMarkdown),
+        date: this.extractDateFromMarkdown(rawMarkdown),
+        html,
+        sourceUrl: `https://github.com/Adventech/sabbath-school-lessons/blob/stage/src/pt/${trimastreCode}/${weekStr}/${dayStr}.md`,
+        lastFetched: new Date(),
+      };
+
+      this.sessionCache.set(cacheKey, lesson);
+      return lesson;
+    } catch (e) {
+      throw new Error(`Erro ao buscar lição: ${e.message}`);
+    }
+  }
+
+  markdownToHtml(md) {
+    let html = md
+      .replace(/^---[\s\S]*?---\n/, '') // Remove frontmatter
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+      .split('\n\n')
+      .map(p => p.trim())
+      .filter(p => p && !p.startsWith('<'))
+      .map(p => `<p>${p}</p>`)
+      .join('');
+
+    return html;
+  }
+
+  extractTitleFromMarkdown(md) {
+    const match = md.match(/title:\s*(.+)/);
+    return match ? match[1].trim() : 'Sem título';
+  }
+
+  extractDateFromMarkdown(md) {
+    const match = md.match(/date:\s*(.+)/);
+    return match ? match[1].trim() : '';
+  }
+
+  getDayName(dayOfWeek) {
+    const names = ['', 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    return names[dayOfWeek] || '';
+  }
+}
+
+// ===== GLOBAL INSTANCE =====
+const adventechService = new AdventechLessonService();
+let currentTrimestreCode = null;
+
+// ===== FUNCTIONS =====
+async function openAdventechViewer() {
+  const modal = document.getElementById('adventech-modal');
+  modal.style.display = 'block';
+
+  // Detectar trimestre
+  if (!currentTrimestreCode) {
+    try {
+      currentTrimestreCode = await adventechService.detectTrimestreCode(2026, 3);
+    } catch (e) {
+      document.getElementById('adventech-content').innerHTML = `<p style="color: red;">Erro: ${e.message}</p>`;
+      return;
+    }
+  }
+
+  // Buscar lição de teste: Semana 1, Quarta-feira (dia 4)
+  try {
+    const lesson = await adventechService.fetchDay(currentTrimestreCode, 1, 4);
+
+    document.getElementById('adventech-content').innerHTML = `
+      <div style="margin-bottom: 24px;">
+        <h2 style="color: var(--violet); margin-bottom: 8px;">${lesson.title}</h2>
+        <p style="color: var(--ink-soft); font-size: 14px;">${lesson.date}</p>
+      </div>
+      ${lesson.html}
+    `;
+
+    document.getElementById('adventech-source-link').href = lesson.sourceUrl;
+    setReadingMode('default');
+  } catch (e) {
+    document.getElementById('adventech-content').innerHTML = `<p style="color: red;">Erro ao carregar: ${e.message}</p>`;
+  }
+}
+
+function closeAdventechViewer() {
+  document.getElementById('adventech-modal').style.display = 'none';
+}
+
+// ===== LESSON SOURCE SELECTOR =====
+let currentLessonSource = 'fluida'; // padrão: nossa lição fluida
+
+function toggleLessonSourceMenu(event) {
+  event.stopPropagation();
+  const menu = event.target.closest('.lesson-source-toggle').nextElementSibling;
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+
+  // Fechar menu ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.lesson-source-toggle') && !e.target.closest('.lesson-source-menu')) {
+      menu.style.display = 'none';
+    }
+  });
+}
+
+async function setLessonSource(source, event) {
+  currentLessonSource = source;
+
+  if (event) {
+    event.stopPropagation();
+    // Fechar menu
+    const menu = event.target.closest('.lesson-source-menu');
+    if (menu) menu.style.display = 'none';
+  } else {
+    // Fechar todos os menus se não houver event
+    document.querySelectorAll('.lesson-source-menu').forEach(m => m.style.display = 'none');
+  }
+
+  // Se selecionou "Original", tentar buscar do GitHub
+  if (source === 'original') {
+    try {
+      // Aqui buscaria do GitHub, por enquanto mostra mensagem
+      console.log('Buscando lição original do GitHub');
+    } catch (e) {
+      console.error('Erro ao buscar lição original:', e);
+      alert('Não conseguimos buscar a lição do GitHub. Usando versão local.');
+    }
+  }
+}
+
+function setLessonReadingMode(mode) {
+  document.documentElement.setAttribute('data-lesson-reading-mode', mode);
+  try {
+    localStorage.setItem('lesson-reading-mode', mode);
+  } catch (e) {}
+
+  // Fechar menu
+  const menus = document.querySelectorAll('.lesson-source-menu');
+  menus.forEach(m => m.style.display = 'none');
+}
+
+// ===== BIBLE READING MODES =====
+let currentBibleReadingMode = 'default';
+
+function renderLessonFloatingButton(dayId, day, lessonId) {
+  const container = document.getElementById('lesson-floating-buttons');
+  if (!container) return;
+
+  // Limpar menus antigos antes de renderizar novo
+  document.querySelectorAll('.lesson-source-menu').forEach(m => m.remove());
+
+  container.innerHTML = `<button id="lesson-menu-btn-${dayId}" class="lesson-source-toggle" style="position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:24px;padding:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;pointer-events:auto;border:1.5px solid;box-shadow:0 2px 10px rgba(0,0,0,0.2);">⋮</button>`;
+  const btn = container.querySelector(`#lesson-menu-btn-${dayId}`);
+  if (!btn) return;
+  const menu = document.createElement('div');
+  menu.className = 'lesson-source-menu';
+  menu.style.cssText = 'display:none;position:fixed;top:60px;right:24px;background:var(--card);border:0.5px solid var(--border);border-radius:8px;min-width:150px;z-index:99999;box-shadow:0 4px 12px rgba(0,0,0,0.15);padding:4px 0;max-height:60vh;overflow-y:auto;';
+  const lblVersion = document.createElement('div');
+  lblVersion.textContent = 'Versão da Lição';
+  lblVersion.style.cssText = 'padding:8px 12px;font-size:11px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.5px;';
+  menu.appendChild(lblVersion);
+  const btnFluida = document.createElement('button');
+  btnFluida.textContent = 'Fluida';
+  btnFluida.style.cssText = 'width:100%;text-align:left;padding:8px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;';
+  btnFluida.onclick = (e)=>{ e.stopPropagation(); setLessonSource('fluida'); menu.style.display='none'; };
+  btnFluida.onmouseover = ()=>{ btnFluida.style.background = 'var(--border2)'; };
+  btnFluida.onmouseout = ()=>{ btnFluida.style.background = 'none'; };
+  const btnOriginal = document.createElement('button');
+  btnOriginal.textContent = 'Original';
+  btnOriginal.style.cssText = 'width:100%;text-align:left;padding:8px 12px;border:none;background:none;color:var(--ink);font-size:13px;cursor:pointer;';
+  btnOriginal.onclick = (e)=>{ e.stopPropagation(); setLessonSource('original'); menu.style.display='none'; };
+  btnOriginal.onmouseover = ()=>{ btnOriginal.style.background = 'var(--border2)'; };
+  btnOriginal.onmouseout = ()=>{ btnOriginal.style.background = 'none'; };
+  menu.appendChild(btnFluida);
+  menu.appendChild(btnOriginal);
+  container.appendChild(menu);
+  btn.onmouseover = ()=>{ btn.style.opacity = '1'; };
+  btn.onmouseout = ()=>{ btn.style.opacity = '0.8'; };
+  btn.onclick = (e)=>{ e.stopPropagation(); menu.style.display = menu.style.display === 'none' ? 'block' : 'none'; };
+  const closeHandler = (e)=>{
+    if(!e.target.closest('.lesson-source-menu') && !e.target.closest('.lesson-source-toggle')) {
+      menu.style.display = 'none';
+    }
+  };
+  document.addEventListener('click', closeHandler);
+}
+
+function setBibleReadingMode(mode) {
+  currentBibleReadingMode = mode;
+  document.documentElement.setAttribute('data-bible-reading-mode', mode);
+
+  // Salvar preferência
+  try {
+    localStorage.setItem('bible-reading-mode', mode);
+  } catch (e) {}
+
+  // Fechar menu
+  const menu = document.getElementById('bible-reading-mode-menu');
+  if (menu) {
+    menu.style.display = 'none';
+  }
+}
+
+// ===== INIT =====
+window.addEventListener('load', () => {
+  // Carregar modo de leitura da Bíblia salvo
+  try {
+    const savedBibleMode = localStorage.getItem('bible-reading-mode');
+    if (savedBibleMode) {
+      setBibleReadingMode(savedBibleMode);
+    }
+  } catch (e) {}
+
+  // Carregar modo de leitura da Lição salvo
+  try {
+    const savedLessonMode = localStorage.getItem('lesson-reading-mode');
+    if (savedLessonMode) {
+      setLessonReadingMode(savedLessonMode);
+    }
+  } catch (e) {}
+});
+</script>
 
 </body>
 </html>
