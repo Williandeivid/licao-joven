@@ -4355,10 +4355,17 @@ function switchSourceTab(btn, dayId, lessonId){
 
 async function loadOfficialContent(lessonId, dayId){
   const panel = document.getElementById(`officialPanel-${dayId}`);
-  if(!panel) return;
+  if(!panel) {
+    console.warn(`Painel officialPanel-${dayId} não encontrado`);
+    return;
+  }
 
-  const content = await fetchOfficialContent(lessonId, dayId);
-  panel.innerHTML = content;
+  try {
+    const content = await fetchOfficialContent(lessonId, dayId);
+    if(panel) panel.innerHTML = content;
+  } catch(e) {
+    console.error(`Erro ao carregar oficial para ${dayId}:`, e);
+  }
 }
 
 // Auto-carregar oficial ao renderizar dia
