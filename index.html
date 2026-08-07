@@ -477,10 +477,8 @@
   main{max-width:760px; margin:0 auto; padding:40px 20px 60px; position:relative; z-index:1;}
 
   /* ===== DAY CARD ===== */
-  .day{ background:var(--card); border:none; border-radius:26px; padding:0 32px 36px; margin-bottom:56px; position:relative; box-shadow:0 2px 0 rgba(28,23,53,0.04), 0 24px 48px -30px rgba(28,23,53,0.35); display:none; overflow:hidden;}
+  .day{ background:var(--card); border:none; border-radius:26px; padding:40px 32px 36px; margin-bottom:56px; position:relative; box-shadow:0 2px 0 rgba(28,23,53,0.04), 0 24px 48px -30px rgba(28,23,53,0.35); display:none;}
   .day.selected{ display:block;}
-  .day-splash{ background:linear-gradient(135deg,rgba(26,26,46,0.6),rgba(15,52,96,0.7)),url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="%231a1a2e" width="400" height="400"/><circle cx="200" cy="150" r="80" fill="%23c850c8" opacity="0.6"/><circle cx="80" cy="100" r="50" fill="%236c4ce0" opacity="0.4"/><circle cx="320" cy="300" r="60" fill="%23c850c8" opacity="0.5"/></svg>'); background-size:cover; background-position:center; padding:32px 0; margin:0 -32px 24px -32px; text-align:center; color:white; min-height:280px; display:flex; flex-direction:column; justify-content:center; animation:splash-fade 5.5s ease-out forwards;}
-  @keyframes splash-fade{ 0%{opacity:1;} 80%{opacity:1;} 100%{opacity:0; display:none;}}
   .day::after{ content:""; position:absolute; top:0; left:24px; right:24px; height:6px; border-radius:0 0 8px 8px; background:var(--dcolor, var(--violet));}
   .day::before{ content:attr(data-letter); position:absolute; top:-20px; left:32px; width:48px; height:48px; border-radius:16px; color:#fff; font-family:'Unbounded', sans-serif; font-weight:800; font-size:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px -6px rgba(28,23,53,0.4); transform:rotate(-6deg); background:var(--dcolor, var(--violet)); z-index:35;}
   .day-date{font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--pink); margin:10px 0 6px; font-weight:700;}
@@ -1351,15 +1349,6 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
   const savedQuiz = progress.quiz && progress.quiz[day.id];
 
   let html = `<section class="day" id="day-${day.id}" data-dayId="${day.id}" data-letter="${day.letter}" style="--dcolor:${colorVar}">`;
-
-  // Splash background (desaparece após 5 segundos)
-  html += `<div class="day-splash">
-    <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.8); margin-bottom:12px;">Lição Jovem ${lessonId}</div>
-    <h1 style="font-size:38px; font-weight:800; margin:0 0 12px; letter-spacing:-0.02em;">${day.title}</h1>
-    <div style="font-size:14px; color:rgba(255,255,255,0.8);">${day.date}</div>
-  </div>`;
-
-  html += `<div style="padding:40px 0 0 0;">`;
   html += `<div class="day-date">${day.date}</div>`;
   html += `<h2 style="margin:0;margin-bottom:16px;">${day.title}</h2>`;
   html += `<div class="keyideas">${day.keyideas}</div>`;
@@ -1444,7 +1433,6 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
 
   if(hasExpandable){ html += `</div>`; }
 
-  html += `</div>`; // Fecha div de conteúdo (padding)
   html += `</section>`;
   return html;
 }
