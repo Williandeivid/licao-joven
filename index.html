@@ -4433,8 +4433,7 @@ function autoLoadOfficialContent(lessonId, dayId){
 
 (async function init(){
   try {
-    await loadTheme();
-    await loadDesignTheme();
+    await Promise.all([loadTheme(), loadDesignTheme()]);
     await preloadAllProgress();
     goHome();
   } catch(e) {
