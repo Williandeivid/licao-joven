@@ -4321,6 +4321,15 @@ async function fetchOfficialContent(lessonId, dayId){
       return `<img src="${imgUrl}" alt="${alt}" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;">`;
     });
 
+    // Função auxiliar para converter referências bíblicas em links
+    function formatBibleReferences(text) {
+      // Detecta padrões como "João 3:16", "Romanos 12:1-5", "2 Timóteo 3", etc.
+      return text.replace(/\b(1º?\s*)?([A-ZÁ][a-záé]*(?:\s+[A-ZÁ][a-záé]*)?)\s+(\d+)(?::(\d+(?:-\d+)?))?/g, (match, prefix, bookName, chapter, verses) => {
+        const fullBookName = (prefix ? prefix.trim() + ' ' : '') + bookName;
+        return `<a href="javascript:openBibleReference('${fullBookName} ${chapter}${verses ? ':' + verses : ''}')" style="color:#6c4ce0;text-decoration:underline;cursor:pointer;">${match}</a>`;
+      });
+    }
+
     // Depois: processar linha por linha
     const lines = content.split('\n');
     const processedLines = [];
@@ -4332,16 +4341,16 @@ async function fetchOfficialContent(lessonId, dayId){
       // Cabeçalhos
       if(trimmed.startsWith('#### ')) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
-        processedLines.push(`<h4 style="margin-top:14px;margin-bottom:8px;font-size:14px;font-weight:700;">${trimmed.slice(5)}</h4>`);
+        processedLines.push(`<h4 style="margin-top:14px;margin-bottom:8px;font-size:14px;font-weight:700;">${formatBibleReferences(trimmed.slice(5))}</h4>`);
       } else if(trimmed.startsWith('### ')) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
-        processedLines.push(`<h4 style="margin-top:16px;margin-bottom:10px;font-size:16px;font-weight:700;">${trimmed.slice(4)}</h4>`);
+        processedLines.push(`<h4 style="margin-top:16px;margin-bottom:10px;font-size:16px;font-weight:700;">${formatBibleReferences(trimmed.slice(4))}</h4>`);
       } else if(trimmed.startsWith('## ')) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
-        processedLines.push(`<h3 style="margin-top:18px;margin-bottom:12px;font-size:18px;font-weight:700;">${trimmed.slice(3)}</h3>`);
+        processedLines.push(`<h3 style="margin-top:18px;margin-bottom:12px;font-size:18px;font-weight:700;">${formatBibleReferences(trimmed.slice(3))}</h3>`);
       } else if(trimmed.startsWith('# ')) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
-        processedLines.push(`<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${trimmed.slice(2)}</h2>`);
+        processedLines.push(`<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${formatBibleReferences(trimmed.slice(2))}</h2>`);
       }
       // Listas
       else if(trimmed.startsWith('- ')) {
@@ -4351,12 +4360,14 @@ async function fetchOfficialContent(lessonId, dayId){
           .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
           .replace(/\*([^*]+)\*/g, '<em>$1</em>')
           .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;">$1</a>');
+        formatted = formatBibleReferences(formatted);
         processedLines.push(`<li style="margin-bottom:6px;">${formatted}</li>`);
       }
       // Citações
       else if(trimmed.startsWith('> ')) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
-        processedLines.push(`<blockquote style="border-left:3px solid #6c4ce0;padding-left:12px;margin:12px 0;color:var(--ink-soft);font-style:italic;">${trimmed.slice(2)}</blockquote>`);
+        const quote = formatBibleReferences(trimmed.slice(2));
+        processedLines.push(`<blockquote style="border-left:3px solid #6c4ce0;padding-left:12px;margin:12px 0;color:var(--ink-soft);font-style:italic;">${quote}</blockquote>`);
       }
       // Parágrafos
       else if(trimmed) {
@@ -4365,6 +4376,7 @@ async function fetchOfficialContent(lessonId, dayId){
           .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
           .replace(/\*([^*]+)\*/g, '<em>$1</em>')
           .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;text-decoration:underline;">$1</a>');
+        formatted = formatBibleReferences(formatted);
         processedLines.push(`<p style="margin-bottom:13px;line-height:1.7;">${formatted}</p>`);
       }
     }
