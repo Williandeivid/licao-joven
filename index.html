@@ -4282,40 +4282,50 @@ async function fetchOfficialContent(lessonId, dayId){
   if(officialContentCache[cacheKey]) return officialContentCache[cacheKey];
 
   try{
-    // Estrutura: src/pt/[ANO]-[TRIMESTRE]-cq/[SEMANA]/[DIA].md
-    // Ex: src/pt/2026-03-cq/01/02.md (Lição 1, Segunda-feira)
-
     const lessonNum = String(parseInt(lessonId)).padStart(2, '0');
-    const quarter = '2026-03-cq'; // 3º trimestre 2026
-    const branch = 'stage'; // Branch oficial do Adventech
+    const quarter = '2026-03-cq';
+    const branch = 'stage';
 
-    // Mapear dia da semana para número (01=domingo, 02=segunda, ..., 07=sábado)
     const dayMap = {dom:'01', seg:'02', ter:'03', qua:'04', qui:'05', sex:'06', sab:'07'};
     const dayNum = dayMap[dayId];
 
-    // URL exata do repositório Adventech
-    const url = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/pt/${quarter}/${lessonNum}/${dayNum}.md`;
+    // URL do arquivo .md
+    const mdUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/pt/${quarter}/${lessonNum}/${dayNum}.md`;
 
-    const response = await fetch(url);
+    const response = await fetch(mdUrl);
     if(!response.ok) throw new Error(`Não encontrado: ${response.status}`);
 
     let content = await response.text();
 
-    // Extrair conteúdo após o frontmatter YAML (---...---)
+    // Extrair conteúdo após frontmatter
     const parts = content.split('---');
     if(parts.length >= 3) {
       content = parts[2].trim();
     }
 
-    // Converter markdown simples para HTML
+    // Converter markdown para HTML com suporte melhorado
+    const baseImageUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/pt/${quarter}/${lessonNum}`;
+
     content = content
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
+        // Converter imagens: ![alt](image.png) → <img src="...">
+        const imgUrl = url.startsWith('http') ? url : `${baseImageUrl}/${url}`;
+        return `<img src="${imgUrl}" alt="${alt}" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;">`;
+      })
       .split('\n')
       .map(line => {
         // Cabeçalhos
+        if(line.startsWith('#### ')) return `<h4 style="margin-top:14px;margin-bottom:8px;font-size:14px;font-weight:700;">${line.slice(5)}</h4>`;
         if(line.startsWith('### ')) return `<h4 style="margin-top:16px;margin-bottom:10px;font-size:16px;font-weight:700;">${line.slice(4)}</h4>`;
         if(line.startsWith('## ')) return `<h3 style="margin-top:18px;margin-bottom:12px;font-size:18px;font-weight:700;">${line.slice(3)}</h3>`;
-        // Citação em bloco
+        if(line.startsWith('# ')) return `<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${line.slice(2)}</h2>`;
+
+        // Listas
+        if(line.trim().startsWith('- ')) return `<li style="margin-left:20px;margin-bottom:6px;">${line.replace(/^-\s+/, '')}</li>`;
+
+        // Citações em bloco
         if(line.startsWith('> ')) return `<blockquote style="border-left:3px solid #6c4ce0;padding-left:12px;margin:12px 0;color:var(--ink-soft);font-style:italic;">${line.slice(2)}</blockquote>`;
+
         // Parágrafo normal
         if(line.trim()) {
           let p = line
