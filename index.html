@@ -539,6 +539,11 @@
   .official-source{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--ink-soft);}
   .official-link{font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#6c4ce0; text-decoration:none; cursor:pointer;}
   .official-link:hover{text-decoration:underline;}
+  .skeleton-loader{display:flex; flex-direction:column; gap:12px; margin:16px 0;}
+  .skeleton-line{height:16px; background:var(--border); border-radius:4px; animation:pulse 1.5s infinite;}
+  .skeleton-line.title{height:24px; width:70%;}
+  .skeleton-line.paragraph{width:100%; opacity:0.8;}
+  .skeleton-line.paragraph:last-child{width:85%; opacity:0.6;}
   .day p{margin:0 0 16px; color:var(--ink);}
   mark.hl{ background:linear-gradient(180deg, transparent 55%, #b8e356 55%); color:#171335; font-weight:700; padding:0 2px; border-radius:3px; line-height:1.6; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
   [data-theme="dark"] mark.hl{ background:none; color:#c3f26a; padding:0; }
@@ -4418,11 +4423,22 @@ async function loadOfficialContent(lessonId, dayId){
     return;
   }
 
+  panel.innerHTML = `<div class="skeleton-loader">
+    <div class="skeleton-line title"></div>
+    <div class="skeleton-line paragraph"></div>
+    <div class="skeleton-line paragraph"></div>
+    <div class="skeleton-line paragraph" style="width:90%;"></div>
+  </div>`;
+
   try {
     const content = await fetchOfficialContent(lessonId, dayId);
     if(panel) panel.innerHTML = content;
   } catch(e) {
     console.error(`Erro ao carregar oficial para ${dayId}:`, e);
+    panel.innerHTML = `<div style="padding:16px; background:var(--tint-violet); border-radius:12px; color:var(--ink-soft);">
+      <strong>⚠️ Conteúdo indisponível</strong><br>
+      <small>Não conseguimos carregar a lição oficial. Verifique sua conexão.</small>
+    </div>`;
   }
 }
 
