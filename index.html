@@ -410,13 +410,20 @@
   header.hero{
     background:linear-gradient(135deg, var(--void) 0%, var(--void-2) 45%, #4a2f9e 100%);
     color:#fff; padding:40px 24px 32px; text-align:center; position:relative; overflow:hidden;
+    background-size:cover; background-position:center;
   }
-  header.hero::before{ content:""; position:absolute; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle, rgba(255,93,143,0.5), transparent 70%); top:-130px; right:-90px; filter:blur(10px);}
-  header.hero::after{ content:""; position:absolute; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(47,214,200,0.4), transparent 70%); bottom:-100px; left:-70px; filter:blur(10px);}
-  .eyebrow{ font-family:'JetBrains Mono', monospace; letter-spacing:0.16em; text-transform:uppercase; font-size:12px; color:var(--lime); margin-bottom:14px; position:relative; z-index:1; display:inline-block; background:rgba(166,226,46,0.12); padding:6px 14px; border-radius:100px;}
-  h1.title{ font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(2rem, 6vw, 3.4rem); margin:0 0 8px; line-height:1.05; letter-spacing:-0.02em; position:relative; z-index:1; background:linear-gradient(90deg, #fff 0%, var(--violet-light) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
-  .subtitle{ font-size:0.95rem; color:#c9c4f0; max-width:520px; margin:0 auto 18px; position:relative; z-index:1;}
-  .keyword-seal{ display:inline-flex; align-items:center; gap:10px; position:relative; z-index:1; background:linear-gradient(90deg, var(--violet), var(--pink)); color:#fff; padding:9px 20px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; box-shadow:0 8px 24px -8px rgba(255,93,143,0.6);}
+  header.hero::before{
+    content:""; position:absolute; inset:0; z-index:0;
+    background-image:url('https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/stage/src/pt/2026-03-cq/splash.png');
+    background-size:cover; background-position:center;
+    animation:hero-bg-fadeout 5.5s ease-out forwards;
+  }
+  @keyframes hero-bg-fadeout{ 0%{opacity:1;} 80%{opacity:1;} 100%{opacity:0;}}
+  header.hero::after{ content:""; position:absolute; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(47,214,200,0.4), transparent 70%); bottom:-100px; left:-70px; filter:blur(10px); z-index:2;}
+  .eyebrow{ font-family:'JetBrains Mono', monospace; letter-spacing:0.16em; text-transform:uppercase; font-size:12px; color:var(--lime); margin-bottom:14px; position:relative; z-index:3; display:inline-block; background:rgba(166,226,46,0.12); padding:6px 14px; border-radius:100px;}
+  h1.title{ font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(2rem, 6vw, 3.4rem); margin:0 0 8px; line-height:1.05; letter-spacing:-0.02em; position:relative; z-index:3; background:linear-gradient(90deg, #fff 0%, var(--violet-light) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .subtitle{ font-size:0.95rem; color:#c9c4f0; max-width:520px; margin:0 auto 18px; position:relative; z-index:3;}
+  .keyword-seal{ display:inline-flex; align-items:center; gap:10px; position:relative; z-index:3; background:linear-gradient(90deg, var(--violet), var(--pink)); color:#fff; padding:9px 20px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; box-shadow:0 8px 24px -8px rgba(255,93,143,0.6);}
   .keyword-seal b{color:#fff; font-size:13.5px; font-family:'Unbounded', sans-serif;}
   [data-theme="neutral"] .keyword-seal{ background:var(--violet); color:#fff; box-shadow:0 8px 24px -8px rgba(108,76,224,0.4); }
   [data-theme="neutral"] .keyword-seal b{ color:#fff; }
