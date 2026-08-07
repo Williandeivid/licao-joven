@@ -4282,23 +4282,37 @@ async function fetchOfficialContent(lessonId, dayId){
   if(officialContentCache[cacheKey]) return officialContentCache[cacheKey];
 
   try{
-    const dayMap = {dom:0, seg:1, ter:2, qua:3, qui:4, sex:5, sab:6};
-    const dayNum = dayMap[dayId];
+    // Construir URL para o GitHub do Adventech
     const lessonNum = parseInt(lessonId);
+    const quarter = '2026-03'; // Q3 2026
+    const dayMap = {dom:'sunday', seg:'monday', ter:'tuesday', qua:'wednesday', qui:'thursday', sex:'friday', sab:'saturday'};
+    const dayName = dayMap[dayId];
 
-    // URL do repositório Adventech (exemplo)
-    const url = `https://raw.githubusercontent.com/adventech/sabbath-school-lessons/master/src/_pt/2026-03/info.yml`;
+    // Tentar buscar do repositório oficial Adventech
+    const url = `https://raw.githubusercontent.com/adventech/sabbath-school-lessons/main/src/_pt/${quarter}/lesson-${lessonNum}/index.md`;
+
     const response = await fetch(url);
-    if(!response.ok) throw new Error('Fetch falhou');
+    if(!response.ok) throw new Error('Conteúdo não encontrado');
 
-    const html = await response.text();
-    officialContentCache[cacheKey] = html;
-    return html;
+    let content = await response.text();
+    // Converter markdown básico para HTML
+    content = content
+      .replace(/^## (.*?)$/gm, '<h3 style="margin-top:18px;margin-bottom:10px;">$1</h3>')
+      .replace(/^### (.*?)$/gm, '<h4 style="margin-top:14px;margin-bottom:8px;">$1</h4>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^/gm, '<p>')
+      .replace(/$/gm, '</p>');
+
+    officialContentCache[cacheKey] = content;
+    return content;
   } catch(e){
     console.error('Erro ao buscar oficial:', e);
-    return `<div style="padding:16px; background:var(--tint-violet); border-radius:12px; color:var(--ink-soft);">
-      <strong>Não foi possível carregar o conteúdo oficial.</strong><br>
-      Verifique sua conexão ou visite <a href="https://sabbathschoollessons.adventech.io" target="_blank" style="color:#6c4ce0; text-decoration:underline;">Adventech</a>
+    return `<div style="padding:16px; background:var(--tint-violet); border-radius:12px; color:var(--ink-soft); margin-bottom:16px;">
+      <strong>⚠️ Conteúdo oficial indisponível</strong><br>
+      <small>Não foi possível conectar ao repositório. Verifique sua conexão de internet.</small><br>
+      <a href="https://sabbathschoollessons.adventech.io" target="_blank" style="color:#6c4ce0; text-decoration:underline; font-size:12px;">Ver versão oficial →</a>
     </div>`;
   }
 }
