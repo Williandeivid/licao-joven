@@ -413,13 +413,15 @@
     background-size:cover; background-position:center;
   }
   header.hero::before{
-    content:""; position:absolute; inset:0; z-index:0;
+    content:""; position:absolute; inset:0; z-index:1;
     background-image:url('https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/stage/src/pt/2026-03-cq/splash.png');
     background-size:cover; background-position:center;
     animation:hero-bg-fadeout 5.5s ease-out forwards;
   }
   @keyframes hero-bg-fadeout{ 0%{opacity:1;} 80%{opacity:1;} 100%{opacity:0;}}
-  header.hero::after{ content:""; position:absolute; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(47,214,200,0.4), transparent 70%); bottom:-100px; left:-70px; filter:blur(10px); z-index:2;}
+  header.hero::after{ content:""; position:absolute; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(47,214,200,0.4), transparent 70%); bottom:-100px; left:-70px; filter:blur(10px); z-index:0;}
+  header.hero > * { animation:text-fadein 5.5s ease-out forwards; }
+  @keyframes text-fadein{ 0%{opacity:0;} 80%{opacity:0;} 100%{opacity:1;}}
   .eyebrow{ font-family:'JetBrains Mono', monospace; letter-spacing:0.16em; text-transform:uppercase; font-size:12px; color:var(--lime); margin-bottom:14px; position:relative; z-index:3; display:inline-block; background:rgba(166,226,46,0.12); padding:6px 14px; border-radius:100px;}
   h1.title{ font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(2rem, 6vw, 3.4rem); margin:0 0 8px; line-height:1.05; letter-spacing:-0.02em; position:relative; z-index:3; background:linear-gradient(90deg, #fff 0%, var(--violet-light) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
   .subtitle{ font-size:0.95rem; color:#c9c4f0; max-width:520px; margin:0 auto 18px; position:relative; z-index:3;}
@@ -1520,11 +1522,12 @@ async function renderLessonDetail(lessonId, fromList){
 
   let html = `<header class="hero">`;
   if(fromList) html += `<button class="back-btn" onclick="goList()">← Voltar para a lista</button><br>`;
-  html += `<div class="eyebrow">Escola Sabatina Jovem · Lição ${lessonId}</div>
+  html += `<div class="eyebrow">Lição Jovem ${lessonId}</div>
     <h1 class="title">${meta.title}</h1>`;
   if(content){
-    html += `<p class="subtitle">${content.daterange} · ${content.bibleref}</p>
-      <div class="keyword-seal">Palavra-chave <b>${content.keyword}</b></div>`;
+    const abbrevBible = content.bibleref.replace(/João/g, 'Jo').replace(/Romanos/g, 'Rm').replace(/Coríntios/g, 'Co').replace(/Gálatas/g, 'Gl').replace(/Efésios/g, 'Ef').replace(/Filipenses/g, 'Fp').replace(/Colossenses/g, 'Cl').replace(/Tessalonicenses/g, 'Ts').replace(/Timóteo/g, 'Tm').replace(/Tito/g, 'Tt').replace(/Filemom/g, 'Flm').replace(/Hebreus/g, 'Hb').replace(/Tiago/g, 'Tg').replace(/Pedro/g, 'Pd').replace(/Judas/g, 'Jd').replace(/Apocalipse/g, 'Ap');
+    html += `<p class="subtitle">${content.daterange} · ${abbrevBible}</p>
+      <div class="keyword-seal">${content.keyword}</div>`;
   } else {
     html += `<p class="subtitle">${meta.dateLabel}</p>`;
   }
