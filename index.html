@@ -477,14 +477,16 @@
   main{max-width:760px; margin:0 auto; padding:40px 20px 60px; position:relative; z-index:1;}
 
   /* ===== DAY CARD ===== */
-  .day{ background:var(--card); border:none; border-radius:26px; padding:40px 32px 36px; margin-bottom:56px; position:relative; box-shadow:0 2px 0 rgba(28,23,53,0.04), 0 24px 48px -30px rgba(28,23,53,0.35); display:none;}
+  .day{ background:var(--card); border:none; border-radius:26px; padding:0 32px 36px; margin-bottom:56px; position:relative; box-shadow:0 2px 0 rgba(28,23,53,0.04), 0 24px 48px -30px rgba(28,23,53,0.35); display:none; overflow:hidden;}
   .day.selected{ display:block;}
+  .day-splash{ background:linear-gradient(135deg,rgba(26,26,46,0.6),rgba(15,52,96,0.7)),url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="%231a1a2e" width="400" height="400"/><circle cx="200" cy="150" r="80" fill="%23c850c8" opacity="0.6"/><circle cx="80" cy="100" r="50" fill="%236c4ce0" opacity="0.4"/><circle cx="320" cy="300" r="60" fill="%23c850c8" opacity="0.5"/></svg>'); background-size:cover; background-position:center; padding:32px 0; margin:0 -32px 24px -32px; text-align:center; color:white; min-height:280px; display:flex; flex-direction:column; justify-content:center; animation:splash-fade 5.5s ease-out forwards;}
+  @keyframes splash-fade{ 0%{opacity:1;} 80%{opacity:1;} 100%{opacity:0; display:none;}}
   .day::after{ content:""; position:absolute; top:0; left:24px; right:24px; height:6px; border-radius:0 0 8px 8px; background:var(--dcolor, var(--violet));}
   .day::before{ content:attr(data-letter); position:absolute; top:-20px; left:32px; width:48px; height:48px; border-radius:16px; color:#fff; font-family:'Unbounded', sans-serif; font-weight:800; font-size:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px -6px rgba(28,23,53,0.4); transform:rotate(-6deg); background:var(--dcolor, var(--violet)); z-index:35;}
   .day-date{font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--pink); margin:10px 0 6px; font-weight:700;}
   .day h2{font-family:'Unbounded', sans-serif; font-size:1.8rem; font-weight:800; margin:0 0 18px; color:var(--heading); letter-spacing:-0.01em;}
-  .keyideas{background:var(--tint-green); border:2px solid var(--lime); padding:14px 18px; border-radius:16px; font-size:14.5px; margin-bottom:14px;}
-  .keyideas b{display:block; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--lime-dark); margin-bottom:6px;}
+  .keyideas{background:var(--tint-green); border:2px solid var(--lime); padding:8px 13px; border-radius:16px; font-size:13px; margin-bottom:12px; line-height:1.4;}
+  .keyideas b{font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--lime-dark); font-weight:700;}
   .centraltexts{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px;}
   .centraltexts span{ font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:700; background:var(--void); color:var(--lime); padding:6px 13px; border-radius:100px;}
 
@@ -1343,12 +1345,21 @@ function renderMindMap(content){
   return `<div class="mindmap-wrap"><h4>Mapa mental da semana</h4>${svg}</div>`;
 }
 
-function renderDayCard(lessonId, day, idx, progress, content){
+function renderDayCard(lessonId, day, idx, progress, content, meta){
   const colorVar = 'var(' + DAY_COLORS[idx % 7] + ')';
   const done = !!(progress.days && progress.days[day.id]);
   const savedQuiz = progress.quiz && progress.quiz[day.id];
 
   let html = `<section class="day" id="day-${day.id}" data-dayId="${day.id}" data-letter="${day.letter}" style="--dcolor:${colorVar}">`;
+
+  // Splash background (desaparece após 5 segundos)
+  html += `<div class="day-splash">
+    <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.8); margin-bottom:12px;">Lição Jovem ${lessonId}</div>
+    <h1 style="font-size:38px; font-weight:800; margin:0 0 12px; letter-spacing:-0.02em;">${day.title}</h1>
+    <div style="font-size:14px; color:rgba(255,255,255,0.8);">${day.date}</div>
+  </div>`;
+
+  html += `<div style="padding:40px 0 0 0;">`;
   html += `<div class="day-date">${day.date}</div>`;
   html += `<h2 style="margin:0;margin-bottom:16px;">${day.title}</h2>`;
   html += `<div class="keyideas">${day.keyideas}</div>`;
@@ -1369,8 +1380,9 @@ function renderDayCard(lessonId, day, idx, progress, content){
   </div>
   <div class="source-panel" data-panel="resumo">`;
 
-  if(day.id === 'dom' && content.tirinha){
-    html += `<div class="day-tirinha"><img src="data:image/jpeg;base64,${content.tirinha}" alt="Tirinha da Lição ${lessonId}"><div class="cap">Tirinha original · ComTexto Bíblico, Lição ${lessonId}</div></div>`;
+  if(day.id === 'dom' && meta && meta.quarter){
+    const tirinhaUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/stage/src/pt/${meta.quarter}/cover.png`;
+    html += `<div class="day-tirinha"><img src="${tirinhaUrl}" alt="Tirinha da Lição ${lessonId}"><div class="cap">Tirinha original · ComTexto Bíblico, Lição ${lessonId}</div></div>`;
   }
   if(day.summary){ html += `<p class="day-summary">${day.summary}</p>`; }
   if(day.id === 'dom'){
@@ -1396,9 +1408,6 @@ function renderDayCard(lessonId, day, idx, progress, content){
     </button><div class="expand-content">`;
   }
 
-  if(day.reflect && day.reflect.length){
-    html += `<div class="reflect"><h3>${day.reflectTitle}</h3><ol>${day.reflect.map(r=>`<li>${r}</li>`).join('')}</ol></div>`;
-  }
 
   if(day.quiz){
     const kahootClasses = ['opt-a','opt-b','opt-c','opt-d'];
@@ -1435,6 +1444,7 @@ function renderDayCard(lessonId, day, idx, progress, content){
 
   if(hasExpandable){ html += `</div>`; }
 
+  html += `</div>`; // Fecha div de conteúdo (padding)
   html += `</section>`;
   return html;
 }
@@ -1547,9 +1557,8 @@ async function renderLessonDetail(lessonId, fromList){
 
   html += `<div class="dashboard"><div class="dash-inner">
     <div class="dash-overall">
-      <span class="label">Progresso: <span class="value">${doneCount}/${quizDays.length} dias</span></span>
-      <span class="label">Acertos: <span class="value">${totalCorrect}/${totalQ}${totalQ?' ('+pct+'%)':''}</span></span>
-      <span class="dash-badge">${evalLabel}</span>
+      ${doneCount > 0 ? `<span class="label">Progresso: <span class="value">${doneCount}/${quizDays.length} dias</span></span>` : ''}
+      ${totalQ > 0 ? `<span class="label">Acertos: <span class="value">${totalCorrect}/${totalQ}${totalQ?' ('+pct+'%)':''}</span></span>` : ''}
     </div>
     <div class="pills">`;
   content.days.forEach(d=>{
@@ -1565,7 +1574,7 @@ async function renderLessonDetail(lessonId, fromList){
 
   html += `<main>`;
   content.days.forEach((d, idx)=>{
-    html += renderDayCard(lessonId, d, idx, progress, content);
+    html += renderDayCard(lessonId, d, idx, progress, content, meta);
   });
   html += `</main><footer style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
     <div style="flex:1; text-align:center;">Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · resumo de estudo pessoal</div>
@@ -4306,37 +4315,62 @@ async function fetchOfficialContent(lessonId, dayId){
     // Converter markdown para HTML com suporte melhorado
     const baseImageUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/pt/${quarter}/${lessonNum}`;
 
-    content = content
-      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
-        // Converter imagens: ![alt](image.png) → <img src="...">
-        const imgUrl = url.startsWith('http') ? url : `${baseImageUrl}/${url}`;
-        return `<img src="${imgUrl}" alt="${alt}" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;">`;
-      })
-      .split('\n')
-      .map(line => {
-        // Cabeçalhos
-        if(line.startsWith('#### ')) return `<h4 style="margin-top:14px;margin-bottom:8px;font-size:14px;font-weight:700;">${line.slice(5)}</h4>`;
-        if(line.startsWith('### ')) return `<h4 style="margin-top:16px;margin-bottom:10px;font-size:16px;font-weight:700;">${line.slice(4)}</h4>`;
-        if(line.startsWith('## ')) return `<h3 style="margin-top:18px;margin-bottom:12px;font-size:18px;font-weight:700;">${line.slice(3)}</h3>`;
-        if(line.startsWith('# ')) return `<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${line.slice(2)}</h2>`;
+    // Primeiro: converter imagens
+    content = content.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
+      const imgUrl = url.startsWith('http') ? url : `${baseImageUrl}/${url}`;
+      return `<img src="${imgUrl}" alt="${alt}" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;">`;
+    });
 
-        // Listas
-        if(line.trim().startsWith('- ')) return `<li style="margin-left:20px;margin-bottom:6px;">${line.replace(/^-\s+/, '')}</li>`;
+    // Depois: processar linha por linha
+    const lines = content.split('\n');
+    const processedLines = [];
+    let inList = false;
 
-        // Citações em bloco
-        if(line.startsWith('> ')) return `<blockquote style="border-left:3px solid #6c4ce0;padding-left:12px;margin:12px 0;color:var(--ink-soft);font-style:italic;">${line.slice(2)}</blockquote>`;
+    for(let line of lines) {
+      const trimmed = line.trim();
 
-        // Parágrafo normal
-        if(line.trim()) {
-          let p = line
-            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;text-decoration:underline;">$1</a>');
-          return `<p style="margin-bottom:13px;line-height:1.7;">${p}</p>`;
-        }
-        return '';
-      })
-      .join('');
+      // Cabeçalhos
+      if(trimmed.startsWith('#### ')) {
+        if(inList) { processedLines.push('</ul>'); inList = false; }
+        processedLines.push(`<h4 style="margin-top:14px;margin-bottom:8px;font-size:14px;font-weight:700;">${trimmed.slice(5)}</h4>`);
+      } else if(trimmed.startsWith('### ')) {
+        if(inList) { processedLines.push('</ul>'); inList = false; }
+        processedLines.push(`<h4 style="margin-top:16px;margin-bottom:10px;font-size:16px;font-weight:700;">${trimmed.slice(4)}</h4>`);
+      } else if(trimmed.startsWith('## ')) {
+        if(inList) { processedLines.push('</ul>'); inList = false; }
+        processedLines.push(`<h3 style="margin-top:18px;margin-bottom:12px;font-size:18px;font-weight:700;">${trimmed.slice(3)}</h3>`);
+      } else if(trimmed.startsWith('# ')) {
+        if(inList) { processedLines.push('</ul>'); inList = false; }
+        processedLines.push(`<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${trimmed.slice(2)}</h2>`);
+      }
+      // Listas
+      else if(trimmed.startsWith('- ')) {
+        if(!inList) { processedLines.push('<ul style="margin:12px 0;padding-left:20px;">'); inList = true; }
+        const text = trimmed.slice(2);
+        let formatted = text
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;">$1</a>');
+        processedLines.push(`<li style="margin-bottom:6px;">${formatted}</li>`);
+      }
+      // Citações
+      else if(trimmed.startsWith('> ')) {
+        if(inList) { processedLines.push('</ul>'); inList = false; }
+        processedLines.push(`<blockquote style="border-left:3px solid #6c4ce0;padding-left:12px;margin:12px 0;color:var(--ink-soft);font-style:italic;">${trimmed.slice(2)}</blockquote>`);
+      }
+      // Parágrafos
+      else if(trimmed) {
+        if(inList) { processedLines.push('</ul>'); inList = false; }
+        let formatted = trimmed
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;text-decoration:underline;">$1</a>');
+        processedLines.push(`<p style="margin-bottom:13px;line-height:1.7;">${formatted}</p>`);
+      }
+    }
+    if(inList) processedLines.push('</ul>');
+
+    content = processedLines.join('');
 
     officialContentCache[cacheKey] = content;
     return content;
