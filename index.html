@@ -1384,7 +1384,6 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
 
   let html = `<section class="day" id="day-${day.id}" data-dayId="${day.id}" data-letter="${day.letter}" style="--dcolor:${colorVar}">`;
   html += `<div class="day-date">${day.date}</div>`;
-  html += `<h2 style="margin:0;margin-bottom:16px;">${day.title}</h2>`;
 
   // Abas Oficial/Resumo
   html += `<div class="source-tabs">
@@ -4384,11 +4383,10 @@ async function fetchOfficialContent(lessonId, dayId){
         return `<a href="javascript:openBibleReference('${fullBookName} ${chapter}${verses ? ':' + verses : ''}')" style="color:#6c4ce0;text-decoration:underline;cursor:pointer;">${match}</a>`;
       });
 
-      // Segundo: versículos avulsos (v. 10, v.11, v. 20, 21, 22, etc.)
-      // Padrão: "v. N", "v.N", "v. N-M", ou números consecutivos após "v."
-      text = text.replace(/v\.\s*(\d+(?:-\d+)?)/gi, (match, verses) => {
-        // Tenta encontrar o livro/capítulo anterior no texto
-        const beforeText = text.substring(Math.max(0, text.indexOf(match) - 100), text.indexOf(match));
+      // Segundo: versículos avulsos (v. 10, v.11, (v. 10), (v. 20, 21, 23), etc.)
+      text = text.replace(/\(\s*v\.?\s*(\d+(?:[,\s]*\d+)*(?:-\d+)?)\s*\)/gi, (match, verses) => {
+        // Para versículos em parênteses, tenta encontrar o livro/capítulo anterior
+        const beforeText = text.substring(Math.max(0, text.indexOf(match) - 150), text.indexOf(match));
         const bookMatch = beforeText.match(/\b(1º?\s*)?([A-ZÁ][a-záé]*(?:\s+[A-ZÁ][a-záé]*)?)\s+(\d+)\b/);
 
         if(bookMatch) {
@@ -4396,7 +4394,9 @@ async function fetchOfficialContent(lessonId, dayId){
           const bookName = bookMatch[2];
           const chapter = bookMatch[3];
           const fullBookName = (prefix ? prefix.trim() + ' ' : '') + bookName;
-          return `<a href="javascript:openBibleReference('${fullBookName} ${chapter}:${verses}')" style="color:#6c4ce0;text-decoration:underline;cursor:pointer;">${match}</a>`;
+          // Limpar versículos: "10, 11, 23" -> "10,11,23"
+          const cleanVerses = verses.replace(/\s+/g, '').replace(/^v\./, '');
+          return `<a href="javascript:openBibleReference('${fullBookName} ${chapter}:${cleanVerses}')" style="color:#6c4ce0;text-decoration:underline;cursor:pointer;">${match}</a>`;
         }
         return match;
       });
@@ -4429,7 +4429,7 @@ async function fetchOfficialContent(lessonId, dayId){
         if(skipFirstH1) {
           skipFirstH1 = false;
         } else {
-          processedLines.push(`<h2 style="margin-top:20px;margin-bottom:14px;font-size:20px;font-weight:800;">${formatBibleReferences(trimmed.slice(2))}</h2>`);
+          processedLines.push(`<h2 style="margin-top:0;margin-bottom:20px;font-size:28px;font-weight:800;">${formatBibleReferences(trimmed.slice(2))}</h2>`);
         }
       }
       // Listas
