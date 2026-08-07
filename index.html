@@ -4282,28 +4282,51 @@ async function fetchOfficialContent(lessonId, dayId){
   if(officialContentCache[cacheKey]) return officialContentCache[cacheKey];
 
   try{
-    // Construir URL para o GitHub do Adventech
-    const lessonNum = parseInt(lessonId);
-    const quarter = '2026-03'; // Q3 2026
-    const dayMap = {dom:'sunday', seg:'monday', ter:'tuesday', qua:'wednesday', qui:'thursday', sex:'friday', sab:'saturday'};
-    const dayName = dayMap[dayId];
+    // Estrutura: src/pt/[ANO]-[TRIMESTRE]-cq/[SEMANA]/[DIA].md
+    // Ex: src/pt/2026-03-cq/01/02.md (Lição 1, Segunda-feira)
 
-    // Tentar buscar do repositório oficial Adventech
-    const url = `https://raw.githubusercontent.com/adventech/sabbath-school-lessons/main/src/_pt/${quarter}/lesson-${lessonNum}/index.md`;
+    const lessonNum = String(parseInt(lessonId)).padStart(2, '0');
+    const quarter = '2026-03-cq'; // 3º trimestre 2026
+    const branch = 'stage'; // Branch oficial do Adventech
+
+    // Mapear dia da semana para número (01=domingo, 02=segunda, ..., 07=sábado)
+    const dayMap = {dom:'01', seg:'02', ter:'03', qua:'04', qui:'05', sex:'06', sab:'07'};
+    const dayNum = dayMap[dayId];
+
+    // URL exata do repositório Adventech
+    const url = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/pt/${quarter}/${lessonNum}/${dayNum}.md`;
 
     const response = await fetch(url);
-    if(!response.ok) throw new Error('Conteúdo não encontrado');
+    if(!response.ok) throw new Error(`Não encontrado: ${response.status}`);
 
     let content = await response.text();
-    // Converter markdown básico para HTML
+
+    // Extrair conteúdo após o frontmatter YAML (---...---)
+    const parts = content.split('---');
+    if(parts.length >= 3) {
+      content = parts[2].trim();
+    }
+
+    // Converter markdown simples para HTML
     content = content
-      .replace(/^## (.*?)$/gm, '<h3 style="margin-top:18px;margin-bottom:10px;">$1</h3>')
-      .replace(/^### (.*?)$/gm, '<h4 style="margin-top:14px;margin-bottom:8px;">$1</h4>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/\n\n/g, '</p><p>')
-      .replace(/^/gm, '<p>')
-      .replace(/$/gm, '</p>');
+      .split('\n')
+      .map(line => {
+        // Cabeçalhos
+        if(line.startsWith('### ')) return `<h4 style="margin-top:16px;margin-bottom:10px;font-size:16px;font-weight:700;">${line.slice(4)}</h4>`;
+        if(line.startsWith('## ')) return `<h3 style="margin-top:18px;margin-bottom:12px;font-size:18px;font-weight:700;">${line.slice(3)}</h3>`;
+        // Citação em bloco
+        if(line.startsWith('> ')) return `<blockquote style="border-left:3px solid #6c4ce0;padding-left:12px;margin:12px 0;color:var(--ink-soft);font-style:italic;">${line.slice(2)}</blockquote>`;
+        // Parágrafo normal
+        if(line.trim()) {
+          let p = line
+            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#6c4ce0;text-decoration:underline;">$1</a>');
+          return `<p style="margin-bottom:13px;line-height:1.7;">${p}</p>`;
+        }
+        return '';
+      })
+      .join('');
 
     officialContentCache[cacheKey] = content;
     return content;
@@ -4311,8 +4334,8 @@ async function fetchOfficialContent(lessonId, dayId){
     console.error('Erro ao buscar oficial:', e);
     return `<div style="padding:16px; background:var(--tint-violet); border-radius:12px; color:var(--ink-soft); margin-bottom:16px;">
       <strong>⚠️ Conteúdo oficial indisponível</strong><br>
-      <small>Não foi possível conectar ao repositório. Verifique sua conexão de internet.</small><br>
-      <a href="https://sabbathschoollessons.adventech.io" target="_blank" style="color:#6c4ce0; text-decoration:underline; font-size:12px;">Ver versão oficial →</a>
+      <small style="font-size:13px;">Não foi possível conectar ao repositório Adventech. Verifique sua conexão de internet.</small><br>
+      <a href="https://github.com/Adventech/sabbath-school-lessons/blob/stage/src/pt/2026-03-cq/" target="_blank" style="color:#6c4ce0; text-decoration:underline; font-size:12px; margin-top:8px; display:inline-block;">Repositório Adventech →</a>
     </div>`;
   }
 }
