@@ -4941,9 +4941,18 @@ let fb = null;
 let currentUser = null;
 
 // Initialize Firebase
+console.log('Firebase disponível?', typeof firebase !== 'undefined');
 if (typeof firebase !== 'undefined') {
-  firebase.initializeApp(firebaseConfig);
-  fb = { auth: firebase.auth(), firestore: firebase.firestore() };
+  try {
+    firebase.initializeApp(firebaseConfig);
+    fb = { auth: firebase.auth(), firestore: firebase.firestore() };
+    console.log('✓ Firebase inicializado com sucesso');
+  } catch(e) {
+    console.error('❌ Erro ao inicializar Firebase:', e);
+  }
+} else {
+  console.error('❌ Firebase não disponível - scripts não carregaram');
+}
 
   // Listen to auth state changes
   fb.auth.onAuthStateChanged(async (user) => {
