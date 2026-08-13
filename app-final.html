@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lições Jovens — Resgate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #171335;
+      --void-2: #241f52;
+      --bg: #f7f5ff;
+      --card: #ffffff;
+      --ink: #1c1735;
+      --ink-soft: #5a5480;
+      --violet: #6c4ce0;
+      --violet-light: #c9bbff;
+      --pink: #ff5d8f;
+      --lime: #a6e22e;
+      --lime-dark: #4d7a12;
+      --sun: #ffc857;
+      --teal: #2fd6c8;
+      --coral: #ff8a5c;
+      --red: #ef4763;
+      --day1: #6c4ce0; --day2: #ff5d8f; --day3: #2fd6c8; --day4: #ffc857; --day5: #ff8a5c; --day6: #8e6cff; --day7: #22b8a6;
+    }
+
+    [data-theme="dark"] {
+      --void: #0f0d1e;
+      --void-2: #1a1630;
+      --bg: #0f0d1e;
+      --card: #1a1630;
+      --ink: #e8e4f0;
+      --ink-soft: #a89fc0;
+      --violet: #8b5cf6;
+      --violet-light: #d8caff;
+      --pink: #ff6ca3;
+      --lime: #bef264;
+      --lime-dark: #a3d500;
+      --teal: #2dd4bf;
+      --coral: #ff9d72;
+      --red: #ff6b6b;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      padding-bottom: 80px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(108, 76, 224, 0.10), transparent 40%),
+        radial-gradient(circle at 92% 20%, rgba(255, 93, 143, 0.10), transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(47, 214, 200, 0.08), transparent 45%);
+    }
+
+    .page { display: none; position: relative; z-index: 1; }
+    .page.active { display: block; }
+
+    /* ===== HERO ===== */
+    header.hero {
+      background: linear-gradient(135deg, var(--void) 0%, var(--void-2) 45%, #4a2f9e 100%);
+      color: #fff;
+      padding: 48px 24px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 93, 143, 0.55), transparent 70%);
+      top: -140px;
+      right: -100px;
+      filter: blur(10px);
+    }
+
+    header.hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(47, 214, 200, 0.4), transparent 70%);
+      bottom: -120px;
+      left: -80px;
+      filter: blur(10px);
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 12.5px;
+      color: var(--lime);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      background: rgba(166, 226, 46, 0.12);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    h1.title {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+      margin: 0 0 10px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #fff 0%, var(--violet-light) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #c9c4f0;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .keyword-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, var(--violet), var(--pink));
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      box-shadow: 0 8px 24px -8px rgba(255, 93, 143, 0.6);
+      margin-bottom: 28px;
+    }
+
+    .keyword-seal b {
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    /* ===== DASHBOARD ===== */
+    .dashboard {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(247, 245, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #e8e2ff;
+      padding: 14px 16px 12px;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] .dashboard {
+      background: rgba(26, 22, 48, 0.9);
+      border-bottom-color: #2a2540;
+    }
+
+    .dash-inner { max-width: 760px; margin: 0 auto; }
+
+    .pills {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-width: 72px;
+      box-shadow: 0 4px 12px -4px rgba(108, 76, 224, 0.4);
+    }
+
+    .pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px -4px rgba(108, 76, 224, 0.6); }
+    .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.6); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 48px 20px 100px; position: relative; z-index: 1; }
+
+    /* ===== DAY CARD ===== */
+    .day {
+      background: var(--card);
+      border-radius: 26px;
+      padding: 40px 32px 36px;
+      margin-bottom: 56px;
+      position: relative;
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 24px 48px -30px rgba(28, 23, 53, 0.35);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    [data-theme="dark"] .day {
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3), 0 24px 48px -30px rgba(0, 0, 0, 0.6);
+    }
+
+    .day::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 6px;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .day:nth-of-type(1)::after { background: var(--day1); }
+    .day:nth-of-type(2)::after { background: var(--day2); }
+    .day:nth-of-type(3)::after { background: var(--day3); }
+    .day:nth-of-type(4)::after { background: var(--day4); }
+    .day:nth-of-type(5)::after { background: var(--day5); }
+    .day:nth-of-type(6)::after { background: var(--day6); }
+    .day:nth-of-type(7)::after { background: var(--day7); }
+
+    .day::before {
+      content: attr(data-letter);
+      position: absolute;
+      top: -20px;
+      left: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      color: #fff;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px -6px rgba(28, 23, 53, 0.4);
+      transform: rotate(-6deg);
+    }
+
+    .day:nth-of-type(1)::before { background: var(--day1); }
+    .day:nth-of-type(2)::before { background: var(--day2); }
+    .day:nth-of-type(3)::before { background: var(--day3); }
+    .day:nth-of-type(4)::before { background: var(--day4); }
+    .day:nth-of-type(5)::before { background: var(--day5); }
+    .day:nth-of-type(6)::before { background: var(--day6); }
+    .day:nth-of-type(7)::before { background: var(--day7); }
+
+    .day-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin: 10px 0 6px;
+      font-weight: 700;
+    }
+
+    .day h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin: 0 0 18px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .keyideas {
+      background: #eef7e0;
+      border: 2px solid #d4edb0;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] .keyideas {
+      background: #2a3520;
+      border-color: #3d5030;
+    }
+
+    .keyideas b {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lime-dark);
+      margin-bottom: 6px;
+    }
+
+    .day p {
+      margin: 0 0 16px;
+      color: var(--ink);
+    }
+
+    /* Destaque de palavras-chave em <b> */
+    .day p b, .day div b {
+      font-weight: 700;
+      color: var(--violet);
+    }
+
+    [data-theme="dark"] .day p b,
+    [data-theme="dark"] .day div b {
+      color: var(--violet-light);
+    }
+
+    /* ===== BOTÃO MARCAR COMO LIDO ===== */
+    .mark-read-btn {
+      background: linear-gradient(90deg, var(--lime), #7dd321);
+      color: var(--lime-dark);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px -4px rgba(166, 226, 46, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .mark-read-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px -4px rgba(166, 226, 46, 0.7);
+    }
+
+    .mark-read-btn.marked {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    /* ===== REFLEXIVAS ===== */
+    .reflect {
+      background: #f3ffe0;
+      border-left: 4px solid var(--lime);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 24px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] .reflect {
+      background: #2a3520;
+      border-left-color: #7dd321;
+    }
+
+    .reflect h3 {
+      margin: 0 0 12px;
+      color: var(--lime-dark);
+      font-size: 1rem;
+    }
+
+    .reflect ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .reflect li {
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    /* ===== MAPA MENTAL RADIAL ===== */
+    .mental-map {
+      margin: 32px 0;
+      padding: 24px;
+      background: rgba(108, 76, 224, 0.05);
+      border-radius: 20px;
+      border: 2px solid rgba(108, 76, 224, 0.15);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] .mental-map {
+      background: rgba(139, 92, 246, 0.1);
+      border-color: rgba(139, 92, 246, 0.25);
+    }
+
+    .mental-map h3 {
+      text-align: center;
+      color: var(--violet);
+      margin-top: 0;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700;
+    }
+
+    .mental-map svg {
+      width: 100%;
+      height: auto;
+      max-width: 400px;
+      display: block;
+      margin: 0 auto;
+      color: var(--violet);
+    }
+
+    /* ===== QUIZ ===== */
+    .quiz {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 2px dashed #e8e2ff;
+    }
+
+    [data-theme="dark"] .quiz {
+      border-top-color: #2a2540;
+    }
+
+    .quiz h3 {
+      font-family: 'Unbounded', sans-serif;
+      color: var(--violet);
+      margin: 0 0 12px;
+    }
+
+    .quiz-timer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--violet);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .q-block {
+      background: #f7f5ff;
+      border-left: 4px solid var(--violet);
+      padding: 16px;
+      margin: 12px 0;
+      border-radius: 12px;
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="dark"] .q-block {
+      background: #1f1a35;
+      border-left-color: #8b5cf6;
+    }
+
+    .diff {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .diff-facil { background: #e0ffe0; color: var(--lime-dark); }
+    .diff-inter { background: #fffce0; color: #8b7500; }
+    .diff-avancada { background: #ffe0e0; color: var(--red); }
+
+    [data-theme="dark"] .diff-facil { background: #2a4a2a; }
+    [data-theme="dark"] .diff-inter { background: #4a4a2a; }
+    [data-theme="dark"] .diff-avancada { background: #4a2a2a; }
+
+    .q-text {
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .options button {
+      background: white;
+      border: 2px solid #e8e2ff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.2s ease;
+      color: var(--ink);
+    }
+
+    [data-theme="dark"] .options button {
+      background: #1f1a35;
+      border-color: #2a2540;
+      color: var(--ink);
+    }
+
+    .options button:hover {
+      border-color: var(--violet);
+      background: #f7f5ff;
+    }
+
+    [data-theme="dark"] .options button:hover {
+      background: #2a2540;
+    }
+
+    .options button.selected {
+      background: var(--violet);
+      color: white;
+      border-color: var(--violet);
+    }
+
+    .gabarito {
+      background: #f3ffe0;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--lime-dark);
+      font-weight: 700;
+      margin-top: 8px;
+      display: none;
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="dark"] .gabarito {
+      background: #2a3520;
+      color: #7dd321;
+    }
+
+    .gabarito.show {
+      display: block;
+    }
+
+    .reveal-btn {
+      background: linear-gradient(90deg, var(--violet), var(--pink));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      box-shadow: 0 4px 12px -4px rgba(255, 93, 143, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .reveal-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px -4px rgba(255, 93, 143, 0.6);
+    }
+
+    /* ===== V/F ===== */
+    .tf {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 2px dashed #e8e2ff;
+    }
+
+    [data-theme="dark"] .tf {
+      border-top-color: #2a2540;
+    }
+
+    .tf h3 {
+      font-family: 'Unbounded', sans-serif;
+      color: var(--violet);
+      margin: 0 0 16px;
+    }
+
+    .tf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f7f5ff;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      border-left: 4px solid var(--teal);
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="dark"] .tf-item {
+      background: #1f1a35;
+      border-left-color: #2dd4bf;
+    }
+
+    .tf-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tf-btns button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #e8e2ff;
+      background: white;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink);
+    }
+
+    [data-theme="dark"] .tf-btns button {
+      background: #2a2540;
+      border-color: #3a3550;
+      color: var(--ink);
+    }
+
+    .tf-btns button:hover {
+      transform: scale(1.1);
+    }
+
+    .tf-btns button[data-v="V"] {
+      color: var(--lime-dark);
+    }
+
+    .tf-btns button[data-v="F"] {
+      color: var(--red);
+    }
+
+    .tf-btns button.selected {
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 2px solid #e8e2ff;
+      display: flex;
+      justify-content: space-around;
+      z-index: 100;
+      padding: 8px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] .bottom-nav {
+      background: rgba(26, 22, 48, 0.95);
+      border-top-color: #2a2540;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 12px 0;
+      cursor: pointer;
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+      border-top: 3px solid transparent;
+    }
+
+    .nav-item:hover { color: var(--violet); }
+    .nav-item.active { color: var(--violet); border-top-color: var(--violet); }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .config-page {
+      padding: 32px 20px;
+    }
+
+    .config-item {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 12px 28px -10px rgba(28, 23, 53, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .config-item h3 {
+      margin: 0;
+      color: var(--ink);
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 60px;
+      height: 32px;
+      background: #e8e2ff;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .toggle-switch.active {
+      background: var(--lime);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s ease;
+    }
+
+    [data-theme="dark"] .toggle-switch::after {
+      background: #1a1630;
+    }
+
+    .toggle-switch.active::after {
+      left: 30px;
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 40px;
+      opacity: 0.6;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <header class="hero">
+    <div class="eyebrow">Lição Jovens</div>
+    <h1 class="title">Permaneçam em Mim</h1>
+    <p class="subtitle">Tema: Dependência de Cristo</p>
+    <div class="keyword-seal">Palavra-chave: <b>DEPENDÊNCIA</b></div>
+  </header>
+
+  <nav class="dashboard">
+    <div class="dash-inner">
+      <div class="pills" id="pills-container"></div>
+    </div>
+  </nav>
+
+  <main id="dias-container"></main>
+</div>
+
+<!-- CONFIG -->
+<div class="page" id="page-config">
+  <main class="config-page">
+    <h2 style="font-family: 'Unbounded', sans-serif; color: var(--violet); font-size: 1.8rem; margin-top: 32px;">Configurações</h2>
+
+    <div class="config-item">
+      <h3>Modo Escuro</h3>
+      <div class="toggle-switch" id="dark-mode-toggle"></div>
+    </div>
+
+    <div class="footer-text">
+      <p>Lições Jovens v1.0 — Resgate (Q3 2026)</p>
+      <p>© Escola Sabatina Jovem</p>
+    </div>
+  </main>
+</div>
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+  <a href="#" class="nav-item active" data-page="home">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 13h2v8H3zm4-8h2v16H7zm4-2h2v18h-2zm4-2h2v20h-2zm4 4h2v16h-2zm4 8h2v8h-2z"/></svg>
+    </div>
+    Home
+  </a>
+  <a href="#" class="nav-item" data-page="config">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 8c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm0-2c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"/></svg>
+    </div>
+    Config
+  </a>
+</nav>
+
+<script>
+  // ===== DADOS LIÇÃO 4 (JSON EMBUTIDO) =====
+  const licao4 = {
+    titulo: "Permaneçam em Mim",
+    palavra_chave: "DEPENDÊNCIA",
+    dias: [
+      {
+        id: "dom",
+        letra: "D",
+        data: "Domingo · 19 de julho",
+        titulo: "O Príncipe dos Pregadores",
+        keyideas: "Charles Spurgeon · Lições espirituais no cotidiano · Parábolas de Jesus · Videira e ramos",
+        verses: ["João 10:1-16", "João 16:21", "João 15"],
+        conteudo: "Um dos pregadores mais marcantes da história do cristianismo foi <b>Charles Spurgeon</b> (1834-1892). Por 38 anos, ele pastoreou a Capela da Rua New Park, em Londres. Spurgeon contava a história de um jovem pregador que trabalhava como capelão em um hospital. Após um grave acidente de trem, ele se ofereceu para carregar um homem ferido e, durante a recuperação, passou a visitá-lo com frequência. Spurgeon comentou: aquele capelão sempre se lembraria daquele homem com apreço, porque <b>sentiu o peso dele</b>.\n\nA capacidade de <b>enxergar lições espirituais nas experiências comuns da vida</b> é uma ferramenta de ensino muito poderosa. Jesus, o maior Mestre de todos, fazia isso com frequência: ao falar com pescadores, usava a linguagem da pesca; quando estava cercado pela natureza, extraía lições do que via ao redor.\n\nOs evangelhos registram cerca de 40 parábolas de Jesus. Curiosamente, o evangelho de João <b>não inclui parábolas propriamente ditas</b> — em vez disso, destaca metáforas usadas por Jesus. Nesta semana, vamos explorar uma das comparações mais marcantes de Cristo: <b>a videira e os ramos</b> (Jo 15).",
+        reflexivas: ["Já \"sentiu o peso\" de alguém — carregou a dor ou a luta de outra pessoa?", "Que lição espiritual você já tirou de uma experiência simples do seu cotidiano?", "Por que você acha que Jesus preferia ensinar com metáforas do dia a dia?"],
+        quiz: [
+          {dif: "Fácil", q: "Quem foi conhecido como \"o príncipe dos pregadores\"?", op: ["A) Charles Spurgeon", "B) John Wesley", "C) João Calvino", "D) Martinho Lutero"], r: "A"},
+          {dif: "Fácil", q: "Por quantos anos Spurgeon pastoreou a Capela da Rua New Park?", op: ["A) 10", "B) 25", "C) 38", "D) 50"], r: "C"},
+          {dif: "Fácil", q: "O que o jovem capelão fez após o acidente de trem?", op: ["A) Chamou a polícia", "B) Carregou um homem ferido", "C) Fugiu do local", "D) Fotografou a cena"], r: "B"},
+          {dif: "Intermediária", q: "Segundo Spurgeon, por que o capelão nunca esqueceria aquele homem?", op: ["A) Porque era famoso", "B) Porque sentiu o peso dele", "C) Porque era seu parente", "D) Porque foi pago"], r: "B"},
+          {dif: "Intermediária", q: "Como Jesus costumava ensinar?", op: ["A) Só com regras escritas", "B) Usando linguagem e lições do cotidiano", "C) Apenas dentro do templo", "D) Somente por escrito"], r: "B"},
+          {dif: "Intermediária", q: "Quantas parábolas os evangelhos registram aproximadamente?", op: ["A) 10", "B) 25", "C) 40", "D) 100"], r: "C"},
+          {dif: "Intermediária", q: "O que é peculiar sobre o evangelho de João quanto às parábolas?", op: ["A) Tem mais parábolas", "B) Não inclui parábolas propriamente ditas", "C) Só em forma de parábolas", "D) Não menciona Jesus"], r: "B"},
+          {dif: "Avançada", q: "Qual metáfora mais longa de Jesus é citada em João 10?", op: ["A) O Bom Pastor", "B) O Semeador", "C) O Filho Pródigo", "D) O Fariseu e o Publicano"], r: "A"},
+          {dif: "Avançada", q: "A ilustração do parto em João 16:21 ilustra o quê?", op: ["A) A dor que se transforma em alegria", "B) O nascimento físico apenas", "C) A criação do mundo", "D) A ressurreição de Lázaro"], r: "A"},
+          {dif: "Avançada", q: "Qual comparação Jesus faz consigo e os discípulos, tema desta semana?", op: ["A) O pastor e as ovelhas", "B) A videira e os ramos", "C) O sal da terra", "D) A luz do mundo"], r: "B"}
+        ],
+        vf: [{q: "Spurgeon foi conhecido como \"o príncipe dos pregadores\".", r: "V"}, {q: "O evangelho de João contém mais parábolas que os outros evangelhos.", r: "F"}, {q: "Jesus usava a linguagem do cotidiano das pessoas para ensinar lições espirituais.", r: "V"}]
+      },
+      {
+        id: "seg",
+        letra: "S",
+        data: "Segunda · 20 de julho",
+        titulo: "Ele Nos Levanta",
+        keyideas: "Videira verdadeira · \"Airo\": cortar ou levantar · Justificação e santificação · Deus não descarta ninguém",
+        verses: ["João 15:1,5", "João 15:2", "João 15:6"],
+        conteudo: "João 15 começa com Jesus destacando a ligação essencial: Ele é a <b>videira verdadeira</b>, e nós somos os ramos. <b>Nenhum ramo se sustenta sozinho</b>; ele depende de uma fonte de vida que o alimenta continuamente.\n\nNo verso 2, Jesus diz que todo ramo que não dá fruto, o Pai corta; e todo o que dá fruto, Ele limpa. A palavra grega <b>airo</b> também pode significar <b>\"levantar\"</b>. Em um vinhedo, o viticultor ergue os ramos para que recebam mais luz e ar. Com isso, Jesus aponta para duas realidades na vida cristã: ser aceito por Deus (<b>justificação pela fé</b>) e ser transformado por Ele (<b>santificação</b>).\n\n<b>Deus não vive procurando motivos para jogar pessoas fora</b> — Ele restaura, fortalece e conduz ao crescimento. Os ramos removidos são aqueles que não permanecem Nele.",
+        reflexivas: ["Você já pensou que Deus \"desistiria\" de você por não estar \"rendendo o suficiente\"?", "Na ilustração de Jesus, o que a poda representa? O que Deus tem pedido para você deixar ir?", "Qual a diferença entre ser \"aceito\" por Deus e ser \"transformado\" por Ele?"],
+        quiz: [
+          {dif: "Fácil", q: "Segundo Jo 15:1, quem é a videira verdadeira?", op: ["A) O Pai", "B) Jesus", "C) O Espírito Santo", "D) A igreja"], r: "B"},
+          {dif: "Fácil", q: "O que Jesus diz que somos em relação à videira?", op: ["A) As raízes", "B) Os ramos", "C) As folhas", "D) O solo"], r: "B"},
+          {dif: "Fácil", q: "O que o Pai faz com ramos que não dão fruto?", op: ["A) Rega mais", "B) Corta", "C) Espera", "D) Ignora"], r: "B"},
+          {dif: "Intermediária", q: "O que significa a palavra grega \"airo\" citada no texto?", op: ["A) Poda", "B) Levantar ou cortar", "C) Regar", "D) Semear"], r: "B"},
+          {dif: "Intermediária", q: "Qual é o objetivo da poda dos ramos que já frutificam?", op: ["A) Remover tudo", "B) Produzir mais fruto", "C) Enfraquecê-los", "D) Parar o crescimento"], r: "B"},
+          {dif: "Intermediária", q: "O que representa a justificação nesta metáfora?", op: ["A) Ser cortado", "B) Ser aceito por Deus", "C) Ser podado", "D) Não frutificar"], r: "B"},
+          {dif: "Avançada", q: "Qual é a diferença principal entre justificação e santificação?", op: ["A) Não há diferença", "B) Aceitar vs. Transformar", "C) Fé vs. Obras", "D) Antigo vs. Novo"], r: "B"},
+          {dif: "Avançada", q: "Quando Jesus diz que ramos são \"removidos\", o que isso significa?", op: ["A) Morte física", "B) Abandono de Deus", "C) Não permanecer Nele", "D) Punição eterna"], r: "C"},
+          {dif: "Avançada", q: "Por que Deus \"levanta\" os ramos que não frutificam?", op: ["A) Para castigá-los", "B) Para restaurá-los", "C) Para ignorá-los", "D) Para cortá-los"], r: "B"},
+          {dif: "Avançada", q: "Qual é a verdade central deste ensinamento?", op: ["A) Deus rejeita fracassos", "B) Deus busca crescimento em nós", "C) Deus não se importa", "D) Deus só ama perfeitos"], r: "B"}
+        ],
+        vf: [{q: "Os ramos se sustentam sozinhos sem a videira.", r: "F"}, {q: "Deus poda os ramos para que produzam mais fruto.", r: "V"}, {q: "Justificação e santificação são a mesma coisa.", r: "F"}]
+      },
+      {
+        id: "ter",
+        letra: "T",
+        data: "Terça · 21 de julho",
+        titulo: "Escolhidos e Não Abandonados",
+        keyideas: "Eleição de Deus · Ódio do mundo · Satanás príncipe do mundo · Permanecer em Cristo",
+        verses: ["João 15:16-19", "Efésios 1:4-5", "1 João 5:19"],
+        conteudo: "Jesus diz aos discípulos que <b>não foram eles que O escolheram</b>, mas Ele é quem os escolheu. Essa afirmação reverte completamente a ordem natural das coisas: é Deus quem inicia o relacionamento. <b>Toda eleição é graça</b> — não é fruto de mérito pessoal ou capacidade própria.\n\nPorém, vem o aviso: <b>\"O mundo vos odiará\"</b>. Por quê? Porque <b>não pertencem ao mundo</b> — foram tirados dele e colocados em uma nova família, a família de Deus. <b>Satanás é o príncipe deste mundo</b>, e tudo aquilo que vai contra seus interesses sofre rejeição e ódio.\n\nMas há esperança: Jesus também diz que os <b>escolheu e os nomeou</b> para que fossem seus embaixadores. Não são apenas escolhidos para receber bênçãos pessoais, mas para representar Cristo e <b>levar fruto que permaneça</b>.",
+        reflexivas: ["O que significa ter sido \"escolhido\" por Deus? Como isso afeta sua identidade?", "Por que razões o mundo pode odiar alguém que segue a Cristo?", "Como você pode ser um embaixador de Cristo nos espaços que frequenta?"],
+        quiz: [
+          {dif: "Fácil", q: "Quem escolheu quem, segundo João 15:16?", op: ["A) Os discípulos escolheram Jesus", "B) Jesus escolheu os discípulos", "C) Ambos se escolheram", "D) O mundo os escolheu"], r: "B"},
+          {dif: "Fácil", q: "Qual é a razão do ódio do mundo contra os cristãos?", op: ["A) Porque são ricos", "B) Porque pertencem ao mundo", "C) Porque não pertencem ao mundo", "D) Porque são fracos"], r: "C"},
+          {dif: "Fácil", q: "Segundo a lição, quem é o príncipe deste mundo?", op: ["A) Deus", "B) Jesus", "C) Satanás", "D) O homem"], r: "C"},
+          {dif: "Intermediária", q: "O que significa a eleição de Deus sobre nós?", op: ["A) Mérito pessoal", "B) Capacidade própria", "C) Pura graça", "D) Escolha mútua"], r: "C"},
+          {dif: "Intermediária", q: "Qual é o propósito de sermos escolhidos por Jesus?", op: ["A) Apenas receber bênçãos", "B) Viver isolados", "C) Ser seus embaixadores", "D) Evitar sofrimento"], r: "C"},
+          {dif: "Intermediária", q: "Como a escolha de Deus afeta nossa identidade?", op: ["A) Nos torna melhores que os outros", "B) Nos retira do mundo", "C) Nos coloca em uma nova família", "D) Não muda nada"], r: "C"},
+          {dif: "Avançada", q: "Qual é a relação entre pertencer a Cristo e sofrer ódio?", op: ["A) Não há relação", "B) Cristianismo evita conflito", "C) Satanás odeia o que vai contra seus interesses", "D) Todos odeiam cristãos"], r: "C"},
+          {dif: "Avançada", q: "O que significa levar \"fruto que permaneça\"?", op: ["A) Ganho financeiro", "B) Fruto que dura eternamente", "C) Reconhecimento social", "D) Poder temporal"], r: "B"},
+          {dif: "Avançada", q: "Como a graça da eleição se manifesta em nossas vidas?", op: ["A) Isolamento do mundo", "B) Superioridade pessoal", "C) Missão e representação de Cristo", "D) Ausência de desafios"], r: "C"},
+          {dif: "Avançada", q: "Por que Jesus chama os escolhidos de \"embaixadores\"?", op: ["A) Para ganhar status", "B) Para representar um reino diferente", "C) Para ter poder político", "D) Para dominar o mundo"], r: "B"}
+        ],
+        vf: [{q: "Fomos nós que escolhemos Jesus.", r: "F"}, {q: "O mundo ama aqueles que pertencem a Cristo.", r: "F"}, {q: "Nossa eleição em Cristo tem um propósito missionário.", r: "V"}]
+      },
+      {
+        id: "qua",
+        letra: "Q",
+        data: "Quarta · 22 de julho",
+        titulo: "Dependência Total",
+        keyideas: "Permanecer em Cristo · Fruto do Espírito · Vida verdadeira · Morte espiritual sem Ele",
+        verses: ["João 15:4-5", "Gálatas 5:22-23", "João 1:4"],
+        conteudo: "<b>\"Permaneçam em mim, e eu permanecerei em vocês\"</b>, diz Jesus. Essa é a base de toda a vida cristã verdadeira. <b>Sem Ele, não podemos fazer nada</b> — não se trata de uma exagero, mas de uma realidade espiritual fundamental.\n\nA metáfora da videira ilustra perfeitamente essa dependência. <b>Os ramos não produzem fruto por si mesmos</b>; toda a seiva, toda a energia, toda a capacidade produtiva vem da videira. Da mesma forma, <b>o Espírito Santo</b> é quem produz em nós o <b>fruto espiritual</b>: amor, alegria, paz, paciência, amabilidade, bondade, fidelidade, mansidão e domínio próprio.\n\n<b>A vida está em Cristo</b>. Sem essa conexão, mesmo que biologicamente vivos, espiritualmente estamos mortos. Permanecer significa manter essa ligação ativa, contínua, vital.",
+        reflexivas: ["Em que áreas da sua vida você tenta ser \"auto-suficiente\" sem Deus?", "O que significa \"permanecer\" em Cristo em termos práticos do dia a dia?", "Como você pode verificar se está realmente conectado à videira?"],
+        quiz: [
+          {dif: "Fácil", q: "Segundo Jesus, sem Ele podemos fazer o quê?", op: ["A) Muitas coisas", "B) Nada", "C) Algumas coisas", "D) Tudo"], r: "B"},
+          {dif: "Fácil", q: "O que produz o fruto espiritual em nós?", op: ["A) Nosso esforço", "B) A sociedade", "C) O Espírito Santo", "D) Nossa vontade"], r: "C"},
+          {dif: "Fácil", q: "Qual é o significado de \"permanecer\" em Cristo?", op: ["A) Visitar a igreja", "B) Manter conexão ativa e contínua", "C) Apenas crer", "D) Praticar religiões"], r: "B"},
+          {dif: "Intermediária", q: "O que as frutas do Espírito mencionadas em Gálatas representam?", op: ["A) Realização pessoal", "B) Sucesso material", "C) Transformação espiritual", "D) Poder temporal"], r: "C"},
+          {dif: "Intermediária", q: "Por que um ramo afastado da videira morre?", op: ["A) Porque é fraco", "B) Porque não recebe seiva", "C) Porque não quer viver", "D) Porque é rejeitado"], r: "B"},
+          {dif: "Intermediária", q: "Qual é a diferença entre estar biologicamente vivo e espiritualmente morto?", op: ["A) Não há diferença", "B) Não existe morte espiritual", "C) Possível viver sem Deus", "D) Sem Deus, espiritualmente estamos mortos"], r: "D"},
+          {dif: "Avançada", q: "Como a dependência total de Cristo liberta a pessoa?", op: ["A) Enriquecendo materialmente", "B) Removendo responsabilidade", "C) Permitindo produção genuína", "D) Garantindo poder"], r: "C"},
+          {dif: "Avançada", q: "O que significa o fruto do Espírito ser produzido \"em nós\" e não \"por nós\"?", op: ["A) Somos passivos", "B) Deus age sem nossa participação", "C) Participamos com capacitação divina", "D) Fazemos sozinhos"], r: "C"},
+          {dif: "Avançada", q: "Por que Jesus usa \"permanecer\" e não apenas \"crer\"?", op: ["A) São sinônimos", "B) Crer é instantâneo; permanecer é contínuo", "C) Permanecer é menos importante", "D) Não há diferença prática"], r: "B"},
+          {dif: "Avançada", q: "Como a vida verdadeira só existe em Cristo?", op: ["A) Vida humana é insignificante", "B) Sem Ele não há propósito ou poder espiritual", "C) Outros conseguem dar significado", "D) Vida é vazia com qualquer religião"], r: "B"}
+        ],
+        vf: [{q: "Podemos produzir fruto espiritual pelo nosso esforço.", r: "F"}, {q: "Permanecer em Cristo é um compromisso contínuo.", r: "V"}, {q: "Estar biologicamente vivo é suficiente sem Deus.", r: "F"}]
+      },
+      {
+        id: "qui",
+        letra: "Q",
+        data: "Quinta · 23 de julho",
+        titulo: "O Amor do Pai",
+        keyideas: "Amor do Pai refletido em Cristo · Amizade com Cristo · Proximidade com Deus · Acesso ao Pai",
+        verses: ["João 15:9-10", "João 15:14-15", "Romanos 5:8"],
+        conteudo: "<b>\"Como o Pai me amou, eu também os amei\"</b>. Essa é uma afirmação profunda: o <b>amor do Pai por Jesus</b> é o padrão para o <b>amor de Jesus por nós</b>. Não é um amor condicional ou temperado — é <b>o mesmo amor infinito</b> que o Pai possui.\n\nAlém disso, Jesus diz algo extraordinário: <b>\"Você não é mais meu servo, mas meu amigo\"</b>. Servos obedecem porque temem; amigos obedecem porque <b>confiam e conhecem</b>. Ser amigo de Cristo significa <b>acesso privilegiado</b> — Ele nos diz \"tudo\" o que ouve do Pai. Não somos apenas salvos de longe; somos convidados para uma <b>intimidade genuína</b>.\n\n<b>Permanecendo em seu amor</b>, guardamos seus mandamentos. Não por medo, não por ganho, mas porque <b>amamos Aquele que nos ama</b>.",
+        reflexivas: ["Como a consciência do amor de Cristo afeta sua relação com Ele?", "Que diferença existe entre ser servo e ser amigo de Deus?", "O que significa ter \"acesso privilegiado\" aos segredos de Deus?"],
+        quiz: [
+          {dif: "Fácil", q: "Qual é o padrão do amor de Jesus por nós?", op: ["A) Seu próprio amor limitado", "B) O amor do Pai por Ele", "C) O amor do mundo", "D) Amor condicional"], r: "B"},
+          {dif: "Fácil", q: "Como Jesus nos chama em João 15:14-15?", op: ["A) Servos", "B) Criados", "C) Amigos", "D) Inferiores"], r: "C"},
+          {dif: "Fácil", q: "O que Jesus promete dar a conhecer aos amigos?", op: ["A) Segredos humanos", "B) Histórias do mundo", "C) Tudo o que ouve do Pai", "D) Planos políticos"], r: "C"},
+          {dif: "Intermediária", q: "Qual é a diferença fundamental entre servo e amigo?", op: ["A) Servo é mais importante", "B) Amigo obedece por confiança; servo por medo", "C) Não há diferença", "D) Amigo é descartável"], r: "B"},
+          {dif: "Intermediária", q: "O que significa \"permanecer no amor\" de Cristo?", op: ["A) Isolamento social", "B) Guardar seus mandamentos por amor", "C) Indiferença", "D) Rebeldia"], r: "B"},
+          {dif: "Intermediária", q: "Como o amor infinito do Pai afeta nossa segurança?", op: ["A) Não afeta", "B) Nos deixa inseguros", "C) Nos dá certeza de valor eterno", "D) Depende de nosso desempenho"], r: "C"},
+          {dif: "Avançada", q: "O que significa ter acesso \"privilegiado\" aos segredos de Deus?", op: ["A) Poder oculto", "B) Intimidade e confiança divina", "C) Conhecimento secreto exclusivo", "D) Privilégio sobre outros"], r: "B"},
+          {dif: "Avançada", q: "Como a amizade com Cristo diferencia-se de religiões baseadas em regras?", op: ["A) Não diferencia", "B) Relacionamento pessoal baseado em amor", "C) Amizade é inferior", "D) Regras são melhores"], r: "B"},
+          {dif: "Avançada", q: "Por que Cristo revela seus segredos aos amigos?", op: ["A) Porque são dignos", "B) Porque confiam Nele e Ele confia neles", "C) Porque pagaram", "D) Porque merecem"], r: "B"},
+          {dif: "Avançada", q: "Como o amor de Cristo nos transforma em obedientes?", op: ["A) Através de medo", "B) Através de obrigação", "C) Através de intimidade e confiança", "D) Através de ameaças"], r: "C"}
+        ],
+        vf: [{q: "Jesus ama os discípulos com amor condicional.", r: "F"}, {q: "Amigos de Cristo recebem acesso aos segredos do Pai.", r: "V"}, {q: "O amor transformador vem apenas do medo.", r: "F"}]
+      },
+      {
+        id: "sex",
+        letra: "S",
+        data: "Sexta · 24 de julho",
+        titulo: "Genuinidade Gera Oposição",
+        keyideas: "Cristianismo verdadeiro é perseguido · Satanás odeia os filhos de Deus · Perseguição reflete identidade · Adaptação ao mundo",
+        verses: ["2 Timóteo 3:12", "João 15:20", "Mateus 5:11-12"],
+        conteudo: "<b>\"Se o mundo vos odeia, lembrai-vos que a mim vos odiou primeiro\"</b>. Jesus deixa claro que <b>perseguição é sinal de genuinidade</b>, não de fracasso. Aquele que vive <b>piedosamente em Cristo sofrerá perseguição</b>.\n\nPor que? Porque <b>Satanás ama pessoas mornamente religiosas</b> — elas não assustam ninguém. Mas <b>aquele que reflete genuinamente Cristo</b> é uma afronta aos interesses do príncipe das trevas. Por isso <b>a perseguição é tão frequente</b>.\n\nHoje, essa perseguição pode não ser martírio, mas <b>rejeição, isolamento, perda de oportunidades</b>. Muitos \"cristãos\" tentam <b>adaptar-se ao mundo</b> para evitar conflito — mas isso significa <b>negar a identidade em Cristo</b>. <b>Autenticidade sempre tem um preço</b>.",
+        reflexivas: ["Que formas de perseguição você já enfrentou por sua fé?", "Como distinguir entre ser rejeitado por fé genuína e por atitude errada?", "Em quais aspectos você está tentando \"se adaptar\" em vez de ser genuíno?"],
+        quiz: [
+          {dif: "Fácil", q: "Segundo 2 Timóteo 3:12, quem sofrerá perseguição?", op: ["A) Apenas os fracos", "B) Aqueles que vivem piedosamente em Cristo", "C) Ninguém", "D) Apenas os líderes"], r: "B"},
+          {dif: "Fácil", q: "O que a perseguição indica sobre nossa fé?", op: ["A) Que somos fracos", "B) Que somos fracassados", "C) Que somos genuínos", "D) Que estamos errados"], r: "C"},
+          {dif: "Fácil", q: "Como Satanás prefere as pessoas religiosas?", op: ["A) Genuinamente dedicadas", "B) Mornamente religiosas", "C) Totalmente ateias", "D) Sempre perseguidas"], r: "B"},
+          {dif: "Intermediária", q: "Por que Cristo foi odiado pelo mundo?", op: ["A) Porque era fraco", "B) Porque era genuíno e refletia Deus", "C) Porque era arrogante", "D) Porque não tinha poder"], r: "B"},
+          {dif: "Intermediária", q: "Qual é o custo de ser genuíno em Cristo?", op: ["A) Nenhum", "B) Ganho material garantido", "C) Possível rejeição, isolamento, perda de oportunidades", "D) Sucesso automático"], r: "C"},
+          {dif: "Intermediária", q: "O que significa \"adaptar-se ao mundo\"?", op: ["A) Ser estratégico", "B) Negar a identidade em Cristo", "C) Fazer amigos", "D) Ser sábio"], r: "B"},
+          {dif: "Avançada", q: "Como a perseguição moderna difere da histórica?", op: ["A) Não há diferença", "B) Hoje é física; antes era espiritual", "C) Pode ser rejeição, isolamento, sem martírio físico", "D) Não existe hoje"], r: "C"},
+          {dif: "Avançada", q: "Por que Satanás não persegue religiões mornamente adaptadas?", op: ["A) Porque são fortes", "B) Porque não representam ameaça aos seus interesses", "C) Porque são genuínas", "D) Porque têm muito poder"], r: "B"},
+          {dif: "Avançada", q: "Qual é a relação entre identificação com Cristo e sofrimento?", op: ["A) Nenhuma", "B) Quanto mais próximo, maior a oposição", "C) Sofrer é opcional", "D) Cristo evita sofrimento para o cristão"], r: "B"},
+          {dif: "Avançada", q: "Como diferenciar perseguição genuína de rejeição por mau caráter?", op: ["A) Pela intensidade apenas", "B) Pelo motivo: fé vs. atitude", "C) Perseguição não existe", "D) Tudo é perseguição religiosa"], r: "B"}
+        ],
+        vf: [{q: "Satanás prefere pessoas genuinamente dedicadas a Cristo.", r: "F"}, {q: "Perseguição em Cristo é sinal de fracasso.", r: "F"}, {q: "Autenticidade sempre tem um custo.", r: "V"}]
+      },
+      {
+        id: "sab",
+        letra: "S",
+        data: "Sábado · 25 de julho · Comunidade",
+        titulo: "Mais do que Perto",
+        keyideas: "Privilégios ligados a uma condição · Distância causada pelo pecado · Reconciliação · Chamados de filhos",
+        verses: ["João 1:12", "Romanos 3:23", "2 Coríntios 5:19"],
+        conteudo: "O autor conta uma experiência pessoal: ao se tornarem pais, ele e a esposa descobriram algo que não imaginavam ser tão significativo nesse processo — as vagas e filas preferenciais. Desde a gravidez, já era possível estacionar mais próximo, usar filas preferenciais, entre outros benefícios. É interessante perceber que esses <b>privilégios não são inerentes à pessoa</b>, mas estão ligados a uma condição específica — seja a gestação, a presença de um bebê, ou outra situação que garanta esse direito.\n\nTambém conhecemos a condição natural do ser humano: <b>\"Todos pecaram e carecem da glória de Deus\"</b> (Rm 3:23). Isso significa que, por natureza, tendemos a viver distantes de Deus — o pecado é o que gera esse afastamento. Essa realidade pode dar a impressão de que não há mais esperança: afinal, como manter um relacionamento com um Deus distante? O maior perigo, porém, é <b>nos acostumarmos com essa ideia</b> e passarmos a viver como se essa distância fosse normal.\n\nEmbora o pecado tenha nos afastado de Deus, Ele nunca Se esqueceu de nós — há um plano para nos reconciliar com Ele. A Bíblia afirma que <b>Deus estava em Cristo reconciliando Consigo o mundo</b>, não levando em conta os pecados dos seres humanos, e nos confiando a palavra da reconciliação (2Co 5:19). Cristo não é apenas o caminho, mas também a recompensa desse caminho — é Nele que encontramos a vida plena. Deus deseja habitar em nosso coração e transformar nossa vida: em vez de sermos apenas criaturas, <b>Ele nos chama de filhos</b>. Você aceita esse convite?",
+        reflexivas: ["Em que momentos da nossa vida podemos acabar nos acostumando com a ideia de estar \"distantes\" de Deus?", "O que significa, na prática, viver como filho de Deus?"],
+        quiz: [
+          {dif: "Fácil", q: "Qual foi a metáfora principal usada por Jesus durante toda esta semana?", op: ["A) O pastor e as ovelhas", "B) A videira e os ramos", "C) O semeador e as sementes", "D) O sal da terra"], r: "B"},
+          {dif: "Fácil", q: "Segundo a lição, qual palavra grega significa tanto \"cortar\" quanto \"levantar\"?", op: ["A) Airo", "B) Karpos", "C) Poiesis", "D) Metanoia"], r: "A"},
+          {dif: "Fácil", q: "Em quais capítulos de João Jesus passa tempo encorajando os discípulos antes da cruz?", op: ["A) 1-5", "B) 13-17", "C) 18-21", "D) 6-10"], r: "B"},
+          {dif: "Intermediária", q: "Qual é a diferença fundamental entre justificação e santificação, conforme ensinado nesta semana?", op: ["A) Não há diferença", "B) Aceitar vs. Transformar", "C) Fé vs. Obras", "D) Novo vs. Antigo"], r: "B"},
+          {dif: "Intermediária", q: "Segundo a lição, por que o mundo odeia os discípulos de Cristo?", op: ["A) Porque são fracos", "B) Porque foram escolhidos por Jesus", "C) Porque são ricos", "D) Porque não creem"], r: "B"},
+          {dif: "Intermediária", q: "Como Jesus chamou os discípulos, em vez de \"servos\"?", op: ["A) Soldados", "B) Amigos", "C) Escravos", "D) Apóstolos"], r: "B"},
+          {dif: "Intermediária", q: "Qual é a condição natural do ser humano, segundo Romanos 3:23?", op: ["A) Ser perfeito", "B) Carecer da glória de Deus", "C) Ser escolhido", "D) Estar salvo"], r: "B"},
+          {dif: "Avançada", q: "Qual apóstolo escreveu que \"todos os que querem viver piedosamente em Cristo serão perseguidos\"?", op: ["A) Pedro", "B) Paulo (2Tm 3:12)", "C) Tiago", "D) João"], r: "B"},
+          {dif: "Avançada", q: "Segundo a lição, por que a perseguição parece inativa nos dias atuais?", op: ["A) Porque o mal foi eliminado", "B) Porque a igreja se adaptou ao mundo", "C) Porque Cristo voltou", "D) Porque não há mais inimigos"], r: "B"},
+          {dif: "Avançada", q: "Qual é a verdade central de toda esta lição sobre \"Permaneçam em Mim\"?", op: ["A) Dependência de outros", "B) Dependência total de Cristo", "C) Independência pessoal", "D) Autonomia espiritual"], r: "B"}
+        ],
+        vf: [{q: "A videira, diferente das árvores comuns, se sustenta sozinha.", r: "F"}, {q: "Jesus amou os discípulos com o mesmo amor com que o Pai O amou.", r: "V"}, {q: "Somos chamados filhos de Deus apenas quando conseguimos ser perfeitos.", r: "F"}]
+      }
+    ]
+  };
+
+  // ===== MAPA MENTAL RADIAL (SVG) =====
+  function criarMapaMental() {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 340 340');
+    svg.style.maxWidth = '100%';
+    svg.style.height = 'auto';
+
+    const colors = ['#6c4ce0', '#ff5d8f', '#2fd6c8', '#ffc857', '#ff8a5c', '#8e6cff', '#22b8a6'];
+    const dias = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+
+    // Centro
+    const centerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    centerCircle.setAttribute('cx', '170');
+    centerCircle.setAttribute('cy', '170');
+    centerCircle.setAttribute('r', '35');
+    centerCircle.setAttribute('fill', 'var(--violet)');
+    centerCircle.setAttribute('opacity', '0.15');
+    centerCircle.setAttribute('stroke', 'var(--violet)');
+    centerCircle.setAttribute('stroke-width', '2');
+    svg.appendChild(centerCircle);
+
+    const centerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    centerText.setAttribute('x', '170');
+    centerText.setAttribute('y', '168');
+    centerText.setAttribute('text-anchor', 'middle');
+    centerText.setAttribute('font-weight', '700');
+    centerText.setAttribute('font-size', '13');
+    centerText.setAttribute('fill', 'var(--ink)');
+    centerText.textContent = 'PERMANEÇAM';
+    svg.appendChild(centerText);
+
+    const centerText2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    centerText2.setAttribute('x', '170');
+    centerText2.setAttribute('y', '183');
+    centerText2.setAttribute('text-anchor', 'middle');
+    centerText2.setAttribute('font-weight', '700');
+    centerText2.setAttribute('font-size', '13');
+    centerText2.setAttribute('fill', 'var(--ink)');
+    centerText2.textContent = 'EM MIM';
+    svg.appendChild(centerText2);
+
+    // 7 dias em círculo
+    for (let i = 0; i < 7; i++) {
+      const angle = (i * 360 / 7 - 90) * (Math.PI / 180);
+      const x = 170 + 90 * Math.cos(angle);
+      const y = 170 + 90 * Math.sin(angle);
+
+      // Linha do centro
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', '170');
+      line.setAttribute('y1', '170');
+      line.setAttribute('x2', x);
+      line.setAttribute('y2', y);
+      line.setAttribute('stroke', 'var(--violet)');
+      line.setAttribute('stroke-width', '1.5');
+      line.setAttribute('opacity', '0.3');
+      svg.appendChild(line);
+
+      // Círculo do dia
+      const dayCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dayCircle.setAttribute('cx', x);
+      dayCircle.setAttribute('cy', y);
+      dayCircle.setAttribute('r', '20');
+      dayCircle.setAttribute('fill', colors[i]);
+      dayCircle.setAttribute('opacity', '0.2');
+      dayCircle.setAttribute('stroke', colors[i]);
+      dayCircle.setAttribute('stroke-width', '2');
+      svg.appendChild(dayCircle);
+
+      // Texto do dia
+      const dayText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      dayText.setAttribute('x', x);
+      dayText.setAttribute('y', y + 6);
+      dayText.setAttribute('text-anchor', 'middle');
+      dayText.setAttribute('font-weight', '700');
+      dayText.setAttribute('font-size', '11');
+      dayText.setAttribute('fill', 'var(--ink)');
+      dayText.textContent = dias[i];
+      svg.appendChild(dayText);
+    }
+
+    return svg;
+  }
+
+  // ===== RENDERIZAR CONTEÚDO =====
+  function renderizarLicao(licao) {
+    const container = document.getElementById('dias-container');
+    const pillsContainer = document.getElementById('pills-container');
+
+    container.innerHTML = '';
+    pillsContainer.innerHTML = '';
+
+    // Pills
+    licao.dias.forEach((dia, idx) => {
+      const pill = document.createElement('a');
+      pill.className = 'pill';
+      pill.href = `#dia-${dia.id}`;
+      pill.innerHTML = `<span style="font-size: 14px; font-weight: 800;">${dia.letra}</span><span>${dia.titulo.split(' ')[0]}</span>`;
+      pillsContainer.appendChild(pill);
+    });
+
+    // Dias
+    licao.dias.forEach((dia, idx) => {
+      const dayEl = document.createElement('article');
+      dayEl.className = 'day';
+      dayEl.setAttribute('data-letter', dia.letra);
+      dayEl.id = `dia-${dia.id}`;
+
+      let conteudoHTML = `
+        <div class="day-date">${dia.data}</div>
+        <h2>${dia.titulo}</h2>
+        <div class="keyideas"><b>Palavras-chave:</b> ${dia.keyideas}</div>
+      `;
+
+      conteudoHTML += `
+        <div style="margin: 24px 0; line-height: 1.8; color: var(--ink);">
+          ${dia.conteudo.replace(/\n/g, '<br><br>')}
+        </div>
+
+        <div class="reflect">
+          <h3>🤔 Diálogo Aberto</h3>
+          <ol>
+      `;
+
+      dia.reflexivas.forEach(r => {
+        conteudoHTML += `<li>${r}</li>`;
+      });
+
+      conteudoHTML += `
+          </ol>
+        </div>
+
+        <button class="mark-read-btn" onclick="marcarComoLido(this)">✓ Marcar como Lido</button>
+      `;
+
+      if (idx === 6) {
+        // Sábado: adicionar mapa mental
+        conteudoHTML = conteudoHTML.replace('</button>', `</button>
+          <div class="mental-map">
+            <h3>📊 Mapa Mental da Semana</h3>
+        `) + `</div>`;
+      }
+
+      if (dia.quiz.length > 0) {
+        conteudoHTML += `<div class="quiz">
+          <h3>📝 Revisão da Semana</h3>
+          <div class="quiz-timer">⏱️ Tempo: <span id="timer-${idx}">00:00</span></div>`;
+
+        dia.quiz.forEach((q, qIdx) => {
+          const diffClass = q.dif.includes('Fácil') ? 'diff-facil' : q.dif.includes('Intermediária') ? 'diff-inter' : 'diff-avancada';
+          conteudoHTML += `
+            <div class="q-block">
+              <span class="diff ${diffClass}">${q.dif}</span>
+              <p class="q-text">Q${qIdx + 1}. ${q.q}</p>
+              <div class="options">
+          `;
+
+          q.op.forEach((opt, oIdx) => {
+            conteudoHTML += `
+              <button onclick="responderQuiz(this, '${q.r}')" class="q-option">
+                ${opt}
+              </button>
+            `;
+          });
+
+          conteudoHTML += `
+              </div>
+              <div class="gabarito" id="gab-${idx}-${qIdx}">✓ Resposta: ${q.r}</div>
+            </div>
+          `;
+        });
+
+        conteudoHTML += `
+          <button class="reveal-btn" onclick="revelarGabarito(${idx})">Ver Gabarito</button>
+        </div>`;
+      }
+
+      if (dia.vf.length > 0) {
+        conteudoHTML += `<div class="tf">
+          <h3>✓/✗ Verdadeiro ou Falso?</h3>`;
+
+        dia.vf.forEach((item, vfIdx) => {
+          conteudoHTML += `
+            <div class="tf-item">
+              <span>${item.q}</span>
+              <div class="tf-btns">
+                <button data-v="V" onclick="responderVF(this, '${item.r}')">V</button>
+                <button data-v="F" onclick="responderVF(this, '${item.r}')">F</button>
+              </div>
+            </div>
+          `;
+        });
+
+        conteudoHTML += `</div>`;
+      }
+
+      dayEl.innerHTML = conteudoHTML;
+
+      // Adicionar mapa mental para sábado
+      if (idx === 6) {
+        const mentalMapDiv = dayEl.querySelector('.mental-map');
+        if (mentalMapDiv) {
+          const mapa = criarMapaMental();
+          mentalMapDiv.appendChild(mapa);
+        }
+      }
+
+      container.appendChild(dayEl);
+    });
+  }
+
+  // ===== FUNÇÕES DE INTERAÇÃO =====
+  function marcarComoLido(btn) {
+    btn.classList.add('marked');
+    btn.textContent = '✓ Lido';
+    btn.disabled = true;
+    localStorage.setItem(`lido-${btn.closest('.day').id}`, 'true');
+  }
+
+  function responderQuiz(btn, respostaCorreta) {
+    const parent = btn.closest('.q-block');
+    const botoes = parent.querySelectorAll('.q-option');
+    botoes.forEach(b => b.disabled = true);
+
+    if (btn.textContent.includes(respostaCorreta)) {
+      btn.style.background = '#a6e22e';
+      btn.style.color = '#3a5000';
+    } else {
+      btn.style.background = '#ef4763';
+      btn.style.color = 'white';
+      botoes.forEach(b => {
+        if (b.textContent.includes(respostaCorreta)) {
+          b.style.background = '#a6e22e';
+          b.style.color = '#3a5000';
+        }
+      });
+    }
+  }
+
+  function responderVF(btn, respostaCorreta) {
+    const parent = btn.closest('.tf-item');
+    const botoes = parent.querySelectorAll('.tf-btns button');
+    botoes.forEach(b => b.disabled = true);
+
+    const escolhido = btn.getAttribute('data-v');
+    if (escolhido === respostaCorreta) {
+      btn.style.background = '#a6e22e';
+      btn.style.color = 'white';
+    } else {
+      btn.style.background = '#ef4763';
+      btn.style.color = 'white';
+      botoes.forEach(b => {
+        if (b.getAttribute('data-v') === respostaCorreta) {
+          b.style.background = '#a6e22e';
+          b.style.color = 'white';
+        }
+      });
+    }
+  }
+
+  function revelarGabarito(idx) {
+    const blocos = document.querySelectorAll(`#gab-${idx}-0, #gab-${idx}-1, #gab-${idx}-2, #gab-${idx}-3, #gab-${idx}-4, #gab-${idx}-5, #gab-${idx}-6, #gab-${idx}-7, #gab-${idx}-8, #gab-${idx}-9`);
+    blocos.forEach(b => b.classList.toggle('show'));
+  }
+
+  // ===== DARK MODE =====
+  function initDarkMode() {
+    const toggle = document.getElementById('dark-mode-toggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('darkMode');
+
+    if (saved === 'true') {
+      root.setAttribute('data-theme', 'dark');
+      toggle.classList.add('active');
+    }
+
+    toggle.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('darkMode', 'false');
+        toggle.classList.remove('active');
+      } else {
+        root.setAttribute('data-theme', 'dark');
+        localStorage.setItem('darkMode', 'true');
+        toggle.classList.add('active');
+      }
+    });
+  }
+
+  // ===== NAVEGAÇÃO =====
+  function initNav() {
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+        item.classList.add('active');
+        const page = item.getAttribute('data-page');
+        document.getElementById(`page-${page}`).classList.add('active');
+      });
+    });
+  }
+
+  // ===== INIT =====
+  document.addEventListener('DOMContentLoaded', () => {
+    renderizarLicao(licao4);
+    initNav();
+    initDarkMode();
+  });
+</script>
+</body>
+</html>

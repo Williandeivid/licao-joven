@@ -1,0 +1,230 @@
+{
+  "licao": 4,
+  "titulo": "Permaneçam em Mim",
+  "keyword": "DEPENDÊNCIA",
+  "dias": [
+    {
+      "id": "dom",
+      "letra": "D",
+      "data": "Domingo · 19 de julho",
+      "titulo": "O Príncipe dos Pregadores",
+      "keyideas": "Charles Spurgeon · Lições espirituais no cotidiano · Parábolas de Jesus · Videira e ramos",
+      "verses": ["João 10:1-16", "João 16:21", "João 15"],
+      "resumo": "Um dos pregadores mais marcantes, Charles Spurgeon (1834-1892), pastoreou em Londres por 38 anos. Contava a história de um jovem capelão que se ofereceu para carregar um homem ferido após um acidente de trem, visitando-o regularmente. Spurgeon comentou que o capelão nunca esqueceria daquele homem com apreço porque \"sentiu o peso dele\". A capacidade de enxergar lições espirituais em experiências comuns é uma ferramenta poderosa de ensino que Jesus exemplificava frequentemente.",
+      "conteudo": "Um dos pregadores mais marcantes da história do cristianismo foi <b>Charles Spurgeon</b> (1834-1892). Por 38 anos, ele pastoreou a Capela da Rua New Park, em Londres, a ponto de ficar conhecido como <b>\"o príncipe dos pregadores\"</b>. Spurgeon contava a história de um jovem pregador que trabalhava como capelão em um hospital. Após um grave acidente de trem, ele se ofereceu para carregar um homem ferido e, durante a recuperação, passou a visitá-lo com frequência. Spurgeon comentou: aquele capelão sempre se lembraria daquele homem com apreço, porque <b>sentiu o peso dele</b> — quando você carrega alguém no coração e sente o peso do que a pessoa enfrenta, o nome dela fica gravado na sua alma.\n\nA capacidade de <b>enxergar lições espirituais nas experiências comuns da vida</b> é uma ferramenta de ensino muito poderosa. Jesus, o maior Mestre de todos, fazia isso com frequência: ao falar com pescadores, usava a linguagem da pesca; quando estava cercado pela natureza, extraía lições do que via ao redor. Com maestria, mostrou que o mundo natural revela o amor de Deus.\n\nOs evangelhos registram cerca de 40 parábolas de Jesus. Curiosamente, o evangelho de João <b>não inclui parábolas propriamente ditas</b> — em vez disso, destaca metáforas usadas por Jesus, incluindo narrativas mais longas, como a do Bom Pastor (Jo 10:1-16), e ilustrações mais curtas, como a do parto (Jo 16:21). Nesta semana, vamos explorar uma das comparações mais marcantes de Cristo: <b>a videira e os ramos</b> (Jo 15).",
+      "reflexivas": [
+        "Já \"sentiu o peso\" de alguém — carregou a dor ou a luta de outra pessoa a ponto de nunca mais esquecê-la?",
+        "Que lição espiritual você já tirou de uma experiência simples do seu cotidiano?",
+        "Por que você acha que Jesus preferia ensinar com metáforas do dia a dia, em vez de conceitos abstratos?"
+      ],
+      "quiz": [
+        {"dif": "Fácil", "q": "Quem foi conhecido como \"o príncipe dos pregadores\"?", "op": ["Charles Spurgeon", "John Wesley", "João Calvino", "Martinho Lutero"], "r": "A"},
+        {"dif": "Fácil", "q": "Por quantos anos Spurgeon pastoreou a Capela da Rua New Park?", "op": ["10", "25", "38", "50"], "r": "C"},
+        {"dif": "Fácil", "q": "O que o jovem capelão fez após o acidente de trem?", "op": ["Chamou a polícia e foi embora", "Carregou um homem ferido", "Fugiu do local", "Fotografou a cena"], "r": "B"},
+        {"dif": "Intermediária", "q": "Segundo Spurgeon, por que o capelão nunca esqueceria aquele homem?", "op": ["Porque era famoso", "Porque sentiu o peso dele", "Porque era seu parente", "Porque foi pago por isso"], "r": "B"},
+        {"dif": "Intermediária", "q": "Como Jesus costumava ensinar, segundo o texto?", "op": ["Só com regras escritas", "Usando linguagem e lições do cotidiano", "Apenas dentro do templo", "Somente por escrito"], "r": "B"},
+        {"dif": "Intermediária", "q": "Quantas parábolas os evangelhos registram de Jesus, aproximadamente?", "op": ["10", "25", "40", "100"], "r": "C"},
+        {"dif": "Intermediária", "q": "O que é peculiar sobre o evangelho de João, quanto às parábolas?", "op": ["Tem mais parábolas que os outros evangelhos", "Não inclui parábolas propriamente ditas", "Foi escrito só em forma de parábolas", "Não menciona Jesus ensinando"], "r": "B"},
+        {"dif": "Avançada", "q": "Qual metáfora mais longa de Jesus é citada como exemplo, em João 10?", "op": ["O Bom Pastor", "O Semeador", "O Filho Pródigo", "O Fariseu e o Publicano"], "r": "A"},
+        {"dif": "Avançada", "q": "A ilustração do parto em João 16:21 é usada para ilustrar o quê?", "op": ["A dor que se transforma em alegria", "O nascimento físico apenas", "A criação do mundo", "A ressurreição de Lázaro"], "r": "A"},
+        {"dif": "Avançada", "q": "Qual comparação Jesus faz consigo mesmo e os discípulos, tema desta semana?", "op": ["O pastor e as ovelhas", "A videira e os ramos", "O sal da terra", "A luz do mundo"], "r": "B"}
+      ],
+      "vf": [
+        {"q": "Spurgeon foi conhecido como \"o príncipe dos pregadores\".", "r": "V"},
+        {"q": "O evangelho de João contém mais parábolas que os outros evangelhos.", "r": "F"},
+        {"q": "Jesus usava a linguagem do cotidiano das pessoas para ensinar lições espirituais.", "r": "V"}
+      ]
+    },
+    {
+      "id": "seg",
+      "letra": "S",
+      "data": "Segunda · 20 de julho",
+      "titulo": "Ele Nos Levanta",
+      "keyideas": "Videira verdadeira · \"Airo\": cortar ou levantar · Justificação e santificação · Deus não descarta ninguém",
+      "verses": ["João 15:1,5", "João 15:2", "João 15:6"],
+      "resumo": "João 15 começa com Jesus se apresentando como a videira verdadeira e nós como os ramos. Essa metáfora revela que nenhum ramo se sustenta sozinho e que dependemos continuamente de uma fonte de vida que nos alimenta. Jesus explica que o Pai corta ramos improdutivos e limpa os frutíferos para maior produtividade. A palavra grega \"airo\" significa tanto \"cortar\" quanto \"levantar\", refletindo o duplo cuidado de Deus: restaurar e refinar. Isso aponta para duas realidades cristãs: ser aceito por Deus (justificação) e ser transformado por Ele (santificação).",
+      "conteudo": "João 15 começa com Jesus destacando a ligação essencial que precisamos ter: Ele é a <b>videira verdadeira</b>, e nós somos os ramos (Jo 15:1,5). <b>Nenhum ramo se sustenta sozinho</b>; ele depende de uma fonte de vida que o alimenta continuamente. O Messias deixa claro que só existe frutificação quando há permanência Nele (v. 3-5).\n\nNo verso 2, Jesus diz que todo ramo que não dá fruto, o Pai corta; e todo o que dá fruto, Ele limpa, para que produza mais. A palavra grega traduzida como \"corta\" é <i>airo</i>, que também pode significar <b>\"levantar\"</b>. Em um vinhedo, essa é uma prática comum: o viticultor ergue os ramos para que recebam mais luz e ar, fortalecendo a planta. Nesse mesmo verso, o verbo traduzido como \"limpar\" também pode ser entendido como \"podar\" — Jesus descreve dois cuidados diferentes, com o mesmo objetivo: quando o ramo não está frutificando, o viticultor o <b>levanta</b> — tira do chão, recria as condições para produzir; quando já está frutificando, ele <b>poda</b> — remove o excesso que rouba energia, para produzir ainda mais.\n\nCom isso, Jesus aponta para duas realidades que caminham juntas na vida cristã: ser aceito por Deus (<b>justificação pela fé</b>) e ser transformado por Ele ao longo do caminho (<b>santificação</b>). É fácil cair numa mentira comum: a de que o Senhor só aceita quem \"já está rendendo\". Mas <b>Deus não vive procurando motivos para jogar pessoas fora</b> — Ele restaura, fortalece e conduz ao crescimento. No fim das contas, os ramos removidos são aqueles que não permanecem Nele (Jo 15:6).",
+      "reflexivas": [
+        "Você já pensou que Deus \"desistiria\" de você por não estar \"rendendo o suficiente\"? Como esse texto responde a isso?",
+        "Na ilustração de Jesus, o que a poda representa? O que Deus tem pedido para você deixar ir, para produzir mais fruto?",
+        "Qual a diferença entre ser \"aceito\" por Deus e ser \"transformado\" por Ele — e por que as duas coisas importam?"
+      ],
+      "quiz": [
+        {"dif": "Fácil", "q": "Segundo Jo 15:1, quem é a videira verdadeira?", "op": ["O Pai", "Jesus", "O Espírito Santo", "A igreja"], "r": "B"},
+        {"dif": "Fácil", "q": "O que Jesus diz que somos, em relação à videira?", "op": ["As raízes", "Os ramos", "As folhas", "O solo"], "r": "B"},
+        {"dif": "Fácil", "q": "O que o Pai faz com ramos que não dão fruto?", "op": ["Rega mais", "Corta", "Espera", "Ignora"], "r": "B"},
+        {"dif": "Intermediária", "q": "O que significa a palavra grega \"airo\" citada no texto?", "op": ["Poda", "Levantar ou cortar", "Regar", "Semear"], "r": "B"},
+        {"dif": "Intermediária", "q": "Qual é o objetivo da poda dos ramos que já frutificam?", "op": ["Remover tudo", "Produzir mais fruto", "Enfraquecê-los", "Parar o crescimento"], "r": "B"},
+        {"dif": "Intermediária", "q": "O que representa a justificação nesta metáfora?", "op": ["Ser cortado", "Ser aceito por Deus", "Ser podado", "Não frutificar"], "r": "B"},
+        {"dif": "Intermediária", "q": "Qual é a diferença principal entre justificação e santificação?", "op": ["Não há diferença", "Aceitar vs. Transformar", "Fé vs. Obras", "Antigo vs. Novo"], "r": "B"},
+        {"dif": "Avançada", "q": "Quando Jesus diz que ramos são \"removidos\", o que isso significa?", "op": ["Morte física", "Abandono de Deus", "Não permanecer Nele", "Punição eterna"], "r": "C"},
+        {"dif": "Avançada", "q": "Por que Deus \"levanta\" os ramos que não frutificam?", "op": ["Para castigá-los", "Para restaurá-los", "Para ignorá-los", "Para cortá-los"], "r": "B"},
+        {"dif": "Avançada", "q": "Qual é a verdade central deste ensinamento?", "op": ["Deus rejeita fracassos", "Deus busca crescimento em nós", "Deus não se importa", "Deus só ama perfeitos"], "r": "B"}
+      ],
+      "vf": [
+        {"q": "Os ramos se sustentam sozinhos sem a videira.", "r": "F"},
+        {"q": "Deus poda os ramos para que produzam mais fruto.", "r": "V"},
+        {"q": "Justificação e santificação são a mesma coisa.", "r": "F"}
+      ]
+    },
+    {
+      "id": "ter",
+      "letra": "T",
+      "data": "Terça · 21 de julho",
+      "titulo": "Suportando as Dificuldades",
+      "keyideas": "Escolhidos, não abandonados · O ódio do mundo atinge o Pai · Satanás, príncipe deste mundo · Seguro no amor do Pai",
+      "verses": ["João 15:19", "João 15:20-23", "João 14:30; 15:18-19"],
+      "resumo": "Jesus preparou os discípulos para as dificuldades que enfrentariam, equilibrando encorajamento com realismo. Advertiu que o mundo odiaria seus seguidores porque os havia odiado primeiro, mas dentro dessa advertência há uma promessa preciosa: \"Vocês não são do mundo — pelo contrário, Eu os escolhi dele\". Essa escolha divina muda a perspectiva sobre as provações: enfrentamos dificuldades não porque Deus nos abandonou, mas porque fomos escolhidos por Ele. Embora Satanás seja o príncipe deste mundo, a certeza de estar seguro no amor do Pai sustenta o cristão.",
+      "conteudo": "Sabendo o que os discípulos enfrentariam nos anos seguintes, Jesus passou bastante tempo encorajando-os, como relatado em João 13-17. Muitas vezes, ao tentar encorajar alguém, acabamos \"adoçando\" a realidade, porque é difícil falar com honestidade sobre o que está pela frente. Cristo, porém, soube equilibrar as duas coisas: Ele encorajou, mas também foi direto sobre os desafios que se aproximavam.\n\nEm João 15, Jesus explicou que o mundo odiaria os discípulos — principalmente porque odiou Ele primeiro. Mas dentro desse alerta há uma promessa preciosa: \"Vocês não são do mundo — pelo contrário, Eu os escolhi dele\" (Jo 15:19). <b>Deus nos escolheu!</b> Isso muda o peso da notícia: Jesus não estava dizendo \"vocês vão sofrer porque Eu não Me importo com vocês\", mas \"vocês vão enfrentar dificuldades porque o mundo Me odeia, e Eu escolhi vocês\". Isso muda completamente o jeito de encarar as provações — segundo nosso Salvador, <b>enfrentamos dificuldades porque Ele nos escolheu, não porque nos abandonou</b>.\n\nJesus continuou explicando que o ódio do mundo não se dirige apenas a Ele; no fundo, <b>atinge também o Pai</b>, que O enviou. Ele deixou claro que <b>Satanás é o \"príncipe deste mundo\"</b> e que, enquanto estivermos aqui, a vida não será fácil (Jo 14:30; 15:18,19). A boa notícia é que, se o mundo não é por nós, <b>Deus é</b>. Jesus suportou o ódio cruel do mundo porque estava <b>seguro no amor do Pai</b> (Jo 15:20-23).",
+      "reflexivas": [
+        "Como a ideia de \"escolhido, não abandonado\" muda a forma como você encara uma dificuldade atual?",
+        "Em Jo 15, Jesus teve uma conversa encorajadora e, ao mesmo tempo, franca com os discípulos. Como isso ainda fala com a igreja hoje?",
+        "O que significa, na prática, estar \"seguro no amor do Pai\" mesmo quando o mundo se opõe a você?"
+      ],
+      "quiz": [
+        {"dif": "Fácil", "q": "Em quais capítulos de João Jesus passa tempo encorajando os discípulos antes da cruz?", "op": ["1-5", "13-17", "18-21", "6-10"], "r": "B"},
+        {"dif": "Fácil", "q": "Segundo Jo 15:19, por que o mundo odeia os discípulos?", "op": ["Porque são fracos", "Porque foram escolhidos por Jesus, fora do mundo", "Porque são ricos", "Porque não creem"], "r": "B"},
+        {"dif": "Fácil", "q": "O que muda, segundo o texto, ao saber que fomos escolhidos por Deus?", "op": ["Nada muda", "O peso da notícia sobre o sofrimento", "Deixamos de sofrer", "Ficamos isentos de provações"], "r": "B"},
+        {"dif": "Intermediária", "q": "Segundo o texto, o ódio do mundo pelos discípulos, no fundo, atinge quem também?", "op": ["Só os discípulos", "O Pai", "Os anjos", "Ninguém além deles"], "r": "B"},
+        {"dif": "Intermediária", "q": "Quem é chamado de \"o príncipe deste mundo\" no texto?", "op": ["César", "Satanás", "Herodes", "Pilatos"], "r": "B"},
+        {"dif": "Intermediária", "q": "Segundo o texto, o que sustenta Jesus diante do ódio do mundo?", "op": ["Sua força física", "O amor do Pai", "O apoio dos discípulos", "Sua riqueza"], "r": "B"},
+        {"dif": "Intermediária", "q": "Qual é a boa notícia, mesmo que o mundo não esteja do nosso lado?", "op": ["Que o mundo vai mudar sozinho", "Que Deus é por nós", "Que a perseguição vai parar logo", "Que ninguém mais vai discordar de nós"], "r": "B"},
+        {"dif": "Avançada", "q": "Em qual outro texto Jesus adverte \"no mundo tereis aflições\"?", "op": ["João 16:33", "Mateus 5:1", "Lucas 2:1", "Marcos 3:1"], "r": "A"},
+        {"dif": "Avançada", "q": "Qual apóstolo escreveu que \"todos os que querem viver piedosamente em Cristo Jesus serão perseguidos\"?", "op": ["Pedro", "Paulo (2Tm 3:12)", "Tiago", "João"], "r": "B"},
+        {"dif": "Avançada", "q": "Segundo Hebreus 11, que tipo de sofrimento os fiéis do Antigo Testamento enfrentaram por fé?", "op": ["Apenas prisão", "Apedrejamento, serra, espada, privações", "Apenas exílio", "Nenhum sofrimento"], "r": "B"}
+      ],
+      "vf": [
+        {"q": "O mundo odeia os discípulos porque odiou Jesus primeiro.", "r": "V"},
+        {"q": "Jesus disse que os discípulos sofreriam porque Ele não se importava com eles.", "r": "F"},
+        {"q": "Satanás é chamado de \"o príncipe deste mundo\" no texto.", "r": "V"}
+      ]
+    },
+    {
+      "id": "qua",
+      "letra": "Q",
+      "data": "Quarta · 22 de julho · Momento Hipertexto",
+      "titulo": "Dependência que Frutifica",
+      "keyideas": "Videira verdadeira · Dependência total do Pai · Permanecer = entrega contínua · Rede semântica",
+      "verses": ["João 5:30", "João 15:5", "Gálatas 5:22-23"],
+      "resumo": "Jesus se apresentou como a Videira verdadeira para mostrar que a vida espiritual procede unicamente da união com Ele. Diferentemente de árvores que se sustentam sozinhas, a videira depende de apoio, revelando que em Sua humanidade, Cristo viveu em total dependência do Pai. Como ramos enxertados na Videira, recebemos vida, força e fruto somente por meio de comunhão constante com Cristo. Permanecer em Jesus significa viver em contínua entrega, fé e obediência, permitindo que o Pai realize a purificação que nos torna mais frutíferos.",
+      "conteudo": "Jesus Se apresentou como a <b>Videira verdadeira</b> para mostrar que a vida espiritual procede unicamente da união com Ele. Diferentemente de árvores que se sustentam sozinhas, a videira <b>depende de apoio</b> — revelando que, em Sua humanidade, Cristo viveu em total dependência do Pai (Jo 5:30), e assim nós também dependemos Dele. Como ramos enxertados na Videira, recebemos vida, força e fruto somente por meio de uma comunhão constante com Cristo; <b>separados Dele, nada podemos fazer</b> (Jo 15:5).\n\n<b>Permanecer em Jesus</b> significa viver em contínua entrega, fé e obediência, permitindo que o Pai, como Agricultor amoroso, realize em nós a poda e a purificação, para que produzamos mais fruto. Dessa união brota uma vida transformada, na qual o caráter de Cristo se manifesta em nós, para a glória de Deus.\n\nComo as passagens a seguir ajudam a compreender melhor as verdades encorajadoras e desafiadoras que Jesus compartilhou em João 15? A partir de tudo isso, é a vez do estudante expressar o que faz sentido a partir da palavra <b>DEPENDÊNCIA</b>.",
+      "reflexivas": [
+        "Como a dependência de Cristo nos liberta em vez de nos escravizar?",
+        "Que frutos (amor, alegria, paz) você deseja ver mais em sua vida através da permanência em Cristo?",
+        "Qual é a diferença entre depender de Cristo e depender de outras coisas neste mundo?"
+      ],
+      "quiz": [
+        {"dif": "Fácil", "q": "A videira verdadeira depende de quê, segundo o texto?", "op": ["De si mesma", "De apoio", "De solo rico", "De chuva constante"], "r": "B"},
+        {"dif": "Fácil", "q": "Como Cristo viveu em Sua humanidade, segundo o texto?", "op": ["De forma independente", "Em total dependência do Pai", "Sozinho", "Sem necessidade de Deus"], "r": "B"},
+        {"dif": "Fácil", "q": "Segundo Jo 15:5, o que podemos fazer separados de Cristo?", "op": ["Tudo", "Muitas coisas", "Nada", "Algumas coisas"], "r": "C"},
+        {"dif": "Intermediária", "q": "O que significa \"permanecer em Jesus\" no texto?", "op": ["Ficar perto fisicamente", "Viver em entrega, fé e obediência contínuas", "Apenas pensar Nele", "Estudar a Bíblia"], "r": "B"},
+        {"dif": "Intermediária", "q": "Qual é o papel do Pai, como Agricultor amoroso?", "op": ["Negligenciar", "Realizar a poda e purificação", "Plantar apenas", "Ignorar os ramos"], "r": "B"},
+        {"dif": "Intermediária", "q": "Como se manifesta o caráter de Cristo em nós?", "op": ["Desaparece", "Através de uma vida transformada", "Nunca aparece", "Apenas nos líderes"], "r": "B"},
+        {"dif": "Intermediária", "q": "Qual livro do NT menciona especificamente o fruto do Espírito?", "op": ["Romanos", "Gálatas 5:22-23", "Efésios", "Filipenses"], "r": "B"},
+        {"dif": "Avançada", "q": "Em Isaías 5:1-7, o que Deus preparou para que produzisse bom fruto?", "op": ["Uma videira qualquer", "Sua vinha (Israel)", "Uma figueira", "Uma árvore de figo"], "r": "B"},
+        {"dif": "Avançada", "q": "Segundo Lucas 13:6-9, qual é a imagem da paciência de Deus?", "op": ["Cortá-la imediatamente", "A parábola da figueira estéril", "Ignorá-la", "Vendê-la"], "r": "B"},
+        {"dif": "Avançada", "q": "Qual apóstolo alertou que árvores sem fruto serão cortadas e lançadas ao fogo?", "op": ["Pedro", "João Batista (Lucas 3:7-9)", "Paulo", "Tiago"], "r": "B"}
+      ],
+      "vf": [
+        {"q": "A videira, diferente das árvores comuns, se sustenta sozinha.", "r": "F"},
+        {"q": "Segundo Jo 15:5, quem está separado de Cristo nada pode fazer.", "r": "V"},
+        {"q": "A palavra-chave desta semana é \"Dependência\".", "r": "V"}
+      ]
+    },
+    {
+      "id": "qui",
+      "letra": "Q",
+      "data": "Quinta · 23 de julho",
+      "titulo": "Permanecendo em Seu Amor",
+      "keyideas": "Amor do Pai refletido no Filho · Amizade com Cristo · Acesso constante ao Pai · Escolhidos antes de escolher",
+      "verses": ["João 15:9", "João 15:13-15", "João 15:16"],
+      "resumo": "Jesus garantiu aos discípulos que os amava da mesma forma que o Pai O amava, um convite a repousar na certeza de serem aceitos. O amor de Cristo é a base do serviço genuíno, diferente da obrigação que finda com a pressão. Jesus relacionava-se com os discípulos não como servos sem valor, mas como amigos de confiança. Essa amizade próxima inclui acesso constante ao Pai através da oração. Cristo nos transforma, devolvendo nosso senso de dignidade ao nos chamar de amigos, tendo nos escolhido antes mesmo de nós O escolhermos.",
+      "conteudo": "Jesus garantiu aos discípulos: <b>\"Como o Pai Me amou, também Eu amei vocês\"</b> (Jo 15:9). É difícil imaginar uma declaração maior do que essa. Jesus nos convida a <b>permanecer em Seu amor</b>, descansando na certeza de que somos aceitos por Ele. Quando entendemos o amor de Cristo por nós, isso se torna a base do nosso serviço — quem serve só por obrigação cedo ou tarde perde o ânimo, mas quem serve em resposta ao Seu amor se firma ainda mais quando a pressão do mundo aumenta.\n\nJesus nos deu o exemplo perfeito desse amor. Ele sabia que era aceito pelo Pai e, por isso, conseguiu suportar a rejeição — a desaprovação dos fariseus não O intimidava, porque Ele sabia que o Pai Se alegrava Nele. O amor de Cristo por nós não nos diminui nem nos trata com superioridade: Ele não falou com os discípulos como se fossem servos sem valor, mas relacionou-Se com eles como <b>amigos de confiança</b>, com quem podia ser aberto e sincero (Jo 15:13-15).\n\nEssa amizade tão próxima com Cristo inclui <b>acesso constante ao Pai</b>: Jesus nos convida a orar segundo a vontade do Pai e nos assegura que Ele ouve e responde (Jo 15:16). Cristo nos transforma e devolve nosso senso de dignidade, porque nos ama e nos recebe como amigos. <b>Ele nos chama de amigos. Foi Ele quem nos escolheu</b> antes mesmo de nós O escolhermos.",
+      "reflexivas": [
+        "Quando você se lembra do amor de Cristo e do amor do Pai por você, o que isso desperta no seu coração?",
+        "Você serve a Deus mais por obrigação ou por resposta ao amor Dele? Como perceber a diferença no dia a dia?",
+        "O que muda saber que Cristo o chama de amigo, e não de servo sem valor?"
+      ],
+      "quiz": [
+        {"dif": "Fácil", "q": "Segundo Jo 15:9, como Jesus amou os discípulos?", "op": ["Como um mestre ama um aluno", "Como o Pai O amou", "Com distância", "Com cautela"], "r": "B"},
+        {"dif": "Fácil", "q": "O que Jesus convida os discípulos a fazer, segundo o texto?", "op": ["Buscar riquezas", "Permanecer em Seu amor", "Evitar o mundo", "Jejuar sempre"], "r": "B"},
+        {"dif": "Fácil", "q": "O que acontece com quem serve a Cristo só por obrigação, segundo o texto?", "op": ["Cresce mais rápido", "Cedo ou tarde perde o ânimo", "Nunca falha", "Se torna líder"], "r": "B"},
+        {"dif": "Intermediária", "q": "Por que Jesus conseguiu suportar a rejeição dos fariseus?", "op": ["Porque não Se importava com ninguém", "Porque sabia que era aceito pelo Pai", "Porque tinha apoio popular", "Porque ignorava os fariseus"], "r": "B"},
+        {"dif": "Intermediária", "q": "Como Jesus chamou os discípulos, em vez de \"servos\"?", "op": ["Soldados", "Amigos", "Escravos", "Estranhos"], "r": "B"},
+        {"dif": "Intermediária", "q": "O que essa amizade com Cristo inclui, segundo Jo 15:16?", "op": ["Riqueza garantida", "Acesso constante ao Pai", "Fama entre os líderes", "Imunidade a provações"], "r": "B"},
+        {"dif": "Intermediária", "q": "Quem escolheu quem primeiro, segundo o texto?", "op": ["Os discípulos escolheram Jesus primeiro", "Jesus escolheu os discípulos primeiro", "Ninguém escolheu ninguém", "Foi decidido por sorteio"], "r": "B"},
+        {"dif": "Avançada", "q": "Em qual outro texto Jesus chama Seus seguidores de \"amigos\" de forma semelhante?", "op": ["João 15:13-15", "Mateus 5:1", "Marcos 10:1", "Lucas 1:1"], "r": "A"},
+        {"dif": "Avançada", "q": "O tema da amizade com Deus também aparece com qual patriarca do Antigo Testamento?", "op": ["Abraão, chamado \"amigo de Deus\"", "Caim", "Labão", "Esaú"], "r": "A"},
+        {"dif": "Avançada", "q": "Qual carta do Novo Testamento também descreve a certeza de ser ouvido ao orar segundo a vontade de Deus?", "op": ["1 João 5:14", "Tito 2", "Filemom", "3 João"], "r": "A"}
+      ],
+      "vf": [
+        {"q": "Jesus amou os discípulos com o mesmo amor com que o Pai O amou.", "r": "V"},
+        {"q": "Quem serve a Cristo só por obrigação tende a se firmar mais com o tempo.", "r": "F"},
+        {"q": "Jesus chamou os discípulos de amigos, não de servos.", "r": "V"}
+      ]
+    },
+    {
+      "id": "sex",
+      "letra": "S",
+      "data": "Sexta · 24 de julho",
+      "titulo": "Por Que a Perseguição Diminuiu",
+      "keyideas": "Cristianismo genuíno gera oposição · Satanás, adversário obstinado · Igreja adaptada ao mundo · Ellen White, O Grande Conflito",
+      "verses": ["João 15:20", "2 Timóteo 3:12", "O Grande Conflito, p. 35-37"],
+      "resumo": "O cristianismo genuíno propagaria paz e harmonia se amplamente recebido, pois sua missão é reconciliar humanos com Deus e uns com os outros. Porém, sob domínio de Satanás, o mundo se rebela contra princípios evangélicos que condenam pecados. Jesus preparou os discípulos avisando que sofreriam perseguição assim como Ele sofreu. Paulo declarou que todos os piedosos em Cristo serão perseguidos, mas hoje a perseguição parece inativa porque a igreja se adaptou aos padrões mundanos. Um reavivamento da fé primitiva reacenderia a oposição e as fogueiras da perseguição.",
+      "conteudo": "O cristianismo genuíno, se recebido e obedecido, <b>espalharia paz, harmonia e felicidade</b> por toda a Terra. A missão de Jesus foi reconciliar os seres humanos com Deus, e assim uns com os outros. Porém, grande parte do mundo está sob o domínio de <b>Satanás, o obstinado adversário de Cristo</b>. O evangelho apresenta princípios de vida em total desarmonia com os hábitos e desejos das pessoas — por isso elas se erguem em rebelião, odeiam a pureza que condena seus pecados, e perseguem quem insiste em falar sobre as justas reivindicações do evangelho.\n\nPrevendo as dúvidas que oprimiriam a alma dos discípulos nos dias de provação, o Salvador lembrou: <b>\"Não é o servo maior do que seu senhor. Se Me perseguiram a Mim, também perseguirão a vocês\"</b> (Jo 15:20). Jesus sofreu por nós mais do que qualquer um de Seus seguidores poderá sofrer pela crueldade de pessoas perversas; os que são chamados a suportar a tortura e o martírio estão simplesmente seguindo as pegadas do amado Filho de Deus.\n\nPaulo declarou que <b>todos os que querem viver piedosamente em Cristo Jesus serão perseguidos</b> (2Tm 3:12). Por que, então, a perseguição parece hoje tão inativa? A única razão é que <b>a igreja se adaptou aos padrões do mundo</b> e, portanto, não gera oposição — a religião que prevalece hoje não é tão pura e santa quanto a fé cristã dos dias de Cristo e Seus apóstolos. Se houvesse um reavivamento da fé e do poder da igreja primitiva, o espírito de oposição reviveria, reacendendo as fogueiras da perseguição.",
+      "reflexivas": [
+        "Na ilustração da videira e dos ramos, o que fica claro sobre a importância de permanecer ligado a Jesus?",
+        "No cotidiano, o que significa permanecer em Cristo e em Seu amor com suas escolhas e atitudes?",
+        "Quais estratégias você acha que Satanás usa para afastar as pessoas de Cristo, e o que você pode fazer na prática para não cair nessas armadilhas?"
+      ],
+      "quiz": [
+        {"dif": "Fácil", "q": "Segundo o texto, o que o cristianismo genuíno espalharia pelo mundo?", "op": ["Divisão", "Paz, harmonia e felicidade", "Riqueza", "Poder político"], "r": "B"},
+        {"dif": "Fácil", "q": "Sob cujo domínio está grande parte do mundo, segundo o texto?", "op": ["Do Pai", "De Deus", "De Satanás", "Da humanidade"], "r": "C"},
+        {"dif": "Fácil", "q": "Por que o mundo odeia a mensagem cristã genuína?", "op": ["Porque é fraca", "Porque condena seus pecados", "Porque é antiga", "Porque é estrangeira"], "r": "B"},
+        {"dif": "Intermediária", "q": "O que Jesus previu que os discípulos sofreriam?", "op": ["Sucesso apenas", "Perseguição", "Riqueza", "Fama"], "r": "B"},
+        {"dif": "Intermediária", "q": "O que Paulo afirmou em 2Tm 3:12?", "op": ["Ninguém será perseguido", "Todos serão ricos", "Todos os piedosos em Cristo serão perseguidos", "O mal será eliminado"], "r": "C"},
+        {"dif": "Intermediária", "q": "Por que a perseguição parece inativa hoje, segundo o texto?", "op": ["Porque o mal sumiu", "Porque a igreja se adaptou ao mundo", "Porque Cristo voltou", "Porque não há mais inimigos"], "r": "B"},
+        {"dif": "Intermediária", "q": "Como era a fé cristã nos dias de Cristo e Seus apóstolos?", "op": ["Menos pura", "Mais adaptada", "Mais pura e santa", "Igual a hoje"], "r": "C"},
+        {"dif": "Avançada", "q": "O que geraria um reavivamento da fé e poder da igreja primitiva?", "op": ["Paz eterna", "Reacendimento do espírito de oposição e perseguição", "Riqueza global", "Fim do mundo"], "r": "B"},
+        {"dif": "Avançada", "q": "Qual livro é citado como referência sobre O Grande Conflito?", "op": ["Apocalipse", "Ellen White, O Grande Conflito, p. 35-37", "Revelação", "Gálatas"], "r": "B"},
+        {"dif": "Avançada", "q": "Segundo o texto, qual é a realidade sobre o cristianismo genuíno?", "op": ["Não gera oposição", "Gera oposição porque conflita com o mundo", "É fácil para todos", "É aceito por todos"], "r": "B"}
+      ],
+      "vf": [
+        {"q": "O cristianismo genuíno seria de fácil aceitação para o mundo.", "r": "F"},
+        {"q": "Jesus advertiu que não haveria perseguição para os seguidores.", "r": "F"},
+        {"q": "A perseguição diminuiu porque a igreja se adaptou aos padrões do mundo.", "r": "V"}
+      ]
+    },
+    {
+      "id": "sab",
+      "letra": "C",
+      "data": "Sábado · 25 de julho · Comunidade",
+      "titulo": "Mais do que Perto",
+      "keyideas": "Privilégios ligados a uma condição · Distância causada pelo pecado · Reconciliação · Chamados de filhos",
+      "verses": ["João 1:12", "Romanos 3:23", "2 Coríntios 5:19"],
+      "resumo": "Uma experiência pessoal ilustra que privilégios estão ligados a condições específicas, não sendo inerentes à pessoa. A condição natural da humanidade é estar afastada de Deus por causa do pecado. Porém, Deus nunca nos esqueceu e existe um plano para reconciliação: Cristo é tanto o caminho quanto a recompensa. Deus deseja habitar no coração e transformar a vida, chamando-nos não de meras criaturas, mas de filhos. Esse convite redimensiona completamente o relacionamento com o Criador.",
+      "conteudo": "O autor conta uma experiência pessoal: ao se tornarem pais, ele e a esposa descobriram algo que não imaginavam ser tão significativo nesse processo — as vagas e filas preferenciais. Desde a gravidez, já era possível estacionar mais próximo, usar filas preferenciais, entre outros benefícios. É interessante perceber que esses <b>privilégios não são inerentes à pessoa</b>, mas estão ligados a uma condição específica — seja a gestação, a presença de um bebê, ou outra situação que garanta esse direito.\n\nTambém conhecemos a condição natural do ser humano: <b>\"Todos pecaram e carecem da glória de Deus\"</b> (Rm 3:23). Isso significa que, por natureza, tendemos a viver distantes de Deus — o pecado é o que gera esse afastamento. Essa realidade pode dar a impressão de que não há mais esperança: afinal, como manter um relacionamento com um Deus distante? O maior perigo, porém, é <b>nos acostumarmos com essa ideia</b> e passarmos a viver como se essa distância fosse normal.\n\nEmbora o pecado tenha nos afastado de Deus, Ele nunca Se esqueceu de nós — há um plano para nos reconciliar com Ele. A Bíblia afirma que <b>Deus estava em Cristo reconciliando Consigo o mundo</b>, não levando em conta os pecados dos seres humanos, e nos confiando a palavra da reconciliação (2Co 5:19). Cristo não é apenas o caminho, mas também a recompensa desse caminho — é Nele que encontramos a vida plena. Deus deseja habitar em nosso coração e transformar nossa vida: em vez de sermos apenas criaturas, <b>Ele nos chama de filhos</b>. Você aceita esse convite?",
+      "reflexivas": [
+        "Em que momentos da nossa vida podemos acabar nos acostumando com a ideia de estar \"distantes\" de Deus?",
+        "O que significa, na prática, viver como filho de Deus?"
+      ],
+      "quiz": [
+        {"dif": "Fácil", "q": "Qual foi a metáfora principal usada por Jesus durante toda esta semana?", "op": ["O pastor e as ovelhas", "A videira e os ramos", "O semeador e as sementes", "O sal da terra"], "r": "B"},
+        {"dif": "Fácil", "q": "Segundo a lição, qual palavra grega significa tanto \"cortar\" quanto \"levantar\"?", "op": ["Airo", "Karpos", "Poiesis", "Metanoia"], "r": "A"},
+        {"dif": "Fácil", "q": "Em quais capítulos de João Jesus passa tempo encorajando os discípulos antes da cruz?", "op": ["1-5", "13-17", "18-21", "6-10"], "r": "B"},
+        {"dif": "Intermediária", "q": "Qual é a diferença fundamental entre justificação e santificação, conforme ensinado nesta semana?", "op": ["Não há diferença", "Aceitar vs. Transformar", "Fé vs. Obras", "Novo vs. Antigo"], "r": "B"},
+        {"dif": "Intermediária", "q": "Segundo a lição, por que o mundo odeia os discípulos de Cristo?", "op": ["Porque são fracos", "Porque foram escolhidos por Jesus", "Porque são ricos", "Porque não creem"], "r": "B"},
+        {"dif": "Intermediária", "q": "Como Jesus chamou os discípulos, em vez de \"servos\"?", "op": ["Soldados", "Amigos", "Escravos", "Apóstolos"], "r": "B"},
+        {"dif": "Intermediária", "q": "Qual é a condição natural do ser humano, segundo Romanos 3:23?", "op": ["Ser perfeito", "Carecer da glória de Deus", "Ser escolhido", "Estar salvo"], "r": "B"},
+        {"dif": "Avançada", "q": "Qual apóstolo escreveu que \"todos os que querem viver piedosamente em Cristo serão perseguidos\"?", "op": ["Pedro", "Paulo (2Tm 3:12)", "Tiago", "João"], "r": "B"},
+        {"dif": "Avançada", "q": "Segundo a lição, por que a perseguição parece inativa nos dias atuais?", "op": ["Porque o mal foi eliminado", "Porque a igreja se adaptou ao mundo", "Porque Cristo voltou", "Porque não há mais inimigos"], "r": "B"},
+        {"dif": "Avançada", "q": "Qual é a verdade central de toda esta lição sobre \"Permaneçam em Mim\"?", "op": ["Dependência de outros", "Dependência total de Cristo", "Independência pessoal", "Autonomia espiritual"], "r": "B"}
+      ],
+      "vf": [
+        {"q": "A videira, diferente das árvores comuns, se sustenta sozinha.", "r": "F"},
+        {"q": "Jesus amou os discípulos com o mesmo amor com que o Pai O amou.", "r": "V"},
+        {"q": "Somos chamados filhos de Deus apenas quando conseguimos ser perfeitos.", "r": "F"}
+      ]
+    }
+  ]
+}

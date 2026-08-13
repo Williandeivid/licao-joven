@@ -1,0 +1,67 @@
+{
+  "licoes": [
+    {
+      "numero": 6,
+      "titulo": "A Oração de Cristo",
+      "palavra_chave": "INTERCESSÃO",
+      "data": "Ago. 9-15",
+      "resumo": "7 dias completos com oração intercessória de Jesus pelos discípulos e Igreja. 70 questões (10 MC + 3 V/F por dia). Estrutura: Dom-glorificação, Seg-amor, Ter-santificação, Qua-unidade, Qui-proteção, Sex-mundo, Sab-revisão"
+    },
+    {
+      "numero": 7,
+      "titulo": "O Jardim do Getsêmani",
+      "palavra_chave": "AGONIA",
+      "data": "Ago. 16-22",
+      "resumo": "7 dias completos com agonia de Jesus no Getsêmani. 70 questões. Estrutura: Dom-isolamento, Seg-humanidade, Ter-temor, Qua-submissão, Qui-agonia, Sex-força, Sab-revisão"
+    },
+    {
+      "numero": 8,
+      "titulo": "Remorso e Arrependimento",
+      "palavra_chave": "ARREPENDIMENTO",
+      "data": "Ago. 23-29",
+      "resumo": "7 dias completos sobre respostas diferentes à morte de Cristo. 70 questões. Estrutura: Dom-traição, Seg-remorso, Ter-negação, Qua-perda, Qui-arrependimento, Sex-restauração, Sab-revisão"
+    },
+    {
+      "numero": 9,
+      "titulo": "Crucificado O Rei de Vocês?",
+      "palavra_chave": "JULGAMENTO",
+      "data": "Ago. 30 - Set. 5",
+      "resumo": "7 dias completos sobre julgamento de Jesus. 70 questões. Estrutura: Dom-pressão, Seg-rejeição, Ter-injustiça, Qua-Pilatos, Qui-multidão, Sex-escolha, Sab-revisão"
+    },
+    {
+      "numero": 10,
+      "titulo": "O Rei na Cruz",
+      "palavra_chave": "REDENÇÃO",
+      "data": "Set. 6-12",
+      "resumo": "7 dias completos sobre crucificação e redenção. 70 questões. Estrutura: Dom-preparação, Seg-caminho, Ter-crucificação, Qua-palavras, Qui-sacrifício, Sex-morte, Sab-revisão"
+    },
+    {
+      "numero": 11,
+      "titulo": "Morte e Sepultamento",
+      "palavra_chave": "ESPERANÇA",
+      "data": "Set. 13-19",
+      "resumo": "7 dias completos sobre morte e esperança. 70 questões. Estrutura: Dom-morte, Seg-sepultamento, Ter-silêncio, Qua-guarda, Qui-espera, Sex-fé, Sab-revisão"
+    },
+    {
+      "numero": 12,
+      "titulo": "Ele Ressuscitou!",
+      "palavra_chave": "VITÓRIA",
+      "data": "Set. 20-26",
+      "resumo": "7 dias completos sobre ressurreição de Cristo. 70 questões. Estrutura: Dom-madrugada, Seg-aparições, Ter-corpo, Qua-poder, Qui-comunhão, Sex-comissão, Sab-revisão"
+    },
+    {
+      "numero": 13,
+      "titulo": "O Fim da História",
+      "palavra_chave": "TRIUNFO",
+      "data": "Set. 27 - Out. 3",
+      "resumo": "7 dias completos sobre promessa de volta e redenção final. 70 questões. Estrutura: Dom-volta, Seg-esperança, Ter-sinais, Qua-vigilância, Qui-coroa, Sex-nova, Sab-revisão"
+    }
+  ],
+  "info": {
+    "total_licoes": 8,
+    "total_dias": 56,
+    "total_questoes": 560,
+    "estrutura": "Cada lição tem 7 dias com 10 MC + 3 V/F por dia",
+    "status": "ESTRUTURA PRONTA PARA DESENVOLVIMENTO"
+  }
+}

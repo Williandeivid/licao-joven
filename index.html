@@ -7,9 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- Firebase SDK v9+ (compat version para compatibilidade com código global) -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-compat/app.js" onload="console.log('✓ Firebase app.js carregado')" onerror="console.error('❌ Erro ao carregar firebase app.js')"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-compat/auth.js" onload="console.log('✓ Firebase auth.js carregado')" onerror="console.error('❌ Erro ao carregar firebase auth.js')"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-compat/firestore.js" onload="console.log('✓ Firebase firestore.js carregado')" onerror="console.error('❌ Erro ao carregar firebase firestore.js')"></script>
+<!-- Firebase removido: Cloudflare Pages bloqueia scripts externos. Usando localStorage para salvar dados. -->
 <style>
   :root{
     --void:#171335; --void-2:#241f52;
@@ -4928,239 +4926,20 @@ function generateRadialMindMap(lessonId) {
 }
 
 // ============ INIT ============
-// ===== FIREBASE INITIALIZATION =====
-const firebaseConfig = {
-  apiKey: "AIzaSyDxvv4-WnBzc48hv5qCjbiFZb3ZuLcI_JI",
-  authDomain: "licaojovem-iasd.firebaseapp.com",
-  projectId: "licaojovem-iasd",
-  storageBucket: "licaojovem-iasd.firebasestorage.app",
-  messagingSenderId: "982985225523",
-  appId: "1:982985225523:web:ccef39de2762d7e9c53a46",
-  measurementId: "G-6DD8Y3814Y"
-};
-
-let fb = null;
-let currentUser = null;
-
-// Initialize Firebase
-console.log('Firebase disponível?', typeof firebase !== 'undefined');
-if (typeof firebase !== 'undefined') {
-  try {
-    firebase.initializeApp(firebaseConfig);
-    fb = { auth: firebase.auth(), firestore: firebase.firestore() };
-    console.log('✓ Firebase inicializado com sucesso');
-
-    // Listen to auth state changes
-    fb.auth.onAuthStateChanged(async (user) => {
-      currentUser = user;
-      updateAuthUI();
-      if (user) {
-        await syncUserDataFromFirebase();
-      }
-    });
-  } catch(e) {
-    console.error('❌ Erro ao inicializar Firebase:', e);
-  }
-} else {
-  console.error('❌ Firebase não disponível - scripts não carregaram');
-}
+// Firebase removido: Cloudflare Pages bloqueia scripts externos do CDN
+// Usando localStorage para salvar dados localmente
+console.log('✓ Usando localStorage para salvar progresso localmente');
 
 async function loginWithGoogle() {
-  if (!fb) { alert('Firebase não está disponível. Para usar o login, acesse em um navegador que permita scripts externos.'); return; }
-  try {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const result = await fb.auth.signInWithPopup(provider);
-    currentUser = result.user;
-    await saveUserToFirebase(currentUser);
-    updateAuthUI();
-    alert('Login bem-sucedido! Bem-vindo, ' + currentUser.displayName);
-  } catch(e) {
-    console.error('Login erro:', e.code, e.message);
-    if(e.code === 'auth/unauthorized-domain'){
-      alert('Este endereço (' + window.location.hostname + ') ainda não foi autorizado pro login do Google.\n\nPra corrigir: acesse o Firebase Console → Authentication → Settings → Authorized domains, e adicione "' + window.location.hostname + '" na lista.');
-    } else if(e.code === 'auth/popup-blocked'){
-      alert('O navegador bloqueou a janela de login. Tente permitir pop-ups pra este site, ou tente novamente — em alguns celulares é preciso tocar direto no botão (sem delay) pra não ser bloqueado.');
-    } else if(e.code === 'auth/popup-closed-by-user' || e.code === 'auth/cancelled-popup-request'){
-      // Usuário fechou a janela de propósito — não precisa mostrar erro nenhum
-    } else if(e.code === 'auth/operation-not-supported-in-this-environment'){
-      alert('O login do Google não funciona nesse tipo de janela (ex: navegador embutido de outro app, ou arquivo aberto localmente). Abra o link direto no Chrome/Safari do celular.');
-    } else {
-      alert('Erro ao fazer login (' + (e.code||'desconhecido') + '): ' + e.message);
-    }
-  }
+  alert('Login com Google desabilitado (Firebase não suportado no Cloudflare Pages).\n\nSeus dados são salvos localmente no navegador.');
 }
 
-async function manualSync(){
-  const btn = document.getElementById('sync-btn');
-  if(btn){ btn.disabled = true; btn.textContent = '🔄 Sincronizando...'; }
-  const ok = await pushLocalDataToFirebase();
-  if(btn){ btn.disabled = false; btn.textContent = '🔄 Sincronizar agora'; }
-  alert(ok ? 'Dados enviados pra nuvem com sucesso!' : 'Não consegui sincronizar — verifique sua conexão.');
-}
 
-async function logout() {
-  if (!fb) return;
-  try {
-    await fb.auth.signOut();
-    currentUser = null;
-    updateAuthUI();
-    alert('Desconectado com sucesso!');
-  } catch(e) {
-    console.error('Logout erro:', e);
-  }
-}
-
-// Pega TODOS os dados salvos localmente (progresso, quiz, marcações, metas, etc.)
-// usando a função list() do armazenamento — não precisa listar cada chave à mão.
-async function gatherAllLocalData(){
-  const bundle = {};
-  try{
-    const listing = await window.storage.list('', false);
-    for(const key of (listing.keys || [])){
-      try{
-        const res = await window.storage.get(key, false);
-        if(res && res.value !== undefined) bundle[key] = res.value;
-      }catch(e){ /* chave sumiu entre o list e o get, ignora */ }
-    }
-  }catch(e){ console.error('Erro ao juntar dados locais:', e); }
-  return bundle;
-}
-
-// Aplica de volta localmente um pacote de dados vindo da nuvem, e recarrega
-// os caches em memória + a tela atual, pra tudo refletir na hora.
-async function applyRemoteDataBundle(bundle){
-  if(!bundle) return;
-  for(const key in bundle){
-    try{ await window.storage.set(key, bundle[key], false); }catch(e){}
-  }
-  // Zerar os caches em memória pra forçar recarregar tudo do storage recém-atualizado
-  // progressCache e planProgressCache são const — limpamos o conteúdo, não reatribuímos
-  Object.keys(progressCache).forEach(k => delete progressCache[k]);
-  bibleHighlights = null;
-  dailyTimeLog = null;
-  bibleActivityLog = null;
-  Object.keys(planProgressCache).forEach(k => delete planProgressCache[k]);
-  userGoals = null;
-  await preloadAllProgress();
-  await loadBibleHighlights();
-  await loadDailyTimeLog();
-  await loadBibleActivityLog();
-  if(typeof loadUserGoals === 'function') await loadUserGoals();
-  if(typeof goHome === 'function') await goHome();
-}
-
-async function saveUserToFirebase(user) {
-  if (!fb || !user) return;
-  try {
-    await fb.firestore.collection('users').doc(user.uid).set({
-      name: user.displayName || 'Usuário',
-      email: user.email,
-      photoURL: user.photoURL,
-      lastLogin: new Date(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
-  } catch(e) {
-    console.error('Erro ao salvar user:', e);
-  }
-}
-
-// Envia TODOS os dados do aparelho pra nuvem — usado no login, no botão manual,
-// e pode ser chamado depois de ações importantes.
-async function pushLocalDataToFirebase(){
-  if(!fb || !currentUser) return false;
-  try{
-    const bundle = await gatherAllLocalData();
-    await fb.firestore.collection('users').doc(currentUser.uid).set({
-      appData: bundle,
-      lastSync: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
-    lastSyncTimestamp = new Date();
-    updateAuthUI();
-    return true;
-  }catch(e){
-    console.error('Erro ao enviar dados pra nuvem:', e);
-    return false;
-  }
-}
-
-// Busca os dados da nuvem e aplica no aparelho — usado no botão de restaurar.
-async function pullRemoteDataToLocal(){
-  if(!fb || !currentUser) return false;
-  try{
-    const doc = await fb.firestore.collection('users').doc(currentUser.uid).get();
-    if(doc.exists && doc.data().appData){
-      await applyRemoteDataBundle(doc.data().appData);
-      lastSyncTimestamp = new Date();
-      updateAuthUI();
-      return true;
-    }
-    return false;
-  }catch(e){
-    console.error('Erro ao buscar dados da nuvem:', e);
-    return false;
-  }
-}
-
-let lastSyncTimestamp = null;
-
-async function syncUserDataFromFirebase() {
-  if (!fb || !currentUser) return;
-  try {
-    const doc = await fb.firestore.collection('users').doc(currentUser.uid).get();
-    if (doc.exists && doc.data().appData) {
-      const remoteSync = doc.data().lastSync;
-      const localHasData = (await window.storage.list('', false)).keys.length > 0;
-      if(!localHasData){
-        // Aparelho novo/vazio: restaura da nuvem automaticamente
-        await applyRemoteDataBundle(doc.data().appData);
-        lastSyncTimestamp = new Date();
-      } else {
-        // Já tem dados aqui: pergunta antes de sobrescrever
-        const remoteDate = remoteSync && remoteSync.toDate ? remoteSync.toDate().toLocaleString('pt-BR') : 'data desconhecida';
-        const wantsRestore = confirm('Encontramos dados salvos na nuvem (de ' + remoteDate + ').\n\nUsar os dados da nuvem agora? Isso substitui o que já está neste aparelho.\n\n(Cancelar mantém os dados deste aparelho e envia eles pra nuvem)');
-        if(wantsRestore){
-          await applyRemoteDataBundle(doc.data().appData);
-        } else {
-          await pushLocalDataToFirebase();
-        }
-        lastSyncTimestamp = new Date();
-      }
-    } else {
-      // Ainda não existe nada salvo na nuvem pra esse usuário: envia o que já existe aqui
-      await pushLocalDataToFirebase();
-    }
-  } catch(e) {
-    console.error('Erro ao sincronizar dados:', e);
-  }
-}
+// Firebase removido — usando localStorage
 
 function updateAuthUI() {
-  const contaName = document.getElementById('conta-name');
   const loginBtn = document.getElementById('login-btn');
-  const logoutBtn = document.getElementById('logout-btn');
-  const syncBtn = document.getElementById('sync-btn');
-  const userInfo = document.getElementById('user-info');
-
-  if (currentUser) {
-    if (contaName) contaName.value = currentUser.displayName || 'Usuário';
-    if (loginBtn) loginBtn.style.display = 'none';
-    if (logoutBtn) logoutBtn.style.display = 'flex';
-    if (syncBtn) syncBtn.style.display = 'flex';
-    if (userInfo) {
-      userInfo.style.display = 'block';
-      userInfo.textContent = lastSyncTimestamp
-        ? '✅ Última sincronização: ' + lastSyncTimestamp.toLocaleString('pt-BR')
-        : '⏳ Ainda não sincronizado nesta sessão';
-    }
-    console.log('✅ Usuário logado:', currentUser.displayName, currentUser.email);
-  } else {
-    if (contaName) contaName.value = '';
-    if (loginBtn) loginBtn.style.display = 'flex';
-    if (logoutBtn) logoutBtn.style.display = 'none';
-    if (syncBtn) syncBtn.style.display = 'none';
-    if (userInfo) userInfo.style.display = 'none';
-    console.log('❌ Usuário deslogado');
-  }
+  if (loginBtn) loginBtn.style.display = 'flex';
 }
 
 // ===== OFFICIAL SOURCE TABS CACHE & FUNCTIONS =====

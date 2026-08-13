@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lições Jovens — Resgate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #171335;
+      --void-2: #241f52;
+      --bg: #f7f5ff;
+      --card: #ffffff;
+      --ink: #1c1735;
+      --ink-soft: #5a5480;
+      --violet: #6c4ce0;
+      --violet-light: #c9bbff;
+      --pink: #ff5d8f;
+      --lime: #a6e22e;
+      --lime-dark: #4d7a12;
+      --sun: #ffc857;
+      --teal: #2fd6c8;
+      --coral: #ff8a5c;
+      --red: #ef4763;
+      --icon-color: #5a5480;
+      --day1: #6c4ce0; --day2: #ff5d8f; --day3: #2fd6c8; --day4: #ffc857; --day5: #ff8a5c; --day6: #8e6cff; --day7: #22b8a6;
+    }
+
+    body.dark-mode {
+      --bg: #0f0a1a;
+      --card: #1a1530;
+      --ink: #e8e4f5;
+      --ink-soft: #a89ee0;
+      --icon-color: #e8e4f5;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      padding-bottom: 80px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(108, 76, 224, 0.10), transparent 40%),
+        radial-gradient(circle at 92% 20%, rgba(255, 93, 143, 0.10), transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(47, 214, 200, 0.08), transparent 45%);
+    }
+
+    body.dark-mode::before {
+      background:
+        radial-gradient(circle at 8% 12%, rgba(108, 76, 224, 0.05), transparent 40%),
+        radial-gradient(circle at 92% 20%, rgba(255, 93, 143, 0.05), transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(47, 214, 200, 0.03), transparent 45%);
+    }
+
+    .page { display: none; position: relative; z-index: 1; }
+    .page.active { display: block; }
+
+    /* ===== HERO ===== */
+    header.hero {
+      background: linear-gradient(135deg, var(--void) 0%, var(--void-2) 45%, #4a2f9e 100%);
+      color: #fff;
+      padding: 48px 24px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 93, 143, 0.55), transparent 70%);
+      top: -140px;
+      right: -100px;
+      filter: blur(10px);
+    }
+
+    header.hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(47, 214, 200, 0.4), transparent 70%);
+      bottom: -120px;
+      left: -80px;
+      filter: blur(10px);
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 12.5px;
+      color: var(--lime);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      background: rgba(166, 226, 46, 0.12);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    h1.title {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+      margin: 0 0 10px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #fff 0%, var(--violet-light) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #c9c4f0;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .keyword-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, var(--violet), var(--pink));
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      box-shadow: 0 8px 24px -8px rgba(255, 93, 143, 0.6);
+      margin-bottom: 28px;
+    }
+
+    .keyword-seal b {
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    .tirinha-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .tirinha-wrap img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+      border: 3px solid rgba(255, 255, 255, 0.15);
+      background: #e0e0e0;
+      min-height: 200px;
+    }
+
+    /* ===== DASHBOARD ===== */
+    .dashboard {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(247, 245, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #e8e2ff;
+      padding: 14px 16px 12px;
+    }
+
+    body.dark-mode .dashboard {
+      background: rgba(15, 10, 26, 0.9);
+      border-bottom-color: #2a2245;
+    }
+
+    .dash-inner { max-width: 760px; margin: 0 auto; }
+
+    .pills {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 10px 14px;
+      border-radius: 16px;
+      border: 2px solid var(--violet);
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      color: white;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-width: 72px;
+      box-shadow: 0 4px 12px -4px rgba(108, 76, 224, 0.4);
+    }
+
+    body.dark-mode .pill {
+      background: #1a1530;
+      border-color: #2a2245;
+    }
+
+    .pill:hover { border-color: var(--violet); transform: translateY(-2px); box-shadow: 0 6px 14px -6px rgba(108, 76, 224, 0.4); }
+    .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #dcd6f7; }
+    .pill.done .dot { background: var(--lime); }
+    .pill.done { border-color: var(--lime); background: #f3ffe0; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 48px 20px 100px; position: relative; z-index: 1; }
+
+    .day {
+      background: var(--card);
+      border-radius: 26px;
+      padding: 40px 32px 36px;
+      margin-bottom: 56px;
+      position: relative;
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 24px 48px -30px rgba(28, 23, 53, 0.35);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark-mode .day {
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.2), 0 24px 48px -30px rgba(0, 0, 0, 0.6);
+    }
+
+    .day::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 6px;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .day:nth-of-type(1)::after { background: var(--day1); }
+    .day:nth-of-type(2)::after { background: var(--day2); }
+    .day:nth-of-type(3)::after { background: var(--day3); }
+    .day:nth-of-type(4)::after { background: var(--day4); }
+    .day:nth-of-type(5)::after { background: var(--day5); }
+    .day:nth-of-type(6)::after { background: var(--day6); }
+    .day:nth-of-type(7)::after { background: var(--day7); }
+
+    .day h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin: 0 0 18px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .day p { margin: 0 0 16px; color: var(--ink); }
+
+    .day-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--violet);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    /* ===== GRID LIÇÕES ===== */
+    .grid-licoes {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 48px 20px;
+    }
+
+    .licao-card {
+      background: var(--card);
+      border-radius: 26px;
+      padding: 32px 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 24px 48px -30px rgba(28, 23, 53, 0.35);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark-mode .licao-card {
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.2), 0 24px 48px -30px rgba(0, 0, 0, 0.6);
+    }
+
+    .licao-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--violet), var(--pink));
+    }
+
+    .licao-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--violet);
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 32px 60px -20px rgba(108, 76, 224, 0.4);
+    }
+
+    .licao-numero {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--violet);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .licao-titulo {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin: 12px 0 16px;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .licao-data {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-soft);
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== BÍBLIA ===== */
+    .bible-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      color: var(--violet);
+      margin-top: 32px;
+      font-size: 1.8rem;
+    }
+
+    .bible-search input {
+      width: 100%;
+      padding: 14px 20px;
+      border: 2px solid #e8e2ff;
+      border-radius: 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      margin-bottom: 32px;
+      transition: all 0.3s ease;
+      background: var(--card);
+      color: var(--ink);
+    }
+
+    body.dark-mode .bible-search input {
+      border-color: #2a2245;
+      background: #1a1530;
+    }
+
+    .bible-search input:focus {
+      outline: none;
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px rgba(108, 76, 224, 0.1);
+    }
+
+    .verse-result {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--violet);
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 12px 28px -10px rgba(28, 23, 53, 0.2);
+      transition: all 0.3s;
+    }
+
+    body.dark-mode .verse-result {
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.2), 0 12px 28px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .verse-result h3 {
+      font-family: 'JetBrains Mono', monospace;
+      margin: 0 0 12px;
+      color: var(--violet);
+      font-weight: 700;
+    }
+
+    .verse-result p {
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* ===== CONFIG ===== */
+    .settings-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .settings-group {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 12px 28px -10px rgba(28, 23, 53, 0.2);
+      transition: all 0.3s;
+    }
+
+    body.dark-mode .settings-group {
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.2), 0 12px 28px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .settings-group h3 {
+      font-family: 'Unbounded', sans-serif;
+      margin-top: 0;
+      color: var(--violet);
+    }
+
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding: 12px 0;
+    }
+
+    .toggle-switch {
+      width: 50px;
+      height: 28px;
+      background: #e8e2ff;
+      border-radius: 100px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-mode .toggle-switch {
+      background: #2a2245;
+    }
+
+    .toggle-switch.on { background: var(--lime); }
+    .toggle-switch::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s ease;
+    }
+
+    .toggle-switch.on::after { left: 24px; }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 2px solid #e8e2ff;
+      display: flex;
+      justify-content: space-around;
+      z-index: 100;
+      padding: 8px 0;
+      transition: all 0.3s;
+    }
+
+    body.dark-mode .bottom-nav {
+      background: rgba(15, 10, 26, 0.95);
+      border-top-color: #2a2245;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 12px 0;
+      cursor: pointer;
+      color: var(--icon-color);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+      border-top: 3px solid transparent;
+    }
+
+    .nav-item:hover { color: var(--violet); background: rgba(108, 76, 224, 0.05); }
+
+    body.dark-mode .nav-item:hover { background: rgba(108, 76, 224, 0.15); }
+
+    .nav-item.active { color: var(--violet); border-top-color: var(--violet); background: rgba(108, 76, 224, 0.08); }
+
+    body.dark-mode .nav-item.active { background: rgba(108, 76, 224, 0.2); }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .loading { color: var(--ink-soft); font-style: italic; }
+    .error { color: var(--red); }
+  </style>
+</head>
+<body>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <header class="hero">
+    <div class="eyebrow">Lição Jovens</div>
+    <h1 class="title" id="home-titulo">Resgate</h1>
+    <p class="subtitle">As cenas finais da vida de Cristo</p>
+    <div class="keyword-seal">Palavra-chave: <b id="home-keyword">DECISÃO</b></div>
+    <div class="tirinha-wrap">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect fill='%23f0f0f0' width='640' height='360'/%3E%3Ctext x='320' y='180' text-anchor='middle' dy='.3em' fill='%23888' font-size='24' font-family='sans-serif'%3ETirinha da lição%3C/text%3E%3C/svg%3E" alt="Tirinha">
+    </div>
+  </header>
+
+  <nav class="dashboard">
+    <div class="dash-inner">
+      <div class="pills" id="pills-container"></div>
+    </div>
+  </nav>
+
+  <main id="home-content"></main>
+</div>
+
+<!-- LIÇÕES -->
+<div class="page" id="page-licoes">
+  <main>
+    <div style="padding: 32px 20px 0; text-align: center;">
+      <h2 style="font-family: 'Unbounded', sans-serif; font-size: 2rem; color: var(--violet);">Resgate</h2>
+      <p style="color: var(--ink-soft);">As cenas finais da vida de Cristo</p>
+    </div>
+    <div class="grid-licoes" id="grid-licoes"></div>
+  </main>
+</div>
+
+<!-- BÍBLIA -->
+<div class="page" id="page-biblia">
+  <main class="bible-container">
+    <h2 class="section-title">Buscar Versículos</h2>
+    <div class="bible-search">
+      <input type="text" id="bible-input" placeholder="Ex: João 3:16 ou Salmos 23" onkeypress="buscarVerso(event)">
+    </div>
+    <div id="bible-results"></div>
+  </main>
+</div>
+
+<!-- CONFIG -->
+<div class="page" id="page-config">
+  <main class="settings-container">
+    <h2 class="section-title">Configurações</h2>
+    <div class="settings-group">
+      <h3>Tema</h3>
+      <div class="setting-item">
+        <label>Modo escuro</label>
+        <div class="toggle-switch" onclick="toggleDarkMode(this)"></div>
+      </div>
+    </div>
+    <div class="settings-group">
+      <h3>Notificações</h3>
+      <div class="setting-item">
+        <label>Lembrete da lição</label>
+        <div class="toggle-switch on" onclick="toggleNotification(this)"></div>
+      </div>
+    </div>
+    <div class="settings-group">
+      <h3>Sobre</h3>
+      <p style="margin: 0; color: var(--ink-soft); font-size: 0.9rem;">
+        Lições da Escola Sabatina Jovem<br>
+        Trimestre: Resgate (3º 2026)<br>
+        Versão 3.0 - Completo com API
+      </p>
+    </div>
+  </main>
+</div>
+
+<!-- NAV -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="mudarAbas('home')" id="nav-home">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+    <span>Home</span>
+  </div>
+  <div class="nav-item" onclick="mudarAbas('licoes')" id="nav-licoes">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+    <span>Lições</span>
+  </div>
+  <div class="nav-item" onclick="mudarAbas('biblia')" id="nav-biblia">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+    <span>Bíblia</span>
+  </div>
+  <div class="nav-item" onclick="mudarAbas('config')" id="nav-config">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"></circle><path d="M12 1v6m0 6v6"></path><path d="M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24"></path><path d="M1 12h6m6 0h6"></path><path d="M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"></path></svg></div>
+    <span>Config</span>
+  </div>
+</nav>
+
+<script>
+  const BIBLE_API = {
+    url: "https://api.scripture.api.bible/v1",
+    key: "e2f2ExE4WrcRB9VF2viwV",
+    bibleId: "35b94e98b2e3a01a-01"
+  };
+
+  const bookIdMap = {
+    "gn": "GEN", "ex": "EXO", "lv": "LEV", "nm": "NUM", "dt": "DEU",
+    "js": "JOS", "jz": "JDG", "rt": "RUT", "1sm": "1SA", "2sm": "2SA",
+    "1rs": "1KI", "2rs": "2KI", "1cr": "1CH", "2cr": "2CH", "ed": "EZR",
+    "ne": "NEH", "et": "EST", "jó": "JOB", "jo": "JOB", "sl": "PSA",
+    "pv": "PRO", "ec": "ECC", "ct": "SNG", "is": "ISA", "jr": "JER",
+    "lm": "LAM", "ez": "EZK", "dn": "DAN", "os": "HOS", "jl": "JOL",
+    "am": "AMO", "ob": "OBA", "jn": "JON", "mq": "MIC", "na": "NAM",
+    "hab": "HAB", "sf": "ZEP", "ag": "HAG", "zc": "ZEC", "ml": "MAL",
+    "mt": "MAT", "mc": "MRK", "lc": "LUK", "jo": "JHN", "at": "ACT",
+    "rm": "ROM", "1co": "1CO", "2co": "2CO", "gl": "GAL", "ef": "EPH",
+    "fp": "PHP", "cl": "COL", "1ts": "1TH", "2ts": "2TH", "1tm": "1TI",
+    "2tm": "2TI", "tt": "TIT", "fm": "PHM", "hb": "HEB", "tg": "JAS",
+    "1pe": "1PE", "2pe": "2PE", "1jo": "1JN", "2jo": "2JN", "3jo": "3JN",
+    "jd": "JUD", "ap": "REV"
+  };
+
+  const licoesConteudo = {
+    1: {
+      titulo: "Confronto decisivo",
+      palavra_chave: "DECISÃO",
+      data: "Jun. 28 - Jul. 04",
+      dias: [
+        { titulo: "O Sanedrim se reúne", conteudo: "Jesus foi levado diante do conselho judaico. Há uma decisão sendo tomada sobre quem realmente é Jesus." },
+        { titulo: "Acusações falsas", conteudo: "Testemunhas falsas tentam condenar Jesus, mas suas acusações não se mantêm. A verdade é confrontada com mentiras." },
+        { titulo: "Pergunta decisiva", conteudo: "Jesus é perguntado: 'Você é o Filho de Deus?' Sua resposta determina o rumo de toda a história." },
+        { titulo: "Negação de Pedro", conteudo: "Enquanto Jesus enfrenta o tribunal, Pedro o nega três vezes. Até mesmo seus discípulos falham no momento crucial." },
+        { titulo: "Condenação injusta", conteudo: "O tribunal condena Jesus por blasfêmia, mas sem autoridade legal para executá-lo. Levam-no a Pilatos." },
+        { titulo: "Diante de Pilatos", conteudo: "Um juiz pagão analisa as acusações. Pilatos encontra Jesus inocente, mas cede à pressão da multidão." },
+        { titulo: "A decisão final", conteudo: "Pilatos lava as mãos, simbolizando sua negação de responsabilidade. Jesus é condenado à morte de cruz." }
+      ]
+    },
+    2: {
+      titulo: "A última ceia",
+      palavra_chave: "COMUNHÃO",
+      data: "Jul. 05 - Jul. 11",
+      dias: [
+        { titulo: "Preparação solene", conteudo: "Jesus prepara-se com seus discípulos para a última celebração da Páscoa. A atmosfera é carregada de significado." },
+        { titulo: "Lavar os pés", conteudo: "Jesus lava os pés de seus discípulos, demonstrando humildade e serviço. Uma lição de verdadeira grandeza." },
+        { titulo: "O traidor revelado", conteudo: "Jesus anuncia que um de seus discípulos o trairá. A tensão aumenta na sala enquanto cada um se questiona." },
+        { titulo: "O pão partido", conteudo: "Jesus toma o pão e o parte, explicando que representa seu corpo entregue. Um memorial da redenção." },
+        { titulo: "O cálice da aliança", conteudo: "Jesus oferece o cálice, estabelecendo uma nova aliança. Seu sangue selará a reconciliação da humanidade com Deus." },
+        { titulo: "O mandamento novo", conteudo: "Jesus ordena: amem-se uns aos outros como eu os amei. O amor é a marca da discipulado verdadeiro." },
+        { titulo: "Consolação antes da partida", conteudo: "Jesus consola seus discípulos sobre sua partida, prometendo o Espírito Santo como consolador e guia." }
+      ]
+    },
+    3: {
+      titulo: "Não é Adeus",
+      palavra_chave: "GARANTIA",
+      data: "Jul. 12 - Jul. 18",
+      dias: [
+        { titulo: "Promessa de volta", conteudo: "Jesus promete voltar para buscar seus discípulos. Essa não é uma despedida final, mas um até logo." },
+        { titulo: "A casa do Pai", conteudo: "Jesus fala sobre a casa do Pai com muitos aposentos. Há lugar preparado para todos os que o seguem." },
+        { titulo: "Caminho, verdade e vida", conteudo: "Jesus se apresenta como o caminho para o Pai. Através dele, somos restaurados à comunhão com Deus." },
+        { titulo: "Obras maiores virão", conteudo: "Jesus afirma que os discípulos farão obras ainda maiores. O poder de Deus continuará através deles." },
+        { titulo: "Tudo pedirão em meu nome", conteudo: "Jesus promete atender a oração dos que pedem em seu nome. A oração é o acesso ao poder divino." },
+        { titulo: "Outro Consolador", conteudo: "O Espírito Santo é prometido como Consolador e Advogado. Ele guiará, ensinará e lembrará de tudo." },
+        { titulo: "Paz deixo com vocês", conteudo: "Jesus oferece sua paz, não como o mundo oferece, mas uma paz que transcende compreensão." }
+      ]
+    },
+    4: {
+      titulo: "Permaneçam em Mim",
+      palavra_chave: "DEPENDÊNCIA",
+      data: "Jul. 19 - Jul. 25",
+      dias: [
+        { titulo: "A videira verdadeira", conteudo: "Jesus é a videira, e nós somos os ramos. Sem permanecer nele, não podemos produzir fruto algum." },
+        { titulo: "Poda para frutificar", conteudo: "O Pai poda os ramos para que deem mais fruto. A dor e o sofrimento servem ao propósito de nos refinar." },
+        { titulo: "Permanecer no amor", conteudo: "Manter-se em Cristo significa permanecer em seu amor. Obediência é a expressão prática desse amor." },
+        { titulo: "Fruto abundante", conteudo: "Quando permanecemos em Jesus, produzimofruto abundante que permanece. Nossas obras deixarão legado eterno." },
+        { titulo: "Escolhidos e postos", conteudo: "Somos escolhidos e postos para dar fruto. Nosso propósito é levar muitos para conhecer a Cristo." },
+        { titulo: "Guardados pelo Pai", conteudo: "Quem permanece em Cristo é guardado pelo Pai. Nada nos pode separar do amor divino." },
+        { titulo: "Alegria completa", conteudo: "Jesus quer que nossa alegria seja completa. A permanência em Cristo é o segredo da verdadeira felicidade." }
+      ]
+    },
+    5: {
+      titulo: "Os últimos ensinhos",
+      palavra_chave: "LEGADO",
+      data: "Jul. 26 - Ago. 01",
+      dias: [
+        { titulo: "Perseguição virá", conteudo: "Jesus avisa que seremos odiados por causa de seu nome. Mas isso não significa que está esquecido de nós." },
+        { titulo: "O Espírito que convence", conteudo: "O Espírito Santo convence o mundo do pecado, da justiça e do julgamento. Ele trabalha para trazer salvação." },
+        { titulo: "Sete milagres de João", conteudo: "Os sete milagres de Jesus em João demonstram sua divindade e poder sobre toda criação." },
+        { titulo: "Glória antes dos tempos", conteudo: "Jesus existia com o Pai desde antes da criação. Sua glória é eterna e incomparável." },
+        { titulo: "União com o Pai", conteudo: "Jesus ora para que seus discípulos sejam um, assim como ele é um com o Pai. Unidade é testemunho do evangelho." },
+        { titulo: "Conhecer o Pai", conteudo: "Jesus revela que vida eterna é conhecer o único Deus verdadeiro. Relacionamento pessoal é essencial." },
+        { titulo: "Consumado está", conteudo: "Jesus completou a obra que o Pai lhe deu. Sua morte e ressurreição consumam o plano da redenção." }
+      ]
+    },
+    6: {
+      titulo: "A oração de Cristo",
+      palavra_chave: "INTERCESSÃO",
+      data: "Ago. 02 - Ago. 08",
+      dias: [
+        { titulo: "Glorifique-me", conteudo: "Jesus pede ao Pai que o glorifique, pois ele glorificou o Pai na terra. A glória de Deus é o propósito supremo." },
+        { titulo: "Vida eterna", conteudo: "Vida eterna é conhecer a Deus e a Jesus. Não é meramente duração, mas qualidade de relacionamento." },
+        { titulo: "Missionários do evangelho", conteudo: "Jesus envia seus discípulos ao mundo, assim como o Pai o enviou. Somos embaixadores de Cristo." },
+        { titulo: "Santificados pela verdade", conteudo: "A Palavra de Deus nos santifica. A verdade nos liberta e nos transforma em instrumento útil ao Pai." },
+        { titulo: "Unidade entre crentes", conteudo: "Jesus ora para que todos os que creem sejam um. A unidade é testemunho poderoso da verdade do evangelho." },
+        { titulo: "Estar onde ele está", conteudo: "Jesus quer que seus seguidores estejam onde ele está. O céu é a morada de todos os redimidos." },
+        { titulo: "Amor do Pai revelado", conteudo: "Jesus revela que o Pai o ama e que esse amor se estende a todos os que creem nele." }
+      ]
+    },
+    7: {
+      titulo: "O jardim do Getsêmani",
+      palavra_chave: "SUBMISSÃO",
+      data: "Ago. 09 - Ago. 15",
+      dias: [
+        { titulo: "Agonia do espírito", conteudo: "Jesus experimenta tristeza profunda ao contemplar a separação que virá. Ele se oferece completamente ao Pai." },
+        { titulo: "Três vezes em oração", conteudo: "Jesus ora três vezes: 'Pai, se possível, afasta este cálice de mim; mas que não seja feita minha vontade, mas a tua'." },
+        { titulo: "Suor como gotas de sangue", conteudo: "A angústia de Jesus é tão profunda que seu suor se torna como sangue. A luta é espiritual e intensa." },
+        { titulo: "Fortalecido por um anjo", conteudo: "Um anjo aparece para fortalecer Jesus. Ele não está sozinho em seu sofrimento e obediência." },
+        { titulo: "Os discípulos adormecidos", conteudo: "Os discípulos não conseguem vigiar uma hora com Jesus. Somos fracos, mas ele é forte por nós." },
+        { titulo: "A vinda de Judas", conteudo: "Judas chega com soldados para prender Jesus. O traidor o identifica com um beijo, a maior ironia de amor falso." },
+        { titulo: "Consumado está", conteudo: "Jesus se entrega voluntariamente. Sua morte não é derrota, mas vitória sobre o pecado e a morte." }
+      ]
+    },
+    8: {
+      titulo: "Remorso e Arrependimento",
+      palavra_chave: "ARREPENDIMENTO",
+      data: "Ago. 16 - Ago. 22",
+      dias: [
+        { titulo: "Remorso de Judas", conteudo: "Judas, vendo que Jesus foi condenado, é tomado de remorso. Mas tarde demais para desfazer a traição." },
+        { titulo: "Diferença entre remorso e arrependimento", conteudo: "O remorso de Judas é apenas tristeza pelos resultados. O arrependimento verdadeiro é mudança de direção." },
+        { titulo: "Tentativa de devolução", conteudo: "Judas tenta devolver os trinta moedas. Mas o dinheiro não pode comprar redenção ou perdão." },
+        { titulo: "Suicídio de Judas", conteudo: "Judas se enforca, tornando-se símbolo do desespero que vem do remorso sem arrependimento verdadeiro." },
+        { titulo: "Preço do sangue", conteudo: "As trinta moedas são usadas para comprar o campo do oleiro, um lugar de enterro para estrangeiros." },
+        { titulo: "A sorte está lançada", conteudo: "Judas perdeu tudo por prata. Sua história é advertência sobre o preço da traição." },
+        { titulo: "Lições para hoje", conteudo: "O arrependimento verdadeiro significa confessar, abandonar o pecado e buscar reconciliação em Jesus." }
+      ]
+    },
+    9: {
+      titulo: "Crucificado O Rei de Vocês?",
+      palavra_chave: "JULGAMENTO",
+      data: "Ago. 23 - Ago. 29",
+      dias: [
+        { titulo: "Decisão de Pilatos", conteudo: "Pilatos tenta se livrar de Jesus oferecendo libertar um prisioneiro. A multidão escolhe Barrabás." },
+        { titulo: "Rei destituído", conteudo: "Quando perguntado 'Crucificado O Rei de Vocês?', respondem 'Não temos Rei senão César'. Rejeitam seu Messias." },
+        { titulo: "Escárnio dos soldados", conteudo: "Os soldados romanos vestem Jesus de púrpura e lhe põem uma coroa de espinhos, zombando de sua reivindicação." },
+        { titulo: "Caminho para o Gólgota", conteudo: "Jesus carrega sua cruz, mas tropeça. Simão de Cirene é forçado a ajudar, levando a cruz com Jesus." },
+        { titulo: "Mulheres choram", conteudo: "Mulheres na multidão choram por Jesus. Ele consola a elas, voltando-se para elas em seu caminho para a morte." },
+        { titulo: "Crucificação entre malfeitores", conteudo: "Jesus é crucificado entre dois ladrões. Ironicamente, o ladrão à direita crê nele e é prometido o paraíso." },
+        { titulo: "Roupas repartidas", conteudo: "Os soldados repartem as roupas de Jesus, cumprindo a profecia. Até na morte, ele é despojado de tudo." }
+      ]
+    },
+    10: {
+      titulo: "O Rei na Cruz",
+      palavra_chave: "VITÓRIA",
+      data: "Ago. 30 - Set. 05",
+      dias: [
+        { titulo: "A inscrição da cruz", conteudo: "Acima da cruz está escrito: 'Jesus de Nazaré, Rei dos Judeus'. Pilatos, sem querer, proclama a verdade." },
+        { titulo: "Oferecimento de bebida", conteudo: "Jesus recusa vinho misturado com mirra, querendo permanecer alerta e consciente até o fim." },
+        { titulo: "Escárnio dos transeuntes", conteudo: "A multidão passa insultando: 'Se é Filho de Deus, desça da cruz'. Mas Jesus não usa seu poder para se salvar." },
+        { titulo: "Meu Deus, por que me desamparaste?", conteudo: "Jesus experimenta o abandono total. Ele bebe o cálice amargo da separação de Deus pelo nosso pecado." },
+        { titulo: "Sede e vinagre", conteudo: "Jesus, na agonia da cruz, diz 'Tenho sede'. Um soldado oferece vinagre em uma esponja. Até isso cumpre profecia." },
+        { titulo: "Está consumado", conteudo: "Com essa proclamação, Jesus entrega o espírito. A redenção da humanidade é completada." },
+        { titulo: "Rasgão do véu", conteudo: "No momento da morte de Jesus, o véu do templo se rasga de cima a baixo. Acesso a Deus é aberto para todos." }
+      ]
+    },
+    11: {
+      titulo: "Morte e Sepultamento",
+      palavra_chave: "ESPERANÇA",
+      data: "Set. 06 - Set. 12",
+      dias: [
+        { titulo: "Lança no seu lado", conteudo: "Um soldado perfura o lado de Jesus com uma lança. Saem água e sangue, símbolos de purificação e redenção." },
+        { titulo: "Testemunha ocular", conteudo: "João testemunha esses eventos e dá seu testemunho. O que viu é a prova de que Jesus realmente morreu." },
+        { titulo: "Sepultamento honrado", conteudo: "José de Arimateia, membro do conselho, pede o corpo de Jesus. Jesus não é jogado em vala comum." },
+        { titulo: "Preparação para o sepultamento", conteudo: "Nicodemos traz especiarias aromáticas. O corpo é envolvido em linho fino, um sepultamento de honra." },
+        { titulo: "Sepulcro novo", conteudo: "Jesus é colocado em um sepulcro novo de rocha, onde ninguém havia sido enterrado antes. Uniqueness marcará sua ressurreição." },
+        { titulo: "Guarda do sepulcro", conteudo: "Os judeus pedem uma guarda para impedir o roubo do corpo. Ironicamente, tentam garantir algo que Deus já controlava." },
+        { titulo: "Espera pela ressurreição", conteudo: "No silêncio do sepulcro, a morte é derrotada. O terceiro dia trará vida e esperança a um mundo perdido." }
+      ]
+    },
+    12: {
+      titulo: "Ele Ressuscitou!",
+      palavra_chave: "RESSURREIÇÃO",
+      data: "Set. 13 - Set. 19",
+      dias: [
+        { titulo: "A pedra foi removida", conteudo: "No primeiro dia da semana, as mulheres encontram a pedra removida do sepulcro. O impossível aconteceu." },
+        { titulo: "Anjos anunciam", conteudo: "Anjos anunciam: 'Ele não está aqui, ressuscitou!' A morte foi vencida. O sepulcro está vazio." },
+        { titulo: "Jesus aparece a Maria", conteudo: "Maria Madalena vê Jesus ressurreto, mas primeiro o confunde com o jardineiro. A identidade é reconhecida no chamado de seu nome." },
+        { titulo: "Não me toque", conteudo: "Jesus diz a Maria: 'Não me toque, pois ainda não subi para meu Pai'. Há uma mudança na natureza de seu corpo." },
+        { titulo: "Aparições aos discípulos", conteudo: "Jesus aparece aos discípulos com portas fechadas. Demonstra que sua ressurreição é real, mas diferente da vida anterior." },
+        { titulo: "Paz seja convosco", conteudo: "Jesus oferece paz e mostra as mãos e o lado. Suas feridas são marcas de identificação e redenção." },
+        { titulo: "Crê e viverá", conteudo: "Quem crê em Jesus, ainda que morra, viverá. A ressurreição é promessa para todos os que seguem a Cristo." }
+      ]
+    },
+    13: {
+      titulo: "O Fim da História",
+      palavra_chave: "ETERNIDADE",
+      data: "Set. 20 - Set. 26",
+      dias: [
+        { titulo: "Última aparição em Jerusalém", conteudo: "Jesus aparece aos discípulos em Jerusalém e lhes dá o Espírito Santo. Eles são capacitados para a missão." },
+        { titulo: "Poder para testemunhar", conteudo: "Jesus diz: 'Recebei o Espírito Santo. A quem perdoardes os pecados, lhes são perdoados'. Autoridade divina é concedida." },
+        { titulo: "Ascensão ao céu", conteudo: "Jesus é elevado ao céu e senta-se à direita de Deus. Completa sua obra na terra e inicia intercessão celestial." },
+        { titulo: "Promessa do retorno", conteudo: "Anjos testificam que Jesus, assim como subiu, descerá do mesmo modo. Sua volta é certa e esperada." },
+        { titulo: "Dias até Pentecostes", conteudo: "Os discípulos aguardam em Jerusalém pela promessa do Pai. Quarenta dias separam a ressurreição de Pentecostes." },
+        { titulo: "Batismo com o Espírito", conteudo: "Jesus promete batismo com o Espírito Santo. Seu poder encheria os discípulos para toda a obra vindoura." },
+        { titulo: "Até aos confins da terra", conteudo: "A Grande Comissão: ide e fazei discípulos de todas as nações. A história de Jesus continua através da igreja." }
+      ]
+    }
+  };
+
+  function renderizarHome() {
+    const licaoNum = 1;
+    const licao = licoesConteudo[licaoNum];
+    document.getElementById('home-titulo').textContent = licao.titulo;
+    document.getElementById('home-keyword').textContent = licao.palavra_chave;
+
+    const pillsContainer = document.getElementById('pills-container');
+    pillsContainer.innerHTML = '';
+    const diasNomes = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+    diasNomes.forEach((dia, idx) => {
+      const pill = document.createElement('div');
+      pill.className = 'pill';
+      pill.innerHTML = `<div class="dot"></div><span>${dia}</span>`;
+      pill.title = `Dia ${idx + 1}`;
+      pillsContainer.appendChild(pill);
+    });
+
+    const homeContent = document.getElementById('home-content');
+    homeContent.innerHTML = '';
+    licao.dias.forEach((dia, idx) => {
+      const dayCard = document.createElement('div');
+      dayCard.className = 'day';
+      dayCard.innerHTML = `
+        <div class="day-number">Dia ${idx + 1} — ${diasNomes[idx]}</div>
+        <h2>${dia.titulo}</h2>
+        <p>${dia.conteudo}</p>
+      `;
+      homeContent.appendChild(dayCard);
+    });
+  }
+
+  function renderizarGrid() {
+    const grid = document.getElementById('grid-licoes');
+    grid.innerHTML = '';
+    for (let i = 1; i <= 13; i++) {
+      const licao = licoesConteudo[i];
+      const card = document.createElement('div');
+      card.className = 'licao-card';
+      card.onclick = () => alert(`Lição ${i}: ${licao.titulo}`);
+      card.innerHTML = `
+        <div class="licao-numero">Lição ${i}</div>
+        <h3 class="licao-titulo">${licao.titulo}</h3>
+        <p class="licao-data">${licao.data}</p>
+      `;
+      grid.appendChild(card);
+    }
+  }
+
+  async function buscarVerso(event) {
+    if (event.key !== 'Enter') return;
+    const input = document.getElementById('bible-input').value.trim();
+    if (!input) return;
+
+    const results = document.getElementById('bible-results');
+    results.innerHTML = '<p class="loading">⏳ Buscando versículo...</p>';
+
+    try {
+      const parts = input.split(/[\s:]+/);
+      if (parts.length < 2) {
+        results.innerHTML = '<p class="error">❌ Formato: "João 3:16" ou "Salmos 23"</p>';
+        return;
+      }
+
+      const bookName = parts[0].toLowerCase();
+      const chapter = parts[1];
+      const verse = parts.length > 2 ? parts[2] : '1';
+
+      const bookId = bookIdMap[bookName];
+      if (!bookId) {
+        results.innerHTML = `<p class="error">❌ Livro "${parts[0]}" não encontrado. Tente: João, Salmos, Gênesis, etc.</p>`;
+        return;
+      }
+
+      const url = `${BIBLE_API.url}/bibles/${BIBLE_API.bibleId}/chapters/${bookId}.${chapter}?content-type=text&include-verse-numbers=true`;
+      const response = await fetch(url, {
+        headers: { 'api-key': BIBLE_API.key },
+        mode: 'cors'
+      });
+
+      if (!response.ok) {
+        throw new Error(`API retornou status ${response.status}`);
+      }
+
+      const data = await response.json();
+      const content = data.data?.content || '';
+      const verseLines = content.split('\n').filter(line => line.trim());
+      const verseMatch = verseLines.find(line => line.includes(` ${verse}:`) || line.includes(` ${verse} `));
+
+      results.innerHTML = `
+        <div class="verse-result">
+          <h3>📖 ${parts[0]} ${chapter}:${verse}</h3>
+          <p>${verseMatch ? verseMatch : (verseLines[0] || content)}</p>
+        </div>
+      `;
+    } catch (error) {
+      results.innerHTML = `<p class="error">❌ Erro ao buscar: ${error.message}<br/>Verifique sua conexão e tente novamente.</p>`;
+    }
+  }
+
+  function mudarAbas(abaId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+    document.getElementById(`page-${abaId}`).classList.add('active');
+    document.getElementById(`nav-${abaId}`).classList.add('active');
+
+    if (abaId === 'licoes') renderizarGrid();
+    window.scrollTo(0, 0);
+  }
+
+  function toggleDarkMode(el) {
+    el.classList.toggle('on');
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+  }
+
+  function toggleNotification(el) {
+    el.classList.toggle('on');
+  }
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.toggle-switch').classList.add('on');
+  }
+
+  renderizarHome();
+  console.log('App Lições Jovens loaded ✅');
+</script>
+
+</body>
+</html>

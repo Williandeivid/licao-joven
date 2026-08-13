@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lições Jovens — Resgate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #171335;
+      --void-2: #241f52;
+      --bg: #f7f5ff;
+      --card: #ffffff;
+      --ink: #1c1735;
+      --ink-soft: #5a5480;
+      --violet: #6c4ce0;
+      --violet-light: #c9bbff;
+      --pink: #ff5d8f;
+      --lime: #a6e22e;
+      --lime-dark: #4d7a12;
+      --sun: #ffc857;
+      --teal: #2fd6c8;
+      --coral: #ff8a5c;
+      --red: #ef4763;
+      --day1: #6c4ce0; --day2: #ff5d8f; --day3: #2fd6c8; --day4: #ffc857; --day5: #ff8a5c; --day6: #8e6cff; --day7: #22b8a6;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(108, 76, 224, 0.10), transparent 40%),
+        radial-gradient(circle at 92% 20%, rgba(255, 93, 143, 0.10), transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(47, 214, 200, 0.08), transparent 45%);
+    }
+
+    .page { display: none; position: relative; z-index: 1; }
+    .page.active { display: block; }
+
+    /* ===== HERO ===== */
+    header.hero {
+      background: linear-gradient(135deg, var(--void) 0%, var(--void-2) 45%, #4a2f9e 100%);
+      color: #fff;
+      padding: 48px 24px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 93, 143, 0.55), transparent 70%);
+      top: -140px;
+      right: -100px;
+      filter: blur(10px);
+    }
+
+    header.hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(47, 214, 200, 0.4), transparent 70%);
+      bottom: -120px;
+      left: -80px;
+      filter: blur(10px);
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 12.5px;
+      color: var(--lime);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      background: rgba(166, 226, 46, 0.12);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    h1.title {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+      margin: 0 0 10px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #fff 0%, var(--violet-light) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #c9c4f0;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .keyword-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, var(--violet), var(--pink));
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      box-shadow: 0 8px 24px -8px rgba(255, 93, 143, 0.6);
+      margin-bottom: 28px;
+    }
+
+    .keyword-seal b {
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    /* ===== DASHBOARD ===== */
+    .dashboard {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(247, 245, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #e8e2ff;
+      padding: 14px 16px 12px;
+    }
+
+    .dash-inner { max-width: 760px; margin: 0 auto; }
+
+    .pills {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-width: 72px;
+      box-shadow: 0 4px 12px -4px rgba(108, 76, 224, 0.4);
+    }
+
+    .pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px -4px rgba(108, 76, 224, 0.6); }
+    .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.6); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 48px 20px 100px; position: relative; z-index: 1; }
+
+    /* ===== DAY CARD ===== */
+    .day {
+      background: var(--card);
+      border-radius: 26px;
+      padding: 40px 32px 36px;
+      margin-bottom: 56px;
+      position: relative;
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 24px 48px -30px rgba(28, 23, 53, 0.35);
+    }
+
+    .day::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 6px;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .day:nth-of-type(1)::after { background: var(--day1); }
+    .day:nth-of-type(2)::after { background: var(--day2); }
+    .day:nth-of-type(3)::after { background: var(--day3); }
+    .day:nth-of-type(4)::after { background: var(--day4); }
+    .day:nth-of-type(5)::after { background: var(--day5); }
+    .day:nth-of-type(6)::after { background: var(--day6); }
+    .day:nth-of-type(7)::after { background: var(--day7); }
+
+    .day::before {
+      content: attr(data-letter);
+      position: absolute;
+      top: -20px;
+      left: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      color: #fff;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px -6px rgba(28, 23, 53, 0.4);
+      transform: rotate(-6deg);
+    }
+
+    .day:nth-of-type(1)::before { background: var(--day1); }
+    .day:nth-of-type(2)::before { background: var(--day2); }
+    .day:nth-of-type(3)::before { background: var(--day3); }
+    .day:nth-of-type(4)::before { background: var(--day4); }
+    .day:nth-of-type(5)::before { background: var(--day5); }
+    .day:nth-of-type(6)::before { background: var(--day6); }
+    .day:nth-of-type(7)::before { background: var(--day7); }
+
+    .day-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin: 10px 0 6px;
+      font-weight: 700;
+    }
+
+    .day h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin: 0 0 18px;
+      color: var(--void);
+      letter-spacing: -0.01em;
+    }
+
+    .keyideas {
+      background: #eef7e0;
+      border: 2px solid #d4edb0;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+
+    .keyideas b {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lime-dark);
+      margin-bottom: 6px;
+    }
+
+    .centraltexts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    .centraltexts span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--void);
+      color: var(--lime);
+      padding: 6px 13px;
+      border-radius: 100px;
+    }
+
+    .day p { margin: 0 0 16px; }
+
+    mark.hl {
+      background: linear-gradient(180deg, transparent 60%, #d9f5a0 60%);
+      background-color: transparent;
+      color: var(--void);
+      font-weight: 700;
+    }
+
+    /* ===== REFLEXIVAS ===== */
+    .reflect {
+      background: #f3ffe0;
+      border-left: 4px solid var(--lime);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+
+    .reflect h3 {
+      margin: 0 0 12px;
+      color: var(--lime-dark);
+      font-size: 1rem;
+    }
+
+    .reflect ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .reflect li {
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    /* ===== QUIZ ===== */
+    .quiz {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 2px dashed #e8e2ff;
+    }
+
+    .quiz h3 {
+      font-family: 'Unbounded', sans-serif;
+      color: var(--violet);
+      margin: 0 0 12px;
+    }
+
+    .quiz-timer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--violet);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .q-block {
+      background: #f7f5ff;
+      border-left: 4px solid var(--violet);
+      padding: 16px;
+      margin: 12px 0;
+      border-radius: 12px;
+    }
+
+    .diff {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .diff-facil { background: #e0ffe0; color: var(--lime-dark); }
+    .diff-inter { background: #fffce0; color: var(--sun-dark); }
+    .diff-avancada { background: #ffe0e0; color: var(--red); }
+
+    .q-text {
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .options button {
+      background: white;
+      border: 2px solid #e8e2ff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .options button:hover {
+      border-color: var(--violet);
+      background: #f7f5ff;
+    }
+
+    .options button.selected {
+      background: var(--violet);
+      color: white;
+      border-color: var(--violet);
+    }
+
+    .quiz-result {
+      background: linear-gradient(90deg, var(--lime), #7dd321);
+      color: #3a5000;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 16px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .reveal-btn {
+      background: linear-gradient(90deg, var(--violet), var(--pink));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      box-shadow: 0 4px 12px -4px rgba(255, 93, 143, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .reveal-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px -4px rgba(255, 93, 143, 0.6);
+    }
+
+    .gabarito {
+      background: #f3ffe0;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--lime-dark);
+      font-weight: 700;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .gabarito.show {
+      display: block;
+    }
+
+    /* ===== V/F ===== */
+    .tf {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 2px dashed #e8e2ff;
+    }
+
+    .tf h3 {
+      font-family: 'Unbounded', sans-serif;
+      color: var(--violet);
+      margin: 0 0 16px;
+    }
+
+    .tf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f7f5ff;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      border-left: 4px solid var(--teal);
+    }
+
+    .tf-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tf-btns button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #e8e2ff;
+      background: white;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .tf-btns button:hover {
+      transform: scale(1.1);
+    }
+
+    .tf-btns button[data-v="V"] {
+      color: var(--lime-dark);
+    }
+
+    .tf-btns button[data-v="F"] {
+      color: var(--red);
+    }
+
+    .tf-btns button.selected {
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 2px solid #e8e2ff;
+      display: flex;
+      justify-content: space-around;
+      z-index: 100;
+      padding: 8px 0;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 12px 0;
+      cursor: pointer;
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+      border-top: 3px solid transparent;
+    }
+
+    .nav-item:hover { color: var(--violet); }
+    .nav-item.active { color: var(--violet); border-top-color: var(--violet); }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h2.section-title {
+      font-family: 'Unbounded', sans-serif;
+      color: var(--violet);
+      font-size: 1.8rem;
+      margin-top: 32px;
+    }
+
+    .grid-licoes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 32px 0;
+    }
+
+    .licao-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-top: 4px solid var(--violet);
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 12px 28px -10px rgba(28, 23, 53, 0.2);
+    }
+
+    .licao-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 2px 0 rgba(28, 23, 53, 0.04), 0 20px 40px -10px rgba(108, 76, 224, 0.3);
+    }
+
+    .licao-numero {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--violet);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .licao-titulo {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .licao-data {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <header class="hero">
+    <div class="eyebrow">Lição Jovens</div>
+    <h1 class="title" id="home-titulo">Permaneçam em Mim</h1>
+    <p class="subtitle">Tema: Dependência de Cristo</p>
+    <div class="keyword-seal">Palavra-chave: <b id="home-keyword">DEPENDÊNCIA</b></div>
+  </header>
+
+  <nav class="dashboard">
+    <div class="dash-inner">
+      <div class="pills" id="pills-container"></div>
+    </div>
+  </nav>
+
+  <main id="home-content"></main>
+</div>
+
+<!-- LIÇÕES -->
+<div class="page" id="page-licoes">
+  <main>
+    <h2 class="section-title">Todas as Lições</h2>
+    <div class="grid-licoes" id="grid-licoes"></div>
+  </main>
+</div>
+
+<!-- CONFIG -->
+<div class="page" id="page-config">
+  <main style="text-align: center; padding-top: 100px;">
+    <h2>⚙️ Configurações</h2>
+    <p style="color: var(--ink-soft);">Em desenvolvimento...</p>
+  </main>
+</div>
+
+<!-- NAV -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="mudarAbas('home')" id="nav-home">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+    <span>Home</span>
+  </div>
+  <div class="nav-item" onclick="mudarAbas('licoes')" id="nav-licoes">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+    <span>Lições</span>
+  </div>
+  <div class="nav-item" onclick="mudarAbas('config')" id="nav-config">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"></circle><path d="M12 1v6m0 6v6"></path><path d="M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24"></path><path d="M1 12h6m6 0h6"></path><path d="M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"></path></svg></div>
+    <span>Config</span>
+  </div>
+</nav>
+
+<script>
+  // DADOS DA LIÇÃO 4 (Exemplo completo)
+  const licoesData = {
+    4: {
+      titulo: "Permaneçam em Mim",
+      keyword: "DEPENDÊNCIA",
+      dias: [
+        {
+          letra: "D",
+          data: "Domingo · 19 de julho",
+          titulo: "O Príncipe dos Pregadores",
+          keyideas: "Charles Spurgeon · Lições espirituais no cotidiano · Parábolas de Jesus · Videira e ramos",
+          verses: ["João 10:1-16", "João 16:21", "João 15"],
+          conteudo: `Um dos pregadores mais marcantes da história do cristianismo foi <b>Charles Spurgeon</b> (1834-1892). Por 38 anos, ele pastoreou a Capela da Rua New Park, em Londres. Spurgeon contava a história de um jovem pregador que trabalhava como capelão em um hospital. Após um grave acidente de trem, ele se ofereceu para carregar um homem ferido e, durante a recuperação, passou a visitá-lo com frequência. Spurgeon comentou: aquele capelão sempre se lembraria daquele homem com apreço, porque <b>sentiu o peso dele</b>.
+
+A capacidade de <b>enxergar lições espirituais nas experiências comuns da vida</b> é uma ferramenta de ensino muito poderosa. Jesus, o maior Mestre de todos, fazia isso com frequência: ao falar com pescadores, usava a linguagem da pesca; quando estava cercado pela natureza, extraía lições do que via ao redor.
+
+Os evangelhos registram cerca de 40 parábolas de Jesus. Curiosamente, o evangelho de João <b>não inclui parábolas propriamente ditas</b> — em vez disso, destaca metáforas usadas por Jesus. Nesta semana, vamos explorar uma das comparações mais marcantes de Cristo: <b>a videira e os ramos</b> (Jo 15).`,
+          reflexivas: [
+            "Já \"sentiu o peso\" de alguém — carregou a dor ou a luta de outra pessoa?",
+            "Que lição espiritual você já tirou de uma experiência simples do seu cotidiano?",
+            "Por que você acha que Jesus preferia ensinar com metáforas do dia a dia?"
+          ],
+          quiz: [
+            { dif: "Fácil", txt: "Quem foi conhecido como \"o príncipe dos pregadores\"?", op: ["Charles Spurgeon", "John Wesley", "João Calvino", "Martinho Lutero"], r: "A" },
+            { dif: "Fácil", txt: "Por quantos anos Spurgeon pastoreou?", op: ["10", "25", "38", "50"], r: "C" },
+            { dif: "Fácil", txt: "O que o jovem capelão fez após o acidente?", op: ["Chamou a polícia", "Carregou um ferido", "Fugiu", "Fotografou"], r: "B" },
+            { dif: "Intermediária", txt: "Por que nunca esqueceria aquele homem?", op: ["Era famoso", "Sentiu o peso dele", "Era parente", "Foi pago"], r: "B" },
+            { dif: "Intermediária", txt: "Como Jesus costumava ensinar?", op: ["Regras escritas", "Lições do cotidiano", "No templo", "Por escrito"], r: "B" },
+            { dif: "Intermediária", txt: "Quantas parábolas os evangelhos registram?", op: ["10", "25", "40", "100"], r: "C" },
+            { dif: "Intermediária", txt: "Particularidade do evangelho de João?", op: ["Mais parábolas", "Não inclui parábolas", "Só parábolas", "Sem Jesus"], r: "B" },
+            { dif: "Avançada", txt: "Qual metáfora em João 10?", op: ["Bom Pastor", "Semeador", "Filho Pródigo", "Fariseu"], r: "A" },
+            { dif: "Avançada", txt: "Ilustração do parto em João 16:21?", op: ["Dor em alegria", "Nascimento físico", "Criação", "Ressurreição"], r: "A" },
+            { dif: "Avançada", txt: "Comparação Jesus e discípulos?", op: ["Pastor e ovelhas", "Videira e ramos", "Sal da terra", "Luz"], r: "B" }
+          ],
+          vf: [
+            { txt: "Spurgeon foi \"príncipe dos pregadores\"", r: "V" },
+            { txt: "João tem mais parábolas que outros", r: "F" },
+            { txt: "Jesus usava cotidiano para ensinar", r: "V" }
+          ]
+        },
+        {
+          letra: "S",
+          data: "Segunda · 20 de julho",
+          titulo: "Ele Nos Levanta",
+          keyideas: "Videira verdadeira · Airo: levantar ou cortar · Justificação e santificação",
+          verses: ["João 15:1,5", "João 15:2", "João 15:6"],
+          conteudo: `João 15 começa mostrando que Jesus é a <b>videira verdadeira</b> e nós somos os ramos. <b>Nenhum ramo se sustenta sozinho</b>; ele depende de uma fonte de vida que o alimenta continuamente.
+
+No verso 2, Jesus diz que o Pai <b>limpa</b> os ramos que frutificam. A palavra grega <em>airo</em> também significa <b>\"levantar\"</b>. Em um vinhedo, o viticultor ergue os ramos para receber mais luz e ar. Com isso, Jesus aponta para duas realidades: ser aceito (<b>justificação</b>) e ser transformado (<b>santificação</b>).
+
+<b>Deus não procura motivos para descartar pessoas</b> — Ele restaura, fortalece e conduz ao crescimento.`,
+          reflexivas: [
+            "Você acha que Deus desistiria de você por não estar \"rendendo\"?",
+            "O que a poda representa? O que Deus pediu para você deixar ir?",
+            "Diferença entre aceito e transformado?"
+          ],
+          quiz: [
+            { dif: "Fácil", txt: "Quem é a videira verdadeira?", op: ["Pai", "Jesus", "Espírito Santo", "Igreja"], r: "B" },
+            { dif: "Fácil", txt: "O que somos em relação à videira?", op: ["Raízes", "Ramos", "Folhas", "Solo"], r: "B" },
+            { dif: "Fácil", txt: "Ramos que não dão fruto são?", op: ["Regados", "Cortados", "Esperados", "Ignorados"], r: "B" },
+            { dif: "Intermediária", txt: "Significa \"airo\" em grego?", op: ["Podar", "Levantar/cortar", "Regar", "Semear"], r: "B" },
+            { dif: "Intermediária", txt: "Objetivo da poda dos frutíferos?", op: ["Remover tudo", "Mais fruto", "Enfraquecer", "Parar"], r: "B" },
+            { dif: "Intermediária", txt: "Justificação nesta metáfora?", op: ["Cortado", "Aceito por Deus", "Podado", "Não frutificando"], r: "B" },
+            { dif: "Avançada", txt: "Justificação vs santificação?", op: ["Mesma coisa", "Aceitar vs transformar", "Fé vs obras", "Antigo vs novo"], r: "B" },
+            { dif: "Avançada", txt: "Ramos \"removidos\" significam?", op: ["Morte física", "Abandono", "Não permanecer", "Punição eterna"], r: "C" },
+            { dif: "Avançada", txt: "Por que Deus \"levanta\" ramos?", op: ["Castigar", "Restaurar", "Ignorar", "Cortar"], r: "B" },
+            { dif: "Avançada", txt: "Verdade central deste ensino?", op: ["Rejeita fracassos", "Busca crescimento", "Não se importa", "Só ama perfeitos"], r: "B" }
+          ],
+          vf: [
+            { txt: "Ramos se sustentam sozinhos", r: "F" },
+            { txt: "Deus poda para mais fruto", r: "V" },
+            { txt: "Justificação e santificação = mesma coisa", r: "F" }
+          ]
+        }
+      ]
+    }
+  };
+
+  // RENDERIZAR HOME
+  function renderHome() {
+    const data = licoesData[4];
+    document.getElementById('home-titulo').textContent = data.titulo;
+    document.getElementById('home-keyword').textContent = data.keyword;
+
+    const pillsHtml = data.dias.map((d, i) => `<div class="pill" onclick="scrollToDay(${i})"><div class="dot"></div><span>${d.letra}</span></div>`).join('');
+    document.getElementById('pills-container').innerHTML = pillsHtml;
+
+    const mainHtml = data.dias.map((d, i) => `
+      <section class="day" data-letter="${d.letra}">
+        <div class="day-date">${d.data}</div>
+        <h2>${d.titulo}</h2>
+        <div class="keyideas"><b>Palavras-chave</b>${d.keyideas}</div>
+        <div class="centraltexts">${d.verses.map(v => `<span>${v}</span>`).join('')}</div>
+        <p>${d.conteudo}</p>
+
+        <div class="reflect">
+          <h3>Perguntas Reflexivas</h3>
+          <ol>${d.reflexivas.map(r => `<li>${r}</li>`).join('')}</ol>
+        </div>
+
+        <div class="quiz">
+          <h3>Quiz — Múltipla Escolha</h3>
+          <div class="quiz-timer">⏱ Tempo: <span class="tval">00:00</span></div>
+          ${d.quiz.map((q, qi) => `
+            <div class="q-block">
+              <span class="diff diff-${q.dif.toLowerCase().replace('á', 'a').substring(0,5)}">${q.dif}</span>
+              <div class="q-text">${qi+1}. ${q.txt}</div>
+              <div class="options">
+                ${q.op.map((o, oi) => `<button class="opt" data-ans="${String.fromCharCode(65+oi)}">${String.fromCharCode(65+oi)}) ${o}</button>`).join('')}
+              </div>
+            </div>
+          `).join('')}
+          <button class="reveal-btn" onclick="toggleGab(this)">Ver gabarito</button>
+          <div class="gabarito">${d.quiz.map((q, i) => `${i+1}-${q.r}`).join(' · ')}</div>
+        </div>
+
+        <div class="tf">
+          <h3>Verdadeiro ou Falso</h3>
+          ${d.vf.map((q, qi) => `
+            <div class="tf-item">
+              <span>${qi+1}. ${q.txt}</span>
+              <div class="tf-btns">
+                <button data-v="V" data-ans="V">V</button>
+                <button data-v="F" data-ans="F">F</button>
+              </div>
+            </div>
+          `).join('')}
+          <button class="reveal-btn" onclick="toggleGab(this)">Ver gabarito</button>
+          <div class="gabarito">${d.vf.map((q, i) => `${i+1}-${q.r}`).join(' · ')}</div>
+        </div>
+      </section>
+    `).join('');
+
+    document.getElementById('home-content').innerHTML = mainHtml;
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById('grid-licoes');
+    const licoes = [
+      { n: 1, t: "Confronto decisivo", d: "Jun. 28 - Jul. 04" },
+      { n: 2, t: "A última ceia", d: "Jul. 05 - Jul. 11" },
+      { n: 3, t: "Não é Adeus", d: "Jul. 12 - Jul. 18" },
+      { n: 4, t: "Permaneçam em Mim", d: "Jul. 19 - Jul. 25" },
+      { n: 5, t: "Os últimos ensinhos", d: "Jul. 26 - Ago. 01" },
+      { n: 6, t: "A oração de Cristo", d: "Ago. 02 - Ago. 08" },
+      { n: 7, t: "O jardim do Getsêmani", d: "Ago. 09 - Ago. 15" },
+      { n: 8, t: "Remorso e Arrependimento", d: "Ago. 16 - Ago. 22" },
+      { n: 9, t: "Crucificado O Rei de Vocês?", d: "Ago. 23 - Ago. 29" },
+      { n: 10, t: "O Rei na Cruz", d: "Ago. 30 - Set. 05" },
+      { n: 11, t: "Morte e Sepultamento", d: "Set. 06 - Set. 12" },
+      { n: 12, t: "Ele Ressuscitou!", d: "Set. 13 - Set. 19" },
+      { n: 13, t: "O Fim da História", d: "Set. 20 - Set. 26" }
+    ];
+    grid.innerHTML = licoes.map(l => `
+      <div class="licao-card">
+        <div class="licao-numero">Lição ${l.n}</div>
+        <h3 class="licao-titulo">${l.t}</h3>
+        <p class="licao-data">${l.d}</p>
+      </div>
+    `).join('');
+  }
+
+  function mudarAbas(aba) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(`page-${aba}`).classList.add('active');
+    document.getElementById(`nav-${aba}`).classList.add('active');
+    if (aba === 'licoes') renderGrid();
+    window.scrollTo(0, 0);
+  }
+
+  function toggleGab(btn) {
+    const gab = btn.nextElementSibling;
+    gab.classList.toggle('show');
+    btn.textContent = gab.classList.contains('show') ? 'Esconder gabarito' : 'Ver gabarito';
+  }
+
+  function scrollToDay(i) {
+    const days = document.querySelectorAll('.day');
+    if (days[i]) days[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  renderHome();
+</script>
+
+</body>
+</html>

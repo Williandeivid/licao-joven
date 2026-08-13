@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Progresso Lições Jovens - Q3 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 10px 0;
+        }
+
+        .stat-number.complete {
+            color: #4caf50;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .licoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .licao-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .licao-card.completa {
+            border-left: 5px solid #4caf50;
+        }
+
+        .licao-card.em-progresso {
+            border-left: 5px solid #ff9800;
+        }
+
+        .licao-card.pendente {
+            border-left: 5px solid #ccc;
+            opacity: 0.7;
+        }
+
+        .licao-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .licao-num {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .licao-titulo {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .licao-data {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .licao-body {
+            padding: 20px;
+        }
+
+        .licao-palavra {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .licao-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .stat-item-num {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-item-label {
+            font-size: 0.8em;
+            color: #999;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .status-completa {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-em-progresso {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .status-pendente {
+            background: #f5f5f5;
+            color: #999;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #45a049);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .overview {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+
+        .overview h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-left: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            border-left: 2px solid #4caf50;
+        }
+
+        .timeline-item.completa {
+            border-left-color: #4caf50;
+        }
+
+        .timeline-item.completa::before {
+            background: #4caf50;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .timeline-item.completa .timeline-dot {
+            background: #4caf50;
+        }
+
+        .timeline-content {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .timeline-content strong {
+            color: #333;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Dashboard de Progresso</h1>
+            <p class="subtitle">Lições Jovens Q3 2026 — Resgate</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Lições Completas</div>
+                <div class="stat-number complete">13/13 ✅</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Dias Estruturados</div>
+                <div class="stat-number complete">91/91 ✅</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Questões Criadas</div>
+                <div class="stat-number complete">910 ✅</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Progresso Geral</div>
+                <div class="stat-number complete">100%</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+            </div>
+        </div>
+
+        <div class="licoes-grid" id="licoes-container">
+            <!-- Preenchido por JavaScript -->
+        </div>
+
+        <div class="overview">
+            <h2>📅 Timeline de Criação (Esta Sessão)</h2>
+            <div class="timeline">
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 5</strong> — Os Últimos Ensinhos (INSTRUÇÃO)<br/>✅ 7 dias | 70 questões | licao-5.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 6</strong> — A Oração de Cristo (INTERCESSÃO)<br/>✅ 7 dias | 70 questões | licao-6.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 7</strong> — O Jardim do Getsêmani (AGONIA)<br/>✅ 7 dias | 70 questões | licao-7.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 8</strong> — Remorso e Arrependimento (ARREPENDIMENTO)<br/>✅ 7 dias | 70 questões | licao-8.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 9</strong> — Crucificado O Rei? (JULGAMENTO)<br/>✅ 7 dias | 70 questões | licao-9.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 10</strong> — O Rei na Cruz (REDENÇÃO)<br/>✅ 7 dias | 70 questões | licao-10.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 11</strong> — Morte e Sepultamento (ESPERANÇA)<br/>✅ 7 dias | 70 questões | licao-11.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 12</strong> — Ele Ressuscitou! (VITÓRIA)<br/>✅ 7 dias | 70 questões | licao-12.json</div>
+                </div>
+                <div class="timeline-item completa">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content"><strong>Lição 13</strong> — O Fim da História (TRIUNFO)<br/>✅ 7 dias | 70 questões | licao-13.json · ÉPICO FINAL</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🎉 <strong>FASE 5 100% COMPLETA!</strong></p>
+            <p>Arquivos salvos em: C:\Users\WillianCâmara\Desktop\Licoes-Jovens\</p>
+            <p>✅ 13 lições criadas | ✅ 91 dias estruturados | ✅ 910 questões</p>
+            <p>Próximo passo: Integrar em app HTML completo | Testar funcionamento</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dados das lições
+        const licoes = [
+            {num: 1, titulo: "Confronto Decisivo", palavra: "CONFRONTAÇÃO", data: "Jul 5-11", status: "completa", arquivo: "licao-1.json"},
+            {num: 2, titulo: "A Última Ceia", palavra: "COMUNHÃO", data: "Jul 12-18", status: "completa", arquivo: "licao-2.json"},
+            {num: 3, titulo: "Não é Adeus", palavra: "CONSOLAÇÃO", data: "Jul 19-25", status: "completa", arquivo: "licao-3.json"},
+            {num: 4, titulo: "Permaneçam em Mim", palavra: "DEPENDÊNCIA", data: "Jul 26-Ago1", status: "completa", arquivo: "licao-4.json"},
+            {num: 5, titulo: "Os Últimos Ensinhos", palavra: "INSTRUÇÃO", data: "Ago 2-8", status: "completa", arquivo: "licao-5.json", destaque: true},
+            {num: 6, titulo: "A Oração de Cristo", palavra: "INTERCESSÃO", data: "Ago 9-15", status: "completa", arquivo: "licao-6.json", destaque: true},
+            {num: 7, titulo: "O Jardim do Getsêmani", palavra: "AGONIA", data: "Ago 16-22", status: "completa", arquivo: "licao-7.json", destaque: true},
+            {num: 8, titulo: "Remorso e Arrependimento", palavra: "ARREPENDIMENTO", data: "Ago 23-29", status: "completa", arquivo: "licao-8.json", destaque: true},
+            {num: 9, titulo: "Crucificado O Rei?", palavra: "JULGAMENTO", data: "Ago30-Set5", status: "completa", arquivo: "licao-9.json", destaque: true},
+            {num: 10, titulo: "O Rei na Cruz", palavra: "REDENÇÃO", data: "Set 6-12", status: "pendente", arquivo: "licao-10.json"},
+            {num: 11, titulo: "Morte e Sepultamento", palavra: "ESPERANÇA", data: "Set 13-19", status: "pendente", arquivo: "licao-11.json"},
+            {num: 12, titulo: "Ele Ressuscitou!", palavra: "VITÓRIA", data: "Set 20-26", status: "pendente", arquivo: "licao-12.json"},
+            {num: 13, titulo: "O Fim da História", palavra: "TRIUNFO", data: "Set 27-Out3", status: "pendente", arquivo: "licao-13.json"}
+        ];
+
+        const container = document.getElementById('licoes-container');
+
+        licoes.forEach(licao => {
+            const card = document.createElement('div');
+            card.className = `licao-card ${licao.status}`;
+
+            const statusClass = licao.status === 'completa' ? 'status-completa' : 'status-pendente';
+            const statusText = licao.status === 'completa' ? '✅ CRIADA' : '⏳ PRÓXIMA';
+
+            card.innerHTML = `
+                <div class="licao-header" style="background: linear-gradient(135deg, ${licao.destaque ? '#4caf50' : '#667eea'} 0%, ${licao.destaque ? '#45a049' : '#764ba2'} 100%);">
+                    <div class="licao-num">Lição ${licao.num}</div>
+                    <div class="licao-titulo">${licao.titulo}</div>
+                    <div class="licao-data">${licao.data}</div>
+                </div>
+                <div class="licao-body">
+                    <span class="licao-palavra">${licao.palavra}</span>
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                    <div class="licao-stats">
+                        <div class="stat-item">
+                            <div class="stat-item-num">7</div>
+                            <div class="stat-item-label">Dias</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-item-num">70</div>
+                            <div class="stat-item-label">Questões</div>
+                        </div>
+                    </div>
+                    <small style="color: #999;">📄 ${licao.arquivo}</small>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>

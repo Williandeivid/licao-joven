@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Lições Jovens Q3 2026 — RESGATE</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: #333;}
+
+        .header {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center;}
+        .header h1 {font-size: 2em; margin-bottom: 5px;}
+        .header p {opacity: 0.9;}
+
+        .container {max-width: 1200px; margin: 20px auto; padding: 20px;}
+
+        .status-bar {
+            background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .status-info {display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;}
+        .status-item {text-align: center;}
+        .status-num {font-size: 2em; font-weight: 900; color: #4caf50;}
+        .status-label {font-size: 0.9em; color: #999; text-transform: uppercase;}
+
+        .licoes-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px;}
+
+        .licao-item {
+            background: white; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer; transition: all 0.3s ease;
+        }
+
+        .licao-item:hover {transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0,0,0,0.15);}
+
+        .licao-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 15px;
+        }
+
+        .licao-num {font-size: 1.8em; font-weight: bold; margin-bottom: 5px;}
+        .licao-titulo {font-size: 1.1em; font-weight: 600;}
+        .licao-data {font-size: 0.85em; opacity: 0.9; margin-top: 5px;}
+
+        .licao-body {padding: 15px;}
+        .palavra-chave {
+            display: inline-block; background: #f0f0f0; padding: 5px 12px;
+            border-radius: 20px; font-size: 0.85em; font-weight: 600; color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            display: inline-block; padding: 5px 10px; border-radius: 15px;
+            font-size: 0.8em; font-weight: 600; background: #e8f5e9; color: #2e7d32;
+        }
+
+        .stats {display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;}
+        .stat {text-align: center; background: #f9f9f9; padding: 10px; border-radius: 6px;}
+        .stat-num {font-size: 1.3em; font-weight: bold; color: #667eea;}
+        .stat-label {font-size: 0.75em; color: #999; text-transform: uppercase;}
+
+        .footer {
+            background: white; border-radius: 8px; padding: 20px; text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 40px;
+        }
+
+        .footer h3 {color: #667eea; margin-bottom: 10px;}
+        .footer p {font-size: 0.9em; color: #666; margin: 5px 0;}
+
+        .badge-completo {
+            display: inline-block; background: #4caf50; color: white;
+            padding: 8px 16px; border-radius: 20px; font-weight: 600;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📚 Lições Jovens Q3 2026</h1>
+        <p><strong>Tema: RESGATE</strong> — As Últimas Cenas da Vida de Cristo</p>
+    </div>
+
+    <div class="container">
+        <div class="status-bar">
+            <div class="badge-completo">✅ 100% COMPLETO - 13 LIÇÕES CRIADAS</div>
+
+            <div class="status-info">
+                <div class="status-item">
+                    <div class="status-num">13</div>
+                    <div class="status-label">Lições</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-num">91</div>
+                    <div class="status-label">Dias</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-num">910</div>
+                    <div class="status-label">Questões</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-num">100%</div>
+                    <div class="status-label">Concluído</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="color: #333; margin-bottom: 20px;">Todas as Lições</h2>
+
+        <div class="licoes-grid">
+            <div class="licao-item">
+                <div class="licao-header">
+                    <div class="licao-num">1</div>
+                    <div class="licao-titulo">Confronto Decisivo</div>
+                    <div class="licao-data">Jul 5-11</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">CONFRONTAÇÃO</span>
+                    <span class="status-badge">✅ Completa</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item">
+                <div class="licao-header">
+                    <div class="licao-num">2</div>
+                    <div class="licao-titulo">A Última Ceia</div>
+                    <div class="licao-data">Jul 12-18</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">COMUNHÃO</span>
+                    <span class="status-badge">✅ Completa</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item">
+                <div class="licao-header">
+                    <div class="licao-num">3</div>
+                    <div class="licao-titulo">Não é Adeus</div>
+                    <div class="licao-data">Jul 19-25</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">CONSOLAÇÃO</span>
+                    <span class="status-badge">✅ Completa</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item">
+                <div class="licao-header">
+                    <div class="licao-num">4</div>
+                    <div class="licao-titulo">Permaneçam em Mim</div>
+                    <div class="licao-data">Jul 26-Ago1</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">DEPENDÊNCIA</span>
+                    <span class="status-badge">✅ Completa</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">5</div>
+                    <div class="licao-titulo">Os Últimos Ensinhos</div>
+                    <div class="licao-data">Ago 2-8</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">INSTRUÇÃO</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">6</div>
+                    <div class="licao-titulo">A Oração de Cristo</div>
+                    <div class="licao-data">Ago 9-15</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">INTERCESSÃO</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">7</div>
+                    <div class="licao-titulo">O Jardim do Getsêmani</div>
+                    <div class="licao-data">Ago 16-22</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">AGONIA</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">8</div>
+                    <div class="licao-titulo">Remorso e Arrependimento</div>
+                    <div class="licao-data">Ago 23-29</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">ARREPENDIMENTO</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">9</div>
+                    <div class="licao-titulo">Crucificado O Rei?</div>
+                    <div class="licao-data">Ago30-Set5</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">JULGAMENTO</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">10</div>
+                    <div class="licao-titulo">O Rei na Cruz</div>
+                    <div class="licao-data">Set 6-12</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">REDENÇÃO</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">11</div>
+                    <div class="licao-titulo">Morte e Sepultamento</div>
+                    <div class="licao-data">Set 13-19</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">ESPERANÇA</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">12</div>
+                    <div class="licao-titulo">Ele Ressuscitou!</div>
+                    <div class="licao-data">Set 20-26</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">VITÓRIA</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="licao-item" style="border-left: 4px solid #4caf50;">
+                <div class="licao-header" style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);">
+                    <div class="licao-num">13</div>
+                    <div class="licao-titulo">O Fim da História</div>
+                    <div class="licao-data">Set 27-Out3</div>
+                </div>
+                <div class="licao-body">
+                    <span class="palavra-chave">TRIUNFO</span>
+                    <span class="status-badge">✅ CRIADA</span>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dias</div></div>
+                        <div class="stat"><div class="stat-num">70</div><div class="stat-label">Questões</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>🎉 FASE 5 — FINALIZADA!</h3>
+            <p><strong>Projeto Completo:</strong> Lições Jovens Q3 2026 — Resgate</p>
+            <p>13 Lições | 91 Dias | 910 Questões | ~65-70KB de Conteúdo</p>
+            <p style="margin-top: 15px; font-size: 0.85em; color: #4caf50;">
+                ✅ Pronto para publicação em Cloudflare Pages
+            </p>
+        </div>
+    </div>
+</body>
+</html>

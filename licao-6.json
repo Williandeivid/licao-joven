@@ -1,0 +1,197 @@
+{
+  "numero": 6,
+  "titulo": "A Oração de Cristo",
+  "palavra_chave": "INTERCESSÃO",
+  "data": "Ago. 9-15",
+  "dias": [
+    {
+      "id": "dom",
+      "letra": "D",
+      "data": "Domingo · 10 de agosto",
+      "titulo": "Oração pela Glorificação",
+      "keyideas": "Honra do Pai · Obra completa · Comunhão eterna · Essência divina",
+      "verses": ["João 17:1-5", "Hebreus 1:3", "Filipenses 2:9-10"],
+      "conteudo": "<b>\"Pai, a hora chegou; glorifica a teu Filho.\"</b> A oração de Jesus começava com <b>pedido de glorificação</b>. Não era vaidade — era <b>reconhecimento de que Sua obra merecia honra</b>.\n\n<b>Jesus havia completado a missão.</b> Ele havia <b>revelado o Pai ao mundo</b>, oferecido perdão, estabelecido uma comunidade de fé. Agora, <b>aquela glória que abandonara no céu deveria ser restaurada</b>. Era retorno justo após cumprimento supremo.\n\n<b>\"A glória que me deste, eu a dei a eles.\"</b> Mas havia algo excepcional: <b>Cristo compartilhava Sua glória com os crentes</b>. Não era glória do trono apenas, mas <b>participação na essência divina</b> — transformação permanente.",
+      "reflexivas": ["O que significava a glorificação de Jesus?", "Por que Sua glória era compartilhada?", "Como compreendemos essa honra divina?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Qual era o pedido inicial da oração?", "op": ["A) Proteção", "B) Glorificação", "C) Perdão", "D) Poder"],"r": "B"},
+        {"dif": "Fácil", "q": "A glória era vaidosa ou justa?", "op": ["A) Vaidosa", "B) Justa, fruto da obra completa", "C) Desnecessária", "D) Imposição"]},"r": "B"},
+        {"dif": "Fácil", "q": "O que Jesus havia revelado?", "op": ["A) Sua força", "B) Seu poder", "C) O Pai", "D) Seu conhecimento"]},"r": "C"},
+        {"dif": "Intermediária", "q": "Por que a glória era restauração?", "op": ["A) Nunca a havia abandonado", "B) Retorno à essência divina pós-encarnação", "C) Era criação nova", "D) Sem razão"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como a glória era compartilhada?", "op": ["A) Não era", "B) Participação transformadora na essência divina", "C) Apenas título", "D) Ilusão"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era o significado de revelar o Pai?", "op": ["A) Ensinar doutrinas", "B) Manifestar Sua natureza, caráter e amor", "C) Proclamar poder", "D) Criar religião"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que glorificação era integral à redenção?", "op": ["A) Não era", "B) Honra ao Pai consolidava obra redentora", "C) Era secundária", "D) Contraditório"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como crentes participavam da glória?", "op": ["A) Não participavam", "B) Conformação progressiva à imagem de Cristo", "C) Apenas teoricamente", "D) Impossível"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era a implicação de 'essência divina'?", "op": ["A) Deificação literal", "B) Comunhão profunda na natureza de Deus", "C) Nenhuma realidade", "D) Apenas esperança"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como essa oração moldava teologia cristã?", "op": ["A) Não moldava", "B) Fundamentava comunhão eterna e transformação", "C) Era anômala", "D) Contradição"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Jesus pediu glorificação por vaidade.", "r": "F"},
+        {"q": "A glória era compartilhada com os crentes.", "r": "V"},
+        {"q": "A encarnação permanecia antes da glorificação.", "r": "F"}
+      ]
+    },
+    {
+      "id": "seg",
+      "letra": "S",
+      "data": "Segunda · 11 de agosto",
+      "titulo": "Oração pelo Amor",
+      "keyideas": "Amor divino · Unidade no amor · Conhecimento experiencial · Comunidade cristã",
+      "verses": ["João 17:20-26", "Romanos 5:5", "1 João 4:7-12"],
+      "conteudo": "<b>\"Que o amor com que me amaste esteja em mim e eu neles.\"</b> Esta oração capturava a <b>transferência de amor divino</b> — o mesmo amor que o Pai tinha por Jesus fluiria através d'Ele para os crentes.\n\n<b>Não era sentimento transitório, mas essência.</b> O amor divino era <b>sacrificial, transformador e eterno</b>. Quando os crentes o experimentavam, <b>sua natureza era radicalmente alterada</b>.\n\n<b>\"Para que o mundo creia que tu me enviaste.\"</b> O teste de autenticidade cristã era <b>amor genuíno entre crentes</b>. <b>Nenhuma doutrina, nenhum milagre provaria Jesus melhor que comunidade unida pelo amor</b>. Este era o testemunho invisível mas irresistível.",
+      "reflexivas": ["Como experimentamos o amor divino?", "Por que o amor era prova suprema?", "Como amor une a comunidade cristã?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Qual era o amor que Jesus pedia?", "op": ["A) Humano", "B) O mesmo amor do Pai", "C) Filosófico", "D) Romântico"]},"r": "B"},
+        {"dif": "Fácil", "q": "O amor era sentimento ou essência?", "op": ["A) Apenas sentimento", "B) Essência transformadora", "C) Ilusão", "D) Decoração"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era o teste de autenticidade cristã?", "op": ["A) Conhecimento doutrinário", "B) Amor entre crentes", "C) Poder de milagres", "D) Discurso persuasivo"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que amor era sacrificial?", "op": ["A) Não era", "B) Renúncia de si para outro", "C) Apenas sentimento", "D) Ilusório"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como o amor convencia o mundo?", "op": ["A) Não convencia", "B) Comunidade unida era testemunho irresistível", "C) Através de apologética", "D) Por poder político"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era a fonte do amor cristão?", "op": ["A) Esforço humano", "B) Transfusão divina do Pai", "C) Determinação pessoal", "D) Treinamento"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que amor transcendia doutrinas?", "op": ["A) Não transcendia", "B) Prova viva da realidade divina", "C) Eram equivalentes", "D) Doutrina era superior"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como amor transformava natureza?", "op": ["A) Não transformava", "B) Reorientava vontade, emoção e relacionamento", "C) Apenas superficialmente", "D) Impossível"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era a implicação de 'mundo creia'?", "op": ["A) Nenhuma", "B) Autenticidade cristã convertia por atração", "C) Força era necessária", "D) Improvável"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos essa oração hoje?", "op": ["A) Não aplicamos", "B) Cultivamos amor genuíno como testemunho", "C) Apenas história", "D) Impossível nos tempos modernos"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "O amor divino era sentimento transitório.", "r": "F"},
+        {"q": "Amor entre crentes era testemunho supremo.", "r": "V"},
+        {"q": "Doutrina provava Jesus melhor que comunidade.", "r": "F"}
+      ]
+    },
+    {
+      "id": "ter",
+      "letra": "T",
+      "data": "Terça · 12 de agosto",
+      "titulo": "Oração por Santificação",
+      "keyideas": "Separação para Deus · Transformação moral · Verdade como agente · Processo contínuo",
+      "verses": ["João 17:17", "1 Tessalonicenses 5:23-24", "2 Coríntios 3:18"],
+      "conteudo": "<b>\"Santifica-os na verdade; a tua palavra é verdade.\"</b> Santificação era <b>processo de separação e transformação</b>. Não era isolamento, mas <b>dedicação exclusiva à vontade divina</b>.\n\n<b>A verdade era o agente transformador.</b> <b>Conhecer a realidade divina, estudar a Palavra, meditar na vontade de Deus</b> — tudo isso moldava o caráter. <b>Ignorância do verdadeiro produzia vício; conhecimento produzia virtude</b>.\n\n<b>\"Não peço que os tires do mundo, mas que os protejas do mal.\"</b> A santificação não era fuga — era <b>permanência no mundo sem ser contaminado por seus princípios</b>. Os crentes eram <b>como sal e luz — presentes, distintivos, transformadores</b>.",
+      "reflexivas": ["Como compreendemos santificação?", "Por que verdade transforma?", "Como permanecemos santos no mundo?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "O que era santificação?", "op": ["A) Perfeição completa", "B) Separação e transformação contínuas", "C) Isolamento", "D) Legalismo"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era o agente da santificação?", "op": ["A) Esforço humano", "B) Vontade própria", "C) A verdade divina", "D) Medo do julgamento"]},"r": "C"},
+        {"dif": "Fácil", "q": "Como os crentes deveriam viver?", "op": ["A) Isolados do mundo", "B) Transformados pelo mundo", "C) Presentes mas não contaminados", "D) Sem moral"]},"r": "C"},
+        {"dif": "Intermediária", "q": "Por que verdade era transformadora?", "op": ["A) Não era", "B) Conformava vontade à realidade divina", "C) Era apenas informação", "D) Contraproducente"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era a relação entre conhecimento e virtude?", "op": ["A) Nenhuma", "B) Conhecimento da verdade produzia virtude", "C) Eram opostos", "D) Indiferentes"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como ignorância afetava moralidade?", "op": ["A) Não afetava", "B) Produzia vício e desorientação", "C) Era irrelevante", "D) Melhorava"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que santificação era contínua?", "op": ["A) Não era", "B) Transformação progressiva até à plenitude", "C) Apenas instantânea", "D) Uma vez e para sempre"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como ser 'sal e luz' refletia santificação?", "op": ["A) Não refletia", "B) Distintividade moral que transformava ambiente", "C) Isolamento da cultura", "D) Conformidade"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era a paradoxo do cristão?", "op": ["A) Nenhum", "B) No mundo mas não do mundo", "C) Separado completamente", "D) Totalmente integrado"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos santificação modernamente?", "op": ["A) Não aplicamos", "B) Cultivo intencional da verdade e virtude", "C) Apenas história", "D) Impossível com tecnologia"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Santificação era perfeição instantânea.", "r": "F"},
+        {"q": "Verdade era o agente transformador da santificação.", "r": "V"},
+        {"q": "Crentes deveriam fugir completamente do mundo.", "r": "F"}
+      ]
+    },
+    {
+      "id": "qua",
+      "letra": "Q",
+      "data": "Quarta · 13 de agosto",
+      "titulo": "Oração por Unidade",
+      "keyideas": "Comunidade orgânica · Diversidade em harmonia · Testemunho corporativo · Igreja universal",
+      "verses": ["João 17:20-23", "Efésios 4:4-6", "Romanos 12:4-5"],
+      "conteudo": "<b>\"Para que todos sejam um, assim como nós somos um.\"</b> Jesus orava pela <b>unidade não baseada em uniformidade, mas em comunhão</b>. A Igreja seria <b>corpo diverso mas harmonioso</b>.\n\n<b>Esta unidade era em comunhão com o Pai e o Filho.</b> <b>Não era construção humana, mas reflexo da própria natureza trinitária de Deus</b>. A comunidade cristã participava da harmonia divina.\n\n<b>\"Para que o mundo creia que tu me enviaste.\"</b> A unidade era <b>prova suprema da divindade de Cristo</b>. <b>Pessoas de raças, culturas e personalidades diferentes vivendo em amor e propósito compartilhado</b> — isto era milagre que nenhuma força humana produziria.",
+      "reflexivas": ["Como vivemos unidade na diversidade?", "Por que unidade era prova divina?", "Qual é nossa responsabilidade na unidade eclesial?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "A unidade era uniformidade ou comunhão?", "op": ["A) Uniformidade", "B) Comunhão diversa", "C) Conformidade", "D) Nenhuma das duas"]},"r": "B"},
+        {"dif": "Fácil", "q": "Em que se baseava a unidade?", "op": ["A) Regras", "B) Comunhão com Pai e Filho", "C) Governo central", "D) Interesse comum"]},"r": "B"},
+        {"dif": "Fácil", "q": "Por que unidade era testemunho?", "op": ["A) Não era", "B) Milagre humanamente impossível", "C) Apenas propaganda", "D) Coincidência"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como unidade refletia Trindade?", "op": ["A) Não refletia", "B) Comunhão diversa como Deus é uno em três", "C) Eram equivalentes", "D) Contraditório"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era a base da unidade corporativa?", "op": ["A) Estrutura administrativa", "B) Participação na vida de Cristo", "C) Contrato social", "D) Interesse econômico"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como diferenças eram mantidas na unidade?", "op": ["A) Suprimidas", "B) Honradas em comunhão", "C) Irrelevantes", "D) Causas de divisão"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que unidade era milagre?", "op": ["A) Não era", "B) Natureza humana tende a divisão", "C) Era ilusão", "D) Sempre foi fácil"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como unidade convertia o mundo?", "op": ["A) Não convertia", "B) Evidência tangível de Deus", "C) Através de apologética", "D) Por superioridade intelectual"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era o escopo da unidade?", "op": ["A) Apenas locais", "B) Universal — todos os crentes", "C) Uma denominação", "D) Minoria"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como promovemos unidade?", "op": ["A) Não podemos", "B) Cultivar comunhão em Cristo acima de diferenças", "C) Eliminar distinções", "D) Aceitar divisão"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Unidade significava todos serem iguais.", "r": "F"},
+        {"q": "Unidade cristã refletia a natureza trinitária de Deus.", "r": "V"},
+        {"q": "Divisão entre crentes era inevitável.", "r": "F"}
+      ]
+    },
+    {
+      "id": "qui",
+      "letra": "Q",
+      "data": "Quinta · 14 de agosto",
+      "titulo": "Oração por Proteção",
+      "keyideas": "Guardião fiel · Segurança espiritual · Vitória sobre o mal · Confiança no Pai",
+      "verses": ["João 17:11-15", "1 Pedro 1:5", "Judas 1:24"],
+      "conteudo": "<b>\"Guardei aqueles que me deste.\"</b> Jesus descrevia <b>vigília constante sobre Seus discípulos</b>. Não era proteção passiva, mas <b>cuidado ativo e intencional</b>.\n\n<b>O mundo era hostil.</b> <b>Satanás buscava destruir, tentar, derrotar</b> os crentes. Mas <b>a proteção divina não removeria tentação — a permitiria para crescimento</b>. Proteção era <b>segurança no propósito, não ausência de luta</b>.\n\n<b>\"Nem todos foram perdidos.\"</b> Havia limite claro: <b>Judas escolheu. A proteção divina respeitava liberdade humana</b>. <b>Deus guardava, mas não escravizava</b>. Crentes podiam rejeitar; se o fizessem, sofriam consequências.",
+      "reflexivas": ["Como compreendemos proteção divina?", "Por que tentação era permitida?", "Qual é a relação entre proteção e liberdade?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Como Jesus guardava os discípulos?", "op": ["A) Passivamente", "B) Com vigília ativa e intencional", "C) Apenas teoricamente", "D) Não os guardava"]},"r": "B"},
+        {"dif": "Fácil", "q": "O mundo era neutro ou hostil?", "op": ["A) Neutro", "B) Hostil", "C) Amigável", "D) Indiferente"]},"r": "B"},
+        {"dif": "Fácil", "q": "A proteção removia tentação?", "op": ["A) Sim", "B) Não — permitia para crescimento", "C) Parcialmente", "D) Aumentava"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que Judas foi perdido?", "op": ["A) Abandono de Jesus", "B) Sua escolha livre", "C) Predestinação para perdição", "D) Acaso"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como proteção respeitava liberdade?", "op": ["A) Não respeitava", "B) Guardava mas não escravizava vontade", "C) Removia decisões", "D) Controlava"]},"r": "B"},
+        {"dif": "Intermediária", "q": "O que proteção garantia?", "op": ["A) Ausência de sofrimento", "B) Segurança no propósito", "C) Impossibilidade de rejeitar Deus", "D) Riqueza material"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que tentação era necessária?", "op": ["A) Não era", "B) Refina fé e produz caráter", "C) Destruir crentes", "D) Diversão"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como Satanás agia contra crentes?", "op": ["A) Impotente", "B) Buscava derrotar através de tentação", "C) Com sucesso sempre", "D) Havia paz total"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era o significado de 'nem todos foram perdidos'?", "op": ["A) Todos se salvaram", "B) Maioria se perdeu", "C) Alguns escolhiam rejeição", "D) Sem significado"]},"r": "C"},
+        {"dif": "Avançada", "q": "Como aplicamos essa proteção?", "op": ["A) Não aplicamos", "B) Confiança em Deus durante provação", "C) Negação de dificuldade", "D) Isolamento"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "A proteção divina removia toda tentação.", "r": "F"},
+        {"q": "Deus guardava os crentes com vigília ativa.", "r": "V"},
+        {"q": "A rejeição de Deus não tinha consequências.", "r": "F"}
+      ]
+    },
+    {
+      "id": "sex",
+      "letra": "S",
+      "data": "Sexta · 15 de agosto",
+      "titulo": "Oração pelo Mundo",
+      "keyideas": "Compaixão universal · Transformação social · Mensagem redentora · Justiça divina",
+      "verses": ["João 17:18", "Mateus 28:19-20", "2 Coríntios 5:18-20"],
+      "conteudo": "<b>\"Como tu me enviaste ao mundo, também eu os envio.\"</b> A missão não terminava com Jesus — <b>continuava através dos crentes</b>. <b>Cada geração era enviada como Cristo foi enviado</b>.\n\n<b>O mundo sofria sem conhecer Deus.</b> <b>Ignorância, injustiça, separação da fonte de vida</b> — tudo isto devastava humanidade. Jesus orava pelos <b>crentes serem instrumentos de redenção</b>.\n\n<b>\"Eu lhes enviei uma missão: reconciliar mundo com Deus.\"</b> Não era conquista política ou dominação — era <b>embaixada de reconciliação</b>. <b>Cada cristão era representante oficial de Deus</b>, levando mensagem de amor, perdão e transformação.",
+      "reflexivas": ["Como compreendemos nossa missão global?", "Por que mundo precisa de redenção?", "Como somos embaixadores de Cristo?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Como continuava a missão de Jesus?", "op": ["A) Terminava com Ele", "B) Através dos crentes", "C) Com organização religiosa", "D) Com poder político"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era o estado do mundo?", "op": ["A) Perfeito", "B) Sofria em ignorância e separação", "C) Melhorava naturalmente", "D) Indiferente"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era a natureza da missão?", "op": ["A) Conquista", "B) Reconciliação", "C) Dominação", "D) Fuga"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que mundo precisava de redenção?", "op": ["A) Não precisava", "B) Separação de Deus produzia morte", "C) Já era redimido", "D) Indiferente"]},"r": "B"},
+        {"dif": "Intermediária", "q": "O que significava 'reconciliação'?", "op": ["A) Conformidade forçada", "B) Restauração de relacionamento com Deus", "C) Mudança de governo", "D) Uniformidade religiosa"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era o papel do cristão?", "op": ["A) Passivo", "B) Embaixador ativo de Deus", "C) Juiz condenador", "D) Isolado"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que era 'embaixada' e não 'conquista'?", "op": ["A) Sem diferença", "B) Representação, não dominação", "C) Poder era necessário", "D) Força era insignificante"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como redenção transformava o mundo?", "op": ["A) Não transformava", "B) Indivíduos transformados transformavam sociedade", "C) Era apenas espiritual", "D) Politicamente"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era o escopo geográfico da missão?", "op": ["A) Apenas ricos", "B) Toda criatura, toda nação", "C) Ocidente", "D) Litoral"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos essa oração?", "op": ["A) Não aplicamos", "B) Testemunho intencional e reconciliador", "C) Apenas oração passiva", "D) Nada podemos fazer"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "A missão terminava com a morte de Jesus.", "r": "F"},
+        {"q": "Cristãos eram embaixadores de reconciliação.", "r": "V"},
+        {"q": "O mundo não precisava de redenção.", "r": "F"}
+      ]
+    },
+    {
+      "id": "sab",
+      "letra": "S",
+      "data": "Sábado · 16 de agosto · Comunidade",
+      "titulo": "Poder da Intercessão Contínua",
+      "keyideas": "Oração como ministério · Intercessão corporativa · Fé que persevera · Eterno presente",
+      "verses": ["Romanos 8:26-27", "Efésios 6:18-20", "Hebreus 7:25"],
+      "conteudo": "<b>\"Cristo nunca morre para interceder por nós.\"</b> A oração de Jesus <b>não era evento único, mas ministério permanente</b>. <b>A cada momento, Ele apresentava crentes ao Pai</b>.\n\n<b>A semana integrava sete dimensões de intercessão:</b> glorificação (reconhecimento), amor (comunhão), santificação (transformação), unidade (corpo), proteção (segurança), mundo (missão) — tudo isto <b>Jesus sustentava continuamente</b>.\n\n<b>Os crentes participavam dessa intercessão.</b> <b>Quando oravam pelos outros, participavam do ministério de Cristo</b>. Oração não era atividade periférica — era <b>trabalho central da fé, participação na obra redentora de Cristo</b>.",
+      "reflexivas": ["Como participamos da intercessão de Cristo?", "Por que oração é ministério central?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Quanto durava a intercessão de Jesus?", "op": ["A) Apenas na terra", "B) Permanentemente", "C) Algumas vezes", "D) Nunca"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era a natureza da oração na semana?", "op": ["A) Apenas doutrina", "B) Sete dimensões integradas", "C) Eventos isolados", "D) Sem padrão"]},"r": "B"},
+        {"dif": "Fácil", "q": "Como crentes participavam da intercessão?", "op": ["A) Não participavam", "B) Orando pelos outros", "C) Apenas observando", "D) Criando obstáculos"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que oração era 'ministério'?", "op": ["A) Não era", "B) Trabalho essencial de transformação", "C) Apenas hobby", "D) Distração"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era a centralidade da oração?", "op": ["A) Periférica", "B) Central — participação na obra de Cristo", "C) Desprezível", "D) Decorativa"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como as sete dimensões se relacionavam?", "op": ["A) Nenhuma relação", "B) Integradas em intercessão completa", "C) Contraditórias", "D) Sequenciais"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que Cristo precisava interceder eternamente?", "op": ["A) Não precisava", "B) Crentes continuavam necessitando apoio", "C) Seu sacrifício era insuficiente", "D) Sem razão"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como intercessão moldava vida cristã?", "op": ["A) Não moldava", "B) Dava propósito e direção", "C) Apenas distração", "D) Nenhum impacto"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era a implicação de 'eterno presente'?", "op": ["A) Sem significado", "B) Cristo sempre presente em oração", "C) Apenas passado", "D) Esperança distante"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos essa lição?", "op": ["A) Nada mudava", "B) Oração como ministério essencial", "C) Apenas contemplação", "D) Passividade"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "A intercessão de Cristo terminou com Sua morte.", "r": "F"},
+        {"q": "Oração era trabalho central da fé cristã.", "r": "V"},
+        {"q": "Crentes não podiam participar da intercessão.", "r": "F"}
+      ]
+    }
+  ]
+}

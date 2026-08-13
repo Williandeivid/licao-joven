@@ -1,0 +1,197 @@
+{
+  "numero": 7,
+  "titulo": "O Jardim do Getsêmani",
+  "palavra_chave": "AGONIA",
+  "data": "Ago. 16-22",
+  "dias": [
+    {
+      "id": "dom",
+      "letra": "D",
+      "data": "Domingo · 17 de agosto",
+      "titulo": "Isolamento Necessário",
+      "keyideas": "Retiro espiritual · Peso singular · Comunhão profunda · Preparo para sacrifício",
+      "verses": ["Mateus 26:36-39", "Lucas 22:40-44", "Hebreus 5:7-8"],
+      "conteudo": "<b>\"Minha alma está triste até à morte.\"</b> Jesus não minimizava Sua agonia — <b>reconhecia seu peso real e significado</b>. Ele se isolava não por fraqueza, mas para <b>confrontar com honestidade o custo redentor</b>.\n\n<b>Três discípulos O acompanhavam, mas ninguém realmente compreendia.</b> <b>A solidão da redenção era singular — ninguém poderia carregá-la senão o Redentor</b>. Mesmo em comunidade, <b>havia momentos em que só Deus podia escutar</b>.\n\n<b>\"Seu suor era como gotas de sangue.\"</b> O isolamento produzia <b>intensidade extrema — corpo e espírito em agonia perfeita</b>. Este era <b>preparo real para sacrifício máximo</b>, não teatro, mas verdadeira luta de morte.",
+      "reflexivas": ["Por que Jesus precisava de isolamento?", "Como compreendemos Sua agonia?", "Qual era o significado do peso singular?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Por que Jesus se isolava?", "op": ["A) Fugir de discípulos", "B) Confrontar honestamente o custo", "C) Demonstrar poder", "D) Orar rotineiramente"]},"r": "B"},
+        {"dif": "Fácil", "q": "Quem acompanhava Jesus?", "op": ["A) Todos", "B) Ninguém", "C) Três discípulos", "D) Judas"]},"r": "C"},
+        {"dif": "Fácil", "q": "Como os discípulos respondiam?", "op": ["A) Velavam", "B) Dormiam", "C) Compreendiam perfeitamente", "D) Fugiam"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que a solidão era singular?", "op": ["A) Não era", "B) Ninguém poderia carregarar o peso redentor", "C) Era covardia", "D) Era ilusão"]},"r": "B"},
+        {"dif": "Intermediária", "q": "O que significava a agonia?", "op": ["A) Fraqueza", "B) Luta genuína de morte com realidade do sacrifício", "C) Drama", "D) Simulação"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era a intensidade do isolamento?", "op": ["A) Leve", "B) Extrema — corpo e espírito em agonia", "C) Moderada", "D) Sem impacto"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que Jesus não removeu o cálice?", "op": ["A) Poderia ter", "B) Obediência ao propósito redentor", "C) Impotência", "D) Negligência"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como preparo conectava-se ao sacrifício?", "op": ["A) Nenhuma conexão", "B) Agonia honesta produzia entrega total", "C) Eram separados", "D) Contradição"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era o significado de 'suor como gotas de sangue'?", "op": ["A) Hipérbole literária", "B) Agonia fisiológica extrema", "C) Poesia", "D) Dramatização"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como compreendemos solidão redentor hoje?", "op": ["A) Não compreendemos", "B) Reconhecendo custos únicos de sacrifício", "C) Apenas teoria", "D) Irrelevante"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Jesus mostrava fraqueza ao admitir agonia.", "r": "F"},
+        {"q": "A solidão de Jesus era parte genuína da redenção.", "r": "V"},
+        {"q": "Os discípulos compreendiam perfeitamente a agonia.", "r": "F"}
+      ]
+    },
+    {
+      "id": "seg",
+      "letra": "S",
+      "data": "Segunda · 18 de agosto",
+      "titulo": "Humanidade de Jesus",
+      "keyideas": "Divindade e humanidade · Vulnerabilidade real · Compaixão verdadeira · Ponte entre céu e terra",
+      "verses": ["Hebreus 4:14-16", "Hebreus 2:14-18", "1 João 4:2-3"],
+      "conteudo": "<b>\"Ele foi tentado em tudo como nós, mas sem pecado.\"</b> A humanidade de Jesus era <b>genuína, não disfarce</b>. Ele <b>experimentava fome, cansaço, sofrimento, tentação</b>.\n\n<b>Mas havia diferença crucial: resistência total ao pecado.</b> <b>Cada tentação era encontrada e vencida</b>. Sua humanidade não era enfraquecida — era <b>humanidade em sua forma mais perfeita e completa</b>.\n\n<b>\"Podemos aproximar-nos com confiança do trono da graça.\"</b> Porque Jesus era <b>verdadeiramente um de nós</b>, Ele compreendia nosso sofrimento profundamente. <b>Ele era ponte: divindade encarnada e humanidade exaltada</b>. Nós éramos representados no céu por Alguém que conhecia nossas lutas.",
+      "reflexivas": ["Como conciliamos divindade e humanidade em Jesus?", "Por que Sua humanidade importava?", "Como nos oferecia compaixão genuína?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "A humanidade de Jesus era genuína?", "op": ["A) Não", "B) Sim — experimentava necessidades", "C) Parcial", "D) Disfarce"]},"r": "B"},
+        {"dif": "Fácil", "q": "Jesus pecava?", "op": ["A) Frequentemente", "B) Ocasionalmente", "C) Nunca — sem pecado", "D) Secretamente"]},"r": "C"},
+        {"dif": "Fácil", "q": "Por que a tentação era importante?", "op": ["A) Não era", "B) Provou Sua humanidade e vitória", "C) O derrotou", "D) Era irrelevante"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era o significado de 'em tudo como nós'?", "op": ["A) Nenhuma diferença", "B) Mesmo tipo de tentação, mesma vulnerabilidade", "C) Não similar", "D) Sem paralelo"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Mas qual era a diferença crucial?", "op": ["A) Nenhuma", "B) Resistência total ao pecado", "C) Mera força", "D) Privilégio"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como humanidade habilitava compaixão?", "op": ["A) Não habilitava", "B) Compreensão experiencial do sofrimento", "C) Apesar da humanidade", "D) Indiferente"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como Jesus era 'ponte'?", "op": ["A) Nenhuma ponte", "B) Divindade representando humanidade no céu", "C) Apenas conceitual", "D) Literalmente"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que encarnação era essencial?", "op": ["A) Não era", "B) Apenas encarnado podia ser perfeito sumo sacerdote", "C) Redundante", "D) Opcional"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como tentação testava Sua humanidade?", "op": ["A) Não testava", "B) Provava verdadeira vulnerabilidade + verdadeira vitória", "C) Era fácil", "D) Sem valor"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos essa verdade?", "op": ["A) Não aplicamos", "B) Confiança em compaixão de Alguém que sofreu", "C) Apenas doutrina", "D) Irrelevante"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Jesus era imune a tentação.", "r": "F"},
+        {"q": "Humanidade de Jesus O habilitava a compadecer-se.", "r": "V"},
+        {"q": "Encarnação era dispensável para redenção.", "r": "F"}
+      ]
+    },
+    {
+      "id": "ter",
+      "letra": "T",
+      "data": "Terça · 19 de agosto",
+      "titulo": "Temor e Tristeza",
+      "keyideas": "Emoção autêntica · Morte enfrentada · Peso relacional · Vulnerabilidade divina",
+      "verses": ["Mateus 26:37-38", "Hebreus 12:2", "2 Coríntios 5:21"],
+      "conteudo": "<b>\"Minha alma está triste até à morte.\"</b> Jesus não negava tristeza — <b>a confessava abertamente</b>. Esta não era fraqueza senão <b>honestidade emocional diante da realidade do sacrifício</b>.\n\n<b>O temor era múltiplo.</b> <b>Temor da morte, da separação do Pai, do peso do pecado do mundo</b> — tudo isto era real. <b>Jesus não escapava das consequências emocionais de Sua própria redenção</b>.\n\n<b>\"Tornou-se pecado por nós.\"</b> <b>Não meramente juridicamente, mas experimentalmente</b>. <b>Ele carregava culpa do mundo — peso emocional, espiritual, físico</b>. Era por isto que Seu suor era gotas de sangue — <b>corpo gritava sob peso que nenhum mortal poderia suportar</b>.",
+      "reflexivas": ["Por que Jesus admitia tristeza?", "Qual era o significado múltiplo do temor?", "Como sofrimento era participação em culpa?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Jesus negava sua tristeza?", "op": ["A) Sim", "B) Não — a confessava", "C) Parcialmente", "D) Nunca mencionava"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era o tipo de temor?", "op": ["A) Apenas morte", "B) Múltiplo: morte, separação, peso do pecado", "C) Sem verdadeiro temor", "D) Imaginário"]},"r": "B"},
+        {"dif": "Fácil", "q": "Jesus escapava consequências emocionais?", "op": ["A) Sim", "B) Não — as experimentava plenamente", "C) Parecia escapar", "D) Ignorava"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que tristeza era autêntica?", "op": ["A) Não era", "B) Reação genuína ao custo redentor", "C) Apenas performance", "D) Dramatização"]},"r": "B"},
+        {"dif": "Intermediária", "q": "O que significava 'tornou-se pecado'?", "op": ["A) Cometeu pecado", "B) Identificação experimental com culpa humana", "C) Apenas imputação legal", "D) Sem realidade"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como culpa afetava Jesus fisicamente?", "op": ["A) Não afetava", "B) Produz agonia fisiológica genuína", "C) Apenas psicologicamente", "D) Sem impacto"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que separação do Pai era parte do temor?", "op": ["A) Nunca ocorria", "B) Encarnava julgamento pelo pecado", "C) Era ilusão", "D) Sem significado"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como Jesus carregava pecado?", "op": ["A) Não carregava", "B) Experiencialmente na cruz", "C) Apenas teoricamente", "D) Alguém mais carregava"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era a intensidade do sofrimento?", "op": ["A) Exagerada", "B) Além da capacidade humana de suportar", "C) Moderada", "D) Irrelevante"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como compreendemos sacrifício?", "op": ["A) Abstratamente", "B) Como sofrimento real e tangível", "C) Apenas conceito", "D) Sem emoção"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Jesus negava suas emoções de tristeza.", "r": "F"},
+        {"q": "Jesus experimentava genuinamente o peso do pecado.", "r": "V"},
+        {"q": "Separação do Pai não era parte da redenção.", "r": "F"}
+      ]
+    },
+    {
+      "id": "qua",
+      "letra": "Q",
+      "data": "Quarta · 20 de agosto",
+      "titulo": "Submissão à Vontade do Pai",
+      "keyideas": "Obediência suprema · Renúncia de si · Vitória sobre egoísmo · Propósito redentor",
+      "verses": ["Mateus 26:39", "Hebreus 5:8", "Romanos 5:18-19"],
+      "conteudo": "<b>\"Não seja feita a minha vontade, mas a tua.\"</b> <b>Isto era renúncia máxima</b> — <b>desejos legítimos (preservação de vida) sendo subordinados ao propósito divino</b>.\n\n<b>Esta não era falta de liberdade, mas exercício supremo dela.</b> <b>Jesus podia ter descido da cruz — tinha poder para isto</b>. Mas <b>recusava, escolhendo obediência ao Pai</b>. A submissão era <b>vitória sobre toda força que tenta desviar de propósito</b>.\n\n<b>\"Mediante obediência de Um, muitos serão justificados.\"</b> A redenção se baseava em <b>obediência perfeita, não apenas sacrifício</b>. <b>Onde Adão desobedeceu, Cristo obedeceu</b>. Era inversão cósmica — restauração através de obediência radicalmente diferente.",
+      "reflexivas": ["Como compreendemos livre renúncia?", "Por que obediência era central?", "Como restaurava a desobediência original?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Qual era a vontade que Jesus renunciava?", "op": ["A) Pecado", "B) Preservação de vida", "C) Poder", "D) Riqueza"]},"r": "B"},
+        {"dif": "Fácil", "q": "Jesus tinha liberdade para rejeitar?", "op": ["A) Não", "B) Sim — podia descer da cruz", "C) Parcialmente", "D) Forçado"]},"r": "B"},
+        {"dif": "Fácil", "q": "O que escolheu Jesus?", "op": ["A) Auto-preservação", "B) Obediência ao Pai", "C) Fuga", "D) Retaliação"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que renúncia era vitória?", "op": ["A) Não era", "B) Supremo domínio de si em submissão", "C) Derrota", "D) Fraqueza"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era a base da redenção?", "op": ["A) Apenas morte", "B) Obediência perfeita + sacrifício", "C) Poder político", "D) Conhecimento"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como Adão e Cristo se comparavam?", "op": ["A) Similares", "B) Adão desobedecia, Cristo obedecia", "C) Ambos desobedeciam", "D) Sem paralelo"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que obediência era restauradora?", "op": ["A) Não era", "B) Revertia desobediência original", "C) Era irrelevante", "D) Complicava"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como submissão demonstrava amor?", "op": ["A) Não demonstrava", "B) Entrega de si pelo amado", "C) Prova de fraqueza", "D) Indiferença"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era o significado de 'mediante obediência'?", "op": ["A) Apesar da obediência", "B) Por causa de obediência", "C) Sem relação", "D) Paralelo"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos essa obediência?", "op": ["A) Rejeição de submissão", "B) Entrega de vontade ao propósito de Deus", "C) Apenas história", "D) Impossível"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Jesus era forçado na submissão ao Pai.", "r": "F"},
+        {"q": "Obediência de Jesus restaurava desobediência de Adão.", "r": "V"},
+        {"q": "Renúncia de si mesmo era fraqueza.", "r": "F"}
+      ]
+    },
+    {
+      "id": "qui",
+      "letra": "Q",
+      "data": "Quinta · 21 de agosto",
+      "titulo": "Agonia Transformada",
+      "keyideas": "Sofrimento significado · Propósito redentor · Transformação através de dor · Vitória em agonia",
+      "verses": ["Romanos 6:9-11", "Colossenses 1:24", "2 Timóteo 2:11-13"],
+      "conteudo": "<b>\"Se morremos com Ele, com Ele viveremos.\"</b> A agonia de Jesus não era fim — era <b>transformação e transição</b>. <b>Seu sofrimento produzia não apenas morte, mas ressurreição</b>.\n\n<b>Havia propósito em cada gota de suor, cada palavra de agonia.</b> <b>Nada era desperdiçado ou vazio</b>. <b>O sofrimento do Justo produzia redenção para muitos</b>. Esta era alquimia divina — <b>transformar morte em vida, derrota em vitória</b>.\n\n<b>\"Preencho em minha carne o que falta dos sofrimentos de Cristo.\"</b> Paulo capturava verdade revolucionária: <b>crentes compartilhavam dos sofrimentos redentores de Cristo</b>. <b>Nossa dor tinha significado quando unida ao propósito redentor</b>. O sofrimento deixava de ser vazio para tornar-se participação na obra de Deus.",
+      "reflexivas": ["Como sofrer tinha significado redentor?", "Por que agonia produzia transformação?", "Como participávamos dos sofrimentos de Cristo?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "A agonia de Jesus era fim?", "op": ["A) Sim", "B) Não — transição para ressurreição", "C) Parcialmente", "D) Permanente"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era o propósito do sofrimento?", "op": ["A) Nenhum", "B) Redenção para muitos", "C) Punishment", "D) Diversão"]},"r": "B"},
+        {"dif": "Fácil", "q": "Havia desperdício na agonia de Jesus?", "op": ["A) Sim", "B) Não — tudo tinha propósito", "C) Parcialmente", "D) Irrelevante"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como morte produzia vida?", "op": ["A) Não produzia", "B) Sacrifício abria acesso à vida eterna", "C) Contraditório", "D) Sem relação"]},"r": "B"},
+        {"dif": "Intermediária", "q": "O que era 'alquimia divina'?", "op": ["A) Mágica", "B) Transformação de derrota em vitória", "C) Engano", "D) Literalmente ouro"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como crentes participavam dos sofrimentos?", "op": ["A) Não participavam", "B) Unindo sua dor ao propósito redentor", "C) Observando", "D) Passivamente"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que sofrimento deixava de ser vazio?", "op": ["A) Nunca era vazio", "B) Significado em comunhão com Cristo", "C) Permanecia vazio", "D) Irrelevante"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como morte era transformadora?", "op": ["A) Não era", "B) Triunfo sobre separa­ção e pecado", "C) Apenas destructiva", "D) Sem poder"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era o significado de 'derrota em vitória'?", "op": ["A) Contraditório", "B) Cruz aparentava derrota mas realizava vitória", "C) Ambas ocorriam", "D) Sem conexão"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos essa transformação?", "op": ["A) Negamos dor", "B) Damos significado à dor através de Cristo", "C) Apenas história", "D) Impossível"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "O sofrimento de Jesus era sem propósito.", "r": "F"},
+        {"q": "Crentes podiam participar dos sofrimentos redentores de Cristo.", "r": "V"},
+        {"q": "Morte produzia apenas derrota.", "r": "F"}
+      ]
+    },
+    {
+      "id": "sex",
+      "letra": "S",
+      "data": "Sexta · 22 de agosto",
+      "titulo": "Força na Fraqueza",
+      "keyideas": "Poder divino em submissão · Humanidade exaltada · Ressurreição precedida · Vitória segura",
+      "verses": ["2 Coríntios 12:9-10", "Filipenses 4:13", "Hebreus 2:18"],
+      "conteudo": "<b>\"Minha graça é suficiente para ti, pois meu poder aperfeiçoa-se na fraqueza.\"</b> <b>Jesus na agonia estava em sua máxima fraqueza humana</b> — e ali, <b>o poder divino era aperfeiçoado</b>.\n\n<b>Não era superação mágica da dor</b> — Jesus ainda sofria. <b>Mas era infusão de poder divino através de submissão radical</b>. <b>Quanto mais fraco era, mais claramente o poder divino era visível</b>.\n\n<b>\"Tudo posso nAquele que me fortalece.\"</b> A força verdadeira não era ausência de luta, mas <b>perseverança em luta com poder divino</b>. Jesus exemplificava isto — <b>em agonia, continuava obediente; em sofrimento, continuava amoroso; na morte, continuava vitorioso</b>.",
+      "reflexivas": ["Como compreendemos força na fraqueza?", "Por que poder era aperfeiçoado?", "Como persistência revelava poder divino?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "Onde era o poder divino aperfeiçoado?", "op": ["A) Na riqueza", "B) Na fraqueza e submissão", "C) Na força humana", "D) Nunca"]},"r": "B"},
+        {"dif": "Fácil", "q": "Jesus sofria durante agonia?", "op": ["A) Não", "B) Sim — sofria genuinamente", "C) Fingiu", "D) Escapava"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era a relação entre fraqueza e poder?", "op": ["A) Nenhuma", "B) Fraqueza revelava poder divino", "C) Contraditória", "D) Confusa"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que poder era 'aperfeiçoado'?", "op": ["A) Não era", "B) Máxima demonstração através de submissão radical", "C) Menos visível", "D) Irrelevante"]},"r": "B"},
+        {"dif": "Intermediária", "q": "A força verdadeira era ausência de luta?", "op": ["A) Sim", "B) Não — perseverança em luta com poder", "C) Parcialmente", "D) Indiferente"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como Jesus exemplificava força?", "op": ["A) Evitando sofrimento", "B) Obedecendo apesar da agonia", "C) Revoltando-se", "D) Fracassando"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que graça era 'suficiente'?", "op": ["A) Não era", "B) Fornecia tudo necessário para fidelidade", "C) Apenas parcialmente", "D) Inadequada"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como submissão abria poder?", "op": ["A) Não abria", "B) Remoção de resistência permitia poder divino", "C) Contradição", "D) Irrelevante"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era a paradoxo de Cristo?", "op": ["A) Nenhuma", "B) Máxima fraqueza com máximo poder", "C) Apenas força", "D) Apenas fraqueza"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos essa lição?", "op": ["A) Negamos nossa fraqueza", "B) Confiamos no poder divino na nossa fraqueza", "C) Apenas história", "D) Impossível"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "O poder divino era visível na força humana de Jesus.", "r": "F"},
+        {"q": "Graça era suficiente para sustentar Jesus na agonia.", "r": "V"},
+        {"q": "Força verdadeira era ausência de lutas.", "r": "F"}
+      ]
+    },
+    {
+      "id": "sab",
+      "letra": "S",
+      "data": "Sábado · 23 de agosto · Comunidade",
+      "titulo": "Lição de Obediência Suprema",
+      "keyideas": "Getsêmani como microcosmo · Entrega completa · Testemunho de fidelidade · Padrão redefinido",
+      "verses": ["Hebreus 5:7-10", "1 Pedro 2:21-24", "Romanos 8:17"],
+      "conteudo": "<b>\"Embora fosse Filho, aprendeu obediência pelo sofrimento.\"</b> <b>O Getsêmani era microcosmo da redenção inteira</b> — isolamento, tentação, agonia, submissão, vitória.\n\n<b>Tudo convergia para uma lição suprema:</b> <b>fidelidade significava mais que conforto</b>. <b>Significava entrega total de vontade ao propósito de Deus</b>. <b>Jesus redefiniu o que significava ser humano perfeito — não era poder, riqueza ou aclamação, mas obediência amorosa</b>.\n\n<b>\"Se sofrem com Cristo, também reinarão com Ele.\"</b> Os crentes eram <b>chamados a Getsêmani também — seus próprios momentos de agonia, tentação, escolha</b>. Mas agora tinham <b>padrão, encorajamento e poder de Alguém que havia trilhado o caminho</b>.",
+      "reflexivas": ["Como Getsêmani moldava entendimento da redenção?", "Por que padrão importava?"],
+      "quiz": [
+        {"dif": "Fácil", "q": "O que era Getsêmani?", "op": ["A) Apenas evento", "B) Microcosmo da redenção inteira", "C) Sem significado", "D) Teatro"]},"r": "B"},
+        {"dif": "Fácil", "q": "Qual era a lição suprema?", "op": ["A) Evitar sofrimento", "B) Fidelidade acima de conforto", "C) Buscar poder", "D) Nenhuma"]},"r": "B"},
+        {"dif": "Fácil", "q": "Como Jesus redefiniu humanidade perfeita?", "op": ["A) Poder", "B) Obediência amorosa", "C) Riqueza", "D) Fama"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Por que sofrimento ensinava obediência?", "op": ["A) Não ensinava", "B) Testava e formava caráter", "C) Era desnecessário", "D) Contraproducente"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Como crentes viviam seu próprio Getsêmani?", "op": ["A) Não viviam", "B) Em momentos de agonia e decisão", "C) Nunca", "D) Opcionalmente"]},"r": "B"},
+        {"dif": "Intermediária", "q": "Qual era o encorajamento para crentes?", "op": ["A) Nenhum", "B) Cristo trilhou o caminho; reinarão com Ele", "C) Apenas história", "D) Irrelevante"]},"r": "B"},
+        {"dif": "Avançada", "q": "Por que Getsêmani era essencial ao evangelho?", "op": ["A) Não era", "B) Revelava verdade de obediência redentor", "C) Era apenas drama", "D) Opcional"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como aplicamos Getsêmani?", "op": ["A) Evitamos", "B) Aceitamos como oportunidade de fidelidade", "C) Negamos", "D) Ignoramos"]},"r": "B"},
+        {"dif": "Avançada", "q": "Qual era a relação entre sofrimento e reino?", "op": ["A) Nenhuma", "B) Sofrimento com Cristo levava a reinado", "C) Contraditório", "D) Irrelevante"]},"r": "B"},
+        {"dif": "Avançada", "q": "Como Getsêmani moldava comunidade cristã?", "op": ["A) Não moldava", "B) Estabelecia padrão de entrega radical", "C) Apenas memória", "D) Sem impacto"]},"r": "B"}
+      ],
+      "vf": [
+        {"q": "Getsêmani era evento isolado sem significado maior.", "r": "F"},
+        {"q": "Cristo redefiniu humanidade perfeita como obediência.", "r": "V"},
+        {"q": "Crentes não eram chamados ao seu próprio Getsêmani.", "r": "F"}
+      ]
+    }
+  ]
+}
