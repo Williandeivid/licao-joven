@@ -4926,16 +4926,45 @@ function generateRadialMindMap(lessonId) {
 }
 
 // ============ INIT ============
-// Firebase removido: Cloudflare Pages bloqueia scripts externos do CDN
-// Usando localStorage para salvar dados localmente
-console.log('✓ Usando localStorage para salvar progresso localmente');
+// Firebase REST API (Realtime Database) - Funciona no Cloudflare Pages!
+const FIREBASE_DB = 'https://licaojovem-iasd-default-rtdb.firebaseio.com';
+console.log('✓ Firebase REST API configurada:', FIREBASE_DB);
 
-async function loginWithGoogle() {
-  alert('Login com Google desabilitado (Firebase não suportado no Cloudflare Pages).\n\nSeus dados são salvos localmente no navegador.');
+// ===== FIREBASE REST API FUNCTIONS =====
+async function salvarNoFirebase(usuarioId, dados) {
+  try {
+    const response = await fetch(
+      `${FIREBASE_DB}/usuarios/${usuarioId}.json`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+      }
+    );
+    const resultado = await response.json();
+    console.log('✅ Dados salvos no Firebase:', resultado);
+    return resultado;
+  } catch(e) {
+    console.error('❌ Erro ao salvar no Firebase:', e);
+    return null;
+  }
 }
 
+async function lerDoFirebase(usuarioId) {
+  try {
+    const response = await fetch(`${FIREBASE_DB}/usuarios/${usuarioId}.json`);
+    const dados = await response.json();
+    console.log('✅ Dados lidos do Firebase:', dados);
+    return dados;
+  } catch(e) {
+    console.error('❌ Erro ao ler do Firebase:', e);
+    return null;
+  }
+}
 
-// Firebase removido — usando localStorage
+async function loginWithGoogle() {
+  alert('Login com Google desabilitado (Firebase não suportado no Cloudflare Pages).\n\nSeus dados são salvos localmente no navegador.\n\nMas você pode usar estas funções para sincronizar com a nuvem:\n- salvarNoFirebase(userId, dados)\n- lerDoFirebase(userId)');
+}
 
 function updateAuthUI() {
   const loginBtn = document.getElementById('login-btn');
