@@ -4966,7 +4966,7 @@ if (typeof firebase !== 'undefined') {
 }
 
 async function loginWithGoogle() {
-  if (!fb) { alert('Firebase não inicializado — verifique sua conexão com a internet.'); return; }
+  if (!fb) { alert('Firebase não está disponível. Para usar o login, acesse em um navegador que permita scripts externos.'); return; }
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     const result = await fb.auth.signInWithPopup(provider);
