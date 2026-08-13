@@ -4949,21 +4949,20 @@ if (typeof firebase !== 'undefined') {
     firebase.initializeApp(firebaseConfig);
     fb = { auth: firebase.auth(), firestore: firebase.firestore() };
     console.log('✓ Firebase inicializado com sucesso');
+
+    // Listen to auth state changes
+    fb.auth.onAuthStateChanged(async (user) => {
+      currentUser = user;
+      updateAuthUI();
+      if (user) {
+        await syncUserDataFromFirebase();
+      }
+    });
   } catch(e) {
     console.error('❌ Erro ao inicializar Firebase:', e);
   }
 } else {
   console.error('❌ Firebase não disponível - scripts não carregaram');
-}
-
-  // Listen to auth state changes
-  fb.auth.onAuthStateChanged(async (user) => {
-    currentUser = user;
-    updateAuthUI();
-    if (user) {
-      await syncUserDataFromFirebase();
-    }
-  });
 }
 
 async function loginWithGoogle() {
