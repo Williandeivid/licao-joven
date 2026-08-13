@@ -1393,6 +1393,34 @@
 </nav>
 
 <script>
+// ===== BOOK_NAME_TO_ID (DEVE ESTAR AQUI, ANTES DE SER USADO) =====
+const BOOK_NAME_TO_ID = {
+  'Gênesis':'GEN','Êxodo':'EXO','Levítico':'LEV','Números':'NUM','Deuteronômio':'DEU',
+  'Josué':'JOS','Juízes':'JDG','Rute':'RUT','1 Samuel':'1SA','2 Samuel':'2SA',
+  '1 Reis':'1KI','2 Reis':'2KI','1 Crônicas':'1CH','2 Crônicas':'2CH','Esdras':'EZR',
+  'Neemias':'NEH','Ester':'EST','Jó':'JOB','Salmos':'PSA','Salmo':'PSA','Provérbios':'PRO',
+  'Eclesiastes':'ECC','Cantares':'SNG','Cânticos':'SNG','Isaías':'ISA','Jeremias':'JER','Lamentações':'LAM',
+  'Ezequiel':'EZK','Daniel':'DAN','Oséias':'HOS','Joel':'JOL','Amós':'AMO','Obadias':'OBA',
+  'Jonas':'JON','Miquéias':'MIC','Naum':'NAM','Habacuque':'HAB','Sofonias':'ZEP','Ageu':'HAG',
+  'Zacarias':'ZEC','Malaquias':'MAL','Mateus':'MAT','Marcos':'MRK','Lucas':'LUK','João':'JHN',
+  'Atos':'ACT','Romanos':'ROM','1 Coríntios':'1CO','2 Coríntios':'2CO','Gálatas':'GAL',
+  'Efésios':'EPH','Filipenses':'PHP','Colossenses':'COL','1 Tessalonicenses':'1TH',
+  '2 Tessalonicenses':'2TH','1 Timóteo':'1TI','2 Timóteo':'2TI','Tito':'TIT','Filemom':'PHM',
+  'Hebreus':'HEB','Tiago':'JAS','1 Pedro':'1PE','2 Pedro':'2PE','1 João':'1JN','2 João':'2JN',
+  '3 João':'3JN','Judas':'JUD','Apocalipse':'REV',
+  'Gn':'GEN','Êx':'EXO','Ex':'EXO','Lv':'LEV','Nm':'NUM','Dt':'DEU','Js':'JOS','Jz':'JDG','Rt':'RUT',
+  '1Sm':'1SA','2Sm':'2SA','1Rs':'1KI','2Rs':'2KI','1Cr':'1CH','2Cr':'2CH','Ed':'EZR','Ne':'NEH',
+  'Et':'EST','Sl':'PSA','Pv':'PRO','Ec':'ECC','Ct':'SNG','Is':'ISA','Jr':'JER','Lm':'LAM','Ez':'EZK',
+  'Dn':'DAN','Os':'HOS','Jl':'JOL','Am':'AMO','Ob':'OBA','Jn':'JON','Mq':'MIC','Na':'NAM','Hc':'HAB',
+  'Sf':'ZEP','Ag':'HAG','Zc':'ZEC','Ml':'MAL','Mt':'MAT','Mc':'MRK','Lc':'LUK','Jo':'JHN','At':'ACT',
+  'Rm':'ROM','1Co':'1CO','2Co':'2CO','Gl':'GAL','Ef':'EPH','Fp':'PHP','Cl':'COL','1Ts':'1TH','2Ts':'2TH',
+  '1Tm':'1TI','2Tm':'2TI','Tt':'TIT','Fm':'PHM','Hb':'HEB','Tg':'JAS','1Pe':'1PE','2Pe':'2PE',
+  '1Jo':'1JN','2Jo':'2JN','3Jo':'3JN','Jd':'JUD','Ap':'REV',
+  '1 Sm':'1SA','2 Sm':'2SA','1 Rs':'1KI','2 Rs':'2KI','1 Cr':'1CH','2 Cr':'2CH',
+  '1 Co':'1CO','2 Co':'2CO','1 Ts':'1TH','2 Ts':'2TH','1 Tm':'1TI','2 Tm':'2TI',
+  '1 Pe':'1PE','2 Pe':'2PE','1 Jo':'1JN','2 Jo':'2JN','3 Jo':'3JN','Fl':'PHP'
+};
+
 // ============ STORAGE ADAPTER ============
 // window.storage only exists inside Claude's preview. Outside it (GitHub/Cloudflare, any
 // real browser), we fall back to localStorage automatically — same interface, so nothing
@@ -5470,33 +5498,6 @@ window.addEventListener('load', async function(){
 
 <script>
 // ===== ADVENTECH LESSON SERVICE =====
-const BOOK_NAME_TO_ID = {
-  'Gênesis':'GEN','Êxodo':'EXO','Levítico':'LEV','Números':'NUM','Deuteronômio':'DEU',
-  'Josué':'JOS','Juízes':'JDG','Rute':'RUT','1 Samuel':'1SA','2 Samuel':'2SA',
-  '1 Reis':'1KI','2 Reis':'2KI','1 Crônicas':'1CH','2 Crônicas':'2CH','Esdras':'EZR',
-  'Neemias':'NEH','Ester':'EST','Jó':'JOB','Salmos':'PSA','Salmo':'PSA','Provérbios':'PRO',
-  'Eclesiastes':'ECC','Cantares':'SNG','Cânticos':'SNG','Isaías':'ISA','Jeremias':'JER','Lamentações':'LAM',
-  'Ezequiel':'EZK','Daniel':'DAN','Oséias':'HOS','Joel':'JOL','Amós':'AMO','Obadias':'OBA',
-  'Jonas':'JON','Miquéias':'MIC','Naum':'NAM','Habacuque':'HAB','Sofonias':'ZEP','Ageu':'HAG',
-  'Zacarias':'ZEC','Malaquias':'MAL','Mateus':'MAT','Marcos':'MRK','Lucas':'LUK','João':'JHN',
-  'Atos':'ACT','Romanos':'ROM','1 Coríntios':'1CO','2 Coríntios':'2CO','Gálatas':'GAL',
-  'Efésios':'EPH','Filipenses':'PHP','Colossenses':'COL','1 Tessalonicenses':'1TH',
-  '2 Tessalonicenses':'2TH','1 Timóteo':'1TI','2 Timóteo':'2TI','Tito':'TIT','Filemom':'PHM',
-  'Hebreus':'HEB','Tiago':'JAS','1 Pedro':'1PE','2 Pedro':'2PE','1 João':'1JN','2 João':'2JN',
-  '3 João':'3JN','Judas':'JUD','Apocalipse':'REV',
-  'Gn':'GEN','Êx':'EXO','Ex':'EXO','Lv':'LEV','Nm':'NUM','Dt':'DEU','Js':'JOS','Jz':'JDG','Rt':'RUT',
-  '1Sm':'1SA','2Sm':'2SA','1Rs':'1KI','2Rs':'2KI','1Cr':'1CH','2Cr':'2CH','Ed':'EZR','Ne':'NEH',
-  'Et':'EST','Sl':'PSA','Pv':'PRO','Ec':'ECC','Ct':'SNG','Is':'ISA','Jr':'JER','Lm':'LAM','Ez':'EZK',
-  'Dn':'DAN','Os':'HOS','Jl':'JOL','Am':'AMO','Ob':'OBA','Jn':'JON','Mq':'MIC','Na':'NAM','Hc':'HAB',
-  'Sf':'ZEP','Ag':'HAG','Zc':'ZEC','Ml':'MAL','Mt':'MAT','Mc':'MRK','Lc':'LUK','Jo':'JHN','At':'ACT',
-  'Rm':'ROM','1Co':'1CO','2Co':'2CO','Gl':'GAL','Ef':'EPH','Fp':'PHP','Cl':'COL','1Ts':'1TH','2Ts':'2TH',
-  '1Tm':'1TI','2Tm':'2TI','Tt':'TIT','Fm':'PHM','Hb':'HEB','Tg':'JAS','1Pe':'1PE','2Pe':'2PE',
-  '1Jo':'1JN','2Jo':'2JN','3Jo':'3JN','Jd':'JUD','Ap':'REV',
-  '1 Sm':'1SA','2 Sm':'2SA','1 Rs':'1KI','2 Rs':'2KI','1 Cr':'1CH','2 Cr':'2CH',
-  '1 Co':'1CO','2 Co':'2CO','1 Ts':'1TH','2 Ts':'2TH','1 Tm':'1TI','2 Tm':'2TI',
-  '1 Pe':'1PE','2 Pe':'2PE','1 Jo':'1JN','2 Jo':'2JN','3 Jo':'3JN','Fl':'PHP'
-};
-
 function linkBibleCitations(text){
   const names = Object.keys(BOOK_NAME_TO_ID).sort((a,b)=>b.length-a.length);
   const namesPattern = names.map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
