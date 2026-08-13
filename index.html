@@ -1807,6 +1807,20 @@ function initSwipeNavigation(lessonId){
 }
 
 async function renderLessonDetail(lessonId, fromList){
+  // 🔥 Carregar dados do Firebase (sincronizar com nuvem)
+  const userId = localStorage.getItem('user-id');
+  if(userId) {
+    try {
+      const dadosFirebase = await lerDoFirebase(userId);
+      if(dadosFirebase && dadosFirebase.progresso) {
+        Object.assign(progressCache, dadosFirebase.progresso);
+        console.log('✅ Dados carregados do Firebase!');
+      }
+    } catch(e) {
+      console.warn('⚠️ Não conseguiu carregar Firebase (offline?):', e.message);
+    }
+  }
+
   const meta = LESSONS_META.find(l=>l.id===lessonId);
   const content = LESSONS_CONTENT.find(l=>l.id===lessonId);
   const progress = progressCache[lessonId] || {days:{}, quiz:{}};
@@ -2221,6 +2235,15 @@ async function marcarConcluido(btn){
   btn.classList.add('done');
   btn.textContent = '✓ Dia concluído';
   await saveProgress(lessonId, progress);
+
+  // 🔥 Auto-save no Firebase
+  const userId = localStorage.getItem('user-id') || 'anonimo-' + Date.now();
+  localStorage.setItem('user-id', userId);
+  await salvarNoFirebase(userId, {
+    progresso: progressCache,
+    atualizado_em: new Date().toISOString()
+  });
+  console.log('✅ Progresso sincronizado com Firebase!');
 }
 
 function refazerQuiz(lessonId, dayId){
