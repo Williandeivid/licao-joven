@@ -1421,6 +1421,19 @@ const BOOK_NAME_TO_ID = {
   '1 Pe':'1PE','2 Pe':'2PE','1 Jo':'1JN','2 Jo':'2JN','3 Jo':'3JN','Fl':'PHP'
 };
 
+// Extrai livro\capítulo de uma citação bíblica em centraltexts (ex: "Mateus 27:24,25")
+function seedContextFromCentralTexts(centraltexts){
+  if(!centraltexts) return {book:null, chapter:null};
+  for(const entry of centraltexts){
+    const m = entry.match(new RegExp('(' + Object.keys(BOOK_NAME_TO_ID).sort((a,b)=>b.length-a.length).map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')\\.?\\s(\\d{1,3})[:.]\\d{1,3}'));
+    if(m){
+      const bookId = BOOK_NAME_TO_ID[m[1]];
+      if(bookId) return {book:bookId, chapter:m[2]};
+    }
+  }
+  return {book:null, chapter:null};
+}
+
 // ============ STORAGE ADAPTER ============
 // window.storage only exists inside Claude's preview. Outside it (GitHub/Cloudflare, any
 // real browser), we fall back to localStorage automatically — same interface, so nothing
@@ -5573,20 +5586,6 @@ function linkShortVerseRefs(html, seedBook, seedChapter){
   }
   result += linkPlain(html.slice(lastIndex));
   return result;
-}
-
-// Extrai livro/capítulo de uma citação bíblica em centraltexts (ex: "Mateus 27:24,25"),
-// pra servir de contexto inicial quando o corpo do texto não repete a citação completa.
-function seedContextFromCentralTexts(centraltexts){
-  if(!centraltexts) return {book:null, chapter:null};
-  for(const entry of centraltexts){
-    const m = entry.match(new RegExp('(' + Object.keys(BOOK_NAME_TO_ID).sort((a,b)=>b.length-a.length).map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')\\.?\\s(\\d{1,3})[:.]\\d{1,3}'));
-    if(m){
-      const bookId = BOOK_NAME_TO_ID[m[1]];
-      if(bookId) return {book:bookId, chapter:m[2]};
-    }
-  }
-  return {book:null, chapter:null};
 }
 
 class AdventechLessonService {
