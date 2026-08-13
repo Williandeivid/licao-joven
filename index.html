@@ -2112,12 +2112,14 @@ async function renderVerseVersion(version, bookMeta, chapter, v1, v2, externalLi
 let favoritesCache = null;
 async function loadFavorites(){
   if(favoritesCache) return favoritesCache;
+  favoritesCache = [];
   try{
     const res = await window.storage.get('bible-favorites', false);
-    favoritesCache = res && res.value ? JSON.parse(res.value) : [];
+    if(res && res.value) {
+      favoritesCache = JSON.parse(res.value);
+    }
   }catch(e){
-    favoritesCache = [];
-    console.warn('Favoritos corrompidos, resetando...', e);
+    console.warn('Favoritos não encontrados (primeira vez ou corrompidos)');
   }
   return favoritesCache;
 }
