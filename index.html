@@ -2246,12 +2246,12 @@ async function marcarConcluido(btn){
   console.log('✅ Progresso sincronizado com Firebase!');
 }
 
-function refazerQuiz(lessonId, dayId){
+async function refazerQuiz(lessonId, dayId){
   const p = progressCache[lessonId] || {days:{}, quiz:{}};
   if(!p.quiz) p.quiz = {};
   delete p.quiz[dayId];
   progressCache[lessonId] = p;
-  saveProgress(lessonId, p);
+  await saveProgress(lessonId, p);
   renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
 }
 
