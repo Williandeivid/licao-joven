@@ -1563,12 +1563,14 @@ function hashStr(s){
 }
 function shuffleOptions(opts, correctLetter, seed){
   const idx = opts.map((o,i)=>i);
-  // Garantir que correctLetter seja sempre uma string válida
+  // FIX: Garantir que correctLetter seja sempre uma string válida (force v3)
   let letter = 'A';
   if(typeof correctLetter === 'number') {
     letter = String.fromCharCode(65 + correctLetter);
   } else if(typeof correctLetter === 'string' && correctLetter.length > 0) {
     letter = correctLetter.substring(0, 1).toUpperCase();
+  } else {
+    letter = 'A'; // fallback padrão
   }
   const correctIdx = letter.charCodeAt(0)-65;
   for(let i=idx.length-1;i>0;i--){
