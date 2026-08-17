@@ -1827,6 +1827,9 @@ async function renderLessonDetail(lessonId, fromList){
   const container = document.getElementById('detail-container');
   if(!container) return;
   window.scrollTo(0, 0);
+  lastScrollY = 0;
+  const nav = document.querySelector('.bottomnav');
+  if(nav) nav.classList.remove('hide-bar');
 
   let html = `<header class="hero">`;
   if(fromList) html += `<button class="back-btn" onclick="goList()">← Voltar para a lista</button><br>`;
