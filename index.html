@@ -2252,7 +2252,7 @@ async function refazerQuiz(lessonId, dayId){
   delete p.quiz[dayId];
   progressCache[lessonId] = p;
   await saveProgress(lessonId, p);
-  renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
+  await renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
 }
 
 function bindDayInteractions(lessonId, content, progress){
