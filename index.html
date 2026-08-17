@@ -2375,7 +2375,7 @@ function bindDayInteractions(lessonId, content, progress){
             p.days[day.id] = {studied:true, estMinutes};
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
-            renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
+            await renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
           }
         });
       });
