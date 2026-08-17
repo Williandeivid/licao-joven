@@ -1563,21 +1563,12 @@ function hashStr(s){
 }
 function shuffleOptions(opts, correctLetter, seed){
   const idx = opts.map((o,i)=>i);
-  // DEBUG: log do valor recebido
-  if(typeof correctLetter !== 'string' && typeof correctLetter !== 'number') {
-    console.warn('shuffleOptions: correctLetter inválido', {type: typeof correctLetter, value: correctLetter});
-    correctLetter = 'A';
-  }
-  // Converter número para letra se necessário
-  let letter = correctLetter || 'A';
+  // Garantir que correctLetter seja sempre uma string válida
+  let letter = 'A';
   if(typeof correctLetter === 'number') {
     letter = String.fromCharCode(65 + correctLetter);
-  } else if(!letter || typeof letter !== 'string') {
-    letter = 'A'; // padrão
-  }
-  if(!letter || typeof letter !== 'string') {
-    console.error('shuffleOptions: letter ainda inválida', {letter, type: typeof letter});
-    letter = 'A';
+  } else if(typeof correctLetter === 'string' && correctLetter.length > 0) {
+    letter = correctLetter.substring(0, 1).toUpperCase();
   }
   const correctIdx = letter.charCodeAt(0)-65;
   for(let i=idx.length-1;i>0;i--){
