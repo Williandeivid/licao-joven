@@ -5031,7 +5031,11 @@ async function lerDoFirebase(usuarioId) {
 
 // Preferencias visuais ficam de proposito so no aparelho: e comum querer
 // tema escuro no celular e claro no computador.
-const CHAVES_LOCAIS = ['theme-preference', 'design-theme', 'font-size', 'bible-view-mode', 'user-id'];
+// Estas nao entram no pacote plano de ajustes: aparencia vai por outro
+// caminho, em ajustes_aparelho, separada por tipo de aparelho.
+// 'prefs-aparelho-ts' e controle interno e nunca sobe.
+const CHAVES_LOCAIS = ['theme-preference', 'design-theme', 'font-size', 'bible-view-mode',
+                       'user-id', 'prefs-aparelho-ts'];
 
 // Prefixos que nunca sobem: cache regeneravel, nao e dado do usuario.
 // 'official-' guarda o conteudo oficial baixado (TTL de 7 dias) e passa
@@ -5124,11 +5128,100 @@ async function aplicarAjustesDaNuvem(remoto) {
 // de outro aparelho.
 const SESSAO_ID = 'sess-' + Math.random().toString(36).slice(2) + '-' + Date.now().toString(36);
 
+// ===== APARENCIA: SEGUE A CONTA, SEPARADA POR TIPO DE APARELHO =====
+// O que voce ajusta no celular vale para os seus celulares; o que ajusta no
+// computador vale para os computadores. Assim a aparencia acompanha a conta
+// sem que mexer no celular a noite mude o monitor do trabalho.
+const CHAVES_POR_APARELHO = ['theme-preference', 'design-theme', 'font-size', 'bible-view-mode'];
+
+function tipoDeAparelho() {
+  const ua = navigator.userAgent || '';
+  const marcaMovel = /Android|iPhone|iPad|iPod|Windows Phone|webOS|BlackBerry|Opera Mini|IEMobile/i.test(ua);
+  // iPad recente se identifica como Mac; o toque desempata.
+  const toque = (navigator.maxTouchPoints || 0) > 1 &&
+                typeof window.matchMedia === 'function' &&
+                window.matchMedia('(pointer: coarse)').matches;
+  return (marcaMovel || toque) ? 'celular' : 'computador';
+}
+
+// Guarda o bloco inteiro que veio da nuvem. A gravacao substitui o no
+// completo, entao sem isso o computador apagaria as preferencias do celular.
+let _prefsAparelhoNuvem = {};
+
+async function coletarPrefsAparelho() {
+  const valores = {};
+  for (const k of CHAVES_POR_APARELHO) {
+    try {
+      const r = await window.storage.get(k, false);
+      if (r && r.value !== undefined && r.value !== null) valores[k] = r.value;
+    } catch(e) { /* chave ainda nao existe */ }
+  }
+  return valores;
+}
+
+function tsLocalPrefs() {
+  try { return localStorage.getItem('prefs-aparelho-ts') || ''; } catch(e) { return ''; }
+}
+function marcarTsLocalPrefs(ts) {
+  try { localStorage.setItem('prefs-aparelho-ts', ts); } catch(e) {}
+}
+
+// Reaplica na tela o que acabou de chegar, sem precisar recarregar.
+async function reaplicarAparencia() {
+  try {
+    // loadFontSize so adiciona a classe; limpa antes para nao empilhar.
+    const html = document.documentElement;
+    if (typeof FONT_SIZES !== 'undefined') FONT_SIZES.forEach(c => html.classList.remove(c));
+    if (typeof loadFontSize === 'function') await loadFontSize();
+    if (typeof loadTheme === 'function') await loadTheme();
+    if (typeof loadDesignTheme === 'function') await loadDesignTheme();
+    if (typeof loadBibleViewMode === 'function') await loadBibleViewMode();
+  } catch(e) {
+    console.warn('⚠️ Nao reaplicou a aparencia:', e.message);
+  }
+}
+
+// Aqui a regra e "a mudanca mais recente vence", nao "local vence":
+// se voce trocou o tema no outro celular, este deve acompanhar.
+async function aplicarPrefsAparelho(blocoTodos) {
+  if (!blocoTodos || typeof blocoTodos !== 'object') return false;
+  _prefsAparelhoNuvem = Object.assign({}, blocoTodos);
+
+  const meu = blocoTodos[tipoDeAparelho()];
+  if (!meu || !meu.valores) return false;
+  if (meu.origem === SESSAO_ID) return false;
+  if (meu.atualizado_em && tsLocalPrefs() && meu.atualizado_em <= tsLocalPrefs()) return false;
+
+  let mudou = false;
+  const gravar = window.storage.setSemSync || window.storage.set;
+  for (const k of Object.keys(meu.valores)) {
+    if (CHAVES_POR_APARELHO.indexOf(k) === -1) continue;
+    try { await gravar.call(window.storage, k, meu.valores[k], false); mudou = true; }
+    catch(e) { console.warn('⚠️ Nao aplicou preferencia', k, '-', e.message); }
+  }
+  if (mudou) {
+    marcarTsLocalPrefs(meu.atualizado_em || new Date().toISOString());
+    await reaplicarAparencia();
+    console.log('🎨 Aparencia de ' + tipoDeAparelho() + ' atualizada da conta');
+  }
+  return mudou;
+}
+
 // Pacote unico enviado ao Firebase, usado por todos os pontos de gravacao.
 async function montarPacoteSync(extra) {
+  // Parte do que ja esta na nuvem para nao apagar o bloco do outro tipo
+  // de aparelho, ja que a gravacao substitui o no inteiro.
+  const prefs = Object.assign({}, _prefsAparelhoNuvem);
+  prefs[tipoDeAparelho()] = {
+    valores: await coletarPrefsAparelho(),
+    atualizado_em: new Date().toISOString(),
+    origem: SESSAO_ID
+  };
+
   return Object.assign({
     progresso: progressCache,
     ajustes: await coletarDadosLocais(),
+    ajustes_aparelho: prefs,
     origem: SESSAO_ID,
     atualizado_em: new Date().toISOString()
   }, extra || {});
@@ -5158,7 +5251,14 @@ function agendarSync() {
   window.storage.setSemSync = setOriginal;
   window.storage.set = async function(key, value, shared) {
     const r = await setOriginal(key, value, shared);
-    try { if (!shared && chaveSincronizavel(key)) agendarSync(); } catch(e) {}
+    try {
+      if (!shared) {
+        const ehAparencia = CHAVES_POR_APARELHO.indexOf(key) !== -1;
+        // Marca o momento da troca para a regra de "mais recente vence".
+        if (ehAparencia) marcarTsLocalPrefs(new Date().toISOString());
+        if (ehAparencia || chaveSincronizavel(key)) agendarSync();
+      }
+    } catch(e) {}
     return r;
   };
 })();
@@ -5186,6 +5286,8 @@ async function mesclarProgressoDaNuvem() {
       const n = await aplicarAjustesDaNuvem(dados.ajustes);
       if (n) console.log('✅ ' + n + ' ajuste(s) trazidos da nuvem');
     }
+
+    if (dados.ajustes_aparelho) await aplicarPrefsAparelho(dados.ajustes_aparelho);
   } catch(e) {
     console.warn('⚠️ Nao deu para mesclar da nuvem:', e.message);
   }
@@ -5224,6 +5326,11 @@ async function aplicarSnapshotAoVivo(dados) {
     if (dados.ajustes) {
       const n = await aplicarAjustesDaNuvem(dados.ajustes);
       if (n) mudou = true;
+    }
+
+    // Aparencia so muda se veio do MESMO tipo de aparelho e for mais recente.
+    if (dados.ajustes_aparelho) {
+      if (await aplicarPrefsAparelho(dados.ajustes_aparelho)) mudou = true;
     }
 
     // Redesenha apenas a aba Conta, que e onde nome e metas aparecem.

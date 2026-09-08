@@ -86,6 +86,37 @@ Dá para apagar depois que todo mundo migrar.
 
 ---
 
+## O que sincroniza
+
+**Segue a conta, igual em todo aparelho:** progresso das lições, nome, metas,
+favoritos, marcações na Bíblia, plano bíblico ativo e seu progresso, datas de
+início, logs de atividade e tempo.
+
+**Segue a conta, mas separado por tipo de aparelho:** claro/escuro, tema de
+design, tamanho da fonte e modo de leitura da Bíblia.
+
+Ou seja: o que você ajusta no celular vale para os seus celulares, e o que
+ajusta no computador vale para os computadores. Trocar o tema no celular à
+noite não mexe no monitor do trabalho, mas um celular novo já entra com as
+suas preferências de celular.
+
+O tipo é detectado por `tipoDeAparelho()`, que combina o user agent com a
+presença de toque — tablets contam como celular, incluindo iPad recente, que
+se identifica como Mac.
+
+**Nunca sobe:** o cache `official-*` (conteúdo oficial baixado, regenerável,
+passa de 300 KB por usuário) e o controle interno `prefs-aparelho-ts`.
+
+### Regra de conflito
+
+| Tipo de dado | Regra | Motivo |
+|---|---|---|
+| Progresso, nome, metas | o do aparelho em uso vence | não perder o que acabou de fazer |
+| Favoritos, marcações | união dos dois | nada se perde de nenhum lado |
+| Aparência | a mudança mais recente vence | trocou o tema no outro celular, este acompanha |
+
+---
+
 ## Onde está cada coisa no código
 
 | O quê | Local |
