@@ -1,0 +1,10 @@
+# Backups locais do index.html - nao devem ir para o repositorio
+index.html.backup*
+index.html.pre-*
+*.backup
+*.backup[0-9]
+
+# Saidas temporarias
+*.log
+.DS_Store
+Thumbs.db

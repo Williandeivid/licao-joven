@@ -6,8 +6,31 @@
 <title>Lições — Escola Sabatina Jovem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- Firebase SDK v9+ (compat version para compatibilidade com código global) -->
-<!-- Firebase removido: Cloudflare Pages bloqueia scripts externos. Usando localStorage para salvar dados. -->
+<!-- Firebase SDK (compat) - carregado do CDN oficial do Google -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+  /* ===================================================================
+     CONFIGURACAO DO FIREBASE
+     -------------------------------------------------------------------
+     Valores de: Firebase Console > Configuracoes do projeto > Seus
+     aplicativos > Configuracao do SDK.
+     A apiKey do Firebase Web e publica por natureza - nao e segredo.
+     A protecao real vem das regras do database + dominios autorizados
+     (Authentication > Settings > Authorized domains).
+  =================================================================== */
+  const firebaseConfig = {
+    apiKey: "AIzaSyDxvv4-WnBzc48hv5qCjbiFZb3ZuLcI_JI",
+    authDomain: "licaojovem-iasd.firebaseapp.com",
+    databaseURL: "https://licaojovem-iasd-default-rtdb.firebaseio.com",
+    projectId: "licaojovem-iasd",
+    storageBucket: "licaojovem-iasd.firebasestorage.app",
+    messagingSenderId: "982985225523",
+    appId: "1:982985225523:web:bfccedbbd93dffa4c53a46",
+    measurementId: "G-3S6F8YQK7S"
+  };
+</script>
 <style>
   :root{
     --void:#171335; --void-2:#241f52;
@@ -1808,14 +1831,11 @@ function initSwipeNavigation(lessonId){
 
 async function renderLessonDetail(lessonId, fromList){
   // 🔥 Carregar dados do Firebase (sincronizar com nuvem)
-  const userId = localStorage.getItem('user-id');
-  if(userId) {
+  // So busca na nuvem quando ha usuario logado: as regras do banco exigem
+  // autenticacao, entao sem login a leitura voltaria 401 a cada licao aberta.
+  if(currentUser) {
     try {
-      const dadosFirebase = await lerDoFirebase(userId);
-      if(dadosFirebase && dadosFirebase.progresso) {
-        Object.assign(progressCache, dadosFirebase.progresso);
-        console.log('✅ Dados carregados do Firebase!');
-      }
+      await mesclarProgressoDaNuvem();
     } catch(e) {
       console.warn('⚠️ Não conseguiu carregar Firebase (offline?):', e.message);
     }
@@ -2236,14 +2256,12 @@ async function marcarConcluido(btn){
   btn.textContent = '✓ Dia concluído';
   await saveProgress(lessonId, progress);
 
-  // 🔥 Auto-save no Firebase
-  const userId = localStorage.getItem('user-id') || 'anonimo-' + Date.now();
-  localStorage.setItem('user-id', userId);
-  await salvarNoFirebase(userId, {
-    progresso: progressCache,
-    atualizado_em: new Date().toISOString()
-  });
-  console.log('✅ Progresso sincronizado com Firebase!');
+  // 🔥 Auto-save no Firebase (so quando ha usuario logado)
+  // Sem login o progresso ja ficou salvo em saveProgress() acima, no proprio navegador.
+  if (currentUser) {
+    await salvarNoFirebase(getUserId(), await montarPacoteSync());
+    console.log('✅ Progresso sincronizado com Firebase!');
+  }
 }
 
 function refazerQuiz(lessonId, dayId){
@@ -2579,6 +2597,9 @@ async function renderConta(){
 
   </div>`;
   container.innerHTML = html;
+  // Os botoes de login so existem depois deste innerHTML.
+  // Sem esta chamada, quem ja esta logado veria "Entrar com Google" de novo.
+  updateAuthUI();
 }
 
 async function saveContaName(name){
@@ -4953,19 +4974,38 @@ function generateRadialMindMap(lessonId) {
 const FIREBASE_DB = 'https://licaojovem-iasd-default-rtdb.firebaseio.com';
 console.log('✓ Firebase REST API configurada:', FIREBASE_DB);
 
+// ===== IDENTIDADE DO USUARIO =====
+let currentUser = null;
+let firebaseAuthReady = false;
+
+// Se logado, usa o uid do Google (sincroniza entre dispositivos).
+// Se nao, usa um id anonimo local (progresso fica so neste navegador).
+function getUserId() {
+  if (currentUser && currentUser.uid) return currentUser.uid;
+  let id = localStorage.getItem('user-id');
+  if (!id) { id = 'anonimo-' + Date.now(); localStorage.setItem('user-id', id); }
+  return id;
+}
+
+async function getAuthToken() {
+  try { if (currentUser) return await currentUser.getIdToken(); }
+  catch(e) { console.warn('Nao obteve token:', e.message); }
+  return null;
+}
+
 // ===== FIREBASE REST API FUNCTIONS =====
 async function salvarNoFirebase(usuarioId, dados) {
   try {
-    const response = await fetch(
-      `${FIREBASE_DB}/usuarios/${usuarioId}.json`,
-      {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados)
-      }
-    );
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/usuarios/${usuarioId}.json` + (token ? `?auth=${token}` : '');
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
     const resultado = await response.json();
-    console.log('✅ Dados salvos no Firebase:', resultado);
+    console.log('✅ Dados salvos no Firebase');
     return resultado;
   } catch(e) {
     console.error('❌ Erro ao salvar no Firebase:', e);
@@ -4975,9 +5015,11 @@ async function salvarNoFirebase(usuarioId, dados) {
 
 async function lerDoFirebase(usuarioId) {
   try {
-    const response = await fetch(`${FIREBASE_DB}/usuarios/${usuarioId}.json`);
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/usuarios/${usuarioId}.json` + (token ? `?auth=${token}` : '');
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
     const dados = await response.json();
-    console.log('✅ Dados lidos do Firebase:', dados);
     return dados;
   } catch(e) {
     console.error('❌ Erro ao ler do Firebase:', e);
@@ -4985,13 +5027,404 @@ async function lerDoFirebase(usuarioId) {
   }
 }
 
+// ===== SINCRONIZACAO DOS AJUSTES (nome, metas, favoritos, marcacoes, planos) =====
+
+// Preferencias visuais ficam de proposito so no aparelho: e comum querer
+// tema escuro no celular e claro no computador.
+const CHAVES_LOCAIS = ['theme-preference', 'design-theme', 'font-size', 'bible-view-mode', 'user-id'];
+
+// Prefixos que nunca sobem: cache regeneravel, nao e dado do usuario.
+// 'official-' guarda o conteudo oficial baixado (TTL de 7 dias) e passa
+// de 300 KB com as 13 licoes visitadas - reenviar isso a cada gravacao
+// so inflaria o banco sem beneficio nenhum.
+const PREFIXOS_LOCAIS = ['official-', 'shared:'];
+
+// O Realtime Database nao aceita . $ # [ ] / em nomes de chave.
+const CHAVE_INVALIDA = /[.$#\[\]\/]/;
+
+function chaveSincronizavel(k) {
+  if (!k || typeof k !== 'string') return false;
+  if (CHAVES_LOCAIS.indexOf(k) !== -1) return false;
+  if (PREFIXOS_LOCAIS.some(p => k.indexOf(p) === 0)) return false;
+  if (CHAVE_INVALIDA.test(k)) return false;
+  return true;
+}
+
+async function coletarDadosLocais() {
+  const dados = {};
+  try {
+    const listed = await window.storage.list('', false);
+    for (const key of (listed.keys || [])) {
+      if (!chaveSincronizavel(key)) continue;
+      try {
+        const res = await window.storage.get(key, false);
+        if (res && res.value !== undefined && res.value !== null) dados[key] = res.value;
+      } catch(e) { /* chave sumiu no meio do caminho, ignora */ }
+    }
+  } catch(e) {
+    console.warn('⚠️ Nao listou o armazenamento local:', e.message);
+  }
+  return dados;
+}
+
+function parseValor(v) {
+  if (typeof v !== 'string') return v;
+  try { return JSON.parse(v); } catch(e) { return v; }
+}
+
+// Regra de conflito: o que esta neste aparelho prevalece.
+// Listas viram uniao; objetos sao mesclados chave a chave.
+function mesclarValor(local, nuvem) {
+  const l = parseValor(local), n = parseValor(nuvem);
+  if (Array.isArray(l) && Array.isArray(n)) {
+    const vistos = new Set(l.map(i => JSON.stringify(i)));
+    const uniao = l.slice();
+    n.forEach(i => {
+      const s = JSON.stringify(i);
+      if (!vistos.has(s)) { vistos.add(s); uniao.push(i); }
+    });
+    return uniao;
+  }
+  if (l && n && typeof l === 'object' && typeof n === 'object') {
+    return Object.assign({}, n, l);
+  }
+  return (l !== undefined && l !== null && l !== '') ? l : n;
+}
+
+async function aplicarAjustesDaNuvem(remoto) {
+  if (!remoto || typeof remoto !== 'object') return 0;
+  let aplicados = 0;
+  for (const key of Object.keys(remoto)) {
+    if (!chaveSincronizavel(key)) continue;
+    try {
+      let local = null;
+      try { const r = await window.storage.get(key, false); local = r ? r.value : null; } catch(e) { local = null; }
+      const resultado = (local === null || local === undefined)
+        ? parseValor(remoto[key])
+        : mesclarValor(local, remoto[key]);
+      const texto = (typeof resultado === 'string') ? resultado : JSON.stringify(resultado);
+      // setSemSync grava sem reagendar sync, evitando eco de volta para a nuvem.
+      const gravar = window.storage.setSemSync || window.storage.set;
+      await gravar.call(window.storage, key, texto, false);
+      aplicados++;
+    } catch(e) {
+      console.warn('⚠️ Nao aplicou a chave', key, '-', e.message);
+    }
+  }
+  if (aplicados) {
+    // Zera os caches em memoria para que releiam o que acabou de chegar.
+    favoritesCache = null; bibleHighlights = null; userGoals = null;
+    dailyTimeLog = null; bibleActivityLog = null; planProgressCache = {};
+  }
+  return aplicados;
+}
+
+// Identifica esta aba/aparelho. Vai junto em toda gravacao para que a
+// escuta ao vivo saiba ignorar o proprio eco e so reagir a mudanca vinda
+// de outro aparelho.
+const SESSAO_ID = 'sess-' + Math.random().toString(36).slice(2) + '-' + Date.now().toString(36);
+
+// Pacote unico enviado ao Firebase, usado por todos os pontos de gravacao.
+async function montarPacoteSync(extra) {
+  return Object.assign({
+    progresso: progressCache,
+    ajustes: await coletarDadosLocais(),
+    origem: SESSAO_ID,
+    atualizado_em: new Date().toISOString()
+  }, extra || {});
+}
+
+// Agrupa gravacoes seguidas numa so ida a nuvem.
+let _syncTimer = null;
+function agendarSync() {
+  if (!currentUser) return;
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(async () => {
+    try {
+      await salvarNoFirebase(getUserId(), await montarPacoteSync());
+      console.log('☁️ Ajustes sincronizados');
+    } catch(e) {
+      console.warn('⚠️ Sincronizacao adiada falhou:', e.message);
+    }
+  }, 1500);
+}
+
+// Toda gravacao local passa a agendar a subida para a nuvem.
+// Feito num ponto so, em vez de espalhar chamadas pelos 11 pontos de escrita.
+(function instalarGanchoDeSync() {
+  if (!window.storage || typeof window.storage.set !== 'function') return;
+  if (window.storage.setSemSync) return; // ja instalado
+  const setOriginal = window.storage.set.bind(window.storage);
+  window.storage.setSemSync = setOriginal;
+  window.storage.set = async function(key, value, shared) {
+    const r = await setOriginal(key, value, shared);
+    try { if (!shared && chaveSincronizavel(key)) agendarSync(); } catch(e) {}
+    return r;
+  };
+})();
+
+// Traz o que esta na nuvem sem apagar o que foi feito offline.
+// Em caso de conflito, o que esta neste aparelho prevalece.
+async function mesclarProgressoDaNuvem() {
+  try {
+    const dados = await lerDoFirebase(getUserId());
+    if (!dados) return;
+
+    if (dados.progresso) {
+      Object.keys(dados.progresso).forEach(lessonId => {
+        const nuvem = dados.progresso[lessonId] || {};
+        const local = progressCache[lessonId];
+        if (!local) { progressCache[lessonId] = nuvem; return; }
+        local.days = Object.assign({}, nuvem.days || {}, local.days || {});
+        local.quiz = Object.assign({}, nuvem.quiz || {}, local.quiz || {});
+        progressCache[lessonId] = local;
+      });
+      console.log('✅ Progresso mesclado com a nuvem');
+    }
+
+    if (dados.ajustes) {
+      const n = await aplicarAjustesDaNuvem(dados.ajustes);
+      if (n) console.log('✅ ' + n + ' ajuste(s) trazidos da nuvem');
+    }
+  } catch(e) {
+    console.warn('⚠️ Nao deu para mesclar da nuvem:', e.message);
+  }
+}
+
+// ===== SINCRONIZACAO AO VIVO =====
+// O Realtime Database empurra mudancas por websocket. Com isso, alterar algo
+// no celular reflete no computador em segundos, sem clicar em nada.
+let _refUsuario = null;
+let _ouvinteAtivo = null;
+
+// Trata cada mudanca que chega da nuvem. Separada da escuta para poder
+// ser testada isoladamente.
+async function aplicarSnapshotAoVivo(dados) {
+  try {
+    if (!dados) return 'vazio';
+
+    // Ignora o eco da propria gravacao.
+    if (dados.origem === SESSAO_ID) return 'eco-ignorado';
+
+    console.log('📡 Mudanca recebida de outro aparelho');
+    let mudou = false;
+
+    if (dados.progresso) {
+      Object.keys(dados.progresso).forEach(lessonId => {
+        const nuvem = dados.progresso[lessonId] || {};
+        const local = progressCache[lessonId];
+        if (!local) { progressCache[lessonId] = nuvem; mudou = true; return; }
+        local.days = Object.assign({}, nuvem.days || {}, local.days || {});
+        local.quiz = Object.assign({}, nuvem.quiz || {}, local.quiz || {});
+        progressCache[lessonId] = local;
+      });
+      mudou = true;
+    }
+
+    if (dados.ajustes) {
+      const n = await aplicarAjustesDaNuvem(dados.ajustes);
+      if (n) mudou = true;
+    }
+
+    // Redesenha apenas a aba Conta, que e onde nome e metas aparecem.
+    // Nao redesenha licao aberta de proposito: tiraria a pessoa do ponto
+    // onde ela esta lendo.
+    if (mudou) {
+      const conta = document.getElementById('tab-conta');
+      if (conta && conta.classList.contains('active')) await renderConta();
+    }
+    return mudou ? 'aplicado' : 'sem-mudanca';
+  } catch(e) {
+    console.warn('⚠️ Falha ao aplicar mudanca ao vivo:', e.message);
+    return 'erro';
+  }
+}
+
+function iniciarEscutaAoVivo() {
+  try {
+    if (!currentUser) return;
+    if (typeof firebase === 'undefined' || !firebase.database) {
+      console.warn('⚠️ SDK do Realtime Database ausente; sincronizacao ao vivo desligada.');
+      return;
+    }
+    pararEscutaAoVivo();
+    _refUsuario = firebase.database().ref('usuarios/' + currentUser.uid);
+    _ouvinteAtivo = _refUsuario.on('value',
+      (snap) => aplicarSnapshotAoVivo(snap.val()),
+      (erro) => console.warn('⚠️ Escuta ao vivo interrompida:', erro.message)
+    );
+
+    console.log('📡 Sincronizacao ao vivo ligada');
+  } catch(e) {
+    console.warn('⚠️ Nao ligou a sincronizacao ao vivo:', e.message);
+  }
+}
+
+function pararEscutaAoVivo() {
+  try {
+    if (_refUsuario && _ouvinteAtivo) _refUsuario.off('value', _ouvinteAtivo);
+  } catch(e) {}
+  _refUsuario = null;
+  _ouvinteAtivo = null;
+}
+
+// ===== FIREBASE AUTH (Google) =====
+function initFirebaseAuth() {
+  try {
+    if (typeof firebase === 'undefined' || !firebase.auth) {
+      console.warn('⚠️ SDK do Firebase nao carregou. Progresso fica salvo apenas neste navegador.');
+      updateAuthUI();
+      return;
+    }
+    if (String(firebaseConfig.apiKey).indexOf('COLE_AQUI') === 0) {
+      console.warn('⚠️ firebaseConfig incompleto: falta colar a apiKey do Console. Login desativado.');
+      updateAuthUI();
+      return;
+    }
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    firebaseAuthReady = true;
+
+    firebase.auth().onAuthStateChanged(async (user) => {
+      currentUser = user;
+      updateAuthUI();
+      if (user) {
+        console.log('✅ Logado como', user.email);
+        await mesclarProgressoDaNuvem();
+        await salvarNoFirebase(getUserId(), await montarPacoteSync({
+          email: user.email,
+          nome: user.displayName || ''
+        }));
+        iniciarEscutaAoVivo();
+      } else {
+        pararEscutaAoVivo();
+      }
+    });
+
+    // Retorno do fluxo de redirect (usado no celular quando o popup e bloqueado)
+    firebase.auth().getRedirectResult().catch(e => {
+      if (e && e.code) console.warn('Redirect login:', e.code, e.message);
+    });
+  } catch(e) {
+    console.error('❌ Falha ao iniciar Firebase Auth:', e);
+    updateAuthUI();
+  }
+}
+
 async function loginWithGoogle() {
-  alert('Login com Google desabilitado (Firebase não suportado no Cloudflare Pages).\n\nSeus dados são salvos localmente no navegador.\n\nMas você pode usar estas funções para sincronizar com a nuvem:\n- salvarNoFirebase(userId, dados)\n- lerDoFirebase(userId)');
+  if (!firebaseAuthReady) {
+    alert('O login ainda nao esta configurado.\n\nFalta colar a apiKey do Firebase no topo do arquivo (firebaseConfig).');
+    return;
+  }
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
+  try {
+    await firebase.auth().signInWithPopup(provider);
+  } catch(e) {
+    const quedaParaRedirect = ['auth/popup-blocked','auth/popup-closed-by-user','auth/cancelled-popup-request','auth/operation-not-supported-in-this-environment'];
+    if (quedaParaRedirect.indexOf(e.code) !== -1) {
+      try { await firebase.auth().signInWithRedirect(provider); return; } catch(e2) { e = e2; }
+    }
+    if (e.code === 'auth/unauthorized-domain') {
+      alert('Este dominio nao esta autorizado no Firebase.\n\nAdicione "' + location.hostname + '" em:\nFirebase Console > Authentication > Settings > Authorized domains');
+    } else {
+      alert('Nao foi possivel entrar: ' + (e.message || e.code));
+    }
+    console.error('❌ Erro no login:', e);
+  }
+}
+
+// Apaga deste aparelho tudo que pertence a conta que esta saindo.
+// Sem isso, quem entrasse em seguida no mesmo navegador herdaria o
+// progresso, o nome e as metas da pessoa anterior - e, pior, esses dados
+// seriam gravados na conta dela na primeira sincronizacao.
+// Nada se perde: esta tudo na nuvem e volta no proximo login.
+async function limparDadosLocaisDoUsuario() {
+  let apagadas = 0;
+  try {
+    const listed = await window.storage.list('', false);
+    for (const key of (listed.keys || [])) {
+      if (!chaveSincronizavel(key)) continue;   // preserva tema, fonte, cache
+      try { await window.storage.delete(key, false); apagadas++; } catch(e) {}
+    }
+  } catch(e) {
+    console.warn('⚠️ Nao listou o armazenamento ao sair:', e.message);
+  }
+  try { localStorage.removeItem('user-id'); } catch(e) {}
+
+  // progressCache e const: limpa chave a chave em vez de reatribuir.
+  Object.keys(progressCache).forEach(k => { delete progressCache[k]; });
+  favoritesCache = null; bibleHighlights = null; userGoals = null;
+  dailyTimeLog = null; bibleActivityLog = null; planProgressCache = {};
+
+  console.log('🧹 Dados locais da conta removidos (' + apagadas + ' chaves)');
+  return apagadas;
+}
+
+async function logout() {
+  const ok = confirm('Sair da conta?\n\nSeu progresso fica guardado na nuvem e volta ao entrar de novo. Ele sera removido deste aparelho para nao se misturar com o de outra pessoa.');
+  if (!ok) return;
+  try {
+    pararEscutaAoVivo();
+    // Sobe o que estiver pendente antes de limpar.
+    if (currentUser) {
+      try { await salvarNoFirebase(getUserId(), await montarPacoteSync()); } catch(e) {}
+    }
+    if (firebaseAuthReady) await firebase.auth().signOut();
+    currentUser = null;
+    await limparDadosLocaisDoUsuario();
+    updateAuthUI();
+    console.log('👋 Sessao encerrada');
+    const conta = document.getElementById('tab-conta');
+    if (conta && conta.classList.contains('active')) await renderConta();
+  } catch(e) {
+    console.error('❌ Erro ao sair:', e);
+  }
+}
+
+async function manualSync() {
+  const btn = document.getElementById('sync-btn');
+  const rotulo = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Sincronizando...'; }
+  try {
+    await mesclarProgressoDaNuvem();
+    await salvarNoFirebase(getUserId(), await montarPacoteSync());
+    if (btn) btn.textContent = '✅ Sincronizado!';
+    // A aba Conta pode ter recebido nome/metas novos vindos da nuvem.
+    if (document.getElementById('tab-conta') && document.getElementById('tab-conta').classList.contains('active')) {
+      await renderConta();
+    }
+  } catch(e) {
+    console.error('❌ Erro ao sincronizar:', e);
+    if (btn) btn.textContent = '❌ Falhou';
+  }
+  setTimeout(() => {
+    if (btn) { btn.disabled = false; btn.textContent = rotulo || '🔄 Sincronizar agora'; }
+  }, 2000);
 }
 
 function updateAuthUI() {
-  const loginBtn = document.getElementById('login-btn');
-  if (loginBtn) loginBtn.style.display = 'flex';
+  const loginBtn  = document.getElementById('login-btn');
+  const logoutBtn = document.getElementById('logout-btn');
+  const syncBtn   = document.getElementById('sync-btn');
+  const info      = document.getElementById('user-info');
+  const logado    = !!currentUser;
+
+  if (loginBtn)  loginBtn.style.display  = logado ? 'none' : 'flex';
+  if (logoutBtn) logoutBtn.style.display = logado ? 'block' : 'none';
+  if (syncBtn)   syncBtn.style.display   = logado ? 'block' : 'none';
+  if (info) {
+    info.style.display = logado ? 'block' : 'none';
+    if (logado) {
+      info.textContent = 'Conectado como ' + (currentUser.displayName || currentUser.email) + ' — seu progresso sincroniza entre dispositivos.';
+    }
+  }
+}
+
+// Inicia o Auth assim que o DOM estiver pronto
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFirebaseAuth);
+} else {
+  initFirebaseAuth();
 }
 
 // ===== OFFICIAL SOURCE TABS CACHE & FUNCTIONS =====
