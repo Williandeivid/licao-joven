@@ -534,15 +534,30 @@
   /* margin-top afasta do chip de perfil, que e fixo no topo direito (y ate 58px) */
   /* Barra de topo: deslogado mostra so o circulo roxo do menu.
      Logado, nome e menu viram uma pilula unica. */
-  #topo-acoes{ position:fixed; top:14px; right:14px; z-index:60; display:flex; align-items:center; gap:6px; border-radius:100px; }
-  #topo-acoes.com-perfil{ background:var(--card); border:1px solid var(--border); box-shadow:0 8px 20px -8px rgba(28,23,53,0.45); padding-right:4px; }
-  #perfil-chip{ display:none; align-items:center; gap:8px; height:44px; padding:0 4px 0 5px; border:none; background:transparent; border-radius:100px; cursor:pointer; max-width:168px; }
-  #perfil-foto{ width:32px; height:32px; border-radius:50%; object-fit:cover; flex:0 0 auto; display:none; }
-  #perfil-inicial{ width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--violet),var(--pink)); color:#fff; display:none; align-items:center; justify-content:center; font-weight:800; font-size:14px; flex:0 0 auto; }
-  #perfil-nome{ font-weight:700; font-size:13px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  /* Topo direito, tres estados:
+     deslogado          -> so o circulo roxo de 3 pontos
+     logado e fechado   -> so a foto do Google
+     logado e aberto    -> pilula com foto, nome e o menu de 3 pontos */
+  #topo-acoes{ position:fixed; top:14px; right:14px; z-index:60; display:flex; align-items:center; gap:6px; border-radius:100px; transition:background .18s ease, box-shadow .18s ease; }
+  #topo-acoes.aberto{ background:var(--card); border:1px solid var(--border); box-shadow:0 8px 20px -8px rgba(28,23,53,0.45); padding:0 4px 0 3px; }
+
+  #perfil-avatar{ display:none; width:44px; height:44px; padding:0; border:none; background:transparent; border-radius:50%; cursor:pointer; align-items:center; justify-content:center; flex:0 0 auto; transition:width .18s ease, height .18s ease; }
+  #topo-acoes.logado #perfil-avatar{ display:flex; }
+  #topo-acoes.aberto #perfil-avatar{ width:38px; height:38px; }
+
+  #perfil-foto{ width:100%; height:100%; border-radius:50%; object-fit:cover; display:none; box-shadow:0 8px 20px -8px rgba(28,23,53,0.45); }
+  #perfil-inicial{ width:100%; height:100%; border-radius:50%; background:linear-gradient(135deg,var(--violet),var(--pink)); color:#fff; display:none; align-items:center; justify-content:center; font-weight:800; font-size:16px; box-shadow:0 8px 20px -8px rgba(28,23,53,0.45); }
+  #topo-acoes.aberto #perfil-foto, #topo-acoes.aberto #perfil-inicial{ box-shadow:none; font-size:14px; }
+
+  #perfil-nome-btn{ display:none; border:none; background:transparent; cursor:pointer; padding:0 4px; max-width:140px; }
+  #topo-acoes.aberto #perfil-nome-btn{ display:block; }
+  #perfil-nome{ display:block; font-weight:700; font-size:13px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
   #app-menu-btn{ width:44px; height:44px; border-radius:50%; background:var(--violet); color:var(--on-violet); box-shadow:0 8px 20px -8px rgba(28,23,53,0.45); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto; transition:background .15s ease, width .15s ease;}
-  #topo-acoes.com-perfil #app-menu-btn{ width:34px; height:34px; background:transparent; color:var(--violet); box-shadow:none; }
-  #topo-acoes.com-perfil #app-menu-btn:hover{ background:var(--tint-violet); }
+  /* Logado e fechado o menu some: quem chama ele de volta e o toque na foto */
+  #topo-acoes.logado:not(.aberto) #app-menu-btn{ display:none; }
+  #topo-acoes.aberto #app-menu-btn{ width:34px; height:34px; background:transparent; color:var(--violet); box-shadow:none; }
+  #topo-acoes.aberto #app-menu-btn:hover{ background:var(--tint-violet); }
   .saudacao{ position:relative; z-index:3; font-size:15px; font-weight:600; color:#d9d4ff; margin:34px 0 10px; letter-spacing:0.01em; animation:text-fadein 0.6s ease-out both;}
   .hero-streak{ position:relative; z-index:3; display:inline-flex; align-items:center; gap:7px; margin:0 0 14px; padding:6px 15px; border-radius:100px; background:rgba(255,157,60,0.16); border:1px solid rgba(255,157,60,0.38); color:#ffd9a8; font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; animation:text-fadein 0.7s ease-out both;}
   h1.title{ font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(34px, 6vw, 57.8px); margin:0 0 8px; line-height:1.05; letter-spacing:-0.02em; position:relative; z-index:3; background:linear-gradient(90deg, #fff 0%, var(--violet-light) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:title-shrink 5.5s ease-out forwards, text-fadein 0.8s ease-out 3.5s both;}
@@ -1359,9 +1374,12 @@
 
 <div id="topo-acoes">
 
-  <button id="perfil-chip" onclick="goConta()" title="Sua conta">
+  <button id="perfil-avatar" onclick="alternarPerfil(event)" title="Sua conta">
     <img id="perfil-foto" alt="">
     <span id="perfil-inicial"></span>
+  </button>
+
+  <button id="perfil-nome-btn" onclick="goConta()" title="Abrir minha conta">
     <span id="perfil-nome"></span>
   </button>
 
@@ -1927,7 +1945,7 @@ async function renderLessonDetail(lessonId, fromList){
     const dDate = dayCalendarDate(lessonId, d.id);
     const today = new Date(); today.setHours(0,0,0,0);
     const statusClass = dDate.getTime()===today.getTime() ? 'day-today' : (dDate < today ? 'day-past' : 'day-future');
-    html += `<div class="pill ${statusClass} ${isStudied?'done':''}" onclick="scrollToDay('${d.id}')"><span>${d.date.split(' · ')[0].slice(0,3)}</span><span class="dot">${isStudied?'✓':''}</span></div>`;
+    html += `<div class="pill ${statusClass} ${isStudied?'done':''}" data-day="${d.id}" onclick="scrollToDay('${d.id}')"><span>${d.date.split(' · ')[0].slice(0,3)}</span><span class="dot">${isStudied?'✓':''}</span></div>`;
   });
   html += `<button class="pill-calendar-toggle" id="calendar-toggle-btn" onclick="toggleWeekCalendar(${lessonId})" title="Escolher outro dia">
     <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18"/><rect x="3" y="4" width="18" height="18" rx="3"/></svg>
@@ -2012,6 +2030,10 @@ function scheduleBibleCardAutoHide(){
   }, 5000);
 }
 
+// Guarda o mes que o calendario esta exibindo, para atualizar sem
+// jogar a pessoa de volta para o mes atual.
+let wcalOffsetAtual = 0;
+
 function toggleWeekCalendar(lessonId){
   const panel = document.getElementById('week-calendar-panel');
   const btn = document.getElementById('calendar-toggle-btn');
@@ -2019,6 +2041,7 @@ function toggleWeekCalendar(lessonId){
   if(!panel || !btn) return;
   const willOpen = !panel.classList.contains('open');
   if(willOpen){
+    wcalOffsetAtual = 0;
     panel.innerHTML = renderWeekCalendarMonth(lessonId, 0);
     panel.classList.add('open');
     btn.classList.add('open');
@@ -2032,6 +2055,7 @@ function toggleWeekCalendar(lessonId){
 
 function changeWeekCalendarMonth(lessonId, newOffset){
   const panel = document.getElementById('week-calendar-panel');
+  wcalOffsetAtual = newOffset;
   if(panel) panel.innerHTML = renderWeekCalendarMonth(lessonId, newOffset);
 }
 
@@ -2278,6 +2302,36 @@ function estimateDayReadingMinutes(lessonId, dayId){
   return Math.max(1, Math.round(baseMinutes + citationMinutes));
 }
 
+// Atualiza no lugar o que depende de "dia concluido", sem redesenhar a
+// tela inteira - um redesenho tiraria a pessoa do ponto onde ela esta lendo.
+function atualizarMarcacoesDoDia(lessonId, dayId){
+  try{
+    // 1. Régua de dias (Dom Seg Ter...)
+    const pill = document.querySelector(`#day-pills-row .pill[data-day="${dayId}"]`);
+    if(pill){
+      pill.classList.add('done');
+      const dot = pill.querySelector('.dot');
+      if(dot) dot.textContent = '✓';
+    }
+
+    // 2. Calendário do mês, se estiver aberto
+    const panel = document.getElementById('week-calendar-panel');
+    if(panel && panel.classList.contains('open')){
+      panel.innerHTML = renderWeekCalendarMonth(lessonId, wcalOffsetAtual);
+    }
+
+    // 3. Selo de sequência no hero
+    const selo = document.querySelector('.hero-streak');
+    if(selo && typeof sequenciaAtual === 'function'){
+      const seq = sequenciaAtual();
+      if(seq === 1) selo.textContent = '🔥 Começou hoje';
+      else if(seq > 1) selo.textContent = `🔥 ${seq} dias seguidos`;
+    }
+  }catch(e){
+    console.warn('⚠️ Não atualizou as marcações do dia:', e.message);
+  }
+}
+
 async function marcarConcluido(btn){
   if(btn.classList.contains('done')) return;
   const lessonId = parseInt(btn.dataset.lesson);
@@ -2290,6 +2344,10 @@ async function marcarConcluido(btn){
   btn.classList.add('done');
   btn.textContent = '✓ Dia concluído';
   await saveProgress(lessonId, progress);
+
+  // Sem isto, marcar um dia passado salvava certo mas a régua de dias e o
+  // calendário continuavam mostrando o dia como não estudado até recarregar.
+  atualizarMarcacoesDoDia(lessonId, dayId);
 
   // 🔥 Auto-save no Firebase (so quando ha usuario logado)
   // Sem login o progresso ja ficou salvo em saveProgress() acima, no proprio navegador.
@@ -5619,15 +5677,32 @@ function saudacaoPorHorario() {
 }
 
 // Chip com foto e nome, ao lado do botao de menu.
-function atualizarChipPerfil() {
-  const chip  = document.getElementById('perfil-chip');
+// Toque na foto abre/fecha o nome e o menu.
+function alternarPerfil(ev) {
+  if (ev) ev.stopPropagation();
   const barra = document.getElementById('topo-acoes');
-  if (!chip) return;
+  if (barra) barra.classList.toggle('aberto');
+}
 
-  // Deslogado: some o chip e a barra volta a ser so o circulo roxo do menu.
+function fecharPerfil() {
+  const barra = document.getElementById('topo-acoes');
+  if (barra) barra.classList.remove('aberto');
+}
+
+// Toque fora recolhe de volta para so a foto.
+document.addEventListener('click', (ev) => {
+  const barra = document.getElementById('topo-acoes');
+  if (!barra || !barra.classList.contains('aberto')) return;
+  if (!barra.contains(ev.target)) fecharPerfil();
+});
+
+function atualizarChipPerfil() {
+  const barra = document.getElementById('topo-acoes');
+  if (!barra) return;
+
+  // Deslogado: sem foto e sem nome, sobra o circulo roxo de 3 pontos.
   if (!currentUser) {
-    chip.style.display = 'none';
-    if (barra) barra.classList.remove('com-perfil');
+    barra.classList.remove('logado', 'aberto');
     return;
   }
 
@@ -5655,8 +5730,7 @@ function atualizarChipPerfil() {
     mostrarInicial();
   }
 
-  chip.style.display = 'flex';
-  if (barra) barra.classList.add('com-perfil');
+  barra.classList.add('logado');
 }
 
 // A saudacao vive no hero, que so e montado ao navegar. Se a pessoa
