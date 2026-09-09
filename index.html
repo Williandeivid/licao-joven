@@ -531,6 +531,20 @@
   header.hero > * { animation:text-fadein 0.8s ease-out 3.5s both; }
   @keyframes text-fadein{ 0%{opacity:0;} 100%{opacity:1;}}
   .eyebrow{ font-family:'JetBrains Mono', monospace; letter-spacing:0.16em; text-transform:uppercase; font-size:12px; color:var(--lime); margin-bottom:14px; position:relative; z-index:3; display:inline-block; background:rgba(166,226,46,0.12); padding:6px 14px; border-radius:100px;}
+  /* margin-top afasta do chip de perfil, que e fixo no topo direito (y ate 58px) */
+  /* Barra de topo: deslogado mostra so o circulo roxo do menu.
+     Logado, nome e menu viram uma pilula unica. */
+  #topo-acoes{ position:fixed; top:14px; right:14px; z-index:60; display:flex; align-items:center; gap:6px; border-radius:100px; }
+  #topo-acoes.com-perfil{ background:var(--card); border:1px solid var(--border); box-shadow:0 8px 20px -8px rgba(28,23,53,0.45); padding-right:4px; }
+  #perfil-chip{ display:none; align-items:center; gap:8px; height:44px; padding:0 4px 0 5px; border:none; background:transparent; border-radius:100px; cursor:pointer; max-width:168px; }
+  #perfil-foto{ width:32px; height:32px; border-radius:50%; object-fit:cover; flex:0 0 auto; display:none; }
+  #perfil-inicial{ width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--violet),var(--pink)); color:#fff; display:none; align-items:center; justify-content:center; font-weight:800; font-size:14px; flex:0 0 auto; }
+  #perfil-nome{ font-weight:700; font-size:13px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #app-menu-btn{ width:44px; height:44px; border-radius:50%; background:var(--violet); color:var(--on-violet); box-shadow:0 8px 20px -8px rgba(28,23,53,0.45); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto; transition:background .15s ease, width .15s ease;}
+  #topo-acoes.com-perfil #app-menu-btn{ width:34px; height:34px; background:transparent; color:var(--violet); box-shadow:none; }
+  #topo-acoes.com-perfil #app-menu-btn:hover{ background:var(--tint-violet); }
+  .saudacao{ position:relative; z-index:3; font-size:15px; font-weight:600; color:#d9d4ff; margin:34px 0 10px; letter-spacing:0.01em; animation:text-fadein 0.6s ease-out both;}
+  .hero-streak{ position:relative; z-index:3; display:inline-flex; align-items:center; gap:7px; margin:0 0 14px; padding:6px 15px; border-radius:100px; background:rgba(255,157,60,0.16); border:1px solid rgba(255,157,60,0.38); color:#ffd9a8; font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; animation:text-fadein 0.7s ease-out both;}
   h1.title{ font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(34px, 6vw, 57.8px); margin:0 0 8px; line-height:1.05; letter-spacing:-0.02em; position:relative; z-index:3; background:linear-gradient(90deg, #fff 0%, var(--violet-light) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:title-shrink 5.5s ease-out forwards, text-fadein 0.8s ease-out 3.5s both;}
   @keyframes title-shrink{ 0%{font-size:clamp(54.4px, 12vw, 102px);} 80%{font-size:clamp(54.4px, 12vw, 102px);} 100%{font-size:clamp(34px, 6vw, 57.8px);}}
   .subtitle{ font-size:16.15px; color:#c9c4f0; max-width:520px; margin:0 auto 18px; position:relative; z-index:3;}
@@ -594,14 +608,19 @@
   .pill-calendar-toggle{ display:flex; align-items:center; justify-content:center; flex:0 0 32px; border-radius:10px; border:2px solid var(--border); background:transparent; color:var(--ink-soft); cursor:pointer; transition:all .15s ease; padding:0;}
   #day-pills-row.collapsed-for-cal .pill{ display:none; }
   #day-pills-row.collapsed-for-cal{ justify-content:flex-start; }
-  #day-pills-row.collapsed-for-cal .pill-calendar-toggle{ flex:0 0 auto; width:100%; }
+  /* Sem o teto, no computador esse botao virava uma barra fina atravessando a tela inteira */
+  #day-pills-row.collapsed-for-cal .pill-calendar-toggle{ flex:0 0 auto; width:100%; max-width:420px; }
+  #day-pills-row.collapsed-for-cal{ justify-content:center; }
   .pill-calendar-toggle svg{width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; transition:transform .25s ease;}
   .pill-calendar-toggle.open{color:var(--violet); border-color:var(--violet);}
   .pill-calendar-toggle.open svg{transform:rotate(180deg);}
   .pill-calendar-toggle:hover{border-color:var(--violet); color:var(--violet);}
   .week-calendar-panel{max-height:0; overflow:hidden; transition:max-height .3s ease;}
-  .week-calendar-panel.open{max-height:420px;}
-  .wcal-inner{padding-top:14px;}
+  /* 420px cortava o mes ao meio (as duas ultimas semanas sumiam) */
+  .week-calendar-panel.open{max-height:560px;}
+  /* Sem o teto de largura, as celulas viravam quadrados gigantes no computador,
+     porque .wcal-day usa aspect-ratio:1 e a grade ocupava a tela toda */
+  .wcal-inner{padding-top:14px; max-width:420px; margin:0 auto;}
   .wcal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:12px; text-transform:capitalize; color:var(--ink);}
   .wcal-head button{background:var(--tint-violet); border:none; width:26px; height:26px; border-radius:8px; color:var(--violet); font-size:14px; cursor:pointer;}
   .wcal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px;}
@@ -1338,8 +1357,15 @@
 </head>
 <body>
 
-<div style="position:fixed;top:14px;right:14px;z-index:60;">
-  <button id="app-menu-btn" onclick="toggleAppMenu()" title="Mais opções" style="width:44px;height:44px;border-radius:50%;background:var(--violet);color:var(--on-violet);box-shadow:0 8px 20px -8px rgba(28,23,53,0.45);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+<div id="topo-acoes">
+
+  <button id="perfil-chip" onclick="goConta()" title="Sua conta">
+    <img id="perfil-foto" alt="">
+    <span id="perfil-inicial"></span>
+    <span id="perfil-nome"></span>
+  </button>
+
+  <button id="app-menu-btn" onclick="toggleAppMenu()" title="Mais opções">
     <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
   </button>
 
@@ -1850,6 +1876,15 @@ async function renderLessonDetail(lessonId, fromList){
 
   let html = `<header class="hero">`;
   if(fromList) html += `<button class="back-btn" onclick="goList()">← Voltar para a lista</button><br>`;
+  if (currentUser) {
+    html += `<p class="saudacao">${saudacaoPorHorario()}, ${escaparHtml(primeiroNome())} 👋</p>`;
+    const seq = sequenciaAtual();
+    if (seq === 1) {
+      html += `<div class="hero-streak">🔥 Começou hoje</div>`;
+    } else if (seq > 1) {
+      html += `<div class="hero-streak">🔥 ${seq} dias seguidos</div>`;
+    }
+  }
   html += `<div class="eyebrow">Lição Jovem ${lessonId}</div>
     <h1 class="title">${meta.title}</h1>`;
   if(content){
@@ -5401,7 +5436,9 @@ function initFirebaseAuth() {
           email: user.email,
           nome: user.displayName || ''
         }));
+        await preencherNomeSeVazio();
         iniciarEscutaAoVivo();
+        await refrescarTelaAposLogin();
       } else {
         pararEscutaAoVivo();
       }
@@ -5509,7 +5546,137 @@ async function manualSync() {
   }, 2000);
 }
 
+// ===== PERFIL NA INTERFACE =====
+function escaparHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// So o primeiro nome: "Willian Câmara" -> "Willian".
+// Sem displayName, usa o trecho antes do @ do e-mail.
+function primeiroNome() {
+  const bruto = (currentUser && (currentUser.displayName || currentUser.email)) || '';
+  return String(bruto).trim().split(/[\s@.]+/)[0] || '';
+}
+
+// Sequencia para o hero. Diferente de computeStreak(), que conta a partir
+// do ultimo dia estudado: aqui a sequencia so vale se ainda esta viva
+// (terminou hoje ou ontem). Senao o hero diria "5 dias seguidos" para
+// quem parou ha um mes. Dias futuros marcados sao ignorados.
+function sequenciaAtual() {
+  try {
+    if (typeof buildProgressMap !== 'function') return 0;
+    const mapa = buildProgressMap();
+    const hoje = dateKey(new Date());
+    const d = new Date(); d.setDate(d.getDate() - 1);
+    const ontem = dateKey(d);
+
+    const dias = Object.keys(mapa).filter(k => mapa[k].studied && k <= hoje).sort();
+    if (!dias.length) return 0;
+
+    const ultimo = dias[dias.length - 1];
+    if (ultimo !== hoje && ultimo !== ontem) return 0;   // sequencia quebrada
+
+    let n = 1;
+    for (let i = dias.length - 1; i > 0; i--) {
+      const dif = Math.round(
+        (new Date(dias[i] + 'T00:00:00') - new Date(dias[i - 1] + 'T00:00:00')) / 86400000
+      );
+      if (dif === 1) n++; else break;
+    }
+    return n;
+  } catch(e) {
+    console.warn('⚠️ Nao calculou a sequencia:', e.message);
+    return 0;
+  }
+}
+
+// Preenche o nome da Conta com o do Google na primeira entrada.
+// Nunca sobrescreve um nome que a pessoa ja tenha digitado.
+async function preencherNomeSeVazio() {
+  try {
+    if (!currentUser) return false;
+    const nomeGoogle = (currentUser.displayName || '').trim();
+    if (!nomeGoogle) return false;
+    await loadUserGoals();
+    if (userGoals && userGoals.name && userGoals.name.trim()) return false;
+    userGoals.name = nomeGoogle;
+    await window.storage.set('user-goals', JSON.stringify(userGoals), false);
+    console.log('✅ Nome preenchido a partir da conta Google');
+    return true;
+  } catch(e) {
+    console.warn('⚠️ Nao preencheu o nome:', e.message);
+    return false;
+  }
+}
+
+function saudacaoPorHorario() {
+  const h = new Date().getHours();
+  if (h < 12) return 'Bom dia';
+  if (h < 18) return 'Boa tarde';
+  return 'Boa noite';
+}
+
+// Chip com foto e nome, ao lado do botao de menu.
+function atualizarChipPerfil() {
+  const chip  = document.getElementById('perfil-chip');
+  const barra = document.getElementById('topo-acoes');
+  if (!chip) return;
+
+  // Deslogado: some o chip e a barra volta a ser so o circulo roxo do menu.
+  if (!currentUser) {
+    chip.style.display = 'none';
+    if (barra) barra.classList.remove('com-perfil');
+    return;
+  }
+
+  const nome    = primeiroNome();
+  const foto    = document.getElementById('perfil-foto');
+  const inicial = document.getElementById('perfil-inicial');
+  const rotulo  = document.getElementById('perfil-nome');
+
+  if (rotulo) rotulo.textContent = nome;
+
+  const mostrarInicial = () => {
+    if (foto) foto.style.display = 'none';
+    if (inicial) {
+      inicial.textContent = (nome.charAt(0) || '?').toUpperCase();
+      inicial.style.display = 'flex';
+    }
+  };
+
+  if (currentUser.photoURL && foto) {
+    foto.onerror = mostrarInicial;   // foto do Google fora do ar cai na inicial
+    foto.src = currentUser.photoURL;
+    foto.style.display = 'block';
+    if (inicial) inicial.style.display = 'none';
+  } else {
+    mostrarInicial();
+  }
+
+  chip.style.display = 'flex';
+  if (barra) barra.classList.add('com-perfil');
+}
+
+// A saudacao vive no hero, que so e montado ao navegar. Se a pessoa
+// entrou estando no INICIO, redesenha para o "Bom dia, Fulano" aparecer
+// na hora, sem precisar trocar de aba.
+async function refrescarTelaAposLogin() {
+  try {
+    const inicioAtivo = document.getElementById('tab-home') &&
+                        document.getElementById('tab-home').classList.contains('active');
+    if (inicioAtivo && typeof goHome === 'function') { await goHome(); return; }
+    const contaAtiva = document.getElementById('tab-conta') &&
+                       document.getElementById('tab-conta').classList.contains('active');
+    if (contaAtiva && typeof renderConta === 'function') await renderConta();
+  } catch(e) {
+    console.warn('⚠️ Nao atualizou a tela apos o login:', e.message);
+  }
+}
+
 function updateAuthUI() {
+  atualizarChipPerfil();
   const loginBtn  = document.getElementById('login-btn');
   const logoutBtn = document.getElementById('logout-btn');
   const syncBtn   = document.getElementById('sync-btn');
