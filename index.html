@@ -808,6 +808,78 @@
 
   /* ===== Concluir button ===== */
   .concluir-wrap{margin:10px 0 24px;}
+
+  /* ===== COMENTÁRIOS =====
+     Tudo em variáveis de cor: os temas de design trocam --card, --ink,
+     --ink-soft e --heading, então esta área acompanha os 15 sem cor fixa. */
+  .btn-comentarios{
+    display:inline-flex; align-items:center; gap:7px; margin-left:auto;
+    background:none; border:none; cursor:pointer; padding:8px 10px;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700;
+    letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);
+    border-radius:10px; transition:color .15s ease, background .15s ease;
+  }
+  .btn-comentarios[hidden]{display:none;}
+  .btn-comentarios:hover{color:var(--violet); background:var(--tint-violet);}
+  .btn-comentarios.tem{color:var(--violet);}
+  .btn-comentarios svg{width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2;}
+
+  .cmt-painel{
+    margin:0 0 24px; padding:18px 0 0; border-top:1px solid var(--border);
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .cmt-lista{display:flex; flex-direction:column;}
+  .cmt-vazio{font-size:13.5px; color:var(--ink-soft); margin:0; padding:4px 0;}
+
+  .cmt-item{
+    display:grid; grid-template-columns:34px 1fr; gap:12px;
+    padding:13px 0; border-bottom:1px solid var(--border2);
+  }
+  .cmt-item:last-child{border-bottom:none;}
+  .cmt-item.meu{background:var(--tint-violet); border-radius:12px; padding:13px 14px; border-bottom:none; margin:4px 0;}
+
+  .cmt-avatar{width:34px; height:34px; border-radius:50%; overflow:hidden; flex:0 0 auto;}
+  .cmt-avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cmt-inicial{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--violet), var(--pink));
+    color:#fff; font-weight:800; font-size:14px;
+  }
+  .cmt-corpo{min-width:0; display:flex; flex-direction:column; gap:3px;}
+  .cmt-topo{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
+  .cmt-nome{font-weight:700; font-size:13.5px; color:var(--heading);}
+  .cmt-tempo{font-size:11.5px; color:var(--ink-soft);}
+  .cmt-texto{font-size:14.5px; color:var(--ink); line-height:1.55; overflow-wrap:anywhere; white-space:pre-wrap;}
+  .cmt-apagar{
+    align-self:flex-start; margin-top:2px; background:none; border:none; cursor:pointer;
+    font-size:11.5px; color:var(--ink-soft); padding:2px 0; text-decoration:underline;
+  }
+  .cmt-apagar:hover{color:var(--pink);}
+
+  .cmt-form{display:flex; flex-direction:column; gap:8px;}
+  .cmt-input{
+    width:100%; min-height:44px; resize:none; overflow:hidden;
+    background:var(--card); color:var(--ink);
+    border:2px solid var(--border); border-radius:14px; padding:12px 14px;
+    font-family:inherit; font-size:14.5px; line-height:1.5;
+  }
+  .cmt-input:focus{outline:none; border-color:var(--violet);}
+  .cmt-input::placeholder{color:var(--ink-soft);}
+  .cmt-rodape{display:flex; align-items:center; justify-content:space-between; gap:12px;}
+  .cmt-contador{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-soft); visibility:hidden;}
+  .cmt-contador.perto{visibility:visible;}
+  .cmt-contador.estourou{visibility:visible; color:var(--pink); font-weight:700;}
+  .cmt-enviar{
+    background:var(--violet); color:var(--on-violet); border:none; cursor:pointer;
+    padding:10px 20px; border-radius:100px;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700;
+    letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .cmt-enviar:disabled{opacity:.4; cursor:default;}
+  .cmt-aviso{
+    font-size:13.5px; color:var(--ink-soft); margin:0;
+    background:var(--tint-violet); border-radius:12px; padding:14px 16px;
+  }
   .btn-concluir{
     display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono', monospace;
     font-size:12.5px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
@@ -1737,6 +1809,10 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
     <button class="btn-concluir ${done?'done':''}" data-lesson="${lessonId}" data-day="${day.id}" onclick="marcarConcluido(this)">
       ${done ? '✓ Dia concluído' : 'Concluir este dia'}
     </button>
+    <button class="btn-comentarios" id="cmt-btn-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" title="Comentários deste dia" ${comentariosLigados() ? '' : 'hidden'}>
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <span class="cmt-rotulo">Comentários</span>
+    </button>
     <div class="menu-3pontos-wrap" style="position:relative;">
       <button class="menu-3pontos-btn" onclick="toggleMenu3Pontos(this, '${lessonId}', '${day.id}')" style="background:none; border:none; font-size:20px; cursor:pointer; padding:8px; color:var(--ink-soft); display:flex; align-items:center;">⋮</button>
       <div class="menu-3pontos" style="display:none; position:absolute; top:100%; right:0; background:var(--card); border:0.5px solid var(--border); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:1000; min-width:180px; overflow:hidden;">
@@ -1748,6 +1824,10 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
         </button>
       </div>
     </div>
+  </div>
+  <div class="cmt-painel" id="cmt-painel-${lessonId}-${day.id}" hidden>
+    <div class="cmt-lista"></div>
+    <div class="cmt-rodape-area"></div>
   </div>`;
 
   const hasExpandable = (day.reflect && day.reflect.length) || day.quiz || day.tf;
@@ -5386,6 +5466,220 @@ async function mesclarProgressoDaNuvem() {
   }
 }
 
+// ===== COMENTARIOS POR DIA DE LICAO =====
+// Estrutura no banco:
+//   comentarios/{licao}/{dia}/{id} = {uid, nome, foto, texto, criadoEm}
+//   config/comentarios/ativo       -> chave geral, desliga tudo de uma vez
+//   config/admins/{uid}            -> pode apagar qualquer comentario
+//   config/banidos/{uid}           -> nao consegue mais postar
+const CMT_LIMITE = 500;
+let cmtConfig = null;
+const cmtCache = {};
+
+async function carregarConfigComentarios(forcar) {
+  if (cmtConfig && !forcar) return cmtConfig;
+  // Deslogado nao tem permissao de ler config: nem tenta, para nao
+  // encher o console de 401 em toda visita.
+  if (!currentUser) { cmtConfig = {}; return cmtConfig; }
+  try {
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/config.json` + (token ? `?auth=${token}` : '');
+    const r = await fetch(url);
+    cmtConfig = r.ok ? ((await r.json()) || {}) : {};
+  } catch(e) {
+    cmtConfig = {};
+  }
+  return cmtConfig;
+}
+
+// Sem config no banco, tudo fica desligado. E o padrao seguro:
+// nada aparece antes de voce publicar as regras e ligar a chave.
+function comentariosLigados(){ return !!(cmtConfig && cmtConfig.comentarios && cmtConfig.comentarios.ativo); }
+function souAdmin(){ return !!(currentUser && cmtConfig && cmtConfig.admins && cmtConfig.admins[currentUser.uid]); }
+function estouBanido(){ return !!(currentUser && cmtConfig && cmtConfig.banidos && cmtConfig.banidos[currentUser.uid]); }
+
+// Enquanto a chave geral estiver desligada, o botao nem aparece.
+// Assim o recurso pode ir para o ar sem mudar nada para quem usa.
+function atualizarVisibilidadeComentarios(){
+  const mostrar = comentariosLigados();
+  document.querySelectorAll('.btn-comentarios').forEach(b => { b.hidden = !mostrar; });
+  if (!mostrar) document.querySelectorAll('.cmt-painel').forEach(p => { p.hidden = true; });
+}
+
+function tempoRelativo(iso){
+  try{
+    const seg = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime())/1000));
+    if (seg < 60) return 'agora';
+    const min = Math.floor(seg/60);   if (min < 60) return `há ${min} min`;
+    const hor = Math.floor(min/60);   if (hor < 24) return `há ${hor} h`;
+    const dia = Math.floor(hor/24);   if (dia === 1) return 'ontem';
+    if (dia < 30) return `há ${dia} dias`;
+    return new Date(iso).toLocaleDateString('pt-BR', {day:'2-digit', month:'short'});
+  }catch(e){ return ''; }
+}
+
+async function toggleComentarios(lessonId, dayId){
+  const painel = document.getElementById(`cmt-painel-${lessonId}-${dayId}`);
+  if (!painel) return;
+  const abrindo = painel.hidden;
+  painel.hidden = !abrindo;
+  if (abrindo) await carregarComentarios(lessonId, dayId);
+}
+
+async function carregarComentarios(lessonId, dayId){
+  const painel = document.getElementById(`cmt-painel-${lessonId}-${dayId}`);
+  if (!painel) return;
+  const lista = painel.querySelector('.cmt-lista');
+  lista.innerHTML = `<p class="cmt-vazio">Carregando…</p>`;
+
+  await carregarConfigComentarios();
+
+  if (!currentUser) { desenharComentarios(lessonId, dayId, []); return; }
+
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/comentarios/${lessonId}/${dayId}.json?auth=${token}`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const dados = await r.json();
+    const arr = dados ? Object.keys(dados).map(id => Object.assign({id}, dados[id])) : [];
+    // Mais antigo primeiro: le como conversa que se constroi ao longo da semana.
+    arr.sort((a,b) => String(a.criadoEm||'').localeCompare(String(b.criadoEm||'')));
+    cmtCache[`${lessonId}-${dayId}`] = arr;
+    desenharComentarios(lessonId, dayId, arr);
+  }catch(e){
+    console.warn('⚠️ Não carregou comentários:', e.message);
+    desenharComentarios(lessonId, dayId, [], 'Não foi possível carregar os comentários agora.');
+  }
+}
+
+function desenharComentarios(lessonId, dayId, lista, erro){
+  const painel = document.getElementById(`cmt-painel-${lessonId}-${dayId}`);
+  if (!painel) return;
+  const alvoLista = painel.querySelector('.cmt-lista');
+  const alvoForm  = painel.querySelector('.cmt-rodape-area');
+  const admin = souAdmin();
+
+  if (erro){
+    alvoLista.innerHTML = `<p class="cmt-vazio">${escaparHtml(erro)}</p>`;
+  } else if (!currentUser){
+    // Deslogado nao chegou a ler nada: afirmar "ninguem comentou" seria mentira.
+    alvoLista.innerHTML = '';
+  } else if (!lista.length){
+    alvoLista.innerHTML = `<p class="cmt-vazio">Ninguém comentou esse dia ainda.</p>`;
+  } else {
+    alvoLista.innerHTML = lista.map(c => {
+      const meu = currentUser && c.uid === currentUser.uid;
+      const podeApagar = meu || admin;
+      const inicial = escaparHtml((c.nome || '?').charAt(0).toUpperCase());
+      const avatar = c.foto
+        ? `<img src="${escaparHtml(c.foto)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'cmt-inicial',textContent:'${inicial}'}))">`
+        : `<span class="cmt-inicial">${inicial}</span>`;
+      return `<div class="cmt-item${meu ? ' meu' : ''}">
+        <div class="cmt-avatar">${avatar}</div>
+        <div class="cmt-corpo">
+          <div class="cmt-topo">
+            <span class="cmt-nome">${escaparHtml(c.nome || 'Alguém')}</span>
+            <span class="cmt-tempo">${escaparHtml(tempoRelativo(c.criadoEm))}</span>
+          </div>
+          <div class="cmt-texto">${escaparHtml(c.texto || '')}</div>
+          ${podeApagar ? `<button class="cmt-apagar" onclick="apagarComentario(${lessonId}, '${dayId}', '${escaparHtml(c.id)}')">${meu ? 'Apagar' : 'Apagar (admin)'}</button>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Área de escrita
+  if (!currentUser){
+    alvoForm.innerHTML = `<p class="cmt-aviso">Entre com sua conta Google para ver e deixar comentários.</p>`;
+  } else if (!comentariosLigados()){
+    alvoForm.innerHTML = `<p class="cmt-aviso">Os comentários estão desligados no momento.</p>`;
+  } else if (estouBanido()){
+    alvoForm.innerHTML = `<p class="cmt-aviso">Sua conta não pode comentar.</p>`;
+  } else {
+    alvoForm.innerHTML = `<div class="cmt-form">
+      <textarea class="cmt-input" id="cmt-txt-${lessonId}-${dayId}" rows="1" maxlength="${CMT_LIMITE}"
+        placeholder="Escreva o que esse dia te deixou…"
+        oninput="ajustarCampoComentario(this, ${lessonId}, '${dayId}')"></textarea>
+      <div class="cmt-rodape">
+        <span class="cmt-contador" id="cmt-cont-${lessonId}-${dayId}"></span>
+        <button class="cmt-enviar" id="cmt-env-${lessonId}-${dayId}" disabled
+          onclick="enviarComentario(${lessonId}, '${dayId}')">Comentar</button>
+      </div>
+    </div>`;
+  }
+
+  atualizarBotaoComentarios(lessonId, dayId, lista.length);
+}
+
+function atualizarBotaoComentarios(lessonId, dayId, total){
+  const btn = document.getElementById(`cmt-btn-${lessonId}-${dayId}`);
+  if (!btn) return;
+  const rotulo = btn.querySelector('.cmt-rotulo');
+  if (rotulo) rotulo.textContent = total > 0 ? String(total) : 'Comentários';
+  btn.classList.toggle('tem', total > 0);
+}
+
+// Campo cresce conforme digita, em vez de abrir uma caixa grande de cara.
+function ajustarCampoComentario(el, lessonId, dayId){
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 220) + 'px';
+
+  const texto = el.value.trim();
+  const env = document.getElementById(`cmt-env-${lessonId}-${dayId}`);
+  if (env) env.disabled = texto.length === 0;
+
+  const cont = document.getElementById(`cmt-cont-${lessonId}-${dayId}`);
+  if (cont){
+    const restam = CMT_LIMITE - el.value.length;
+    cont.textContent = `${restam}`;
+    cont.className = 'cmt-contador' + (restam <= 0 ? ' estourou' : (restam <= 60 ? ' perto' : ''));
+  }
+}
+
+async function enviarComentario(lessonId, dayId){
+  const campo = document.getElementById(`cmt-txt-${lessonId}-${dayId}`);
+  const botao = document.getElementById(`cmt-env-${lessonId}-${dayId}`);
+  if (!campo || !currentUser) return;
+  const texto = campo.value.trim();
+  if (!texto) return;
+
+  if (botao){ botao.disabled = true; botao.textContent = 'Enviando…'; }
+  try{
+    const token = await getAuthToken();
+    const corpo = {
+      uid: currentUser.uid,
+      nome: primeiroNome(),
+      foto: currentUser.photoURL || '',
+      texto: texto.slice(0, CMT_LIMITE),
+      criadoEm: new Date().toISOString()
+    };
+    const r = await fetch(`${FIREBASE_DB}/comentarios/${lessonId}/${dayId}.json?auth=${token}`, {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(corpo)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    campo.value = '';
+    await carregarComentarios(lessonId, dayId);
+  }catch(e){
+    console.error('❌ Não enviou o comentário:', e);
+    alert('Não foi possível enviar seu comentário agora. Tente de novo em instantes.');
+    if (botao){ botao.disabled = false; botao.textContent = 'Comentar'; }
+  }
+}
+
+async function apagarComentario(lessonId, dayId, id){
+  if (!currentUser) return;
+  if (!confirm('Apagar este comentário?')) return;
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/comentarios/${lessonId}/${dayId}/${id}.json?auth=${token}`, {method:'DELETE'});
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    await carregarComentarios(lessonId, dayId);
+  }catch(e){
+    console.error('❌ Não apagou o comentário:', e);
+    alert('Não foi possível apagar agora. Tente de novo.');
+  }
+}
+
 // ===== SINCRONIZACAO AO VIVO =====
 // O Realtime Database empurra mudancas por websocket. Com isso, alterar algo
 // no celular reflete no computador em segundos, sem clicar em nada.
@@ -5495,6 +5789,8 @@ function initFirebaseAuth() {
           nome: user.displayName || ''
         }));
         await preencherNomeSeVazio();
+        await carregarConfigComentarios(true);
+        atualizarVisibilidadeComentarios();
         iniciarEscutaAoVivo();
         await refrescarTelaAposLogin();
       } else {
@@ -5763,7 +6059,12 @@ function updateAuthUI() {
   if (info) {
     info.style.display = logado ? 'block' : 'none';
     if (logado) {
-      info.textContent = 'Conectado como ' + (currentUser.displayName || currentUser.email) + ' — seu progresso sincroniza entre dispositivos.';
+      // O uid aparece aqui para poder ser copiado ao configurar admin
+      // nas regras do banco. E identificador publico, nao e segredo.
+      info.innerHTML = 'Conectado como ' + escaparHtml(currentUser.displayName || currentUser.email) +
+        ' — seu progresso sincroniza entre dispositivos.<br>' +
+        '<span style="font-family:\'JetBrains Mono\',monospace; font-size:11px; opacity:.75; user-select:all; word-break:break-all;">uid: ' +
+        escaparHtml(currentUser.uid) + '</span>';
     }
   }
 }

@@ -117,6 +117,67 @@ passa de 300 KB por usuário) e o controle interno `prefs-aparelho-ts`.
 
 ---
 
+## Regras com comentários (substituem as anteriores)
+
+Quando for ligar os comentários, `Realtime Database → Regras` recebe isto no lugar
+do que está publicado hoje:
+
+```json
+{
+  "rules": {
+    "usuarios": {
+      "$uid": {
+        ".read":  "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "config": {
+      ".read": "auth != null",
+      "comentarios": { ".write": "root.child('config/admins/'+auth.uid).exists()" },
+      "banidos":     { ".write": "root.child('config/admins/'+auth.uid).exists()" },
+      "admins":      { ".write": false }
+    },
+    "comentarios": {
+      ".read": "auth != null",
+      "$licao": { "$dia": { "$id": {
+        ".write": "auth != null && ( (!data.exists() && newData.child('uid').val() == auth.uid && root.child('config/comentarios/ativo').val() == true && !root.child('config/banidos/'+auth.uid).exists()) || (data.exists() && !newData.exists() && (data.child('uid').val() == auth.uid || root.child('config/admins/'+auth.uid).exists())) )",
+        ".validate": "newData.hasChildren(['uid','nome','texto','criadoEm']) && newData.child('texto').isString() && newData.child('texto').val().length <= 500 && newData.child('uid').val() == auth.uid"
+      } } }
+    }
+  }
+}
+```
+
+O que cada pedaço garante:
+
+| Regra | Efeito |
+|---|---|
+| `comentarios` só lê com `auth != null` | quem não entrou não vê nome nem foto de ninguém |
+| escrita exige `uid == auth.uid` | ninguém posta no nome de outro |
+| exige `config/comentarios/ativo == true` | a chave geral desliga tudo de uma vez |
+| bloqueia quem está em `banidos` | banir é marcar um registro, não caçar comentários |
+| apagar: autor **ou** admin | você remove qualquer coisa; cada um remove o seu |
+| editar não é permitido | `data.exists() && newData.exists()` não passa em nenhum caso |
+| `admins` com `".write": false` | ninguém se promove a admin pelo app |
+| `texto` até 500 caracteres | limite garantido no banco, não só na tela |
+
+### Depois de publicar as regras
+
+Ainda em `Realtime Database`, crie os dois registros (aba Dados, botão +):
+
+```
+config/admins/SEU_UID     →  true
+config/comentarios/ativo  →  false
+```
+
+Seu `uid` aparece na aba **Conta** do app, embaixo de "Conectado como".
+
+Deixe `ativo` em `false` até querer abrir para todo mundo. Com ele desligado, o
+app mostra "Os comentários estão desligados no momento" e ninguém consegue postar
+— nem você.
+
+---
+
 ## Onde está cada coisa no código
 
 | O quê | Local |
