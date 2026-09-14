@@ -5570,7 +5570,7 @@ function desenharComentarios(lessonId, dayId, lista, erro){
       const podeApagar = meu || admin;
       const inicial = escaparHtml((c.nome || '?').charAt(0).toUpperCase());
       const avatar = c.foto
-        ? `<img src="${escaparHtml(c.foto)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'cmt-inicial',textContent:'${inicial}'}))">`
+        ? `<img src="${escaparHtml(c.foto)}" alt="" data-fallback="${inicial}">`
         : `<span class="cmt-inicial">${inicial}</span>`;
       return `<div class="cmt-item${meu ? ' meu' : ''}">
         <div class="cmt-avatar">${avatar}</div>
@@ -5580,10 +5580,27 @@ function desenharComentarios(lessonId, dayId, lista, erro){
             <span class="cmt-tempo">${escaparHtml(tempoRelativo(c.criadoEm))}</span>
           </div>
           <div class="cmt-texto">${escaparHtml(c.texto || '')}</div>
-          ${podeApagar ? `<button class="cmt-apagar" onclick="apagarComentario(${lessonId}, '${dayId}', '${escaparHtml(c.id)}')">${meu ? 'Apagar' : 'Apagar (admin)'}</button>` : ''}
+          ${podeApagar ? `<button class="cmt-apagar" data-lesson="${lessonId}" data-day="${escaparHtml(dayId)}" data-id="${escaparHtml(c.id)}">${meu ? 'Apagar' : 'Apagar (admin)'}</button>` : ''}
         </div>
       </div>`;
     }).join('');
+
+    // Handlers inline (onclick/onerror) sofrem double-decode: o HTML-escape
+    // protege o atributo, mas o navegador decodifica entidades antes de tratar
+    // o valor como JS, entao uma aspa escapada volta a ser aspa e escapa da
+    // string. Por isso os dados vao em data-* e os listeners sao presos aqui.
+    alvoLista.querySelectorAll('.cmt-avatar img[data-fallback]').forEach(img => {
+      img.addEventListener('error', () => {
+        img.replaceWith(Object.assign(document.createElement('span'), {
+          className: 'cmt-inicial', textContent: img.dataset.fallback
+        }));
+      });
+    });
+    alvoLista.querySelectorAll('.cmt-apagar').forEach(btn => {
+      btn.addEventListener('click', () => {
+        apagarComentario(Number(btn.dataset.lesson), btn.dataset.day, btn.dataset.id);
+      });
+    });
   }
 
   // Área de escrita
