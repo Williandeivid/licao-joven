@@ -2414,6 +2414,27 @@ function atualizarMarcacoesDoDia(lessonId, dayId){
   }
 }
 
+// Recalcula e repinta só a faixa "Progresso: X/Y dias · Acertos: X/Y" do
+// dashboard, sem tocar no resto da tela (usado ao terminar um quiz).
+function atualizarDashboardProgresso(lessonId){
+  try{
+    const content = LESSONS_CONTENT.find(l=>l.id===lessonId);
+    const overall = document.querySelector('.dash-overall');
+    if(!content || !overall) return;
+    const progress = progressCache[lessonId] || {days:{}, quiz:{}};
+    const quizDays = content.days.filter(d=>d.quiz);
+    const doneCount = quizDays.filter(d=> progress.quiz && progress.quiz[d.id]).length;
+    let totalCorrect=0, totalQ=0;
+    quizDays.forEach(d=>{ if(progress.quiz && progress.quiz[d.id]){ totalCorrect+=progress.quiz[d.id].correct; totalQ+=10; }});
+    const pct = totalQ? Math.round(totalCorrect/totalQ*100) : 0;
+    overall.innerHTML =
+      (doneCount > 0 ? `<span class="label">Progresso: <span class="value">${doneCount}/${quizDays.length} dias</span></span>` : '') +
+      (totalQ > 0 ? `<span class="label">Acertos: <span class="value">${totalCorrect}/${totalQ} (${pct}%)</span></span>` : '');
+  }catch(e){
+    console.warn('⚠️ Não atualizou o dashboard de progresso:', e.message);
+  }
+}
+
 async function marcarConcluido(btn){
   if(btn.classList.contains('done')) return;
   const lessonId = parseInt(btn.dataset.lesson);
@@ -2568,7 +2589,17 @@ function bindDayInteractions(lessonId, content, progress){
             p.days[day.id] = {studied:true, estMinutes};
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
-            renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
+
+            // Antes disso a tela inteira era reconstruida (renderLessonDetail),
+            // o que parecia um refresh: piscava, perdia o scroll e fechava
+            // acordeoes abertos. Agora so os pedacos que mudaram sao atualizados.
+            atualizarMarcacoesDoDia(lessonId, day.id);
+            atualizarDashboardProgresso(lessonId);
+            const btnConcluir = document.querySelector(`.btn-concluir[data-lesson="${lessonId}"][data-day="${day.id}"]`);
+            if(btnConcluir && !btnConcluir.classList.contains('done')){
+              btnConcluir.classList.add('done');
+              btnConcluir.textContent = '✓ Dia concluído';
+            }
           }
         });
       });
