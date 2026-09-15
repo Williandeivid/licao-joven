@@ -84,14 +84,15 @@ git commit -m "docs: adiciona regras do ranking ao fechamento pendente do Fireba
 - Modify: `index.html:3112-3114` (inserir entre o fim de `computeDaysInRange` e o início de `computeDailyStreakSync`)
 
 **Interfaces:**
-- Consumes: `buildProgressMap()` (retorna `{[dateKey]: {studied, pct, date, time}}`), `dateKey(Date)`, `dayCalendarDate(lessonId, dayId)`, `findLessonDayByDate(key)` — todas já existentes no arquivo.
+- Consumes: `buildProgressMap()` (retorna `{[dateKey]: {studied, pct, date, time}}`), `dateKey(Date)`, `dayCalendarDate(lessonId, dayId)`, `findLessonDayByDate(key)`, `window.storage.get/set` — todas já existentes no arquivo.
 - Produces:
   - `getQuarterRange()` → `{start: Date, end: Date}`
   - `calcularRankingSemanal()` → `{semanaId: string, diasConcluidos: number, notaMedia: number, pontos: number}`
   - `calcularRankingTrimestre()` → `{trimestreId: string, diasConcluidos: number, diasElapsados: number, notaMedia: number, pontos: number}`
-  - Usadas pela Task 3 (gravação) e Task 6 (exibição).
+  - `registrarRankingPrivado()` → `Promise<void>` — grava/mescla o histórico privado local (chave `ranking-historico-privado`), sem depender de login nem de opt-in, sem chamar `fetch`. Sobe pro Firebase (privado, dentro de `/usuarios/{uid}`) sozinha, pelo mecanismo genérico de sync que já existe — não é chamada nova de rede.
+  - Usadas pela Task 3 (gravação pública) e Task 5/6 (gatilhos e exibição).
 
-- [ ] **Step 1: Inserir as três funções**
+- [ ] **Step 1: Inserir as quatro funções**
 
 Localize em `index.html` o trecho (função `computeDaysInRange`, termina com):
 
@@ -112,7 +113,7 @@ function computeDaysInRange(progressMap, startDate, endDate){
 function computeDailyStreakSync(progressMap){
 ```
 
-Insira as três funções novas entre o `}` que fecha `computeDaysInRange` e a linha `function computeDailyStreakSync(progressMap){`:
+Insira as quatro funções novas entre o `}` que fecha `computeDaysInRange` e a linha `function computeDailyStreakSync(progressMap){`:
 
 ```js
 function computeDaysInRange(progressMap, startDate, endDate){
@@ -170,6 +171,27 @@ function calcularRankingTrimestre(){
   const notaMedia = notas.length ? Math.round(notas.reduce((a,b)=>a+b,0)/notas.length) : 0;
   const pontos = Math.round(diasConcluidos/diasElapsados*60) + Math.round(notaMedia/100*40);
   return { trimestreId: dateKey(start), diasConcluidos, diasElapsados, notaMedia, pontos };
+}
+
+// Historico privado: guarda a pontuacao de cada semana/trimestre num
+// unico objeto local. Nao chama o Firebase diretamente - a chave sobe
+// sozinha pelo mesmo gancho generico de sync que ja existe pra
+// qualquer ajuste local, dentro do no privado /usuarios/{uid}.
+async function registrarRankingPrivado(){
+  try{
+    const semana = calcularRankingSemanal();
+    const trimestre = calcularRankingTrimestre();
+    let historico = {semana:{}, trimestre:{}};
+    try{
+      const res = await window.storage.get('ranking-historico-privado', false);
+      if(res && res.value) historico = JSON.parse(res.value);
+    }catch(e){ /* chave ainda nao existe */ }
+    if(!historico.semana) historico.semana = {};
+    if(!historico.trimestre) historico.trimestre = {};
+    historico.semana[semana.semanaId] = { diasConcluidos: semana.diasConcluidos, notaMedia: semana.notaMedia, pontos: semana.pontos };
+    historico.trimestre[trimestre.trimestreId] = { diasConcluidos: trimestre.diasConcluidos, diasElapsados: trimestre.diasElapsados, notaMedia: trimestre.notaMedia, pontos: trimestre.pontos };
+    await window.storage.set('ranking-historico-privado', JSON.stringify(historico), false);
+  } catch(e){ console.warn('⚠️ Não salvou o histórico privado do ranking:', e.message); }
 }
 
 function computeDailyStreakSync(progressMap){
@@ -272,15 +294,48 @@ resultado;
 
 Expected: JSON com `"ok":true`.
 
-- [ ] **Step 5: Parar servidor local**
+- [ ] **Step 5: Testar `registrarRankingPrivado()` — grava e mescla o histórico sem sobrescrever semanas/trimestres anteriores**
+
+```js
+const storageBackup = await window.storage.get('ranking-historico-privado', false).catch(()=>null);
+let resultado;
+try {
+  // historico pre-existente de uma semana/trimestre "antiga" que nao deve ser apagada
+  await window.storage.set('ranking-historico-privado', JSON.stringify({
+    semana: {'2000-01-02': {diasConcluidos:3, notaMedia:50, pontos:41}},
+    trimestre: {'2000-01-02': {diasConcluidos:3, diasElapsados:10, notaMedia:50, pontos:38}}
+  }), false);
+
+  await registrarRankingPrivado();
+
+  const { semanaId } = calcularRankingSemanal();
+  const { trimestreId } = calcularRankingTrimestre();
+  const salvo = JSON.parse((await window.storage.get('ranking-historico-privado', false)).value);
+
+  resultado = JSON.stringify({
+    manteveSemanaAntiga: !!salvo.semana['2000-01-02'],
+    gravouSemanaAtual: !!salvo.semana[semanaId],
+    manteveTrimestreAntigo: !!salvo.trimestre['2000-01-02'],
+    gravouTrimestreAtual: !!salvo.trimestre[trimestreId]
+  });
+} finally {
+  if(storageBackup && storageBackup.value) await window.storage.set('ranking-historico-privado', storageBackup.value, false);
+  else await window.storage.delete('ranking-historico-privado', false).catch(()=>{});
+}
+resultado;
+```
+
+Expected: `{"manteveSemanaAntiga":true,"gravouSemanaAtual":true,"manteveTrimestreAntigo":true,"gravouTrimestreAtual":true}`.
+
+- [ ] **Step 6: Parar servidor local**
 
 Run: `lsof -i :8000 -t | xargs -r kill 2>/dev/null`
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add index.html
-git commit -m "feat: calculo de pontuacao do ranking semanal e do trimestre"
+git commit -m "feat: calculo de pontuacao e historico privado do ranking semanal e do trimestre"
 ```
 
 ---
@@ -666,14 +721,18 @@ git commit -m "feat: opt-in do ranking na aba Conta"
 - Modify: `index.html` (bloco de conclusão da 10ª pergunta do quiz, dentro de `bindDayInteractions`)
 
 **Interfaces:**
-- Consumes: `atualizarRankingSemanal()`, `atualizarRankingTrimestre()` (Task 3, ambas já se autoprotegem contra usuário deslogado/sem opt-in).
-- Produces: nenhuma nova função — só liga os dois pontos de gravação de progresso já existentes às funções da Task 3.
+- Consumes: `registrarRankingPrivado()` (Task 2, roda sempre — sem login, sem opt-in), `atualizarRankingSemanal()`, `atualizarRankingTrimestre()` (Task 3, ambas já se autoprotegem contra usuário deslogado/sem opt-in).
+- Produces: nenhuma nova função — só liga os dois pontos de gravação de progresso já existentes às funções das Tasks 2 e 3.
 
 - [ ] **Step 1: Adicionar as chamadas em `marcarConcluido`**
 
 Localize:
 
 ```js
+  // Sem isto, marcar um dia passado salvava certo mas a régua de dias e o
+  // calendário continuavam mostrando o dia como não estudado até recarregar.
+  atualizarMarcacoesDoDia(lessonId, dayId);
+
   // 🔥 Auto-save no Firebase (so quando ha usuario logado)
   // Sem login o progresso ja ficou salvo em saveProgress() acima, no proprio navegador.
   if (currentUser) {
@@ -688,6 +747,14 @@ function refazerQuiz(lessonId, dayId){
 Substitua por:
 
 ```js
+  // Sem isto, marcar um dia passado salvava certo mas a régua de dias e o
+  // calendário continuavam mostrando o dia como não estudado até recarregar.
+  atualizarMarcacoesDoDia(lessonId, dayId);
+
+  // Historico privado do ranking: roda sempre, mesmo sem login e sem
+  // opt-in (so grava local; se estiver logado, sobe sozinho no proximo sync).
+  await registrarRankingPrivado();
+
   // 🔥 Auto-save no Firebase (so quando ha usuario logado)
   // Sem login o progresso ja ficou salvo em saveProgress() acima, no proprio navegador.
   if (currentUser) {
@@ -727,6 +794,7 @@ Substitua por:
               btnConcluir.classList.add('done');
               btnConcluir.textContent = '✓ Dia concluído';
             }
+            await registrarRankingPrivado();
             await atualizarRankingSemanal();
             await atualizarRankingTrimestre();
           }
@@ -737,11 +805,12 @@ Substitua por:
 
 Run: `cd /Users/josiasgomeslima/Documents/licao-joven && (lsof -i :8000 -t | xargs -r kill) 2>/dev/null; python3 -m http.server 8000 >/tmp/server.log 2>&1 &`
 
-- [ ] **Step 4: Testar que `marcarConcluido` dispara as duas funções (só quando logado)**
+- [ ] **Step 4: Testar que `marcarConcluido` dispara as três funções (privado sempre, públicas só quando logado)**
 
 ```js
-let chamadasSemanal = 0, chamadasTrimestre = 0;
-const semanalOriginal = atualizarRankingSemanal, trimestreOriginal = atualizarRankingTrimestre;
+let chamadasPrivado = 0, chamadasSemanal = 0, chamadasTrimestre = 0;
+const privadoOriginal = registrarRankingPrivado, semanalOriginal = atualizarRankingSemanal, trimestreOriginal = atualizarRankingTrimestre;
+window.registrarRankingPrivado = async () => { chamadasPrivado++; };
 window.atualizarRankingSemanal = async () => { chamadasSemanal++; };
 window.atualizarRankingTrimestre = async () => { chamadasTrimestre++; };
 
@@ -755,22 +824,46 @@ const tinhaBotao = !!btn;
 if(btn) await marcarConcluido(btn);
 
 window.fetch = fetchOriginal;
+window.registrarRankingPrivado = privadoOriginal;
 window.atualizarRankingSemanal = semanalOriginal;
 window.atualizarRankingTrimestre = trimestreOriginal;
 currentUser = userBackup;
 
-JSON.stringify({ tinhaBotao, chamadasSemanal, chamadasTrimestre });
+JSON.stringify({ tinhaBotao, chamadasPrivado, chamadasSemanal, chamadasTrimestre });
 ```
 
-Expected: `{"tinhaBotao":true,"chamadasSemanal":1,"chamadasTrimestre":1}`. Se `tinhaBotao` for `false`, abra manualmente uma lição com pelo menos um dia não concluído antes de rodar o script (ex.: navegue pra lição atual e expanda um dia).
+Expected: `{"tinhaBotao":true,"chamadasPrivado":1,"chamadasSemanal":1,"chamadasTrimestre":1}`. Se `tinhaBotao` for `false`, abra manualmente uma lição com pelo menos um dia não concluído antes de rodar o script (ex.: navegue pra lição atual e expanda um dia).
 
-- [ ] **Step 5: Testar que a conclusão do quiz dispara as duas funções**
+- [ ] **Step 4b: Testar que `registrarRankingPrivado` dispara mesmo sem login**
+
+```js
+let chamadasPrivado = 0;
+const privadoOriginal = registrarRankingPrivado;
+window.registrarRankingPrivado = async () => { chamadasPrivado++; };
+
+const userBackup = currentUser;
+currentUser = null;
+
+const btn = document.querySelector('.btn-concluir:not(.done)');
+const tinhaBotao = !!btn;
+if(btn) await marcarConcluido(btn);
+
+window.registrarRankingPrivado = privadoOriginal;
+currentUser = userBackup;
+
+JSON.stringify({ tinhaBotao, chamadasPrivado });
+```
+
+Expected: `{"tinhaBotao":true,"chamadasPrivado":1}`. Se `tinhaBotao` for `false`, abra manualmente uma lição com outro dia não concluído (o do Step 4 já foi marcado).
+
+- [ ] **Step 5: Testar que a conclusão do quiz dispara as três funções**
 
 Reaproveita a técnica de clicar nas 10 respostas certas já usada na verificação do fix do "refresh do quiz":
 
 ```js
-let chamadasSemanal = 0, chamadasTrimestre = 0;
-const semanalOriginal = atualizarRankingSemanal, trimestreOriginal = atualizarRankingTrimestre;
+let chamadasPrivado = 0, chamadasSemanal = 0, chamadasTrimestre = 0;
+const privadoOriginal = registrarRankingPrivado, semanalOriginal = atualizarRankingSemanal, trimestreOriginal = atualizarRankingTrimestre;
+window.registrarRankingPrivado = async () => { chamadasPrivado++; };
 window.atualizarRankingSemanal = async () => { chamadasSemanal++; };
 window.atualizarRankingTrimestre = async () => { chamadasTrimestre++; };
 
@@ -784,13 +877,14 @@ for(let i=0;i<blocks.length;i++){
 }
 await new Promise(r=>setTimeout(r,300));
 
+window.registrarRankingPrivado = privadoOriginal;
 window.atualizarRankingSemanal = semanalOriginal;
 window.atualizarRankingTrimestre = trimestreOriginal;
 
-JSON.stringify({ chamadasSemanal, chamadasTrimestre });
+JSON.stringify({ chamadasPrivado, chamadasSemanal, chamadasTrimestre });
 ```
 
-Expected: `{"chamadasSemanal":1,"chamadasTrimestre":1}`. Se o quiz já estiver respondido de um teste anterior, chame `refazerQuiz(lessonId, dayId)` primeiro (pegue os IDs de `quizEl.id`, formato `quiz-{lessonId}-{dayId}`) e reabra a lição antes de repetir o script.
+Expected: `{"chamadasPrivado":1,"chamadasSemanal":1,"chamadasTrimestre":1}`. Se o quiz já estiver respondido de um teste anterior, chame `refazerQuiz(lessonId, dayId)` primeiro (pegue os IDs de `quizEl.id`, formato `quiz-{lessonId}-{dayId}`) e reabra a lição antes de repetir o script.
 
 - [ ] **Step 6: Parar servidor local**
 
