@@ -3798,7 +3798,7 @@ async function carregarRankingTab(tipo){
       <div class="ranking-row${item.uid===meuId?' me':''}">
         <span class="ranking-rank">${i+1}º</span>
         <span class="ranking-name">${escaparHtml(item.nome || 'Alguém')}</span>
-        <span class="ranking-score">${item.pontos} pts</span>
+        <span class="ranking-score">${Number(item.pontos) || 0} pts</span>
       </div>`).join('');
 
     if(meuIndex >= 50){
@@ -3807,7 +3807,7 @@ async function carregarRankingTab(tipo){
       <div class="ranking-row me">
         <span class="ranking-rank">${meuIndex+1}º</span>
         <span class="ranking-name">${escaparHtml(item.nome || 'Alguém')}</span>
-        <span class="ranking-score">${item.pontos} pts</span>
+        <span class="ranking-score">${Number(item.pontos) || 0} pts</span>
       </div>`;
     }
 
