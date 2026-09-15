@@ -919,7 +919,17 @@ async function carregarRankingTab(tipo){
     return;
   }
   if(!(await rankingOptInAtivo())){
-    panel.innerHTML = `<p class="conta-note">Ative "Participar do ranking" na aba Conta pra ver e aparecer aqui.</p>`;
+    // Sem opt-in nao ha chamada nenhuma ao Firebase: a pontuacao e so
+    // calculo local, entao a pessoa ve o proprio numero sem se expor
+    // nem ver os outros.
+    const dados = tipo === 'semana' ? calcularRankingSemanal() : calcularRankingTrimestre();
+    panel.innerHTML = `
+      <div class="ranking-row me">
+        <span class="ranking-rank">—</span>
+        <span class="ranking-name">Você (privado)</span>
+        <span class="ranking-score">${dados.pontos} pts</span>
+      </div>
+      <p class="conta-note">Ative "Participar do ranking" na aba Conta pra comparar com outras pessoas.</p>`;
     panel.dataset.loaded = '1';
     return;
   }
@@ -982,7 +992,7 @@ async function carregarRankingTab(tipo){
 
 Run: `cd /Users/josiasgomeslima/Documents/licao-joven && (lsof -i :8000 -t | xargs -r kill) 2>/dev/null; python3 -m http.server 8000 >/tmp/server.log 2>&1 &`
 
-- [ ] **Step 6: Testar estado deslogado e estado sem opt-in**
+- [ ] **Step 6: Testar estado deslogado, e estado logado sem opt-in (vê a própria pontuação, sem chamar o Firebase)**
 
 ```js
 const userBackup = currentUser;
@@ -993,18 +1003,28 @@ const semDeslogado = document.querySelector('#ranking-section .ranking-panel.act
 
 currentUser = { uid:'uid-teste', getIdToken: async()=>'token-teste' };
 await window.storage.set('ranking-opt-in', JSON.stringify(false), false);
+
+let chamouFetch = false;
+const fetchOriginal = window.fetch.bind(window);
+window.fetch = async (...args) => { chamouFetch = true; return fetchOriginal(...args); };
+
 await goStats();
 await new Promise(r=>setTimeout(r,100));
-const semOptIn = document.querySelector('#ranking-section .ranking-panel.active').textContent;
+const painelSemOptIn = document.querySelector('#ranking-section .ranking-panel.active');
+const semOptIn = painelSemOptIn.textContent;
+const pontosEsperados = calcularRankingSemanal().pontos;
 
+window.fetch = fetchOriginal;
 currentUser = userBackup;
 JSON.stringify({
   deslogadoPedeLogin: semDeslogado.includes('Entre com sua conta Google'),
-  semOptInPedeAtivar: semOptIn.includes('Ative "Participar do ranking"')
+  semOptInMostraPropriaPontuacao: semOptIn.includes('Você (privado)') && semOptIn.includes(`${pontosEsperados} pts`),
+  semOptInPedeAtivarComparar: semOptIn.includes('Ative "Participar do ranking"'),
+  semOptInNaoChamouFirebase: !chamouFetch
 });
 ```
 
-Expected: `{"deslogadoPedeLogin":true,"semOptInPedeAtivar":true}`.
+Expected: `{"deslogadoPedeLogin":true,"semOptInMostraPropriaPontuacao":true,"semOptInPedeAtivarComparar":true,"semOptInNaoChamouFirebase":true}`.
 
 - [ ] **Step 7: Testar lista renderizada, ordenação e destaque de "eu"**
 

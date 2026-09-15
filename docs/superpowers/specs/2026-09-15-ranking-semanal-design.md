@@ -173,6 +173,15 @@ cliente é suficiente — não precisa de query otimizada
 (`orderBy`/`limitToLast`) agora; fica registrado como melhoria futura
 se o grupo crescer muito.
 
+**Visão privada sem opt-in:** como `diasConcluidos`/`notaMedia`/`pontos`
+são calculados só a partir do progresso local (sem rede), quem está
+logado mas não ativou o switch ainda vê a própria pontuação — só não
+vê nem aparece na lista pública dos outros participantes. A aba mostra
+"Você (privado): X pts" com uma nota "Ative 'Participar do ranking' pra
+comparar com outras pessoas", sem nenhuma chamada ao Firebase nesse
+estado. Quem não está logado continua vendo o convite pra entrar com a
+conta Google (essa parte não muda).
+
 ## Regras do Firebase
 
 Entra junto com a atualização de regras já pendente no
