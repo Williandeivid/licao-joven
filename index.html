@@ -5294,6 +5294,63 @@ async function lerDoFirebase(usuarioId) {
   }
 }
 
+// ===== RANKING: opt-in, gravacao e saida =====
+async function rankingOptInAtivo(){
+  try {
+    const res = await window.storage.get('ranking-opt-in', false);
+    return res && JSON.parse(res.value) === true;
+  } catch(e) { return false; }
+}
+
+async function atualizarRankingSemanal(){
+  if(!currentUser) return;
+  try{
+    if(!(await rankingOptInAtivo())) return;
+    const { semanaId, diasConcluidos, notaMedia, pontos } = calcularRankingSemanal();
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/ranking/${semanaId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
+    await fetch(url, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, notaMedia, pontos, atualizado_em: new Date().toISOString() })
+    });
+  } catch(e){ console.warn('⚠️ Não atualizou o ranking semanal:', e.message); }
+}
+
+async function atualizarRankingTrimestre(){
+  if(!currentUser) return;
+  try{
+    if(!(await rankingOptInAtivo())) return;
+    const { trimestreId, diasConcluidos, diasElapsados, notaMedia, pontos } = calcularRankingTrimestre();
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
+    await fetch(url, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, diasElapsados, notaMedia, pontos, atualizado_em: new Date().toISOString() })
+    });
+  } catch(e){ console.warn('⚠️ Não atualizou o ranking do trimestre:', e.message); }
+}
+
+async function sairDoRanking(){
+  const uid = getUserId();
+  const token = await getAuthToken();
+  try {
+    const semanasUrl = `${FIREBASE_DB}/ranking.json?shallow=true` + (token ? `&auth=${token}` : '');
+    const semanasRes = await fetch(semanasUrl);
+    if(semanasRes.ok){
+      const semanas = (await semanasRes.json()) || {};
+      for(const semanaId of Object.keys(semanas)){
+        const delUrl = `${FIREBASE_DB}/ranking/${semanaId}/${uid}.json` + (token ? `?auth=${token}` : '');
+        await fetch(delUrl, {method:'DELETE'});
+      }
+    }
+    const { trimestreId } = calcularRankingTrimestre();
+    const trimUrl = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}/${uid}.json` + (token ? `?auth=${token}` : '');
+    await fetch(trimUrl, {method:'DELETE'});
+  } catch(e){ console.warn('⚠️ Não conseguiu limpar o ranking ao sair:', e.message); }
+}
+
 // ===== SINCRONIZACAO DOS AJUSTES (nome, metas, favoritos, marcacoes, planos) =====
 
 // Preferencias visuais ficam de proposito so no aparelho: e comum querer
