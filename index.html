@@ -3111,6 +3111,71 @@ function computeDaysInRange(progressMap, startDate, endDate){
   return count;
 }
 
+// ===== RANKING: intervalo do trimestre e calculo de pontos =====
+function getQuarterRange(){
+  return { start: dayCalendarDate(1, 'dom'), end: dayCalendarDate(13, 'sab') };
+}
+
+function calcularRankingSemanal(){
+  const progressMap = buildProgressMap();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const sunday = new Date(today); sunday.setDate(today.getDate() - today.getDay());
+  let diasConcluidos = 0;
+  const notas = [];
+  const cursor = new Date(sunday);
+  while(cursor <= today){
+    const info = progressMap[dateKey(cursor)];
+    if(info && info.studied) diasConcluidos++;
+    if(info && info.pct !== null && info.pct !== undefined) notas.push(info.pct);
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  const notaMedia = notas.length ? Math.round(notas.reduce((a,b)=>a+b,0)/notas.length) : 0;
+  const pontos = Math.round(diasConcluidos/7*60) + Math.round(notaMedia/100*40);
+  return { semanaId: dateKey(sunday), diasConcluidos, notaMedia, pontos };
+}
+
+function calcularRankingTrimestre(){
+  const progressMap = buildProgressMap();
+  const { start, end } = getQuarterRange();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const limite = today < end ? today : end;
+  let diasElapsados = Math.floor((limite - start) / 86400000) + 1;
+  if(diasElapsados < 1) diasElapsados = 1;
+  let diasConcluidos = 0;
+  const notas = [];
+  Object.keys(progressMap).forEach(key => {
+    const dia = new Date(key + 'T00:00:00');
+    if(dia < start || dia > limite) return;
+    const info = progressMap[key];
+    if(info.studied) diasConcluidos++;
+    if(info.pct !== null && info.pct !== undefined) notas.push(info.pct);
+  });
+  const notaMedia = notas.length ? Math.round(notas.reduce((a,b)=>a+b,0)/notas.length) : 0;
+  const pontos = Math.round(diasConcluidos/diasElapsados*60) + Math.round(notaMedia/100*40);
+  return { trimestreId: dateKey(start), diasConcluidos, diasElapsados, notaMedia, pontos };
+}
+
+// Historico privado: guarda a pontuacao de cada semana/trimestre num
+// unico objeto local. Nao chama o Firebase diretamente - a chave sobe
+// sozinha pelo mesmo gancho generico de sync que ja existe pra
+// qualquer ajuste local, dentro do no privado /usuarios/{uid}.
+async function registrarRankingPrivado(){
+  try{
+    const semana = calcularRankingSemanal();
+    const trimestre = calcularRankingTrimestre();
+    let historico = {semana:{}, trimestre:{}};
+    try{
+      const res = await window.storage.get('ranking-historico-privado', false);
+      if(res && res.value) historico = JSON.parse(res.value);
+    }catch(e){ /* chave ainda nao existe */ }
+    if(!historico.semana) historico.semana = {};
+    if(!historico.trimestre) historico.trimestre = {};
+    historico.semana[semana.semanaId] = { diasConcluidos: semana.diasConcluidos, notaMedia: semana.notaMedia, pontos: semana.pontos };
+    historico.trimestre[trimestre.trimestreId] = { diasConcluidos: trimestre.diasConcluidos, diasElapsados: trimestre.diasElapsados, notaMedia: trimestre.notaMedia, pontos: trimestre.pontos };
+    await window.storage.set('ranking-historico-privado', JSON.stringify(historico), false);
+  } catch(e){ console.warn('⚠️ Não salvou o histórico privado do ranking:', e.message); }
+}
+
 function computeDailyStreakSync(progressMap){
   const engaged = new Set();
   Object.keys(progressMap).forEach(k => { if(progressMap[k].studied) engaged.add(k); });
