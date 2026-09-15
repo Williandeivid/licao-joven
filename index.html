@@ -2797,6 +2797,16 @@ async function renderConta(){
     </div>
 
     <div class="conta-card">
+      <div class="conta-section-title">Ranking</div>
+      ${currentUser ? `
+      <div class="conta-row">
+        <div><div class="conta-row-title">Participar do ranking</div><div class="conta-row-sub">Mostra seu nome e desempenho pros outros participantes, nas abas Esta semana e Trimestre em Progresso</div></div>
+        <input type="checkbox" id="ranking-opt-in-check" onchange="onRankingOptInChange(this.checked)" style="width:22px;height:22px;flex-shrink:0;">
+      </div>
+      ` : `<p class="conta-note">Entre com sua conta Google para participar do ranking.</p>`}
+    </div>
+
+    <div class="conta-card">
       <div class="conta-section-title">Sobre</div>
       <p class="conta-note">ComTexto Bíblico — Resgate<br>3º Trimestre 2026</p>
     </div>
@@ -2806,12 +2816,24 @@ async function renderConta(){
   // Os botoes de login so existem depois deste innerHTML.
   // Sem esta chamada, quem ja esta logado veria "Entrar com Google" de novo.
   updateAuthUI();
+  await atualizarRankingCheckboxConta();
 }
 
 async function saveContaName(name){
   await loadUserGoals();
   userGoals.name = name.trim();
   try{ await window.storage.set('user-goals', JSON.stringify(userGoals), false); }catch(e){}
+}
+
+async function atualizarRankingCheckboxConta(){
+  const check = document.getElementById('ranking-opt-in-check');
+  if(!check) return;
+  check.checked = await rankingOptInAtivo();
+}
+
+async function onRankingOptInChange(ligado){
+  await window.storage.set('ranking-opt-in', JSON.stringify(ligado), false);
+  if(!ligado) await sairDoRanking();
 }
 
 async function toggleThemeFromConta(){
