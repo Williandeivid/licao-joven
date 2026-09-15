@@ -104,29 +104,35 @@ alfabético.
 
 ## Quando a entrada é gravada
 
-Duas funções novas, `atualizarRankingSemanal()` e
-`atualizarRankingTrimestre()`, rodam nos dois pontos onde o progresso
-de lição já muda:
+Três funções novas rodam nos dois pontos onde o progresso de lição já
+muda — depois de `marcarConcluido()` (dia concluído) e depois da 10ª
+resposta do quiz (mesmo ponto corrigido no fix do "refresh do quiz"):
 
-- depois de `marcarConcluido()` (dia concluído)
-- depois da 10ª resposta do quiz (mesmo ponto corrigido no fix do
-  "refresh do quiz")
+- `registrarRankingPrivado()` — roda **sempre**, com ou sem login, com
+  ou sem opt-in. Recalcula a pontuação da semana e do trimestre
+  correntes e mescla num histórico local (`window.storage`, chave
+  `ranking-historico-privado`), guardando por `semanaId`/`trimestreId`.
+  Não faz nenhuma chamada de rede própria — é só leitura/escrita local.
+  Quando a pessoa está logada, essa chave sobe pro Firebase pelo mesmo
+  mecanismo genérico de sincronização que já existe pra qualquer
+  ajuste local (`coletarDadosLocais()`/`montarPacoteSync()`), gravando
+  dentro do nó privado `/usuarios/{uid}` — sem nó novo, sem regra
+  nova, mesma proteção de tudo mais que já é privado. Isso responde
+  diretamente a pergunta "não pode ficar salvo, só não público?": pode,
+  e é assim que fica — salvo, privado, com histórico por semana e por
+  trimestre, mesmo pra quem nunca ativou o ranking público.
+- `atualizarRankingSemanal()` e `atualizarRankingTrimestre()` — só
+  executam se **a pessoa estiver logada** e **tiver optado por
+  participar** (ver seção seguinte). Recalculam a mesma coisa que
+  `registrarRankingPrivado()` (mesma lógica de `buildProgressMap()` +
+  `computeDaysInRange()`, restrita a dias de lição — não conta plano
+  bíblico) e gravam com `PUT` em `/ranking/{semanaId}/{uid}` e
+  `/ranking_trimestre/{trimestreId}/{uid}` — os nós **públicos**,
+  lidos por qualquer usuário logado.
 
-Ambas só executam se **a pessoa estiver logada** e **tiver optado por
-participar** (ver seção seguinte). Silenciosas (try/catch), no mesmo
-padrão do resto da sincronização com Firebase — uma falha de rede aqui
-não pode quebrar o fluxo de concluir dia/quiz.
-
-- `atualizarRankingSemanal()` recalcula `diasConcluidos` e `notaMedia`
-  da semana corrente a partir de `progressCache` (mesma lógica de
-  `buildProgressMap()` + `computeDaysInRange()`, restrita a dias de
-  lição — não conta plano bíblico) e grava com `PUT` em
-  `/ranking/{semanaId}/{uid}`.
-- `atualizarRankingTrimestre()` reaproveita os mesmos valores que
-  `renderStats()` já calcula para o trimestre inteiro (`totalStudied` e
-  a média de `recentScores` em `buildProgressMap()`), soma
-  `diasElapsados` (hoje − início do trimestre, em dias, capado no fim
-  do trimestre) e grava em `/ranking_trimestre/{trimestreId}/{uid}`.
+Todas silenciosas (try/catch), no mesmo padrão do resto da
+sincronização com Firebase — uma falha aqui não pode quebrar o fluxo
+de concluir dia/quiz.
 
 **Regra central de presença — só vale pro semanal:** a entrada de uma
 semana só existe se houve alguma ação de progresso *naquela* semana.
@@ -179,8 +185,11 @@ logado mas não ativou o switch ainda vê a própria pontuação — só não
 vê nem aparece na lista pública dos outros participantes. A aba mostra
 "Você (privado): X pts" com uma nota "Ative 'Participar do ranking' pra
 comparar com outras pessoas", sem nenhuma chamada ao Firebase nesse
-estado. Quem não está logado continua vendo o convite pra entrar com a
-conta Google (essa parte não muda).
+estado (a exibição sempre recalcula a semana/trimestre *corrente* na
+hora — o histórico de semanas passadas fica guardado por
+`registrarRankingPrivado()`, ver seção anterior, mesmo que não haja
+tela pra navegá-lo ainda). Quem não está logado continua vendo o
+convite pra entrar com a conta Google (essa parte não muda).
 
 ## Regras do Firebase
 
@@ -238,3 +247,6 @@ Entra junto com a atualização de regras já pendente no
 - Cloud Functions / cálculo no servidor
 - Paginação ou query otimizada do ranking
 - Limpeza automática de semanas antigas
+- Tela pra navegar o histórico privado (`ranking-historico-privado`) de
+  semanas/trimestres passados — a persistência existe (ver
+  `registrarRankingPrivado()`), mas não uma interface pra revisá-la
