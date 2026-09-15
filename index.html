@@ -2852,8 +2852,12 @@ async function atualizarRankingCheckboxConta(){
 }
 
 async function onRankingOptInChange(ligado){
-  await window.storage.set('ranking-opt-in', JSON.stringify(ligado), false);
-  if(!ligado) await sairDoRanking();
+  try{ await window.storage.set('ranking-opt-in', JSON.stringify(ligado), false); }
+  catch(e){ console.warn('⚠️ Não salvou a preferência do ranking:', e.message); }
+  if(!ligado){
+    const ok = await sairDoRanking();
+    if(!ok) alert('Não conseguimos remover seus dados do ranking agora. Verifique sua conexão e tente novamente na aba Conta.');
+  }
 }
 
 async function toggleThemeFromConta(){
@@ -3750,24 +3754,24 @@ async function carregarRankingTab(tipo){
     panel.dataset.loaded = '1';
     return;
   }
-  if(!(await rankingOptInAtivo())){
-    // Sem opt-in nao ha chamada nenhuma ao Firebase: a pontuacao e so
-    // calculo local, entao a pessoa ve o proprio numero sem se expor
-    // nem ver os outros.
-    const dados = tipo === 'semana' ? calcularRankingSemanal() : calcularRankingTrimestre();
-    panel.innerHTML = `
-      <div class="ranking-row me">
-        <span class="ranking-rank">—</span>
-        <span class="ranking-name">Você (privado)</span>
-        <span class="ranking-score">${dados.pontos} pts</span>
-      </div>
-      <p class="conta-note">Ative "Participar do ranking" na aba Conta pra comparar com outras pessoas.</p>`;
-    panel.dataset.loaded = '1';
-    return;
-  }
-
-  panel.innerHTML = `<p class="conta-note">Carregando…</p>`;
   try{
+    if(!(await rankingOptInAtivo())){
+      // Sem opt-in nao ha chamada nenhuma ao Firebase: a pontuacao e so
+      // calculo local, entao a pessoa ve o proprio numero sem se expor
+      // nem ver os outros.
+      const dados = tipo === 'semana' ? calcularRankingSemanal() : calcularRankingTrimestre();
+      panel.innerHTML = `
+        <div class="ranking-row me">
+          <span class="ranking-rank">—</span>
+          <span class="ranking-name">Você (privado)</span>
+          <span class="ranking-score">${dados.pontos} pts</span>
+        </div>
+        <p class="conta-note">Ative "Participar do ranking" na aba Conta pra comparar com outras pessoas.</p>`;
+      panel.dataset.loaded = '1';
+      return;
+    }
+
+    panel.innerHTML = `<p class="conta-note">Carregando…</p>`;
     const token = await getAuthToken();
     const meuId = getUserId();
     let entradas;
@@ -3775,16 +3779,18 @@ async function carregarRankingTab(tipo){
       const { semanaId } = calcularRankingSemanal();
       const url = `${FIREBASE_DB}/ranking/${semanaId}.json` + (token ? `?auth=${token}` : '');
       const r = await fetch(url);
-      entradas = r.ok ? ((await r.json()) || {}) : {};
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      entradas = (await r.json()) || {};
     } else {
       const { trimestreId } = calcularRankingTrimestre();
       const url = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}.json` + (token ? `?auth=${token}` : '');
       const r = await fetch(url);
-      entradas = r.ok ? ((await r.json()) || {}) : {};
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      entradas = (await r.json()) || {};
     }
 
     const lista = Object.keys(entradas).map(uid => Object.assign({uid}, entradas[uid]));
-    lista.sort((a,b) => (b.pontos - a.pontos) || (b.notaMedia - a.notaMedia) || String(a.nome||'').localeCompare(String(b.nome||''), 'pt-BR'));
+    lista.sort((a,b) => ((Number(b.pontos)||0) - (Number(a.pontos)||0)) || ((Number(b.notaMedia)||0) - (Number(a.notaMedia)||0)) || String(a.nome||'').localeCompare(String(b.nome||''), 'pt-BR'));
 
     if(!lista.length){
       panel.innerHTML = `<p class="conta-note">Ninguém no ranking ${tipo==='semana'?'essa semana':'esse trimestre'} ainda. Seja o primeiro!</p>`;
@@ -5447,13 +5453,15 @@ async function atualizarRankingSemanal(){
   try{
     if(!(await rankingOptInAtivo())) return;
     const { semanaId, diasConcluidos, notaMedia, pontos } = calcularRankingSemanal();
+    if(diasConcluidos === 0 && pontos === 0) return;
     const token = await getAuthToken();
     const url = `${FIREBASE_DB}/ranking/${semanaId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'PUT',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, notaMedia, pontos, atualizado_em: new Date().toISOString() })
     });
+    if(!response.ok) throw new Error('HTTP ' + response.status);
   } catch(e){ console.warn('⚠️ Não atualizou o ranking semanal:', e.message); }
 }
 
@@ -5462,13 +5470,15 @@ async function atualizarRankingTrimestre(){
   try{
     if(!(await rankingOptInAtivo())) return;
     const { trimestreId, diasConcluidos, diasElapsados, notaMedia, pontos } = calcularRankingTrimestre();
+    if(diasConcluidos === 0 && pontos === 0) return;
     const token = await getAuthToken();
     const url = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'PUT',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, diasElapsados, notaMedia, pontos, atualizado_em: new Date().toISOString() })
     });
+    if(!response.ok) throw new Error('HTTP ' + response.status);
   } catch(e){ console.warn('⚠️ Não atualizou o ranking do trimestre:', e.message); }
 }
 
@@ -5481,14 +5491,19 @@ async function sairDoRanking(){
     if(semanasRes.ok){
       const semanas = (await semanasRes.json()) || {};
       for(const semanaId of Object.keys(semanas)){
-        const delUrl = `${FIREBASE_DB}/ranking/${semanaId}/${uid}.json` + (token ? `?auth=${token}` : '');
-        await fetch(delUrl, {method:'DELETE'});
+        const delUrl = `${FIREBASE_DB}/ranking/${encodeURIComponent(semanaId)}/${uid}.json` + (token ? `?auth=${token}` : '');
+        const delRes = await fetch(delUrl, {method:'DELETE'});
+        if(!delRes.ok) throw new Error('HTTP ' + delRes.status);
       }
+    } else {
+      throw new Error('HTTP ' + semanasRes.status);
     }
     const { trimestreId } = calcularRankingTrimestre();
     const trimUrl = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}/${uid}.json` + (token ? `?auth=${token}` : '');
-    await fetch(trimUrl, {method:'DELETE'});
-  } catch(e){ console.warn('⚠️ Não conseguiu limpar o ranking ao sair:', e.message); }
+    const trimRes = await fetch(trimUrl, {method:'DELETE'});
+    if(!trimRes.ok) throw new Error('HTTP ' + trimRes.status);
+    return true;
+  } catch(e){ console.warn('⚠️ Não conseguiu limpar o ranking ao sair:', e.message); return false; }
 }
 
 // ===== SINCRONIZACAO DOS AJUSTES (nome, metas, favoritos, marcacoes, planos) =====
