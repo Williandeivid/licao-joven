@@ -2452,11 +2452,17 @@ async function marcarConcluido(btn){
   // calendário continuavam mostrando o dia como não estudado até recarregar.
   atualizarMarcacoesDoDia(lessonId, dayId);
 
+  // Historico privado do ranking: roda sempre, mesmo sem login e sem
+  // opt-in (so grava local; se estiver logado, sobe sozinho no proximo sync).
+  await registrarRankingPrivado();
+
   // 🔥 Auto-save no Firebase (so quando ha usuario logado)
   // Sem login o progresso ja ficou salvo em saveProgress() acima, no proprio navegador.
   if (currentUser) {
     await salvarNoFirebase(getUserId(), await montarPacoteSync());
     console.log('✅ Progresso sincronizado com Firebase!');
+    await atualizarRankingSemanal();
+    await atualizarRankingTrimestre();
   }
 }
 
@@ -2600,6 +2606,9 @@ function bindDayInteractions(lessonId, content, progress){
               btnConcluir.classList.add('done');
               btnConcluir.textContent = '✓ Dia concluído';
             }
+            await registrarRankingPrivado();
+            await atualizarRankingSemanal();
+            await atualizarRankingTrimestre();
           }
         });
       });
