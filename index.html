@@ -5333,9 +5333,9 @@ async function atualizarRankingTrimestre(){
 }
 
 async function sairDoRanking(){
-  const uid = getUserId();
-  const token = await getAuthToken();
   try {
+    const uid = getUserId();
+    const token = await getAuthToken();
     const semanasUrl = `${FIREBASE_DB}/ranking.json?shallow=true` + (token ? `&auth=${token}` : '');
     const semanasRes = await fetch(semanasUrl);
     if(semanasRes.ok){
