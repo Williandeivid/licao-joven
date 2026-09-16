@@ -502,6 +502,8 @@
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; font-size:1rem; line-height:1.6; padding-bottom:82px;}
   /* Monocromatic icons only - not images or decorative SVGs */
   .timer-icon, .fav-star-btn svg, .celebrate-banner svg, .placeholder-box svg, .cal-streak-icon, .cal-view-icon svg, .cal-mini-icon, .stats-card svg, .header-icon, .gear-btn svg, .conta-avatar svg, .profile-avatar svg, .dayed-icon, .bible-subtab svg, .theme-toggle svg{filter:saturate(0);}
+  /* Chart data (not an icon) - keep its own teal/violet colors, matching the legend swatches */
+  .stats-card svg.stats-chart-colored{filter:none;}
   body::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
     background:
@@ -2432,6 +2434,27 @@ function atualizarMarcacoesDoDia(lessonId, dayId){
   }
 }
 
+// Recalcula e repinta só a faixa "Progresso: X/Y dias · Acertos: X/Y" do
+// dashboard, sem tocar no resto da tela (usado ao terminar um quiz).
+function atualizarDashboardProgresso(lessonId){
+  try{
+    const content = LESSONS_CONTENT.find(l=>l.id===lessonId);
+    const overall = document.querySelector('.dash-overall');
+    if(!content || !overall) return;
+    const progress = progressCache[lessonId] || {days:{}, quiz:{}};
+    const quizDays = content.days.filter(d=>d.quiz);
+    const doneCount = quizDays.filter(d=> progress.quiz && progress.quiz[d.id]).length;
+    let totalCorrect=0, totalQ=0;
+    quizDays.forEach(d=>{ if(progress.quiz && progress.quiz[d.id]){ totalCorrect+=progress.quiz[d.id].correct; totalQ+=10; }});
+    const pct = totalQ? Math.round(totalCorrect/totalQ*100) : 0;
+    overall.innerHTML =
+      (doneCount > 0 ? `<span class="label">Progresso: <span class="value">${doneCount}/${quizDays.length} dias</span></span>` : '') +
+      (totalQ > 0 ? `<span class="label">Acertos: <span class="value">${totalCorrect}/${totalQ} (${pct}%)</span></span>` : '');
+  }catch(e){
+    console.warn('⚠️ Não atualizou o dashboard de progresso:', e.message);
+  }
+}
+
 async function marcarConcluido(btn){
   if(btn.classList.contains('done')) return;
   const lessonId = parseInt(btn.dataset.lesson);
@@ -2586,7 +2609,17 @@ function bindDayInteractions(lessonId, content, progress){
             p.days[day.id] = {studied:true, estMinutes};
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
-            renderLessonDetail(lessonId, document.getElementById('tab-list').classList.contains('active'));
+
+            // Antes disso a tela inteira era reconstruida (renderLessonDetail),
+            // o que parecia um refresh: piscava, perdia o scroll e fechava
+            // acordeoes abertos. Agora so os pedacos que mudaram sao atualizados.
+            atualizarMarcacoesDoDia(lessonId, day.id);
+            atualizarDashboardProgresso(lessonId);
+            const btnConcluir = document.querySelector(`.btn-concluir[data-lesson="${lessonId}"][data-day="${day.id}"]`);
+            if(btnConcluir && !btnConcluir.classList.contains('done')){
+              btnConcluir.classList.add('done');
+              btnConcluir.textContent = '✓ Dia concluído';
+            }
           }
         });
       });
@@ -3307,7 +3340,7 @@ function renderTimeChart(progressMap){
     xAxisSvg += `<text x="${x.toFixed(1)}" y="${h-8}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-soft)">${label}</text>`;
   }
 
-  let svg = `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;">
+  let svg = `<svg class="stats-chart-colored" viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;">
     <defs>
       <linearGradient id="fillLesson" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="var(--violet)" stop-opacity="0.32"/>
@@ -3332,19 +3365,15 @@ function renderTimeChart(progressMap){
   return html;
 }
 
-function renderChaptersVsLessonsChart(progressMap){
-  const totalChaptersRead = new Set();
-  for(const key in BIBLE_PLANS){
-    const prog = planProgressCache[key];
-    if(prog) Object.keys(prog.read).forEach(ck=>totalChaptersRead.add(ck));
-  }
+function renderBibleDaysVsLessonsChart(progressMap){
+  const totalBibleDays = Object.keys(bibleActivityLog||{}).length;
   const totalLessonDays = Object.values(progressMap).filter(v=>v.studied).length;
-  const maxValRaw = Math.max(5, totalChaptersRead.size, totalLessonDays);
+  const maxValRaw = Math.max(5, totalBibleDays, totalLessonDays);
   const maxVal = Math.ceil(maxValRaw/5)*5;
-  const w=220, h=170, padL=30, padR=12, padT=12, padB=26;
+  const w=220, h=170, padL=30, padR=12, padT=24, padB=26;
   const barH = h-padT-padB;
   const bars = [
-    {label:'Bíblia', value:totalChaptersRead.size, color:'var(--teal)'},
+    {label:'Bíblia', value:totalBibleDays, color:'var(--teal)'},
     {label:'Lição', value:totalLessonDays, color:'var(--violet)'},
   ];
   function yAt(v){ return padT + barH - (v/maxVal)*barH; }
@@ -3354,7 +3383,7 @@ function renderChaptersVsLessonsChart(progressMap){
     yAxisSvg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${w-padR}" y2="${y.toFixed(1)}" stroke="var(--border)" stroke-width="1" stroke-dasharray="${v===0?'0':'3,3'}"/>`;
     yAxisSvg += `<text x="${padL-6}" y="${(y+3).toFixed(1)}" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-soft)">${Math.round(v)}</text>`;
   });
-  let svg = `<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:260px;height:auto;margin:0 auto;display:block;">
+  let svg = `<svg class="stats-chart-colored" viewBox="0 0 ${w} ${h}" style="width:100%;max-width:260px;height:auto;margin:0 auto;display:block;">
     ${yAxisSvg}
     <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h-padB}" stroke="var(--border)" stroke-width="1"/>`;
   const barW = 60, gap = (w-padL-padR-2*barW)/3;
@@ -3368,7 +3397,7 @@ function renderChaptersVsLessonsChart(progressMap){
   });
   svg += `</svg>`;
   let html = svg;
-  html += `<div class="cal-legend"><span><i class="lg" style="background:var(--teal)"></i>Capítulos da Bíblia</span><span><i class="lg" style="background:var(--violet)"></i>Dias de Lição</span></div>`;
+  html += `<div class="cal-legend"><span><i class="lg" style="background:var(--teal)"></i>Dias de Bíblia</span><span><i class="lg" style="background:var(--violet)"></i>Dias de Lição</span></div>`;
   return html;
 }
 
@@ -3397,7 +3426,7 @@ function renderScoreChart(progressMap){
     xAxisSvg += `<text x="${p.x.toFixed(1)}" y="${h-8}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-soft)">${label}</text>`;
   }
 
-  let svg = `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;">
+  let svg = `<svg class="stats-chart-colored" viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;">
     ${yAxisSvg}
     <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h-padB}" stroke="var(--border)" stroke-width="1"/>
     <path d="${path}" fill="none" stroke="var(--violet)" stroke-width="2.5"/>`;
@@ -3603,8 +3632,8 @@ function renderStats(){
       ${renderCalendarMonth(progressMap)}
     </div>
     <div class="stats-card">
-      <h3><svg viewBox="0 0 24 24"><rect x="3" y="10" width="4" height="10"/><rect x="10" y="4" width="4" height="16"/><rect x="17" y="7" width="4" height="13"/></svg>Capítulos lidos × Dias de lição</h3>
-      ${renderChaptersVsLessonsChart(progressMap)}
+      <h3><svg viewBox="0 0 24 24"><rect x="3" y="10" width="4" height="10"/><rect x="10" y="4" width="4" height="16"/><rect x="17" y="7" width="4" height="13"/></svg>Dias de Bíblia × Dias de lição</h3>
+      ${renderBibleDaysVsLessonsChart(progressMap)}
     </div>
     <div class="stats-card">
       <h3><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>Tempo de estudo por dia</h3>
@@ -5650,7 +5679,7 @@ function desenharComentarios(lessonId, dayId, lista, erro){
       const podeApagar = meu || admin;
       const inicial = escaparHtml((c.nome || '?').charAt(0).toUpperCase());
       const avatar = c.foto
-        ? `<img src="${escaparHtml(c.foto)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'cmt-inicial',textContent:'${inicial}'}))">`
+        ? `<img src="${escaparHtml(c.foto)}" alt="" data-fallback="${inicial}">`
         : `<span class="cmt-inicial">${inicial}</span>`;
       return `<div class="cmt-item${meu ? ' meu' : ''}">
         <div class="cmt-avatar">${avatar}</div>
@@ -5660,10 +5689,27 @@ function desenharComentarios(lessonId, dayId, lista, erro){
             <span class="cmt-tempo">${escaparHtml(tempoRelativo(c.criadoEm))}</span>
           </div>
           <div class="cmt-texto">${escaparHtml(c.texto || '')}</div>
-          ${podeApagar ? `<button class="cmt-apagar" onclick="apagarComentario(${lessonId}, '${dayId}', '${escaparHtml(c.id)}')">${meu ? 'Apagar' : 'Apagar (admin)'}</button>` : ''}
+          ${podeApagar ? `<button class="cmt-apagar" data-lesson="${lessonId}" data-day="${escaparHtml(dayId)}" data-id="${escaparHtml(c.id)}">${meu ? 'Apagar' : 'Apagar (admin)'}</button>` : ''}
         </div>
       </div>`;
     }).join('');
+
+    // Handlers inline (onclick/onerror) sofrem double-decode: o HTML-escape
+    // protege o atributo, mas o navegador decodifica entidades antes de tratar
+    // o valor como JS, entao uma aspa escapada volta a ser aspa e escapa da
+    // string. Por isso os dados vao em data-* e os listeners sao presos aqui.
+    alvoLista.querySelectorAll('.cmt-avatar img[data-fallback]').forEach(img => {
+      img.addEventListener('error', () => {
+        img.replaceWith(Object.assign(document.createElement('span'), {
+          className: 'cmt-inicial', textContent: img.dataset.fallback
+        }));
+      });
+    });
+    alvoLista.querySelectorAll('.cmt-apagar').forEach(btn => {
+      btn.addEventListener('click', () => {
+        apagarComentario(Number(btn.dataset.lesson), btn.dataset.day, btn.dataset.id);
+      });
+    });
   }
 
   // Área de escrita
@@ -6140,7 +6186,10 @@ function updateAuthUI() {
     if (logado) {
       // O uid aparece aqui para poder ser copiado ao configurar admin
       // nas regras do banco. E identificador publico, nao e segredo.
-      info.innerHTML = 'Conectado como ' + escaparHtml(currentUser.displayName || currentUser.email) +
+      const nome = currentUser.displayName;
+      const email = currentUser.email || '';
+      const nomeExibido = nome ? nome + ' (' + email + ')' : email;
+      info.innerHTML = 'Conectado como ' + escaparHtml(nomeExibido) +
         ' — seu progresso sincroniza entre dispositivos.<br>' +
         '<span style="font-family:\'JetBrains Mono\',monospace; font-size:11px; opacity:.75; user-select:all; word-break:break-all;">uid: ' +
         escaparHtml(currentUser.uid) + '</span>';
