@@ -2782,6 +2782,20 @@ async function renderConta(){
         <p id="user-info" class="conta-note" style="margin:0; display:none;"></p>
       </div>
     </div>
+    ${souAdmin() ? `
+    <div class="conta-card">
+      <div class="conta-section-title">Administração</div>
+      <div class="conta-row">
+        <div>
+          <div class="conta-row-title">Comentários nas lições</div>
+          <div class="conta-row-sub">${comentariosLigados()
+            ? 'Ligados — todo mundo que entrar pode comentar'
+            : 'Desligados — o botão nem aparece para ninguém'}</div>
+        </div>
+        <button class="conta-btn" onclick="alternarComentarios()">${comentariosLigados() ? 'Desligar' : 'Ligar'}</button>
+      </div>
+      <p class="conta-note" style="margin:10px 0 0;">Esta seção aparece só para administradores.</p>
+    </div>` : ''}
 
     <div class="conta-card">
       <div class="conta-section-title">Sobre</div>
@@ -5228,7 +5242,7 @@ async function lerDoFirebase(usuarioId) {
 // caminho, em ajustes_aparelho, separada por tipo de aparelho.
 // 'prefs-aparelho-ts' e controle interno e nunca sobe.
 const CHAVES_LOCAIS = ['theme-preference', 'design-theme', 'font-size', 'bible-view-mode',
-                       'user-id', 'prefs-aparelho-ts'];
+                       'user-id', 'prefs-aparelho-ts', 'admin-ja-tentado'];
 
 // Prefixos que nunca sobem: cache regeneravel, nao e dado do usuario.
 // 'official-' guarda o conteudo oficial baixado (TTL de 7 dias) e passa
@@ -5514,6 +5528,50 @@ async function carregarConfigComentarios(forcar) {
 
 // Sem config no banco, tudo fica desligado. E o padrao seguro:
 // nada aparece antes de voce publicar as regras e ligar a chave.
+// Quem pode ser admin está definido NAS REGRAS do banco, por e-mail - não
+// aqui, para não expor os e-mails no HTML público. O app apenas tenta se
+// cadastrar em config/admins uma vez por aparelho: quem não tem permissão
+// leva uma recusa silenciosa do próprio banco.
+async function tentarVirarAdmin(){
+  if (!currentUser) return false;
+  try{
+    if (localStorage.getItem('admin-ja-tentado') === currentUser.uid) return souAdmin();
+    localStorage.setItem('admin-ja-tentado', currentUser.uid);
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/config/admins/${currentUser.uid}.json?auth=${token}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body:'true'
+    });
+    if (r.ok){
+      await carregarConfigComentarios(true);
+      console.log('✅ Conta reconhecida como administradora');
+      return true;
+    }
+  }catch(e){ /* sem permissão: é o esperado para a maioria */ }
+  return false;
+}
+
+// Liga/desliga os comentários do app inteiro. Só admin consegue gravar -
+// quem não é leva recusa do banco, não só da tela.
+async function alternarComentarios(){
+  if (!souAdmin()) return;
+  const novo = !comentariosLigados();
+  if (!confirm(novo ? 'Ligar os comentários para todo mundo?' : 'Desligar os comentários do app inteiro?')) return;
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/config/comentarios/ativo.json?auth=${token}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(novo)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    await carregarConfigComentarios(true);
+    atualizarVisibilidadeComentarios();
+    if (typeof renderConta === 'function') await renderConta();
+    console.log('☁️ Comentários agora:', novo ? 'ligados' : 'desligados');
+  }catch(e){
+    console.error('❌ Não alterou a chave dos comentários:', e);
+    alert('Não foi possível alterar agora. Confira se as regras do banco já foram publicadas.');
+  }
+}
+
 function comentariosLigados(){ return !!(cmtConfig && cmtConfig.comentarios && cmtConfig.comentarios.ativo); }
 function souAdmin(){ return !!(currentUser && cmtConfig && cmtConfig.admins && cmtConfig.admins[currentUser.uid]); }
 function estouBanido(){ return !!(currentUser && cmtConfig && cmtConfig.banidos && cmtConfig.banidos[currentUser.uid]); }
@@ -5810,6 +5868,7 @@ function initFirebaseAuth() {
         }));
         await preencherNomeSeVazio();
         await carregarConfigComentarios(true);
+        await tentarVirarAdmin();
         atualizarVisibilidadeComentarios();
         iniciarEscutaAoVivo();
         await refrescarTelaAposLogin();
