@@ -117,10 +117,31 @@ passa de 300 KB por usuário) e o controle interno `prefs-aparelho-ts`.
 
 ---
 
-## Regras com comentários (substituem as anteriores)
+## Ligar os comentários — passo único
 
-Quando for ligar os comentários, `Realtime Database → Regras` recebe isto no lugar
-do que está publicado hoje:
+Desde 15/09 os administradores são definidos **por e-mail, dentro das regras**.
+Isso eliminou a parte chata: você não precisa mais copiar uid nem montar a
+árvore `config` campo a campo no console.
+
+Como funciona: ao entrar no app, ele tenta se cadastrar em `config/admins`.
+Quem não tem o e-mail autorizado leva uma recusa do próprio banco. Quem tem,
+passa a ver o cartão **Administração** na aba Conta, com a chave que liga e
+desliga os comentários — sem voltar ao console nunca mais.
+
+**O que fazer, uma vez só:**
+
+1. `Realtime Database` → aba **Regras** → apagar tudo → colar o bloco abaixo → **Publicar**
+2. Abrir o app e entrar com o Google
+3. Aba **Conta** → cartão **Administração** → **Ligar**
+
+Nada de criar nós na mão. Nada de uid.
+
+> Para incluir mais alguém depois, é só acrescentar o e-mail na linha dos
+> admins e publicar de novo.
+
+---
+
+## As regras (substituem as anteriores)
 
 ```json
 {
@@ -133,9 +154,13 @@ do que está publicado hoje:
     },
     "config": {
       ".read": "auth != null",
-      "comentarios": { ".write": "root.child('config/admins/'+auth.uid).exists()" },
-      "banidos":     { ".write": "root.child('config/admins/'+auth.uid).exists()" },
-      "admins":      { ".write": false }
+      "admins": {
+        "$uid": {
+          ".write": "auth != null && auth.uid == $uid && auth.token.email != null && (auth.token.email.toLowerCase() == 'willian932@gmail.com' || auth.token.email.toLowerCase() == 'josiaslgomes.jg@gmail.com')"
+        }
+      },
+      "comentarios": { ".write": "auth != null && root.child('config/admins/'+auth.uid).exists()" },
+      "banidos":     { ".write": "auth != null && root.child('config/admins/'+auth.uid).exists()" }
     },
     "comentarios": {
       ".read": "auth != null",
