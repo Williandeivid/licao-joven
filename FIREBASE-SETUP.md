@@ -41,6 +41,24 @@ respondeu `HTTP 200`.
         ".read":  "auth != null && auth.uid == $uid",
         ".write": "auth != null && auth.uid == $uid"
       }
+    },
+    "ranking": {
+      ".read": "auth != null",
+      "$semanaId": {
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.hasChildren(['nome','diasConcluidos','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= 7 && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
+        }
+      }
+    },
+    "ranking_trimestre": {
+      ".read": "auth != null",
+      "$trimestreId": {
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.hasChildren(['nome','diasConcluidos','diasElapsados','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= newData.child('diasElapsados').val() && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
+        }
+      }
     }
   }
 }
@@ -150,6 +168,24 @@ Nada de criar nós na mão. Nada de uid.
       "$uid": {
         ".read":  "auth != null && auth.uid == $uid",
         ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "ranking": {
+      ".read": "auth != null",
+      "$semanaId": {
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.hasChildren(['nome','diasConcluidos','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= 7 && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
+        }
+      }
+    },
+    "ranking_trimestre": {
+      ".read": "auth != null",
+      "$trimestreId": {
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.hasChildren(['nome','diasConcluidos','diasElapsados','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= newData.child('diasElapsados').val() && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
+        }
       }
     },
     "config": {

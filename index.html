@@ -1007,6 +1007,17 @@
   .stats-wrap{max-width:520px; margin:0 auto; padding:16px 20px 50px; display:grid; gap:18px;}
   .stats-card{background:var(--card); border-radius:22px; padding:20px 20px 22px; box-shadow:0 20px 44px -28px rgba(28,23,53,0.3);}
   .stats-card h3{font-family:'Unbounded', sans-serif; font-size:1rem; color:var(--heading); margin:0 0 14px; display:flex; align-items:center; gap:8px;}
+  .ranking-tabs{display:flex; gap:6px; background:var(--bg); padding:5px; border-radius:100px; margin-bottom:14px;}
+  .ranking-tab{flex:1; padding:10px 8px; border-radius:100px; border:none; cursor:pointer; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:12px; background:none; color:var(--ink-soft); transition:all .15s ease;}
+  .ranking-tab.active{background:var(--violet); color:var(--on-violet, #fff);}
+  .ranking-panel{display:none;}
+  .ranking-panel.active{display:block;}
+  .ranking-row{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px;}
+  .ranking-row.me{background:var(--tint-violet); font-weight:700;}
+  .ranking-rank{font-family:'JetBrains Mono', monospace; font-weight:800; color:var(--ink-soft); width:28px; flex-shrink:0;}
+  .ranking-name{flex:1; font-size:14px; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .ranking-score{font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--violet); font-size:13px; flex-shrink:0;}
+  .ranking-sep{text-align:center; color:var(--ink-soft); padding:2px 0; letter-spacing:0.2em;}
   .cal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13px; text-transform:capitalize; color:var(--heading);}
   .cal-header-label{flex:1; text-align:center;}
   .cal-streak-row{display:flex; align-items:center; gap:8px; background:var(--tint-amber); border-radius:12px; padding:9px 14px; margin-bottom:14px; font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:700; color:var(--heading);}
@@ -2472,11 +2483,17 @@ async function marcarConcluido(btn){
   // calendário continuavam mostrando o dia como não estudado até recarregar.
   atualizarMarcacoesDoDia(lessonId, dayId);
 
+  // Historico privado do ranking: roda sempre, mesmo sem login e sem
+  // opt-in (so grava local; se estiver logado, sobe sozinho no proximo sync).
+  await registrarRankingPrivado();
+
   // 🔥 Auto-save no Firebase (so quando ha usuario logado)
   // Sem login o progresso ja ficou salvo em saveProgress() acima, no proprio navegador.
   if (currentUser) {
     await salvarNoFirebase(getUserId(), await montarPacoteSync());
     console.log('✅ Progresso sincronizado com Firebase!');
+    await atualizarRankingSemanal();
+    await atualizarRankingTrimestre();
   }
 }
 
@@ -2620,6 +2637,9 @@ function bindDayInteractions(lessonId, content, progress){
               btnConcluir.classList.add('done');
               btnConcluir.textContent = '✓ Dia concluído';
             }
+            await registrarRankingPrivado();
+            await atualizarRankingSemanal();
+            await atualizarRankingTrimestre();
           }
         });
       });
@@ -2831,6 +2851,16 @@ async function renderConta(){
     </div>` : ''}
 
     <div class="conta-card">
+      <div class="conta-section-title">Ranking</div>
+      ${currentUser ? `
+      <div class="conta-row">
+        <div><div class="conta-row-title">Participar do ranking</div><div class="conta-row-sub">Mostra seu nome e desempenho pros outros participantes, nas abas Esta semana e Trimestre em Progresso</div></div>
+        <input type="checkbox" id="ranking-opt-in-check" onchange="onRankingOptInChange(this.checked)" style="width:22px;height:22px;flex-shrink:0;">
+      </div>
+      ` : `<p class="conta-note">Entre com sua conta Google para participar do ranking.</p>`}
+    </div>
+
+    <div class="conta-card">
       <div class="conta-section-title">Sobre</div>
       <p class="conta-note">ComTexto Bíblico — Resgate<br>3º Trimestre 2026</p>
     </div>
@@ -2840,12 +2870,28 @@ async function renderConta(){
   // Os botoes de login so existem depois deste innerHTML.
   // Sem esta chamada, quem ja esta logado veria "Entrar com Google" de novo.
   updateAuthUI();
+  await atualizarRankingCheckboxConta();
 }
 
 async function saveContaName(name){
   await loadUserGoals();
   userGoals.name = name.trim();
   try{ await window.storage.set('user-goals', JSON.stringify(userGoals), false); }catch(e){}
+}
+
+async function atualizarRankingCheckboxConta(){
+  const check = document.getElementById('ranking-opt-in-check');
+  if(!check) return;
+  check.checked = await rankingOptInAtivo();
+}
+
+async function onRankingOptInChange(ligado){
+  try{ await window.storage.set('ranking-opt-in', JSON.stringify(ligado), false); }
+  catch(e){ console.warn('⚠️ Não salvou a preferência do ranking:', e.message); }
+  if(!ligado){
+    const ok = await sairDoRanking();
+    if(!ok) alert('Não conseguimos remover seus dados do ranking agora. Verifique sua conexão e tente novamente na aba Conta.');
+  }
 }
 
 async function toggleThemeFromConta(){
@@ -3143,6 +3189,71 @@ function computeDaysInRange(progressMap, startDate, endDate){
     cursor.setDate(cursor.getDate()+1);
   }
   return count;
+}
+
+// ===== RANKING: intervalo do trimestre e calculo de pontos =====
+function getQuarterRange(){
+  return { start: dayCalendarDate(1, 'dom'), end: dayCalendarDate(13, 'sab') };
+}
+
+function calcularRankingSemanal(){
+  const progressMap = buildProgressMap();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const sunday = new Date(today); sunday.setDate(today.getDate() - today.getDay());
+  let diasConcluidos = 0;
+  const notas = [];
+  const cursor = new Date(sunday);
+  while(cursor <= today){
+    const info = progressMap[dateKey(cursor)];
+    if(info && info.studied) diasConcluidos++;
+    if(info && info.pct !== null && info.pct !== undefined) notas.push(info.pct);
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  const notaMedia = notas.length ? Math.round(notas.reduce((a,b)=>a+b,0)/notas.length) : 0;
+  const pontos = Math.round(diasConcluidos/7*60) + Math.round(notaMedia/100*40);
+  return { semanaId: dateKey(sunday), diasConcluidos, notaMedia, pontos };
+}
+
+function calcularRankingTrimestre(){
+  const progressMap = buildProgressMap();
+  const { start, end } = getQuarterRange();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const limite = today < end ? today : end;
+  let diasElapsados = Math.floor((limite - start) / 86400000) + 1;
+  if(diasElapsados < 1) diasElapsados = 1;
+  let diasConcluidos = 0;
+  const notas = [];
+  Object.keys(progressMap).forEach(key => {
+    const dia = new Date(key + 'T00:00:00');
+    if(dia < start || dia > limite) return;
+    const info = progressMap[key];
+    if(info.studied) diasConcluidos++;
+    if(info.pct !== null && info.pct !== undefined) notas.push(info.pct);
+  });
+  const notaMedia = notas.length ? Math.round(notas.reduce((a,b)=>a+b,0)/notas.length) : 0;
+  const pontos = Math.round(diasConcluidos/diasElapsados*60) + Math.round(notaMedia/100*40);
+  return { trimestreId: dateKey(start), diasConcluidos, diasElapsados, notaMedia, pontos };
+}
+
+// Historico privado: guarda a pontuacao de cada semana/trimestre num
+// unico objeto local. Nao chama o Firebase diretamente - a chave sobe
+// sozinha pelo mesmo gancho generico de sync que ja existe pra
+// qualquer ajuste local, dentro do no privado /usuarios/{uid}.
+async function registrarRankingPrivado(){
+  try{
+    const semana = calcularRankingSemanal();
+    const trimestre = calcularRankingTrimestre();
+    let historico = {semana:{}, trimestre:{}};
+    try{
+      const res = await window.storage.get('ranking-historico-privado', false);
+      if(res && res.value) historico = JSON.parse(res.value);
+    }catch(e){ /* chave ainda nao existe */ }
+    if(!historico.semana) historico.semana = {};
+    if(!historico.trimestre) historico.trimestre = {};
+    historico.semana[semana.semanaId] = { diasConcluidos: semana.diasConcluidos, notaMedia: semana.notaMedia, pontos: semana.pontos };
+    historico.trimestre[trimestre.trimestreId] = { diasConcluidos: trimestre.diasConcluidos, diasElapsados: trimestre.diasElapsados, notaMedia: trimestre.notaMedia, pontos: trimestre.pontos };
+    await window.storage.set('ranking-historico-privado', JSON.stringify(historico), false);
+  } catch(e){ console.warn('⚠️ Não salvou o histórico privado do ranking:', e.message); }
 }
 
 function computeDailyStreakSync(progressMap){
@@ -3622,6 +3733,16 @@ function renderStats(){
       })()}</b> min essa semana</span>
     </div>
 
+  <div class="stats-section-label">Ranking</div>
+  <div class="stats-card" id="ranking-section">
+    <div class="ranking-tabs">
+      <button class="ranking-tab active" data-tab="semana" onclick="switchRankingTab(this)">Esta semana</button>
+      <button class="ranking-tab" data-tab="trimestre" onclick="switchRankingTab(this)">Trimestre</button>
+    </div>
+    <div class="ranking-panel active" data-panel="semana"><p class="conta-note">Carregando…</p></div>
+    <div class="ranking-panel" data-panel="trimestre"></div>
+  </div>
+
   <div class="stats-section-label">Histórico</div>
   <div class="stats-card study-time-card">
       <div class="stc-item"><span class="stc-value">${totalStudyMin}<span class="stc-unit">min</span></span><span class="stc-label">Tempo total de estudo</span></div>
@@ -3646,6 +3767,96 @@ function renderStats(){
   </div>
   <footer>Toque em um dia do calendário pra registrar ou editar o que você fez.</footer>`;
   container.innerHTML = html;
+  carregarRankingTab('semana');
+}
+
+function switchRankingTab(btn){
+  const wrap = document.getElementById('ranking-section');
+  if(!wrap) return;
+  wrap.querySelectorAll('.ranking-tab').forEach(b => b.classList.toggle('active', b === btn));
+  wrap.querySelectorAll('.ranking-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === btn.dataset.tab));
+  const panel = wrap.querySelector(`.ranking-panel[data-panel="${btn.dataset.tab}"]`);
+  if(panel && !panel.dataset.loaded) carregarRankingTab(btn.dataset.tab);
+}
+
+async function carregarRankingTab(tipo){
+  const panel = document.querySelector(`#ranking-section .ranking-panel[data-panel="${tipo}"]`);
+  if(!panel) return;
+
+  if(!currentUser){
+    panel.innerHTML = `<p class="conta-note">Entre com sua conta Google na aba Conta pra ver e participar do ranking.</p>`;
+    panel.dataset.loaded = '1';
+    return;
+  }
+  try{
+    if(!(await rankingOptInAtivo())){
+      // Sem opt-in nao ha chamada nenhuma ao Firebase: a pontuacao e so
+      // calculo local, entao a pessoa ve o proprio numero sem se expor
+      // nem ver os outros.
+      const dados = tipo === 'semana' ? calcularRankingSemanal() : calcularRankingTrimestre();
+      panel.innerHTML = `
+        <div class="ranking-row me">
+          <span class="ranking-rank">—</span>
+          <span class="ranking-name">Você (privado)</span>
+          <span class="ranking-score">${dados.pontos} pts</span>
+        </div>
+        <p class="conta-note">Ative "Participar do ranking" na aba Conta pra comparar com outras pessoas.</p>`;
+      panel.dataset.loaded = '1';
+      return;
+    }
+
+    panel.innerHTML = `<p class="conta-note">Carregando…</p>`;
+    const token = await getAuthToken();
+    const meuId = getUserId();
+    let entradas;
+    if(tipo === 'semana'){
+      const { semanaId } = calcularRankingSemanal();
+      const url = `${FIREBASE_DB}/ranking/${semanaId}.json` + (token ? `?auth=${token}` : '');
+      const r = await fetch(url);
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      entradas = (await r.json()) || {};
+    } else {
+      const { trimestreId } = calcularRankingTrimestre();
+      const url = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}.json` + (token ? `?auth=${token}` : '');
+      const r = await fetch(url);
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      entradas = (await r.json()) || {};
+    }
+
+    const lista = Object.keys(entradas).map(uid => Object.assign({uid}, entradas[uid]));
+    lista.sort((a,b) => ((Number(b.pontos)||0) - (Number(a.pontos)||0)) || ((Number(b.notaMedia)||0) - (Number(a.notaMedia)||0)) || String(a.nome||'').localeCompare(String(b.nome||''), 'pt-BR'));
+
+    if(!lista.length){
+      panel.innerHTML = `<p class="conta-note">Ninguém no ranking ${tipo==='semana'?'essa semana':'esse trimestre'} ainda. Seja o primeiro!</p>`;
+      panel.dataset.loaded = '1';
+      return;
+    }
+
+    const top = lista.slice(0, 50);
+    const meuIndex = lista.findIndex(item => item.uid === meuId);
+    let html = top.map((item, i) => `
+      <div class="ranking-row${item.uid===meuId?' me':''}">
+        <span class="ranking-rank">${i+1}º</span>
+        <span class="ranking-name">${escaparHtml(item.nome || 'Alguém')}</span>
+        <span class="ranking-score">${Number(item.pontos) || 0} pts</span>
+      </div>`).join('');
+
+    if(meuIndex >= 50){
+      const item = lista[meuIndex];
+      html += `<div class="ranking-sep">···</div>
+      <div class="ranking-row me">
+        <span class="ranking-rank">${meuIndex+1}º</span>
+        <span class="ranking-name">${escaparHtml(item.nome || 'Alguém')}</span>
+        <span class="ranking-score">${Number(item.pontos) || 0} pts</span>
+      </div>`;
+    }
+
+    panel.innerHTML = html;
+    panel.dataset.loaded = '1';
+  } catch(e){
+    console.warn('⚠️ Não carregou o ranking:', e.message);
+    panel.innerHTML = `<p class="conta-note">Não foi possível carregar o ranking agora.</p>`;
+  }
 }
 
 // ============ DAY EDITOR MODAL ============
@@ -5261,6 +5472,72 @@ async function lerDoFirebase(usuarioId) {
     console.error('❌ Erro ao ler do Firebase:', e);
     return null;
   }
+}
+
+// ===== RANKING: opt-in, gravacao e saida =====
+async function rankingOptInAtivo(){
+  try {
+    const res = await window.storage.get('ranking-opt-in', false);
+    return res && JSON.parse(res.value) === true;
+  } catch(e) { return false; }
+}
+
+async function atualizarRankingSemanal(){
+  if(!currentUser) return;
+  try{
+    if(!(await rankingOptInAtivo())) return;
+    const { semanaId, diasConcluidos, notaMedia, pontos } = calcularRankingSemanal();
+    if(diasConcluidos === 0 && pontos === 0) return;
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/ranking/${semanaId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, notaMedia, pontos, atualizado_em: new Date().toISOString() })
+    });
+    if(!response.ok) throw new Error('HTTP ' + response.status);
+  } catch(e){ console.warn('⚠️ Não atualizou o ranking semanal:', e.message); }
+}
+
+async function atualizarRankingTrimestre(){
+  if(!currentUser) return;
+  try{
+    if(!(await rankingOptInAtivo())) return;
+    const { trimestreId, diasConcluidos, diasElapsados, notaMedia, pontos } = calcularRankingTrimestre();
+    if(diasConcluidos === 0 && pontos === 0) return;
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, diasElapsados, notaMedia, pontos, atualizado_em: new Date().toISOString() })
+    });
+    if(!response.ok) throw new Error('HTTP ' + response.status);
+  } catch(e){ console.warn('⚠️ Não atualizou o ranking do trimestre:', e.message); }
+}
+
+async function sairDoRanking(){
+  try {
+    const uid = getUserId();
+    const token = await getAuthToken();
+    const semanasUrl = `${FIREBASE_DB}/ranking.json?shallow=true` + (token ? `&auth=${token}` : '');
+    const semanasRes = await fetch(semanasUrl);
+    if(semanasRes.ok){
+      const semanas = (await semanasRes.json()) || {};
+      for(const semanaId of Object.keys(semanas)){
+        const delUrl = `${FIREBASE_DB}/ranking/${encodeURIComponent(semanaId)}/${uid}.json` + (token ? `?auth=${token}` : '');
+        const delRes = await fetch(delUrl, {method:'DELETE'});
+        if(!delRes.ok) throw new Error('HTTP ' + delRes.status);
+      }
+    } else {
+      throw new Error('HTTP ' + semanasRes.status);
+    }
+    const { trimestreId } = calcularRankingTrimestre();
+    const trimUrl = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}/${uid}.json` + (token ? `?auth=${token}` : '');
+    const trimRes = await fetch(trimUrl, {method:'DELETE'});
+    if(!trimRes.ok) throw new Error('HTTP ' + trimRes.status);
+    return true;
+  } catch(e){ console.warn('⚠️ Não conseguiu limpar o ranking ao sair:', e.message); return false; }
 }
 
 // ===== SINCRONIZACAO DOS AJUSTES (nome, metas, favoritos, marcacoes, planos) =====
