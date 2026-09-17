@@ -3165,7 +3165,7 @@ async function renderQuarterCover(){
   const userName = (userGoals && userGoals.name) ? userGoals.name : '';
   const container = document.getElementById('list-container');
   if(!container) return;
-  let html = `<div class="quarters-header"><h1>Lições</h1><p>Escolha o trimestre de estudo.</p></div><div class="quarters-list">`;
+  let html = `<div class="quarters-header"><h1>${t('nav.licoes')}</h1><p>${t('list.escolhaTrimestre')}</p></div><div class="quarters-list">`;
   QUARTERS.forEach(q=>{
     const totalWeeks = q.lessonEnd - q.lessonStart + 1;
     let studiedWeeks = 0;
@@ -3178,13 +3178,13 @@ async function renderQuarterCover(){
     }
     html += `<div class="quarter-card" onclick="renderLessonListView('${q.id}')">
       <div class="quarter-card-top">
-        ${q.cover ? `<img class="quarter-card-cover" src="data:image/jpeg;base64,${q.cover}" alt="Capa ${q.title}">` : ''}
+        ${q.cover ? `<img class="quarter-card-cover" src="data:image/jpeg;base64,${q.cover}" alt="${t('list.capaDe')} ${q.title}">` : ''}
         <div class="quarter-card-info">
           <div class="quarter-card-title">${q.title}</div>
           <div class="quarter-card-sub">${q.trimester}</div>
           ${userName ? `<div class="quarter-card-owner">${userName}</div>` : ''}
         </div>
-        <div class="quarter-card-count">${studiedWeeks}/${totalWeeks}<span>semanas</span></div>
+        <div class="quarter-card-count">${studiedWeeks}/${totalWeeks}<span>${t('list.semanas')}</span></div>
       </div>
       <div class="quarter-dots">${dots}</div>
     </div>`;
@@ -3210,6 +3210,11 @@ function dayCalendarDate(lessonId, dayId){
 }
 
 const LOCALE_POR_IDIOMA = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
+const DIAS_INICIAIS_POR_IDIOMA = {
+  pt: ['D','S','T','Q','Q','S','S'],
+  en: ['S','M','T','W','T','F','S'],
+  es: ['D','L','M','M','J','V','S'],
+};
 
 // Monta "Domingo · 28 de junho" (ou equivalente no idioma atual) a partir
 // da data REAL do dia, em vez de ler texto fixo gravado no conteudo -
@@ -3482,19 +3487,19 @@ function renderCalendarMonth(progressMap){
 
   let html = `<div class="cal-streak-row">
     <svg class="cal-streak-icon" viewBox="0 0 24 24"><path d="M12 2c1.5 4-4 6.5-4 11a4 4 0 008 0c0-2-1-3.5-1.5-5 2.5 1.5 4 4 4 7.5a6.5 6.5 0 11-13 0c0-6 4-9 6.5-13.5z"/></svg>
-    <span>Sequência de <b>${dailyStreakForCalendar}</b> dia${dailyStreakForCalendar===1?'':'s'}</span>
+    <span>${t('stats.sequenciaPrefix')} <b>${dailyStreakForCalendar}</b> ${dailyStreakForCalendar===1?t('stats.dia'):t('stats.dias')}</span>
   </div>
   <div class="cal-header">
     <button onclick="shiftMonth(-1)" ${!calendarExpanded?'style="visibility:hidden"':''}>‹</button>
-    <span class="cal-header-label">${calendarExpanded ? monthLabel : 'Esta semana'}</span>
-    <button class="cal-view-icon" onclick="toggleCalendarView()" title="${calendarExpanded?'Ver semana':'Ver mês'}">
+    <span class="cal-header-label">${calendarExpanded ? monthLabel : t('stats.semana')}</span>
+    <button class="cal-view-icon" onclick="toggleCalendarView()" title="${calendarExpanded?t('stats.verSemana'):t('stats.verMes')}">
       ${calendarExpanded
         ? '<svg viewBox="0 0 24 24"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg>'
         : '<svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>'}
     </button>
     <button onclick="shiftMonth(1)" ${!calendarExpanded?'style="visibility:hidden"':''}>›</button>
   </div>
-  <div class="cal-grid">${['D','S','T','Q','Q','S','S'].map(d=>`<div class="cal-dow">${d}</div>`).join('')}`;
+  <div class="cal-grid">${(DIAS_INICIAIS_POR_IDIOMA[idiomaConteudoAtual] || DIAS_INICIAIS_POR_IDIOMA.pt).map(d=>`<div class="cal-dow">${d}</div>`).join('')}`;
 
   let rangeStart, rangeEnd, goalTotal;
   if(calendarExpanded){
@@ -3519,13 +3524,13 @@ function renderCalendarMonth(progressMap){
     goalTotal = daysGoal;
   }
   html += `</div>
-  <div class="cal-legend"><span><i class="lg lg-lesson"></i>Lição</span><span><i class="lg lg-bible"></i>Plano bíblico</span><span><i class="lg lg-both"></i>Os dois</span></div>`;
+  <div class="cal-legend"><span><i class="lg lg-lesson"></i>${t('stats.legendaLicao')}</span><span><i class="lg lg-bible"></i>${t('stats.legendaPlanoBiblico')}</span><span><i class="lg lg-both"></i>${t('stats.legendaOsDois')}</span></div>`;
 
   if(daysGoal > 0){
     const achieved = computeDaysInRange(progressMap, rangeStart, rangeEnd);
     const pct = Math.min(100, Math.round(achieved/goalTotal*100));
     html += `<div class="cal-goal-row">
-      <span>Meta ${calendarExpanded?'do mês':'da semana'}: <b>${achieved}/${goalTotal}</b> dias</span>
+      <span>${calendarExpanded?t('stats.metaDoMes'):t('stats.metaDaSemana')}: <b>${achieved}/${goalTotal}</b> ${t('stats.dias')}</span>
       <div class="cal-goal-track"><div class="cal-goal-fill" style="width:${pct}%"></div></div>
     </div>`;
   }
@@ -3591,14 +3596,14 @@ function renderTimeChart(progressMap){
   const hasData = series.some(s=>s.lessonMin>0 || s.bibleMin>0);
 
   let html = `<div class="period-toggle">
-    <button class="${timeChartPeriod===30?'active':''}" onclick="setTimeChartPeriod(30)">30 dias</button>
-    <button class="${timeChartPeriod===90?'active':''}" onclick="setTimeChartPeriod(90)">90 dias</button>
-    <button class="${timeChartPeriod===365?'active':''}" onclick="setTimeChartPeriod(365)">1 ano</button>
-    <button class="${timeChartPeriod===null?'active':''}" onclick="setTimeChartPeriod(null)">Sempre</button>
+    <button class="${timeChartPeriod===30?'active':''}" onclick="setTimeChartPeriod(30)">${t('stats.periodo30')}</button>
+    <button class="${timeChartPeriod===90?'active':''}" onclick="setTimeChartPeriod(90)">${t('stats.periodo90')}</button>
+    <button class="${timeChartPeriod===365?'active':''}" onclick="setTimeChartPeriod(365)">${t('stats.periodo365')}</button>
+    <button class="${timeChartPeriod===null?'active':''}" onclick="setTimeChartPeriod(null)">${t('stats.periodoSempre')}</button>
   </div>`;
 
   if(!hasData){
-    html += '<p class="stats-empty">Ainda sem tempo registrado neste período. Complete um quiz ou edite um dia no calendário.</p>';
+    html += `<p class="stats-empty">${t('stats.semTempo')}</p>`;
     return html;
   }
 
@@ -3657,7 +3662,7 @@ function renderTimeChart(progressMap){
   </svg>`;
 
   html += svg;
-  html += `<div class="cal-legend"><span><i class="lg" style="background:var(--violet)"></i>Lição (min/dia)</span><span><i class="lg" style="background:var(--teal)"></i>Plano bíblico (min/dia)</span></div>`;
+  html += `<div class="cal-legend"><span><i class="lg" style="background:var(--violet)"></i>${t('stats.legendaLicaoMin')}</span><span><i class="lg" style="background:var(--teal)"></i>${t('stats.legendaBibliaMin')}</span></div>`;
   return html;
 }
 
@@ -3699,7 +3704,7 @@ function renderBibleDaysVsLessonsChart(progressMap){
 
 function renderScoreChart(progressMap){
   const entries = Object.entries(progressMap).filter(([k,v])=>v.pct!==null).sort((a,b)=>a[1].date-b[1].date);
-  if(entries.length===0) return '<p class="stats-empty">Ainda sem quizzes respondidos. Responda o quiz de um dia pra ver sua evolução aqui.</p>';
+  if(entries.length===0) return `<p class="stats-empty">${t('stats.semQuizzes')}</p>`;
   const w=320,h=160, padL=32, padR=12, padT=14, padB=26;
   const n = entries.length;
   function xAt(i){ return padL + (n<=1?(w-padL-padR)/2:(i/(n-1))*(w-padL-padR)); }
@@ -3851,7 +3856,7 @@ function renderStats(){
   if(didBothToday){
     html += `<div class="celebrate-banner">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
-      <div><div class="cb-title">Dia completo! 🔥</div><div class="cb-sub">Lição + Plano Bíblico feitos hoje.</div></div>
+      <div><div class="cb-title">${t('stats.diaCompleto')}</div><div class="cb-sub">${t('stats.diaCompletoSub')}</div></div>
     </div>`;
   }
 
@@ -3859,7 +3864,16 @@ function renderStats(){
       <h3><svg viewBox="0 0 24 24"><path d="M12 2c1.5 4-4 6.5-4 11a4 4 0 008 0c0-2-1-3.5-1.5-5 2.5 1.5 4 4 4 7.5a6.5 6.5 0 11-13 0c0-6 4-9 6.5-13.5z"/></svg>${t('stats.sequenciaDias')}</h3>
       <div class="streak-box">
         <div class="streak-num">${dailyStreak}</div>
-        <div class="streak-label">dia${dailyStreak===1?'':'s'} seguido${dailyStreak===1?'':'s'} com pelo menos 1 atividade (lição ou plano bíblico).<br>Total de ${totalStudied} dia${totalStudied===1?'':'s'} concluído${totalStudied===1?'':'s'} no trimestre.</div>
+        <div class="streak-label">${(function(){
+          const s1 = dailyStreak===1 ? '' : 's';
+          const s2 = totalStudied===1 ? '' : 's';
+          return t('stats.streakLabel')
+            .replace(/\$\{dia1\}/g, t('stats.dia') + s1)
+            .replace(/\$\{s1\}/g, s1)
+            .replace(/\$\{n2\}/g, totalStudied)
+            .replace(/\$\{dia2\}/g, t('stats.dia') + s2)
+            .replace(/\$\{s2\}/g, s2);
+        })()}</div>
       </div>
     </div>
 
@@ -3899,7 +3913,7 @@ function renderStats(){
         const weekScores = recent.filter(v=>v.date>=weekAgo && v.date<=today);
         if(!weekScores.length) return '—';
         return (weekScores.reduce((s,v)=>s+v.pct,0)/weekScores.length/10).toFixed(1);
-      })()}</b> nota média</span>
+      })()}</b> ${t('stats.notaMedia')}</span>
       <span class="ws-sep">·</span>
       <span class="ws-item"><b>${(function(){
         const today=new Date(); today.setHours(0,0,0,0);
@@ -5089,6 +5103,9 @@ const UI_STRINGS = {
     'list.statusConcluida': 'Concluída',
     'list.statusEmBreve': 'Em breve',
     'list.footer': 'Toque em "${nav}" pra voltar direto pra lição da semana atual.',
+    'list.escolhaTrimestre': 'Escolha o trimestre de estudo.',
+    'list.semanas': 'semanas',
+    'list.capaDe': 'Capa',
     'lesson.concluirDia': 'Concluir este dia',
     'lesson.diaConcluido': '✓ Dia concluído',
     'lesson.voceLevou': 'Você levou ',
@@ -5152,6 +5169,28 @@ const UI_STRINGS = {
     'stats.metaLicao': 'Meta de Lição (min/dia)',
     'stats.metaDiasSemana': 'Meta de dias/semana',
     'stats.metaNota': 'Meta de nota (de 10)',
+    'stats.sequenciaPrefix': 'Sequência de',
+    'stats.dia': 'dia',
+    'stats.dias': 'dias',
+    'stats.streakLabel': '${dia1} seguido${s1} com pelo menos 1 atividade (lição ou plano bíblico).<br>Total de ${n2} ${dia2} concluído${s2} no trimestre.',
+    'stats.verSemana': 'Ver semana',
+    'stats.verMes': 'Ver mês',
+    'stats.legendaLicao': 'Lição',
+    'stats.legendaPlanoBiblico': 'Plano bíblico',
+    'stats.legendaOsDois': 'Os dois',
+    'stats.metaDoMes': 'Meta do mês',
+    'stats.metaDaSemana': 'Meta da semana',
+    'stats.periodo30': '30 dias',
+    'stats.periodo90': '90 dias',
+    'stats.periodo365': '1 ano',
+    'stats.periodoSempre': 'Sempre',
+    'stats.semTempo': 'Ainda sem tempo registrado neste período. Complete um quiz ou edite um dia no calendário.',
+    'stats.legendaLicaoMin': 'Lição (min/dia)',
+    'stats.legendaBibliaMin': 'Plano bíblico (min/dia)',
+    'stats.semQuizzes': 'Ainda sem quizzes respondidos. Responda o quiz de um dia pra ver sua evolução aqui.',
+    'stats.diaCompleto': 'Dia completo! 🔥',
+    'stats.diaCompletoSub': 'Lição + Plano Bíblico feitos hoje.',
+    'stats.notaMedia': 'nota média',
     'conta.subtitulo': 'Seu perfil, aparência e seus dados.',
     'conta.loginSync': 'Login e sincronização',
     'conta.entrarGoogle': 'Entrar com Google',
@@ -5258,6 +5297,9 @@ const UI_STRINGS = {
     'list.statusConcluida': 'Completed',
     'list.statusEmBreve': 'Coming soon',
     'list.footer': 'Tap "${nav}" to go straight back to this week\'s lesson.',
+    'list.escolhaTrimestre': 'Choose the quarter to study.',
+    'list.semanas': 'weeks',
+    'list.capaDe': 'Cover',
     'lesson.concluirDia': 'Complete this day',
     'lesson.diaConcluido': '✓ Day completed',
     'lesson.voceLevou': 'You took ',
@@ -5321,6 +5363,28 @@ const UI_STRINGS = {
     'stats.metaLicao': 'Lesson goal (min/day)',
     'stats.metaDiasSemana': 'Days/week goal',
     'stats.metaNota': 'Score goal (out of 10)',
+    'stats.sequenciaPrefix': 'Streak of',
+    'stats.dia': 'day',
+    'stats.dias': 'days',
+    'stats.streakLabel': '${dia1} in a row with at least 1 activity (lesson or Bible plan).<br>Total of ${n2} ${dia2} completed this quarter.',
+    'stats.verSemana': 'View week',
+    'stats.verMes': 'View month',
+    'stats.legendaLicao': 'Lesson',
+    'stats.legendaPlanoBiblico': 'Bible plan',
+    'stats.legendaOsDois': 'Both',
+    'stats.metaDoMes': 'Month goal',
+    'stats.metaDaSemana': 'Week goal',
+    'stats.periodo30': '30 days',
+    'stats.periodo90': '90 days',
+    'stats.periodo365': '1 year',
+    'stats.periodoSempre': 'Always',
+    'stats.semTempo': 'No time logged for this period yet. Complete a quiz or edit a day on the calendar.',
+    'stats.legendaLicaoMin': 'Lesson (min/day)',
+    'stats.legendaBibliaMin': 'Bible plan (min/day)',
+    'stats.semQuizzes': 'No quizzes answered yet. Answer a day\'s quiz to see your progress here.',
+    'stats.diaCompleto': 'Complete day! 🔥',
+    'stats.diaCompletoSub': 'Lesson + Bible Plan done today.',
+    'stats.notaMedia': 'average score',
     'conta.subtitulo': 'Your profile, appearance, and your data.',
     'conta.loginSync': 'Login and sync',
     'conta.entrarGoogle': 'Sign in with Google',
@@ -5427,6 +5491,9 @@ const UI_STRINGS = {
     'list.statusConcluida': 'Completada',
     'list.statusEmBreve': 'Próximamente',
     'list.footer': 'Toca "${nav}" para volver directo a la lección de esta semana.',
+    'list.escolhaTrimestre': 'Elige el trimestre de estudio.',
+    'list.semanas': 'semanas',
+    'list.capaDe': 'Portada',
     'lesson.concluirDia': 'Completar este día',
     'lesson.diaConcluido': '✓ Día completado',
     'lesson.voceLevou': 'Te tomó ',
@@ -5490,6 +5557,28 @@ const UI_STRINGS = {
     'stats.metaLicao': 'Meta de Lección (min/día)',
     'stats.metaDiasSemana': 'Meta de días/semana',
     'stats.metaNota': 'Meta de nota (de 10)',
+    'stats.sequenciaPrefix': 'Racha de',
+    'stats.dia': 'día',
+    'stats.dias': 'días',
+    'stats.streakLabel': '${dia1} seguido${s1} con al menos 1 actividad (lección o plan bíblico).<br>Total de ${n2} ${dia2} completado${s2} en el trimestre.',
+    'stats.verSemana': 'Ver semana',
+    'stats.verMes': 'Ver mes',
+    'stats.legendaLicao': 'Lección',
+    'stats.legendaPlanoBiblico': 'Plan bíblico',
+    'stats.legendaOsDois': 'Los dos',
+    'stats.metaDoMes': 'Meta del mes',
+    'stats.metaDaSemana': 'Meta de la semana',
+    'stats.periodo30': '30 días',
+    'stats.periodo90': '90 días',
+    'stats.periodo365': '1 año',
+    'stats.periodoSempre': 'Siempre',
+    'stats.semTempo': 'Todavía no hay tiempo registrado en este período. Completa un quiz o edita un día en el calendario.',
+    'stats.legendaLicaoMin': 'Lección (min/día)',
+    'stats.legendaBibliaMin': 'Plan bíblico (min/día)',
+    'stats.semQuizzes': 'Todavía no hay quizzes respondidos. Responde el quiz de un día para ver tu evolución aquí.',
+    'stats.diaCompleto': '¡Día completo! 🔥',
+    'stats.diaCompletoSub': 'Lección + Plan Bíblico hechos hoy.',
+    'stats.notaMedia': 'nota promedio',
     'conta.subtitulo': 'Tu perfil, apariencia y tus datos.',
     'conta.loginSync': 'Inicio de sesión y sincronización',
     'conta.entrarGoogle': 'Iniciar sesión con Google',
