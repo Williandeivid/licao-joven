@@ -2813,7 +2813,7 @@ function renderLessonList(){
   const currentId = getCurrentLessonId();
   const container = document.getElementById('list-container');
   if(!container) return;
-  let html = `<div class="list-header"><h1>Lições do Trimestre</h1><p>Toque em qualquer lição pra abrir — passadas, atual ou futuras.</p></div>`;
+  let html = `<div class="list-header"><h1>${t('list.titulo')}</h1><p>${t('list.subtitulo')}</p></div>`;
   html += `<div class="lesson-grid">`;
   LESSONS_META.forEach(l=>{
     const status = lessonStatus(l.id, currentId);
@@ -2829,6 +2829,7 @@ function renderLessonList(){
     } else {
       daysFilled = new Array(7).fill(false);
     }
+    const statusLabel = status==='current'?t('list.statusAtual'):status==='past'?t('list.statusConcluida'):t('list.statusEmBreve');
     html += `<div class="lesson-card status-${status}" onclick="openLessonFromList(${l.id})">
       <div class="lc-num">${String(l.id).padStart(2,'0')}</div>
       <div class="lc-body">
@@ -2837,10 +2838,10 @@ function renderLessonList(){
         <div class="lc-progress-track"><div class="lc-progress-fill" style="width:${pct}%"></div></div>
         <div class="lc-daydots">${daysFilled.map(f=>`<span class="${f?'filled':''}"></span>`).join('')}</div>
       </div>
-      <div class="lc-badge">${status==='current'?'Atual':status==='past'?'Concluída':'Em breve'}</div>
+      <div class="lc-badge">${statusLabel}</div>
     </div>`;
   });
-  html += `</div><footer>Toque em "Início" pra voltar direto pra lição da semana atual.</footer>`;
+  html += `</div><footer>${t('list.footer').replace('${nav}', t('nav.inicio'))}</footer>`;
   container.innerHTML = html;
 }
 
@@ -5015,6 +5016,12 @@ const UI_STRINGS = {
     'menu.tema.sunset': 'Sunset',
     'menu.tema.ocean': 'Ocean',
     'menu.tema.forest': 'Forest',
+    'list.titulo': 'Lições do Trimestre',
+    'list.subtitulo': 'Toque em qualquer lição pra abrir — passadas, atual ou futuras.',
+    'list.statusAtual': 'Atual',
+    'list.statusConcluida': 'Concluída',
+    'list.statusEmBreve': 'Em breve',
+    'list.footer': 'Toque em "${nav}" pra voltar direto pra lição da semana atual.',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5044,6 +5051,12 @@ const UI_STRINGS = {
     'menu.tema.sunset': 'Sunset',
     'menu.tema.ocean': 'Ocean',
     'menu.tema.forest': 'Forest',
+    'list.titulo': "Quarter's Lessons",
+    'list.subtitulo': 'Tap any lesson to open it — past, current, or future.',
+    'list.statusAtual': 'Current',
+    'list.statusConcluida': 'Completed',
+    'list.statusEmBreve': 'Coming soon',
+    'list.footer': 'Tap "${nav}" to go straight back to this week\'s lesson.',
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5073,6 +5086,12 @@ const UI_STRINGS = {
     'menu.tema.sunset': 'Sunset',
     'menu.tema.ocean': 'Ocean',
     'menu.tema.forest': 'Forest',
+    'list.titulo': 'Lecciones del Trimestre',
+    'list.subtitulo': 'Toca cualquier lección para abrirla — pasada, actual o futura.',
+    'list.statusAtual': 'Actual',
+    'list.statusConcluida': 'Completada',
+    'list.statusEmBreve': 'Próximamente',
+    'list.footer': 'Toca "${nav}" para volver directo a la lección de esta semana.',
   },
 };
 
@@ -5132,6 +5151,11 @@ async function recarregarConteudoNoIdiomaAtual(){
     const licaoAberta = container && container.style.display !== 'none' && container.dataset.lessonId;
     if(licaoAberta){
       await renderLessonDetail(parseInt(container.dataset.lessonId), false);
+      return;
+    }
+    const listaAtiva = document.getElementById('tab-list') && document.getElementById('tab-list').classList.contains('active') && document.getElementById('list-container') && document.getElementById('list-container').style.display !== 'none';
+    if(listaAtiva){
+      renderLessonList();
       return;
     }
     const bibleAtivo = document.getElementById('tab-bible') && document.getElementById('tab-bible').classList.contains('active');
