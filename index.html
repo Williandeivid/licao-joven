@@ -1581,6 +1581,58 @@ const BOOK_NAME_TO_ID = {
   '1 Pe':'1PE','2 Pe':'2PE','1 Jo':'1JN','2 Jo':'2JN','3 Jo':'3JN','Fl':'PHP'
 };
 
+const BOOK_NAME_TO_ID_EN = {
+  'Genesis':'GEN','Exodus':'EXO','Leviticus':'LEV','Numbers':'NUM','Deuteronomy':'DEU',
+  'Joshua':'JOS','Judges':'JDG','Ruth':'RUT','1 Samuel':'1SA','2 Samuel':'2SA',
+  '1 Kings':'1KI','2 Kings':'2KI','1 Chronicles':'1CH','2 Chronicles':'2CH','Ezra':'EZR',
+  'Nehemiah':'NEH','Esther':'EST','Job':'JOB','Psalms':'PSA','Psalm':'PSA','Proverbs':'PRO',
+  'Ecclesiastes':'ECC','Song of Solomon':'SNG','Song of Songs':'SNG','Isaiah':'ISA',
+  'Jeremiah':'JER','Lamentations':'LAM','Ezekiel':'EZK','Daniel':'DAN','Hosea':'HOS',
+  'Joel':'JOL','Amos':'AMO','Obadiah':'OBA','Jonah':'JON','Micah':'MIC','Nahum':'NAM',
+  'Habakkuk':'HAB','Zephaniah':'ZEP','Haggai':'HAG','Zechariah':'ZEC','Malachi':'MAL',
+  'Matthew':'MAT','Mark':'MRK','Luke':'LUK','John':'JHN','Acts':'ACT','Romans':'ROM',
+  '1 Corinthians':'1CO','2 Corinthians':'2CO','Galatians':'GAL','Ephesians':'EPH',
+  'Philippians':'PHP','Colossians':'COL','1 Thessalonians':'1TH','2 Thessalonians':'2TH',
+  '1 Timothy':'1TI','2 Timothy':'2TI','Titus':'TIT','Philemon':'PHM','Hebrews':'HEB',
+  'James':'JAS','1 Peter':'1PE','2 Peter':'2PE','1 John':'1JN','2 John':'2JN',
+  '3 John':'3JN','Jude':'JUD','Revelation':'REV',
+  'Gen':'GEN','Ex':'EXO','Lev':'LEV','Num':'NUM','Deut':'DEU','Josh':'JOS','Judg':'JDG',
+  '1 Sam':'1SA','2 Sam':'2SA','1 Kgs':'1KI','2 Kgs':'2KI','1 Chr':'1CH','2 Chr':'2CH',
+  'Neh':'NEH','Ps':'PSA','Prov':'PRO','Eccl':'ECC','Isa':'ISA','Jer':'JER','Lam':'LAM',
+  'Ezek':'EZK','Dan':'DAN','Hos':'HOS','Obad':'OBA','Nah':'NAM','Hab':'HAB','Zeph':'ZEP',
+  'Hag':'HAG','Zech':'ZEC','Mal':'MAL','Matt':'MAT','Mk':'MRK','Lk':'LUK','Jn':'JHN',
+  'Rom':'ROM','1 Cor':'1CO','2 Cor':'2CO','Gal':'GAL','Eph':'EPH','Phil':'PHP',
+  'Col':'COL','1 Thess':'1TH','2 Thess':'2TH','1 Tim':'1TI','2 Tim':'2TI','Phlm':'PHM',
+  'Heb':'HEB','Jas':'JAS','1 Pet':'1PE','2 Pet':'2PE','1 Jn':'1JN','2 Jn':'2JN',
+  '3 Jn':'3JN','Rev':'REV'
+};
+
+const BOOK_NAME_TO_ID_ES = {
+  'Génesis':'GEN','Éxodo':'EXO','Levítico':'LEV','Números':'NUM','Deuteronomio':'DEU',
+  'Josué':'JOS','Jueces':'JDG','Rut':'RUT','1 Samuel':'1SA','2 Samuel':'2SA',
+  '1 Reyes':'1KI','2 Reyes':'2KI','1 Crónicas':'1CH','2 Crónicas':'2CH','Esdras':'EZR',
+  'Nehemías':'NEH','Ester':'EST','Job':'JOB','Salmos':'PSA','Salmo':'PSA',
+  'Proverbios':'PRO','Eclesiastés':'ECC','Cantares':'SNG','Isaías':'ISA',
+  'Jeremías':'JER','Lamentaciones':'LAM','Ezequiel':'EZK','Daniel':'DAN','Oseas':'HOS',
+  'Joel':'JOL','Amós':'AMO','Abdías':'OBA','Jonás':'JON','Miqueas':'MIC','Nahúm':'NAM',
+  'Habacuc':'HAB','Sofonías':'ZEP','Hageo':'HAG','Zacarías':'ZEC','Malaquías':'MAL',
+  'Mateo':'MAT','Marcos':'MRK','Lucas':'LUK','Juan':'JHN','Hechos':'ACT','Romanos':'ROM',
+  '1 Corintios':'1CO','2 Corintios':'2CO','Gálatas':'GAL','Efesios':'EPH',
+  'Filipenses':'PHP','Colosenses':'COL','1 Tesalonicenses':'1TH','2 Tesalonicenses':'2TH',
+  '1 Timoteo':'1TI','2 Timoteo':'2TI','Tito':'TIT','Filemón':'PHM','Hebreos':'HEB',
+  'Santiago':'JAS','1 Pedro':'1PE','2 Pedro':'2PE','1 Juan':'1JN','2 Juan':'2JN',
+  '3 Juan':'3JN','Judas':'JUD','Apocalipsis':'REV',
+  'Gn':'GEN','Ex':'EXO','Lv':'LEV','Nm':'NUM','Dt':'DEU','Jos':'JOS','Jue':'JDG',
+  '1 Sm':'1SA','2 Sm':'2SA','1 Re':'1KI','2 Re':'2KI','1 Cr':'1CH','2 Cr':'2CH',
+  'Neh':'NEH','Sal':'PSA','Prov':'PRO','Ecl':'ECC','Is':'ISA','Jer':'JER','Lam':'LAM',
+  'Ez':'EZK','Dn':'DAN','Os':'HOS','Am':'AMO','Abd':'OBA','Jon':'JON','Miq':'MIC',
+  'Nah':'NAM','Hab':'HAB','Sof':'ZEP','Hag':'HAG','Zac':'ZEC','Mal':'MAL','Mt':'MAT',
+  'Mc':'MRK','Lc':'LUK','Jn':'JHN','Hch':'ACT','Rom':'ROM','1 Co':'1CO','2 Co':'2CO',
+  'Gal':'GAL','Ef':'EPH','Flp':'PHP','Col':'COL','1 Ts':'1TH','2 Ts':'2TH',
+  '1 Tim':'1TI','2 Tim':'2TI','Tit':'TIT','Flm':'PHM','Heb':'HEB','Stg':'JAS',
+  '1 Pe':'1PE','2 Pe':'2PE','1 Jn':'1JN','2 Jn':'2JN','3 Jn':'3JN','Jud':'JUD','Ap':'REV'
+};
+
 // Extrai livro\capítulo de uma citação bíblica em centraltexts (ex: "Mateus 27:24,25")
 function seedContextFromCentralTexts(centraltexts){
   if(!centraltexts) return {book:null, chapter:null};
@@ -6551,7 +6603,7 @@ const officialContentCache = {};
 const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 dias em ms
 
 function getCachedOfficial(lessonId, dayId){
-  const key = `official-${lessonId}-${dayId}`;
+  const key = `official-${idiomaConteudoAtual}-${lessonId}-${dayId}`;
   const stored = localStorage.getItem(key);
   if(!stored) return null;
   try{
@@ -6563,7 +6615,7 @@ function getCachedOfficial(lessonId, dayId){
 }
 
 function setCachedOfficial(lessonId, dayId, content){
-  const key = `official-${lessonId}-${dayId}`;
+  const key = `official-${idiomaConteudoAtual}-${lessonId}-${dayId}`;
   localStorage.setItem(key, JSON.stringify({content, timestamp: Date.now()}));
 }
 
@@ -6613,7 +6665,7 @@ function comVagaOficial(tarefa){
 }
 
 async function fetchOfficialContent(lessonId, dayId){
-  const cacheKey = `${lessonId}-${dayId}`;
+  const cacheKey = `${idiomaConteudoAtual}-${lessonId}-${dayId}`;
   if(officialContentCache[cacheKey]) return officialContentCache[cacheKey];
   const cached = getCachedOfficial(lessonId, dayId);
   if(cached) return cached;
@@ -6631,7 +6683,7 @@ async function fetchOfficialContent(lessonId, dayId){
 }
 
 async function buscarOficialDaRede(lessonId, dayId){
-  const cacheKey = `${lessonId}-${dayId}`;
+  const cacheKey = `${idiomaConteudoAtual}-${lessonId}-${dayId}`;
 
   try{
     const lessonNum = String(parseInt(lessonId)).padStart(2, '0');
@@ -6641,8 +6693,9 @@ async function buscarOficialDaRede(lessonId, dayId){
     const dayMap = {dom:'01', seg:'02', ter:'03', qua:'04', qui:'05', sex:'06', sab:'07'};
     const dayNum = dayMap[dayId];
 
-    // URL do arquivo .md
-    const mdUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/pt/${quarter}/${lessonNum}/${dayNum}.md`;
+    // URL do arquivo .md — pasta do idioma corrente (Adventech ja publica en/es
+    // com a mesma estrutura de arquivos que pt, mesmo codigo de trimestre)
+    const mdUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/${idiomaConteudoAtual}/${quarter}/${lessonNum}/${dayNum}.md`;
 
     const response = await fetch(mdUrl);
     if(!response.ok) throw new Error(`Não encontrado: ${response.status}`);
@@ -6656,7 +6709,7 @@ async function buscarOficialDaRede(lessonId, dayId){
     }
 
     // Converter markdown para HTML com suporte melhorado
-    const baseImageUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/pt/${quarter}/${lessonNum}`;
+    const baseImageUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/${idiomaConteudoAtual}/${quarter}/${lessonNum}`;
 
     // Primeiro: converter imagens
     content = content.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
@@ -6667,6 +6720,9 @@ async function buscarOficialDaRede(lessonId, dayId){
     // Função auxiliar para converter referências bíblicas em links
     function formatBibleReferences(text) {
       let lastBookId = null, lastChapter = null;
+      const dicionarioLivros = idiomaConteudoAtual === 'en' ? BOOK_NAME_TO_ID_EN
+        : idiomaConteudoAtual === 'es' ? BOOK_NAME_TO_ID_ES
+        : BOOK_NAME_TO_ID;
 
       function wrapVerse(bookId, chapter, v1, v2, label){
         v2 = v2 || v1;
@@ -6676,13 +6732,13 @@ async function buscarOficialDaRede(lessonId, dayId){
         return `<a href="javascript:openBibleReference('${fullName} ${chapter}')" style="color:var(--violet);text-decoration:underline;cursor:pointer;">${label}</a>`;
       }
 
-      const bookKeys = Object.keys(BOOK_NAME_TO_ID).sort((a,b)=>b.length-a.length);
+      const bookKeys = Object.keys(dicionarioLivros).sort((a,b)=>b.length-a.length);
       const namesPattern = bookKeys.map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
       const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::(\\d+)(?:-(\\d+))?)?((?:,\\s?\\d+)*)', 'g');
 
       // Primeiro: livro + capítulo[:versículos][, versículo extra...]
       text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, extraList) => {
-        const bookId = BOOK_NAME_TO_ID[bookName];
+        const bookId = dicionarioLivros[bookName];
         if(!bookId) return match;
         lastBookId = bookId; lastChapter = chapter;
         if(!v1){
@@ -6816,7 +6872,7 @@ function switchSourceTab(btn, dayId, lessonId){
   day.querySelectorAll('.source-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === btn.dataset.tab));
 
   // Se clicou em Oficial e ainda não carregou, carrega agora
-  if(btn.dataset.tab === 'oficial' && !officialContentCache[`${lessonId}-${dayId}`]){
+  if(btn.dataset.tab === 'oficial' && !officialContentCache[`${idiomaConteudoAtual}-${lessonId}-${dayId}`]){
     loadOfficialContent(lessonId, dayId);
   }
 }
