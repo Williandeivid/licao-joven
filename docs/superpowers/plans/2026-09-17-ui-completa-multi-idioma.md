@@ -2314,6 +2314,7 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'stats.minEssaSemana': 'min essa semana',
 'stats.legendaDiasBiblia': 'Dias de Bíblia',
 'stats.legendaDiasLicao': 'Dias de Lição',
+'bible.buscandoCapitulo': 'Buscando o capítulo...',
 ```
 
 ```js
@@ -2337,6 +2338,7 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'stats.minEssaSemana': 'min this week',
 'stats.legendaDiasBiblia': 'Bible Days',
 'stats.legendaDiasLicao': 'Lesson Days',
+'bible.buscandoCapitulo': 'Fetching the chapter...',
 ```
 
 ```js
@@ -2360,6 +2362,7 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'stats.minEssaSemana': 'min esta semana',
 'stats.legendaDiasBiblia': 'Días de Biblia',
 'stats.legendaDiasLicao': 'Días de Lección',
+'bible.buscandoCapitulo': 'Buscando el capítulo...',
 ```
 
 - [ ] **Step 2: Aplicar `saudacaoPorHorario`**
@@ -2392,6 +2395,8 @@ function saudacaoPorHorario() {
 | `dias essa semana` (`week-summary-row`, aba Estatísticas, ~linha 3925 — achado pela revisão da Task 12, não estava na tabela original) | `stats.diasEssaSemana` |
 | `min essa semana` (mesma região, ~linha 3932) | `stats.minEssaSemana` |
 | `Dias de Bíblia` / `Dias de Lição` (`renderBibleDaysVsLessonsChart`, legenda do gráfico, ~linha 3701 — mesmo achado da Task 12) | `stats.legendaDiasBiblia`/`stats.legendaDiasLicao` |
+| `Buscando o capítulo...` (`openChapterPopup`/`switchChapterPopupVersion`, ~linhas 5951/5958 — achado pela revisão da Task 13, string irmã de `bible.buscandoTexto` mas com texto diferente) | `bible.buscandoCapitulo` |
+| `Não consegui buscar aqui dentro agora.` (`renderChapterPopupVersion`, catch, ~linha 5972 — mesmo achado) | `t('bible.naoConseguiBuscarAqui')` — **reaproveita**, texto idêntico ao já criado na Task 13, não cria chave nova |
 
 - [ ] **Step 4: Consistência de locale (`pt-BR` fixo → `LOCALE_POR_IDIOMA`)**
 
