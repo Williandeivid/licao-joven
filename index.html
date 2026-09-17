@@ -1853,7 +1853,7 @@ function renderMindMap(content){
     });
   });
   svg += `</svg>`;
-  return `<div class="mindmap-wrap"><h4>Mapa mental da semana</h4>${svg}</div>`;
+  return `<div class="mindmap-wrap"><h4>${t('lesson.mapaMentalSemana')}</h4>${svg}</div>`;
 }
 
 // Alguns dias trazem um rotulo especial (ex.: "Domingo · 28 de junho · Momento
@@ -1892,11 +1892,12 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
   // Antes dependia de meta.quarter, campo que nenhuma lição tem - a tirinha nunca aparecia.
   if(day.id === 'dom'){
     const tirinhaUrl = `${ADVENTECH_BASE}/${TRIMESTRE_ATUAL}/cover.png`;
-    html += `<div class="day-tirinha"><img src="${tirinhaUrl}" alt="Tirinha da Lição ${lessonId}" onerror="this.closest('.day-tirinha').remove()"><div class="cap">Tirinha original · ComTexto Bíblico, Lição ${lessonId}</div></div>`;
+    const tirinhaCap = t('lesson.tirinhaOriginal').replace('${n}', lessonId);
+    html += `<div class="day-tirinha"><img src="${tirinhaUrl}" alt="${tirinhaCap}" onerror="this.closest('.day-tirinha').remove()"><div class="cap">${tirinhaCap}</div></div>`;
   }
   if(day.summary){ html += `<p class="day-summary">${day.summary}</p>`; }
   if(day.id === 'dom'){
-    html += `<div class="week-base-note">Texto-base da semana: <b onclick="openBibleReference('${content.bibleref}')" style="cursor:pointer; text-decoration:underline; color:var(--violet);">${content.bibleref}</b></div>`;
+    html += `<div class="week-base-note">${t('lesson.textoBaseSemana')} <b onclick="openBibleReference('${content.bibleref}')" style="cursor:pointer; text-decoration:underline; color:var(--violet);">${content.bibleref}</b></div>`;
   }
   {
     const seed = seedContextFromCentralTexts(day.centraltexts);
@@ -2206,10 +2207,10 @@ async function getBiblePlanHomeCard(){
   const label = readingLabel(nextDay);
   return `<div class="home-bible-card" id="home-bible-card" onclick="jumpToBibleChapter('${nextDay[0].book}',${nextDay[0].chapter})">
     <div>
-      <div class="hbc-label">Continue seu plano bíblico</div>
+      <div class="hbc-label">${t('bible.continuePlanoBiblico')}</div>
       <div class="hbc-ref">${label}</div>
     </div>
-    <span class="hbc-btn">Ler →</span>
+    <span class="hbc-btn">${t('bible.ler')}</span>
   </div>`;
 }
 function scheduleBibleCardAutoHide(){
@@ -2258,7 +2259,7 @@ function renderWeekCalendarMonth(lessonId, monthOffset){
   const daysInMonth = new Date(year, month+1, 0).getDate();
   const startWeekday = firstDay.getDay();
   const today = new Date(); today.setHours(0,0,0,0);
-  const monthLabel = firstDay.toLocaleDateString('pt-BR', {month:'long', year:'numeric'});
+  const monthLabel = firstDay.toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {month:'long', year:'numeric'});
 
   const quarterStart = dayCalendarDate(1, 'dom');
   const quarterEnd = dayCalendarDate(13, 'sab');
@@ -2305,7 +2306,7 @@ function renderWeekCalendarMonth(lessonId, monthOffset){
 function showWeekCalendarMessage(outOfQuarter){
   const el = document.getElementById('wcal-message');
   if(!el) return;
-  el.textContent = outOfQuarter ? 'Sem conteúdo disponível para essa data.' : 'Essa lição ainda não foi montada.';
+  el.textContent = outOfQuarter ? t('lesson.semConteudoData') : t('lesson.licaoNaoMontada');
   setTimeout(()=>{ if(el) el.textContent=''; }, 3000);
 }
 
@@ -2631,7 +2632,7 @@ function bindDayInteractions(lessonId, content, progress){
 
       // Versão da Lição
       const lblVersion = document.createElement('div');
-      lblVersion.textContent = 'Versão da Lição';
+      lblVersion.textContent = t('lesson.versaoDaLicao');
       lblVersion.style.cssText = 'padding:8px 12px;font-size:11px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.5px;';
       menu.appendChild(lblVersion);
 
@@ -3215,6 +3216,11 @@ const DIAS_INICIAIS_POR_IDIOMA = {
   en: ['S','M','T','W','T','F','S'],
   es: ['D','L','M','M','J','V','S'],
 };
+const DIAS_ABREV_POR_IDIOMA = {
+  pt: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+  en: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+  es: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+};
 
 // Monta "Domingo · 28 de junho" (ou equivalente no idioma atual) a partir
 // da data REAL do dia, em vez de ler texto fixo gravado no conteudo -
@@ -3466,7 +3472,7 @@ function renderCalendarMonth(progressMap){
   const startWeekday = firstDay.getDay();
   const daysInMonth = new Date(year, month+1, 0).getDate();
   const lastDayOfMonth = new Date(year, month, daysInMonth);
-  const monthLabel = firstDay.toLocaleDateString('pt-BR', {month:'long', year:'numeric'});
+  const monthLabel = firstDay.toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {month:'long', year:'numeric'});
   const bLog = bibleActivityLog || {};
   const dailyStreakForCalendar = computeDailyStreakSync(progressMap);
   const goals = userGoals || {};
@@ -3698,7 +3704,7 @@ function renderBibleDaysVsLessonsChart(progressMap){
   });
   svg += `</svg>`;
   let html = svg;
-  html += `<div class="cal-legend"><span><i class="lg" style="background:var(--teal)"></i>Dias de Bíblia</span><span><i class="lg" style="background:var(--violet)"></i>Dias de Lição</span></div>`;
+  html += `<div class="cal-legend"><span><i class="lg" style="background:var(--teal)"></i>${t('stats.legendaDiasBiblia')}</span><span><i class="lg" style="background:var(--violet)"></i>${t('stats.legendaDiasLicao')}</span></div>`;
   return html;
 }
 
@@ -3904,7 +3910,7 @@ function renderStats(){
         const today=new Date(); const dow=today.getDay();
         const sunday=new Date(today); sunday.setDate(today.getDate()-dow);
         return computeDaysInRange(progressMap, sunday, today);
-      })()}/7</b> dias essa semana</span>
+      })()}/7</b> ${t('stats.diasEssaSemana')}</span>
       <span class="ws-sep">·</span>
       <span class="ws-item"><b>${(function(){
         const recent = Object.values(progressMap).filter(v=>v.pct!==null);
@@ -3929,7 +3935,7 @@ function renderStats(){
           cursor.setDate(cursor.getDate()+1);
         }
         return total;
-      })()}</b> min essa semana</span>
+      })()}</b> ${t('stats.minEssaSemana')}</span>
     </div>
 
   <div class="stats-section-label">${t('conta.ranking')}</div>
@@ -4023,7 +4029,7 @@ async function carregarRankingTab(tipo){
     }
 
     const lista = Object.keys(entradas).map(uid => Object.assign({uid}, entradas[uid]));
-    lista.sort((a,b) => ((Number(b.pontos)||0) - (Number(a.pontos)||0)) || ((Number(b.notaMedia)||0) - (Number(a.notaMedia)||0)) || String(a.nome||'').localeCompare(String(b.nome||''), 'pt-BR'));
+    lista.sort((a,b) => ((Number(b.pontos)||0) - (Number(a.pontos)||0)) || ((Number(b.notaMedia)||0) - (Number(a.notaMedia)||0)) || String(a.nome||'').localeCompare(String(b.nome||''), LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR'));
 
     if(!lista.length){
       panel.innerHTML = `<p class="conta-note">${tipo === 'semana' ? t('ranking.ninguemSemana') : t('ranking.ninguemTrimestre')}</p>`;
@@ -4089,21 +4095,21 @@ async function openDayEditor(targetKey){
   if(lessonMatch && dayHasQuiz){
     html += `<div class="dayed-section">
       <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>${lessonMatch.lessonTitle} — ${lessonMatch.dayTitle}</div>
-      <div class="dayed-row"><label>Acertos (de 10)</label><input type="number" id="ed-correct" min="0" max="10" value="${lessonQuiz?lessonQuiz.correct:''}" placeholder="—"></div>
-      <div class="dayed-row"><label>Tempo (minutos)</label><input type="number" id="ed-lesson-min" min="0" value="${lessonQuiz?Math.round(lessonQuiz.time/60000):''}" placeholder="—"></div>
+      <div class="dayed-row"><label>${t('lesson.acertosDe10')}</label><input type="number" id="ed-correct" min="0" max="10" value="${lessonQuiz?lessonQuiz.correct:''}" placeholder="—"></div>
+      <div class="dayed-row"><label>${t('lesson.tempoMinutos')}</label><input type="number" id="ed-lesson-min" min="0" value="${lessonQuiz?Math.round(lessonQuiz.time/60000):''}" placeholder="—"></div>
     </div>`;
   } else if(lessonMatch){
     html += `<div class="dayed-section">
       <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>${lessonMatch.lessonTitle} — ${lessonMatch.dayTitle}</div>
-      <div class="dayed-row"><label>Estudei esse dia (sem quiz)</label><input type="checkbox" id="ed-studied-only" ${isStudied?'checked':''} style="width:22px;height:22px;"></div>
+      <div class="dayed-row"><label>${t('lesson.estudeiSemQuiz')}</label><input type="checkbox" id="ed-studied-only" ${isStudied?'checked':''} style="width:22px;height:22px;"></div>
     </div>`;
   } else {
-    html += `<div class="dayed-section"><div class="dayed-label">Nenhuma lição prevista para este dia.</div></div>`;
+    html += `<div class="dayed-section"><div class="dayed-label">${t('lesson.nenhumaLicaoPrevista')}</div></div>`;
   }
 
   html += `<div class="dayed-section">
     <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Plano Bíblico</div>
-    <div class="dayed-row"><label>Tempo (minutos)</label><input type="number" id="ed-bible-min" min="0" value="${bibleMinutes||''}" placeholder="—"></div>
+    <div class="dayed-row"><label>${t('lesson.tempoMinutos')}</label><input type="number" id="ed-bible-min" min="0" value="${bibleMinutes||''}" placeholder="—"></div>
   </div>
   <button class="dayed-save" onclick="saveDayEditor()">Salvar</button>
   </div></div>`;
@@ -4418,11 +4424,11 @@ function readingLabel(reading){
   reading.forEach(r=>{
     if(r.book===curBook && r.chapter===end+1){ end = r.chapter; }
     else{
-      if(curBook) parts.push(start===end ? `${BOOK_NAME_BY_ID[curBook]} ${start}` : `${BOOK_NAME_BY_ID[curBook]} ${start}-${end}`);
+      if(curBook) parts.push(start===end ? `${bookDisplayName(curBook, idiomaConteudoAtual)} ${start}` : `${bookDisplayName(curBook, idiomaConteudoAtual)} ${start}-${end}`);
       curBook = r.book; start = r.chapter; end = r.chapter;
     }
   });
-  if(curBook) parts.push(start===end ? `${BOOK_NAME_BY_ID[curBook]} ${start}` : `${BOOK_NAME_BY_ID[curBook]} ${start}-${end}`);
+  if(curBook) parts.push(start===end ? `${bookDisplayName(curBook, idiomaConteudoAtual)} ${start}` : `${bookDisplayName(curBook, idiomaConteudoAtual)} ${start}-${end}`);
   return parts.join(' · ');
 }
 
@@ -4541,7 +4547,7 @@ function bibleCrumbHtml(book){
   if(bibleState.returnTo === 'plan'){
     return `<button onclick="renderBiblePlan()">← ${planField(currentPlanKey, 'name', idiomaConteudoAtual)}</button>`;
   }
-  return `<button onclick="goBible()">← Livros</button><span>/</span><button onclick="renderBibleChapters()">${bookDisplayName(book.id, idiomaConteudoAtual)}</button>`;
+  return `<button onclick="goBible()">← ${t('bible.livros')}</button><span>/</span><button onclick="renderBibleChapters()">${bookDisplayName(book.id, idiomaConteudoAtual)}</button>`;
 }
 
 let activeBiblePlan = null;
@@ -4602,6 +4608,7 @@ async function renderPlanSelector(){
   }
   html += `</div><footer>${t('bible.capitulosNoTotal').replace('${a}', BIBLE_PLANS.chronological.sequence.length).replace('${b}', BIBLE_PLANS.traditional.sequence.length)}</footer>`;
   container.innerHTML = html;
+  container.dataset.view = 'plan';
 }
 
 async function activatePlan(key){
@@ -4689,6 +4696,7 @@ async function renderBiblePlan(){
     <div class="day-chapter-list" id="day-chapter-list"></div>
   </div><footer>${t('bible.toqueNumeroDia')}</footer>`;
   container.innerHTML = html;
+  container.dataset.view = 'plan';
   renderDayChapterList();
   const scroller = document.getElementById('day-scroller');
   const activeChip = scroller.querySelector('.day-chip.viewed');
@@ -4970,7 +4978,7 @@ function openBiblePlanCalendar(key, startDateStr, monthOffset){
       <div style="display:grid;grid-template-columns:repeat(7, 1fr);gap:4px;">`;
 
     // Dias da semana
-    ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'].forEach(day => {
+    (DIAS_ABREV_POR_IDIOMA[idiomaConteudoAtual] || DIAS_ABREV_POR_IDIOMA.pt).forEach(day => {
       html += `<div style="text-align:center;font-size:11px;font-weight:600;color:var(--ink-soft);padding:4px;">${day}</div>`;
     });
 
@@ -5018,7 +5026,7 @@ function openBiblePlanCalendar(key, startDateStr, monthOffset){
       box-shadow:0 20px 60px rgba(0,0,0,0.3);
     ">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <h2 style="margin:0;font-size:16px;font-weight:600;">Calendário do Plano</h2>
+        <h2 style="margin:0;font-size:16px;font-weight:600;">${t('bible.calendarioDoPlano')}</h2>
         <button onclick="this.closest('[style*=position]').remove()" style="
           background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:0;
         ">×</button>
@@ -5343,6 +5351,30 @@ const UI_STRINGS = {
     'comments.alguem': 'Alguém',
     'comments.carregarFalhou': 'Não foi possível carregar os comentários agora.',
     'comments.tituloBotao': 'Comentários deste dia',
+    'common.bomDia': 'Bom dia',
+    'common.boaTarde': 'Boa tarde',
+    'common.boaNoite': 'Boa noite',
+    'conta.sincronizaEntreDispositivos': ' — seu progresso sincroniza entre dispositivos.',
+    'lesson.acertosDe10': 'Acertos (de 10)',
+    'lesson.tempoMinutos': 'Tempo (minutos)',
+    'lesson.estudeiSemQuiz': 'Estudei esse dia (sem quiz)',
+    'lesson.nenhumaLicaoPrevista': 'Nenhuma lição prevista para este dia.',
+    'lesson.mapaMentalSemana': 'Mapa mental da semana',
+    'lesson.tirinhaOriginal': 'Tirinha original · ComTexto Bíblico, Lição ${n}',
+    'lesson.textoBaseSemana': 'Texto-base da semana:',
+    'lesson.semConteudoData': 'Sem conteúdo disponível para essa data.',
+    'lesson.licaoNaoMontada': 'Essa lição ainda não foi montada.',
+    'lesson.versaoDaLicao': 'Versão da Lição',
+    'lesson.mindmapLicaoFallback': 'Lição',
+    'stats.diasEssaSemana': 'dias essa semana',
+    'stats.minEssaSemana': 'min essa semana',
+    'stats.legendaDiasBiblia': 'Dias de Bíblia',
+    'stats.legendaDiasLicao': 'Dias de Lição',
+    'bible.buscandoCapitulo': 'Buscando o capítulo...',
+    'bible.livros': 'Livros',
+    'bible.calendarioDoPlano': 'Calendário do Plano',
+    'bible.continuePlanoBiblico': 'Continue seu plano bíblico',
+    'bible.ler': 'Ler →',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5591,6 +5623,30 @@ const UI_STRINGS = {
     'comments.alguem': 'Someone',
     'comments.carregarFalhou': "Couldn't load the comments right now.",
     'comments.tituloBotao': 'Comments for this day',
+    'common.bomDia': 'Good morning',
+    'common.boaTarde': 'Good afternoon',
+    'common.boaNoite': 'Good evening',
+    'conta.sincronizaEntreDispositivos': ' — your progress syncs across devices.',
+    'lesson.acertosDe10': 'Correct (out of 10)',
+    'lesson.tempoMinutos': 'Time (minutes)',
+    'lesson.estudeiSemQuiz': 'I studied this day (no quiz)',
+    'lesson.nenhumaLicaoPrevista': 'No lesson scheduled for this day.',
+    'lesson.mapaMentalSemana': "This week's mind map",
+    'lesson.tirinhaOriginal': 'Original comic strip · ComTexto Bíblico, Lesson ${n}',
+    'lesson.textoBaseSemana': "This week's key text:",
+    'lesson.semConteudoData': 'No content available for that date.',
+    'lesson.licaoNaoMontada': "This lesson hasn't been built yet.",
+    'lesson.versaoDaLicao': 'Lesson Version',
+    'lesson.mindmapLicaoFallback': 'Lesson',
+    'stats.diasEssaSemana': 'days this week',
+    'stats.minEssaSemana': 'min this week',
+    'stats.legendaDiasBiblia': 'Bible Days',
+    'stats.legendaDiasLicao': 'Lesson Days',
+    'bible.buscandoCapitulo': 'Fetching the chapter...',
+    'bible.livros': 'Books',
+    'bible.calendarioDoPlano': 'Plan Calendar',
+    'bible.continuePlanoBiblico': 'Continue your Bible plan',
+    'bible.ler': 'Read →',
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5839,6 +5895,30 @@ const UI_STRINGS = {
     'comments.alguem': 'Alguien',
     'comments.carregarFalhou': 'No se pudieron cargar los comentarios ahora.',
     'comments.tituloBotao': 'Comentarios de este día',
+    'common.bomDia': 'Buenos días',
+    'common.boaTarde': 'Buenas tardes',
+    'common.boaNoite': 'Buenas noches',
+    'conta.sincronizaEntreDispositivos': ' — tu progreso se sincroniza entre dispositivos.',
+    'lesson.acertosDe10': 'Aciertos (de 10)',
+    'lesson.tempoMinutos': 'Tiempo (minutos)',
+    'lesson.estudeiSemQuiz': 'Estudié este día (sin quiz)',
+    'lesson.nenhumaLicaoPrevista': 'No hay lección prevista para este día.',
+    'lesson.mapaMentalSemana': 'Mapa mental de la semana',
+    'lesson.tirinhaOriginal': 'Tira original · ComTexto Bíblico, Lección ${n}',
+    'lesson.textoBaseSemana': 'Texto base de la semana:',
+    'lesson.semConteudoData': 'Sin contenido disponible para esa fecha.',
+    'lesson.licaoNaoMontada': 'Esta lección todavía no fue armada.',
+    'lesson.versaoDaLicao': 'Versión de la Lección',
+    'lesson.mindmapLicaoFallback': 'Lección',
+    'stats.diasEssaSemana': 'días esta semana',
+    'stats.minEssaSemana': 'min esta semana',
+    'stats.legendaDiasBiblia': 'Días de Biblia',
+    'stats.legendaDiasLicao': 'Días de Lección',
+    'bible.buscandoCapitulo': 'Buscando el capítulo...',
+    'bible.livros': 'Libros',
+    'bible.calendarioDoPlano': 'Calendario del Plan',
+    'bible.continuePlanoBiblico': 'Continúa tu plan bíblico',
+    'bible.ler': 'Leer →',
   },
 };
 
@@ -5923,6 +6003,15 @@ async function recarregarConteudoNoIdiomaAtual(){
     const bibleAtivo = document.getElementById('tab-bible') && document.getElementById('tab-bible').classList.contains('active');
     if(bibleAtivo && typeof bibleState !== 'undefined' && bibleState && bibleState.book && bibleState.chapter){
       await openBibleChapter(bibleState.chapter);
+      return;
+    }
+    const bibleContainer = document.getElementById('bible-container');
+    if(bibleAtivo && bibleContainer && bibleContainer.dataset.view === 'plan'){
+      await goBiblePlan();
+      return;
+    }
+    if(bibleAtivo && bibleContainer && bibleContainer.dataset.view === 'books'){
+      renderBibleBooks();
     }
   }catch(e){ console.warn('⚠️ Não recarregou o conteúdo no novo idioma:', e.message); }
 }
@@ -5987,6 +6076,7 @@ function renderBibleBooks(){
   html += `<div class="testament-label">${t('bible.novoTestamento')}</div>` + renderBookGrid(BIBLE_BOOKS.filter(b=>b.t==='NT'));
   html += `</div><footer>${t('bible.credito')}</footer>`;
   container.innerHTML = html;
+  container.dataset.view = 'books';
 }
 
 let pendingBibleChapter = null;
@@ -6061,7 +6151,7 @@ async function openChapterPopup(bookId, chapter, refLabel){
   const idioma = idiomaConteudoAtual;
   const versaoInicial = idioma === 'pt' ? 'nvi' : IDIOMA_BIBLIA[idioma].versaoUnica;
   const title = refLabel || `${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`;
-  openVerseModal(title, `${chapterPopupVersionRow(idioma,versaoInicial,bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`, {book:bookId, chapter, v1:0, v2:0, label:`${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`});
+  openVerseModal(title, `${chapterPopupVersionRow(idioma,versaoInicial,bookId,chapter)}<span class="vpop-loading">${t('bible.buscandoCapitulo')}</span>`, {book:bookId, chapter, v1:0, v2:0, label:`${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`});
   await renderChapterPopupVersion(idioma, versaoInicial, book, chapter);
 }
 
@@ -6069,7 +6159,7 @@ async function switchChapterPopupVersion(version, bookId, chapter){
   const book = BIBLE_BOOKS.find(b=>b.id===bookId);
   if(!book) return;
   const idioma = idiomaConteudoAtual;
-  updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`);
+  updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,bookId,chapter)}<span class="vpop-loading">${t('bible.buscandoCapitulo')}</span>`);
   await renderChapterPopupVersion(idioma, version, book, chapter);
 }
 
@@ -6083,7 +6173,7 @@ async function renderChapterPopupVersion(idioma, version, book, chapter){
     });
     updateVerseModalBody(html);
   }catch(e){
-    updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,book.id,chapter)}<span class="vpop-loading">Não consegui buscar aqui dentro agora.</span>`);
+    updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,book.id,chapter)}<span class="vpop-loading">${t('bible.naoConseguiBuscarAqui')}</span>`);
   }
 }
 
@@ -6101,7 +6191,7 @@ function renderBibleChapters(){
   if(!container) return;
   let html = `<div class="bible-header"><h1>${bookDisplayName(book.id, idiomaConteudoAtual)}</h1><p>${book.ch}${book.ch>1?t('bible.capitulos'):t('bible.capitulo')}</p></div>
   <div class="bible-wrap">
-    <div class="bible-crumbs">${bibleState.returnTo==='plan' ? bibleCrumbHtml(book) : '<button onclick="goBible()">← Livros</button>'}</div>
+    <div class="bible-crumbs">${bibleState.returnTo==='plan' ? bibleCrumbHtml(book) : `<button onclick="goBible()">← ${t('bible.livros')}</button>`}</div>
     <div class="chapter-grid">`;
   for(let c=1;c<=book.ch;c++){
     html += `<button class="chapter-btn" onclick="openBibleChapter(${c})">${c}</button>`;
@@ -6554,7 +6644,7 @@ function renderQuizFeedback(correct, explanation, nextReviewDays = null) {
 function generateRadialMindMap(lessonId) {
   const lesson = LESSONS_CONTENT.find(l => l.id === lessonId);
   if (!lesson) return '';
-  const centerKeyword = lesson.keyword || 'Lição';
+  const centerKeyword = lesson.keyword || t('lesson.mindmapLicaoFallback');
   const dayColors = ['#6c4ce0', '#ff5d8f', '#2fd6c8', '#ffc857', '#ff8a5c', '#8e6cff', '#22b8a6'];
   const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   let svg = `<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:500px;">
@@ -7548,9 +7638,9 @@ async function preencherNomeSeVazio() {
 
 function saudacaoPorHorario() {
   const h = new Date().getHours();
-  if (h < 12) return 'Bom dia';
-  if (h < 18) return 'Boa tarde';
-  return 'Boa noite';
+  if (h < 12) return t('common.bomDia');
+  if (h < 18) return t('common.boaTarde');
+  return t('common.boaNoite');
 }
 
 // Chip com foto e nome, ao lado do botao de menu.
@@ -7646,7 +7736,7 @@ function updateAuthUI() {
       const email = currentUser.email || '';
       const nomeExibido = nome ? nome + ' (' + email + ')' : email;
       info.innerHTML = 'Conectado como ' + escaparHtml(nomeExibido) +
-        ' — seu progresso sincroniza entre dispositivos.<br>' +
+        t('conta.sincronizaEntreDispositivos') + '<br>' +
         '<span style="font-family:\'JetBrains Mono\',monospace; font-size:11px; opacity:.75; user-select:all; word-break:break-all;">uid: ' +
         escaparHtml(currentUser.uid) + '</span>';
     }
@@ -8492,7 +8582,7 @@ function renderLessonFloatingButton(dayId, day, lessonId) {
   menu.className = 'lesson-source-menu';
   menu.style.cssText = 'display:none;position:fixed;top:60px;right:24px;background:var(--card);border:0.5px solid var(--border);border-radius:8px;min-width:150px;z-index:99999;box-shadow:0 4px 12px rgba(0,0,0,0.15);padding:4px 0;max-height:60vh;overflow-y:auto;';
   const lblVersion = document.createElement('div');
-  lblVersion.textContent = 'Versão da Lição';
+  lblVersion.textContent = t('lesson.versaoDaLicao');
   lblVersion.style.cssText = 'padding:8px 12px;font-size:11px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.5px;';
   menu.appendChild(lblVersion);
   const btnFluida = document.createElement('button');
