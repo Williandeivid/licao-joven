@@ -6820,9 +6820,13 @@ function aplicarTraducaoConteudo(contentPt, idioma, listaTraducoes){
 // ===== OFFICIAL SOURCE TABS CACHE & FUNCTIONS =====
 const officialContentCache = {};
 const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 dias em ms
+// Sobe a cada correcao no parser de citacoes bíblicas (formatBibleReferences) -
+// invalida sozinho todo HTML ja processado e guardado no localStorage de quem
+// testou antes da correcao, sem precisar pedir pra pessoa limpar cache na mao.
+const OFICIAL_CACHE_VERSAO = 'v2';
 
 function getCachedOfficial(lessonId, dayId){
-  const key = `official-${idiomaConteudoAtual}-${lessonId}-${dayId}`;
+  const key = `official-${OFICIAL_CACHE_VERSAO}-${idiomaConteudoAtual}-${lessonId}-${dayId}`;
   const stored = localStorage.getItem(key);
   if(!stored) return null;
   try{
@@ -6834,7 +6838,7 @@ function getCachedOfficial(lessonId, dayId){
 }
 
 function setCachedOfficial(lessonId, dayId, content, idioma){
-  const key = `official-${idioma}-${lessonId}-${dayId}`;
+  const key = `official-${OFICIAL_CACHE_VERSAO}-${idioma}-${lessonId}-${dayId}`;
   localStorage.setItem(key, JSON.stringify({content, timestamp: Date.now()}));
 }
 
