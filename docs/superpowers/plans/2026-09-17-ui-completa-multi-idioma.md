@@ -2310,6 +2310,10 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'lesson.licaoNaoMontada': 'Essa lição ainda não foi montada.',
 'lesson.versaoDaLicao': 'Versão da Lição',
 'lesson.mindmapLicaoFallback': 'Lição',
+'stats.diasEssaSemana': 'dias essa semana',
+'stats.minEssaSemana': 'min essa semana',
+'stats.legendaDiasBiblia': 'Dias de Bíblia',
+'stats.legendaDiasLicao': 'Dias de Lição',
 ```
 
 ```js
@@ -2329,6 +2333,10 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'lesson.licaoNaoMontada': "This lesson hasn't been built yet.",
 'lesson.versaoDaLicao': 'Lesson Version',
 'lesson.mindmapLicaoFallback': 'Lesson',
+'stats.diasEssaSemana': 'days this week',
+'stats.minEssaSemana': 'min this week',
+'stats.legendaDiasBiblia': 'Bible Days',
+'stats.legendaDiasLicao': 'Lesson Days',
 ```
 
 ```js
@@ -2348,6 +2356,10 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'lesson.licaoNaoMontada': 'Esta lección todavía no fue armada.',
 'lesson.versaoDaLicao': 'Versión de la Lección',
 'lesson.mindmapLicaoFallback': 'Lección',
+'stats.diasEssaSemana': 'días esta semana',
+'stats.minEssaSemana': 'min esta semana',
+'stats.legendaDiasBiblia': 'Días de Biblia',
+'stats.legendaDiasLicao': 'Días de Lección',
 ```
 
 - [ ] **Step 2: Aplicar `saudacaoPorHorario`**
@@ -2377,6 +2389,9 @@ function saudacaoPorHorario() {
 | `'Essa lição ainda não foi montada.'` | `t('lesson.licaoNaoMontada')` |
 | `'Versão da Lição'` (2 ocorrências) | `t('lesson.versaoDaLicao')` |
 | `lesson.keyword \|\| 'Lição'` (fallback do mindmap, só dispara se a lição não tiver `keyword` — praticamente nunca hoje) | `lesson.keyword \|\| t('lesson.mindmapLicaoFallback')` |
+| `dias essa semana` (`week-summary-row`, aba Estatísticas, ~linha 3925 — achado pela revisão da Task 12, não estava na tabela original) | `stats.diasEssaSemana` |
+| `min essa semana` (mesma região, ~linha 3932) | `stats.minEssaSemana` |
+| `Dias de Bíblia` / `Dias de Lição` (`renderBibleDaysVsLessonsChart`, legenda do gráfico, ~linha 3701 — mesmo achado da Task 12) | `stats.legendaDiasBiblia`/`stats.legendaDiasLicao` |
 
 - [ ] **Step 4: Consistência de locale (`pt-BR` fixo → `LOCALE_POR_IDIOMA`)**
 
