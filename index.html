@@ -1460,16 +1460,16 @@
 
 <div id="topo-acoes">
 
-  <button id="perfil-avatar" onclick="alternarPerfil(event)" title="Sua conta">
+  <button id="perfil-avatar" onclick="alternarPerfil(event)" title="Sua conta" data-i18n-title="menu.suaConta">
     <img id="perfil-foto" alt="">
     <span id="perfil-inicial"></span>
   </button>
 
-  <button id="perfil-nome-btn" onclick="goConta()" title="Abrir minha conta">
+  <button id="perfil-nome-btn" onclick="goConta()" title="Abrir minha conta" data-i18n-title="menu.abrirConta">
     <span id="perfil-nome"></span>
   </button>
 
-  <button id="app-menu-btn" onclick="toggleAppMenu()" title="Mais opções">
+  <button id="app-menu-btn" onclick="toggleAppMenu()" title="Mais opções" data-i18n-title="menu.maisOpcoes">
     <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
   </button>
 
@@ -1477,23 +1477,23 @@
 
     <button onclick="goTodayFromMenu()" style="width:100%;padding:10px 12px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;font-weight:700;border-radius:10px;display:flex;gap:10px;align-items:center;">
       <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--violet);fill:none;stroke-width:2.2;flex-shrink:0;"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-      Voltar para hoje
+      <span data-i18n="menu.voltarHoje">Voltar para hoje</span>
     </button>
 
     <hr style="margin:8px 0;border:none;border-top:1px solid var(--border);">
 
-    <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Tamanho da fonte</div>
+    <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;"><span data-i18n="menu.tamanhoFonte">Tamanho da fonte</span></div>
     <button id="font-size-menu-btn" onclick="cycleFontSize()" style="width:100%;padding:10px 12px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:10px;display:flex;gap:10px;align-items:center;justify-content:space-between;">
       <span style="display:flex;gap:10px;align-items:center;">
         <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--violet);fill:none;stroke-width:2.2;flex-shrink:0;"><circle cx="12" cy="5" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg>
-        Alternar tamanho
+        <span data-i18n="menu.alternarTamanho">Alternar tamanho</span>
       </span>
       <span id="font-size-menu-label" style="font-size:12px;color:var(--ink-soft);"></span>
     </button>
 
     <hr style="margin:8px 0;border:none;border-top:1px solid var(--border);">
 
-    <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Idioma</div>
+    <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;"><span data-i18n="menu.idioma">Idioma</span></div>
     <div id="idioma-conteudo-row" style="display:flex;gap:8px;padding:8px 10px 4px;">
       <button class="idioma-conteudo-btn" data-idioma="pt" onclick="setIdiomaConteudo('pt')" style="flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);background:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);">🇧🇷 PT</button>
       <button class="idioma-conteudo-btn" data-idioma="en" onclick="setIdiomaConteudo('en')" style="flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);background:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);">🇺🇸 EN</button>
@@ -1502,22 +1502,22 @@
 
     <hr style="margin:8px 0;border:none;border-top:1px solid var(--border);">
 
-    <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Design</div>
+    <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;"><span data-i18n="menu.design">Design</span></div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:8px 10px 4px;">
-      <button onclick="setDesignTheme('light')" title="Claro" style="width:28px;height:28px;border-radius:50%;background:#f7f5ff;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('dark')" title="Escuro" style="width:28px;height:28px;border-radius:50%;background:#100e1e;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('reading')" title="Leitura" style="width:28px;height:28px;border-radius:50%;background:#faf9f7;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('neutral')" title="Neutro" style="width:28px;height:28px;border-radius:50%;background:#fafafa;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('mono-dark')" title="Mono Escuro" style="width:28px;height:28px;border-radius:50%;background:#0a0a0a;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('mono-light')" title="Mono Claro" style="width:28px;height:28px;border-radius:50%;background:#fafafa;border:2px solid #4a3fb0;cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('gray-light')" title="Cinza Claro" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#ffffff,#4a4a4a);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('gray-dark')" title="Cinza Escuro" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#000000,#e8e8e8);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('rainbow-vibrant')" title="Vibrante" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#0066ff,#ff0066,#00b341);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('rainbow-subtle')" title="Sutil" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#1f5a96,#b83a3a,#2a7f3f);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('rainbow-premium')" title="Premium" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#0b3d91,#8b2323,#1b4d2d);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('rainbow-sunset')" title="Sunset" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#ff6b3d,#ff3d6b,#ffa500);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('rainbow-ocean')" title="Ocean" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#0066ff,#0099cc,#00d4ff);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
-      <button onclick="setDesignTheme('rainbow-forest')" title="Forest" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#2a7f3f,#1b8a3d,#1a9a5a);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('light')" title="Claro" data-i18n-title="menu.tema.claro" style="width:28px;height:28px;border-radius:50%;background:#f7f5ff;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('dark')" title="Escuro" data-i18n-title="menu.tema.escuro" style="width:28px;height:28px;border-radius:50%;background:#100e1e;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('reading')" title="Leitura" data-i18n-title="menu.tema.leitura" style="width:28px;height:28px;border-radius:50%;background:#faf9f7;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('neutral')" title="Neutro" data-i18n-title="menu.tema.neutro" style="width:28px;height:28px;border-radius:50%;background:#fafafa;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('mono-dark')" title="Mono Escuro" data-i18n-title="menu.tema.monoEscuro" style="width:28px;height:28px;border-radius:50%;background:#0a0a0a;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('mono-light')" title="Mono Claro" data-i18n-title="menu.tema.monoClaro" style="width:28px;height:28px;border-radius:50%;background:#fafafa;border:2px solid #4a3fb0;cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('gray-light')" title="Cinza Claro" data-i18n-title="menu.tema.cinzaClaro" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#ffffff,#4a4a4a);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('gray-dark')" title="Cinza Escuro" data-i18n-title="menu.tema.cinzaEscuro" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#000000,#e8e8e8);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('rainbow-vibrant')" title="Vibrante" data-i18n-title="menu.tema.vibrante" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#0066ff,#ff0066,#00b341);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('rainbow-subtle')" title="Sutil" data-i18n-title="menu.tema.sutil" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#1f5a96,#b83a3a,#2a7f3f);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('rainbow-premium')" title="Premium" data-i18n-title="menu.tema.premium" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#0b3d91,#8b2323,#1b4d2d);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('rainbow-sunset')" title="Sunset" data-i18n-title="menu.tema.sunset" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#ff6b3d,#ff3d6b,#ffa500);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('rainbow-ocean')" title="Ocean" data-i18n-title="menu.tema.ocean" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#0066ff,#0099cc,#00d4ff);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
+      <button onclick="setDesignTheme('rainbow-forest')" title="Forest" data-i18n-title="menu.tema.forest" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(90deg,#2a7f3f,#1b8a3d,#1a9a5a);border:2px solid var(--border);cursor:pointer;padding:0;"></button>
     </div>
   </div>
 </div>
@@ -4993,6 +4993,28 @@ const UI_STRINGS = {
     'nav.licoes': 'Lições',
     'nav.progresso': 'Progresso',
     'nav.conta': 'Conta',
+    'menu.suaConta': 'Sua conta',
+    'menu.abrirConta': 'Abrir minha conta',
+    'menu.maisOpcoes': 'Mais opções',
+    'menu.voltarHoje': 'Voltar para hoje',
+    'menu.tamanhoFonte': 'Tamanho da fonte',
+    'menu.alternarTamanho': 'Alternar tamanho',
+    'menu.idioma': 'Idioma',
+    'menu.design': 'Tema',
+    'menu.tema.claro': 'Claro',
+    'menu.tema.escuro': 'Escuro',
+    'menu.tema.leitura': 'Leitura',
+    'menu.tema.neutro': 'Neutro',
+    'menu.tema.monoEscuro': 'Mono Escuro',
+    'menu.tema.monoClaro': 'Mono Claro',
+    'menu.tema.cinzaClaro': 'Cinza Claro',
+    'menu.tema.cinzaEscuro': 'Cinza Escuro',
+    'menu.tema.vibrante': 'Vibrante',
+    'menu.tema.sutil': 'Sutil',
+    'menu.tema.premium': 'Premium',
+    'menu.tema.sunset': 'Sunset',
+    'menu.tema.ocean': 'Ocean',
+    'menu.tema.forest': 'Forest',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5000,6 +5022,28 @@ const UI_STRINGS = {
     'nav.licoes': 'Lessons',
     'nav.progresso': 'Progress',
     'nav.conta': 'Account',
+    'menu.suaConta': 'Your account',
+    'menu.abrirConta': 'Open my account',
+    'menu.maisOpcoes': 'More options',
+    'menu.voltarHoje': 'Back to today',
+    'menu.tamanhoFonte': 'Font size',
+    'menu.alternarTamanho': 'Cycle size',
+    'menu.idioma': 'Language',
+    'menu.design': 'Theme',
+    'menu.tema.claro': 'Light',
+    'menu.tema.escuro': 'Dark',
+    'menu.tema.leitura': 'Reading',
+    'menu.tema.neutro': 'Neutral',
+    'menu.tema.monoEscuro': 'Mono Dark',
+    'menu.tema.monoClaro': 'Mono Light',
+    'menu.tema.cinzaClaro': 'Light Gray',
+    'menu.tema.cinzaEscuro': 'Dark Gray',
+    'menu.tema.vibrante': 'Vibrant',
+    'menu.tema.sutil': 'Subtle',
+    'menu.tema.premium': 'Premium',
+    'menu.tema.sunset': 'Sunset',
+    'menu.tema.ocean': 'Ocean',
+    'menu.tema.forest': 'Forest',
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5007,6 +5051,28 @@ const UI_STRINGS = {
     'nav.licoes': 'Lecciones',
     'nav.progresso': 'Progreso',
     'nav.conta': 'Cuenta',
+    'menu.suaConta': 'Tu cuenta',
+    'menu.abrirConta': 'Abrir mi cuenta',
+    'menu.maisOpcoes': 'Más opciones',
+    'menu.voltarHoje': 'Volver a hoy',
+    'menu.tamanhoFonte': 'Tamaño de fuente',
+    'menu.alternarTamanho': 'Cambiar tamaño',
+    'menu.idioma': 'Idioma',
+    'menu.design': 'Tema',
+    'menu.tema.claro': 'Claro',
+    'menu.tema.escuro': 'Oscuro',
+    'menu.tema.leitura': 'Lectura',
+    'menu.tema.neutro': 'Neutro',
+    'menu.tema.monoEscuro': 'Mono Oscuro',
+    'menu.tema.monoClaro': 'Mono Claro',
+    'menu.tema.cinzaClaro': 'Gris Claro',
+    'menu.tema.cinzaEscuro': 'Gris Oscuro',
+    'menu.tema.vibrante': 'Vibrante',
+    'menu.tema.sutil': 'Sutil',
+    'menu.tema.premium': 'Premium',
+    'menu.tema.sunset': 'Sunset',
+    'menu.tema.ocean': 'Ocean',
+    'menu.tema.forest': 'Forest',
   },
 };
 
@@ -5021,6 +5087,9 @@ function t(chave){
 function aplicarTraducaoEstatica(){
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    el.title = t(el.dataset.i18nTitle);
   });
 }
 
