@@ -2917,7 +2917,7 @@ async function renderConta(){
     </div>
 
     <div class="conta-card">
-      <div class="conta-section-title">Design</div>
+      <div class="conta-section-title">${t('menu.design')}</div>
       <div class="theme-selector">
         <select id="theme-select" onchange="setDesignTheme(this.value)">
           <option value="light">Padrão</option>
@@ -2936,13 +2936,13 @@ async function renderConta(){
     </div>
 
     <div class="conta-card">
-      <div class="conta-section-title">Meus versículos favoritos ${favoritesCache.length?`(${favoritesCache.length})`:''}</div>
+      <div class="conta-section-title">${t('conta.meusFavoritos')} ${favoritesCache.length?`(${favoritesCache.length})`:''}</div>
       ${favoritesCache.length===0
-        ? `<p class="conta-note">Nenhum favorito ainda. Toque na estrela ⭐ ao ler um versículo ou capítulo, na Bíblia ou no Plano Bíblico, pra salvar aqui.</p>`
+        ? `<p class="conta-note">${t('conta.semFavoritos')}</p>`
         : `<div class="fav-list">${favoritesCache.map(f=>`
             <div class="fav-item" onclick="openFavorite('${f.book}',${f.chapter},${f.v1},${f.v2})">
               <span class="fav-item-label">${f.label}</span>
-              <span class="fav-item-date">${new Date(f.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})}</span>
+              <span class="fav-item-date">${new Date(f.date+'T00:00:00').toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR',{day:'2-digit',month:'short'})}</span>
             </div>`).join('')}</div>`}
     </div>
 
@@ -2958,7 +2958,7 @@ async function renderConta(){
         <input type="file" id="conta-restore-input" accept=".json" style="display:none" onchange="importBackup(this.files[0])">
       </div>
       <div class="conta-row">
-        <div><div class="conta-row-title">${t('conta.zerarTudo')}</div><div class="conta-row-sub">Apaga lições, plano bíblico e metas — sem volta</div></div>
+        <div><div class="conta-row-title">${t('conta.zerarTudo')}</div><div class="conta-row-sub">${t('conta.zerarTudoNota')}</div></div>
         <button class="conta-btn conta-btn-danger" onclick="confirmResetAll()">${t('conta.zerar')}</button>
       </div>
     </div>
@@ -2967,7 +2967,7 @@ async function renderConta(){
       <div class="conta-section-title">${t('conta.feedback')}</div>
       <div class="conta-row">
         <div><div class="conta-row-title">${t('conta.reportarBug')}</div><div class="conta-row-sub">${t('conta.reportarBugNota')}</div></div>
-        <a href="https://forms.gle/kWq4KMfBPg7D7h1M6" target="_blank" rel="noopener" class="conta-btn">Abrir</a>
+        <a href="https://forms.gle/kWq4KMfBPg7D7h1M6" target="_blank" rel="noopener" class="conta-btn">${t('conta.abrirLink')}</a>
       </div>
     </div>
 
@@ -2982,7 +2982,7 @@ async function renderConta(){
           ${t('conta.sairConta')}
         </button>
         <button id="sync-btn" onclick="manualSync()" style="background:var(--violet); color:var(--on-violet); border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:none;">
-          🔄 Sincronizar agora
+          ${t('conta.sincronizarAgora')}
         </button>
         <p id="user-info" class="conta-note" style="margin:0; display:none;"></p>
       </div>
@@ -2994,10 +2994,10 @@ async function renderConta(){
         <div>
           <div class="conta-row-title">${t('conta.comentariosToggle')}</div>
           <div class="conta-row-sub">${comentariosLigados()
-            ? 'Ligados — todo mundo que entrar pode comentar'
-            : 'Desligados — o botão nem aparece para ninguém'}</div>
+            ? t('conta.comentariosLigados')
+            : t('conta.comentariosDesligados')}</div>
         </div>
-        <button class="conta-btn" onclick="alternarComentarios()">${comentariosLigados() ? 'Desligar' : 'Ligar'}</button>
+        <button class="conta-btn" onclick="alternarComentarios()">${comentariosLigados() ? t('conta.desligar') : t('conta.ligar')}</button>
       </div>
       <p class="conta-note" style="margin:10px 0 0;">${t('conta.administracaoNota')}</p>
     </div>` : ''}
@@ -3006,7 +3006,7 @@ async function renderConta(){
       <div class="conta-section-title">${t('conta.ranking')}</div>
       ${currentUser ? `
       <div class="conta-row">
-        <div><div class="conta-row-title">${t('conta.participarRanking')}</div><div class="conta-row-sub">Mostra seu nome e desempenho pros outros participantes, nas abas Esta semana e Trimestre em Progresso</div></div>
+        <div><div class="conta-row-title">${t('conta.participarRanking')}</div><div class="conta-row-sub">${t('conta.participarRankingNota').replace('${semana}', t('stats.semana')).replace('${trimestre}', t('stats.trimestre')).replace('${progresso}', t('nav.progresso'))}</div></div>
         <input type="checkbox" id="ranking-opt-in-check" onchange="onRankingOptInChange(this.checked)" style="width:22px;height:22px;flex-shrink:0;">
       </div>
       ` : `<p class="conta-note">${t('conta.entreParaRanking')}</p>`}
@@ -3014,7 +3014,7 @@ async function renderConta(){
 
     <div class="conta-card">
       <div class="conta-section-title">${t('conta.sobre')}</div>
-      <p class="conta-note">ComTexto Bíblico — Resgate<br>3º Trimestre 2026</p>
+      <p class="conta-note">ComTexto Bíblico — ${t('conta.sobreTema')}<br>${t('conta.sobreTrimestre')}</p>
     </div>
 
   </div>`;
@@ -3916,7 +3916,7 @@ function renderStats(){
       })()}</b> min essa semana</span>
     </div>
 
-  <div class="stats-section-label">Ranking</div>
+  <div class="stats-section-label">${t('conta.ranking')}</div>
   <div class="stats-card" id="ranking-section">
     <div class="ranking-tabs">
       <button class="ranking-tab active" data-tab="semana" onclick="switchRankingTab(this)">${t('stats.semana')}</button>
@@ -3967,7 +3967,7 @@ async function carregarRankingTab(tipo){
   if(!panel) return;
 
   if(!currentUser){
-    panel.innerHTML = `<p class="conta-note">Entre com sua conta Google na aba Conta pra ver e participar do ranking.</p>`;
+    panel.innerHTML = `<p class="conta-note">${t('ranking.naoLogado').replace('${conta}', t('nav.conta'))}</p>`;
     panel.dataset.loaded = '1';
     return;
   }
@@ -4038,7 +4038,7 @@ async function carregarRankingTab(tipo){
     panel.dataset.loaded = '1';
   } catch(e){
     console.warn('⚠️ Não carregou o ranking:', e.message);
-    panel.innerHTML = `<p class="conta-note">Não foi possível carregar o ranking agora.</p>`;
+    panel.innerHTML = `<p class="conta-note">${t('ranking.carregarFalhou')}</p>`;
   }
 }
 
@@ -5177,6 +5177,20 @@ const UI_STRINGS = {
     'ranking.ninguemTrimestre': 'Ninguém no ranking esse trimestre ainda. Seja o primeiro!',
     'ranking.alguem': 'Alguém',
     'ranking.pts': 'pts',
+    'conta.meusFavoritos': 'Meus versículos favoritos',
+    'conta.semFavoritos': 'Nenhum favorito ainda. Toque na estrela ⭐ ao ler um versículo ou capítulo, na Bíblia ou no Plano Bíblico, pra salvar aqui.',
+    'conta.zerarTudoNota': 'Apaga lições, plano bíblico e metas — sem volta',
+    'conta.abrirLink': 'Abrir',
+    'conta.comentariosLigados': 'Ligados — todo mundo que entrar pode comentar',
+    'conta.comentariosDesligados': 'Desligados — o botão nem aparece para ninguém',
+    'conta.ligar': 'Ligar',
+    'conta.desligar': 'Desligar',
+    'conta.participarRankingNota': 'Mostra seu nome e desempenho pros outros participantes, nas abas ${semana} e ${trimestre} em ${progresso}',
+    'conta.sobreTema': 'Resgate',
+    'conta.sobreTrimestre': '3º Trimestre 2026',
+    'conta.sincronizarAgora': '🔄 Sincronizar agora',
+    'ranking.naoLogado': 'Entre com sua conta Google na aba ${conta} pra ver e participar do ranking.',
+    'ranking.carregarFalhou': 'Não foi possível carregar o ranking agora.',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5305,6 +5319,20 @@ const UI_STRINGS = {
     'ranking.ninguemTrimestre': "No one's on the leaderboard this quarter yet. Be the first!",
     'ranking.alguem': 'Someone',
     'ranking.pts': 'pts',
+    'conta.meusFavoritos': 'My favorite verses',
+    'conta.semFavoritos': 'No favorites yet. Tap the star ⭐ while reading a verse or chapter, in the Bible or in the Bible Plan, to save it here.',
+    'conta.zerarTudoNota': "Deletes lessons, Bible plan, and goals — can't be undone",
+    'conta.abrirLink': 'Open',
+    'conta.comentariosLigados': 'On — anyone who signs in can comment',
+    'conta.comentariosDesligados': "Off — the button doesn't even show up for anyone",
+    'conta.ligar': 'Turn on',
+    'conta.desligar': 'Turn off',
+    'conta.participarRankingNota': 'Shows your name and performance to other participants, in the ${semana} and ${trimestre} tabs under ${progresso}',
+    'conta.sobreTema': 'Rescue',
+    'conta.sobreTrimestre': 'Q3 2026',
+    'conta.sincronizarAgora': '🔄 Sync now',
+    'ranking.naoLogado': 'Sign in with your Google account in the ${conta} tab to see and join the leaderboard.',
+    'ranking.carregarFalhou': "Couldn't load the leaderboard right now.",
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5433,6 +5461,20 @@ const UI_STRINGS = {
     'ranking.ninguemTrimestre': 'Todavía nadie está en el ranking este trimestre. ¡Sé el primero!',
     'ranking.alguem': 'Alguien',
     'ranking.pts': 'pts',
+    'conta.meusFavoritos': 'Mis versículos favoritos',
+    'conta.semFavoritos': 'Todavía no hay favoritos. Toca la estrella ⭐ al leer un versículo o capítulo, en la Biblia o en el Plan Bíblico, para guardarlo aquí.',
+    'conta.zerarTudoNota': 'Borra lecciones, plan bíblico y metas — no se puede deshacer',
+    'conta.abrirLink': 'Abrir',
+    'conta.comentariosLigados': 'Activados — cualquiera que inicie sesión puede comentar',
+    'conta.comentariosDesligados': 'Desactivados — el botón ni siquiera aparece para nadie',
+    'conta.ligar': 'Activar',
+    'conta.desligar': 'Desactivar',
+    'conta.participarRankingNota': 'Muestra tu nombre y desempeño a otros participantes, en las pestañas ${semana} y ${trimestre} dentro de ${progresso}',
+    'conta.sobreTema': 'Rescate',
+    'conta.sobreTrimestre': '3er Trimestre 2026',
+    'conta.sincronizarAgora': '🔄 Sincronizar ahora',
+    'ranking.naoLogado': 'Inicia sesión con tu cuenta de Google en la pestaña ${conta} para ver y participar en el ranking.',
+    'ranking.carregarFalhou': 'No se pudo cargar el ranking ahora.',
   },
 };
 
