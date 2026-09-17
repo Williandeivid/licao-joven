@@ -5059,12 +5059,22 @@ function openBibleReference(ref){
   // Parse "João 16", "Sl 23:4", "2 Timóteo 3:1-5" etc. Testa as chaves mais
   // longas primeiro pra cobrir nomes compostos ("2 Timóteo") antes de abreviações curtas.
   ref = ref.trim();
-  const dicionarioLivros = dicionarioDeLivros(idiomaConteudoAtual);
-  const bookKeys = Object.keys(dicionarioLivros).sort((a,b)=>b.length-a.length);
-  const matchedKey = bookKeys.find(k => ref === k || ref.startsWith(k + ' ') || ref.startsWith(k + ':'));
+
+  // Tenta o dicionario do idioma corrente primeiro; cai pro portugues se
+  // nao achar - cobertura de traducao e por campo (aplicarTraducaoConteudo),
+  // entao "bibleref" pode continuar em portugues mesmo com idioma != pt.
+  const dicionarios = idiomaConteudoAtual === 'pt'
+    ? [BOOK_NAME_TO_ID]
+    : [dicionarioDeLivros(idiomaConteudoAtual), BOOK_NAME_TO_ID];
+
+  let bookId = null, matchedKey = null;
+  for(const dicionarioLivros of dicionarios){
+    const bookKeys = Object.keys(dicionarioLivros).sort((a,b)=>b.length-a.length);
+    const achado = bookKeys.find(k => ref === k || ref.startsWith(k + ' ') || ref.startsWith(k + ':'));
+    if(achado){ matchedKey = achado; bookId = dicionarioLivros[achado]; break; }
+  }
   if(!matchedKey) return;
 
-  const bookId = dicionarioLivros[matchedKey];
   const rest = ref.slice(matchedKey.length).replace(/^[\s:]+/, '');
   const chapter = parseInt(rest);
   const book = BIBLE_BOOKS.find(b => b.id === bookId);
