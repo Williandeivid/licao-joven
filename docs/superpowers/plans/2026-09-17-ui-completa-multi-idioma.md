@@ -1698,3 +1698,707 @@ Abra a aba Conta (`renderConta()`) com `idiomaConteudoAtual='es'` e confira visu
 git add index.html
 git commit -m "feat: traduz sobras da aba Conta/Estatísticas (achado do review da Task 8)"
 ```
+
+---
+
+## Task 12: Capa da aba Lições + resto da aba Estatísticas
+
+> Task acrescentada pelo controller depois da revisão final da branch (11
+> tasks originais) — a revisão achou duas superfícies inteiras de UI que
+> nenhuma task tinha auditado: a tela de capa dos trimestres (primeira
+> tela da aba Lições) e boa parte do widget de calendário + gráficos da
+> aba Estatísticas. Ruling: a meta do plano ("nenhum texto fixo em
+> português") carrega esse trabalho — vira tasks novas em vez de débito
+> permanente.
+
+**Files:**
+- Modify: `index.html` (`renderQuarterCover`, região ~3163-3193)
+- Modify: `index.html` (`renderStats` e helpers de calendário/gráfico que ela chama: `cellHtml`/`monthLabel` em torno de ~3464-3530, `renderTimeChart` ~3589-3660, `renderBibleDaysVsLessonsChart` ~3670-3700, `renderScoreChart` ~3700+, bloco "HOJE"/streak ~3849-3862, "nota média" ~3900)
+
+**Interfaces:**
+- Consumes: `t()`, `nav.licoes`/`stats.semana`/`stats.trimestre` (já existentes — reaproveitar, não duplicar).
+- Produces: chaves `list.*`/`stats.*` listadas abaixo, mais um const novo `DIAS_INICIAIS_POR_IDIOMA` (array, não cabe em `UI_STRINGS` que só guarda string).
+
+- [ ] **Step 1: Adicionar as chaves novas**
+
+```js
+// pt
+'list.escolhaTrimestre': 'Escolha o trimestre de estudo.',
+'list.semanas': 'semanas',
+'list.capaDe': 'Capa',
+'stats.sequenciaPrefix': 'Sequência de',
+'stats.dia': 'dia',
+'stats.dias': 'dias',
+'stats.streakLabel': '${n1} ${dia1} seguido${s1} com pelo menos 1 atividade (lição ou plano bíblico).<br>Total de ${n2} ${dia2} concluído${s2} no trimestre.',
+'stats.verSemana': 'Ver semana',
+'stats.verMes': 'Ver mês',
+'stats.legendaLicao': 'Lição',
+'stats.legendaPlanoBiblico': 'Plano bíblico',
+'stats.legendaOsDois': 'Os dois',
+'stats.metaDoMes': 'Meta do mês',
+'stats.metaDaSemana': 'Meta da semana',
+'stats.periodo30': '30 dias',
+'stats.periodo90': '90 dias',
+'stats.periodo365': '1 ano',
+'stats.periodoSempre': 'Sempre',
+'stats.semTempo': 'Ainda sem tempo registrado neste período. Complete um quiz ou edite um dia no calendário.',
+'stats.legendaLicaoMin': 'Lição (min/dia)',
+'stats.legendaBibliaMin': 'Plano bíblico (min/dia)',
+'stats.semQuizzes': 'Ainda sem quizzes respondidos. Responda o quiz de um dia pra ver sua evolução aqui.',
+'stats.diaCompleto': 'Dia completo! 🔥',
+'stats.diaCompletoSub': 'Lição + Plano Bíblico feitos hoje.',
+'stats.notaMedia': 'nota média',
+```
+
+```js
+// en
+'list.escolhaTrimestre': 'Choose the quarter to study.',
+'list.semanas': 'weeks',
+'list.capaDe': 'Cover',
+'stats.sequenciaPrefix': 'Streak of',
+'stats.dia': 'day',
+'stats.dias': 'days',
+'stats.streakLabel': '${n1} ${dia1} in a row with at least 1 activity (lesson or Bible plan).<br>Total of ${n2} ${dia2} completed this quarter.',
+'stats.verSemana': 'View week',
+'stats.verMes': 'View month',
+'stats.legendaLicao': 'Lesson',
+'stats.legendaPlanoBiblico': 'Bible plan',
+'stats.legendaOsDois': 'Both',
+'stats.metaDoMes': 'Month goal',
+'stats.metaDaSemana': 'Week goal',
+'stats.periodo30': '30 days',
+'stats.periodo90': '90 days',
+'stats.periodo365': '1 year',
+'stats.periodoSempre': 'Always',
+'stats.semTempo': 'No time logged for this period yet. Complete a quiz or edit a day on the calendar.',
+'stats.legendaLicaoMin': 'Lesson (min/day)',
+'stats.legendaBibliaMin': 'Bible plan (min/day)',
+'stats.semQuizzes': 'No quizzes answered yet. Answer a day\'s quiz to see your progress here.',
+'stats.diaCompleto': 'Complete day! 🔥',
+'stats.diaCompletoSub': 'Lesson + Bible Plan done today.',
+'stats.notaMedia': 'average score',
+```
+
+```js
+// es
+'list.escolhaTrimestre': 'Elige el trimestre de estudio.',
+'list.semanas': 'semanas',
+'list.capaDe': 'Portada',
+'stats.sequenciaPrefix': 'Racha de',
+'stats.dia': 'día',
+'stats.dias': 'días',
+'stats.streakLabel': '${n1} ${dia1} seguido${s1} con al menos 1 actividad (lección o plan bíblico).<br>Total de ${n2} ${dia2} completado${s2} en el trimestre.',
+'stats.verSemana': 'Ver semana',
+'stats.verMes': 'Ver mes',
+'stats.legendaLicao': 'Lección',
+'stats.legendaPlanoBiblico': 'Plan bíblico',
+'stats.legendaOsDois': 'Los dos',
+'stats.metaDoMes': 'Meta del mes',
+'stats.metaDaSemana': 'Meta de la semana',
+'stats.periodo30': '30 días',
+'stats.periodo90': '90 días',
+'stats.periodo365': '1 año',
+'stats.periodoSempre': 'Siempre',
+'stats.semTempo': 'Todavía no hay tiempo registrado en este período. Completa un quiz o edita un día en el calendario.',
+'stats.legendaLicaoMin': 'Lección (min/día)',
+'stats.legendaBibliaMin': 'Plan bíblico (min/día)',
+'stats.semQuizzes': 'Todavía no hay quizzes respondidos. Responde el quiz de un día para ver tu evolución aquí.',
+'stats.diaCompleto': '¡Día completo! 🔥',
+'stats.diaCompletoSub': 'Lección + Plan Bíblico hechos hoy.',
+'stats.notaMedia': 'nota promedio',
+```
+
+`stats.streakLabel` usa `${n1}`/`${dia1}`/`${s1}`/`${n2}`/`${dia2}`/`${s2}` como placeholders literais — resolvidos assim no call site (note o `s1`/`s2` calculados igual ao código já existente, `dailyStreakForCalendar===1?'':'s'`, e a **chave de dia no singular/plural resolvida separadamente**, já que "dia"/"día" muda igual em pt/es mas "day" não pluraliza com "s" sozinho tampouco muda igual — na prática os 3 idiomas seguem o mesmo padrão "raiz + 's' se plural", então é seguro usar a MESMA lógica de sufixo `s1`/`s2` nos 3):
+
+```js
+const s1 = dailyStreakForCalendar===1 ? '' : 's';
+const s2 = totalStudied===1 ? '' : 's';
+const streakHtml = t('stats.streakLabel')
+  .replace('${n1}', dailyStreakForCalendar)
+  .replace('${dia1}', t('stats.dia') + s1)
+  .replace('${s1}', '') // suffix ja embutido em dia1 acima, deixa vazio
+  .replace('${n2}', totalStudied)
+  .replace('${dia2}', t('stats.dia') + s2)
+  .replace('${s2}', '');
+```
+
+(Ajuste o template das 3 chaves removendo os `${s1}`/`${s2}` soltos já que o sufixo entra colado em `${dia1}`/`${dia2}` — deixe só `${n1} ${dia1} seguido${s1}...` **sem** o `${s1}` residual, ou seja: escreva o template já esperando que `${dia1}` venha com "dia"/"dias" completo. Ajuste o texto das 3 chaves acima pra bater com essa resolução final antes de aplicar — teste o resultado renderizado pros 3 idiomas no Step 3 e ajuste a pontuação se ficar estranho.)
+
+- [ ] **Step 2: Aplicar em `renderQuarterCover`**
+
+| Texto atual (pt) | Chave/ação |
+|---|---|
+| `<h1>Lições</h1>` | `<h1>${t('nav.licoes')}</h1>` (reaproveita, não cria chave nova) |
+| `<p>Escolha o trimestre de estudo.</p>` | `list.escolhaTrimestre` |
+| `<span>semanas</span>` | `list.semanas` |
+| `alt="Capa ${q.title}"` | `alt="${t('list.capaDe')} ${q.title}"` |
+
+- [ ] **Step 3: Aplicar em `renderStats` e helpers de gráfico/calendário**
+
+| Texto atual (pt) | Chave |
+|---|---|
+| `Sequência de <b>${n}</b> dia${s}` (streak) | ver Step 1 acima (`stats.streakLabel`) |
+| `${calendarExpanded ? monthLabel : 'Esta semana'}` | `${calendarExpanded ? monthLabel : t('stats.semana')}` — **reaproveita `stats.semana`, já existente desde a Task 7** (a revisão final achou esse "Esta semana" hardcoded exatamente ao lado de uma chave pronta não usada) |
+| `title="${calendarExpanded?'Ver semana':'Ver mês'}"` | `title="${calendarExpanded?t('stats.verSemana'):t('stats.verMes')}"` |
+| `['D','S','T','Q','Q','S','S']` (iniciais de dia da semana) | ver bloco de código abaixo — substitui pelo array certo por idioma |
+| `<span><i class="lg lg-lesson"></i>Lição</span><span><i class="lg lg-bible"></i>Plano bíblico</span><span><i class="lg lg-both"></i>Os dois</span>` | `stats.legendaLicao`/`stats.legendaPlanoBiblico`/`stats.legendaOsDois` |
+| `Meta ${calendarExpanded?'do mês':'da semana'}: <b>${achieved}/${goalTotal}</b> dias` | `${calendarExpanded?t('stats.metaDoMes'):t('stats.metaDaSemana')}: <b>${achieved}/${goalTotal}</b> ${t('stats.dias')}` |
+| `<button ...>30 dias</button>`/`90 dias`/`1 ano`/`Sempre` (toggle de período) | `stats.periodo30`/`stats.periodo90`/`stats.periodo365`/`stats.periodoSempre` |
+| `'<p class="stats-empty">Ainda sem tempo registrado neste período. Complete um quiz ou edite um dia no calendário.</p>'` | `stats.semTempo` |
+| `<span>...Lição (min/dia)</span><span>...Plano bíblico (min/dia)</span>` | `stats.legendaLicaoMin`/`stats.legendaBibliaMin` |
+| `'<p class="stats-empty">Ainda sem quizzes respondidos. Responda o quiz de um dia pra ver sua evolução aqui.</p>'` | `stats.semQuizzes` |
+| `<div class="cb-title">Dia completo! 🔥</div><div class="cb-sub">Lição + Plano Bíblico feitos hoje.</div>` | `stats.diaCompleto`/`stats.diaCompletoSub` |
+| `nota média` (texto ao lado da nota média da semana) | `stats.notaMedia` |
+
+Pra `['D','S','T','Q','Q','S','S']`, localize a declaração literal do array (dentro de `renderStats`, no `.map(d=>...)` das iniciais do calendário) e substitua por um const novo + leitura pelo idioma atual:
+
+```js
+// Adicione perto de LOCALE_POR_IDIOMA (Task 6) ou logo antes de renderStats:
+const DIAS_INICIAIS_POR_IDIOMA = {
+  pt: ['D','S','T','Q','Q','S','S'],
+  en: ['S','M','T','W','T','F','S'],
+  es: ['D','L','M','M','J','V','S'],
+};
+```
+```js
+// troca:
+['D','S','T','Q','Q','S','S'].map(d=>`<div class="cal-dow">${d}</div>`).join('')
+// por:
+(DIAS_INICIAIS_POR_IDIOMA[idiomaConteudoAtual] || DIAS_INICIAIS_POR_IDIOMA.pt).map(d=>`<div class="cal-dow">${d}</div>`).join('')
+```
+
+- [ ] **Step 4: Testar**
+
+Abra a aba Lições (`renderQuarterCover()`) e a aba Estatísticas (`renderStats()`) com `idiomaConteudoAtual='en'`, confira visualmente (screenshot) os pontos acima. Confirme especialmente que a linha `${calendarExpanded ? monthLabel : t('stats.semana')}` mostra "This week" em inglês (era o "Esta semana" hardcoded que a revisão final achou).
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: traduz capa da aba Lições e resto da aba Estatísticas"
+```
+
+---
+
+## Task 13: Feedback do quiz + erros/carregamento da Bíblia + sobras de Comentários
+
+> Task acrescentada pelo controller depois da revisão final (mesma
+> origem da Task 12 — ver nota lá).
+
+**Files:**
+- Modify: `index.html` (`renderQuizFeedback`, região ~6254-6267)
+- Modify: `index.html` (`toggleVerseLive`/`switchVerseVersion`/`renderVerseVersion` ~2370-2412; `openBibleChapter` ~5944-5990; leitor de capítulo ~6008-6016; `title="Remover marcação"` ~3316)
+- Modify: `index.html` (modal estático `#version-modal`, HTML fora de `<script>`, ~7896-7900)
+- Modify: `index.html` (`tempoRelativo`/`desenharComentarios`/`carregarComentarios`, região ~6773-6850)
+
+**Interfaces:**
+- Consumes: `t()`, `common.carregando` (Task 7, se aplicável).
+- Produces: chaves `lesson.*`/`bible.*`/`comments.*` listadas abaixo.
+
+- [ ] **Step 1: Adicionar as chaves novas**
+
+```js
+// pt
+'lesson.correto': 'Correto!',
+'lesson.incorreto': 'Incorreto',
+'lesson.mensagemCorreta': 'Excelente! Você dominou este conceito.',
+'lesson.mensagemIncorreta': 'Não desista! Esta questão será revisada em breve.',
+'lesson.explicacao': '📖 Explicação:',
+'lesson.proximaRevisao1Dia': '⏰ Próxima revisão: em 1 dia',
+'lesson.proximaRevisaoDias': '📅 Próxima revisão: em ${n} dias',
+'bible.buscandoTexto': 'Buscando o texto...',
+'bible.naoConseguiBuscarAqui': 'Não consegui buscar aqui dentro agora.',
+'bible.versiculoNaoEncontrado': 'Versículo não encontrado neste capítulo.',
+'bible.carregandoPrefixo': 'Carregando',
+'bible.naoConseguiBuscarCapitulo': 'Não consegui buscar este capítulo agora (sem conexão ou bloqueio de rede).',
+'bible.tentarDeNovo': 'Tentar de novo',
+'bible.removerMarcacao': 'Remover marcação',
+'bible.qualVersao': 'Qual versão?',
+'bible.escolhaTraducao': 'Escolha a tradução que deseja ler',
+'comments.agora': 'agora',
+'comments.haMin': 'há ${n} min',
+'comments.haH': 'há ${n} h',
+'comments.ontem': 'ontem',
+'comments.haDias': 'há ${n} dias',
+'comments.apagar': 'Apagar',
+'comments.apagarAdmin': 'Apagar (admin)',
+'comments.alguem': 'Alguém',
+'comments.carregarFalhou': 'Não foi possível carregar os comentários agora.',
+'comments.tituloBotao': 'Comentários deste dia',
+```
+
+```js
+// en
+'lesson.correto': 'Correct!',
+'lesson.incorreto': 'Incorrect',
+'lesson.mensagemCorreta': "Excellent! You've mastered this concept.",
+'lesson.mensagemIncorreta': "Don't give up! This question will be reviewed again soon.",
+'lesson.explicacao': '📖 Explanation:',
+'lesson.proximaRevisao1Dia': '⏰ Next review: in 1 day',
+'lesson.proximaRevisaoDias': '📅 Next review: in ${n} days',
+'bible.buscandoTexto': 'Fetching the text...',
+'bible.naoConseguiBuscarAqui': "Couldn't fetch this here right now.",
+'bible.versiculoNaoEncontrado': 'Verse not found in this chapter.',
+'bible.carregandoPrefixo': 'Loading',
+'bible.naoConseguiBuscarCapitulo': "Couldn't fetch this chapter right now (no connection or network block).",
+'bible.tentarDeNovo': 'Try again',
+'bible.removerMarcacao': 'Remove highlight',
+'bible.qualVersao': 'Which version?',
+'bible.escolhaTraducao': 'Choose the translation you want to read',
+'comments.agora': 'just now',
+'comments.haMin': '${n} min ago',
+'comments.haH': '${n} h ago',
+'comments.ontem': 'yesterday',
+'comments.haDias': '${n} days ago',
+'comments.apagar': 'Delete',
+'comments.apagarAdmin': 'Delete (admin)',
+'comments.alguem': 'Someone',
+'comments.carregarFalhou': "Couldn't load the comments right now.",
+'comments.tituloBotao': 'Comments for this day',
+```
+
+```js
+// es
+'lesson.correto': '¡Correcto!',
+'lesson.incorreto': 'Incorrecto',
+'lesson.mensagemCorreta': '¡Excelente! Dominaste este concepto.',
+'lesson.mensagemIncorreta': '¡No te rindas! Esta pregunta será repasada pronto.',
+'lesson.explicacao': '📖 Explicación:',
+'lesson.proximaRevisao1Dia': '⏰ Próximo repaso: en 1 día',
+'lesson.proximaRevisaoDias': '📅 Próximo repaso: en ${n} días',
+'bible.buscandoTexto': 'Buscando el texto...',
+'bible.naoConseguiBuscarAqui': 'No pude buscarlo aquí ahora.',
+'bible.versiculoNaoEncontrado': 'Versículo no encontrado en este capítulo.',
+'bible.carregandoPrefixo': 'Cargando',
+'bible.naoConseguiBuscarCapitulo': 'No pude buscar este capítulo ahora (sin conexión o bloqueo de red).',
+'bible.tentarDeNovo': 'Intentar de nuevo',
+'bible.removerMarcacao': 'Quitar marcado',
+'bible.qualVersao': '¿Qué versión?',
+'bible.escolhaTraducao': 'Elige la traducción que quieres leer',
+'comments.agora': 'ahora',
+'comments.haMin': 'hace ${n} min',
+'comments.haH': 'hace ${n} h',
+'comments.ontem': 'ayer',
+'comments.haDias': 'hace ${n} días',
+'comments.apagar': 'Borrar',
+'comments.apagarAdmin': 'Borrar (admin)',
+'comments.alguem': 'Alguien',
+'comments.carregarFalhou': 'No se pudieron cargar los comentarios ahora.',
+'comments.tituloBotao': 'Comentarios de este día',
+```
+
+- [ ] **Step 2: Aplicar em `renderQuizFeedback`**
+
+```js
+const title = correct ? t('lesson.correto') : t('lesson.incorreto');
+const message = correct ? t('lesson.mensagemCorreta') : t('lesson.mensagemIncorreta');
+```
+E troque `<strong>📖 Explicação:</strong>` por `<strong>${t('lesson.explicacao')}</strong>`, `⏰ Próxima revisão: em 1 dia` por `t('lesson.proximaRevisao1Dia')`, e `` `📅 Próxima revisão: em ${nextReviewDays} dias` `` por `` t('lesson.proximaRevisaoDias').replace('${n}', nextReviewDays) ``.
+
+- [ ] **Step 3: Aplicar nos pontos da Bíblia**
+
+Troque cada string da tabela abaixo pela chave correspondente (`t('chave')`), localizando o texto exato em cada função:
+
+| Texto atual (pt) | Onde | Chave |
+|---|---|---|
+| `Buscando o texto...` | `toggleVerseLive`/`switchVerseVersion` (2 pontos) | `bible.buscandoTexto` |
+| `Não consegui buscar aqui dentro agora.` | `renderVerseVersion` (2 pontos) | `bible.naoConseguiBuscarAqui` |
+| `Versículo não encontrado neste capítulo.` | `renderVerseVersion` | `bible.versiculoNaoEncontrado` |
+| `` `Carregando ${bookDisplayName(...)} ${chapter}...` `` | `openBibleChapter` | `` `${t('bible.carregandoPrefixo')} ${bookDisplayName(...)} ${chapter}...` `` |
+| `Não consegui buscar este capítulo agora (sem conexão ou bloqueio de rede).` | `openBibleChapter` (2 pontos) | `bible.naoConseguiBuscarCapitulo` |
+| `Tentar de novo` | `openBibleChapter` (2 pontos) | `bible.tentarDeNovo` |
+| `title="Remover marcação"` | popup de destaque de versículo | `data-i18n-title="bible.removerMarcacao"` (mesmo padrão `title`+`data-i18n-title` já usado) |
+
+**Atenção — inconsistência que a revisão final achou:** o segundo ponto de "não consegui buscar" em `openBibleChapter` (o `catch` mais profundo, que monta um link `Abrir X num site de Bíblia →` pro `bibliaonline.com.br`) **não estava protegido** por `idioma === 'pt'`, ao contrário dos outros dois pontos equivalentes (Task 5). Corrija isso também: envolva esse link específico em `idioma === 'pt' ? ... : ''`, igual ao padrão já usado em `toggleVerseLive`/`switchVerseVersion` — em en/es esse link simplesmente não aparece (o site de destino só tem conteúdo em português mesmo).
+
+- [ ] **Step 4: Aplicar o modal estático `#version-modal`**
+
+Localize (HTML fora de `<script>`, perto do fim do arquivo):
+```html
+<h2>Qual versão?</h2>
+<p>Escolha a tradução que deseja ler</p>
+```
+Substitua por (mesmo padrão `data-i18n` da Task 1):
+```html
+<h2 data-i18n="bible.qualVersao">Qual versão?</h2>
+<p data-i18n="bible.escolhaTraducao">Escolha a tradução que deseja ler</p>
+```
+
+- [ ] **Step 5: Aplicar em Comentários**
+
+Em `tempoRelativo(iso)`, troque cada retorno de string fixa: `'agora'` → `t('comments.agora')`; `` `há ${min} min` `` → `` t('comments.haMin').replace('${n}', min) ``; `` `há ${hor} h` `` → `` t('comments.haH').replace('${n}', hor) ``; `'ontem'` → `t('comments.ontem')`; `` `há ${dia} dias` `` → `` t('comments.haDias').replace('${n}', dia) `` (o último `return` da função, formatação de data completa via `toLocaleDateString('pt-BR',...)`, **não muda** — está fora do escopo desta task, já é um caso raro de comentário com mais de 30 dias).
+
+Em `desenharComentarios`: `` `${meu ? 'Apagar' : 'Apagar (admin)'}` `` → `` `${meu ? t('comments.apagar') : t('comments.apagarAdmin')}` ``; `` c.nome || 'Alguém' `` → `` c.nome || t('comments.alguem') `` (chave PRÓPRIA, `comments.alguem` — **não reaproveita** `ranking.alguem`, são contextos semanticamente diferentes mesmo com texto igual em português).
+
+Em `carregarComentarios`: `'Não foi possível carregar os comentários agora.'` → `t('comments.carregarFalhou')`.
+
+No botão que abre o painel (HTML de `renderDayCard`, `title="Comentários deste dia"`): aplique `data-i18n-title="comments.tituloBotao"` mantendo o `title` original.
+
+- [ ] **Step 6: Testar**
+
+Chame `renderQuizFeedback(true, 'explicação de teste', 3)` com `idiomaConteudoAtual='en'` e confira o HTML resultante (`textContent`) contém "Correct!"/"Excellent!..."/"Next review: in 3 days". Chame `tempoRelativo(new Date(Date.now()-120000).toISOString())` (2 min atrás) com `idiomaConteudoAtual='es'` e confirme `"hace 2 min"`.
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: traduz feedback do quiz, erros da Bíblia e sobras de Comentários"
+```
+
+---
+
+## Task 14: Plano Bíblico (aba inteira)
+
+> Task acrescentada pelo controller depois da revisão final — a maior
+> das superfícies não cobertas: a sub-aba "Plano Bíblico" inteira
+> (seletor de plano, visão de um plano ativo, modais de configuração/
+> troca de data/informações) nunca foi tocada por nenhuma das 11 tasks
+> originais.
+
+**Files:**
+- Modify: `index.html` (`BIBLE_PLANS`, declaração ~4301-4309 — vira `BIBLE_PLANS` com só os campos não-textuais + um objeto novo `BIBLE_PLANS_I18N`)
+- Modify: `index.html` (`bibleSubtabsHTML`, `bibleCrumbHtml`, `renderPlanSelector`, `renderBiblePlan`, `showPlanConfigModal`/função equivalente de config, `showChangeDatePicker`, `infoPlanItem` — toda a região ~4483-4900, números aproximados)
+
+**Interfaces:**
+- Consumes: `t()`, `conta.abrirLink` (Task 11, reaproveitada pro botão "Abrir" dos planos).
+- Produces: `BIBLE_PLANS_I18N` (objeto `{en:{chave:{name,desc,pace}}, es:{...}}`) + helper `planField(key, campo, idioma)`; chaves `bible.*` listadas abaixo.
+
+- [ ] **Step 1: Traduzir os dados dos 7 planos**
+
+Localize `BIBLE_PLANS` (mantém os campos `sequence`/`days` como estão, só extrai `name`/`desc`/`pace` pra fora):
+
+```js
+const BIBLE_PLANS = {
+  traditional: { name:'Tradicional', desc:'Do Gênesis ao Apocalipse, na ordem clássica dos livros.', pace:'~3,3 capítulos/dia · cerca de 1 ano', sequence: buildTraditionalSeq() },
+  chronological: { name:'Cronológico', desc:'Na ordem aproximada em que os acontecimentos aconteceram — Jó logo após o início de Gênesis, os profetas ao lado dos reis da época, etc.', pace:'~3,3 capítulos/dia · cerca de 1 ano', sequence: CHRON_PLAN_DATA },
+  fast6: { name:'Acelerado', desc:'A Bíblia inteira, na ordem clássica, num ritmo mais intenso — pra quem já tem o hábito de leitura.', pace:'~6,5 capítulos/dia · cerca de 6 meses', sequence: buildTraditionalSeq() },
+  nt90: { name:'Novo Testamento', desc:'Só o Novo Testamento — ótimo pra começar mais leve ou revisar os Evangelhos e cartas.', pace:'~2,9 capítulos/dia · 90 dias', sequence: buildNTSeq() },
+  youthPlan1y: { name:'Ano Bíblico Jovem', desc:'Começa em Salmos, depois percorre a Bíblia inteira misturando poesia, história e os Evangelhos ao longo do ano — baseado no Ano Bíblico Jovem 2021.', pace:'~2,6 capítulos/dia · cerca de 1 ano', sequence: YOUTH_PLAN_DAYS.flat(), days: YOUTH_PLAN_DAYS },
+  youthPlan6m: { name:'Ano Bíblico Jovem · 6 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo dobrado — dois dias da leitura original por dia.', pace:'~5,2 capítulos/dia · cerca de 6 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 2) },
+  youthPlan3m: { name:'Ano Bíblico Jovem · 3 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo bem intenso — quatro dias da leitura original por dia.', pace:'~10,4 capítulos/dia · cerca de 3 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 4) },
+};
+```
+
+Mantenha `BIBLE_PLANS` EXATAMENTE como está (os campos `name`/`desc`/`pace` em português continuam sendo o fallback/dado-fonte, igual `LESSONS_CONTENT`/`BIBLE_BOOKS` antes deles). Adicione um objeto novo logo depois, com as traduções, e um helper:
+
+```js
+// Traducao dos campos de texto de cada plano de leitura - name/desc/pace
+// continuam em BIBLE_PLANS (fonte em portugues); aqui so os overrides
+// en/es, mesmo padrao de bookDisplayName/dayDisplayDate (fallback pro pt
+// quando a chave/idioma nao tiver override).
+const BIBLE_PLANS_I18N = {
+  en: {
+    traditional: { name:'Traditional', desc:'From Genesis to Revelation, in the classic book order.', pace:'~3.3 chapters/day · about 1 year' },
+    chronological: { name:'Chronological', desc:'In the approximate order events happened — Job right after the start of Genesis, the prophets alongside the kings of their time, etc.', pace:'~3.3 chapters/day · about 1 year' },
+    fast6: { name:'Accelerated', desc:'The whole Bible, in classic order, at a faster pace — for those who already have a reading habit.', pace:'~6.5 chapters/day · about 6 months' },
+    nt90: { name:'New Testament', desc:'Just the New Testament — great to start light or review the Gospels and letters.', pace:'~2.9 chapters/day · 90 days' },
+    youthPlan1y: { name:'Youth Bible Year', desc:'Starts in Psalms, then goes through the whole Bible mixing poetry, history, and the Gospels over the year — based on the 2021 Youth Bible Year.', pace:'~2.6 chapters/day · about 1 year' },
+    youthPlan6m: { name:'Youth Bible Year · 6 months', desc:'The same Youth Bible Year sequence, at double pace — two days of the original reading per day.', pace:'~5.2 chapters/day · about 6 months' },
+    youthPlan3m: { name:'Youth Bible Year · 3 months', desc:'The same Youth Bible Year sequence, at a very intense pace — four days of the original reading per day.', pace:'~10.4 chapters/day · about 3 months' },
+  },
+  es: {
+    traditional: { name:'Tradicional', desc:'De Génesis a Apocalipsis, en el orden clásico de los libros.', pace:'~3,3 capítulos/día · cerca de 1 año' },
+    chronological: { name:'Cronológico', desc:'En el orden aproximado en que ocurrieron los acontecimientos — Job justo después del inicio de Génesis, los profetas junto a los reyes de su época, etc.', pace:'~3,3 capítulos/día · cerca de 1 año' },
+    fast6: { name:'Acelerado', desc:'La Biblia entera, en el orden clásico, a un ritmo más intenso — para quien ya tiene el hábito de lectura.', pace:'~6,5 capítulos/día · cerca de 6 meses' },
+    nt90: { name:'Nuevo Testamento', desc:'Solo el Nuevo Testamento — ideal para empezar más liviano o repasar los Evangelios y las cartas.', pace:'~2,9 capítulos/día · 90 días' },
+    youthPlan1y: { name:'Año Bíblico Joven', desc:'Empieza en Salmos, y luego recorre toda la Biblia mezclando poesía, historia y los Evangelios a lo largo del año — basado en el Año Bíblico Joven 2021.', pace:'~2,6 capítulos/día · cerca de 1 año' },
+    youthPlan6m: { name:'Año Bíblico Joven · 6 meses', desc:'La misma secuencia del Año Bíblico Joven, al doble de ritmo — dos días de la lectura original por día.', pace:'~5,2 capítulos/día · cerca de 6 meses' },
+    youthPlan3m: { name:'Año Bíblico Joven · 3 meses', desc:'La misma secuencia del Año Bíblico Joven, a un ritmo muy intenso — cuatro días de la lectura original por día.', pace:'~10,4 capítulos/día · cerca de 3 meses' },
+  },
+};
+
+// Le name/desc/pace de um plano no idioma atual, caindo pro portugues
+// (BIBLE_PLANS[key] em si) quando faltar override.
+function planField(key, campo, idioma){
+  const override = BIBLE_PLANS_I18N[idioma] && BIBLE_PLANS_I18N[idioma][key];
+  return (override && override[campo]) || BIBLE_PLANS[key][campo];
+}
+```
+
+- [ ] **Step 2: Trocar toda leitura direta de `plan.name`/`plan.desc`/`plan.pace` (ou `BIBLE_PLANS[key].name` etc.) por `planField(key, 'name', idiomaConteudoAtual)` etc.**
+
+Localize CADA ocorrência de `.name`/`.desc`/`.pace` num objeto de plano (variável costuma se chamar `plan`, com a `key` do plano disponível no mesmo escopo — em `bibleCrumbHtml`, `renderPlanSelector`, `renderBiblePlan`, no header de config, etc.) e troque pelo `planField(key, 'campo', idiomaConteudoAtual)` correspondente. Como são vários pontos e a variável local muda de nome função a função, confirme o nome da chave (`key`/`currentPlanKey`/etc.) disponível em cada escopo antes de aplicar.
+
+- [ ] **Step 3: Adicionar as chaves `bible.*` de chrome fixo**
+
+```js
+// pt
+'bible.planoBiblico': 'Plano Bíblico',
+'bible.escolhaComoPercorrer': 'Escolha como você quer percorrer a Bíblia inteira.',
+'bible.recente': '★ Recente',
+'bible.desativar': 'Desativar',
+'bible.tornarOficial': 'Tornar oficial',
+'bible.capitulosNoTotal': '${a} / ${b} capítulos no total, dependendo do plano.',
+'bible.todosOsPlanos': '← Todos os planos',
+'bible.diasConcluidos': '${done} de ${total} dias concluídos',
+'bible.diasAdiantado': '${n} dia${s} adiantado',
+'bible.diasAtrasado': '${n} dia${s} atrasado',
+'bible.abrirCalendario': 'Abrir calendário',
+'bible.toqueNumeroDia': 'Toque no número do dia pra ver a leitura daquele dia. Toque na bolinha pra marcar/desmarcar cada capítulo, ou no texto pra abrir e ler.',
+'bible.compartilhar': 'Compartilhar',
+'bible.configuracoes': 'Configurações',
+'bible.informacoes': 'Informações',
+'bible.pararPlano': 'Parar Plano',
+'bible.configuracoesDoPlano': 'Configurações do Plano',
+'bible.progresso': 'Progresso',
+'bible.diaXdeY': 'Dia ${x} de ${y}',
+'bible.comecou': 'Começou',
+'bible.termina': 'Termina',
+'bible.trocarDatas': 'Trocar Datas',
+'bible.emDia': 'Em Dia',
+'bible.fechar': 'Fechar',
+'bible.trocarDataInicio': 'Trocar Data de Início',
+'bible.novaDataInicio': 'Nova data de início:',
+'bible.salvarData': 'Salvar Data',
+'bible.cancelar': 'Cancelar',
+```
+
+```js
+// en
+'bible.planoBiblico': 'Bible Plan',
+'bible.escolhaComoPercorrer': 'Choose how you want to go through the whole Bible.',
+'bible.recente': '★ Recent',
+'bible.desativar': 'Deactivate',
+'bible.tornarOficial': 'Make official',
+'bible.capitulosNoTotal': '${a} / ${b} chapters in total, depending on the plan.',
+'bible.todosOsPlanos': '← All plans',
+'bible.diasConcluidos': '${done} of ${total} days completed',
+'bible.diasAdiantado': '${n} day${s} ahead',
+'bible.diasAtrasado': '${n} day${s} behind',
+'bible.abrirCalendario': 'Open calendar',
+'bible.toqueNumeroDia': "Tap the day's number to see that day's reading. Tap the dot to mark/unmark each chapter, or the text to open and read it.",
+'bible.compartilhar': 'Share',
+'bible.configuracoes': 'Settings',
+'bible.informacoes': 'Information',
+'bible.pararPlano': 'Stop Plan',
+'bible.configuracoesDoPlano': 'Plan Settings',
+'bible.progresso': 'Progress',
+'bible.diaXdeY': 'Day ${x} of ${y}',
+'bible.comecou': 'Started',
+'bible.termina': 'Ends',
+'bible.trocarDatas': 'Change Dates',
+'bible.emDia': 'On Track',
+'bible.fechar': 'Close',
+'bible.trocarDataInicio': 'Change Start Date',
+'bible.novaDataInicio': 'New start date:',
+'bible.salvarData': 'Save Date',
+'bible.cancelar': 'Cancel',
+```
+
+```js
+// es
+'bible.planoBiblico': 'Plan Bíblico',
+'bible.escolhaComoPercorrer': 'Elige cómo quieres recorrer toda la Biblia.',
+'bible.recente': '★ Reciente',
+'bible.desativar': 'Desactivar',
+'bible.tornarOficial': 'Hacer oficial',
+'bible.capitulosNoTotal': '${a} / ${b} capítulos en total, según el plan.',
+'bible.todosOsPlanos': '← Todos los planes',
+'bible.diasConcluidos': '${done} de ${total} días completados',
+'bible.diasAdiantado': '${n} día${s} adelantado',
+'bible.diasAtrasado': '${n} día${s} atrasado',
+'bible.abrirCalendario': 'Abrir calendario',
+'bible.toqueNumeroDia': 'Toca el número del día para ver la lectura de ese día. Toca el círculo para marcar/desmarcar cada capítulo, o el texto para abrirlo y leerlo.',
+'bible.compartilhar': 'Compartir',
+'bible.configuracoes': 'Configuración',
+'bible.informacoes': 'Información',
+'bible.pararPlano': 'Detener Plan',
+'bible.configuracoesDoPlano': 'Configuración del Plan',
+'bible.progresso': 'Progreso',
+'bible.diaXdeY': 'Día ${x} de ${y}',
+'bible.comecou': 'Empezó',
+'bible.termina': 'Termina',
+'bible.trocarDatas': 'Cambiar Fechas',
+'bible.emDia': 'Al Día',
+'bible.fechar': 'Cerrar',
+'bible.trocarDataInicio': 'Cambiar Fecha de Inicio',
+'bible.novaDataInicio': 'Nueva fecha de inicio:',
+'bible.salvarData': 'Guardar Fecha',
+'bible.cancelar': 'Cancelar',
+```
+
+- [ ] **Step 4: Aplicar as chaves de chrome fixo**
+
+Para cada texto abaixo, localize o ponto exato (a maioria dentro de `bibleSubtabsHTML`, `renderPlanSelector`, `renderBiblePlan`, e as 3 funções de modal — config, troca de data, informações) e troque por `t('chave')` (ou `.replace('${x}', valor)` quando tiver placeholder), seguindo o mesmo padrão já usado em todas as tasks anteriores:
+
+| Texto atual (pt) | Chave |
+|---|---|
+| `Plano Bíblico` (subaba, header da tela, crumb) | `bible.planoBiblico` |
+| `Escolha como você quer percorrer a Bíblia inteira.` | `bible.escolhaComoPercorrer` |
+| `★ Recente` | `bible.recente` |
+| `Abrir` (botão de abrir plano) | `t('conta.abrirLink')` — **reaproveita**, não cria chave nova |
+| `Desativar` | `bible.desativar` |
+| `Tornar oficial` | `bible.tornarOficial` |
+| `` `${a} / ${b} capítulos no total, dependendo do plano.` `` | `bible.capitulosNoTotal` (com `.replace`) |
+| `← Todos os planos` | `bible.todosOsPlanos` |
+| `` `${daysDone} de ${totalDays} dias concluídos` `` | `bible.diasConcluidos` (com `.replace`) |
+| `` `${n} dia${s} adiantado` `` / `` `${n} dia${s} atrasado` `` | `bible.diasAdiantado`/`bible.diasAtrasado` (com `.replace`) |
+| `title="Abrir calendário"` | `data-i18n-title="bible.abrirCalendario"` |
+| footer `Toque no número do dia...` | `bible.toqueNumeroDia` |
+| `<span>Compartilhar</span>` | `bible.compartilhar` |
+| `<span>Configurações</span>` | `bible.configuracoes` |
+| `<span>Informações</span>` | `bible.informacoes` |
+| `<span>Parar Plano</span>` | `bible.pararPlano` |
+| `Configurações do Plano` (h2 do modal) | `bible.configuracoesDoPlano` |
+| `Progresso` (label) | `bible.progresso` |
+| `` `Dia ${scheduleIdx + 1} de ${plan.sequence.length}` `` | `bible.diaXdeY` (com `.replace`) |
+| `Começou` / `Termina` (labels) | `bible.comecou`/`bible.termina` |
+| `Trocar Datas` (botão) | `bible.trocarDatas` |
+| `statusMsg` já traduzido via `bible.diasAdiantado`/`diasAtrasado` + o caso `'Em Dia'` → `bible.emDia` | — |
+| `Fechar` (botão) | `bible.fechar` |
+| `Trocar Data de Início` (h2) | `bible.trocarDataInicio` |
+| `Nova data de início:` (label) | `bible.novaDataInicio` |
+| `Salvar Data` (botão) | `bible.salvarData` |
+| `Cancelar` (botão) | `bible.cancelar` |
+| `Informações` (h2 do modal de info) | `bible.informacoes` (reaproveita, mesmo texto já usado acima) |
+
+**Não mexa** em `dateLabel`/`toLocaleDateString('pt-BR', ...)` dos chips de dia e das datas de início/fim do plano — isso é um débito técnico já conhecido (mesma classe do `monthLabel` do calendário semanal, ver Task 15) e não faz parte desta task.
+
+- [ ] **Step 5: Testar**
+
+```js
+idiomaConteudoAtual = 'en';
+planField('traditional', 'name', 'en'); // "Traditional"
+planField('traditional', 'name', 'pt'); // "Tradicional"
+idiomaConteudoAtual = 'pt';
+```
+
+Abra a sub-aba Plano Bíblico (`goBiblePlan()`) com `idiomaConteudoAtual='es'` e confira visualmente (screenshot) o seletor de planos e, se houver um plano ativo/testável, a tela de um plano aberto. Não é preciso testar os 3 modais (config/data/info) clicando de verdade — leia o código e confirme visualmente pelo menos o seletor e a tela principal do plano.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: traduz a aba Plano Bíblico inteira"
+```
+
+---
+
+## Task 15: Sobras pequenas (saudação, editor de dia, tela de lição, consistência de locale)
+
+> Task acrescentada pelo controller depois da revisão final — itens
+> pequenos e espalhados que sobraram, agrupados numa única task porque
+> nenhum sozinho justifica uma task própria.
+
+**Files:**
+- Modify: `index.html` (`saudacaoPorHorario`, ~7265-7269)
+- Modify: `index.html` (linha vizinha ao `conta.sobre` na aba Conta, ~7365)
+- Modify: `index.html` (`openDayEditor`, ~4070-4085 — o editor de dia tinha ficado deliberadamente fora de escopo até agora, ver Task 7; agora completa)
+- Modify: `index.html` (sobras da tela de lição: `generateRadialMindMap`/mapa mental ~1856, tirinha ~1895, texto-base da semana ~1899, mensagem de calendário vazio ~2308, "Versão da Lição" ~2634 e ~8204, fallback de mindmap ~6266)
+- Modify: `index.html` (consistência de locale: `monthLabel` em ~2261/~3464 e datas do Plano Bíblico já sinalizadas na Task 14, `localeCompare` do ranking em ~4010)
+
+**Interfaces:**
+- Consumes: `t()`, `LOCALE_POR_IDIOMA` (Task 6).
+- Produces: chaves `common.*`/`lesson.*`/`bible.*` listadas abaixo.
+
+- [ ] **Step 1: Adicionar as chaves novas**
+
+```js
+// pt
+'common.bomDia': 'Bom dia',
+'common.boaTarde': 'Boa tarde',
+'common.boaNoite': 'Boa noite',
+'conta.sincronizaEntreDispositivos': ' — seu progresso sincroniza entre dispositivos.',
+'lesson.acertosDe10': 'Acertos (de 10)',
+'lesson.tempoMinutos': 'Tempo (minutos)',
+'lesson.estudeiSemQuiz': 'Estudei esse dia (sem quiz)',
+'lesson.nenhumaLicaoPrevista': 'Nenhuma lição prevista para este dia.',
+'lesson.mapaMentalSemana': 'Mapa mental da semana',
+'lesson.tirinhaOriginal': 'Tirinha original · ComTexto Bíblico, Lição ${n}',
+'lesson.textoBaseSemana': 'Texto-base da semana:',
+'lesson.semConteudoData': 'Sem conteúdo disponível para essa data.',
+'lesson.licaoNaoMontada': 'Essa lição ainda não foi montada.',
+'lesson.versaoDaLicao': 'Versão da Lição',
+'lesson.mindmapLicaoFallback': 'Lição',
+```
+
+```js
+// en
+'common.bomDia': 'Good morning',
+'common.boaTarde': 'Good afternoon',
+'common.boaNoite': 'Good evening',
+'conta.sincronizaEntreDispositivos': ' — your progress syncs across devices.',
+'lesson.acertosDe10': 'Correct (out of 10)',
+'lesson.tempoMinutos': 'Time (minutes)',
+'lesson.estudeiSemQuiz': 'I studied this day (no quiz)',
+'lesson.nenhumaLicaoPrevista': 'No lesson scheduled for this day.',
+'lesson.mapaMentalSemana': "This week's mind map",
+'lesson.tirinhaOriginal': 'Original comic strip · ComTexto Bíblico, Lesson ${n}',
+'lesson.textoBaseSemana': "This week's key text:",
+'lesson.semConteudoData': 'No content available for that date.',
+'lesson.licaoNaoMontada': "This lesson hasn't been built yet.",
+'lesson.versaoDaLicao': 'Lesson Version',
+'lesson.mindmapLicaoFallback': 'Lesson',
+```
+
+```js
+// es
+'common.bomDia': 'Buenos días',
+'common.boaTarde': 'Buenas tardes',
+'common.boaNoite': 'Buenas noches',
+'conta.sincronizaEntreDispositivos': ' — tu progreso se sincroniza entre dispositivos.',
+'lesson.acertosDe10': 'Aciertos (de 10)',
+'lesson.tempoMinutos': 'Tiempo (minutos)',
+'lesson.estudeiSemQuiz': 'Estudié este día (sin quiz)',
+'lesson.nenhumaLicaoPrevista': 'No hay lección prevista para este día.',
+'lesson.mapaMentalSemana': 'Mapa mental de la semana',
+'lesson.tirinhaOriginal': 'Tira original · ComTexto Bíblico, Lección ${n}',
+'lesson.textoBaseSemana': 'Texto base de la semana:',
+'lesson.semConteudoData': 'Sin contenido disponible para esa fecha.',
+'lesson.licaoNaoMontada': 'Esta lección todavía no fue armada.',
+'lesson.versaoDaLicao': 'Versión de la Lección',
+'lesson.mindmapLicaoFallback': 'Lección',
+```
+
+- [ ] **Step 2: Aplicar `saudacaoPorHorario`**
+
+```js
+function saudacaoPorHorario() {
+  const h = new Date().getHours();
+  if (h < 12) return t('common.bomDia');
+  if (h < 18) return t('common.boaTarde');
+  return t('common.boaNoite');
+}
+```
+
+- [ ] **Step 3: Aplicar os demais pontos**
+
+| Texto atual (pt) | Chave |
+|---|---|
+| `' — seu progresso sincroniza entre dispositivos.<br>' +` (aba Conta) | `t('conta.sincronizaEntreDispositivos') + '<br>' +` |
+| `<label>Acertos (de 10)</label>` | `<label>${t('lesson.acertosDe10')}</label>` |
+| `<label>Tempo (minutos)</label>` (2 ocorrências no editor de dia) | `<label>${t('lesson.tempoMinutos')}</label>` |
+| `<label>Estudei esse dia (sem quiz)</label>` | `<label>${t('lesson.estudeiSemQuiz')}</label>` |
+| `<div class="dayed-label">Nenhuma lição prevista para este dia.</div>` | `<div class="dayed-label">${t('lesson.nenhumaLicaoPrevista')}</div>` |
+| `<h4>Mapa mental da semana</h4>` | `<h4>${t('lesson.mapaMentalSemana')}</h4>` |
+| `alt="Tirinha da Lição ${lessonId}"` + `<div class="cap">Tirinha original · ComTexto Bíblico, Lição ${lessonId}</div>` | mantém "ComTexto Bíblico" intocado; troca só `Tirinha original · ` → usa `t('lesson.tirinhaOriginal').replace('${n}', lessonId)` pro `<div class="cap">`; o `alt` pode reaproveitar o mesmo texto ou ficar só com o nome da lição, sua escolha, desde que não fique em branco |
+| `Texto-base da semana: ` | `${t('lesson.textoBaseSemana')} ` |
+| `'Sem conteúdo disponível para essa data.'` | `t('lesson.semConteudoData')` |
+| `'Essa lição ainda não foi montada.'` | `t('lesson.licaoNaoMontada')` |
+| `'Versão da Lição'` (2 ocorrências) | `t('lesson.versaoDaLicao')` |
+| `lesson.keyword \|\| 'Lição'` (fallback do mindmap, só dispara se a lição não tiver `keyword` — praticamente nunca hoje) | `lesson.keyword \|\| t('lesson.mindmapLicaoFallback')` |
+
+- [ ] **Step 4: Consistência de locale (`pt-BR` fixo → `LOCALE_POR_IDIOMA`)**
+
+Nos pontos abaixo, troque `'pt-BR'` fixo por `(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR')` — mesmo padrão já usado no favoritos (Task 11):
+- `monthLabel` do calendário semanal (`toggleWeekCalendar`, ~linha 2261) e do calendário de Estatísticas (~linha 3464) — os DOIS pontos calculam `monthLabel` do mesmo jeito, confirme se são a mesma função duplicada ou duas funções distintas antes de decidir se vale extrair um helper (não é obrigatório, só troque `'pt-BR'` nos dois se forem separados).
+- `localeCompare(..., 'pt-BR')` na ordenação por nome do ranking (~linha 4010) — troque pro locale atual (efeito prático pequeno pra nomes latinos, mas consistente com o resto da branch).
+
+Isso NÃO inclui as datas do Plano Bíblico (chips de dia, início/fim) nem `content.daterange`/`meta.dateLabel` do cabeçalho da lição — esses continuam fora de escopo (são datas atreladas a CONTEÚDO/`LESSONS_META`, não à interface fixa, mesma razão já registrada no plano original pra `l.title`/`l.dateLabel`).
+
+- [ ] **Step 5: Testar**
+
+```js
+idiomaConteudoAtual = 'en';
+saudacaoPorHorario(); // "Good morning"/"Good afternoon"/"Good evening" conforme a hora atual
+idiomaConteudoAtual = 'pt';
+```
+
+Abra o editor de dia (`openDayEditor(alguma-chave-de-data)`) e confira visualmente os rótulos em inglês; abra uma lição no dia "sáb" (tem mapa mental) e no dia "dom" (tem tirinha + texto-base) e confira os dois em espanhol.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: traduz sobras pequenas (saudação, editor de dia, tela de lição, locale)"
+```
