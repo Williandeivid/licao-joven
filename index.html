@@ -2853,6 +2853,7 @@ function renderLessonList(){
   });
   html += `</div><footer>${t('list.footer').replace('${nav}', t('nav.inicio'))}</footer>`;
   container.innerHTML = html;
+  container.dataset.view = 'list';
 }
 
 async function openLessonFromList(id){
@@ -3190,6 +3191,7 @@ async function renderQuarterCover(){
   });
   html += `</div>`;
   container.innerHTML = html;
+  container.dataset.view = 'quarters';
 }
 
 function renderLessonListView(){
@@ -5627,9 +5629,14 @@ async function recarregarConteudoNoIdiomaAtual(){
       await renderConta();
       return;
     }
-    const listaAtiva = document.getElementById('tab-list') && document.getElementById('tab-list').classList.contains('active') && document.getElementById('list-container') && document.getElementById('list-container').style.display !== 'none';
+    const listContainer = document.getElementById('list-container');
+    const listaAtiva = document.getElementById('tab-list') && document.getElementById('tab-list').classList.contains('active') && listContainer && listContainer.style.display !== 'none';
     if(listaAtiva){
-      renderLessonList();
+      if(listContainer.dataset.view === 'list'){
+        renderLessonList();
+      } else {
+        await renderQuarterCover();
+      }
       return;
     }
     const bibleAtivo = document.getElementById('tab-bible') && document.getElementById('tab-bible').classList.contains('active');
