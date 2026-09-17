@@ -802,6 +802,7 @@
   .vpop-version-row{display:flex; gap:8px; margin-bottom:14px;}
   .vpop-version-btn{flex:1; padding:8px 12px; border-radius:12px; border:none; cursor:pointer; font-family:'Plus Jakarta Sans', sans-serif; font-weight:700; font-size:0.813rem; background:var(--tint-violet); color:var(--ink-soft); transition:background .12s ease, color .12s ease;}
   .vpop-version-btn.active{background:var(--violet); color:var(--on-violet);}
+  .idioma-conteudo-btn.active{background:var(--violet); border-color:var(--violet); color:var(--on-violet);}
   .verse-block h4{font-family:'JetBrains Mono', monospace; font-size:0.647rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--violet); margin:0 0 10px; font-weight:700;}
   .verse-item{margin-bottom:12px; font-size:0.882rem;}
   .verse-item:last-child{margin-bottom:0;}
@@ -1492,6 +1493,15 @@
 
     <hr style="margin:8px 0;border:none;border-top:1px solid var(--border);">
 
+    <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Idioma</div>
+    <div id="idioma-conteudo-row" style="display:flex;gap:8px;padding:8px 10px 4px;">
+      <button class="idioma-conteudo-btn" data-idioma="pt" onclick="setIdiomaConteudo('pt')" style="flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);background:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);">🇧🇷 PT</button>
+      <button class="idioma-conteudo-btn" data-idioma="en" onclick="setIdiomaConteudo('en')" style="flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);background:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);">🇺🇸 EN</button>
+      <button class="idioma-conteudo-btn" data-idioma="es" onclick="setIdiomaConteudo('es')" style="flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);background:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);">🇲🇽 ES</button>
+    </div>
+
+    <hr style="margin:8px 0;border:none;border-top:1px solid var(--border);">
+
     <div style="padding:6px 12px 2px;font-size:11px;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Design</div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:8px 10px 4px;">
       <button onclick="setDesignTheme('light')" title="Claro" style="width:28px;height:28px;border-radius:50%;background:#f7f5ff;border:2px solid var(--border);cursor:pointer;padding:0;"></button>
@@ -1992,6 +2002,7 @@ async function renderLessonDetail(lessonId, fromList){
   const progress = progressCache[lessonId] || {days:{}, quiz:{}};
   const container = document.getElementById('detail-container');
   if(!container) return;
+  container.dataset.lessonId = lessonId;
   window.scrollTo(0, 0);
 
   let html = `<header class="hero">`;
@@ -2006,7 +2017,7 @@ async function renderLessonDetail(lessonId, fromList){
     }
   }
   html += `<div class="eyebrow">Lição Jovem ${lessonId}</div>
-    <h1 class="title">${meta.title}</h1>`;
+    <h1 class="title">${content ? content.title : meta.title}</h1>`;
   if(content){
     const abbrevBible = (content.bibleref || '').replace(/João/g, 'Jo').replace(/Romanos/g, 'Rm').replace(/Coríntios/g, 'Co').replace(/Gálatas/g, 'Gl').replace(/Efésios/g, 'Ef').replace(/Filipenses/g, 'Fp').replace(/Colossenses/g, 'Cl').replace(/Tessalonicenses/g, 'Ts').replace(/Timóteo/g, 'Tm').replace(/Tito/g, 'Tt').replace(/Filemom/g, 'Flm').replace(/Hebreus/g, 'Hb').replace(/Tiago/g, 'Tg').replace(/Pedro/g, 'Pd').replace(/Judas/g, 'Jd').replace(/Apocalipse/g, 'Ap');
     html += `<p class="subtitle">${content.daterange} · ${abbrevBible}</p>
@@ -4826,6 +4837,60 @@ const BOOK_CATEGORY = {
 };
 const CATEGORY_LABEL = {law:'Lei',histAT:'História (AT)',wisdom:'Poéticos',majorProph:'Profetas Maiores',minorProph:'Profetas Menores',gospel:'Evangelhos',histNT:'História (NT)',pauline:'Cartas Paulinas',general:'Cartas Gerais',apocalyptic:'Apocalíptico'};
 
+// ===== IDIOMA DO CONTEUDO (licao + biblia) =====
+// So o conteudo troca de idioma - botoes, menus e rotulos fixos do app
+// continuam em portugues nesta entrega. Variavel de modulo (nao window.storage
+// direto) para que o resto do codigo leia sincrono, sem precisar de await
+// espalhado por toda parte - mesmo principio de bibleViewMode logo abaixo.
+let idiomaConteudoAtual = 'pt';
+const IDIOMAS_SUPORTADOS = ['pt', 'en', 'es'];
+
+async function carregarIdiomaConteudo(){
+  try{
+    const res = await window.storage.get('idioma-conteudo', false);
+    if(res && res.value && IDIOMAS_SUPORTADOS.includes(res.value)) idiomaConteudoAtual = res.value;
+  }catch(e){ /* chave ainda nao existe, fica pt */ }
+  atualizarBotoesIdiomaConteudo();
+}
+
+function atualizarBotoesIdiomaConteudo(){
+  document.querySelectorAll('.idioma-conteudo-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.idioma === idiomaConteudoAtual);
+  });
+}
+
+async function setIdiomaConteudo(idioma){
+  if(!IDIOMAS_SUPORTADOS.includes(idioma) || idioma === idiomaConteudoAtual){
+    const appMenu = document.getElementById('app-menu-panel');
+    if(appMenu) appMenu.style.display = 'none';
+    return;
+  }
+  idiomaConteudoAtual = idioma;
+  try{ await window.storage.set('idioma-conteudo', idioma, false); }catch(e){}
+  atualizarBotoesIdiomaConteudo();
+  const appMenu = document.getElementById('app-menu-panel');
+  if(appMenu) appMenu.style.display = 'none';
+  await recarregarConteudoNoIdiomaAtual();
+}
+
+// Reaproveita a tela que ja esta aberta (licao ou biblia) e busca de novo
+// no idioma corrente - sem isso, trocar o idioma so afetaria a proxima
+// navegacao, nao o que a pessoa esta lendo agora.
+async function recarregarConteudoNoIdiomaAtual(){
+  try{
+    const listAtivo = document.getElementById('tab-list') && document.getElementById('tab-list').classList.contains('active');
+    if(listAtivo){
+      const container = document.getElementById('detail-container');
+      const lessonId = container && container.dataset.lessonId ? parseInt(container.dataset.lessonId) : null;
+      if(lessonId){ await renderLessonDetail(lessonId, false); return; }
+    }
+    const bibleAtivo = document.getElementById('tab-bible') && document.getElementById('tab-bible').classList.contains('active');
+    if(bibleAtivo && typeof bibleState !== 'undefined' && bibleState && bibleState.book && bibleState.chapter){
+      await openBibleChapter(bibleState.chapter);
+    }
+  }catch(e){ console.warn('⚠️ Não recarregou o conteúdo no novo idioma:', e.message); }
+}
+
 let bibleViewMode = 'list';
 async function loadBibleViewMode(){
   try{
@@ -6895,6 +6960,11 @@ window.addEventListener('load', async function(){
       await loadDesignTheme();
     } catch(e) {
       console.error('Init error (loadDesignTheme):', e);
+    }
+    try {
+      await carregarIdiomaConteudo();
+    } catch(e) {
+      console.error('Init error (carregarIdiomaConteudo):', e);
     }
     try {
       await preloadAllProgress();
