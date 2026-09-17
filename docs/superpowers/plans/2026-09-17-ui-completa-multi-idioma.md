@@ -1482,3 +1482,219 @@ Não é possível testar `alert()`/`confirm()` reais via automação (bloqueiam 
 git add index.html
 git commit -m "feat: traduz alert()/confirm() visíveis ao usuário"
 ```
+
+---
+
+## Task 11: Sobras da aba Conta/Estatísticas (achado do review da Task 8)
+
+> Task acrescentada pelo controller durante a execução do plano (não fazia
+> parte da versão original) — o revisor da Task 8 achou 9 textos em
+> português dentro de `renderConta`/`carregarRankingTab` que não estavam
+> na tabela da Task 8 nem em nenhuma task seguinte (9/10), então ficariam
+> em português pra sempre mesmo em EN/ES, contradizendo a meta do plano.
+> Ruling do controller: são reais e carregam a meta do plano ("nenhuma
+> string fixa em português") — viram uma task extra, não um item
+> adiado. Achado #9 original (rótulo "Ranking" na aba Estatísticas) já
+> tinha chave pronta (`conta.ranking`, da própria Task 8) só faltando
+> aplicar — incluído aqui. Achado #10 (alertas admin) já é coberto pela
+> Task 10, não repetido aqui. Um item a mais (botão "🔄 Sincronizar
+> agora") e outro (data do favorito sempre em `pt-BR`) foram achados
+> pelo controller na mesma varredura, não pelo revisor — incluídos por
+> serem exatamente a mesma classe de problema.
+
+**Files:**
+- Modify: `index.html` (`renderConta`, região ~2899-3020 — pode ter se movido com as tasks anteriores)
+- Modify: `index.html` (`carregarRankingTab`, região ~3965-4042)
+- Modify: `index.html` (rótulo "Ranking" da aba Estatísticas, dentro de `renderStats`)
+
+**Interfaces:**
+- Consumes: `t()`, `menu.design` (Task 2), `conta.ranking`/`nav.conta`/`stats.semana`/`stats.trimestre` (Tasks 1/7/8, já existentes).
+- Produces: chaves `conta.*` novas listadas abaixo.
+
+- [ ] **Step 1: Adicionar as chaves novas**
+
+```js
+// pt
+'conta.meusFavoritos': 'Meus versículos favoritos',
+'conta.semFavoritos': 'Nenhum favorito ainda. Toque na estrela ⭐ ao ler um versículo ou capítulo, na Bíblia ou no Plano Bíblico, pra salvar aqui.',
+'conta.zerarTudoNota': 'Apaga lições, plano bíblico e metas — sem volta',
+'conta.abrirLink': 'Abrir',
+'conta.comentariosLigados': 'Ligados — todo mundo que entrar pode comentar',
+'conta.comentariosDesligados': 'Desligados — o botão nem aparece para ninguém',
+'conta.ligar': 'Ligar',
+'conta.desligar': 'Desligar',
+'conta.participarRankingNota': 'Mostra seu nome e desempenho pros outros participantes, nas abas ${semana} e ${trimestre} em ${progresso}',
+'conta.sobreTema': 'Resgate',
+'conta.sobreTrimestre': '3º Trimestre 2026',
+'conta.sincronizarAgora': '🔄 Sincronizar agora',
+'ranking.naoLogado': 'Entre com sua conta Google na aba ${conta} pra ver e participar do ranking.',
+'ranking.carregarFalhou': 'Não foi possível carregar o ranking agora.',
+```
+
+```js
+// en
+'conta.meusFavoritos': 'My favorite verses',
+'conta.semFavoritos': 'No favorites yet. Tap the star ⭐ while reading a verse or chapter, in the Bible or in the Bible Plan, to save it here.',
+'conta.zerarTudoNota': "Deletes lessons, Bible plan, and goals — can't be undone",
+'conta.abrirLink': 'Open',
+'conta.comentariosLigados': 'On — anyone who signs in can comment',
+'conta.comentariosDesligados': "Off — the button doesn't even show up for anyone",
+'conta.ligar': 'Turn on',
+'conta.desligar': 'Turn off',
+'conta.participarRankingNota': 'Shows your name and performance to other participants, in the ${semana} and ${trimestre} tabs under ${progresso}',
+'conta.sobreTema': 'Rescue',
+'conta.sobreTrimestre': 'Q3 2026',
+'conta.sincronizarAgora': '🔄 Sync now',
+'ranking.naoLogado': 'Sign in with your Google account in the ${conta} tab to see and join the leaderboard.',
+'ranking.carregarFalhou': "Couldn't load the leaderboard right now.",
+```
+
+```js
+// es
+'conta.meusFavoritos': 'Mis versículos favoritos',
+'conta.semFavoritos': 'Todavía no hay favoritos. Toca la estrella ⭐ al leer un versículo o capítulo, en la Biblia o en el Plan Bíblico, para guardarlo aquí.',
+'conta.zerarTudoNota': 'Borra lecciones, plan bíblico y metas — no se puede deshacer',
+'conta.abrirLink': 'Abrir',
+'conta.comentariosLigados': 'Activados — cualquiera que inicie sesión puede comentar',
+'conta.comentariosDesligados': 'Desactivados — el botón ni siquiera aparece para nadie',
+'conta.ligar': 'Activar',
+'conta.desligar': 'Desactivar',
+'conta.participarRankingNota': 'Muestra tu nombre y desempeño a otros participantes, en las pestañas ${semana} y ${trimestre} dentro de ${progresso}',
+'conta.sobreTema': 'Rescate',
+'conta.sobreTrimestre': '3er Trimestre 2026',
+'conta.sincronizarAgora': '🔄 Sincronizar ahora',
+'ranking.naoLogado': 'Inicia sesión con tu cuenta de Google en la pestaña ${conta} para ver y participar en el ranking.',
+'ranking.carregarFalhou': 'No se pudo cargar el ranking ahora.',
+```
+
+`conta.participarRankingNota` e `ranking.naoLogado` usam placeholders literais (`${semana}`/`${trimestre}`/`${progresso}`/`${conta}`, mesma técnica das tasks anteriores), resolvidos no Step 2 interpolando `t('stats.semana')`/`t('stats.trimestre')`/`t('nav.progresso')`/`t('nav.conta')`.
+
+- [ ] **Step 2: Aplicar em `renderConta`**
+
+Localize cada trecho abaixo e troque exatamente como mostrado (texto exato confirmado no arquivo no momento em que esta task foi escrita — confirme com busca antes de editar, pode ter se movido):
+
+```js
+// 1. Seção de aparência — reaproveita menu.design (Task 2), NÃO cria chave nova
+'<div class="conta-section-title">Design</div>'
+// vira:
+`<div class="conta-section-title">${t('menu.design')}</div>`
+```
+
+```js
+// 2. Favoritos — título com contagem interpolada + estado vazio
+'<div class="conta-section-title">Meus versículos favoritos ${favoritesCache.length?`(${favoritesCache.length})`:\'\'}</div>'
+// vira:
+`<div class="conta-section-title">${t('conta.meusFavoritos')} ${favoritesCache.length?`(${favoritesCache.length})`:''}</div>`
+```
+```js
+'`<p class="conta-note">Nenhum favorito ainda. Toque na estrela ⭐ ao ler um versículo ou capítulo, na Bíblia ou no Plano Bíblico, pra salvar aqui.</p>`'
+// vira:
+`<p class="conta-note">${t('conta.semFavoritos')}</p>`
+```
+```js
+// A data de cada favorito na lista está fixa em pt-BR - troque pro locale certo
+// (LOCALE_POR_IDIOMA já existe desde a Task 6):
+"new Date(f.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})"
+// vira:
+"new Date(f.date+'T00:00:00').toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR',{day:'2-digit',month:'short'})"
+```
+
+```js
+// 3. Nota do botão "Zerar tudo"
+'<div class="conta-row-sub">Apaga lições, plano bíblico e metas — sem volta</div>'
+// vira:
+`<div class="conta-row-sub">${t('conta.zerarTudoNota')}</div>`
+```
+
+```js
+// 4. Link de feedback
+'<a href="https://forms.gle/kWq4KMfBPg7D7h1M6" target="_blank" rel="noopener" class="conta-btn">Abrir</a>'
+// vira:
+`<a href="https://forms.gle/kWq4KMfBPg7D7h1M6" target="_blank" rel="noopener" class="conta-btn">${t('conta.abrirLink')}</a>`
+```
+
+```js
+// 5. Botão "Sincronizar agora"
+'🔄 Sincronizar agora'
+// vira (dentro do template do botão sync-btn):
+t('conta.sincronizarAgora')
+```
+
+```js
+// 6. Status e botão do toggle de comentários (admin)
+`comentariosLigados()
+  ? 'Ligados — todo mundo que entrar pode comentar'
+  : 'Desligados — o botão nem aparece para ninguém'`
+// vira:
+`comentariosLigados()
+  ? t('conta.comentariosLigados')
+  : t('conta.comentariosDesligados')`
+```
+```js
+"${comentariosLigados() ? 'Desligar' : 'Ligar'}"
+// vira:
+"${comentariosLigados() ? t('conta.desligar') : t('conta.ligar')}"
+```
+
+```js
+// 7. Nota do opt-in de ranking (interpola 3 chaves já existentes)
+'<div class="conta-row-sub">Mostra seu nome e desempenho pros outros participantes, nas abas Esta semana e Trimestre em Progresso</div>'
+// vira:
+`<div class="conta-row-sub">${t('conta.participarRankingNota').replace('${semana}', t('stats.semana')).replace('${trimestre}', t('stats.trimestre')).replace('${progresso}', t('nav.progresso'))}</div>`
+```
+
+```js
+// 8. Seção "Sobre" — "ComTexto Bíblico" NUNCA traduz (marca); tema e trimestre traduzem
+'<p class="conta-note">ComTexto Bíblico — Resgate<br>3º Trimestre 2026</p>'
+// vira:
+`<p class="conta-note">ComTexto Bíblico — ${t('conta.sobreTema')}<br>${t('conta.sobreTrimestre')}</p>`
+```
+
+- [ ] **Step 3: Aplicar em `carregarRankingTab`**
+
+```js
+// 9. Mensagem de não-logado (interpola nav.conta)
+'`<p class="conta-note">Entre com sua conta Google na aba Conta pra ver e participar do ranking.</p>`'
+// vira:
+`<p class="conta-note">${t('ranking.naoLogado').replace('${conta}', t('nav.conta'))}</p>`
+```
+
+```js
+// 10. Mensagem de erro ao carregar
+"panel.innerHTML = `<p class=\"conta-note\">Não foi possível carregar o ranking agora.</p>`;"
+// vira:
+"panel.innerHTML = `<p class=\"conta-note\">${t('ranking.carregarFalhou')}</p>`;"
+```
+
+- [ ] **Step 4: Aplicar o rótulo "Ranking" da aba Estatísticas**
+
+Localize (dentro de `renderStats`, logo antes de `<div class="stats-card" id="ranking-section">`):
+
+```html
+<div class="stats-section-label">Ranking</div>
+```
+
+Substitua por (reaproveita `conta.ranking`, já existente desde a Task 8 — NÃO cria chave nova):
+
+```html
+<div class="stats-section-label">${t('conta.ranking')}</div>
+```
+
+- [ ] **Step 5: Testar**
+
+```js
+idiomaConteudoAtual = 'en';
+t('conta.meusFavoritos'); // "My favorite verses"
+t('conta.participarRankingNota').replace('${semana}', t('stats.semana')).replace('${trimestre}', t('stats.trimestre')).replace('${progresso}', t('nav.progresso'));
+// "Shows your name and performance to other participants, in the This week and Quarter tabs under Progress"
+idiomaConteudoAtual = 'pt';
+```
+
+Abra a aba Conta (`renderConta()`) com `idiomaConteudoAtual='es'` e confira visualmente (screenshot) que os 9 pontos apareceram traduzidos, inclusive o rótulo "Ranking" dentro de Estatísticas.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: traduz sobras da aba Conta/Estatísticas (achado do review da Task 8)"
+```
