@@ -5194,6 +5194,13 @@ const UI_STRINGS = {
     'conta.sincronizarAgora': '🔄 Sincronizar agora',
     'ranking.naoLogado': 'Entre com sua conta Google na aba ${conta} pra ver e participar do ranking.',
     'ranking.carregarFalhou': 'Não foi possível carregar o ranking agora.',
+    'comments.entreParaComentar': 'Entre com sua conta Google para ver e deixar comentários.',
+    'comments.desligados': 'Os comentários estão desligados no momento.',
+    'comments.banido': 'Sua conta não pode comentar.',
+    'comments.vazio': 'Ninguém comentou esse dia ainda.',
+    'comments.placeholder': 'Escreva o que esse dia te deixou…',
+    'comments.comentar': 'Comentar',
+    'comments.enviando': 'Enviando…',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5339,6 +5346,13 @@ const UI_STRINGS = {
     'conta.sincronizarAgora': '🔄 Sync now',
     'ranking.naoLogado': 'Sign in with your Google account in the ${conta} tab to see and join the leaderboard.',
     'ranking.carregarFalhou': "Couldn't load the leaderboard right now.",
+    'comments.entreParaComentar': 'Sign in with your Google account to see and leave comments.',
+    'comments.desligados': 'Comments are currently turned off.',
+    'comments.banido': "Your account can't comment.",
+    'comments.vazio': "No one has commented on this day yet.",
+    'comments.placeholder': 'Write what this day left you with…',
+    'comments.comentar': 'Comment',
+    'comments.enviando': 'Sending…',
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5484,6 +5498,13 @@ const UI_STRINGS = {
     'conta.sincronizarAgora': '🔄 Sincronizar ahora',
     'ranking.naoLogado': 'Inicia sesión con tu cuenta de Google en la pestaña ${conta} para ver y participar en el ranking.',
     'ranking.carregarFalhou': 'No se pudo cargar el ranking ahora.',
+    'comments.entreParaComentar': 'Inicia sesión con tu cuenta de Google para ver y dejar comentarios.',
+    'comments.desligados': 'Los comentarios están desactivados por ahora.',
+    'comments.banido': 'Tu cuenta no puede comentar.',
+    'comments.vazio': 'Todavía nadie comentó este día.',
+    'comments.placeholder': 'Escribe lo que este día te dejó…',
+    'comments.comentar': 'Comentar',
+    'comments.enviando': 'Enviando…',
   },
 };
 
@@ -6713,7 +6734,7 @@ async function carregarComentarios(lessonId, dayId){
   const painel = document.getElementById(`cmt-painel-${lessonId}-${dayId}`);
   if (!painel) return;
   const lista = painel.querySelector('.cmt-lista');
-  lista.innerHTML = `<p class="cmt-vazio">Carregando…</p>`;
+  lista.innerHTML = `<p class="cmt-vazio">${t('common.carregando')}</p>`;
 
   await carregarConfigComentarios();
 
@@ -6748,7 +6769,7 @@ function desenharComentarios(lessonId, dayId, lista, erro){
     // Deslogado nao chegou a ler nada: afirmar "ninguem comentou" seria mentira.
     alvoLista.innerHTML = '';
   } else if (!lista.length){
-    alvoLista.innerHTML = `<p class="cmt-vazio">Ninguém comentou esse dia ainda.</p>`;
+    alvoLista.innerHTML = `<p class="cmt-vazio">${t('comments.vazio')}</p>`;
   } else {
     alvoLista.innerHTML = lista.map(c => {
       const meu = currentUser && c.uid === currentUser.uid;
@@ -6790,20 +6811,20 @@ function desenharComentarios(lessonId, dayId, lista, erro){
 
   // Área de escrita
   if (!currentUser){
-    alvoForm.innerHTML = `<p class="cmt-aviso">Entre com sua conta Google para ver e deixar comentários.</p>`;
+    alvoForm.innerHTML = `<p class="cmt-aviso">${t('comments.entreParaComentar')}</p>`;
   } else if (!comentariosLigados()){
-    alvoForm.innerHTML = `<p class="cmt-aviso">Os comentários estão desligados no momento.</p>`;
+    alvoForm.innerHTML = `<p class="cmt-aviso">${t('comments.desligados')}</p>`;
   } else if (estouBanido()){
-    alvoForm.innerHTML = `<p class="cmt-aviso">Sua conta não pode comentar.</p>`;
+    alvoForm.innerHTML = `<p class="cmt-aviso">${t('comments.banido')}</p>`;
   } else {
     alvoForm.innerHTML = `<div class="cmt-form">
       <textarea class="cmt-input" id="cmt-txt-${lessonId}-${dayId}" rows="1" maxlength="${CMT_LIMITE}"
-        placeholder="Escreva o que esse dia te deixou…"
+        placeholder="${t('comments.placeholder')}"
         oninput="ajustarCampoComentario(this, ${lessonId}, '${dayId}')"></textarea>
       <div class="cmt-rodape">
         <span class="cmt-contador" id="cmt-cont-${lessonId}-${dayId}"></span>
         <button class="cmt-enviar" id="cmt-env-${lessonId}-${dayId}" disabled
-          onclick="enviarComentario(${lessonId}, '${dayId}')">Comentar</button>
+          onclick="enviarComentario(${lessonId}, '${dayId}')">${t('comments.comentar')}</button>
       </div>
     </div>`;
   }
@@ -6843,7 +6864,7 @@ async function enviarComentario(lessonId, dayId){
   const texto = campo.value.trim();
   if (!texto) return;
 
-  if (botao){ botao.disabled = true; botao.textContent = 'Enviando…'; }
+  if (botao){ botao.disabled = true; botao.textContent = t('comments.enviando'); }
   try{
     const token = await getAuthToken();
     const corpo = {
@@ -6862,7 +6883,7 @@ async function enviarComentario(lessonId, dayId){
   }catch(e){
     console.error('❌ Não enviou o comentário:', e);
     alert('Não foi possível enviar seu comentário agora. Tente de novo em instantes.');
-    if (botao){ botao.disabled = false; botao.textContent = 'Comentar'; }
+    if (botao){ botao.disabled = false; botao.textContent = t('comments.comentar'); }
   }
 }
 
