@@ -2562,6 +2562,12 @@ async function marcarConcluido(btn){
   if(btn.classList.contains('done')) return;
   const lessonId = parseInt(btn.dataset.lesson);
   const dayId = btn.dataset.day;
+  // Dia cuja data no calendario da licao ainda nao chegou nao pode ser
+  // marcado como estudado - nem local, nem vindo da nuvem (mesma trava em
+  // aplicarSnapshotAoVivo). Evita marcacoes fantasma tipo sabado aparecer
+  // "concluido" numa quinta-feira.
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  if(dayCalendarDate(lessonId, dayId) > hoje) return;
   const progress = progressCache[lessonId] || {days:{}, quiz:{}};
   if(!progress.days) progress.days = {};
   const estMinutes = estimateDayReadingMinutes(lessonId, dayId);
@@ -5989,7 +5995,7 @@ async function mesclarProgressoDaNuvem() {
 
     if (dados.progresso) {
       Object.keys(dados.progresso).forEach(lessonId => {
-        const nuvem = dados.progresso[lessonId] || {};
+        const nuvem = filtrarDiasFuturos(lessonId, dados.progresso[lessonId] || {});
         const local = progressCache[lessonId];
         if (!local) { progressCache[lessonId] = nuvem; return; }
         local.days = Object.assign({}, nuvem.days || {}, local.days || {});
@@ -6291,6 +6297,23 @@ async function apagarComentario(lessonId, dayId, id){
 let _refUsuario = null;
 let _ouvinteAtivo = null;
 
+// Nunca aceita da nuvem um dia "estudado" cuja data no calendario da licao
+// ainda nao chegou - protege contra dado velho/de teste que "ressuscita"
+// sozinho quando a escuta ao vivo dispara por qualquer motivo (troca de
+// idioma, tema etc. tambem reenviam o no inteiro do usuario, nao so
+// progresso). Mesma trava usada em marcarConcluido pro clique do botao.
+function filtrarDiasFuturos(lessonId, progressoLicao){
+  if (!progressoLicao || !progressoLicao.days) return progressoLicao;
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const diasFiltrados = {};
+  Object.keys(progressoLicao.days).forEach(dayId => {
+    if (!(dayId in dayOffsets) || dayCalendarDate(lessonId, dayId) <= hoje){
+      diasFiltrados[dayId] = progressoLicao.days[dayId];
+    }
+  });
+  return Object.assign({}, progressoLicao, { days: diasFiltrados });
+}
+
 // Trata cada mudanca que chega da nuvem. Separada da escuta para poder
 // ser testada isoladamente.
 async function aplicarSnapshotAoVivo(dados) {
@@ -6305,7 +6328,7 @@ async function aplicarSnapshotAoVivo(dados) {
 
     if (dados.progresso) {
       Object.keys(dados.progresso).forEach(lessonId => {
-        const nuvem = dados.progresso[lessonId] || {};
+        const nuvem = filtrarDiasFuturos(lessonId, dados.progresso[lessonId] || {});
         const local = progressCache[lessonId];
         if (!local) { progressCache[lessonId] = nuvem; mudou = true; return; }
         local.days = Object.assign({}, nuvem.days || {}, local.days || {});
