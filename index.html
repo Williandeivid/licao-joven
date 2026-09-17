@@ -3042,7 +3042,7 @@ async function onRankingOptInChange(ligado){
   catch(e){ console.warn('⚠️ Não salvou a preferência do ranking:', e.message); }
   if(!ligado){
     const ok = await sairDoRanking();
-    if(!ok) alert('Não conseguimos remover seus dados do ranking agora. Verifique sua conexão e tente novamente na aba Conta.');
+    if(!ok) alert(t('alerts.rankingRemoveFalhou'));
   }
 }
 
@@ -3080,18 +3080,18 @@ function importBackup(file){
       for(const key in data){
         await window.storage.set(key, data[key], false);
       }
-      alert('Backup restaurado! O app vai recarregar agora.');
+      alert(t('alerts.backupRestaurado'));
       location.reload();
     }catch(err){
-      alert('Não consegui ler esse arquivo de backup.');
+      alert(t('alerts.backupInvalido'));
     }
   };
   reader.readAsText(file);
 }
 
 function confirmResetAll(){
-  if(!confirm('Isso vai apagar TODO o seu progresso (lições, plano bíblico, metas). Não tem como desfazer. Tem certeza?')) return;
-  if(!confirm('Confirma mesmo? Essa é a última chance de cancelar.')) return;
+  if(!confirm(t('alerts.confirmZerar1'))) return;
+  if(!confirm(t('alerts.confirmZerar2'))) return;
   (async ()=>{
     try{
       const listed = await window.storage.list('', false);
@@ -4706,7 +4706,7 @@ function closePlanMenu(key){
 function sharePlanItem(key){
   closePlanMenu(key);
   const plan = BIBLE_PLANS[key];
-  alert('Compartilhar: '+plan.name);
+  alert(t('alerts.compartilharPrefixo')+plan.name);
 }
 
 async function configPlanItem(key){
@@ -4853,7 +4853,7 @@ function showChangeDatePicker(key){
 
 async function savePlanNewDate(key, newDateStr){
   if(!newDateStr) {
-    alert('Selecione uma data');
+    alert(t('alerts.selecioneData'));
     return;
   }
   await savePlanStartDateKey(key, newDateStr);
@@ -4989,7 +4989,7 @@ function openBiblePlanCalendar(key, startDateStr, monthOffset){
 
 function stopPlanItem(key){
   closePlanMenu(key);
-  alert('Plano congelado na data de hoje');
+  alert(t('alerts.planoCongelado'));
 }
 
 function togglePlanSettings(){
@@ -5201,6 +5201,23 @@ const UI_STRINGS = {
     'comments.placeholder': 'Escreva o que esse dia te deixou…',
     'comments.comentar': 'Comentar',
     'comments.enviando': 'Enviando…',
+    'alerts.rankingRemoveFalhou': 'Não conseguimos remover seus dados do ranking agora. Verifique sua conexão e tente novamente na aba Conta.',
+    'alerts.backupRestaurado': 'Backup restaurado! O app vai recarregar agora.',
+    'alerts.backupInvalido': 'Não consegui ler esse arquivo de backup.',
+    'alerts.confirmZerar1': 'Isso vai apagar TODO o seu progresso (lições, plano bíblico, metas). Não tem como desfazer. Tem certeza?',
+    'alerts.confirmZerar2': 'Confirma mesmo? Essa é a última chance de cancelar.',
+    'alerts.compartilharPrefixo': 'Compartilhar: ',
+    'alerts.selecioneData': 'Selecione uma data',
+    'alerts.planoCongelado': 'Plano congelado na data de hoje',
+    'alerts.confirmComentariosLigar': 'Ligar os comentários para todo mundo?',
+    'alerts.confirmComentariosDesligar': 'Desligar os comentários do app inteiro?',
+    'alerts.comentariosConfigFalhou': 'Não foi possível alterar agora. Confira se as regras do banco já foram publicadas.',
+    'alerts.comentarioEnvioFalhou': 'Não foi possível enviar seu comentário agora. Tente de novo em instantes.',
+    'alerts.confirmApagarComentario': 'Apagar este comentário?',
+    'alerts.comentarioApagarFalhou': 'Não foi possível apagar agora. Tente de novo.',
+    'alerts.loginFalhouPrefixo': 'Nao foi possivel entrar: ',
+    'alerts.confirmSair': 'Sair da conta?\n\nSeu progresso fica guardado na nuvem e volta ao entrar de novo. Ele sera removido deste aparelho para nao se misturar com o de outra pessoa.',
+    'alerts.licaoGithubFalhou': 'Não conseguimos buscar a lição do GitHub. Usando versão local.',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5353,6 +5370,23 @@ const UI_STRINGS = {
     'comments.placeholder': 'Write what this day left you with…',
     'comments.comentar': 'Comment',
     'comments.enviando': 'Sending…',
+    'alerts.rankingRemoveFalhou': "We couldn't remove your leaderboard data right now. Check your connection and try again from the Account tab.",
+    'alerts.backupRestaurado': 'Backup restored! The app will reload now.',
+    'alerts.backupInvalido': "Couldn't read that backup file.",
+    'alerts.confirmZerar1': "This will delete ALL your progress (lessons, Bible plan, goals). This can't be undone. Are you sure?",
+    'alerts.confirmZerar2': 'Really confirm? This is your last chance to cancel.',
+    'alerts.compartilharPrefixo': 'Share: ',
+    'alerts.selecioneData': 'Select a date',
+    'alerts.planoCongelado': "Plan frozen at today's date",
+    'alerts.confirmComentariosLigar': 'Turn comments on for everyone?',
+    'alerts.confirmComentariosDesligar': 'Turn off comments for the whole app?',
+    'alerts.comentariosConfigFalhou': "Couldn't change this right now. Check whether the database rules have been published yet.",
+    'alerts.comentarioEnvioFalhou': "Couldn't send your comment right now. Try again in a moment.",
+    'alerts.confirmApagarComentario': 'Delete this comment?',
+    'alerts.comentarioApagarFalhou': "Couldn't delete it right now. Try again.",
+    'alerts.loginFalhouPrefixo': "Couldn't sign in: ",
+    'alerts.confirmSair': "Sign out?\n\nYour progress stays saved in the cloud and comes back when you sign in again. It will be removed from this device so it doesn't mix with someone else's.",
+    'alerts.licaoGithubFalhou': "Couldn't fetch the lesson from GitHub. Using the local version.",
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5505,6 +5539,23 @@ const UI_STRINGS = {
     'comments.placeholder': 'Escribe lo que este día te dejó…',
     'comments.comentar': 'Comentar',
     'comments.enviando': 'Enviando…',
+    'alerts.rankingRemoveFalhou': 'No pudimos eliminar tus datos del ranking ahora. Revisa tu conexión e intenta de nuevo en la pestaña Cuenta.',
+    'alerts.backupRestaurado': '¡Copia de seguridad restaurada! La app se va a recargar ahora.',
+    'alerts.backupInvalido': 'No pude leer ese archivo de copia de seguridad.',
+    'alerts.confirmZerar1': 'Esto va a borrar TODO tu progreso (lecciones, plan bíblico, metas). No se puede deshacer. ¿Estás seguro?',
+    'alerts.confirmZerar2': '¿Confirmas de verdad? Esta es tu última oportunidad de cancelar.',
+    'alerts.compartilharPrefixo': 'Compartir: ',
+    'alerts.selecioneData': 'Selecciona una fecha',
+    'alerts.planoCongelado': 'Plan congelado en la fecha de hoy',
+    'alerts.confirmComentariosLigar': '¿Activar los comentarios para todos?',
+    'alerts.confirmComentariosDesligar': '¿Desactivar los comentarios de toda la app?',
+    'alerts.comentariosConfigFalhou': 'No se pudo cambiar ahora. Revisa si las reglas de la base de datos ya fueron publicadas.',
+    'alerts.comentarioEnvioFalhou': 'No se pudo enviar tu comentario ahora. Intenta de nuevo en un momento.',
+    'alerts.confirmApagarComentario': '¿Borrar este comentario?',
+    'alerts.comentarioApagarFalhou': 'No se pudo borrar ahora. Intenta de nuevo.',
+    'alerts.loginFalhouPrefixo': 'No se pudo iniciar sesión: ',
+    'alerts.confirmSair': '¿Cerrar sesión?\n\nTu progreso queda guardado en la nube y vuelve cuando inicies sesión de nuevo. Se eliminará de este dispositivo para no mezclarse con el de otra persona.',
+    'alerts.licaoGithubFalhou': 'No pudimos buscar la lección de GitHub. Usando la versión local.',
   },
 };
 
@@ -6681,7 +6732,7 @@ async function tentarVirarAdmin(){
 async function alternarComentarios(){
   if (!souAdmin()) return;
   const novo = !comentariosLigados();
-  if (!confirm(novo ? 'Ligar os comentários para todo mundo?' : 'Desligar os comentários do app inteiro?')) return;
+  if (!confirm(novo ? t('alerts.confirmComentariosLigar') : t('alerts.confirmComentariosDesligar'))) return;
   try{
     const token = await getAuthToken();
     const r = await fetch(`${FIREBASE_DB}/config/comentarios/ativo.json?auth=${token}`, {
@@ -6694,7 +6745,7 @@ async function alternarComentarios(){
     console.log('☁️ Comentários agora:', novo ? 'ligados' : 'desligados');
   }catch(e){
     console.error('❌ Não alterou a chave dos comentários:', e);
-    alert('Não foi possível alterar agora. Confira se as regras do banco já foram publicadas.');
+    alert(t('alerts.comentariosConfigFalhou'));
   }
 }
 
@@ -6882,14 +6933,14 @@ async function enviarComentario(lessonId, dayId){
     await carregarComentarios(lessonId, dayId);
   }catch(e){
     console.error('❌ Não enviou o comentário:', e);
-    alert('Não foi possível enviar seu comentário agora. Tente de novo em instantes.');
+    alert(t('alerts.comentarioEnvioFalhou'));
     if (botao){ botao.disabled = false; botao.textContent = t('comments.comentar'); }
   }
 }
 
 async function apagarComentario(lessonId, dayId, id){
   if (!currentUser) return;
-  if (!confirm('Apagar este comentário?')) return;
+  if (!confirm(t('alerts.confirmApagarComentario'))) return;
   try{
     const token = await getAuthToken();
     const r = await fetch(`${FIREBASE_DB}/comentarios/${lessonId}/${dayId}/${id}.json?auth=${token}`, {method:'DELETE'});
@@ -6897,7 +6948,7 @@ async function apagarComentario(lessonId, dayId, id){
     await carregarComentarios(lessonId, dayId);
   }catch(e){
     console.error('❌ Não apagou o comentário:', e);
-    alert('Não foi possível apagar agora. Tente de novo.');
+    alert(t('alerts.comentarioApagarFalhou'));
   }
 }
 
@@ -7064,7 +7115,7 @@ async function loginWithGoogle() {
     if (e.code === 'auth/unauthorized-domain') {
       alert('Este dominio nao esta autorizado no Firebase.\n\nAdicione "' + location.hostname + '" em:\nFirebase Console > Authentication > Settings > Authorized domains');
     } else {
-      alert('Nao foi possivel entrar: ' + (e.message || e.code));
+      alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
     }
     console.error('❌ Erro no login:', e);
   }
@@ -7098,7 +7149,7 @@ async function limparDadosLocaisDoUsuario() {
 }
 
 async function logout() {
-  const ok = confirm('Sair da conta?\n\nSeu progresso fica guardado na nuvem e volta ao entrar de novo. Ele sera removido deste aparelho para nao se misturar com o de outra pessoa.');
+  const ok = confirm(t('alerts.confirmSair'));
   if (!ok) return;
   try {
     pararEscutaAoVivo();
@@ -8117,7 +8168,7 @@ async function setLessonSource(source, event) {
       console.log('Buscando lição original do GitHub');
     } catch (e) {
       console.error('Erro ao buscar lição original:', e);
-      alert('Não conseguimos buscar a lição do GitHub. Usando versão local.');
+      alert(t('alerts.licaoGithubFalhou'));
     }
   }
 }
