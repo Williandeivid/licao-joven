@@ -6753,6 +6753,13 @@ function aplicarTraducaoConteudo(contentPt, idioma, listaTraducoes){
           questions: diaPt.quiz.questions.map((q, i) => Object.assign({}, q, (diaTraduzido.quiz.questions && diaTraduzido.quiz.questions[i]) || {}))
         });
       }
+      // tf.answers (V/F) casa por posicao com tf.items, igual quiz.answers -
+      // mesmo motivo pra nao fazer merge raso aqui.
+      if(diaPt.tf && diaTraduzido.tf){
+        diaMesclado.tf = Object.assign({}, diaPt.tf, {
+          items: diaTraduzido.tf.items || diaPt.tf.items
+        });
+      }
       return diaMesclado;
     })
   });
