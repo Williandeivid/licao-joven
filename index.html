@@ -2906,13 +2906,13 @@ async function renderConta(){
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   await loadFavorites();
 
-  let html = `<div class="conta-header"><h1>Conta</h1><p>Seu perfil, aparência e seus dados.</p></div>
+  let html = `<div class="conta-header"><h1>${t('nav.conta')}</h1><p>${t('conta.subtitulo')}</p></div>
   <div class="conta-wrap">
 
     <div class="conta-card">
       <div class="conta-avatar-row">
         <div class="conta-avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-        <input type="text" id="conta-name" value="${goals.name||''}" placeholder="Seu nome" onchange="saveContaName(this.value)">
+        <input type="text" id="conta-name" value="${goals.name||''}" placeholder="${t('conta.nomePlaceholder')}" onchange="saveContaName(this.value)">
       </div>
     </div>
 
@@ -2947,39 +2947,39 @@ async function renderConta(){
     </div>
 
     <div class="conta-card">
-      <div class="conta-section-title">Seus dados</div>
+      <div class="conta-section-title">${t('conta.seusDados')}</div>
       <div class="conta-row">
-        <div><div class="conta-row-title">Fazer backup</div><div class="conta-row-sub">Baixa um arquivo com todo seu progresso</div></div>
-        <button class="conta-btn" onclick="exportBackup()">Baixar</button>
+        <div><div class="conta-row-title">${t('conta.fazerBackup')}</div><div class="conta-row-sub">${t('conta.fazerBackupNota')}</div></div>
+        <button class="conta-btn" onclick="exportBackup()">${t('conta.baixar')}</button>
       </div>
       <div class="conta-row">
-        <div><div class="conta-row-title">Restaurar backup</div><div class="conta-row-sub">Recupera o progresso de um arquivo salvo</div></div>
-        <button class="conta-btn conta-btn-secondary" onclick="document.getElementById('conta-restore-input').click()">Escolher arquivo</button>
+        <div><div class="conta-row-title">${t('conta.restaurarBackup')}</div><div class="conta-row-sub">${t('conta.restaurarBackupNota')}</div></div>
+        <button class="conta-btn conta-btn-secondary" onclick="document.getElementById('conta-restore-input').click()">${t('conta.escolherArquivo')}</button>
         <input type="file" id="conta-restore-input" accept=".json" style="display:none" onchange="importBackup(this.files[0])">
       </div>
       <div class="conta-row">
-        <div><div class="conta-row-title">Zerar tudo</div><div class="conta-row-sub">Apaga lições, plano bíblico e metas — sem volta</div></div>
-        <button class="conta-btn conta-btn-danger" onclick="confirmResetAll()">Zerar</button>
+        <div><div class="conta-row-title">${t('conta.zerarTudo')}</div><div class="conta-row-sub">Apaga lições, plano bíblico e metas — sem volta</div></div>
+        <button class="conta-btn conta-btn-danger" onclick="confirmResetAll()">${t('conta.zerar')}</button>
       </div>
     </div>
 
     <div class="conta-card">
-      <div class="conta-section-title">Feedback</div>
+      <div class="conta-section-title">${t('conta.feedback')}</div>
       <div class="conta-row">
-        <div><div class="conta-row-title">Reportar bug ou sugestão</div><div class="conta-row-sub">Abre um formulário rápido, leva menos de 1 minuto</div></div>
+        <div><div class="conta-row-title">${t('conta.reportarBug')}</div><div class="conta-row-sub">${t('conta.reportarBugNota')}</div></div>
         <a href="https://forms.gle/kWq4KMfBPg7D7h1M6" target="_blank" rel="noopener" class="conta-btn">Abrir</a>
       </div>
     </div>
 
     <div class="conta-card">
-      <div class="conta-section-title">Login e sincronização</div>
+      <div class="conta-section-title">${t('conta.loginSync')}</div>
       <div id="auth-container" style="display:flex; flex-direction:column; gap:12px;">
         <button id="login-btn" onclick="loginWithGoogle()" style="background:linear-gradient(90deg,#4285f4,#34a853); color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-          Entrar com Google
+          ${t('conta.entrarGoogle')}
         </button>
         <button id="logout-btn" onclick="logout()" style="background:#ff5d8f; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:none;">
-          Sair da conta
+          ${t('conta.sairConta')}
         </button>
         <button id="sync-btn" onclick="manualSync()" style="background:var(--violet); color:var(--on-violet); border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:none;">
           🔄 Sincronizar agora
@@ -2989,31 +2989,31 @@ async function renderConta(){
     </div>
     ${souAdmin() ? `
     <div class="conta-card">
-      <div class="conta-section-title">Administração</div>
+      <div class="conta-section-title">${t('conta.administracao')}</div>
       <div class="conta-row">
         <div>
-          <div class="conta-row-title">Comentários nas lições</div>
+          <div class="conta-row-title">${t('conta.comentariosToggle')}</div>
           <div class="conta-row-sub">${comentariosLigados()
             ? 'Ligados — todo mundo que entrar pode comentar'
             : 'Desligados — o botão nem aparece para ninguém'}</div>
         </div>
         <button class="conta-btn" onclick="alternarComentarios()">${comentariosLigados() ? 'Desligar' : 'Ligar'}</button>
       </div>
-      <p class="conta-note" style="margin:10px 0 0;">Esta seção aparece só para administradores.</p>
+      <p class="conta-note" style="margin:10px 0 0;">${t('conta.administracaoNota')}</p>
     </div>` : ''}
 
     <div class="conta-card">
-      <div class="conta-section-title">Ranking</div>
+      <div class="conta-section-title">${t('conta.ranking')}</div>
       ${currentUser ? `
       <div class="conta-row">
-        <div><div class="conta-row-title">Participar do ranking</div><div class="conta-row-sub">Mostra seu nome e desempenho pros outros participantes, nas abas Esta semana e Trimestre em Progresso</div></div>
+        <div><div class="conta-row-title">${t('conta.participarRanking')}</div><div class="conta-row-sub">Mostra seu nome e desempenho pros outros participantes, nas abas Esta semana e Trimestre em Progresso</div></div>
         <input type="checkbox" id="ranking-opt-in-check" onchange="onRankingOptInChange(this.checked)" style="width:22px;height:22px;flex-shrink:0;">
       </div>
-      ` : `<p class="conta-note">Entre com sua conta Google para participar do ranking.</p>`}
+      ` : `<p class="conta-note">${t('conta.entreParaRanking')}</p>`}
     </div>
 
     <div class="conta-card">
-      <div class="conta-section-title">Sobre</div>
+      <div class="conta-section-title">${t('conta.sobre')}</div>
       <p class="conta-note">ComTexto Bíblico — Resgate<br>3º Trimestre 2026</p>
     </div>
 
@@ -3980,10 +3980,10 @@ async function carregarRankingTab(tipo){
       panel.innerHTML = `
         <div class="ranking-row me">
           <span class="ranking-rank">—</span>
-          <span class="ranking-name">Você (privado)</span>
-          <span class="ranking-score">${dados.pontos} pts</span>
+          <span class="ranking-name">${t('ranking.vocePrivado')}</span>
+          <span class="ranking-score">${dados.pontos} ${t('ranking.pts')}</span>
         </div>
-        <p class="conta-note">Ative "Participar do ranking" na aba Conta pra comparar com outras pessoas.</p>`;
+        <p class="conta-note">${t('ranking.ativeParticipar').replace('${toggle}', t('conta.participarRanking')).replace('${conta}', t('nav.conta'))}</p>`;
       panel.dataset.loaded = '1';
       return;
     }
@@ -4010,7 +4010,7 @@ async function carregarRankingTab(tipo){
     lista.sort((a,b) => ((Number(b.pontos)||0) - (Number(a.pontos)||0)) || ((Number(b.notaMedia)||0) - (Number(a.notaMedia)||0)) || String(a.nome||'').localeCompare(String(b.nome||''), 'pt-BR'));
 
     if(!lista.length){
-      panel.innerHTML = `<p class="conta-note">Ninguém no ranking ${tipo==='semana'?'essa semana':'esse trimestre'} ainda. Seja o primeiro!</p>`;
+      panel.innerHTML = `<p class="conta-note">${tipo === 'semana' ? t('ranking.ninguemSemana') : t('ranking.ninguemTrimestre')}</p>`;
       panel.dataset.loaded = '1';
       return;
     }
@@ -4020,8 +4020,8 @@ async function carregarRankingTab(tipo){
     let html = top.map((item, i) => `
       <div class="ranking-row${item.uid===meuId?' me':''}">
         <span class="ranking-rank">${i+1}º</span>
-        <span class="ranking-name">${escaparHtml(item.nome || 'Alguém')}</span>
-        <span class="ranking-score">${Number(item.pontos) || 0} pts</span>
+        <span class="ranking-name">${escaparHtml(item.nome || t('ranking.alguem'))}</span>
+        <span class="ranking-score">${Number(item.pontos) || 0} ${t('ranking.pts')}</span>
       </div>`).join('');
 
     if(meuIndex >= 50){
@@ -4029,8 +4029,8 @@ async function carregarRankingTab(tipo){
       html += `<div class="ranking-sep">···</div>
       <div class="ranking-row me">
         <span class="ranking-rank">${meuIndex+1}º</span>
-        <span class="ranking-name">${escaparHtml(item.nome || 'Alguém')}</span>
-        <span class="ranking-score">${Number(item.pontos) || 0} pts</span>
+        <span class="ranking-name">${escaparHtml(item.nome || t('ranking.alguem'))}</span>
+        <span class="ranking-score">${Number(item.pontos) || 0} ${t('ranking.pts')}</span>
       </div>`;
     }
 
@@ -5147,6 +5147,36 @@ const UI_STRINGS = {
     'stats.metaLicao': 'Meta de Lição (min/dia)',
     'stats.metaDiasSemana': 'Meta de dias/semana',
     'stats.metaNota': 'Meta de nota (de 10)',
+    'conta.subtitulo': 'Seu perfil, aparência e seus dados.',
+    'conta.loginSync': 'Login e sincronização',
+    'conta.entrarGoogle': 'Entrar com Google',
+    'conta.sairConta': 'Sair da conta',
+    'conta.nomePlaceholder': 'Seu nome',
+    'conta.participarRanking': 'Participar do ranking',
+    'conta.entreParaRanking': 'Entre com sua conta Google para participar do ranking.',
+    'conta.ranking': 'Ranking',
+    'conta.feedback': 'Feedback',
+    'conta.reportarBug': 'Reportar bug ou sugestão',
+    'conta.reportarBugNota': 'Abre um formulário rápido, leva menos de 1 minuto',
+    'conta.seusDados': 'Seus dados',
+    'conta.fazerBackup': 'Fazer backup',
+    'conta.fazerBackupNota': 'Baixa um arquivo com todo seu progresso',
+    'conta.baixar': 'Baixar',
+    'conta.restaurarBackup': 'Restaurar backup',
+    'conta.restaurarBackupNota': 'Recupera o progresso de um arquivo salvo',
+    'conta.escolherArquivo': 'Escolher arquivo',
+    'conta.zerarTudo': 'Zerar tudo',
+    'conta.zerar': 'Zerar',
+    'conta.administracao': 'Administração',
+    'conta.administracaoNota': 'Esta seção aparece só para administradores.',
+    'conta.comentariosToggle': 'Comentários nas lições',
+    'conta.sobre': 'Sobre',
+    'ranking.vocePrivado': 'Você (privado)',
+    'ranking.ativeParticipar': 'Ative "${toggle}" na aba ${conta} pra comparar com outras pessoas.',
+    'ranking.ninguemSemana': 'Ninguém no ranking essa semana ainda. Seja o primeiro!',
+    'ranking.ninguemTrimestre': 'Ninguém no ranking esse trimestre ainda. Seja o primeiro!',
+    'ranking.alguem': 'Alguém',
+    'ranking.pts': 'pts',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5245,6 +5275,36 @@ const UI_STRINGS = {
     'stats.metaLicao': 'Lesson goal (min/day)',
     'stats.metaDiasSemana': 'Days/week goal',
     'stats.metaNota': 'Score goal (out of 10)',
+    'conta.subtitulo': 'Your profile, appearance, and your data.',
+    'conta.loginSync': 'Login and sync',
+    'conta.entrarGoogle': 'Sign in with Google',
+    'conta.sairConta': 'Sign out',
+    'conta.nomePlaceholder': 'Your name',
+    'conta.participarRanking': 'Join the leaderboard',
+    'conta.entreParaRanking': 'Sign in with your Google account to join the leaderboard.',
+    'conta.ranking': 'Leaderboard',
+    'conta.feedback': 'Feedback',
+    'conta.reportarBug': 'Report a bug or suggestion',
+    'conta.reportarBugNota': 'Opens a quick form, takes less than 1 minute',
+    'conta.seusDados': 'Your data',
+    'conta.fazerBackup': 'Back up',
+    'conta.fazerBackupNota': 'Downloads a file with all your progress',
+    'conta.baixar': 'Download',
+    'conta.restaurarBackup': 'Restore backup',
+    'conta.restaurarBackupNota': 'Recovers progress from a saved file',
+    'conta.escolherArquivo': 'Choose file',
+    'conta.zerarTudo': 'Reset everything',
+    'conta.zerar': 'Reset',
+    'conta.administracao': 'Administration',
+    'conta.administracaoNota': 'This section only appears for admins.',
+    'conta.comentariosToggle': 'Comments on lessons',
+    'conta.sobre': 'About',
+    'ranking.vocePrivado': 'You (private)',
+    'ranking.ativeParticipar': 'Turn on "${toggle}" in the ${conta} tab to compare with others.',
+    'ranking.ninguemSemana': "No one's on the leaderboard this week yet. Be the first!",
+    'ranking.ninguemTrimestre': "No one's on the leaderboard this quarter yet. Be the first!",
+    'ranking.alguem': 'Someone',
+    'ranking.pts': 'pts',
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5343,6 +5403,36 @@ const UI_STRINGS = {
     'stats.metaLicao': 'Meta de Lección (min/día)',
     'stats.metaDiasSemana': 'Meta de días/semana',
     'stats.metaNota': 'Meta de nota (de 10)',
+    'conta.subtitulo': 'Tu perfil, apariencia y tus datos.',
+    'conta.loginSync': 'Inicio de sesión y sincronización',
+    'conta.entrarGoogle': 'Iniciar sesión con Google',
+    'conta.sairConta': 'Cerrar sesión',
+    'conta.nomePlaceholder': 'Tu nombre',
+    'conta.participarRanking': 'Participar en el ranking',
+    'conta.entreParaRanking': 'Inicia sesión con tu cuenta de Google para participar en el ranking.',
+    'conta.ranking': 'Ranking',
+    'conta.feedback': 'Feedback',
+    'conta.reportarBug': 'Reportar un error o sugerencia',
+    'conta.reportarBugNota': 'Abre un formulario rápido, toma menos de 1 minuto',
+    'conta.seusDados': 'Tus datos',
+    'conta.fazerBackup': 'Hacer copia de seguridad',
+    'conta.fazerBackupNota': 'Descarga un archivo con todo tu progreso',
+    'conta.baixar': 'Descargar',
+    'conta.restaurarBackup': 'Restaurar copia de seguridad',
+    'conta.restaurarBackupNota': 'Recupera el progreso de un archivo guardado',
+    'conta.escolherArquivo': 'Elegir archivo',
+    'conta.zerarTudo': 'Borrar todo',
+    'conta.zerar': 'Borrar',
+    'conta.administracao': 'Administración',
+    'conta.administracaoNota': 'Esta sección aparece solo para administradores.',
+    'conta.comentariosToggle': 'Comentarios en las lecciones',
+    'conta.sobre': 'Acerca de',
+    'ranking.vocePrivado': 'Tú (privado)',
+    'ranking.ativeParticipar': 'Activa "${toggle}" en la pestaña ${conta} para comparar con otras personas.',
+    'ranking.ninguemSemana': 'Todavía nadie está en el ranking esta semana. ¡Sé el primero!',
+    'ranking.ninguemTrimestre': 'Todavía nadie está en el ranking este trimestre. ¡Sé el primero!',
+    'ranking.alguem': 'Alguien',
+    'ranking.pts': 'pts',
   },
 };
 
@@ -5407,6 +5497,11 @@ async function recarregarConteudoNoIdiomaAtual(){
     const statsAtivo = document.getElementById('tab-stats') && document.getElementById('tab-stats').classList.contains('active');
     if(statsAtivo){
       await renderStats();
+      return;
+    }
+    const contaAtiva = document.getElementById('tab-conta') && document.getElementById('tab-conta').classList.contains('active');
+    if(contaAtiva){
+      await renderConta();
       return;
     }
     const listaAtiva = document.getElementById('tab-list') && document.getElementById('tab-list').classList.contains('active') && document.getElementById('list-container') && document.getElementById('list-container').style.display !== 'none';
