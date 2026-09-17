@@ -4089,7 +4089,7 @@ async function openDayEditor(targetKey){
     <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Plano Bíblico</div>
     <div class="dayed-row"><label>Tempo (minutos)</label><input type="number" id="ed-bible-min" min="0" value="${bibleMinutes||''}" placeholder="—"></div>
   </div>
-  <button class="dayed-save" onclick="saveDayEditor()">${t('common.salvar')}</button>
+  <button class="dayed-save" onclick="saveDayEditor()">Salvar</button>
   </div></div>`;
 
   const wrap = document.createElement('div');
