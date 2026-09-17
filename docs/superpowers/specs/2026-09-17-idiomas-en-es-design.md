@@ -156,18 +156,89 @@ lição, na mesma função) passam a montar a URL com
 corrente. Nenhuma outra mudança — o parser de markdown
 (`markdownToHtml`) já processa o `.md` de qualquer idioma igual.
 
-**Limitação aceita:** o auto-link de citações bíblicas em texto puro
-dentro do markdown oficial (`formatBibleReferences()`, função
-`buscarOficialDaRede`) usa `BOOK_NAME_TO_ID`, um dicionário de nomes
-de livros **só em português** ("João", "Gênesis" etc.), pra detectar
-e transformar citações em texto corrido em links clicáveis. Em
-inglês/espanhol essa detecção não vai reconhecer os nomes dos livros
-("John", "Genesis", "Juan", "Génesis"...), então citações bíblicas na
-aba Oficial em EN/ES aparecem como texto normal, sem virar link
-clicável — o texto em si (vindo pronto do Adventech) continua correto
-e legível, só perde essa conveniência de toque. Fica registrado como
-melhoria futura (adicionar `BOOK_NAME_TO_ID` equivalente por idioma),
-não faz parte desta primeira entrega.
+### Toque pra ver versículo funciona nos três idiomas
+
+O auto-link de citações bíblicas em texto corrido
+(`formatBibleReferences()`, dentro de `buscarOficialDaRede()`) detecta
+nomes de livro no texto puro do markdown oficial usando
+`BOOK_NAME_TO_ID` — hoje um dicionário só em português ("João",
+"Gênesis"...). Pra funcionar em inglês e espanhol também, ele precisa
+reconhecer os nomes de livro **naquele** idioma.
+
+Solução: dois dicionários novos, mesmo formato de `BOOK_NAME_TO_ID`
+(nome do livro → mesmo código de 3 letras já usado em `data-book`,
+independente de idioma — `GEN`, `EXO`... `JHN`... `REV`), cobrindo
+nome completo de cada um dos 66 livros mais as abreviações mais
+comuns:
+
+```js
+const BOOK_NAME_TO_ID_EN = {
+  'Genesis':'GEN','Exodus':'EXO','Leviticus':'LEV','Numbers':'NUM','Deuteronomy':'DEU',
+  'Joshua':'JOS','Judges':'JDG','Ruth':'RUT','1 Samuel':'1SA','2 Samuel':'2SA',
+  '1 Kings':'1KI','2 Kings':'2KI','1 Chronicles':'1CH','2 Chronicles':'2CH','Ezra':'EZR',
+  'Nehemiah':'NEH','Esther':'EST','Job':'JOB','Psalms':'PSA','Psalm':'PSA','Proverbs':'PRO',
+  'Ecclesiastes':'ECC','Song of Solomon':'SNG','Song of Songs':'SNG','Isaiah':'ISA',
+  'Jeremiah':'JER','Lamentations':'LAM','Ezekiel':'EZK','Daniel':'DAN','Hosea':'HOS',
+  'Joel':'JOL','Amos':'AMO','Obadiah':'OBA','Jonah':'JON','Micah':'MIC','Nahum':'NAM',
+  'Habakkuk':'HAB','Zephaniah':'ZEP','Haggai':'HAG','Zechariah':'ZEC','Malachi':'MAL',
+  'Matthew':'MAT','Mark':'MRK','Luke':'LUK','John':'JHN','Acts':'ACT','Romans':'ROM',
+  '1 Corinthians':'1CO','2 Corinthians':'2CO','Galatians':'GAL','Ephesians':'EPH',
+  'Philippians':'PHP','Colossians':'COL','1 Thessalonians':'1TH','2 Thessalonians':'2TH',
+  '1 Timothy':'1TI','2 Timothy':'2TI','Titus':'TIT','Philemon':'PHM','Hebrews':'HEB',
+  'James':'JAS','1 Peter':'1PE','2 Peter':'2PE','1 John':'1JN','2 John':'2JN',
+  '3 John':'3JN','Jude':'JUD','Revelation':'REV',
+  // abreviacoes comuns
+  'Gen':'GEN','Ex':'EXO','Lev':'LEV','Num':'NUM','Deut':'DEU','Josh':'JOS','Judg':'JDG',
+  '1 Sam':'1SA','2 Sam':'2SA','1 Kgs':'1KI','2 Kgs':'2KI','1 Chr':'1CH','2 Chr':'2CH',
+  'Neh':'NEH','Ps':'PSA','Prov':'PRO','Eccl':'ECC','Isa':'ISA','Jer':'JER','Lam':'LAM',
+  'Ezek':'EZK','Dan':'DAN','Hos':'HOS','Obad':'OBA','Nah':'NAM','Hab':'HAB','Zeph':'ZEP',
+  'Hag':'HAG','Zech':'ZEC','Mal':'MAL','Matt':'MAT','Mk':'MRK','Lk':'LUK','Jn':'JHN',
+  'Rom':'ROM','1 Cor':'1CO','2 Cor':'2CO','Gal':'GAL','Eph':'EPH','Phil':'PHP',
+  'Col':'COL','1 Thess':'1TH','2 Thess':'2TH','1 Tim':'1TI','2 Tim':'2TI','Phlm':'PHM',
+  'Heb':'HEB','Jas':'JAS','1 Pet':'1PE','2 Pet':'2PE','1 Jn':'1JN','2 Jn':'2JN',
+  '3 Jn':'3JN','Rev':'REV'
+};
+
+const BOOK_NAME_TO_ID_ES = {
+  'Génesis':'GEN','Éxodo':'EXO','Levítico':'LEV','Números':'NUM','Deuteronomio':'DEU',
+  'Josué':'JOS','Jueces':'JDG','Rut':'RUT','1 Samuel':'1SA','2 Samuel':'2SA',
+  '1 Reyes':'1KI','2 Reyes':'2KI','1 Crónicas':'1CH','2 Crónicas':'2CH','Esdras':'EZR',
+  'Nehemías':'NEH','Ester':'EST','Job':'JOB','Salmos':'PSA','Salmo':'PSA',
+  'Proverbios':'PRO','Eclesiastés':'ECC','Cantares':'SNG','Isaías':'ISA',
+  'Jeremías':'JER','Lamentaciones':'LAM','Ezequiel':'EZK','Daniel':'DAN','Oseas':'HOS',
+  'Joel':'JOL','Amós':'AMO','Abdías':'OBA','Jonás':'JON','Miqueas':'MIC','Nahúm':'NAM',
+  'Habacuc':'HAB','Sofonías':'ZEP','Hageo':'HAG','Zacarías':'ZEC','Malaquías':'MAL',
+  'Mateo':'MAT','Marcos':'MRK','Lucas':'LUK','Juan':'JHN','Hechos':'ACT','Romanos':'ROM',
+  '1 Corintios':'1CO','2 Corintios':'2CO','Gálatas':'GAL','Efesios':'EPH',
+  'Filipenses':'PHP','Colosenses':'COL','1 Tesalonicenses':'1TH','2 Tesalonicenses':'2TH',
+  '1 Timoteo':'1TI','2 Timoteo':'2TI','Tito':'TIT','Filemón':'PHM','Hebreos':'HEB',
+  'Santiago':'JAS','1 Pedro':'1PE','2 Pedro':'2PE','1 Juan':'1JN','2 Juan':'2JN',
+  '3 Juan':'3JN','Judas':'JUD','Apocalipsis':'REV',
+  // abreviaciones comunes
+  'Gn':'GEN','Ex':'EXO','Lv':'LEV','Nm':'NUM','Dt':'DEU','Jos':'JOS','Jue':'JDG',
+  '1 Sm':'1SA','2 Sm':'2SA','1 Re':'1KI','2 Re':'2KI','1 Cr':'1CH','2 Cr':'2CH',
+  'Neh':'NEH','Sal':'PSA','Prov':'PRO','Ecl':'ECC','Is':'ISA','Jer':'JER','Lam':'LAM',
+  'Ez':'EZK','Dn':'DAN','Os':'HOS','Am':'AMO','Abd':'OBA','Jon':'JON','Miq':'MIC',
+  'Nah':'NAM','Hab':'HAB','Sof':'ZEP','Hag':'HAG','Zac':'ZEC','Mal':'MAL','Mt':'MAT',
+  'Mc':'MRK','Lc':'LUK','Jn':'JHN','Hch':'ACT','Rom':'ROM','1 Co':'1CO','2 Co':'2CO',
+  'Gal':'GAL','Ef':'EPH','Flp':'PHP','Col':'COL','1 Ts':'1TH','2 Ts':'2TH',
+  '1 Tim':'1TI','2 Tim':'2TI','Tit':'TIT','Flm':'PHM','Heb':'HEB','Stg':'JAS',
+  '1 Pe':'1PE','2 Pe':'2PE','1 Jn':'1JN','2 Jn':'2JN','3 Jn':'3JN','Jud':'JUD','Ap':'REV'
+};
+```
+
+`formatBibleReferences()` passa a receber o idioma corrente e escolher
+o dicionário certo (`BOOK_NAME_TO_ID` pra `pt`, `BOOK_NAME_TO_ID_EN`
+pra `en`, `BOOK_NAME_TO_ID_ES` pra `es`) antes de montar o
+`namesPattern`/`fullCiteRe` — o resto da função (como já reconhece
+"livro + capítulo[:versículos]" e "v. 10, 11" avulsos) não muda, só a
+fonte dos nomes de livro.
+
+`seedContextFromCentralTexts()` (usada só pela aba Resumo, pra
+interpretar referências curtas tipo "v. 10" a partir do contexto de
+`centraltexts`) **continua usando sempre `BOOK_NAME_TO_ID` em
+português** — `centraltexts` não é traduzido (ver Modelo de dados
+acima), então o dicionário que o interpreta também não precisa mudar.
 
 ### Aba Bíblia
 
@@ -221,8 +292,6 @@ pra quando o arquivo de tradução ainda não cobre alguma lição nova).
 ## Fora de escopo (não incluído nesta entrega)
 
 - Tradução da interface do app (botões, menus, rótulos fixos)
-- Auto-link de citações bíblicas em texto corrido na aba Oficial para
-  inglês/espanhol (precisaria de um `BOOK_NAME_TO_ID` por idioma)
 - Trimestres futuros (só o trimestre `2026-03-cq` atual é traduzido)
 - Mais de uma versão bíblica por idioma em inglês/espanhol (a fonte
   gratuita usada só tem uma de cada)
