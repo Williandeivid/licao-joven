@@ -6875,7 +6875,9 @@ async function buscarOficialDaRede(lessonId, dayId){
       const namesPattern = bookKeys.map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
       // O espanhol da Adventech escreve "Juan 11: 43" (espaço depois dos dois-pontos);
       // português/inglês escrevem "Jo 11:43"/"John 11:43" (sem espaço) - \s? cobre os dois.
-      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::\\s?(\\d+)(?:-(\\d+))?)?((?:,\\s?\\d+)*)', 'g');
+      // Range de versículo vem tanto com hífen comum ("6-8") quanto travessão ("1–5",
+      // "43–12:33") dependendo do idioma/dia - [-–—] cobre os tres.
+      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::\\s?(\\d+)(?:[-–—](\\d+))?)?((?:,\\s?\\d+)*)', 'g');
 
       // Primeiro: livro + capítulo[:versículos][, versículo extra...]
       text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, extraList, offset, full) => {
@@ -6916,7 +6918,7 @@ async function buscarOficialDaRede(lessonId, dayId){
         // "; capítulo:versículo[-versículo][,versículo]*" — continuação de outro
         // capítulo do MESMO livro, separada por ponto e vírgula.
         // Ex: "(Jo 14:15, 21; 15:10, 14)" ou "(At 1:8; 2:1-4)"
-        segment = segment.replace(/;\s*(\d+):\s?(\d+)(?:-(\d+))?((?:,\s?\d+)*)/g, (match, chapter, v1, v2, extraList) => {
+        segment = segment.replace(/;\s*(\d+):\s?(\d+)(?:[-–—](\d+))?((?:,\s?\d+)*)/g, (match, chapter, v1, v2, extraList) => {
           if(!lastBookId) return match;
           lastChapter = chapter;
           const label = chapter+':'+v1+(v2?'-'+v2:'');
