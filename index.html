@@ -2748,17 +2748,60 @@ function bindDayInteractions(lessonId, content, progress){
     if(!day.tf) return;
     const tfEl = document.querySelector('#day-'+day.id+' .tf');
     if(!tfEl) return;
-    tfEl.querySelectorAll('.tf-item').forEach(item=>{
+    const tfItems = tfEl.querySelectorAll('.tf-item');
+    const savedTf = progress.tf && progress.tf[day.id];
+    const tfState = {answered: savedTf ? tfItems.length : 0, correct: savedTf ? savedTf.correct : 0, startTime: null, timerInterval: null, done: !!savedTf};
+
+    if(savedTf){
+      tfItems.forEach(item=>{
+        const correct = tfEl.dataset.answers.split(',')[parseInt(item.dataset.q)-1];
+        item.querySelectorAll('button').forEach(b=>{
+          b.disabled = true;
+          if(b.dataset.v===correct) b.classList.add('correct');
+        });
+      });
+    }
+
+    tfItems.forEach(item=>{
       const correct = tfEl.dataset.answers.split(',')[parseInt(item.dataset.q)-1];
       item.querySelectorAll('button').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          if(item.querySelector('button[disabled]')) return;
+        btn.addEventListener('click', async ()=>{
+          if(tfState.done || item.querySelector('button[disabled]')) return;
+          if(tfState.startTime === null) tfState.startTime = Date.now();
           item.querySelectorAll('button').forEach(b=>{
             b.disabled=true;
             if(b.dataset.v===correct) b.classList.add('correct');
             else if(b===btn) b.classList.add('wrong');
           });
           item.classList.add('answered');
+          tfState.answered++;
+          if(btn.dataset.v === correct) tfState.correct++;
+
+          // So salva/entra no ranking quando TODAS as afirmacoes do dia
+          // foram respondidas - mesmo padrao do quiz de multipla escolha.
+          if(tfState.answered === tfItems.length){
+            tfState.done = true;
+            const elapsed = Date.now() - tfState.startTime;
+
+            const p = progressCache[lessonId] || {days:{}, quiz:{}};
+            if(!p.tf) p.tf = {};
+            if(!p.days) p.days = {};
+            p.tf[day.id] = {correct: tfState.correct, total: tfItems.length, time: elapsed};
+            const estMinutes = estimateDayReadingMinutes(lessonId, day.id);
+            if(!p.days[day.id]) p.days[day.id] = {studied:true, estMinutes};
+            progressCache[lessonId] = p;
+            await saveProgress(lessonId, p);
+
+            atualizarMarcacoesDoDia(lessonId, day.id);
+            const btnConcluir = document.querySelector(`.btn-concluir[data-lesson="${lessonId}"][data-day="${day.id}"]`);
+            if(btnConcluir && !btnConcluir.classList.contains('done')){
+              btnConcluir.classList.add('done');
+              btnConcluir.textContent = '✓ Dia concluído';
+            }
+            await registrarRankingPrivado();
+            await atualizarRankingSemanal();
+            await atualizarRankingTrimestre();
+          }
         });
       });
     });
@@ -3188,11 +3231,19 @@ function buildProgressMap(){
       const studied = !!dayEntry;
       const estMinutes = (dayEntry && typeof dayEntry === 'object' && dayEntry.estMinutes) || 0;
       const quiz = progress.quiz && progress.quiz[day.id];
-      if(studied || quiz){
+      const tf = progress.tf && progress.tf[day.id];
+      if(studied || quiz || tf){
         if(!map[key]) map[key] = {studied:false, pct:null, date, time:0};
         if(studied) map[key].studied = true;
-        map[key].time = (estMinutes * 60000) + (quiz ? (quiz.time || 0) : 0);
-        if(quiz){ map[key].pct = Math.round(quiz.correct/quiz.total*100); }
+        map[key].time = (estMinutes * 60000) + (quiz ? (quiz.time || 0) : 0) + (tf ? (tf.time || 0) : 0);
+        // pct mescla quiz e Verdadeiro/Falso quando os dois existem no dia
+        // (a maioria) - com so um dos dois, usa so ele. Usado pela media do
+        // ranking e por qualquer outro lugar que le buildProgressMap.
+        const quizPct = quiz ? quiz.correct/quiz.total*100 : null;
+        const tfPct = tf ? tf.correct/tf.total*100 : null;
+        if(quizPct !== null && tfPct !== null) map[key].pct = Math.round((quizPct+tfPct)/2);
+        else if(quizPct !== null) map[key].pct = Math.round(quizPct);
+        else if(tfPct !== null) map[key].pct = Math.round(tfPct);
       }
     });
   });
