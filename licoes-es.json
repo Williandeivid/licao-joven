@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "Confrontación Decisiva",
+    "keyword": "ENTREGA",
+    "days": [
+      {
+        "id": "dom",
+        "title": "El Comienzo del Fin",
+        "summary": "La resurrección de Lázaro fue el último gran milagro público de Jesús — y, al mismo tiempo, la chispa que selló la decisión de los líderes religiosos de matarlo.",
+        "body": ["<p>La resurrección de Lázaro fue el último gran milagro realizado por Jesús durante Su ministerio público.</p>"],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": ["¿Por qué crees que el mayor milagro de Jesús generó más odio, en lugar de más fe?"]
+      }
+    ]
+  }
+]

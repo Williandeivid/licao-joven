@@ -2050,7 +2050,9 @@ async function renderLessonDetail(lessonId, fromList){
   }
 
   const meta = LESSONS_META.find(l=>l.id===lessonId);
-  const content = LESSONS_CONTENT.find(l=>l.id===lessonId);
+  const contentPt = LESSONS_CONTENT.find(l=>l.id===lessonId);
+  const listaTraducoes = await carregarTraducaoResumo(idiomaConteudoAtual);
+  const content = aplicarTraducaoConteudo(contentPt, idiomaConteudoAtual, listaTraducoes);
   const progress = progressCache[lessonId] || {days:{}, quiz:{}};
   const container = document.getElementById('detail-container');
   if(!container) return;
@@ -6660,6 +6662,46 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initFirebaseAuth);
 } else {
   initFirebaseAuth();
+}
+
+// ===== TRADUCAO DA ABA RESUMO =====
+// So carrega o arquivo do idioma quando alguem troca pra ingles/espanhol -
+// em portugues (o padrao) nao baixa nada extra, o conteudo ja esta embutido
+// em LESSONS_CONTENT.
+const traducaoResumoCache = {};
+
+async function carregarTraducaoResumo(idioma){
+  if(idioma === 'pt') return null;
+  if(traducaoResumoCache[idioma]) return traducaoResumoCache[idioma];
+  try{
+    const res = await fetch(`licoes-${idioma}.json`);
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const lista = await res.json();
+    traducaoResumoCache[idioma] = lista;
+    return lista;
+  }catch(e){
+    console.warn('⚠️ Não carregou a tradução da lição (' + idioma + '):', e.message);
+    traducaoResumoCache[idioma] = []; // evita tentar de novo a cada render nesta sessao
+    return [];
+  }
+}
+
+// Mescla os campos traduzidos por cima de uma copia do conteudo em
+// portugues. Campos ausentes na traducao (lista de dias menor, ou o
+// proprio dia faltando) caem pro portugues automaticamente - cobertura
+// parcial nunca quebra a tela.
+function aplicarTraducaoConteudo(contentPt, idioma, listaTraducoes){
+  if(idioma === 'pt' || !contentPt || !listaTraducoes) return contentPt;
+  const traducaoLicao = listaTraducoes.find(l => l.id === contentPt.id);
+  if(!traducaoLicao) return contentPt;
+
+  const mesclado = Object.assign({}, contentPt, traducaoLicao, {
+    days: contentPt.days.map(diaPt => {
+      const diaTraduzido = traducaoLicao.days && traducaoLicao.days.find(d => d.id === diaPt.id);
+      return diaTraduzido ? Object.assign({}, diaPt, diaTraduzido) : diaPt;
+    })
+  });
+  return mesclado;
 }
 
 // ===== OFFICIAL SOURCE TABS CACHE & FUNCTIONS =====

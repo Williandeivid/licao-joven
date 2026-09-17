@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "Decisive Confrontation",
+    "keyword": "DELIVERY",
+    "days": [
+      {
+        "id": "dom",
+        "title": "The Beginning of the End",
+        "summary": "The resurrection of Lazarus was Jesus' last great public miracle — and, at the same time, the spark that sealed the religious leaders' decision to kill Him.",
+        "body": ["<p>The resurrection of Lazarus was the last great miracle performed by Jesus during His public ministry.</p>"],
+        "reflectTitle": "Reflection Questions",
+        "reflect": ["Why do you think Jesus' greatest miracle generated more hatred, instead of more faith?"]
+      }
+    ]
+  }
+]
