@@ -2355,7 +2355,7 @@ async function toggleVerseLive(el){
         return `<a href="${externalUrl}" target="_blank" rel="noopener" class="vpop-extlink">Abrir ${bookMeta.name} ${chapter} num site de Bíblia →</a>`;
       })()
     : '';
-  const refLabel = v1===v2 ? `${bookMeta.name} ${chapter}:${v1}` : `${bookMeta.name} ${chapter}:${v1}-${v2}`;
+  const refLabel = v1===v2 ? `${bookDisplayName(bookMeta.id, idiomaConteudoAtual)} ${chapter}:${v1}` : `${bookDisplayName(bookMeta.id, idiomaConteudoAtual)} ${chapter}:${v1}-${v2}`;
 
   openVerseModal(refLabel, `${versionSwitchRow(idioma,versaoInicial,book,chapter,v1,v2)}<span class="vpop-loading">Buscando o texto...</span><br>${externalLink}`, {book,chapter,v1,v2,label:refLabel});
   await renderVerseVersion(idioma, versaoInicial, bookMeta, chapter, v1, v2, externalLink);
@@ -4223,6 +4223,35 @@ const BOOK_ABBR_PT = {
 const BOOK_NAME_BY_ID = {};
 BIBLE_BOOKS.forEach(b=>{ BOOK_NAME_BY_ID[b.id] = b.name; });
 
+// Deriva o nome completo em EN/ES de cada livro invertendo os dicionarios
+// nome->id que ja existem (BOOK_NAME_TO_ID_EN/_ES) - a entrada mais longa
+// que aponta pra um id e sempre o nome completo, nunca a abreviacao (ex.:
+// "Genesis" e "Gn" apontam pro mesmo id GEN; "Genesis" e a mais longa).
+function nomesCompletosPorId(dicionario){
+  const porId = {};
+  Object.keys(dicionario).forEach(nome => {
+    const id = dicionario[nome];
+    if(!porId[id] || nome.length > porId[id].length) porId[id] = nome;
+  });
+  return porId;
+}
+const NOME_COMPLETO_EN_POR_ID = nomesCompletosPorId(BOOK_NAME_TO_ID_EN);
+const NOME_COMPLETO_ES_POR_ID = nomesCompletosPorId(BOOK_NAME_TO_ID_ES);
+BIBLE_BOOKS.forEach(b=>{
+  b.name_en = NOME_COMPLETO_EN_POR_ID[b.id] || b.name;
+  b.name_es = NOME_COMPLETO_ES_POR_ID[b.id] || b.name;
+});
+
+// Nome do livro pra EXIBIR na tela, no idioma certo - nunca usar pra montar
+// URL/chave de cache (isso continua sendo o id de 3 letras, ja existente).
+function bookDisplayName(bookId, idioma){
+  const book = BIBLE_BOOKS.find(b => b.id === bookId);
+  if(!book) return bookId;
+  if(idioma === 'en') return book.name_en;
+  if(idioma === 'es') return book.name_es;
+  return book.name;
+}
+
 function buildTraditionalSeq(){
   const seq = [];
   BIBLE_BOOKS.forEach(b=>{ for(let c=1;c<=b.ch;c++){ seq.push({book:b.id, chapter:c}); } });
@@ -4431,7 +4460,7 @@ function bibleCrumbHtml(book){
   if(bibleState.returnTo === 'plan'){
     return `<button onclick="renderBiblePlan()">← ${BIBLE_PLANS[currentPlanKey].name}</button>`;
   }
-  return `<button onclick="goBible()">← Livros</button><span>/</span><button onclick="renderBibleChapters()">${book.name}</button>`;
+  return `<button onclick="goBible()">← Livros</button><span>/</span><button onclick="renderBibleChapters()">${bookDisplayName(book.id, idiomaConteudoAtual)}</button>`;
 }
 
 let activeBiblePlan = null;
@@ -4852,11 +4881,11 @@ function openBiblePlanCalendar(key, startDateStr, monthOffset){
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
         <button onclick="openBiblePlanCalendar('${key}', '${startDateStr}', ${monthOffset-1})" style="
           background:none;border:none;color:var(--primary);cursor:pointer;font-size:14px;
-        ">‹ Anterior</button>
+        ">${t('bible.anteriorCap')}</button>
         <span style="font-weight:600;">${monthDate.toLocaleDateString('pt-BR', {month:'long', year:'numeric'})}</span>
         <button onclick="openBiblePlanCalendar('${key}', '${startDateStr}', ${monthOffset+1})" style="
           background:none;border:none;color:var(--primary);cursor:pointer;font-size:14px;
-        ">Próximo ›</button>
+        ">${t('bible.proximoCap')}</button>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(7, 1fr);gap:4px;">`;
@@ -5047,6 +5076,18 @@ const UI_STRINGS = {
     'lesson.resumoEstudoPessoal': 'resumo de estudo pessoal',
     'lesson.anterior': '← Anterior',
     'lesson.proximo': 'Próximo →',
+    'bible.titulo': 'Bíblia',
+    'bible.modoLista': '☰ Lista',
+    'bible.modoCards': '▢ Cards',
+    'bible.modoTabela': '▦ Tabela Periódica',
+    'bible.subtitulo': 'Escolha um livro para ler — NVI ou ARA.',
+    'bible.antigoTestamento': 'Antigo Testamento',
+    'bible.novoTestamento': 'Novo Testamento',
+    'bible.credito': 'NVI e ARC via repositório público no GitHub (MaatheusGois/bible)',
+    'bible.anteriorCap': '‹ Anterior',
+    'bible.proximoCap': 'Próximo ›',
+    'bible.capitulo': ' capítulo',
+    'bible.capitulos': ' capítulos',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5107,6 +5148,18 @@ const UI_STRINGS = {
     'lesson.resumoEstudoPessoal': 'personal study summary',
     'lesson.anterior': '← Previous',
     'lesson.proximo': 'Next →',
+    'bible.titulo': 'Bible',
+    'bible.modoLista': '☰ List',
+    'bible.modoCards': '▢ Cards',
+    'bible.modoTabela': '▦ Periodic Table',
+    'bible.subtitulo': 'Choose a book to read — King James Version.',
+    'bible.antigoTestamento': 'Old Testament',
+    'bible.novoTestamento': 'New Testament',
+    'bible.credito': 'KJV via public GitHub repository (MaatheusGois/bible)',
+    'bible.anteriorCap': '‹ Previous',
+    'bible.proximoCap': 'Next ›',
+    'bible.capitulo': ' chapter',
+    'bible.capitulos': ' chapters',
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5167,6 +5220,18 @@ const UI_STRINGS = {
     'lesson.resumoEstudoPessoal': 'resumen de estudio personal',
     'lesson.anterior': '← Anterior',
     'lesson.proximo': 'Siguiente →',
+    'bible.titulo': 'Biblia',
+    'bible.modoLista': '☰ Lista',
+    'bible.modoCards': '▢ Tarjetas',
+    'bible.modoTabela': '▦ Tabla Periódica',
+    'bible.subtitulo': 'Elige un libro para leer — Reina-Valera.',
+    'bible.antigoTestamento': 'Antiguo Testamento',
+    'bible.novoTestamento': 'Nuevo Testamento',
+    'bible.credito': 'Reina-Valera vía repositorio público en GitHub (MaatheusGois/bible)',
+    'bible.anteriorCap': '‹ Anterior',
+    'bible.proximoCap': 'Siguiente ›',
+    'bible.capitulo': ' capítulo',
+    'bible.capitulos': ' capítulos',
   },
 };
 
@@ -5266,17 +5331,17 @@ function renderBookGrid(books){
   if(bibleViewMode === 'card'){
     return `<div class="book-cards">` + books.map(b=>
       `<button class="book-card cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')">
-        <span class="bc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="bc-name">${b.name}</span>
+        <span class="bc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="bc-name">${bookDisplayName(b.id, idiomaConteudoAtual)}</span>
       </button>`).join('') + `</div>`;
   }
   if(bibleViewMode === 'periodic'){
     return `<div class="periodic-grid">` + books.map(b=>
-      `<button class="periodic-cell cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')" title="${b.name}">
-        <span class="pc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="pc-name">${b.name}</span>
+      `<button class="periodic-cell cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')" title="${bookDisplayName(b.id, idiomaConteudoAtual)}">
+        <span class="pc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="pc-name">${bookDisplayName(b.id, idiomaConteudoAtual)}</span>
       </button>`).join('') + `</div>`;
   }
   return `<div class="book-grid">` + books.map(b=>
-    `<button class="book-btn" onclick="openBibleBook('${b.id}')">${b.name}</button>`).join('') + `</div>`;
+    `<button class="book-btn" onclick="openBibleBook('${b.id}')">${bookDisplayName(b.id, idiomaConteudoAtual)}</button>`).join('') + `</div>`;
 }
 
 function renderBibleBooks(){
@@ -5284,21 +5349,21 @@ function renderBibleBooks(){
   if(!container) return;
   let html = bibleSubtabsHTML('read');
   html += `<div class="bible-header">
-    <h1><svg class="header-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Bíblia
+    <h1><svg class="header-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>${t('bible.titulo')}
       <button class="gear-btn" onclick="toggleViewModeMenu()">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
     </h1>
     <div class="view-mode-menu" id="view-mode-menu">
-      <button class="${bibleViewMode==='list'?'active':''}" onclick="setBibleViewMode('list')">☰ Lista</button>
-      <button class="${bibleViewMode==='card'?'active':''}" onclick="setBibleViewMode('card')">▢ Cards</button>
-      <button class="${bibleViewMode==='periodic'?'active':''}" onclick="setBibleViewMode('periodic')">▦ Tabela Periódica</button>
+      <button class="${bibleViewMode==='list'?'active':''}" onclick="setBibleViewMode('list')">${t('bible.modoLista')}</button>
+      <button class="${bibleViewMode==='card'?'active':''}" onclick="setBibleViewMode('card')">${t('bible.modoCards')}</button>
+      <button class="${bibleViewMode==='periodic'?'active':''}" onclick="setBibleViewMode('periodic')">${t('bible.modoTabela')}</button>
     </div>
-    <p>Escolha um livro para ler — NVI ou ARA.</p></div>
+    <p>${t('bible.subtitulo')}</p></div>
   <div class="bible-wrap">`;
-  html += `<div class="testament-label">Antigo Testamento</div>` + renderBookGrid(BIBLE_BOOKS.filter(b=>b.t==='AT'));
-  html += `<div class="testament-label">Novo Testamento</div>` + renderBookGrid(BIBLE_BOOKS.filter(b=>b.t==='NT'));
-  html += `</div><footer>NVI e ARC via repositório público no GitHub (MaatheusGois/bible)</footer>`;
+  html += `<div class="testament-label">${t('bible.antigoTestamento')}</div>` + renderBookGrid(BIBLE_BOOKS.filter(b=>b.t==='AT'));
+  html += `<div class="testament-label">${t('bible.novoTestamento')}</div>` + renderBookGrid(BIBLE_BOOKS.filter(b=>b.t==='NT'));
+  html += `</div><footer>${t('bible.credito')}</footer>`;
   container.innerHTML = html;
 }
 
@@ -5373,8 +5438,8 @@ async function openChapterPopup(bookId, chapter, refLabel){
   if(!book) return;
   const idioma = idiomaConteudoAtual;
   const versaoInicial = idioma === 'pt' ? 'nvi' : IDIOMA_BIBLIA[idioma].versaoUnica;
-  const title = refLabel || `${book.name} ${chapter}`;
-  openVerseModal(title, `${chapterPopupVersionRow(idioma,versaoInicial,bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`, {book:bookId, chapter, v1:0, v2:0, label:`${book.name} ${chapter}`});
+  const title = refLabel || `${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`;
+  openVerseModal(title, `${chapterPopupVersionRow(idioma,versaoInicial,bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`, {book:bookId, chapter, v1:0, v2:0, label:`${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`});
   await renderChapterPopupVersion(idioma, versaoInicial, book, chapter);
 }
 
@@ -5412,7 +5477,7 @@ function renderBibleChapters(){
   const book = BIBLE_BOOKS.find(b=>b.id===bibleState.book);
   const container = document.getElementById('bible-container');
   if(!container) return;
-  let html = `<div class="bible-header"><h1>${book.name}</h1><p>${book.ch} capítulo${book.ch>1?'s':''}</p></div>
+  let html = `<div class="bible-header"><h1>${bookDisplayName(book.id, idiomaConteudoAtual)}</h1><p>${book.ch}${book.ch>1?t('bible.capitulos'):t('bible.capitulo')}</p></div>
   <div class="bible-wrap">
     <div class="bible-crumbs">${bibleState.returnTo==='plan' ? bibleCrumbHtml(book) : '<button onclick="goBible()">← Livros</button>'}</div>
     <div class="chapter-grid">`;
@@ -5544,7 +5609,7 @@ async function openBibleChapter(chapter){
   const idioma = idiomaConteudoAtual;
   container.innerHTML = `<div class="bible-wrap"><div class="bible-crumbs">
     ${bibleCrumbHtml(book)}
-  </div><div class="bible-loading">Carregando ${book.name} ${chapter}...</div></div>`;
+  </div><div class="bible-loading">Carregando ${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}...</div></div>`;
   window.scrollTo(0,0);
 
   let result, usedTranslation = bibleState.translation;
@@ -5575,7 +5640,7 @@ async function openBibleChapter(chapter){
       container.innerHTML = `<div class="bible-wrap"><div class="bible-crumbs">
         ${bibleCrumbHtml(book)}
       </div><div class="bible-error">Não consegui buscar este capítulo agora (sem conexão ou bloqueio de rede).<br>
-      <a href="${externalUrl}" target="_blank" rel="noopener" class="vpop-extlink">Abrir ${book.name} ${chapter} num site de Bíblia →</a><br><br>
+      <a href="${externalUrl}" target="_blank" rel="noopener" class="vpop-extlink">Abrir ${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter} num site de Bíblia →</a><br><br>
       <button onclick="openBibleChapter(${chapter})">Tentar de novo</button></div></div>`;
       return;
       }
@@ -5600,9 +5665,9 @@ async function renderBibleChapterContent(book, chapter, result, translation, idi
     </div>
     <div class="verse-card">
       <div class="verse-card-head">
-        <h2>${book.name} ${chapter}</h2>
+        <h2>${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}</h2>
         <div style="display:flex;align-items:center;gap:8px;">
-          <button class="fav-star-btn" id="fav-star-btn-chapter" onclick="toggleFavorite('${book.id}',${chapter},0,0,'${book.name} ${chapter}')"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button class="fav-star-btn" id="fav-star-btn-chapter" onclick="toggleFavorite('${book.id}',${chapter},0,0,'${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}')"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
           ${idioma === 'pt' ? `<div class="translation-toggle">
             <button class="${translation==='nvi'?'active':''}" onclick="switchTranslation('nvi')">NVI</button>
             <button class="${translation==='ara'?'active':''}" onclick="switchTranslation('ara')">ARA</button>
@@ -5627,8 +5692,8 @@ async function renderBibleChapterContent(book, chapter, result, translation, idi
     html += `<div class="verse-line${colorName?' highlighted':''}" data-vkey="${key}"${bg} onclick="openHighlightPicker(this,'${book.id}',${chapter},${v.verse})">${v.verse?`<span class="verse-num">${v.verse}</span>`:''}${v.text}</div>`;
   });
   html += `<div class="chapter-nav">
-      <button onclick="openBibleChapter(${chapter-1})" ${chapter<=1?'disabled':''}>‹ Anterior</button>
-      <button onclick="openBibleChapter(${chapter+1})" ${chapter>=book.ch?'disabled':''}>Próximo ›</button>
+      <button onclick="openBibleChapter(${chapter-1})" ${chapter<=1?'disabled':''}>${t('bible.anteriorCap')}</button>
+      <button onclick="openBibleChapter(${chapter+1})" ${chapter>=book.ch?'disabled':''}>${t('bible.proximoCap')}</button>
     </div>
   </div></div>`;
   container.innerHTML = html;
