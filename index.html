@@ -376,8 +376,8 @@
   }
   /* Exceção: links de citação bíblica sempre seguem a cor do tema,
      mesmo com o modo de leitura antigo (dia/noite/sépia) ativo por cima */
-  [data-lesson-reading-mode] .day a[href^="javascript:openBibleReference"],
-  [data-lesson-reading-mode] .day-content a[href^="javascript:openBibleReference"],
+  [data-lesson-reading-mode] .day .vref-chapter,
+  [data-lesson-reading-mode] .day-content .vref-chapter,
   [data-lesson-reading-mode] .day .vref,
   [data-lesson-reading-mode] .day-content .vref {
     color: var(--violet) !important;
@@ -5070,6 +5070,14 @@ function chapterPopupVersionRow(idioma, activeVersion, bookId, chapter){
   return `<div class="vpop-version-row">${btn('nvi','NVI')}${btn('ara','ARA')}</div>`;
 }
 
+// Handler de clique pros links de referencia de capitulo sem versiculo
+// gerados por wrapChapter (formatBibleReferences) - le os dados de
+// data-* do proprio elemento em vez de montar uma chamada dentro do
+// href, mesmo padrao que toggleVerseLive ja usa pra referencias de versiculo.
+function abrirCapituloDoTexto(el){
+  openChapterPopup(el.dataset.book, parseInt(el.dataset.chapter), el.textContent);
+}
+
 async function openChapterPopup(bookId, chapter, refLabel){
   const book = BIBLE_BOOKS.find(b=>b.id===bookId);
   if(!book) return;
@@ -6784,8 +6792,8 @@ async function buscarOficialDaRede(lessonId, dayId){
         v2 = v2 || v1;
         return `<span class="vref" data-book="${bookId}" data-chapter="${chapter}" data-v1="${v1}" data-v2="${v2}" onclick="toggleVerseLive(this)">${label}</span><span class="vref-pop"></span>`;
       }
-      function wrapChapter(fullName, chapter, label){
-        return `<a href="javascript:openBibleReference('${fullName} ${chapter}')" style="color:var(--violet);text-decoration:underline;cursor:pointer;">${label}</a>`;
+      function wrapChapter(bookId, chapter, label){
+        return `<a class="vref-chapter" data-book="${bookId}" data-chapter="${chapter}" onclick="abrirCapituloDoTexto(this)" style="color:var(--violet);text-decoration:underline;cursor:pointer;">${label}</a>`;
       }
 
       const bookKeys = Object.keys(dicionarioLivros).sort((a,b)=>b.length-a.length);
@@ -6799,7 +6807,7 @@ async function buscarOficialDaRede(lessonId, dayId){
         lastBookId = bookId; lastChapter = chapter;
         if(!v1){
           // Sem versículo especificado: abre o capítulo inteiro (comportamento de antes)
-          return wrapChapter(bookName, chapter, match);
+          return wrapChapter(bookId, chapter, match);
         }
         let result = wrapVerse(bookId, chapter, v1, v2, `${bookName} ${chapter}:${v1}${v2 ? '-' + v2 : ''}`);
         if(extraList){
@@ -6811,7 +6819,7 @@ async function buscarOficialDaRede(lessonId, dayId){
       // Segundo: versículos avulsos "(v. 10)", "v. 10-12", "(v. 10, 11)" — sempre versículo
       // específico. Pula por cima do HTML já gerado no primeiro passo (spans/links),
       // processando só o texto puro entre eles — evita reprocessar "data-v1=" etc.
-      const skipRe = /<span class="vref"[^>]*>.*?<\/span>(?:<span class="vref-pop"><\/span>)?|<a href="javascript:openBibleReference[^>]*>.*?<\/a>/g;
+      const skipRe = /<span class="vref"[^>]*>.*?<\/span>(?:<span class="vref-pop"><\/span>)?|<a class="vref-chapter"[^>]*>.*?<\/a>/g;
       const linkStandaloneVerses = (segment) => {
         segment = segment.replace(/\(?\s*v\.?\s*(\d+)(?:-(\d+))?((?:,\s?\d+)*)\s*\)?/g, (match, v1, v2, extraList) => {
           if(!lastBookId) return match;
