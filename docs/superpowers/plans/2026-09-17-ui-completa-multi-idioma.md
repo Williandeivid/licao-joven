@@ -2315,6 +2315,10 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'stats.legendaDiasBiblia': 'Dias de Bíblia',
 'stats.legendaDiasLicao': 'Dias de Lição',
 'bible.buscandoCapitulo': 'Buscando o capítulo...',
+'bible.livros': 'Livros',
+'bible.calendarioDoPlano': 'Calendário do Plano',
+'bible.continuePlanoBiblico': 'Continue seu plano bíblico',
+'bible.ler': 'Ler →',
 ```
 
 ```js
@@ -2339,6 +2343,10 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'stats.legendaDiasBiblia': 'Bible Days',
 'stats.legendaDiasLicao': 'Lesson Days',
 'bible.buscandoCapitulo': 'Fetching the chapter...',
+'bible.livros': 'Books',
+'bible.calendarioDoPlano': 'Plan Calendar',
+'bible.continuePlanoBiblico': 'Continue your Bible plan',
+'bible.ler': 'Read →',
 ```
 
 ```js
@@ -2363,6 +2371,10 @@ git commit -m "feat: traduz a aba Plano Bíblico inteira"
 'stats.legendaDiasBiblia': 'Días de Biblia',
 'stats.legendaDiasLicao': 'Días de Lección',
 'bible.buscandoCapitulo': 'Buscando el capítulo...',
+'bible.livros': 'Libros',
+'bible.calendarioDoPlano': 'Calendario del Plan',
+'bible.continuePlanoBiblico': 'Continúa tu plan bíblico',
+'bible.ler': 'Leer →',
 ```
 
 - [ ] **Step 2: Aplicar `saudacaoPorHorario`**
@@ -2397,6 +2409,30 @@ function saudacaoPorHorario() {
 | `Dias de Bíblia` / `Dias de Lição` (`renderBibleDaysVsLessonsChart`, legenda do gráfico, ~linha 3701 — mesmo achado da Task 12) | `stats.legendaDiasBiblia`/`stats.legendaDiasLicao` |
 | `Buscando o capítulo...` (`openChapterPopup`/`switchChapterPopupVersion`, ~linhas 5951/5958 — achado pela revisão da Task 13, string irmã de `bible.buscandoTexto` mas com texto diferente) | `bible.buscandoCapitulo` |
 | `Não consegui buscar aqui dentro agora.` (`renderChapterPopupVersion`, catch, ~linha 5972 — mesmo achado) | `t('bible.naoConseguiBuscarAqui')` — **reaproveita**, texto idêntico ao já criado na Task 13, não cria chave nova |
+| `← Livros` (`bibleCrumbHtml`, ~linha 4544 — achado pela revisão da Task 14) | `` `← ${t('bible.livros')}` `` |
+| `Calendário do Plano` (h2 do modal `openBiblePlanCalendar`, ~linha 5021 — achado pela revisão da Task 14) | `bible.calendarioDoPlano` |
+| `['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']` (dias da semana do mesmo modal, ~linha 4972 — mesmo achado) | ver bloco de código abaixo, novo array `DIAS_ABREV_POR_IDIOMA` |
+| `Continue seu plano bíblico` (card do Home, `getBiblePlanHomeCard`, ~linha 2209 — achado pela revisão da Task 14) | `bible.continuePlanoBiblico` |
+| `Ler →` (mesmo card, ~linha 2211) | `bible.ler` |
+| `BOOK_NAME_BY_ID[curBook]` (`readingLabel`, ~linhas 4421/4425 — usado pelo mesmo card do Home; único consumidor restante de `BOOK_NAME_BY_ID` fora da fonte de dados — mesmo achado da Task 14) | `bookDisplayName(curBook, idiomaConteudoAtual)` (função já existente desde a Task 5) — troca nos 2 pontos da função |
+
+Pra `['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']` do modal de calendário do plano, adicione um array novo (mesmo padrão de `DIAS_INICIAIS_POR_IDIOMA` da Task 12, mas com abreviação de 3 letras em vez de inicial única — são usos diferentes, não reaproveite um pro outro):
+
+```js
+const DIAS_ABREV_POR_IDIOMA = {
+  pt: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+  en: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+  es: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+};
+```
+```js
+// troca:
+['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'].forEach(day => { ... })
+// por:
+(DIAS_ABREV_POR_IDIOMA[idiomaConteudoAtual] || DIAS_ABREV_POR_IDIOMA.pt).forEach(day => { ... })
+```
+
+**Correção de comportamento (Importante, achado pela revisão da Task 14):** a tela do Plano Bíblico (seletor de planos ou tela de um plano aberto) não é redesenhada ao trocar o idioma pelo menu — `recarregarConteudoNoIdiomaAtual()` só cobre o caso de capítulo aberto na aba Bíblia (`bibleAtivo && bibleState.chapter`), não o caso de estar na sub-aba Plano Bíblico. Investigue e corrija: acrescente um jeito de saber, dentro de `recarregarConteudoNoIdiomaAtual`, se a sub-aba ativa é "Plano Bíblico" (seletor OU plano aberto) e, se for, redesenhar com `goBiblePlan()` (que já decide sozinha entre seletor e plano ativo). Mesmo padrão já usado pra resolver o bug parecido da capa de trimestres vs. lista de lições (correção da revisão final da 1ª rodada) — pode usar um `dataset` marcador no `#bible-container`, ou qualquer sinal já confiável que você achar investigando `goBiblePlan`/`renderPlanSelector`/`renderBiblePlan`/`goBible`/`renderBibleBooks`. Teste os 3 cenários: lista de livros da Bíblia aberta (continua lista), plano bíblico aberto (continua plano), nenhum dos dois (lição/stats/conta/lista, já cobertos, não quebra).
 
 - [ ] **Step 4: Consistência de locale (`pt-BR` fixo → `LOCALE_POR_IDIOMA`)**
 
