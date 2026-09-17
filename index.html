@@ -1878,14 +1878,14 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
   html += `<div class="source-tabs">
     <button class="source-tab active" data-tab="oficial" onclick="switchSourceTab(this, '${day.id}', '${lessonId}')">
       <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      Oficial
+      ${t('lesson.abaOficial')}
     </button>
     <button class="source-tab" data-tab="resumo" onclick="switchSourceTab(this, '${day.id}', '${lessonId}')">
-      ✎ Resumo
+      ${t('lesson.abaResumo')}
     </button>
   </div>
   <div class="source-panel active" data-panel="oficial" id="officialPanel-${day.id}">
-    <div class="official-live"><span class="dot"></span>Buscando ao vivo...</div>
+    <div class="official-live"><span class="dot"></span>${t('lesson.buscandoAoVivo')}</div>
   </div>
   <div class="source-panel" data-panel="resumo">`;
 
@@ -1913,18 +1913,18 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
     <button class="btn-concluir ${done?'done':''}" data-lesson="${lessonId}" data-day="${day.id}" onclick="marcarConcluido(this)">
       ${done ? t('lesson.diaConcluido') : t('lesson.concluirDia')}
     </button>
-    <button class="btn-comentarios" id="cmt-btn-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" title="Comentários deste dia" data-i18n-title="comments.tituloBotao" ${comentariosLigados() ? '' : 'hidden'}>
+    <button class="btn-comentarios" id="cmt-btn-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" title="${t('comments.tituloBotao')}" data-i18n-title="comments.tituloBotao" ${comentariosLigados() ? '' : 'hidden'}>
       <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      <span class="cmt-rotulo">Comentários</span>
+      <span class="cmt-rotulo">${t('comments.rotulo')}</span>
     </button>
     <div class="menu-3pontos-wrap" style="position:relative;">
       <button class="menu-3pontos-btn" onclick="toggleMenu3Pontos(this, '${lessonId}', '${day.id}')" style="background:none; border:none; font-size:20px; cursor:pointer; padding:8px; color:var(--ink-soft); display:flex; align-items:center;">⋮</button>
       <div class="menu-3pontos" style="display:none; position:absolute; top:100%; right:0; background:var(--card); border:0.5px solid var(--border); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:1000; min-width:180px; overflow:hidden;">
         <button onclick="exportarPDF('${lessonId}', '${day.id}')" style="width:100%; text-align:left; padding:12px 16px; border:none; background:none; cursor:pointer; font-size:14px; color:var(--ink); display:flex; align-items:center; gap:8px; transition:background 0.2s;">
-          <span style="font-size:16px;">📄</span> Baixar texto
+          <span style="font-size:16px;">📄</span> ${t('lesson.baixarTexto').replace(/^📄\s*/,'')}
         </button>
         <button onclick="compartilharWhatsApp('${lessonId}', '${day.id}')" style="width:100%; text-align:left; padding:12px 16px; border:none; background:none; cursor:pointer; font-size:14px; color:var(--ink); display:flex; align-items:center; gap:8px; transition:background 0.2s;">
-          <span style="font-size:16px;">💬</span> Compartilhar
+          <span style="font-size:16px;">💬</span> ${t('bible.compartilhar')}
         </button>
       </div>
     </div>
@@ -1937,7 +1937,7 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
   const hasExpandable = (day.reflect && day.reflect.length) || day.quiz || day.tf;
   if(hasExpandable){
     html += `<button class="expand-btn" onclick="toggleExpand(this)">
-      <span>Ver perguntas${day.quiz?' e quiz':''}</span><span class="arrow">▾</span>
+      <span>${t('lesson.verPerguntas')}${day.quiz?t('lesson.eQuiz'):''}</span><span class="arrow">▾</span>
     </button><div class="expand-content">`;
   }
 
@@ -1951,8 +1951,8 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
     const newAnswers = shuffledQ.map(s=>s.correct);
 
     html += `<div class="quiz" id="quiz-${lessonId}-${day.id}" data-answers="${newAnswers.join(',')}">
-      <h3>Quiz — Múltipla Escolha</h3>
-      <div class="quiz-timer"><svg class="timer-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg><span>Tempo: <span class="tval" data-timer>${savedQuiz ? formatTime(savedQuiz.time) : '00:00'}</span></span></div>`;
+      <h3>${t('lesson.quizMultiplaEscolha')}</h3>
+      <div class="quiz-timer"><svg class="timer-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg><span>${t('lesson.tempoDoisPontos')}<span class="tval" data-timer>${savedQuiz ? formatTime(savedQuiz.time) : '00:00'}</span></span></div>`;
     day.quiz.questions.forEach((q, i)=>{
       const diffClass = q.diff==='Fácil'?'diff-facil':(q.diff==='Intermediária'?'diff-inter':'diff-avancada');
       html += `<div class="q-block" data-q="${i+1}"><span class="diff ${diffClass}">${q.diff}</span>
@@ -3324,7 +3324,7 @@ function openHighlightPicker(anchorEl, book, chapter, verse){
   let dotsHtml = Object.entries(HIGHLIGHT_COLORS).map(([name,color]) =>
     `<button class="hl-dot${current===name?' active':''}" style="background:${color}" onclick="setVerseHighlight('${book}',${chapter},${verse},'${name}')" title="${name}"></button>`
   ).join('');
-  pop.innerHTML = `<div class="hl-dots">${dotsHtml}</div><button class="hl-remove" onclick="setVerseHighlight('${book}',${chapter},${verse},null)" title="Remover marcação" data-i18n-title="bible.removerMarcacao">✕</button>`;
+  pop.innerHTML = `<div class="hl-dots">${dotsHtml}</div><button class="hl-remove" onclick="setVerseHighlight('${book}',${chapter},${verse},null)" title="${t('bible.removerMarcacao')}" data-i18n-title="bible.removerMarcacao">✕</button>`;
   document.body.appendChild(pop);
   const rect = anchorEl.getBoundingClientRect();
   pop.style.top = (rect.bottom + window.scrollY + 4) + 'px';
@@ -3680,8 +3680,8 @@ function renderBibleDaysVsLessonsChart(progressMap){
   const w=220, h=170, padL=30, padR=12, padT=24, padB=26;
   const barH = h-padT-padB;
   const bars = [
-    {label:'Bíblia', value:totalBibleDays, color:'var(--teal)'},
-    {label:'Lição', value:totalLessonDays, color:'var(--violet)'},
+    {label:t('bible.titulo'), value:totalBibleDays, color:'var(--teal)'},
+    {label:t('stats.legendaLicao'), value:totalLessonDays, color:'var(--violet)'},
   ];
   function yAt(v){ return padT + barH - (v/maxVal)*barH; }
   let yAxisSvg = '';
@@ -3887,7 +3887,7 @@ function renderStats(){
   <div class="stats-card profile-card">
       <div class="profile-top">
         <div class="profile-avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-        <div class="profile-name">${goals.name || 'Seu nome'}</div>
+        <div class="profile-name">${goals.name || t('conta.nomePlaceholder')}</div>
         <button class="gear-btn" onclick="toggleGoalsEditor()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
       </div>
       <div class="goals-row">
@@ -3897,7 +3897,7 @@ function renderStats(){
         <div class="goal-chip"><span class="goal-label">${t('stats.diasSemana')}</span><span class="goal-value">${goals.daysPerWeek||'—'}</span></div>
       </div>
       <div class="goals-editor" id="goals-editor">
-        <div class="dayed-row"><label>Seu nome</label><input type="text" id="goal-name" value="${goals.name||''}" placeholder="Nome"></div>
+        <div class="dayed-row"><label>${t('conta.nomePlaceholder')}</label><input type="text" id="goal-name" value="${goals.name||''}" placeholder="${t('conta.nomePlaceholder')}"></div>
         <div class="dayed-row"><label>${t('stats.metaBiblia')}</label><input type="number" id="goal-bible-min" min="0" value="${goals.bibleMin||''}"></div>
         <div class="dayed-row"><label>${t('stats.metaLicao')}</label><input type="number" id="goal-lesson-min" min="0" value="${goals.lessonMin||''}"></div>
         <div class="dayed-row"><label>${t('stats.metaNota')}</label><input type="number" id="goal-score" min="0" max="10" value="${goals.scoreGoal||''}"></div>
@@ -5169,6 +5169,14 @@ const UI_STRINGS = {
     'lesson.resumoEstudoPessoal': 'resumo de estudo pessoal',
     'lesson.anterior': '← Anterior',
     'lesson.proximo': 'Próximo →',
+    'lesson.abaOficial': 'Oficial',
+    'lesson.abaResumo': '✎ Resumo',
+    'lesson.buscandoAoVivo': 'Buscando ao vivo...',
+    'lesson.baixarTexto': '📄 Baixar texto',
+    'lesson.verPerguntas': 'Ver perguntas',
+    'lesson.eQuiz': ' e quiz',
+    'lesson.quizMultiplaEscolha': 'Quiz — Múltipla Escolha',
+    'lesson.tempoDoisPontos': 'Tempo: ',
     'bible.titulo': 'Bíblia',
     'bible.modoLista': '☰ Lista',
     'bible.modoCards': '▢ Cards',
@@ -5234,6 +5242,7 @@ const UI_STRINGS = {
     'conta.entrarGoogle': 'Entrar com Google',
     'conta.sairConta': 'Sair da conta',
     'conta.nomePlaceholder': 'Seu nome',
+    'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar do ranking',
     'conta.entreParaRanking': 'Entre com sua conta Google para participar do ranking.',
     'conta.ranking': 'Ranking',
@@ -5280,6 +5289,7 @@ const UI_STRINGS = {
     'comments.placeholder': 'Escreva o que esse dia te deixou…',
     'comments.comentar': 'Comentar',
     'comments.enviando': 'Enviando…',
+    'comments.rotulo': 'Comentários',
     'alerts.rankingRemoveFalhou': 'Não conseguimos remover seus dados do ranking agora. Verifique sua conexão e tente novamente na aba Conta.',
     'alerts.backupRestaurado': 'Backup restaurado! O app vai recarregar agora.',
     'alerts.backupInvalido': 'Não consegui ler esse arquivo de backup.',
@@ -5441,6 +5451,14 @@ const UI_STRINGS = {
     'lesson.resumoEstudoPessoal': 'personal study summary',
     'lesson.anterior': '← Previous',
     'lesson.proximo': 'Next →',
+    'lesson.abaOficial': 'Official',
+    'lesson.abaResumo': '✎ Summary',
+    'lesson.buscandoAoVivo': 'Fetching live...',
+    'lesson.baixarTexto': '📄 Download text',
+    'lesson.verPerguntas': 'See questions',
+    'lesson.eQuiz': ' and quiz',
+    'lesson.quizMultiplaEscolha': 'Quiz — Multiple Choice',
+    'lesson.tempoDoisPontos': 'Time: ',
     'bible.titulo': 'Bible',
     'bible.modoLista': '☰ List',
     'bible.modoCards': '▢ Cards',
@@ -5506,6 +5524,7 @@ const UI_STRINGS = {
     'conta.entrarGoogle': 'Sign in with Google',
     'conta.sairConta': 'Sign out',
     'conta.nomePlaceholder': 'Your name',
+    'conta.conectadoComo': 'Signed in as ',
     'conta.participarRanking': 'Join the leaderboard',
     'conta.entreParaRanking': 'Sign in with your Google account to join the leaderboard.',
     'conta.ranking': 'Leaderboard',
@@ -5552,6 +5571,7 @@ const UI_STRINGS = {
     'comments.placeholder': 'Write what this day left you with…',
     'comments.comentar': 'Comment',
     'comments.enviando': 'Sending…',
+    'comments.rotulo': 'Comments',
     'alerts.rankingRemoveFalhou': "We couldn't remove your leaderboard data right now. Check your connection and try again from the Account tab.",
     'alerts.backupRestaurado': 'Backup restored! The app will reload now.',
     'alerts.backupInvalido': "Couldn't read that backup file.",
@@ -5713,6 +5733,14 @@ const UI_STRINGS = {
     'lesson.resumoEstudoPessoal': 'resumen de estudio personal',
     'lesson.anterior': '← Anterior',
     'lesson.proximo': 'Siguiente →',
+    'lesson.abaOficial': 'Oficial',
+    'lesson.abaResumo': '✎ Resumen',
+    'lesson.buscandoAoVivo': 'Buscando en vivo...',
+    'lesson.baixarTexto': '📄 Descargar texto',
+    'lesson.verPerguntas': 'Ver preguntas',
+    'lesson.eQuiz': ' y quiz',
+    'lesson.quizMultiplaEscolha': 'Quiz — Opción Múltiple',
+    'lesson.tempoDoisPontos': 'Tiempo: ',
     'bible.titulo': 'Biblia',
     'bible.modoLista': '☰ Lista',
     'bible.modoCards': '▢ Tarjetas',
@@ -5778,6 +5806,7 @@ const UI_STRINGS = {
     'conta.entrarGoogle': 'Iniciar sesión con Google',
     'conta.sairConta': 'Cerrar sesión',
     'conta.nomePlaceholder': 'Tu nombre',
+    'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar en el ranking',
     'conta.entreParaRanking': 'Inicia sesión con tu cuenta de Google para participar en el ranking.',
     'conta.ranking': 'Ranking',
@@ -5824,6 +5853,7 @@ const UI_STRINGS = {
     'comments.placeholder': 'Escribe lo que este día te dejó…',
     'comments.comentar': 'Comentar',
     'comments.enviando': 'Enviando…',
+    'comments.rotulo': 'Comentarios',
     'alerts.rankingRemoveFalhou': 'No pudimos eliminar tus datos del ranking ahora. Revisa tu conexión e intenta de nuevo en la pestaña Cuenta.',
     'alerts.backupRestaurado': '¡Copia de seguridad restaurada! La app se va a recargar ahora.',
     'alerts.backupInvalido': 'No pude leer ese archivo de copia de seguridad.',
@@ -7749,7 +7779,7 @@ function updateAuthUI() {
       const nome = currentUser.displayName;
       const email = currentUser.email || '';
       const nomeExibido = nome ? nome + ' (' + email + ')' : email;
-      info.innerHTML = 'Conectado como ' + escaparHtml(nomeExibido) +
+      info.innerHTML = t('conta.conectadoComo') + escaparHtml(nomeExibido) +
         t('conta.sincronizaEntreDispositivos') + '<br>' +
         '<span style="font-family:\'JetBrains Mono\',monospace; font-size:11px; opacity:.75; user-select:all; word-break:break-all;">uid: ' +
         escaparHtml(currentUser.uid) + '</span>';
