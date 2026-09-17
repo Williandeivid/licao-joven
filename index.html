@@ -1633,6 +1633,15 @@ const BOOK_NAME_TO_ID_ES = {
   '1 Pe':'1PE','2 Pe':'2PE','1 Jn':'1JN','2 Jn':'2JN','3 Jn':'3JN','Jud':'JUD','Ap':'REV'
 };
 
+// Escolhe o dicionario de nomes de livro certo pro idioma - usado tanto no
+// auto-link de citacoes (formatBibleReferences) quanto no parser de
+// referencia de texto solto (openBibleReference), pra nao dessincronizar.
+function dicionarioDeLivros(idioma){
+  return idioma === 'en' ? BOOK_NAME_TO_ID_EN
+    : idioma === 'es' ? BOOK_NAME_TO_ID_ES
+    : BOOK_NAME_TO_ID;
+}
+
 // Extrai livro\capítulo de uma citação bíblica em centraltexts (ex: "Mateus 27:24,25")
 function seedContextFromCentralTexts(centraltexts){
   if(!centraltexts) return {book:null, chapter:null};
@@ -4950,11 +4959,11 @@ async function setIdiomaConteudo(idioma){
 // navegacao, nao o que a pessoa esta lendo agora.
 async function recarregarConteudoNoIdiomaAtual(){
   try{
-    const listAtivo = document.getElementById('tab-list') && document.getElementById('tab-list').classList.contains('active');
-    if(listAtivo){
-      const container = document.getElementById('detail-container');
-      const lessonId = container && container.dataset.lessonId ? parseInt(container.dataset.lessonId) : null;
-      if(lessonId){ await renderLessonDetail(lessonId, false); return; }
+    const container = document.getElementById('detail-container');
+    const licaoAberta = container && container.style.display !== 'none' && container.dataset.lessonId;
+    if(licaoAberta){
+      await renderLessonDetail(parseInt(container.dataset.lessonId), false);
+      return;
     }
     const bibleAtivo = document.getElementById('tab-bible') && document.getElementById('tab-bible').classList.contains('active');
     if(bibleAtivo && typeof bibleState !== 'undefined' && bibleState && bibleState.book && bibleState.chapter){
@@ -5050,11 +5059,12 @@ function openBibleReference(ref){
   // Parse "João 16", "Sl 23:4", "2 Timóteo 3:1-5" etc. Testa as chaves mais
   // longas primeiro pra cobrir nomes compostos ("2 Timóteo") antes de abreviações curtas.
   ref = ref.trim();
-  const bookKeys = Object.keys(BOOK_NAME_TO_ID).sort((a,b)=>b.length-a.length);
+  const dicionarioLivros = dicionarioDeLivros(idiomaConteudoAtual);
+  const bookKeys = Object.keys(dicionarioLivros).sort((a,b)=>b.length-a.length);
   const matchedKey = bookKeys.find(k => ref === k || ref.startsWith(k + ' ') || ref.startsWith(k + ':'));
   if(!matchedKey) return;
 
-  const bookId = BOOK_NAME_TO_ID[matchedKey];
+  const bookId = dicionarioLivros[matchedKey];
   const rest = ref.slice(matchedKey.length).replace(/^[\s:]+/, '');
   const chapter = parseInt(rest);
   const book = BIBLE_BOOKS.find(b => b.id === bookId);
@@ -5815,6 +5825,7 @@ async function aplicarAjustesDaNuvem(remoto) {
     // Zera os caches em memoria para que releiam o que acabou de chegar.
     favoritesCache = null; bibleHighlights = null; userGoals = null;
     dailyTimeLog = null; bibleActivityLog = null; planProgressCache = {};
+    await carregarIdiomaConteudo();
   }
   return aplicados;
 }
@@ -6677,6 +6688,7 @@ async function carregarTraducaoResumo(idioma){
     const res = await fetch(`licoes-${idioma}.json`);
     if(!res.ok) throw new Error('HTTP ' + res.status);
     const lista = await res.json();
+    if(!Array.isArray(lista)) throw new Error('formato inválido: esperava um array');
     traducaoResumoCache[idioma] = lista;
     return lista;
   }catch(e){
@@ -6698,7 +6710,17 @@ function aplicarTraducaoConteudo(contentPt, idioma, listaTraducoes){
   const mesclado = Object.assign({}, contentPt, traducaoLicao, {
     days: contentPt.days.map(diaPt => {
       const diaTraduzido = traducaoLicao.days && traducaoLicao.days.find(d => d.id === diaPt.id);
-      return diaTraduzido ? Object.assign({}, diaPt, diaTraduzido) : diaPt;
+      if(!diaTraduzido) return diaPt;
+      const diaMesclado = Object.assign({}, diaPt, diaTraduzido);
+      // quiz.answers (letra da resposta certa) nunca vem na traducao - o
+      // gabarito usa a posicao das opcoes, que a traducao preserva. Um
+      // merge raso aqui trocaria o quiz inteiro e perderia o gabarito.
+      if(diaPt.quiz && diaTraduzido.quiz){
+        diaMesclado.quiz = Object.assign({}, diaPt.quiz, {
+          questions: diaPt.quiz.questions.map((q, i) => Object.assign({}, q, (diaTraduzido.quiz.questions && diaTraduzido.quiz.questions[i]) || {}))
+        });
+      }
+      return diaMesclado;
     })
   });
   return mesclado;
@@ -6720,8 +6742,8 @@ function getCachedOfficial(lessonId, dayId){
   return null;
 }
 
-function setCachedOfficial(lessonId, dayId, content){
-  const key = `official-${idiomaConteudoAtual}-${lessonId}-${dayId}`;
+function setCachedOfficial(lessonId, dayId, content, idioma){
+  const key = `official-${idioma}-${lessonId}-${dayId}`;
   localStorage.setItem(key, JSON.stringify({content, timestamp: Date.now()}));
 }
 
@@ -6789,7 +6811,10 @@ async function fetchOfficialContent(lessonId, dayId){
 }
 
 async function buscarOficialDaRede(lessonId, dayId){
-  const cacheKey = `${idiomaConteudoAtual}-${lessonId}-${dayId}`;
+  // Capturado uma unica vez - evita que uma troca de idioma no meio do
+  // fetch (assincrono) grave conteudo do idioma errado na chave de cache.
+  const idioma = idiomaConteudoAtual;
+  const cacheKey = `${idioma}-${lessonId}-${dayId}`;
 
   try{
     const lessonNum = String(parseInt(lessonId)).padStart(2, '0');
@@ -6801,7 +6826,7 @@ async function buscarOficialDaRede(lessonId, dayId){
 
     // URL do arquivo .md — pasta do idioma corrente (Adventech ja publica en/es
     // com a mesma estrutura de arquivos que pt, mesmo codigo de trimestre)
-    const mdUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/${idiomaConteudoAtual}/${quarter}/${lessonNum}/${dayNum}.md`;
+    const mdUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/${idioma}/${quarter}/${lessonNum}/${dayNum}.md`;
 
     const response = await fetch(mdUrl);
     if(!response.ok) throw new Error(`Não encontrado: ${response.status}`);
@@ -6815,7 +6840,7 @@ async function buscarOficialDaRede(lessonId, dayId){
     }
 
     // Converter markdown para HTML com suporte melhorado
-    const baseImageUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/${idiomaConteudoAtual}/${quarter}/${lessonNum}`;
+    const baseImageUrl = `https://raw.githubusercontent.com/Adventech/sabbath-school-lessons/${branch}/src/${idioma}/${quarter}/${lessonNum}`;
 
     // Primeiro: converter imagens
     content = content.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
@@ -6826,9 +6851,7 @@ async function buscarOficialDaRede(lessonId, dayId){
     // Função auxiliar para converter referências bíblicas em links
     function formatBibleReferences(text) {
       let lastBookId = null, lastChapter = null;
-      const dicionarioLivros = idiomaConteudoAtual === 'en' ? BOOK_NAME_TO_ID_EN
-        : idiomaConteudoAtual === 'es' ? BOOK_NAME_TO_ID_ES
-        : BOOK_NAME_TO_ID;
+      const dicionarioLivros = dicionarioDeLivros(idioma);
 
       function wrapVerse(bookId, chapter, v1, v2, label){
         v2 = v2 || v1;
@@ -6961,7 +6984,7 @@ async function buscarOficialDaRede(lessonId, dayId){
     content = processedLines.join('');
 
     officialContentCache[cacheKey] = content;
-    setCachedOfficial(lessonId, dayId, content);
+    setCachedOfficial(lessonId, dayId, content, idioma);
     return content;
   } catch(e){
     registrarFalhaOficial(e);
