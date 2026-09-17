@@ -6873,16 +6873,25 @@ async function buscarOficialDaRede(lessonId, dayId){
 
       const bookKeys = Object.keys(dicionarioLivros).sort((a,b)=>b.length-a.length);
       const namesPattern = bookKeys.map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
-      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::(\\d+)(?:-(\\d+))?)?((?:,\\s?\\d+)*)', 'g');
+      // O espanhol da Adventech escreve "Juan 11: 43" (espaço depois dos dois-pontos);
+      // português/inglês escrevem "Jo 11:43"/"John 11:43" (sem espaço) - \s? cobre os dois.
+      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::\\s?(\\d+)(?:-(\\d+))?)?((?:,\\s?\\d+)*)', 'g');
 
       // Primeiro: livro + capítulo[:versículos][, versículo extra...]
-      text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, extraList) => {
+      text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, extraList, offset, full) => {
         const bookId = dicionarioLivros[bookName];
         if(!bookId) return match;
         lastBookId = bookId; lastChapter = chapter;
         if(!v1){
           // Sem versículo especificado: abre o capítulo inteiro (comportamento de antes)
           return wrapChapter(bookId, chapter, match);
+        }
+        // Range entre capítulos ("11: 43-12: 33", comum no espanhol): o que o regex capturou
+        // como v2 (12) na verdade é o início de outro capítulo, não o versículo final do
+        // mesmo capítulo - dá pra ver pelo ":" logo depois dele no texto original. Sem
+        // suporte a range entre capítulos aqui, descarta v2 e usa só o versículo inicial.
+        if(v2 && extraList === '' && full[offset + match.length] === ':'){
+          v2 = undefined;
         }
         let result = wrapVerse(bookId, chapter, v1, v2, `${bookName} ${chapter}:${v1}${v2 ? '-' + v2 : ''}`);
         if(extraList){
@@ -6907,7 +6916,7 @@ async function buscarOficialDaRede(lessonId, dayId){
         // "; capítulo:versículo[-versículo][,versículo]*" — continuação de outro
         // capítulo do MESMO livro, separada por ponto e vírgula.
         // Ex: "(Jo 14:15, 21; 15:10, 14)" ou "(At 1:8; 2:1-4)"
-        segment = segment.replace(/;\s*(\d+):(\d+)(?:-(\d+))?((?:,\s?\d+)*)/g, (match, chapter, v1, v2, extraList) => {
+        segment = segment.replace(/;\s*(\d+):\s?(\d+)(?:-(\d+))?((?:,\s?\d+)*)/g, (match, chapter, v1, v2, extraList) => {
           if(!lastBookId) return match;
           lastChapter = chapter;
           const label = chapter+':'+v1+(v2?'-'+v2:'');
