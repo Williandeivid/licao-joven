@@ -2310,16 +2310,21 @@ function scrollToDay(dayId){
 }
 
 const verseFetchCache = {};
-async function fetchVerseVersion(version, bookMeta, chapter){
-  const cacheKey = version+'-'+bookMeta.id+'-'+chapter;
+async function fetchVerseVersion(idioma, version, bookMeta, chapter){
+  const cacheKey = idioma+'-'+version+'-'+bookMeta.id+'-'+chapter;
   if(!verseFetchCache[cacheKey]){
-    const result = version==='nvi' ? await fetchNVI(bookMeta, chapter) : await fetchARA(bookMeta, chapter);
+    const result = idioma !== 'pt'
+      ? await fetchVersaoUnica(idioma, bookMeta, chapter)
+      : (version==='nvi' ? await fetchNVI(bookMeta, chapter) : await fetchARA(bookMeta, chapter));
     verseFetchCache[cacheKey] = result.verses;
   }
   return verseFetchCache[cacheKey];
 }
 
-function versionSwitchRow(activeVersion, book, chapter, v1, v2){
+// So mostra alternador de versao em portugues - ingles/espanhol so tem
+// uma versao gratuita disponivel nesta fonte, nao ha o que escolher.
+function versionSwitchRow(idioma, activeVersion, book, chapter, v1, v2){
+  if(idioma !== 'pt') return '';
   const btn = (v, label) => `<button class="vpop-version-btn${v===activeVersion?' active':''}" onclick="switchVerseVersion('${v}','${book}',${chapter},${v1},${v2})">${label}</button>`;
   return `<div class="vpop-version-row">${btn('nvi','NVI')}${btn('arc','ARC')}</div>`;
 }
@@ -2328,37 +2333,50 @@ async function toggleVerseLive(el){
   const book = el.dataset.book, chapter = parseInt(el.dataset.chapter);
   const v1 = parseInt(el.dataset.v1), v2 = parseInt(el.dataset.v2);
   const bookMeta = BIBLE_BOOKS.find(b=>b.id===book);
-  const slug = BIBLIAONLINE_SLUG[book] || '';
-  const externalUrl = `https://www.bibliaonline.com.br/nvi/${slug}/${chapter}`;
-  const externalLink = `<a href="${externalUrl}" target="_blank" rel="noopener" class="vpop-extlink">Abrir ${bookMeta.name} ${chapter} num site de Bíblia →</a>`;
+  const idioma = idiomaConteudoAtual;
+  const versaoInicial = idioma === 'pt' ? 'nvi' : IDIOMA_BIBLIA[idioma].versaoUnica;
+  // Link externo (bibliaonline.com.br) so existe em portugues - nao faz
+  // sentido mandar quem le em ingles/espanhol pra um site so em pt.
+  const externalLink = idioma === 'pt'
+    ? (() => {
+        const slug = BIBLIAONLINE_SLUG[book] || '';
+        const externalUrl = `https://www.bibliaonline.com.br/nvi/${slug}/${chapter}`;
+        return `<a href="${externalUrl}" target="_blank" rel="noopener" class="vpop-extlink">Abrir ${bookMeta.name} ${chapter} num site de Bíblia →</a>`;
+      })()
+    : '';
   const refLabel = v1===v2 ? `${bookMeta.name} ${chapter}:${v1}` : `${bookMeta.name} ${chapter}:${v1}-${v2}`;
 
-  openVerseModal(refLabel, `${versionSwitchRow('nvi',book,chapter,v1,v2)}<span class="vpop-loading">Buscando o texto...</span><br>${externalLink}`, {book,chapter,v1,v2,label:refLabel});
-  await renderVerseVersion('nvi', bookMeta, chapter, v1, v2, externalLink);
+  openVerseModal(refLabel, `${versionSwitchRow(idioma,versaoInicial,book,chapter,v1,v2)}<span class="vpop-loading">Buscando o texto...</span><br>${externalLink}`, {book,chapter,v1,v2,label:refLabel});
+  await renderVerseVersion(idioma, versaoInicial, bookMeta, chapter, v1, v2, externalLink);
 }
 
 async function switchVerseVersion(version, book, chapter, v1, v2){
   const bookMeta = BIBLE_BOOKS.find(b=>b.id===book);
-  const slug = BIBLIAONLINE_SLUG[book] || '';
-  const externalUrl = `https://www.bibliaonline.com.br/${version==='nvi'?'nvi':'acf'}/${slug}/${chapter}`;
-  const externalLink = `<a href="${externalUrl}" target="_blank" rel="noopener" class="vpop-extlink">Abrir ${bookMeta.name} ${chapter} num site de Bíblia →</a>`;
-  updateVerseModalBody(`${versionSwitchRow(version,book,chapter,v1,v2)}<span class="vpop-loading">Buscando o texto...</span><br>${externalLink}`);
-  await renderVerseVersion(version, bookMeta, chapter, v1, v2, externalLink);
+  const idioma = idiomaConteudoAtual;
+  const externalLink = idioma === 'pt'
+    ? (() => {
+        const slug = BIBLIAONLINE_SLUG[book] || '';
+        const externalUrl = `https://www.bibliaonline.com.br/${version==='nvi'?'nvi':'acf'}/${slug}/${chapter}`;
+        return `<a href="${externalUrl}" target="_blank" rel="noopener" class="vpop-extlink">Abrir ${bookMeta.name} ${chapter} num site de Bíblia →</a>`;
+      })()
+    : '';
+  updateVerseModalBody(`${versionSwitchRow(idioma,version,book,chapter,v1,v2)}<span class="vpop-loading">Buscando o texto...</span><br>${externalLink}`);
+  await renderVerseVersion(idioma, version, bookMeta, chapter, v1, v2, externalLink);
 }
 
-async function renderVerseVersion(version, bookMeta, chapter, v1, v2, externalLink){
+async function renderVerseVersion(idioma, version, bookMeta, chapter, v1, v2, externalLink){
   let allVerses;
   try{
-    allVerses = await fetchVerseVersion(version, bookMeta, chapter);
+    allVerses = await fetchVerseVersion(idioma, version, bookMeta, chapter);
   }catch(e){
-    if(version==='nvi'){
-      try{ allVerses = await fetchVerseVersion('arc', bookMeta, chapter); version = 'arc'; }
+    if(idioma === 'pt' && version==='nvi'){
+      try{ allVerses = await fetchVerseVersion(idioma, 'arc', bookMeta, chapter); version = 'arc'; }
       catch(e2){
-        updateVerseModalBody(`${versionSwitchRow(version,bookMeta.id,chapter,v1,v2)}<span class="vpop-loading">Não consegui buscar aqui dentro agora.</span><br>${externalLink}`);
+        updateVerseModalBody(`${versionSwitchRow(idioma,version,bookMeta.id,chapter,v1,v2)}<span class="vpop-loading">Não consegui buscar aqui dentro agora.</span><br>${externalLink}`);
         return;
       }
     } else {
-      updateVerseModalBody(`${versionSwitchRow(version,bookMeta.id,chapter,v1,v2)}<span class="vpop-loading">Não consegui buscar aqui dentro agora.</span><br>${externalLink}`);
+      updateVerseModalBody(`${versionSwitchRow(idioma,version,bookMeta.id,chapter,v1,v2)}<span class="vpop-loading">Não consegui buscar aqui dentro agora.</span><br>${externalLink}`);
       return;
     }
   }
@@ -2367,11 +2385,11 @@ async function renderVerseVersion(version, bookMeta, chapter, v1, v2, externalLi
     return vn >= v1 && vn <= v2;
   });
   if(verses.length === 0){
-    updateVerseModalBody(`${versionSwitchRow(version,bookMeta.id,chapter,v1,v2)}<span class="vpop-loading">Versículo não encontrado neste capítulo.</span><br>${externalLink}`);
+    updateVerseModalBody(`${versionSwitchRow(idioma,version,bookMeta.id,chapter,v1,v2)}<span class="vpop-loading">Versículo não encontrado neste capítulo.</span><br>${externalLink}`);
     return;
   }
   const text = verses.map(v=> (verses.length>1?`<b>${v.verse}</b> `:'') + v.text).join(' ');
-  updateVerseModalBody(`${versionSwitchRow(version,bookMeta.id,chapter,v1,v2)}${text}`);
+  updateVerseModalBody(`${versionSwitchRow(idioma,version,bookMeta.id,chapter,v1,v2)}${text}`);
 }
 
 
@@ -5044,7 +5062,10 @@ function openBibleReference(ref){
   openChapterPopup(book.id, chapter, ref);
 }
 
-function chapterPopupVersionRow(activeVersion, bookId, chapter){
+// So mostra alternador de versao em portugues - mesma razao do
+// versionSwitchRow do popup de versiculo (so 1 versao gratuita fora do pt).
+function chapterPopupVersionRow(idioma, activeVersion, bookId, chapter){
+  if(idioma !== 'pt') return '';
   const btn = (v, label) => `<button class="vpop-version-btn${v===activeVersion?' active':''}" onclick="switchChapterPopupVersion('${v}','${bookId}',${chapter})">${label}</button>`;
   return `<div class="vpop-version-row">${btn('nvi','NVI')}${btn('ara','ARA')}</div>`;
 }
@@ -5052,29 +5073,32 @@ function chapterPopupVersionRow(activeVersion, bookId, chapter){
 async function openChapterPopup(bookId, chapter, refLabel){
   const book = BIBLE_BOOKS.find(b=>b.id===bookId);
   if(!book) return;
+  const idioma = idiomaConteudoAtual;
+  const versaoInicial = idioma === 'pt' ? 'nvi' : IDIOMA_BIBLIA[idioma].versaoUnica;
   const title = refLabel || `${book.name} ${chapter}`;
-  openVerseModal(title, `${chapterPopupVersionRow('nvi',bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`, {book:bookId, chapter, v1:0, v2:0, label:`${book.name} ${chapter}`});
-  await renderChapterPopupVersion('nvi', book, chapter);
+  openVerseModal(title, `${chapterPopupVersionRow(idioma,versaoInicial,bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`, {book:bookId, chapter, v1:0, v2:0, label:`${book.name} ${chapter}`});
+  await renderChapterPopupVersion(idioma, versaoInicial, book, chapter);
 }
 
 async function switchChapterPopupVersion(version, bookId, chapter){
   const book = BIBLE_BOOKS.find(b=>b.id===bookId);
   if(!book) return;
-  updateVerseModalBody(`${chapterPopupVersionRow(version,bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`);
-  await renderChapterPopupVersion(version, book, chapter);
+  const idioma = idiomaConteudoAtual;
+  updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,bookId,chapter)}<span class="vpop-loading">Buscando o capítulo...</span>`);
+  await renderChapterPopupVersion(idioma, version, book, chapter);
 }
 
-async function renderChapterPopupVersion(version, book, chapter){
+async function renderChapterPopupVersion(idioma, version, book, chapter){
   try{
-    const result = await fetchTranslation(book, chapter, version);
-    let html = chapterPopupVersionRow(version, book.id, chapter);
+    const result = await fetchTranslation(idioma, book, chapter, version);
+    let html = chapterPopupVersionRow(idioma, version, book.id, chapter);
     html += `<div class="translation-note">${result.note||''}</div>`;
     (result.verses||[]).forEach(v=>{
       html += `<div class="verse-line">${v.verse?`<span class="verse-num">${v.verse}</span>`:''}${v.text}</div>`;
     });
     updateVerseModalBody(html);
   }catch(e){
-    updateVerseModalBody(`${chapterPopupVersionRow(version,book.id,chapter)}<span class="vpop-loading">Não consegui buscar aqui dentro agora.</span>`);
+    updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,book.id,chapter)}<span class="vpop-loading">Não consegui buscar aqui dentro agora.</span>`);
   }
 }
 
@@ -5128,13 +5152,23 @@ const BOOK_ID_TO_GITHUB = {
   '3JN':'3jo',JUD:'jd',REV:'re'
 };
 
+// Pasta e versao unica gratuita disponivel por idioma neste repositorio
+// (MaatheusGois/bible). Portugues tem NVI e ARC pra escolher; ingles e
+// espanhol so tem uma versao gratuita cada aqui.
+const IDIOMA_BIBLIA = {
+  pt: { pasta: 'pt-br' },
+  en: { pasta: 'en', versaoUnica: 'kjv' },
+  es: { pasta: 'es', versaoUnica: 'rvr' }
+};
+
 const bookJsonCache = {};
-async function fetchBookGithub(versionId, myBookId){
-  const cacheKey = versionId + '-' + myBookId;
+async function fetchBookGithub(idioma, versionId, myBookId){
+  const cacheKey = idioma + '-' + versionId + '-' + myBookId;
   if(bookJsonCache[cacheKey]) return bookJsonCache[cacheKey];
   const ghId = BOOK_ID_TO_GITHUB[myBookId];
   if(!ghId) throw new Error('Livro sem correspondência: ' + myBookId);
-  const url = `https://raw.githubusercontent.com/MaatheusGois/bible/main/versions/pt-br/${versionId}/${ghId}/${ghId}.json`;
+  const pasta = (IDIOMA_BIBLIA[idioma] || IDIOMA_BIBLIA.pt).pasta;
+  const url = `https://raw.githubusercontent.com/MaatheusGois/bible/main/versions/${pasta}/${versionId}/${ghId}/${ghId}.json`;
   const res = await fetch(url);
   if(!res.ok) throw new Error(versionId + ' (GitHub) falhou: ' + res.status);
   const json = await res.json();
@@ -5143,7 +5177,7 @@ async function fetchBookGithub(versionId, myBookId){
 }
 
 async function fetchNVI(book, chapter){
-  const data = await fetchBookGithub('nvi', book.id);
+  const data = await fetchBookGithub('pt', 'nvi', book.id);
   const chapterVerses = data.chapters && data.chapters[chapter - 1];
   if(!chapterVerses || !chapterVerses.length) throw new Error('NVI: capítulo vazio');
   const verses = chapterVerses.map((text, idx) => ({ verse: String(idx + 1), text }));
@@ -5151,11 +5185,22 @@ async function fetchNVI(book, chapter){
 }
 
 async function fetchARA(book, chapter){
-  const data = await fetchBookGithub('arc', book.id);
+  const data = await fetchBookGithub('pt', 'arc', book.id);
   const chapterVerses = data.chapters && data.chapters[chapter - 1];
   if(!chapterVerses || !chapterVerses.length) throw new Error('ARC: capítulo vazio');
   const verses = chapterVerses.map((text, idx) => ({ verse: String(idx + 1), text }));
   return { verses, note: 'ARC (Almeida Revista e Corrigida)' };
+}
+
+// Unica versao gratuita disponivel pra ingles/espanhol nesta fonte -
+// usada tanto na leitura por capitulo quanto no popup de referencia.
+async function fetchVersaoUnica(idioma, book, chapter){
+  const versionId = IDIOMA_BIBLIA[idioma].versaoUnica;
+  const data = await fetchBookGithub(idioma, versionId, book.id);
+  const chapterVerses = data.chapters && data.chapters[chapter - 1];
+  if(!chapterVerses || !chapterVerses.length) throw new Error(versionId + ': capítulo vazio');
+  const verses = chapterVerses.map((text, idx) => ({ verse: String(idx + 1), text }));
+  return { verses, note: versionId.toUpperCase() };
 }
 
 const CORS_PROXIES = [
@@ -5182,10 +5227,12 @@ async function fetchARAviaProxy(book, chapter){
 async function fetchFromApiBible(book, chapter){ return fetchNVI(book, chapter); }
 async function fetchFromBibleApi(book, chapter){ return fetchARA(book, chapter); }
 
-async function fetchTranslation(book, chapter, translation){
-  const cacheKey = book.id+'-'+chapter+'-'+translation;
+async function fetchTranslation(idioma, book, chapter, translation){
+  const cacheKey = idioma+'-'+book.id+'-'+chapter+'-'+translation;
   if(bibleChapterCache[cacheKey]) return bibleChapterCache[cacheKey];
-  const result = translation==='nvi' ? await fetchNVI(book, chapter) : await fetchARA(book, chapter);
+  const result = idioma !== 'pt'
+    ? await fetchVersaoUnica(idioma, book, chapter)
+    : (translation==='nvi' ? await fetchNVI(book, chapter) : await fetchARA(book, chapter));
   bibleChapterCache[cacheKey] = result;
   return result;
 }
@@ -5196,6 +5243,7 @@ async function openBibleChapter(chapter){
   const container = document.getElementById('bible-container');
   if(!container) return;
   const book = BIBLE_BOOKS.find(b=>b.id===bibleState.book);
+  const idioma = idiomaConteudoAtual;
   container.innerHTML = `<div class="bible-wrap"><div class="bible-crumbs">
     ${bibleCrumbHtml(book)}
   </div><div class="bible-loading">Carregando ${book.name} ${chapter}...</div></div>`;
@@ -5203,11 +5251,18 @@ async function openBibleChapter(chapter){
 
   let result, usedTranslation = bibleState.translation;
   try{
-    result = await fetchTranslation(book, chapter, usedTranslation);
+    result = await fetchTranslation(idioma, book, chapter, usedTranslation);
   }catch(e1){
+    if(idioma !== 'pt'){
+      container.innerHTML = `<div class="bible-wrap"><div class="bible-crumbs">
+        ${bibleCrumbHtml(book)}
+      </div><div class="bible-error">Não consegui buscar este capítulo agora (sem conexão ou bloqueio de rede).<br><br>
+      <button onclick="openBibleChapter(${chapter})">Tentar de novo</button></div></div>`;
+      return;
+    }
     const fallback = usedTranslation==='nvi' ? 'ara' : 'nvi';
     try{
-      result = await fetchTranslation(book, chapter, fallback);
+      result = await fetchTranslation(idioma, book, chapter, fallback);
       usedTranslation = fallback;
       bibleState.translation = fallback;
     }catch(e2){
@@ -5215,7 +5270,7 @@ async function openBibleChapter(chapter){
         result = await fetchARAviaProxy(book, chapter);
         usedTranslation = 'ara';
         bibleState.translation = 'ara';
-        bibleChapterCache[book.id+'-'+chapter+'-ara'] = result;
+        bibleChapterCache['pt-'+book.id+'-'+chapter+'-ara'] = result;
       }catch(e3){
       const slug = BIBLIAONLINE_SLUG[book.id] || '';
       const externalUrl = `https://www.bibliaonline.com.br/nvi/${slug}/${chapter}`;
@@ -5228,7 +5283,7 @@ async function openBibleChapter(chapter){
       }
     }
   }
-  await renderBibleChapterContent(book, chapter, result, usedTranslation);
+  await renderBibleChapterContent(book, chapter, result, usedTranslation, idioma);
 }
 
 function switchTranslation(newT){
@@ -5236,9 +5291,10 @@ function switchTranslation(newT){
   openBibleChapter(bibleState.chapter);
 }
 
-async function renderBibleChapterContent(book, chapter, result, translation){
+async function renderBibleChapterContent(book, chapter, result, translation, idioma){
   const container = document.getElementById('bible-container');
   if(!container) return;
+  idioma = idioma || idiomaConteudoAtual;
   const verses = result.verses || [];
   let html = `<div class="bible-wrap">
     <div class="bible-crumbs">
@@ -5249,10 +5305,10 @@ async function renderBibleChapterContent(book, chapter, result, translation){
         <h2>${book.name} ${chapter}</h2>
         <div style="display:flex;align-items:center;gap:8px;">
           <button class="fav-star-btn" id="fav-star-btn-chapter" onclick="toggleFavorite('${book.id}',${chapter},0,0,'${book.name} ${chapter}')"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
-          <div class="translation-toggle">
+          ${idioma === 'pt' ? `<div class="translation-toggle">
             <button class="${translation==='nvi'?'active':''}" onclick="switchTranslation('nvi')">NVI</button>
             <button class="${translation==='ara'?'active':''}" onclick="switchTranslation('ara')">ARA</button>
-          </div>
+          </div>` : ''}
           <div style="position:relative;">
             <button id="bible-reading-mode-toggle" style="background:none;border:none;cursor:pointer;color:var(--ink-soft);padding:4px 8px;opacity:0.7;font-size:18px;margin-left:8px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">⋮</button>
             <div id="bible-reading-mode-menu" style="display:none;position:absolute;top:100%;right:0;background:var(--card);border:0.5px solid var(--border);border-radius:8px;min-width:130px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin-top:4px;">
