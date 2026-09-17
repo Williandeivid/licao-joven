@@ -4108,10 +4108,10 @@ async function openDayEditor(targetKey){
   }
 
   html += `<div class="dayed-section">
-    <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Plano Bíblico</div>
+    <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>${t('bible.planoBiblico')}</div>
     <div class="dayed-row"><label>${t('lesson.tempoMinutos')}</label><input type="number" id="ed-bible-min" min="0" value="${bibleMinutes||''}" placeholder="—"></div>
   </div>
-  <button class="dayed-save" onclick="saveDayEditor()">Salvar</button>
+  <button class="dayed-save" onclick="saveDayEditor()">${t('common.salvar')}</button>
   </div></div>`;
 
   const wrap = document.createElement('div');
@@ -6001,17 +6001,29 @@ async function recarregarConteudoNoIdiomaAtual(){
       return;
     }
     const bibleAtivo = document.getElementById('tab-bible') && document.getElementById('tab-bible').classList.contains('active');
-    if(bibleAtivo && typeof bibleState !== 'undefined' && bibleState && bibleState.book && bibleState.chapter){
-      await openBibleChapter(bibleState.chapter);
-      return;
-    }
-    const bibleContainer = document.getElementById('bible-container');
-    if(bibleAtivo && bibleContainer && bibleContainer.dataset.view === 'plan'){
-      await goBiblePlan();
-      return;
-    }
-    if(bibleAtivo && bibleContainer && bibleContainer.dataset.view === 'books'){
-      renderBibleBooks();
+    if(bibleAtivo){
+      const bibleContainer = document.getElementById('bible-container');
+      const bibleView = bibleContainer && bibleContainer.dataset.view;
+      // dataset.view é a fonte da verdade (marcado pelas 4 telas da Bíblia:
+      // 'books', 'chapters', 'chapter', 'plan') — não usar bibleState.chapter
+      // pra decidir, porque ele fica "sticky" (nunca é zerado ao voltar do
+      // capítulo pro plano ou pra grade de capítulos).
+      switch(bibleView){
+        case 'chapter':
+          if(typeof bibleState !== 'undefined' && bibleState && bibleState.chapter){
+            await openBibleChapter(bibleState.chapter);
+          }
+          break;
+        case 'chapters':
+          renderBibleChapters();
+          break;
+        case 'plan':
+          await goBiblePlan();
+          break;
+        case 'books':
+          renderBibleBooks();
+          break;
+      }
     }
   }catch(e){ console.warn('⚠️ Não recarregou o conteúdo no novo idioma:', e.message); }
 }
@@ -6198,6 +6210,7 @@ function renderBibleChapters(){
   }
   html += `</div></div>`;
   container.innerHTML = html;
+  container.dataset.view = 'chapters';
 }
 
 const APIBIBLE_KEY = 'e2f2ExE4WrcRB9VF2viwV';
@@ -6322,6 +6335,7 @@ async function openBibleChapter(chapter){
   container.innerHTML = `<div class="bible-wrap"><div class="bible-crumbs">
     ${bibleCrumbHtml(book)}
   </div><div class="bible-loading">${t('bible.carregandoPrefixo')} ${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}...</div></div>`;
+  container.dataset.view = 'chapter';
   window.scrollTo(0,0);
 
   let result, usedTranslation = bibleState.translation;
