@@ -1532,23 +1532,23 @@
 <nav class="bottomnav">
   <button class="navtab" id="tab-home" onclick="goHome()">
     <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-    Início
+    <span data-i18n="nav.inicio">Início</span>
   </button>
   <button class="navtab" id="tab-bible" onclick="goBible()">
     <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-    Bíblia
+    <span data-i18n="nav.biblia">Bíblia</span>
   </button>
   <button class="navtab" id="tab-list" onclick="goList()">
     <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>
-    Lições
+    <span data-i18n="nav.licoes">Lições</span>
   </button>
   <button class="navtab" id="tab-stats" onclick="goStats()">
     <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
-    Progresso
+    <span data-i18n="nav.progresso">Progresso</span>
   </button>
   <button class="navtab" id="tab-conta" onclick="goConta()">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-    Conta
+    <span data-i18n="nav.conta">Conta</span>
   </button>
 </nav>
 
@@ -4983,12 +4983,54 @@ const CATEGORY_LABEL = {law:'Lei',histAT:'História (AT)',wisdom:'Poéticos',maj
 let idiomaConteudoAtual = 'pt';
 const IDIOMAS_SUPORTADOS = ['pt', 'en', 'es'];
 
+// Dicionario central de strings de interface (botoes, menus, titulos fixos).
+// Cada task da feature de UI multi-idioma adiciona suas chaves aqui, nos 3
+// idiomas ao mesmo tempo - nunca so em portugues torcendo pro fallback.
+const UI_STRINGS = {
+  pt: {
+    'nav.inicio': 'Início',
+    'nav.biblia': 'Bíblia',
+    'nav.licoes': 'Lições',
+    'nav.progresso': 'Progresso',
+    'nav.conta': 'Conta',
+  },
+  en: {
+    'nav.inicio': 'Home',
+    'nav.biblia': 'Bible',
+    'nav.licoes': 'Lessons',
+    'nav.progresso': 'Progress',
+    'nav.conta': 'Account',
+  },
+  es: {
+    'nav.inicio': 'Inicio',
+    'nav.biblia': 'Biblia',
+    'nav.licoes': 'Lecciones',
+    'nav.progresso': 'Progreso',
+    'nav.conta': 'Cuenta',
+  },
+};
+
+function t(chave){
+  const dict = UI_STRINGS[idiomaConteudoAtual] || UI_STRINGS.pt;
+  return dict[chave] || UI_STRINGS.pt[chave] || chave;
+}
+
+// Aplica traducao no texto que esta direto no HTML (fora de qualquer
+// template JS) - elementos marcados com data-i18n="chave". Chamada no
+// boot e toda vez que o idioma muda.
+function aplicarTraducaoEstatica(){
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+}
+
 async function carregarIdiomaConteudo(){
   try{
     const res = await window.storage.get('idioma-conteudo', false);
     if(res && res.value && IDIOMAS_SUPORTADOS.includes(res.value)) idiomaConteudoAtual = res.value;
   }catch(e){ /* chave ainda nao existe, fica pt */ }
   atualizarBotoesIdiomaConteudo();
+  aplicarTraducaoEstatica();
 }
 
 function atualizarBotoesIdiomaConteudo(){
@@ -5015,6 +5057,7 @@ async function setIdiomaConteudo(idioma){
 // no idioma corrente - sem isso, trocar o idioma so afetaria a proxima
 // navegacao, nao o que a pessoa esta lendo agora.
 async function recarregarConteudoNoIdiomaAtual(){
+  aplicarTraducaoEstatica();
   try{
     const container = document.getElementById('detail-container');
     const licaoAberta = container && container.style.display !== 'none' && container.dataset.lessonId;
