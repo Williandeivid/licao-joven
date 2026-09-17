@@ -1900,7 +1900,7 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
 
   html += `<div class="concluir-wrap" style="display:flex; gap:12px; align-items:center; justify-content:space-between;">
     <button class="btn-concluir ${done?'done':''}" data-lesson="${lessonId}" data-day="${day.id}" onclick="marcarConcluido(this)">
-      ${done ? '✓ Dia concluído' : 'Concluir este dia'}
+      ${done ? t('lesson.diaConcluido') : t('lesson.concluirDia')}
     </button>
     <button class="btn-comentarios" id="cmt-btn-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" title="Comentários deste dia" ${comentariosLigados() ? '' : 'hidden'}>
       <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -1949,18 +1949,18 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
         <div class="options">${shuffledQ[i].opts.map((o,oi)=>`<button class="opt ${kahootClasses[oi]}" data-v="${String.fromCharCode(65+oi)}">${o}</button>`).join('')}</div>
       </div>`;
     });
-    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>Você levou <b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>Acertos: <b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span><button class="quiz-refazer-btn" onclick="refazerQuiz(${lessonId},'${day.id}')">🔄 Refazer</button></div>
-    <button class="reveal-btn" onclick="toggleGabarito(this)">Ver gabarito completo</button>
+    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>${t('lesson.voceLevou')}<b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>${t('lesson.acertos')}<b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span><button class="quiz-refazer-btn" onclick="refazerQuiz(${lessonId},'${day.id}')">${t('lesson.refazer')}</button></div>
+    <button class="reveal-btn" onclick="toggleGabarito(this)">${t('lesson.verGabaritoCompleto')}</button>
     <div class="gabarito">${newAnswers.map((a,i)=>(i+1)+'-'+a).join(' · ')}</div>
     </div>`;
   }
 
   if(day.tf){
-    html += `<div class="tf" data-answers="${day.tf.answers.join(',')}"><h3>Verdadeiro ou Falso</h3>`;
+    html += `<div class="tf" data-answers="${day.tf.answers.join(',')}"><h3>${t('lesson.verdadeiroOuFalso')}</h3>`;
     day.tf.items.forEach((t,i)=>{
       html += `<div class="tf-item" data-q="${i+1}"><span>${i+1}. ${t}</span><div class="tf-btns"><button data-v="V">V</button><button data-v="F">F</button></div></div>`;
     });
-    html += `<button class="reveal-btn" onclick="toggleGabarito(this)">Ver gabarito</button>
+    html += `<button class="reveal-btn" onclick="toggleGabarito(this)">${t('lesson.verGabarito')}</button>
     <div class="gabarito">${day.tf.answers.map((a,i)=>(i+1)+'-'+a).join(' · ')}</div></div>`;
   }
 
@@ -2069,17 +2069,17 @@ async function renderLessonDetail(lessonId, fromList){
   window.scrollTo(0, 0);
 
   let html = `<header class="hero">`;
-  if(fromList) html += `<button class="back-btn" onclick="goList()">← Voltar para a lista</button><br>`;
+  if(fromList) html += `<button class="back-btn" onclick="goList()">${t('lesson.voltarLista')}</button><br>`;
   if (currentUser) {
     html += `<p class="saudacao">${saudacaoPorHorario()}, ${escaparHtml(primeiroNome())} 👋</p>`;
     const seq = sequenciaAtual();
     if (seq === 1) {
-      html += `<div class="hero-streak">🔥 Começou hoje</div>`;
+      html += `<div class="hero-streak">${t('lesson.comecouHoje')}</div>`;
     } else if (seq > 1) {
-      html += `<div class="hero-streak">🔥 ${seq} dias seguidos</div>`;
+      html += `<div class="hero-streak">${t('lesson.diasSeguidos').replace('${n}', seq)}</div>`;
     }
   }
-  html += `<div class="eyebrow">Lição Jovem ${lessonId}</div>
+  html += `<div class="eyebrow">${t('lesson.licaoJovem')} ${lessonId}</div>
     <h1 class="title">${content ? content.title : meta.title}</h1>`;
   if(content){
     const abbrevBible = (content.bibleref || '').replace(/João/g, 'Jo').replace(/Romanos/g, 'Rm').replace(/Coríntios/g, 'Co').replace(/Gálatas/g, 'Gl').replace(/Efésios/g, 'Ef').replace(/Filipenses/g, 'Fp').replace(/Colossenses/g, 'Cl').replace(/Tessalonicenses/g, 'Ts').replace(/Timóteo/g, 'Tm').replace(/Tito/g, 'Tt').replace(/Filemom/g, 'Flm').replace(/Hebreus/g, 'Hb').replace(/Tiago/g, 'Tg').replace(/Pedro/g, 'Pd').replace(/Judas/g, 'Jd').replace(/Apocalipse/g, 'Ap');
@@ -2093,8 +2093,8 @@ async function renderLessonDetail(lessonId, fromList){
   if(!content){
     html += `<div class="placeholder-box">
       <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-      <h3>Conteúdo em construção</h3>
-      <p>Essa lição ainda não foi extraída e parafraseada do PDF. Peça pra eu montar a Lição ${lessonId} e ela aparece aqui com todos os dias, versículos e quiz — igual às Lições 3 e 4.</p>
+      <h3>${t('lesson.conteudoConstrucao')}</h3>
+      <p>${t('lesson.conteudoConstrucaoTexto').replace('${n}', lessonId)}</p>
     </div>`;
     container.innerHTML = html;
     return;
@@ -2105,15 +2105,15 @@ async function renderLessonDetail(lessonId, fromList){
   let totalCorrect=0, totalQ=0;
   quizDays.forEach(d=>{ if(progress.quiz && progress.quiz[d.id]){ totalCorrect+=progress.quiz[d.id].correct; totalQ+=10; }});
   const pct = totalQ? Math.round(totalCorrect/totalQ*100) : 0;
-  let evalLabel = 'Comece um dia abaixo';
+  let evalLabel = t('lesson.comeceUmDia');
   if(doneCount>0){
-    evalLabel = (pct>=90?'Excelente domínio':pct>=70?'Bom domínio':pct>=50?'Vale revisar alguns pontos':'Reveja a lição com calma') + ' ('+pct+'%)';
+    evalLabel = (pct>=90?t('lesson.excelenteDominio'):pct>=70?t('lesson.bomDominio'):pct>=50?t('lesson.valeRevisar'):t('lesson.revejaComCalma')) + ' ('+pct+'%)';
   }
 
   html += `<div class="dashboard"><div class="dash-inner">
     <div class="dash-overall">
-      ${doneCount > 0 ? `<span class="label">Progresso: <span class="value">${doneCount}/${quizDays.length} dias</span></span>` : ''}
-      ${totalQ > 0 ? `<span class="label">Acertos: <span class="value">${totalCorrect}/${totalQ}${totalQ?' ('+pct+'%)':''}</span></span>` : ''}
+      ${doneCount > 0 ? `<span class="label">${t('lesson.progresso')}<span class="value">${doneCount}/${quizDays.length}${t('lesson.dias')}</span></span>` : ''}
+      ${totalQ > 0 ? `<span class="label">${t('lesson.acertos')}<span class="value">${totalCorrect}/${totalQ}${totalQ?' ('+pct+'%)':''}</span></span>` : ''}
     </div>
     <div class="pills" id="day-pills-row">`;
   content.days.forEach(d=>{
@@ -2123,7 +2123,7 @@ async function renderLessonDetail(lessonId, fromList){
     const statusClass = dDate.getTime()===today.getTime() ? 'day-today' : (dDate < today ? 'day-past' : 'day-future');
     html += `<div class="pill ${statusClass} ${isStudied?'done':''}" data-day="${d.id}" onclick="scrollToDay('${d.id}')"><span>${d.date.split(' · ')[0].slice(0,3)}</span><span class="dot">${isStudied?'✓':''}</span></div>`;
   });
-  html += `<button class="pill-calendar-toggle" id="calendar-toggle-btn" onclick="toggleWeekCalendar(${lessonId})" title="Escolher outro dia">
+  html += `<button class="pill-calendar-toggle" id="calendar-toggle-btn" onclick="toggleWeekCalendar(${lessonId})" data-i18n-title="lesson.escolherOutroDia" title="${t('lesson.escolherOutroDia')}">
     <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18"/><rect x="3" y="4" width="18" height="18" rx="3"/></svg>
   </button>`;
   html += `</div>`;
@@ -2137,10 +2137,10 @@ async function renderLessonDetail(lessonId, fromList){
     html += renderDayCard(lessonId, d, idx, progress, content, meta);
   });
   html += `</main><footer style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
-    <div style="flex:1; text-align:center;">Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · resumo de estudo pessoal</div>
+    <div style="flex:1; text-align:center;">Lição ${lessonId} · ${meta.title} · ComTexto Bíblico · ${t('lesson.resumoEstudoPessoal')}</div>
     <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-      <button class="nav-btn prev-btn" onclick="goPrevDay(${lessonId})" style="cursor:pointer;"><span>← Anterior</span></button>
-      <button class="nav-btn next-btn" onclick="goNextDay(${lessonId})" style="cursor:pointer;"><span>Próximo →</span></button>
+      <button class="nav-btn prev-btn" onclick="goPrevDay(${lessonId})" style="cursor:pointer;"><span>${t('lesson.anterior')}</span></button>
+      <button class="nav-btn next-btn" onclick="goNextDay(${lessonId})" style="cursor:pointer;"><span>${t('lesson.proximo')}</span></button>
     </div>
   </footer>`;
 
@@ -2529,8 +2529,8 @@ function atualizarMarcacoesDoDia(lessonId, dayId){
     const selo = document.querySelector('.hero-streak');
     if(selo && typeof sequenciaAtual === 'function'){
       const seq = sequenciaAtual();
-      if(seq === 1) selo.textContent = '🔥 Começou hoje';
-      else if(seq > 1) selo.textContent = `🔥 ${seq} dias seguidos`;
+      if(seq === 1) selo.textContent = t('lesson.comecouHoje');
+      else if(seq > 1) selo.textContent = t('lesson.diasSeguidos').replace('${n}', seq);
     }
   }catch(e){
     console.warn('⚠️ Não atualizou as marcações do dia:', e.message);
@@ -2551,8 +2551,8 @@ function atualizarDashboardProgresso(lessonId){
     quizDays.forEach(d=>{ if(progress.quiz && progress.quiz[d.id]){ totalCorrect+=progress.quiz[d.id].correct; totalQ+=10; }});
     const pct = totalQ? Math.round(totalCorrect/totalQ*100) : 0;
     overall.innerHTML =
-      (doneCount > 0 ? `<span class="label">Progresso: <span class="value">${doneCount}/${quizDays.length} dias</span></span>` : '') +
-      (totalQ > 0 ? `<span class="label">Acertos: <span class="value">${totalCorrect}/${totalQ} (${pct}%)</span></span>` : '');
+      (doneCount > 0 ? `<span class="label">${t('lesson.progresso')}<span class="value">${doneCount}/${quizDays.length}${t('lesson.dias')}</span></span>` : '') +
+      (totalQ > 0 ? `<span class="label">${t('lesson.acertos')}<span class="value">${totalCorrect}/${totalQ} (${pct}%)</span></span>` : '');
   }catch(e){
     console.warn('⚠️ Não atualizou o dashboard de progresso:', e.message);
   }
@@ -2574,7 +2574,7 @@ async function marcarConcluido(btn){
   progress.days[dayId] = {studied:true, estMinutes};
   progressCache[lessonId] = progress;
   btn.classList.add('done');
-  btn.textContent = '✓ Dia concluído';
+  btn.textContent = t('lesson.diaConcluido');
   await saveProgress(lessonId, progress);
 
   // Sem isto, marcar um dia passado salvava certo mas a régua de dias e o
@@ -2733,7 +2733,7 @@ function bindDayInteractions(lessonId, content, progress){
             const btnConcluir = document.querySelector(`.btn-concluir[data-lesson="${lessonId}"][data-day="${day.id}"]`);
             if(btnConcluir && !btnConcluir.classList.contains('done')){
               btnConcluir.classList.add('done');
-              btnConcluir.textContent = '✓ Dia concluído';
+              btnConcluir.textContent = t('lesson.diaConcluido');
             }
             await registrarRankingPrivado();
             await atualizarRankingSemanal();
@@ -2796,7 +2796,7 @@ function bindDayInteractions(lessonId, content, progress){
             const btnConcluir = document.querySelector(`.btn-concluir[data-lesson="${lessonId}"][data-day="${day.id}"]`);
             if(btnConcluir && !btnConcluir.classList.contains('done')){
               btnConcluir.classList.add('done');
-              btnConcluir.textContent = '✓ Dia concluído';
+              btnConcluir.textContent = t('lesson.diaConcluido');
             }
             await registrarRankingPrivado();
             await atualizarRankingSemanal();
@@ -5022,6 +5022,31 @@ const UI_STRINGS = {
     'list.statusConcluida': 'Concluída',
     'list.statusEmBreve': 'Em breve',
     'list.footer': 'Toque em "${nav}" pra voltar direto pra lição da semana atual.',
+    'lesson.concluirDia': 'Concluir este dia',
+    'lesson.diaConcluido': '✓ Dia concluído',
+    'lesson.voceLevou': 'Você levou ',
+    'lesson.acertos': 'Acertos: ',
+    'lesson.refazer': '🔄 Refazer',
+    'lesson.verGabaritoCompleto': 'Ver gabarito completo',
+    'lesson.verdadeiroOuFalso': 'Verdadeiro ou Falso',
+    'lesson.verGabarito': 'Ver gabarito',
+    'lesson.voltarLista': '← Voltar para a lista',
+    'lesson.comecouHoje': '🔥 Começou hoje',
+    'lesson.diasSeguidos': '🔥 ${n} dias seguidos',
+    'lesson.licaoJovem': 'Lição Jovem',
+    'lesson.conteudoConstrucao': 'Conteúdo em construção',
+    'lesson.conteudoConstrucaoTexto': 'Essa lição ainda não foi extraída e parafraseada do PDF. Peça pra eu montar a Lição ${n} e ela aparece aqui com todos os dias, versículos e quiz — igual às Lições 3 e 4.',
+    'lesson.comeceUmDia': 'Comece um dia abaixo',
+    'lesson.excelenteDominio': 'Excelente domínio',
+    'lesson.bomDominio': 'Bom domínio',
+    'lesson.valeRevisar': 'Vale revisar alguns pontos',
+    'lesson.revejaComCalma': 'Reveja a lição com calma',
+    'lesson.progresso': 'Progresso: ',
+    'lesson.dias': ' dias',
+    'lesson.escolherOutroDia': 'Escolher outro dia',
+    'lesson.resumoEstudoPessoal': 'resumo de estudo pessoal',
+    'lesson.anterior': '← Anterior',
+    'lesson.proximo': 'Próximo →',
   },
   en: {
     'nav.inicio': 'Home',
@@ -5057,6 +5082,31 @@ const UI_STRINGS = {
     'list.statusConcluida': 'Completed',
     'list.statusEmBreve': 'Coming soon',
     'list.footer': 'Tap "${nav}" to go straight back to this week\'s lesson.',
+    'lesson.concluirDia': 'Complete this day',
+    'lesson.diaConcluido': '✓ Day completed',
+    'lesson.voceLevou': 'You took ',
+    'lesson.acertos': 'Correct: ',
+    'lesson.refazer': '🔄 Retry',
+    'lesson.verGabaritoCompleto': 'See full answer key',
+    'lesson.verdadeiroOuFalso': 'True or False',
+    'lesson.verGabarito': 'See answer key',
+    'lesson.voltarLista': '← Back to the list',
+    'lesson.comecouHoje': '🔥 Started today',
+    'lesson.diasSeguidos': '🔥 ${n} days in a row',
+    'lesson.licaoJovem': 'Youth Lesson',
+    'lesson.conteudoConstrucao': 'Content coming soon',
+    'lesson.conteudoConstrucaoTexto': "This lesson hasn't been extracted and paraphrased from the PDF yet. Ask me to build Lesson ${n} and it will show up here with all the days, verses, and quiz — just like Lessons 3 and 4.",
+    'lesson.comeceUmDia': 'Start a day below',
+    'lesson.excelenteDominio': 'Excellent mastery',
+    'lesson.bomDominio': 'Good mastery',
+    'lesson.valeRevisar': 'Worth reviewing a few points',
+    'lesson.revejaComCalma': 'Review the lesson slowly',
+    'lesson.progresso': 'Progress: ',
+    'lesson.dias': ' days',
+    'lesson.escolherOutroDia': 'Choose another day',
+    'lesson.resumoEstudoPessoal': 'personal study summary',
+    'lesson.anterior': '← Previous',
+    'lesson.proximo': 'Next →',
   },
   es: {
     'nav.inicio': 'Inicio',
@@ -5092,6 +5142,31 @@ const UI_STRINGS = {
     'list.statusConcluida': 'Completada',
     'list.statusEmBreve': 'Próximamente',
     'list.footer': 'Toca "${nav}" para volver directo a la lección de esta semana.',
+    'lesson.concluirDia': 'Completar este día',
+    'lesson.diaConcluido': '✓ Día completado',
+    'lesson.voceLevou': 'Te tomó ',
+    'lesson.acertos': 'Aciertos: ',
+    'lesson.refazer': '🔄 Rehacer',
+    'lesson.verGabaritoCompleto': 'Ver solucionario completo',
+    'lesson.verdadeiroOuFalso': 'Verdadero o Falso',
+    'lesson.verGabarito': 'Ver solucionario',
+    'lesson.voltarLista': '← Volver a la lista',
+    'lesson.comecouHoje': '🔥 Empezó hoy',
+    'lesson.diasSeguidos': '🔥 ${n} días seguidos',
+    'lesson.licaoJovem': 'Lección Joven',
+    'lesson.conteudoConstrucao': 'Contenido en construcción',
+    'lesson.conteudoConstrucaoTexto': 'Esta lección todavía no fue extraída y parafraseada del PDF. Pídeme que arme la Lección ${n} y va a aparecer aquí con todos los días, versículos y quiz — igual que las Lecciones 3 y 4.',
+    'lesson.comeceUmDia': 'Empieza un día abajo',
+    'lesson.excelenteDominio': 'Dominio excelente',
+    'lesson.bomDominio': 'Buen dominio',
+    'lesson.valeRevisar': 'Vale la pena repasar algunos puntos',
+    'lesson.revejaComCalma': 'Repasa la lección con calma',
+    'lesson.progresso': 'Progreso: ',
+    'lesson.dias': ' días',
+    'lesson.escolherOutroDia': 'Elegir otro día',
+    'lesson.resumoEstudoPessoal': 'resumen de estudio personal',
+    'lesson.anterior': '← Anterior',
+    'lesson.proximo': 'Siguiente →',
   },
 };
 
