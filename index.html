@@ -4322,6 +4322,38 @@ const BIBLE_PLANS = {
   youthPlan3m: { name:'Ano Bíblico Jovem · 3 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo bem intenso — quatro dias da leitura original por dia.', pace:'~10,4 capítulos/dia · cerca de 3 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 4) },
 };
 
+// Traducao dos campos de texto de cada plano de leitura - name/desc/pace
+// continuam em BIBLE_PLANS (fonte em portugues); aqui so os overrides
+// en/es, mesmo padrao de bookDisplayName/dayDisplayDate (fallback pro pt
+// quando a chave/idioma nao tiver override).
+const BIBLE_PLANS_I18N = {
+  en: {
+    traditional: { name:'Traditional', desc:'From Genesis to Revelation, in the classic book order.', pace:'~3.3 chapters/day · about 1 year' },
+    chronological: { name:'Chronological', desc:'In the approximate order events happened — Job right after the start of Genesis, the prophets alongside the kings of their time, etc.', pace:'~3.3 chapters/day · about 1 year' },
+    fast6: { name:'Accelerated', desc:'The whole Bible, in classic order, at a faster pace — for those who already have a reading habit.', pace:'~6.5 chapters/day · about 6 months' },
+    nt90: { name:'New Testament', desc:'Just the New Testament — great to start light or review the Gospels and letters.', pace:'~2.9 chapters/day · 90 days' },
+    youthPlan1y: { name:'Youth Bible Year', desc:'Starts in Psalms, then goes through the whole Bible mixing poetry, history, and the Gospels over the year — based on the 2021 Youth Bible Year.', pace:'~2.6 chapters/day · about 1 year' },
+    youthPlan6m: { name:'Youth Bible Year · 6 months', desc:'The same Youth Bible Year sequence, at double pace — two days of the original reading per day.', pace:'~5.2 chapters/day · about 6 months' },
+    youthPlan3m: { name:'Youth Bible Year · 3 months', desc:'The same Youth Bible Year sequence, at a very intense pace — four days of the original reading per day.', pace:'~10.4 chapters/day · about 3 months' },
+  },
+  es: {
+    traditional: { name:'Tradicional', desc:'De Génesis a Apocalipsis, en el orden clásico de los libros.', pace:'~3,3 capítulos/día · cerca de 1 año' },
+    chronological: { name:'Cronológico', desc:'En el orden aproximado en que ocurrieron los acontecimientos — Job justo después del inicio de Génesis, los profetas junto a los reyes de su época, etc.', pace:'~3,3 capítulos/día · cerca de 1 año' },
+    fast6: { name:'Acelerado', desc:'La Biblia entera, en el orden clásico, a un ritmo más intenso — para quien ya tiene el hábito de lectura.', pace:'~6,5 capítulos/día · cerca de 6 meses' },
+    nt90: { name:'Nuevo Testamento', desc:'Solo el Nuevo Testamento — ideal para empezar más liviano o repasar los Evangelios y las cartas.', pace:'~2,9 capítulos/día · 90 días' },
+    youthPlan1y: { name:'Año Bíblico Joven', desc:'Empieza en Salmos, y luego recorre toda la Biblia mezclando poesía, historia y los Evangelios a lo largo del año — basado en el Año Bíblico Joven 2021.', pace:'~2,6 capítulos/día · cerca de 1 año' },
+    youthPlan6m: { name:'Año Bíblico Joven · 6 meses', desc:'La misma secuencia del Año Bíblico Joven, al doble de ritmo — dos días de la lectura original por día.', pace:'~5,2 capítulos/día · cerca de 6 meses' },
+    youthPlan3m: { name:'Año Bíblico Joven · 3 meses', desc:'La misma secuencia del Año Bíblico Joven, a un ritmo muy intenso — cuatro días de la lectura original por día.', pace:'~10,4 capítulos/día · cerca de 3 meses' },
+  },
+};
+
+// Le name/desc/pace de um plano no idioma atual, caindo pro portugues
+// (BIBLE_PLANS[key] em si) quando faltar override.
+function planField(key, campo, idioma){
+  const override = BIBLE_PLANS_I18N[idioma] && BIBLE_PLANS_I18N[idioma][key];
+  return (override && override[campo]) || BIBLE_PLANS[key][campo];
+}
+
 function chunkEvenly(sequence, totalDays){
   const days = [];
   const n = sequence.length;
@@ -4497,17 +4529,17 @@ async function markDayDone(dayIndex){
 function bibleSubtabsHTML(active){
   return `<div class="bible-subtabs">
     <button class="bible-subtab ${active==='read'?'active':''}" onclick="goBible()">
-      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Bíblia
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>${t('bible.titulo')}
     </button>
     <button class="bible-subtab ${active==='plan'?'active':''}" onclick="goBiblePlan()">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Plano Bíblico
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${t('bible.planoBiblico')}
     </button>
   </div>`;
 }
 
 function bibleCrumbHtml(book){
   if(bibleState.returnTo === 'plan'){
-    return `<button onclick="renderBiblePlan()">← ${BIBLE_PLANS[currentPlanKey].name}</button>`;
+    return `<button onclick="renderBiblePlan()">← ${planField(currentPlanKey, 'name', idiomaConteudoAtual)}</button>`;
   }
   return `<button onclick="goBible()">← Livros</button><span>/</span><button onclick="renderBibleChapters()">${bookDisplayName(book.id, idiomaConteudoAtual)}</button>`;
 }
@@ -4547,7 +4579,7 @@ async function renderPlanSelector(){
   if(!container) return;
   await loadActiveBiblePlan();
   let html = bibleSubtabsHTML('plan');
-  html += `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Plano Bíblico</h1><p>Escolha como você quer percorrer a Bíblia inteira.</p></div><div class="bible-wrap">`;
+  html += `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${t('bible.planoBiblico')}</h1><p>${t('bible.escolhaComoPercorrer')}</p></div><div class="bible-wrap">`;
   for(const key in BIBLE_PLANS){
     const plan = BIBLE_PLANS[key];
     const prog = await loadPlanProgress(key);
@@ -4556,19 +4588,19 @@ async function renderPlanSelector(){
     const pct = total ? Math.round(done/total*100) : 0;
     const isActive = activeBiblePlan === key;
     html += `<div class="plan-card ${isActive?'is-active-plan':''}">
-      <div class="plan-card-top"><span class="plan-card-name">${plan.name}${isActive?' <span class=\"active-badge\">★ Recente</span>':''}</span><span class="plan-card-pct">${pct}%</span></div>
-      <div class="plan-card-desc">${plan.desc}</div>
-      <div class="plan-card-pace">${plan.pace}</div>
+      <div class="plan-card-top"><span class="plan-card-name">${planField(key, 'name', idiomaConteudoAtual)}${isActive?` <span class=\"active-badge\">${t('bible.recente')}</span>`:''}</span><span class="plan-card-pct">${pct}%</span></div>
+      <div class="plan-card-desc">${planField(key, 'desc', idiomaConteudoAtual)}</div>
+      <div class="plan-card-pace">${planField(key, 'pace', idiomaConteudoAtual)}</div>
       <div class="plan-progress-track small"><div class="plan-progress-fill" style="width:${pct}%"></div></div>
       <div class="plan-card-actions">
-        <button class="plan-card-open" onclick="openPlan('${key}')">Abrir</button>
+        <button class="plan-card-open" onclick="openPlan('${key}')">${t('conta.abrirLink')}</button>
         ${isActive
-          ? `<button class="plan-card-deactivate" onclick="event.stopPropagation(); deactivatePlan()">Desativar</button>`
-          : `<button class="plan-card-activate" onclick="event.stopPropagation(); activatePlan('${key}')">Tornar oficial</button>`}
+          ? `<button class="plan-card-deactivate" onclick="event.stopPropagation(); deactivatePlan()">${t('bible.desativar')}</button>`
+          : `<button class="plan-card-activate" onclick="event.stopPropagation(); activatePlan('${key}')">${t('bible.tornarOficial')}</button>`}
       </div>
     </div>`;
   }
-  html += `</div><footer>${BIBLE_PLANS.chronological.sequence.length} / ${BIBLE_PLANS.traditional.sequence.length} capítulos no total, dependendo do plano.</footer>`;
+  html += `</div><footer>${t('bible.capitulosNoTotal').replace('${a}', BIBLE_PLANS.chronological.sequence.length).replace('${b}', BIBLE_PLANS.traditional.sequence.length)}</footer>`;
   container.innerHTML = html;
 }
 
@@ -4615,24 +4647,24 @@ async function renderBiblePlan(){
   if(viewedDayIndex === undefined || viewedDayIndex === null || viewedDayIndex >= totalDays) viewedDayIndex = scheduleIdx;
 
   let html = bibleSubtabsHTML('plan');
-  html += `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${plan.name}
+  html += `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${planField(key, 'name', idiomaConteudoAtual)}
     <div style="position:relative;">
       <button class="gear-btn" onclick="togglePlanMenuItems('${key}')" style="filter:saturate(0);"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
       <div id="plan-menu-items-${key}" style="position:absolute;top:100%;right:0;background:var(--card);border:2px solid var(--border);border-radius:8px;padding:8px;min-width:200px;z-index:20;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
-        <button onclick="sharePlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M12 2v10m5-5l-5-5-5 5"/></svg><span>Compartilhar</span></button>
-        <button onclick="configPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="2.5"/><path d="M12 1v4M12 19v4M6.22 6.22l2.83 2.83M14.95 14.95l2.83 2.83M1 12h4M19 12h4M6.22 17.78l2.83-2.83M14.95 9.05l2.83-2.83"/></svg><span>Configurações</span></button>
-        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">i</text></svg><span>Informações</span></button>
-        <button onclick="stopPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:#ff6b6b;font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#ff6b6b;stroke-width:2;fill:#ff6b6b;filter:saturate(0);flex-shrink:0;"><rect x="6" y="6" width="12" height="12"/></svg><span>Parar Plano</span></button>
+        <button onclick="sharePlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M12 2v10m5-5l-5-5-5 5"/></svg><span>${t('bible.compartilhar')}</span></button>
+        <button onclick="configPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="2.5"/><path d="M12 1v4M12 19v4M6.22 6.22l2.83 2.83M14.95 14.95l2.83 2.83M1 12h4M19 12h4M6.22 17.78l2.83-2.83M14.95 9.05l2.83-2.83"/></svg><span>${t('bible.configuracoes')}</span></button>
+        <button onclick="infoPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;filter:saturate(0);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">i</text></svg><span>${t('bible.informacoes')}</span></button>
+        <button onclick="stopPlanItem('${key}')" style="width:100%;padding:10px;border:none;background:none;text-align:left;cursor:pointer;color:#ff6b6b;font-size:14px;border-radius:6px;display:flex;gap:8px;align-items:center;"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#ff6b6b;stroke-width:2;fill:#ff6b6b;filter:saturate(0);flex-shrink:0;"><rect x="6" y="6" width="12" height="12"/></svg><span>${t('bible.pararPlano')}</span></button>
       </div>
     </div>
-  </h1><p>${plan.desc}</p></div>
+  </h1><p>${planField(key, 'desc', idiomaConteudoAtual)}</p></div>
   <div class="bible-wrap">
-    <div class="bible-crumbs"><button onclick="renderPlanSelector()">← Todos os planos</button></div>
+    <div class="bible-crumbs"><button onclick="renderPlanSelector()">${t('bible.todosOsPlanos')}</button></div>
     <div class="plan-summary">
       <div class="big-pct">${pct}%</div>
-      <div class="sub">${daysDone} de ${totalDays} dias concluídos · ${plan.pace}</div>
+      <div class="sub">${t('bible.diasConcluidos').replace('${done}', daysDone).replace('${total}', totalDays)} · ${planField(key, 'pace', idiomaConteudoAtual)}</div>
       <div class="plan-progress-track"><div class="plan-progress-fill" style="width:${pct}%"></div></div>
-      ${aheadBehind !== 0 ? `<div class="ahead-behind ${aheadBehind>0?'ahead':'behind'}">${aheadBehind>0?`${aheadBehind} dia${aheadBehind===1?'':'s'} adiantado`:`${Math.abs(aheadBehind)} dia${Math.abs(aheadBehind)===1?'':'s'} atrasado`}</div>` : ''}
+      ${aheadBehind !== 0 ? `<div class="ahead-behind ${aheadBehind>0?'ahead':'behind'}">${aheadBehind>0?t('bible.diasAdiantado').replace('${n}', aheadBehind).replace('${s}', aheadBehind===1?'':'s'):t('bible.diasAtrasado').replace('${n}', Math.abs(aheadBehind)).replace('${s}', Math.abs(aheadBehind)===1?'':'s')}</div>` : ''}
     </div>
 
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">
@@ -4651,11 +4683,11 @@ async function renderBiblePlan(){
         flex-shrink:0;width:32px;height:58px;border:2px solid var(--border);background:var(--card);border-radius:8px;
         cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);
         transition:all 0.2s ease;
-      " title="Abrir calendário"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></button>
+      " data-i18n-title="bible.abrirCalendario" title="${t('bible.abrirCalendario')}"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></button>
     </div>
 
     <div class="day-chapter-list" id="day-chapter-list"></div>
-  </div><footer>Toque no número do dia pra ver a leitura daquele dia. Toque na bolinha pra marcar/desmarcar cada capítulo, ou no texto pra abrir e ler.</footer>`;
+  </div><footer>${t('bible.toqueNumeroDia')}</footer>`;
   container.innerHTML = html;
   renderDayChapterList();
   const scroller = document.getElementById('day-scroller');
@@ -4678,7 +4710,7 @@ function renderDayChapterList(){
   let html = '';
   reading.forEach(r=>{
     const done = !!prog.read[r.book+'-'+r.chapter];
-    const label = `${BOOK_NAME_BY_ID[r.book]} ${r.chapter}`;
+    const label = `${bookDisplayName(r.book, idiomaConteudoAtual)} ${r.chapter}`;
     html += `<div class="chapter-row ${done?'done':''}">
       <button class="chapter-check" onclick="toggleSingleChapter('${r.book}',${r.chapter})">${done?'✓':''}</button>
       <button class="chapter-open" onclick="openPlanChapterFromList('${r.book}',${r.chapter})"><span>${label}</span><span class="chevron">›</span></button>
@@ -4721,8 +4753,7 @@ function closePlanMenu(key){
 
 function sharePlanItem(key){
   closePlanMenu(key);
-  const plan = BIBLE_PLANS[key];
-  alert(t('alerts.compartilharPrefixo')+plan.name);
+  alert(t('alerts.compartilharPrefixo')+planField(key, 'name', idiomaConteudoAtual));
 }
 
 async function configPlanItem(key){
@@ -4740,9 +4771,9 @@ async function configPlanItem(key){
   const startDate = new Date(startDateStr);
   const progressPct = Math.round((scheduleIdx / plan.sequence.length) * 100);
 
-  const statusMsg = aheadBehind > 0 ? `${aheadBehind} Dia${aheadBehind > 1 ? 's' : ''} Adiantado` :
-                    aheadBehind < 0 ? `${Math.abs(aheadBehind)} Dia${Math.abs(aheadBehind) > 1 ? 's' : ''} Atrasado` :
-                    'Em Dia';
+  const statusMsg = aheadBehind > 0 ? t('bible.diasAdiantado').replace('${n}', aheadBehind).replace('${s}', aheadBehind > 1 ? 's' : '') :
+                    aheadBehind < 0 ? t('bible.diasAtrasado').replace('${n}', Math.abs(aheadBehind)).replace('${s}', Math.abs(aheadBehind) > 1 ? 's' : '') :
+                    t('bible.emDia');
   const statusColor = aheadBehind > 0 ? '#4ade80' : aheadBehind < 0 ? '#ff6b6b' : '#60a5fa';
 
 
@@ -4760,7 +4791,7 @@ async function configPlanItem(key){
       max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);my-margin:20px 0;
     ">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <h2 style="margin:0;font-size:18px;font-weight:600;">Configurações do Plano</h2>
+        <h2 style="margin:0;font-size:18px;font-weight:600;">${t('bible.configuracoesDoPlano')}</h2>
         <button onclick="document.getElementById('plan-config-modal').remove()" style="
           background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:0;line-height:1;
         ">×</button>
@@ -4768,8 +4799,8 @@ async function configPlanItem(key){
 
       <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;margin-bottom:20px;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-          <span style="font-size:14px;color:var(--ink-secondary);">Progresso</span>
-          <span style="font-size:18px;font-weight:600;color:var(--ink);">Dia ${scheduleIdx + 1} de ${plan.sequence.length}</span>
+          <span style="font-size:14px;color:var(--ink-secondary);">${t('bible.progresso')}</span>
+          <span style="font-size:18px;font-weight:600;color:var(--ink);">${t('bible.diaXdeY').replace('${x}', scheduleIdx + 1).replace('${y}', plan.sequence.length)}</span>
         </div>
 
         <div style="
@@ -4783,11 +4814,11 @@ async function configPlanItem(key){
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
           <div>
-            <span style="color:var(--ink-secondary);display:block;margin-bottom:4px;">Começou</span>
+            <span style="color:var(--ink-secondary);display:block;margin-bottom:4px;">${t('bible.comecou')}</span>
             <span style="color:var(--ink);font-weight:500;display:block;">${startDate.toLocaleDateString('pt-BR')}</span>
           </div>
           <div>
-            <span style="color:var(--ink-secondary);display:block;margin-bottom:4px;">Termina</span>
+            <span style="color:var(--ink-secondary);display:block;margin-bottom:4px;">${t('bible.termina')}</span>
             <span style="color:var(--ink);font-weight:500;display:block;">${endDate.toLocaleDateString('pt-BR')}</span>
           </div>
         </div>
@@ -4796,7 +4827,7 @@ async function configPlanItem(key){
       <button onclick="showChangeDatePicker('${key}')" style="
         width:100%;padding:12px;background:var(--card);color:var(--primary);border:2px solid var(--primary);
         border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;margin-bottom:12px;
-      ">Trocar Datas</button>
+      ">${t('bible.trocarDatas')}</button>
 
       <div style="
         background:var(--bg-secondary);border-radius:8px;padding:12px;
@@ -4808,7 +4839,7 @@ async function configPlanItem(key){
       <button onclick="document.getElementById('plan-config-modal').remove()" style="
         width:100%;padding:12px;background:var(--primary);color:white;border:none;
         border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;
-      ">Fechar</button>
+      ">${t('bible.fechar')}</button>
     </div>
   `;
 
@@ -4835,14 +4866,14 @@ function showChangeDatePicker(key){
       max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);
     ">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <h2 style="margin:0;font-size:18px;font-weight:600;">Trocar Data de Início</h2>
+        <h2 style="margin:0;font-size:18px;font-weight:600;">${t('bible.trocarDataInicio')}</h2>
         <button onclick="this.closest('[style*=position]').remove()" style="
           background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:0;
         ">×</button>
       </div>
 
       <div style="margin-bottom:20px;">
-        <label style="display:block;margin-bottom:8px;font-size:14px;font-weight:500;">Nova data de início:</label>
+        <label style="display:block;margin-bottom:8px;font-size:14px;font-weight:500;">${t('bible.novaDataInicio')}</label>
         <input type="date" id="plan-date-input-${key}" value="${currentDate}" style="
           width:100%;padding:10px;border:2px solid var(--border);border-radius:6px;
           background:var(--card);color:var(--ink);font-size:14px;
@@ -4852,12 +4883,12 @@ function showChangeDatePicker(key){
       <button onclick="savePlanNewDate('${key}', document.getElementById('plan-date-input-${key}').value)" style="
         width:100%;padding:12px;background:var(--primary);color:white;border:none;
         border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;margin-bottom:8px;
-      ">Salvar Data</button>
+      ">${t('bible.salvarData')}</button>
 
       <button onclick="this.closest('[style*=position]').remove()" style="
         width:100%;padding:12px;background:var(--card);color:var(--ink);border:2px solid var(--border);
         border-radius:6px;cursor:pointer;font-weight:500;font-size:14px;
-      ">Cancelar</button>
+      ">${t('bible.cancelar')}</button>
     </div>
   `;
 
@@ -4879,7 +4910,6 @@ async function savePlanNewDate(key, newDateStr){
 
 function infoPlanItem(key){
   closePlanMenu(key);
-  const plan = BIBLE_PLANS[key];
   const modal = document.createElement('div');
   modal.style.cssText = `
     position:fixed;top:0;left:0;right:0;bottom:0;
@@ -4893,12 +4923,12 @@ function infoPlanItem(key){
       max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);
     ">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <h2 style="margin:0;font-size:18px;font-weight:600;">Informações</h2>
+        <h2 style="margin:0;font-size:18px;font-weight:600;">${t('bible.informacoes')}</h2>
         <button onclick="this.closest('[style*=position]').remove()" style="
           background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:0;
         ">×</button>
       </div>
-      <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink);">${plan.desc}</p>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink);">${planField(key, 'desc', idiomaConteudoAtual)}</p>
     </div>
   `;
 
@@ -5275,6 +5305,34 @@ const UI_STRINGS = {
     'bible.removerMarcacao': 'Remover marcação',
     'bible.qualVersao': 'Qual versão?',
     'bible.escolhaTraducao': 'Escolha a tradução que deseja ler',
+    'bible.planoBiblico': 'Plano Bíblico',
+    'bible.escolhaComoPercorrer': 'Escolha como você quer percorrer a Bíblia inteira.',
+    'bible.recente': '★ Recente',
+    'bible.desativar': 'Desativar',
+    'bible.tornarOficial': 'Tornar oficial',
+    'bible.capitulosNoTotal': '${a} / ${b} capítulos no total, dependendo do plano.',
+    'bible.todosOsPlanos': '← Todos os planos',
+    'bible.diasConcluidos': '${done} de ${total} dias concluídos',
+    'bible.diasAdiantado': '${n} dia${s} adiantado',
+    'bible.diasAtrasado': '${n} dia${s} atrasado',
+    'bible.abrirCalendario': 'Abrir calendário',
+    'bible.toqueNumeroDia': 'Toque no número do dia pra ver a leitura daquele dia. Toque na bolinha pra marcar/desmarcar cada capítulo, ou no texto pra abrir e ler.',
+    'bible.compartilhar': 'Compartilhar',
+    'bible.configuracoes': 'Configurações',
+    'bible.informacoes': 'Informações',
+    'bible.pararPlano': 'Parar Plano',
+    'bible.configuracoesDoPlano': 'Configurações do Plano',
+    'bible.progresso': 'Progresso',
+    'bible.diaXdeY': 'Dia ${x} de ${y}',
+    'bible.comecou': 'Começou',
+    'bible.termina': 'Termina',
+    'bible.trocarDatas': 'Trocar Datas',
+    'bible.emDia': 'Em Dia',
+    'bible.fechar': 'Fechar',
+    'bible.trocarDataInicio': 'Trocar Data de Início',
+    'bible.novaDataInicio': 'Nova data de início:',
+    'bible.salvarData': 'Salvar Data',
+    'bible.cancelar': 'Cancelar',
     'comments.agora': 'agora',
     'comments.haMin': 'há ${n} min',
     'comments.haH': 'há ${n} h',
@@ -5495,6 +5553,34 @@ const UI_STRINGS = {
     'bible.removerMarcacao': 'Remove highlight',
     'bible.qualVersao': 'Which version?',
     'bible.escolhaTraducao': 'Choose the translation you want to read',
+    'bible.planoBiblico': 'Bible Plan',
+    'bible.escolhaComoPercorrer': 'Choose how you want to go through the whole Bible.',
+    'bible.recente': '★ Recent',
+    'bible.desativar': 'Deactivate',
+    'bible.tornarOficial': 'Make official',
+    'bible.capitulosNoTotal': '${a} / ${b} chapters in total, depending on the plan.',
+    'bible.todosOsPlanos': '← All plans',
+    'bible.diasConcluidos': '${done} of ${total} days completed',
+    'bible.diasAdiantado': '${n} day${s} ahead',
+    'bible.diasAtrasado': '${n} day${s} behind',
+    'bible.abrirCalendario': 'Open calendar',
+    'bible.toqueNumeroDia': "Tap the day's number to see that day's reading. Tap the dot to mark/unmark each chapter, or the text to open and read it.",
+    'bible.compartilhar': 'Share',
+    'bible.configuracoes': 'Settings',
+    'bible.informacoes': 'Information',
+    'bible.pararPlano': 'Stop Plan',
+    'bible.configuracoesDoPlano': 'Plan Settings',
+    'bible.progresso': 'Progress',
+    'bible.diaXdeY': 'Day ${x} of ${y}',
+    'bible.comecou': 'Started',
+    'bible.termina': 'Ends',
+    'bible.trocarDatas': 'Change Dates',
+    'bible.emDia': 'On Track',
+    'bible.fechar': 'Close',
+    'bible.trocarDataInicio': 'Change Start Date',
+    'bible.novaDataInicio': 'New start date:',
+    'bible.salvarData': 'Save Date',
+    'bible.cancelar': 'Cancel',
     'comments.agora': 'just now',
     'comments.haMin': '${n} min ago',
     'comments.haH': '${n} h ago',
@@ -5715,6 +5801,34 @@ const UI_STRINGS = {
     'bible.removerMarcacao': 'Quitar marcado',
     'bible.qualVersao': '¿Qué versión?',
     'bible.escolhaTraducao': 'Elige la traducción que quieres leer',
+    'bible.planoBiblico': 'Plan Bíblico',
+    'bible.escolhaComoPercorrer': 'Elige cómo quieres recorrer toda la Biblia.',
+    'bible.recente': '★ Reciente',
+    'bible.desativar': 'Desactivar',
+    'bible.tornarOficial': 'Hacer oficial',
+    'bible.capitulosNoTotal': '${a} / ${b} capítulos en total, según el plan.',
+    'bible.todosOsPlanos': '← Todos los planes',
+    'bible.diasConcluidos': '${done} de ${total} días completados',
+    'bible.diasAdiantado': '${n} día${s} adelantado',
+    'bible.diasAtrasado': '${n} día${s} atrasado',
+    'bible.abrirCalendario': 'Abrir calendario',
+    'bible.toqueNumeroDia': 'Toca el número del día para ver la lectura de ese día. Toca el círculo para marcar/desmarcar cada capítulo, o el texto para abrirlo y leerlo.',
+    'bible.compartilhar': 'Compartir',
+    'bible.configuracoes': 'Configuración',
+    'bible.informacoes': 'Información',
+    'bible.pararPlano': 'Detener Plan',
+    'bible.configuracoesDoPlano': 'Configuración del Plan',
+    'bible.progresso': 'Progreso',
+    'bible.diaXdeY': 'Día ${x} de ${y}',
+    'bible.comecou': 'Empezó',
+    'bible.termina': 'Termina',
+    'bible.trocarDatas': 'Cambiar Fechas',
+    'bible.emDia': 'Al Día',
+    'bible.fechar': 'Cerrar',
+    'bible.trocarDataInicio': 'Cambiar Fecha de Inicio',
+    'bible.novaDataInicio': 'Nueva fecha de inicio:',
+    'bible.salvarData': 'Guardar Fecha',
+    'bible.cancelar': 'Cancelar',
     'comments.agora': 'ahora',
     'comments.haMin': 'hace ${n} min',
     'comments.haH': 'hace ${n} h',
