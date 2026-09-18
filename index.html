@@ -4317,12 +4317,23 @@ function buildNTSeq(){
   BIBLE_BOOKS.filter(b=>b.t==='NT').forEach(b=>{ for(let c=1;c<=b.ch;c++){ seq.push({book:b.id, chapter:c}); } });
   return seq;
 }
+// Mesma ordem classica de buildTraditionalSeq(), so rotacionada pra comecar
+// no capitulo do dia do projeto real "Reavivados por Sua Palavra"
+// (reavivadosporsuapalavra.org, que segue a ordem canonica dos livros) em
+// 18/09/2026: Salmos 42. Dali em diante segue Salmos 43, 44... Apocalipse,
+// depois volta pra Genesis 1 e completa o ciclo ate Salmos 41.
+function buildReavivadosSeq(){
+  const full = buildTraditionalSeq();
+  const anchorIndex = full.findIndex(r => r.book==='PSA' && r.chapter===42);
+  return full.slice(anchorIndex).concat(full.slice(0, anchorIndex));
+}
 
 const BIBLE_PLANS = {
   traditional: { name:'Tradicional', desc:'Do Gênesis ao Apocalipse, na ordem clássica dos livros.', pace:'~3,3 capítulos/dia · cerca de 1 ano', sequence: buildTraditionalSeq() },
   chronological: { name:'Cronológico', desc:'Na ordem aproximada em que os acontecimentos aconteceram — Jó logo após o início de Gênesis, os profetas ao lado dos reis da época, etc.', pace:'~3,3 capítulos/dia · cerca de 1 ano', sequence: CHRON_PLAN_DATA },
   fast6: { name:'Acelerado', desc:'A Bíblia inteira, na ordem clássica, num ritmo mais intenso — pra quem já tem o hábito de leitura.', pace:'~6,5 capítulos/dia · cerca de 6 meses', sequence: buildTraditionalSeq() },
   nt90: { name:'Novo Testamento', desc:'Só o Novo Testamento — ótimo pra começar mais leve ou revisar os Evangelhos e cartas.', pace:'~2,9 capítulos/dia · 90 dias', sequence: buildNTSeq() },
+  reavivados: { name:'Reavivados por Sua Palavra', desc:'Começa em Salmos 42 — o capítulo do dia no projeto Reavivados por Sua Palavra em 18/09/2026 — e segue dali a ordem clássica dos livros, capítulo por capítulo, até completar a Bíblia inteira.', pace:'1 capítulo/dia · cerca de 3 anos e 3 meses', sequence: buildReavivadosSeq() },
   youthPlan1y: { name:'Ano Bíblico Jovem', desc:'Começa em Salmos, depois percorre a Bíblia inteira misturando poesia, história e os Evangelhos ao longo do ano — baseado no Ano Bíblico Jovem 2021.', pace:'~2,6 capítulos/dia · cerca de 1 ano', sequence: YOUTH_PLAN_DAYS.flat(), days: YOUTH_PLAN_DAYS },
   youthPlan6m: { name:'Ano Bíblico Jovem · 6 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo dobrado — dois dias da leitura original por dia.', pace:'~5,2 capítulos/dia · cerca de 6 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 2) },
   youthPlan3m: { name:'Ano Bíblico Jovem · 3 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo bem intenso — quatro dias da leitura original por dia.', pace:'~10,4 capítulos/dia · cerca de 3 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 4) },
@@ -4338,6 +4349,7 @@ const BIBLE_PLANS_I18N = {
     chronological: { name:'Chronological', desc:'In the approximate order events happened — Job right after the start of Genesis, the prophets alongside the kings of their time, etc.', pace:'~3.3 chapters/day · about 1 year' },
     fast6: { name:'Accelerated', desc:'The whole Bible, in classic order, at a faster pace — for those who already have a reading habit.', pace:'~6.5 chapters/day · about 6 months' },
     nt90: { name:'New Testament', desc:'Just the New Testament — great to start light or review the Gospels and letters.', pace:'~2.9 chapters/day · 90 days' },
+    reavivados: { name:'Revived by His Word', desc:'Starts at Psalm 42 — the day\'s chapter in the "Revived by His Word" project on 9/18/2026 — then follows the classic book order, chapter by chapter, until the whole Bible is done.', pace:'1 chapter/day · about 3 years and 3 months' },
     youthPlan1y: { name:'Youth Bible Year', desc:'Starts in Psalms, then goes through the whole Bible mixing poetry, history, and the Gospels over the year — based on the 2021 Youth Bible Year.', pace:'~2.6 chapters/day · about 1 year' },
     youthPlan6m: { name:'Youth Bible Year · 6 months', desc:'The same Youth Bible Year sequence, at double pace — two days of the original reading per day.', pace:'~5.2 chapters/day · about 6 months' },
     youthPlan3m: { name:'Youth Bible Year · 3 months', desc:'The same Youth Bible Year sequence, at a very intense pace — four days of the original reading per day.', pace:'~10.4 chapters/day · about 3 months' },
@@ -4347,6 +4359,7 @@ const BIBLE_PLANS_I18N = {
     chronological: { name:'Cronológico', desc:'En el orden aproximado en que ocurrieron los acontecimientos — Job justo después del inicio de Génesis, los profetas junto a los reyes de su época, etc.', pace:'~3,3 capítulos/día · cerca de 1 año' },
     fast6: { name:'Acelerado', desc:'La Biblia entera, en el orden clásico, a un ritmo más intenso — para quien ya tiene el hábito de lectura.', pace:'~6,5 capítulos/día · cerca de 6 meses' },
     nt90: { name:'Nuevo Testamento', desc:'Solo el Nuevo Testamento — ideal para empezar más liviano o repasar los Evangelios y las cartas.', pace:'~2,9 capítulos/día · 90 días' },
+    reavivados: { name:'Reavivados por Su Palabra', desc:'Empieza en Salmos 42 — el capítulo del día en el proyecto Reavivados por Su Palabra el 18/09/2026 — y sigue desde ahí el orden clásico de los libros, capítulo por capítulo, hasta completar toda la Biblia.', pace:'1 capítulo/día · cerca de 3 años y 3 meses' },
     youthPlan1y: { name:'Año Bíblico Joven', desc:'Empieza en Salmos, y luego recorre toda la Biblia mezclando poesía, historia y los Evangelios a lo largo del año — basado en el Año Bíblico Joven 2021.', pace:'~2,6 capítulos/día · cerca de 1 año' },
     youthPlan6m: { name:'Año Bíblico Joven · 6 meses', desc:'La misma secuencia del Año Bíblico Joven, al doble de ritmo — dos días de la lectura original por día.', pace:'~5,2 capítulos/día · cerca de 6 meses' },
     youthPlan3m: { name:'Año Bíblico Joven · 3 meses', desc:'La misma secuencia del Año Bíblico Joven, a un ritmo muy intenso — cuatro días de la lectura original por día.', pace:'~10,4 capítulos/día · cerca de 3 meses' },
@@ -4436,6 +4449,7 @@ BIBLE_PLANS.traditional.days = chunkEvenly(BIBLE_PLANS.traditional.sequence, 365
 BIBLE_PLANS.chronological.days = chunkEvenly(BIBLE_PLANS.chronological.sequence, 365);
 BIBLE_PLANS.fast6.days = chunkSixPlusTen(BIBLE_PLANS.fast6.sequence);
 BIBLE_PLANS.nt90.days = chunkEvenly(BIBLE_PLANS.nt90.sequence, 90);
+BIBLE_PLANS.reavivados.days = chunkEvenly(BIBLE_PLANS.reavivados.sequence, BIBLE_PLANS.reavivados.sequence.length);
 for(const k in BIBLE_PLANS){ BIBLE_PLANS[k].totalDays = BIBLE_PLANS[k].days.length; }
 
 
