@@ -561,6 +561,7 @@
   #topo-acoes.aberto #app-menu-btn{ width:34px; height:34px; background:transparent; color:var(--violet); box-shadow:none; }
   #topo-acoes.aberto #app-menu-btn:hover{ background:var(--tint-violet); }
   .saudacao{ position:relative; z-index:3; font-size:15px; font-weight:600; color:#d9d4ff; margin:34px 0 10px; letter-spacing:0.01em; animation:text-fadein 0.6s ease-out both;}
+  .saudacao-seq{ color:#ffd6a8; font-weight:700; white-space:nowrap;}
   .hero-streak{ position:relative; z-index:3; display:inline-flex; align-items:center; gap:7px; margin:0 0 14px; padding:6px 15px; border-radius:100px; background:rgba(255,157,60,0.16); border:1px solid rgba(255,157,60,0.38); color:#ffd9a8; font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; animation:text-fadein 0.7s ease-out both;}
   h1.title{ font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(34px, 6vw, 57.8px); margin:0 0 8px; line-height:1.05; letter-spacing:-0.02em; position:relative; z-index:3; background:linear-gradient(90deg, #fff 0%, var(--violet-light) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:title-shrink 5.5s ease-out forwards, text-fadein 0.8s ease-out 3.5s both;}
   @keyframes title-shrink{ 0%{font-size:clamp(54.4px, 12vw, 102px);} 80%{font-size:clamp(54.4px, 12vw, 102px);} 100%{font-size:clamp(34px, 6vw, 57.8px);}}
@@ -2158,21 +2159,16 @@ async function renderLessonDetail(lessonId, fromList){
 
   let html = `<header class="hero">`;
   if(fromList) html += `<button class="back-btn" onclick="goList()">${t('lesson.voltarLista')}</button><br>`;
-  if (currentUser) {
-    html += `<p class="saudacao">${saudacaoPorHorario()}, ${escaparHtml(primeiroNome())} 👋</p>`;
-    const seq = sequenciaAtual();
-    if (seq === 1) {
-      html += `<div class="hero-streak">${t('lesson.comecouHoje')}</div>`;
-    } else if (seq > 1) {
-      html += `<div class="hero-streak">${t('lesson.diasSeguidos').replace('${n}', seq)}</div>`;
-    }
-  }
+  // Saudacao e sequencia na mesma linha: antes eram dois selos empilhados
+  // brigando com o selo da licao logo abaixo, e o titulo ficava espremido.
+  // O selo sai vazio ate o progresso da nuvem chegar - senao ele aparecia
+  // com o numero do aparelho e trocava na frente da pessoa segundos depois.
+  if (currentUser) html += saudacaoHeroHTML();
   html += `<div class="eyebrow">${t('lesson.licaoJovem')} ${lessonId}</div>
     <h1 class="title">${content ? content.title : meta.title}</h1>`;
   if(content){
     const abbrevBible = (content.bibleref || '').replace(/João/g, 'Jo').replace(/Romanos/g, 'Rm').replace(/Coríntios/g, 'Co').replace(/Gálatas/g, 'Gl').replace(/Efésios/g, 'Ef').replace(/Filipenses/g, 'Fp').replace(/Colossenses/g, 'Cl').replace(/Tessalonicenses/g, 'Ts').replace(/Timóteo/g, 'Tm').replace(/Tito/g, 'Tt').replace(/Filemom/g, 'Flm').replace(/Hebreus/g, 'Hb').replace(/Tiago/g, 'Tg').replace(/Pedro/g, 'Pd').replace(/Judas/g, 'Jd').replace(/Apocalipse/g, 'Ap');
-    html += `<p class="subtitle">${content.daterange} · ${abbrevBible}</p>
-      <div class="keyword-seal">${content.keyword}</div>`;
+    html += `<p class="subtitle">${content.daterange} · ${abbrevBible}</p>`;
   } else {
     html += `<p class="subtitle">${meta.dateLabel}</p>`;
   }
@@ -2615,12 +2611,7 @@ function atualizarMarcacoesDoDia(lessonId, dayId){
     }
 
     // 3. Selo de sequência no hero
-    const selo = document.querySelector('.hero-streak');
-    if(selo && typeof sequenciaAtual === 'function'){
-      const seq = sequenciaAtual();
-      if(seq === 1) selo.textContent = t('lesson.comecouHoje');
-      else if(seq > 1) selo.textContent = t('lesson.diasSeguidos').replace('${n}', seq);
-    }
+    atualizarSeloSequencia();
   }catch(e){
     console.warn('⚠️ Não atualizou as marcações do dia:', e.message);
   }
@@ -3207,6 +3198,10 @@ async function goHome(){
 async function showStreakToastIfNeeded(){
   const old = document.getElementById('streak-toast-root');
   if(old) old.remove();
+  // Este aviso é o que aparecia com o número errado ao recarregar: ele saía
+  // com o que estava no aparelho e, segundos depois, a nuvem trazia outro.
+  // Agora espera o progresso da nuvem; quem não está logado vê na hora.
+  if(!nuvemPronta){ avisoDeSequenciaPendente = true; return; }
   const streak = await computeDailyStreak();
   if(streak <= 2) return;
 
@@ -4428,8 +4423,6 @@ const BIBLE_PLANS = {
   umPorDia: { name:'Um Capítulo por Dia', desc:'Exatamente um capítulo a cada dia, do Gênesis ao Apocalipse. Sem correria e sem dia pesado — o mesmo compromisso curto todos os dias.', pace:'1 capítulo/dia · 1.189 dias (cerca de 3 anos e 3 meses)', sequence: buildTraditionalSeq() },
   reavivados: { name:'Reavivados por Sua Palavra', desc:'Acompanha o calendário real do projeto Reavivados por Sua Palavra — hoje (18/09/2026) é Salmos 42, e o capítulo do dia avança junto com o calendário, não com a data em que você ativa o plano. Segue a ordem clássica dos livros até completar a Bíblia inteira.', pace:'1 capítulo/dia · cerca de 3 anos e 3 meses', sequence: buildReavivadosSeq() },
   youthPlan1y: { name:'Ano Bíblico Jovem', desc:'Começa em Salmos, depois percorre a Bíblia inteira misturando poesia, história e os Evangelhos ao longo do ano — baseado no Ano Bíblico Jovem 2021.', pace:'~2,6 capítulos/dia · cerca de 1 ano', sequence: YOUTH_PLAN_DAYS.flat(), days: YOUTH_PLAN_DAYS },
-  youthPlan6m: { name:'Ano Bíblico Jovem · 6 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo dobrado — dois dias da leitura original por dia.', pace:'~5,2 capítulos/dia · cerca de 6 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 2) },
-  youthPlan3m: { name:'Ano Bíblico Jovem · 3 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo bem intenso — quatro dias da leitura original por dia.', pace:'~10,4 capítulos/dia · cerca de 3 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 4) },
 };
 
 // Traducao dos campos de texto de cada plano de leitura - name/desc/pace
@@ -4444,8 +4437,6 @@ const BIBLE_PLANS_I18N = {
     nt90: { name:'New Testament', desc:'Just the New Testament — great to start light or review the Gospels and letters.', pace:'~2.9 chapters/day · 90 days' },
     reavivados: { name:'Revived by His Word', desc:'Follows the real calendar of the "Revived by His Word" project — today (9/18/2026) is Psalm 42, and the day\'s chapter moves forward with the calendar, not with the date you activate the plan. Follows the classic book order until the whole Bible is done.', pace:'1 chapter/day · about 3 years and 3 months' },
     youthPlan1y: { name:'Youth Bible Year', desc:'Starts in Psalms, then goes through the whole Bible mixing poetry, history, and the Gospels over the year — based on the 2021 Youth Bible Year.', pace:'~2.6 chapters/day · about 1 year' },
-    youthPlan6m: { name:'Youth Bible Year · 6 months', desc:'The same Youth Bible Year sequence, at double pace — two days of the original reading per day.', pace:'~5.2 chapters/day · about 6 months' },
-    youthPlan3m: { name:'Youth Bible Year · 3 months', desc:'The same Youth Bible Year sequence, at a very intense pace — four days of the original reading per day.', pace:'~10.4 chapters/day · about 3 months' },
   },
   es: {
     traditional: { name:'Tradicional', desc:'De Génesis a Apocalipsis, en el orden clásico de los libros.', pace:'~3,3 capítulos/día · cerca de 1 año' },
@@ -4454,8 +4445,6 @@ const BIBLE_PLANS_I18N = {
     nt90: { name:'Nuevo Testamento', desc:'Solo el Nuevo Testamento — ideal para empezar más liviano o repasar los Evangelios y las cartas.', pace:'~2,9 capítulos/día · 90 días' },
     reavivados: { name:'Reavivados por Su Palabra', desc:'Sigue el calendario real del proyecto Reavivados por Su Palabra — hoy (18/09/2026) es Salmos 42, y el capítulo del día avanza junto con el calendario, no con la fecha en que activas el plan. Sigue el orden clásico de los libros hasta completar toda la Biblia.', pace:'1 capítulo/día · cerca de 3 años y 3 meses' },
     youthPlan1y: { name:'Año Bíblico Joven', desc:'Empieza en Salmos, y luego recorre toda la Biblia mezclando poesía, historia y los Evangelios a lo largo del año — basado en el Año Bíblico Joven 2021.', pace:'~2,6 capítulos/día · cerca de 1 año' },
-    youthPlan6m: { name:'Año Bíblico Joven · 6 meses', desc:'La misma secuencia del Año Bíblico Joven, al doble de ritmo — dos días de la lectura original por día.', pace:'~5,2 capítulos/día · cerca de 6 meses' },
-    youthPlan3m: { name:'Año Bíblico Joven · 3 meses', desc:'La misma secuencia del Año Bíblico Joven, a un ritmo muy intenso — cuatro días de la lectura original por día.', pace:'~10,4 capítulos/día · cerca de 3 meses' },
   },
 };
 
@@ -4668,6 +4657,27 @@ async function loadActiveBiblePlan(){
   }catch(e){ activeBiblePlan = ''; }
   return activeBiblePlan;
 }
+// Os planos "Ano Biblico Jovem 6 meses" e "3 meses" sairam em 19/09/2026: eram
+// a mesma leitura do Ano Biblico Jovem, so que mais rapida. Quem estava num
+// deles passa para o plano que ficou, sem perder um capitulo - o progresso e
+// guardado por capitulo ("GEN-1"), nao por dia, entao basta juntar os mapas.
+const PLANOS_APOSENTADOS = { youthPlan6m: 'youthPlan1y', youthPlan3m: 'youthPlan1y' };
+
+async function migrarPlanoAposentado(){
+  const velho = activeBiblePlan;
+  if (!velho || !PLANOS_APOSENTADOS[velho]) return;
+  const novo = PLANOS_APOSENTADOS[velho];
+  try{
+    const doVelho = await loadPlanProgress(velho);
+    const doNovo  = await loadPlanProgress(novo);
+    doNovo.read = Object.assign({}, doNovo.read || {}, doVelho.read || {});
+    planProgressCache[novo] = doNovo;
+    await savePlanProgress(novo);
+  }catch(e){ console.warn('nao deu para levar o progresso do plano antigo:', e.message); }
+  await setActiveBiblePlan(novo);
+  console.log('plano', velho, 'virou', novo);
+}
+
 async function setActiveBiblePlan(key){
   activeBiblePlan = key;
   try{ await window.storage.set('active-bible-plan', key, false); }catch(e){}
@@ -4678,6 +4688,7 @@ async function goBiblePlan(){
   document.getElementById('bible-container').style.display = 'block';
   document.getElementById('tab-bible').classList.add('active');
   await loadActiveBiblePlan();
+  await migrarPlanoAposentado();
   if(activeBiblePlan && BIBLE_PLANS[activeBiblePlan]){
     currentPlanKey = activeBiblePlan;
     openPlanBooks = new Set();
@@ -8167,12 +8178,18 @@ function initFirebaseAuth() {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     firebaseAuthReady = true;
 
+    // Rede ruim nao pode deixar o selo escondido para sempre: passados 8s
+    // sem resposta, mostra o que da para calcular com o que esta no aparelho.
+    setTimeout(() => { if (!nuvemPronta) liberarSequencia(); }, 8000);
     firebase.auth().onAuthStateChanged(async (user) => {
       currentUser = user;
       updateAuthUI();
       if (user) {
         console.log('✅ Logado como', user.email);
         await mesclarProgressoDaNuvem();
+        // Só agora o progresso da nuvem entrou: o selo de sequência pode
+        // aparecer sem risco de mostrar um número que muda em seguida.
+        liberarSequencia();
         await salvarNoFirebase(getUserId(), await montarPacoteSync({
           email: user.email,
           nome: user.displayName || ''
@@ -8185,6 +8202,8 @@ function initFirebaseAuth() {
         iniciarEscutaAoVivo();
         await refrescarTelaAposLogin();
       } else {
+        // Sem conta não há nuvem para esperar: o que está no aparelho é tudo.
+        liberarSequencia();
         pararEscutaAoVivo();
       }
     });
@@ -8195,6 +8214,8 @@ function initFirebaseAuth() {
     });
   } catch(e) {
     console.error('❌ Falha ao iniciar Firebase Auth:', e);
+    // Sem Firebase nao ha nuvem para esperar: libera o selo de sequencia.
+    liberarSequencia();
     updateAuthUI();
   }
 }
@@ -8309,6 +8330,57 @@ function primeiroNome() {
 // do ultimo dia estudado: aqui a sequencia so vale se ainda esta viva
 // (terminou hoje ou ontem). Senao o hero diria "5 dias seguidos" para
 // quem parou ha um mes. Dias futuros marcados sao ignorados.
+// Fica true quando ja da para confiar no progresso: apos mesclar o da nuvem,
+// ou assim que se sabe que ninguem esta logado.
+let nuvemPronta = false;
+// O aviso do foguinho tentou aparecer antes disso e ficou esperando a vez.
+let avisoDeSequenciaPendente = false;
+
+// Chamada quando a nuvem chega: acerta o selo da capa e solta o aviso que
+// ficou esperando, agora com o numero definitivo.
+function liberarSequencia(){
+  nuvemPronta = true;
+  atualizarSaudacaoHero();
+  if (avisoDeSequenciaPendente){
+    avisoDeSequenciaPendente = false;
+    if (typeof showStreakToastIfNeeded === 'function') showStreakToastIfNeeded();
+  }
+}
+
+function textoSequencia(){
+  const seq = sequenciaAtual();
+  if (seq === 1) return t('lesson.comecouHoje');
+  if (seq > 1) return t('lesson.diasSeguidos').replace('${n}', seq);
+  return '';
+}
+
+function saudacaoHeroHTML(){
+  const fogo = nuvemPronta ? textoSequencia() : '';
+  return `<p class="saudacao">${saudacaoPorHorario()}, ${escaparHtml(primeiroNome())} 👋`
+    + `<span class="saudacao-seq" id="selo-seq">${fogo ? ' · ' + fogo : ''}</span></p>`;
+}
+
+function atualizarSeloSequencia(){
+  const selo = document.getElementById('selo-seq');
+  if (!selo || !nuvemPronta) return;
+  const fogo = textoSequencia();
+  selo.textContent = fogo ? ' · ' + fogo : '';
+}
+
+// Depois do login a licao aberta nao e redesenhada; esta funcao poe a
+// saudacao no lugar (ou so atualiza o selo, se ela ja estiver la).
+function atualizarSaudacaoHero(){
+  try{
+    const hero = document.querySelector('#detail-container .hero');
+    if (!hero || !currentUser) return;
+    if (!hero.querySelector('.saudacao')){
+      const marco = hero.querySelector('.eyebrow');
+      if (marco) marco.insertAdjacentHTML('beforebegin', saudacaoHeroHTML());
+    }
+    atualizarSeloSequencia();
+  }catch(e){ /* capa e enfeite: nunca derruba o resto */ }
+}
+
 function sequenciaAtual() {
   try {
     if (typeof buildProgressMap !== 'function') return 0;
@@ -8430,7 +8502,12 @@ async function refrescarTelaAposLogin() {
     if (inicioAtivo && typeof goHome === 'function') { await goHome(); return; }
     const contaAtiva = document.getElementById('tab-conta') &&
                        document.getElementById('tab-conta').classList.contains('active');
-    if (contaAtiva && typeof renderConta === 'function') await renderConta();
+    if (contaAtiva && typeof renderConta === 'function') { await renderConta(); return; }
+    // A aba Progresso tambem mostra a sequencia e o total de dias: sem isto
+    // ela ficava com o numero de antes da nuvem ate a pessoa trocar de aba.
+    const statsAtiva = document.getElementById('tab-stats') &&
+                       document.getElementById('tab-stats').classList.contains('active');
+    if (statsAtiva && typeof goStats === 'function') await goStats();
   } catch(e) {
     console.warn('⚠️ Nao atualizou a tela apos o login:', e.message);
   }
