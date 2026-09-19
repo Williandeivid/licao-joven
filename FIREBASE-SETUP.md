@@ -46,7 +46,7 @@ respondeu `HTTP 200`.
       ".read": "auth != null",
       "$semanaId": {
         "$uid": {
-          ".write": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.hasChildren(['nome','diasConcluidos','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= 7 && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
         }
       }
@@ -55,7 +55,7 @@ respondeu `HTTP 200`.
       ".read": "auth != null",
       "$trimestreId": {
         "$uid": {
-          ".write": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.hasChildren(['nome','diasConcluidos','diasElapsados','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= newData.child('diasElapsados').val() && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
         }
       }
@@ -174,7 +174,7 @@ Nada de criar nós na mão. Nada de uid.
       ".read": "auth != null",
       "$semanaId": {
         "$uid": {
-          ".write": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.hasChildren(['nome','diasConcluidos','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= 7 && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
         }
       }
@@ -183,7 +183,7 @@ Nada de criar nós na mão. Nada de uid.
       ".read": "auth != null",
       "$trimestreId": {
         "$uid": {
-          ".write": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.hasChildren(['nome','diasConcluidos','diasElapsados','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= newData.child('diasElapsados').val() && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
         }
       }
@@ -204,10 +204,54 @@ Nada de criar nós na mão. Nada de uid.
         ".write": "auth != null && ( (!data.exists() && newData.child('uid').val() == auth.uid && root.child('config/comentarios/ativo').val() == true && !root.child('config/banidos/'+auth.uid).exists()) || (data.exists() && !newData.exists() && (data.child('uid').val() == auth.uid || root.child('config/admins/'+auth.uid).exists())) )",
         ".validate": "newData.hasChildren(['uid','nome','texto','criadoEm']) && newData.child('texto').isString() && newData.child('texto').val().length <= 500 && newData.child('uid').val() == auth.uid"
       } } }
+    },
+    "curtidas": {
+      ".read": "auth != null",
+      "$licao": { "$dia": { "$uid": {
+        ".write": "auth != null && auth.uid == $uid && (!newData.exists() || !root.child('config/banidos/'+auth.uid).exists())",
+        ".validate": "newData.hasChildren(['nome','em']) && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('em').isNumber()"
+      } } }
+    },
+    "curtidas_cmt": {
+      ".read": "auth != null",
+      "$licao": { "$dia": { "$cmt": { "$uid": {
+        ".write": "auth != null && auth.uid == $uid && (!newData.exists() || !root.child('config/banidos/'+auth.uid).exists())",
+        ".validate": "newData.val() == true"
+      } } } }
+    },
+    "stats": {
+      ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
+      "$licao": { "$dia": { "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10))"
+      } } }
     }
   }
 }
 ```
+
+### Curtidas (desde 18/09)
+
+| Regra | Efeito |
+|---|---|
+| `curtidas/{licao}/{dia}/{uid}` | cada um só grava e apaga a **própria** curtida do dia |
+| `curtidas_cmt/.../{cmt}/{uid}` | idem para curtir um comentário |
+| banido não curte | mas ainda consegue **tirar** a curtida que já tinha |
+| leitura só logado | igual aos comentários |
+
+### Acompanhamento — só para admin (desde 19/09)
+
+`stats/{licao}/{dia}/{uid}` = `{c:true, q:<acertos 0-10>, em:<timestamp>}`
+
+Gravado sozinho quando a pessoa conclui o dia ou termina o quiz. **Só admin
+lê**: a regra exige `config/admins/{uid}`. Quem estuda nunca vê esse número.
+
+Aparece em dois lugares, ambos só para admin: a linha embaixo da barra de
+curtir, em cada dia, e a tabela da semana no cartão **Administração** da aba
+Conta.
+
+Apagar registro de teste tem que ser no caminho exato
+`stats/{licao}/{dia}/{uid}` — nenhuma regra permite apagar um nó acima disso.
 
 O que cada pedaço garante:
 

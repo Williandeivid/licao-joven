@@ -814,17 +814,91 @@
   /* ===== COMENTÁRIOS =====
      Tudo em variáveis de cor: os temas de design trocam --card, --ink,
      --ink-soft e --heading, então esta área acompanha os 15 sem cor fixa. */
-  .btn-comentarios{
-    display:inline-flex; align-items:center; gap:7px; margin-left:auto;
-    background:none; border:none; cursor:pointer; padding:8px 10px;
-    font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700;
-    letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);
-    border-radius:10px; transition:color .15s ease, background .15s ease;
+  /* Barra de ações estilo Instagram: curtir · comentar · compartilhar.
+     O coração usa vermelho fixo de propósito: é o sinal universal de curtida
+     e --pink vira azul ou marrom em alguns temas. */
+  .acoes-dia{--heart:#ed4956; margin:-10px 0 18px; display:flex; flex-direction:column; gap:4px;}
+  .acoes-linha{display:flex; align-items:center; gap:6px; margin-left:-8px;}
+  .acao{
+    display:inline-flex; align-items:center; gap:6px;
+    background:none; border:none; cursor:pointer; padding:8px;
+    color:var(--ink); border-radius:12px; transition:background .15s ease, color .15s ease;
+    -webkit-tap-highlight-color:transparent;
   }
-  .btn-comentarios[hidden]{display:none;}
-  .btn-comentarios:hover{color:var(--violet); background:var(--tint-violet);}
-  .btn-comentarios.tem{color:var(--violet);}
-  .btn-comentarios svg{width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2;}
+  .acao[hidden]{display:none;}
+  .acao:hover{background:var(--tint-violet);}
+  .acao svg{width:25px; height:25px; stroke:currentColor; fill:none; stroke-width:1.9; stroke-linejoin:round; stroke-linecap:round; transition:transform .15s ease;}
+  .acao:active svg{transform:scale(.88);}
+  .acao-num{font-size:14px; font-weight:700; color:var(--heading); min-width:0;}
+  .acao-num:empty{display:none;}
+  .acao-curtir.curtido svg{fill:var(--heart); stroke:var(--heart);}
+  .acao-curtir.pulsa svg{animation:coracaoPulsa .45s ease;}
+  @keyframes coracaoPulsa{0%{transform:scale(1)}30%{transform:scale(1.3)}60%{transform:scale(.92)}100%{transform:scale(1)}}
+  .acoes-legenda{font-size:13.5px; color:var(--ink); line-height:1.4;}
+  .acoes-legenda:empty{display:none;}
+  /* Linha que só os administradores enxergam */
+  .acoes-admin{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--ink-soft);
+    background:var(--tint-violet); border-radius:8px; padding:5px 10px; align-self:flex-start; margin-top:2px;
+  }
+  .acoes-admin[hidden]{display:none;}
+  .acoes-admin b{color:var(--violet);}
+  .admin-tabela{margin-top:12px; display:flex; flex-direction:column; gap:2px; font-size:13.5px;}
+  .admin-linha{display:grid; grid-template-columns:1fr auto auto auto; gap:10px; align-items:center; padding:7px 10px; border-radius:8px;}
+  .admin-linha:nth-child(odd){background:var(--tint-violet);}
+  .admin-linha.cabecalho{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); background:none;}
+  .admin-linha span:not(:first-child){min-width:44px; text-align:right; font-variant-numeric:tabular-nums;}
+  .admin-linha b{color:var(--violet);}
+  .admin-tabela .admin-total{margin-top:6px; font-size:12.5px; color:var(--ink-soft);}
+  .acoes-legenda b{font-weight:700; color:var(--heading);}
+  .acoes-ver-cmt{
+    align-self:flex-start; background:none; border:none; cursor:pointer; padding:0;
+    font-size:13.5px; color:var(--ink-soft); font-family:inherit;
+  }
+  .acoes-ver-cmt[hidden]{display:none;}
+  .acoes-ver-cmt:hover{color:var(--ink);}
+
+  /* Coração pequeno de cada comentário */
+  .cmt-item{position:relative;}
+  .cmt-curtir{
+    position:absolute; top:12px; right:0; display:flex; flex-direction:column; align-items:center; gap:1px;
+    background:none; border:none; cursor:pointer; padding:4px; color:var(--ink-soft);
+    --heart:#ed4956;
+  }
+  .cmt-item.meu .cmt-curtir{right:8px;}
+  .cmt-curtir svg{width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2;}
+  .cmt-curtir.curtido svg{fill:var(--heart); stroke:var(--heart);}
+  .cmt-curtir.pulsa svg{animation:coracaoPulsa .45s ease;}
+  .cmt-curtir span{font-size:10.5px; font-weight:700;}
+  .cmt-corpo{padding-right:26px;}
+
+  /* Folha de compartilhar (quando o aparelho não tem o menu nativo) */
+  .share-fundo{position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:3000; display:flex; align-items:flex-end; justify-content:center;}
+  .share-folha{
+    background:var(--card); color:var(--ink); width:100%; max-width:480px;
+    border-radius:20px 20px 0 0; padding:10px 16px calc(18px + env(safe-area-inset-bottom));
+    display:flex; flex-direction:column; gap:4px; animation:folhaSobe .2s ease;
+  }
+  @keyframes folhaSobe{from{transform:translateY(100%)}to{transform:none}}
+  .share-folha .alca{width:40px; height:4px; border-radius:4px; background:var(--border); margin:0 auto 10px;}
+  .share-folha h4{margin:0 0 8px; font-size:15px; text-align:center; color:var(--heading);}
+  .share-folha button{
+    display:flex; align-items:center; gap:12px; width:100%; padding:13px 10px;
+    background:none; border:none; border-radius:12px; cursor:pointer; font-size:15px; color:var(--ink); text-align:left;
+  }
+  .share-folha button:hover{background:var(--tint-violet);}
+  .share-folha .ico{font-size:20px; width:28px; text-align:center;}
+  .share-folha small{color:var(--ink-soft); font-size:12.5px; margin-left:2px;}
+  .share-aviso{
+    position:fixed; left:50%; bottom:90px; transform:translateX(-50%); z-index:3100;
+    display:flex; align-items:center; gap:12px; max-width:92vw;
+    background:var(--heading); color:var(--card); padding:10px 12px 10px 18px;
+    border-radius:100px; font-size:13.5px; box-shadow:0 8px 24px rgba(0,0,0,.2);
+  }
+  .share-aviso button{
+    background:var(--card); color:var(--heading); border:none; cursor:pointer;
+    padding:7px 14px; border-radius:100px; font-family:inherit; font-size:12.5px; font-weight:700;
+  }
 
   .cmt-painel{
     margin:0 0 24px; padding:18px 0 0; border-top:1px solid var(--border);
@@ -1827,25 +1901,28 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
     html += renderMindMap(content);
   }
 
-  html += `<div class="concluir-wrap" style="display:flex; gap:12px; align-items:center; justify-content:space-between;">
+  html += `<div class="concluir-wrap">
     <button class="btn-concluir ${done?'done':''}" data-lesson="${lessonId}" data-day="${day.id}" onclick="marcarConcluido(this)">
       ${done ? '✓ Dia concluído' : 'Concluir este dia'}
     </button>
-    <button class="btn-comentarios" id="cmt-btn-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" title="Comentários deste dia" ${comentariosLigados() ? '' : 'hidden'}>
-      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      <span class="cmt-rotulo">Comentários</span>
-    </button>
-    <div class="menu-3pontos-wrap" style="position:relative;">
-      <button class="menu-3pontos-btn" onclick="toggleMenu3Pontos(this, '${lessonId}', '${day.id}')" style="background:none; border:none; font-size:20px; cursor:pointer; padding:8px; color:var(--ink-soft); display:flex; align-items:center;">⋮</button>
-      <div class="menu-3pontos" style="display:none; position:absolute; top:100%; right:0; background:var(--card); border:0.5px solid var(--border); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:1000; min-width:180px; overflow:hidden;">
-        <button onclick="exportarPDF('${lessonId}', '${day.id}')" style="width:100%; text-align:left; padding:12px 16px; border:none; background:none; cursor:pointer; font-size:14px; color:var(--ink); display:flex; align-items:center; gap:8px; transition:background 0.2s;">
-          <span style="font-size:16px;">📄</span> Baixar texto
-        </button>
-        <button onclick="compartilharWhatsApp('${lessonId}', '${day.id}')" style="width:100%; text-align:left; padding:12px 16px; border:none; background:none; cursor:pointer; font-size:14px; color:var(--ink); display:flex; align-items:center; gap:8px; transition:background 0.2s;">
-          <span style="font-size:16px;">💬</span> Compartilhar
-        </button>
-      </div>
+  </div>
+  <div class="acoes-dia" data-lesson="${lessonId}" data-day="${day.id}">
+    <div class="acoes-linha">
+      <button class="acao acao-curtir" id="curtir-btn-${lessonId}-${day.id}" onclick="curtirDia(${lessonId}, '${day.id}')" aria-pressed="false" title="Curtir">
+        <svg viewBox="0 0 24 24"><path d="M12 20.7l-1.3-1.2C5.9 15.2 3 12.6 3 9.3 3 6.7 5 4.7 7.6 4.7c1.5 0 2.9.7 3.8 1.8h1.2c.9-1.1 2.3-1.8 3.8-1.8C19 4.7 21 6.7 21 9.3c0 3.3-2.9 5.9-7.7 10.2L12 20.7z"/></svg>
+        <span class="acao-num"></span>
+      </button>
+      <button class="acao btn-comentarios" id="cmt-btn-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" title="Comentar" ${comentariosVisiveis() ? '' : 'hidden'}>
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span class="cmt-rotulo acao-num"></span>
+      </button>
+      <button class="acao acao-compartilhar" onclick="compartilharDia(${lessonId}, '${day.id}')" title="Compartilhar">
+        <svg viewBox="0 0 24 24"><path d="M22 3L9.2 10.1M22 3l-6.5 18-3.3-8.6L3 9.4 22 3z"/></svg>
+      </button>
     </div>
+    <div class="acoes-legenda" id="curtir-leg-${lessonId}-${day.id}"></div>
+    <div class="acoes-admin" id="stat-${lessonId}-${day.id}" hidden></div>
+    <button class="acoes-ver-cmt" id="cmt-ver-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" hidden></button>
   </div>
   <div class="cmt-painel" id="cmt-painel-${lessonId}-${day.id}" hidden>
     <div class="cmt-lista"></div>
@@ -2071,6 +2148,7 @@ async function renderLessonDetail(lessonId, fromList){
   </footer>`;
 
   container.innerHTML = html;
+  carregarSocialDaLicao(lessonId);
   // Auto-scroll para o dia de hoje — só depois que a animação do cabeçalho
   // (imagem esmaecendo + título aparecendo) terminar de vez, ~4.3s
   const today = new Date();
@@ -2494,6 +2572,7 @@ async function marcarConcluido(btn){
     console.log('✅ Progresso sincronizado com Firebase!');
     await atualizarRankingSemanal();
     await atualizarRankingTrimestre();
+    await registrarStat(lessonId, dayId, {c:true});
   }
 }
 
@@ -2626,6 +2705,7 @@ function bindDayInteractions(lessonId, content, progress){
             p.days[day.id] = {studied:true, estMinutes};
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
+            registrarStat(lessonId, day.id, {c:true, q: localState.correct});
 
             // Antes disso a tela inteira era reconstruida (renderLessonDetail),
             // o que parecia um refresh: piscava, perdia o scroll e fechava
@@ -2847,6 +2927,11 @@ async function renderConta(){
         </div>
         <button class="conta-btn" onclick="alternarComentarios()">${comentariosLigados() ? 'Desligar' : 'Ligar'}</button>
       </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">Acompanhamento da semana</div>
+        <div class="conta-row-sub">Quantas pessoas concluíram cada dia e fizeram o quiz</div>
+        <div id="admin-acompanhamento" class="admin-tabela">Carregando…</div>
+      </div>
       <p class="conta-note" style="margin:10px 0 0;">Esta seção aparece só para administradores.</p>
     </div>` : ''}
 
@@ -2871,6 +2956,7 @@ async function renderConta(){
   // Sem esta chamada, quem ja esta logado veria "Entrar com Google" de novo.
   updateAuthUI();
   await atualizarRankingCheckboxConta();
+  if (souAdmin()) carregarAcompanhamentoAdmin();
 }
 
 async function saveContaName(name){
@@ -4089,6 +4175,7 @@ const BIBLE_PLANS = {
   chronological: { name:'Cronológico', desc:'Na ordem aproximada em que os acontecimentos aconteceram — Jó logo após o início de Gênesis, os profetas ao lado dos reis da época, etc.', pace:'~3,3 capítulos/dia · cerca de 1 ano', sequence: CHRON_PLAN_DATA },
   fast6: { name:'Acelerado', desc:'A Bíblia inteira, na ordem clássica, num ritmo mais intenso — pra quem já tem o hábito de leitura.', pace:'~6,5 capítulos/dia · cerca de 6 meses', sequence: buildTraditionalSeq() },
   nt90: { name:'Novo Testamento', desc:'Só o Novo Testamento — ótimo pra começar mais leve ou revisar os Evangelhos e cartas.', pace:'~2,9 capítulos/dia · 90 dias', sequence: buildNTSeq() },
+  umPorDia: { name:'Um Capítulo por Dia', desc:'Exatamente um capítulo a cada dia, do Gênesis ao Apocalipse. Sem correria e sem dia pesado — o mesmo compromisso curto todos os dias.', pace:'1 capítulo/dia · 1.189 dias (cerca de 3 anos e 3 meses)', sequence: buildTraditionalSeq() },
   youthPlan1y: { name:'Ano Bíblico Jovem', desc:'Começa em Salmos, depois percorre a Bíblia inteira misturando poesia, história e os Evangelhos ao longo do ano — baseado no Ano Bíblico Jovem 2021.', pace:'~2,6 capítulos/dia · cerca de 1 ano', sequence: YOUTH_PLAN_DAYS.flat(), days: YOUTH_PLAN_DAYS },
   youthPlan6m: { name:'Ano Bíblico Jovem · 6 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo dobrado — dois dias da leitura original por dia.', pace:'~5,2 capítulos/dia · cerca de 6 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 2) },
   youthPlan3m: { name:'Ano Bíblico Jovem · 3 meses', desc:'A mesma sequência do Ano Bíblico Jovem, num ritmo bem intenso — quatro dias da leitura original por dia.', pace:'~10,4 capítulos/dia · cerca de 3 meses', sequence: YOUTH_PLAN_DAYS.flat(), days: groupDaysBy(YOUTH_PLAN_DAYS, 4) },
@@ -4170,6 +4257,8 @@ BIBLE_PLANS.traditional.days = chunkEvenly(BIBLE_PLANS.traditional.sequence, 365
 BIBLE_PLANS.chronological.days = chunkEvenly(BIBLE_PLANS.chronological.sequence, 365);
 BIBLE_PLANS.fast6.days = chunkSixPlusTen(BIBLE_PLANS.fast6.sequence);
 BIBLE_PLANS.nt90.days = chunkEvenly(BIBLE_PLANS.nt90.sequence, 90);
+// Um dia para cada capítulo: tantos dias quanto capítulos.
+BIBLE_PLANS.umPorDia.days = chunkEvenly(BIBLE_PLANS.umPorDia.sequence, BIBLE_PLANS.umPorDia.sequence.length);
 for(const k in BIBLE_PLANS){ BIBLE_PLANS[k].totalDays = BIBLE_PLANS[k].days.length; }
 
 
@@ -5879,13 +5968,17 @@ async function alternarComentarios(){
 }
 
 function comentariosLigados(){ return !!(cmtConfig && cmtConfig.comentarios && cmtConfig.comentarios.ativo); }
+// Deslogado não consegue ler a config, então não dá para saber se a chave está
+// ligada. Nesse caso o balão aparece: quem tocar recebe o convite para entrar,
+// em vez de achar que o app não tem comentários.
+function comentariosVisiveis(){ return comentariosLigados() || !currentUser; }
 function souAdmin(){ return !!(currentUser && cmtConfig && cmtConfig.admins && cmtConfig.admins[currentUser.uid]); }
 function estouBanido(){ return !!(currentUser && cmtConfig && cmtConfig.banidos && cmtConfig.banidos[currentUser.uid]); }
 
 // Enquanto a chave geral estiver desligada, o botao nem aparece.
 // Assim o recurso pode ir para o ar sem mudar nada para quem usa.
 function atualizarVisibilidadeComentarios(){
-  const mostrar = comentariosLigados();
+  const mostrar = comentariosVisiveis();
   document.querySelectorAll('.btn-comentarios').forEach(b => { b.hidden = !mostrar; });
   if (!mostrar) document.querySelectorAll('.cmt-painel').forEach(p => { p.hidden = true; });
 }
@@ -5907,7 +6000,10 @@ async function toggleComentarios(lessonId, dayId){
   if (!painel) return;
   const abrindo = painel.hidden;
   painel.hidden = !abrindo;
+  const ver = document.getElementById(`cmt-ver-${lessonId}-${dayId}`);
+  if (ver && abrindo) ver.hidden = true;
   if (abrindo) await carregarComentarios(lessonId, dayId);
+  else atualizarBotaoComentarios(lessonId, dayId, (cmtCache[`${lessonId}-${dayId}`] || []).length);
 }
 
 async function carregarComentarios(lessonId, dayId){
@@ -5922,9 +6018,14 @@ async function carregarComentarios(lessonId, dayId){
 
   try{
     const token = await getAuthToken();
-    const r = await fetch(`${FIREBASE_DB}/comentarios/${lessonId}/${dayId}.json?auth=${token}`);
+    const [r, rc] = await Promise.all([
+      fetch(`${FIREBASE_DB}/comentarios/${lessonId}/${dayId}.json?auth=${token}`),
+      fetch(`${FIREBASE_DB}/curtidas_cmt/${lessonId}/${dayId}.json?auth=${token}`)
+    ]);
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const dados = await r.json();
+    // Curtidas dos comentários são extra: se a regra ainda não existir, só não aparecem.
+    curtidasCmt[`${lessonId}-${dayId}`] = rc.ok ? ((await rc.json()) || {}) : {};
     const arr = dados ? Object.keys(dados).map(id => Object.assign({id}, dados[id])) : [];
     // Mais antigo primeiro: le como conversa que se constroi ao longo da semana.
     arr.sort((a,b) => String(a.criadoEm||'').localeCompare(String(b.criadoEm||'')));
@@ -5954,6 +6055,9 @@ function desenharComentarios(lessonId, dayId, lista, erro){
     alvoLista.innerHTML = lista.map(c => {
       const meu = currentUser && c.uid === currentUser.uid;
       const podeApagar = meu || admin;
+      const quemCurtiu = (curtidasCmt[`${lessonId}-${dayId}`] || {})[c.id] || {};
+      const nCurtidas = Object.keys(quemCurtiu).length;
+      const euCurti = !!quemCurtiu[currentUser.uid];
       const inicial = escaparHtml((c.nome || '?').charAt(0).toUpperCase());
       const avatar = c.foto
         ? `<img src="${escaparHtml(c.foto)}" alt="" data-fallback="${inicial}">`
@@ -5966,6 +6070,10 @@ function desenharComentarios(lessonId, dayId, lista, erro){
             <span class="cmt-tempo">${escaparHtml(tempoRelativo(c.criadoEm))}</span>
           </div>
           <div class="cmt-texto">${escaparHtml(c.texto || '')}</div>
+          <button class="cmt-curtir${euCurti ? ' curtido' : ''}" data-id="${escaparHtml(c.id)}" title="Curtir comentário" aria-pressed="${euCurti}">
+            <svg viewBox="0 0 24 24"><path d="M12 20.7l-1.3-1.2C5.9 15.2 3 12.6 3 9.3 3 6.7 5 4.7 7.6 4.7c1.5 0 2.9.7 3.8 1.8h1.2c.9-1.1 2.3-1.8 3.8-1.8C19 4.7 21 6.7 21 9.3c0 3.3-2.9 5.9-7.7 10.2L12 20.7z"/></svg>
+            <span>${nCurtidas || ''}</span>
+          </button>
           ${podeApagar ? `<button class="cmt-apagar" data-lesson="${lessonId}" data-day="${escaparHtml(dayId)}" data-id="${escaparHtml(c.id)}">${meu ? 'Apagar' : 'Apagar (admin)'}</button>` : ''}
         </div>
       </div>`;
@@ -5986,6 +6094,9 @@ function desenharComentarios(lessonId, dayId, lista, erro){
       btn.addEventListener('click', () => {
         apagarComentario(Number(btn.dataset.lesson), btn.dataset.day, btn.dataset.id);
       });
+    });
+    alvoLista.querySelectorAll('.cmt-curtir').forEach(btn => {
+      btn.addEventListener('click', () => curtirComentario(lessonId, dayId, btn.dataset.id, btn));
     });
   }
 
@@ -6016,8 +6127,14 @@ function atualizarBotaoComentarios(lessonId, dayId, total){
   const btn = document.getElementById(`cmt-btn-${lessonId}-${dayId}`);
   if (!btn) return;
   const rotulo = btn.querySelector('.cmt-rotulo');
-  if (rotulo) rotulo.textContent = total > 0 ? String(total) : 'Comentários';
-  btn.classList.toggle('tem', total > 0);
+  if (rotulo) rotulo.textContent = total > 0 ? String(total) : '';
+  // "Ver os 3 comentários" embaixo, como no Instagram - só com o painel fechado.
+  const ver = document.getElementById(`cmt-ver-${lessonId}-${dayId}`);
+  const painel = document.getElementById(`cmt-painel-${lessonId}-${dayId}`);
+  if (ver){
+    ver.hidden = !(total > 0 && comentariosLigados() && painel && painel.hidden);
+    ver.textContent = total === 1 ? 'Ver 1 comentário' : `Ver os ${total} comentários`;
+  }
 }
 
 // Campo cresce conforme digita, em vez de abrir uma caixa grande de cara.
@@ -6079,6 +6196,407 @@ async function apagarComentario(lessonId, dayId, id){
     console.error('❌ Não apagou o comentário:', e);
     alert('Não foi possível apagar agora. Tente de novo.');
   }
+}
+
+// ===== PAINEL DO ADMIN: QUANTAS PESSOAS FIZERAM O DIA =====
+// Estrutura no banco:
+//   stats/{licao}/{dia}/{uid} = {c:true, q:<acertos 0-10>, em:<timestamp>}
+// Cada um grava só o próprio registro; só admin lê o conjunto. Quem estuda
+// não vê esse número em lugar nenhum - é painel de quem cuida da turma.
+const statsLicao = {};
+
+async function registrarStat(lessonId, dayId, dados){
+  if (!currentUser) return;
+  try{
+    const token = await getAuthToken();
+    await fetch(`${FIREBASE_DB}/stats/${lessonId}/${dayId}/${currentUser.uid}.json?auth=${token}`, {
+      method:'PATCH', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(Object.assign({em: Date.now()}, dados))
+    });
+  }catch(e){ /* estatistica e extra: nunca atrapalha quem esta estudando */ }
+}
+
+async function carregarStatsDaLicao(lessonId){
+  if (!souAdmin()) return;
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/stats/${lessonId}.json?auth=${token}`);
+    if (!r.ok) return;
+    statsLicao[lessonId] = (await r.json()) || {};
+    document.querySelectorAll(`.acoes-dia[data-lesson="${lessonId}"]`).forEach(b => desenharStatDia(lessonId, b.dataset.day));
+  }catch(e){ console.warn('⚠️ Não carregou o painel de acompanhamento:', e.message); }
+}
+
+function desenharStatDia(lessonId, dayId){
+  const alvo = document.getElementById(`stat-${lessonId}-${dayId}`);
+  if (!alvo) return;
+  if (!souAdmin()){ alvo.hidden = true; return; }
+  const pessoas = Object.values(((statsLicao[lessonId] || {})[dayId]) || {});
+  const concluiram = pessoas.filter(p => p && p.c).length;
+  const fizeramQuiz = pessoas.filter(p => p && typeof p.q === 'number').length;
+  const notas = pessoas.filter(p => p && typeof p.q === 'number').map(p => p.q);
+  const media = notas.length ? Math.round(notas.reduce((a,b) => a+b, 0) / notas.length * 10) : null;
+  alvo.hidden = false;
+  alvo.innerHTML = `<span title="Só administradores veem esta linha">👀 <b>${concluiram}</b> concluíram · <b>${fizeramQuiz}</b> fizeram o quiz`
+    + (media !== null ? ` · média <b>${media}%</b>` : '') + `</span>`;
+}
+
+// Tabela da aba Conta: a semana inteira de uma vez, dia a dia.
+async function carregarAcompanhamentoAdmin(lessonId){
+  const alvo = document.getElementById('admin-acompanhamento');
+  if (!alvo || !souAdmin()) return;
+  const licao = lessonId || getCurrentLessonId();
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/stats/${licao}.json?auth=${token}`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    statsLicao[licao] = (await r.json()) || {};
+  }catch(e){
+    alvo.innerHTML = `<p class="conta-note" style="margin:0;">Não foi possível ler agora (${escaparHtml(e.message)}). Confira se as regras do banco já têm o bloco <b>stats</b>.</p>`;
+    return;
+  }
+
+  const content = LESSONS_CONTENT.find(c => c.id === licao);
+  const dias = content ? content.days : [];
+  const gente = new Set();
+  const linhas = dias.map(d => {
+    const pessoas = Object.entries((statsLicao[licao] || {})[d.id] || {});
+    pessoas.forEach(([uid]) => gente.add(uid));
+    const concluiram = pessoas.filter(([,p]) => p && p.c).length;
+    const notas = pessoas.map(([,p]) => p && p.q).filter(q => typeof q === 'number');
+    const media = notas.length ? Math.round(notas.reduce((a,b) => a+b, 0) / notas.length * 10) : null;
+    return `<div class="admin-linha">
+      <span>${escaparHtml(String(d.date || d.title).split(' · ')[0])}</span>
+      <span><b>${concluiram}</b></span>
+      <span><b>${notas.length}</b></span>
+      <span>${media === null ? '—' : media + '%'}</span>
+    </div>`;
+  }).join('');
+
+  alvo.innerHTML = `<div class="admin-linha cabecalho"><span>Lição ${licao}</span><span>Leu</span><span>Quiz</span><span>Média</span></div>`
+    + linhas
+    + `<p class="admin-total">${gente.size === 1 ? '1 pessoa' : gente.size + ' pessoas'} com registro nesta lição. Só quem entra com a conta é contado.</p>`;
+}
+
+// ===== CURTIR E COMPARTILHAR (estilo Instagram) =====
+// Estrutura no banco:
+//   curtidas/{licao}/{dia}/{uid}            = {nome, em}  -> quem curtiu o dia
+//   curtidas_cmt/{licao}/{dia}/{cmtId}/{uid} = true        -> quem curtiu o comentário
+// Cada um só grava e apaga a própria curtida (regra no banco), então não dá
+// para inflar contagem nem tirar a curtida de outra pessoa.
+const curtidasDia = {};
+const curtidasCmt = {};
+
+// Busca curtidas (e contagem de comentários) da lição inteira de uma vez:
+// 2 requisições por lição aberta, em vez de 14 (uma por dia).
+async function carregarSocialDaLicao(lessonId){
+  const barras = document.querySelectorAll(`.acoes-dia[data-lesson="${lessonId}"]`);
+  if (!barras.length) return;
+  if (!currentUser){ barras.forEach(b => desenharCurtidasDia(lessonId, b.dataset.day)); return; }
+  try{
+    const token = await getAuthToken();
+    const pedidos = [fetch(`${FIREBASE_DB}/curtidas/${lessonId}.json?auth=${token}`)];
+    if (comentariosLigados()) pedidos.push(fetch(`${FIREBASE_DB}/comentarios/${lessonId}.json?auth=${token}`));
+    const [rc, rm] = await Promise.all(pedidos);
+    const curt = rc.ok ? ((await rc.json()) || {}) : {};
+    const cmts = rm && rm.ok ? ((await rm.json()) || {}) : null;
+    barras.forEach(b => {
+      const dia = b.dataset.day;
+      curtidasDia[`${lessonId}-${dia}`] = curt[dia] || {};
+      desenharCurtidasDia(lessonId, dia);
+      if (cmts) atualizarBotaoComentarios(lessonId, dia, Object.keys(cmts[dia] || {}).length);
+    });
+    carregarStatsDaLicao(lessonId);
+  }catch(e){
+    console.warn('⚠️ Não carregou curtidas:', e.message);
+  }
+}
+
+// Depois do login a lição aberta não é redesenhada: atualiza só as barras.
+function carregarSocialVisivel(){
+  const licoes = new Set([...document.querySelectorAll('.acoes-dia')].map(b => b.dataset.lesson));
+  licoes.forEach(l => carregarSocialDaLicao(Number(l)));
+}
+
+function desenharCurtidasDia(lessonId, dayId){
+  const btn = document.getElementById(`curtir-btn-${lessonId}-${dayId}`);
+  const leg = document.getElementById(`curtir-leg-${lessonId}-${dayId}`);
+  if (!btn) return;
+  const mapa = curtidasDia[`${lessonId}-${dayId}`] || {};
+  const uids = Object.keys(mapa);
+  const eu = !!(currentUser && mapa[currentUser.uid]);
+  btn.classList.toggle('curtido', eu);
+  btn.setAttribute('aria-pressed', eu);
+  btn.querySelector('.acao-num').textContent = uids.length ? String(uids.length) : '';
+  if (!leg) return;
+
+  const n = uids.length;
+  const pessoas = k => k === 1 ? '1 pessoa' : `${k} pessoas`;
+  if (!n){ leg.innerHTML = ''; return; }
+  if (eu){
+    leg.innerHTML = n === 1 ? 'Você curtiu' : `Curtido por <b>você</b> e mais ${pessoas(n-1)}`;
+    return;
+  }
+  // Mostra o nome de quem curtiu por último, como o Instagram.
+  const ultimo = uids.map(u => mapa[u]).sort((a,b) => (b.em||0) - (a.em||0))[0] || {};
+  const nome = escaparHtml(ultimo.nome || 'alguém');
+  leg.innerHTML = `Curtido por <b>${nome}</b>` + (n > 1 ? ` e mais ${pessoas(n-1)}` : '');
+}
+
+// Nada de confirm(): no app instalado e em alguns navegadores ele não aparece,
+// e o toque no coração ficava sem resposta nenhuma.
+function pedirLoginPara(acao){
+  avisoRapido(`Entre na sua conta para ${acao}`, 'Entrar', () => {
+    if (typeof loginWithGoogle === 'function') loginWithGoogle();
+  });
+}
+
+function pulsar(el){ el.classList.remove('pulsa'); void el.offsetWidth; el.classList.add('pulsa'); }
+
+async function curtirDia(lessonId, dayId){
+  if (!currentUser){ pedirLoginPara('curtir'); return; }
+  const chave = `${lessonId}-${dayId}`;
+  const mapa = curtidasDia[chave] = curtidasDia[chave] || {};
+  const uid = currentUser.uid;
+  const antes = mapa[uid];
+  const curtindo = !antes;
+  // Otimista: a tela responde na hora; se o banco recusar, desfaz.
+  if (curtindo) mapa[uid] = {nome: primeiroNome(), em: Date.now()}; else delete mapa[uid];
+  desenharCurtidasDia(lessonId, dayId);
+  if (curtindo) pulsar(document.getElementById(`curtir-btn-${chave}`));
+  try{
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/curtidas/${lessonId}/${dayId}/${uid}.json?auth=${token}`;
+    const r = curtindo
+      ? await fetch(url, {method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(mapa[uid])})
+      : await fetch(url, {method:'DELETE'});
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+  }catch(e){
+    console.error('❌ Não registrou a curtida:', e);
+    if (antes) mapa[uid] = antes; else delete mapa[uid];
+    desenharCurtidasDia(lessonId, dayId);
+    avisoRapido('Não foi possível curtir agora');
+  }
+}
+
+async function curtirComentario(lessonId, dayId, cmtId, btn){
+  if (!currentUser) return;
+  const chave = `${lessonId}-${dayId}`;
+  const todos = curtidasCmt[chave] = curtidasCmt[chave] || {};
+  const mapa = todos[cmtId] = todos[cmtId] || {};
+  const uid = currentUser.uid;
+  const curtindo = !mapa[uid];
+  const desenhar = () => {
+    const n = Object.keys(mapa).length;
+    btn.classList.toggle('curtido', !!mapa[uid]);
+    btn.setAttribute('aria-pressed', !!mapa[uid]);
+    btn.querySelector('span').textContent = n || '';
+  };
+  if (curtindo) mapa[uid] = true; else delete mapa[uid];
+  desenhar();
+  if (curtindo) pulsar(btn);
+  try{
+    const token = await getAuthToken();
+    const url = `${FIREBASE_DB}/curtidas_cmt/${lessonId}/${dayId}/${cmtId}/${uid}.json?auth=${token}`;
+    const r = curtindo
+      ? await fetch(url, {method:'PUT', headers:{'Content-Type':'application/json'}, body:'true'})
+      : await fetch(url, {method:'DELETE'});
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+  }catch(e){
+    console.error('❌ Não registrou a curtida do comentário:', e);
+    if (curtindo) delete mapa[uid]; else mapa[uid] = true;
+    desenhar();
+    avisoRapido('Não foi possível curtir agora');
+  }
+}
+
+// Texto completo do dia, do próprio conteúdo da lição (não do que está na
+// tela): sai igual tendo a aba Oficial ou Resumo aberta.
+function textoCompletoDoDia(lessonId, dayId){
+  const {content, day} = dadosDoDia(lessonId, dayId);
+  if (!day) return null;
+  const limpo = t => String(t || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const linhas = [
+    `📖 *Lição ${lessonId}${content && content.title ? ' · ' + content.title : ''}*`,
+    `*${day.title}*${day.date ? ' — ' + day.date : ''}`
+  ];
+  if (day.centraltexts && day.centraltexts.length) linhas.push('', '_' + day.centraltexts.join(' · ') + '_');
+  linhas.push('', (day.body || []).map(limpo).filter(Boolean).join('\n\n'));
+  linhas.push('', 'No app Lição Jovem:', linkDoDia(lessonId, dayId));
+  return linhas.join('\n');
+}
+
+// ===== IMAGEM PARA STORIES =====
+// Desenha 1080x1920 num canvas: no celular vai direto para o menu de
+// compartilhar (Instagram aparece lá); no computador baixa o PNG.
+function quebrarLinhas(ctx, texto, largura){
+  const linhas = [];
+  String(texto || '').split('\n').forEach(paragrafo => {
+    let linha = '';
+    paragrafo.split(' ').forEach(p => {
+      const teste = linha ? linha + ' ' + p : p;
+      if (ctx.measureText(teste).width > largura && linha){ linhas.push(linha); linha = p; }
+      else linha = teste;
+    });
+    linhas.push(linha);
+  });
+  return linhas;
+}
+
+async function gerarImagemStories(lessonId, dayId){
+  const {content, day} = dadosDoDia(lessonId, dayId);
+  if (!day) return null;
+  try{ await document.fonts.ready; }catch(e){}
+
+  const L = 1080, A = 1920, margem = 96;
+  const cv = Object.assign(document.createElement('canvas'), {width:L, height:A});
+  const ctx = cv.getContext('2d');
+
+  const fundo = ctx.createLinearGradient(0, 0, L, A);
+  fundo.addColorStop(0, '#6c4ce0'); fundo.addColorStop(1, '#ff5d8f');
+  ctx.fillStyle = fundo; ctx.fillRect(0, 0, L, A);
+  // Dois círculos claros ao fundo, para não ficar um degradê chapado.
+  ctx.fillStyle = 'rgba(255,255,255,.08)';
+  ctx.beginPath(); ctx.arc(L*0.85, A*0.16, 300, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(L*0.1, A*0.82, 240, 0, 7); ctx.fill();
+
+  // Mede tudo antes de desenhar, para o bloco ficar centralizado na vertical
+  // em vez de sobrar um vazio embaixo quando o resumo e curto.
+  ctx.font = '800 82px Unbounded, sans-serif';
+  const linhasTitulo = quebrarLinhas(ctx, day.title, L - margem*2);
+  const verso = (day.centraltexts && day.centraltexts.length) ? day.centraltexts[0] : '';
+  ctx.font = '500 46px "Plus Jakarta Sans", sans-serif';
+  const resumo = String(day.summary || (day.body || [])[0] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const linhasResumo = quebrarLinhas(ctx, resumo, L - margem*2).slice(0, 16);
+
+  const altura = 60 + linhasTitulo.length*96 + (verso ? 100 : 0) + 64 + linhasResumo.length*66;
+  let y = Math.max(320, (A - altura)/2);
+
+  ctx.fillStyle = 'rgba(255,255,255,.85)';
+  ctx.font = '600 34px "JetBrains Mono", monospace';
+  ctx.fillText(`LIÇÃO ${lessonId} · ${String(day.date || '').split(' · ')[0].toUpperCase()}`, margem, y);
+
+  y += 96;
+  ctx.fillStyle = '#fff';
+  ctx.font = '800 82px Unbounded, sans-serif';
+  linhasTitulo.forEach(l => { ctx.fillText(l, margem, y); y += 96; });
+
+  if (verso){
+    y += 24;
+    ctx.fillStyle = 'rgba(255,255,255,.9)';
+    ctx.font = '600 38px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText(verso, margem, y);
+    y += 40;
+  }
+
+  y += 64;
+  ctx.fillStyle = '#fff';
+  ctx.font = '500 46px "Plus Jakarta Sans", sans-serif';
+  linhasResumo.forEach(l => { ctx.fillText(l, margem, y); y += 66; });
+
+  ctx.fillStyle = 'rgba(255,255,255,.75)';
+  ctx.font = '600 32px "JetBrains Mono", monospace';
+  ctx.fillText('LIÇÃO JOVEM · ESCOLA SABATINA', margem, A - 150);
+  ctx.font = '400 30px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText(location.host, margem, A - 100);
+
+  // JPEG de alta qualidade: ~1/6 do tamanho do PNG, e o stories aceita igual.
+  return new Promise(res => cv.toBlob(res, 'image/jpeg', 0.92));
+}
+
+async function compartilharStories(lessonId, dayId){
+  const {day} = dadosDoDia(lessonId, dayId);
+  let blob;
+  try{ blob = await gerarImagemStories(lessonId, dayId); }
+  catch(e){ console.error('❌ Não gerou a imagem:', e); }
+  if (!blob){ avisoRapido('Não foi possível gerar a imagem'); return; }
+
+  const arquivo = new File([blob], `licao-${lessonId}-${dayId}.jpg`, {type:'image/jpeg'});
+  if (navigator.canShare && navigator.canShare({files:[arquivo]})){
+    try{ await navigator.share({files:[arquivo], title: day ? day.title : 'Lição Jovem'}); return; }
+    catch(e){ if (e && e.name === 'AbortError') return; }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = Object.assign(document.createElement('a'), {href:url, download:`licao-${lessonId}-${dayId}.jpg`});
+  a.click();
+  URL.revokeObjectURL(url);
+  avisoRapido('Imagem baixada');
+}
+
+function textoParaCompartilhar(lessonId, dayId){
+  const {content, day} = dadosDoDia(lessonId, dayId);
+  if (!day) return null;
+  const quando = (day.date || '').split(' · ')[0];
+  const titulo = `Lição ${lessonId}${content && content.title ? ' · ' + content.title : ''}`;
+  const linhas = [`📖 *${titulo}*`, `${quando ? quando + ' — ' : ''}*${day.title}*`];
+  if (day.summary) linhas.push('', resumirTexto(day.summary, 220));
+  linhas.push('', 'Estude esse dia no app Lição Jovem:');
+  return {titulo, texto: linhas.join('\n'), link: linkDoDia(lessonId, dayId)};
+}
+
+// A folha é sempre nossa, porque ela também guarda o "Baixar texto" que saiu
+// do menu ⋮. "Outros apps" chama o menu do próprio celular, quando existe.
+function compartilharDia(lessonId, dayId){
+  const s = textoParaCompartilhar(lessonId, dayId);
+  if (s) abrirFolhaCompartilhar(s, lessonId, dayId);
+}
+
+function abrirFolhaCompartilhar(s, lessonId, dayId){
+  document.querySelectorAll('.share-fundo').forEach(el => el.remove());
+  const fundo = document.createElement('div');
+  fundo.className = 'share-fundo';
+  fundo.innerHTML = `<div class="share-folha" role="dialog" aria-label="Compartilhar">
+    <div class="alca"></div>
+    <h4>Compartilhar</h4>
+    <button data-acao="whats"><span class="ico">💬</span> WhatsApp <small>resumo e link</small></button>
+    <button data-acao="whats-todo"><span class="ico">📝</span> WhatsApp <small>texto do dia inteiro</small></button>
+    <button data-acao="stories"><span class="ico">🖼️</span> Imagem para stories</button>
+    <button data-acao="copiar"><span class="ico">🔗</span> Copiar link</button>
+    ${navigator.share ? '<button data-acao="outros"><span class="ico">📤</span> Outros apps</button>' : ''}
+    <button data-acao="baixar"><span class="ico">📄</span> Baixar texto</button>
+  </div>`;
+  const fechar = () => fundo.remove();
+  const acao = (nome, fn) => {
+    const b = fundo.querySelector(`[data-acao="${nome}"]`);
+    if (b) b.addEventListener('click', fn);
+  };
+  fundo.addEventListener('click', e => { if (e.target === fundo) fechar(); });
+  acao('whats', () => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(s.texto + '\n' + s.link)}`, '_blank');
+    fechar();
+  });
+  acao('whats-todo', () => {
+    const t = textoCompletoDoDia(lessonId, dayId);
+    if (t) window.open(`https://wa.me/?text=${encodeURIComponent(t)}`, '_blank');
+    fechar();
+  });
+  acao('stories', () => { fechar(); avisoRapido('Gerando a imagem…'); compartilharStories(lessonId, dayId); });
+  acao('copiar', async () => {
+    try{ await navigator.clipboard.writeText(s.link); avisoRapido('Link copiado'); }
+    catch(e){ prompt('Copie o link:', s.link); }
+    fechar();
+  });
+  acao('outros', async () => {
+    fechar();
+    try{ await navigator.share({title: s.titulo, text: s.texto, url: s.link}); }
+    catch(e){ /* fechou o menu do aparelho: nada a fazer */ }
+  });
+  acao('baixar', () => { fechar(); exportarPDF(lessonId, dayId); });
+  document.body.appendChild(fundo);
+}
+
+// Aviso curto no rodapé. Com rótulo, vira um atalho ("Entrar") e fica mais tempo.
+function avisoRapido(msg, rotulo, aoTocar){
+  document.querySelectorAll('.share-aviso').forEach(el => el.remove());
+  const el = Object.assign(document.createElement('div'), {className:'share-aviso'});
+  el.appendChild(document.createTextNode(msg));
+  if (rotulo){
+    const b = Object.assign(document.createElement('button'), {textContent: rotulo});
+    b.addEventListener('click', () => { el.remove(); if (aoTocar) aoTocar(); });
+    el.appendChild(b);
+  }
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), rotulo ? 6000 : 2200);
 }
 
 // ===== SINCRONIZACAO AO VIVO =====
@@ -6193,6 +6711,7 @@ function initFirebaseAuth() {
         await carregarConfigComentarios(true);
         await tentarVirarAdmin();
         atualizarVisibilidadeComentarios();
+        carregarSocialVisivel();
         iniciarEscutaAoVivo();
         await refrescarTelaAposLogin();
       } else {
@@ -6791,21 +7310,6 @@ function autoLoadOfficialContent(lessonId, dayId){
   setTimeout(() => loadOfficialContent(lessonId, dayId), 100);
 }
 
-// #9 - Menu 3 pontos
-function toggleMenu3Pontos(btn, lessonId, dayId){
-  const menu = btn.nextElementSibling;
-  const isOpen = menu.style.display !== 'none';
-  document.querySelectorAll('.menu-3pontos').forEach(m => m.style.display = 'none');
-  menu.style.display = isOpen ? 'none' : 'block';
-}
-
-// Fecha todos os menus ⋮. Antes as funções chamavam toggleMenu3Pontos no
-// PRIMEIRO botão da página, que estava fechado - e acabavam abrindo o menu
-// do primeiro dia em vez de fechar o atual.
-function fecharMenus3Pontos(){
-  document.querySelectorAll('.menu-3pontos').forEach(m => { m.style.display = 'none'; });
-}
-
 // Link que abre o app direto na lição e no dia. Montado a partir do endereço
 // em que o app está rodando: funciona no pages.dev hoje e num domínio próprio
 // depois, sem ninguém precisar lembrar de trocar. (O link fixo anterior,
@@ -6830,22 +7334,6 @@ function resumirTexto(texto, limite){
   return corte.slice(0, corte.lastIndexOf(' ') > 0 ? corte.lastIndexOf(' ') : limite).trim() + '…';
 }
 
-function compartilharWhatsApp(lessonId, dayId){
-  const {content, day} = dadosDoDia(lessonId, dayId);
-  if(!day) return;
-
-  const quando = (day.date || '').split(' · ')[0];           // "Quarta"
-  const linhas = [
-    `📖 *Lição ${lessonId}${content && content.title ? ' · ' + content.title : ''}*`,
-    `${quando ? quando + ' — ' : ''}*${day.title}*`
-  ];
-  if(day.summary) linhas.push('', resumirTexto(day.summary, 220));
-  linhas.push('', 'Estude esse dia no app Lição Jovem:', linkDoDia(lessonId, dayId));
-
-  window.open(`https://wa.me/?text=${encodeURIComponent(linhas.join('\n'))}`, '_blank');
-  fecharMenus3Pontos();
-}
-
 // Continua gerando .txt - o menu passou a dizer "Baixar texto", que é o que
 // o arquivo realmente é. PDF de verdade fica registrado em IDEIAS.md.
 function exportarPDF(lessonId, dayId){
@@ -6864,7 +7352,6 @@ function exportarPDF(lessonId, dayId){
   a.download = `licao-${lessonId}-${dayId}.txt`;
   a.click();
   URL.revokeObjectURL(url);
-  fecharMenus3Pontos();
 }
 
 // Abre a lição e o dia vindos de um link compartilhado (?licao=11&dia=qua).
