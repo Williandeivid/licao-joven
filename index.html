@@ -864,6 +864,55 @@
   .hub-txt small{font-size:12.5px; color:var(--ink-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .hub-seta{width:18px; height:18px; flex:0 0 auto; stroke:var(--ink-soft); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
 
+  /* ===== Busca, retomada e seletor de modo na tela de livros ===== */
+  .bible-busca{
+    position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:10px;
+    background:var(--card); border:1.5px solid var(--border); border-radius:100px;
+    padding:4px 16px; margin:6px 0 12px;
+  }
+  .bible-busca svg{width:18px; height:18px; stroke:var(--ink-soft); fill:none; stroke-width:2; flex:0 0 auto;}
+  .bible-busca input{
+    flex:1; border:none; background:none; outline:none; color:var(--ink);
+    font-family:inherit; font-size:15px; padding:12px 0; min-width:0;
+  }
+  .bible-busca input::placeholder{color:var(--ink-soft);}
+  .bible-retomar{display:flex; gap:10px; margin:0 0 14px; align-items:stretch;}
+  .retomar-principal{
+    flex:1; display:flex; flex-direction:column; gap:3px; text-align:left; cursor:pointer;
+    background:var(--violet); color:var(--on-violet); border:none; border-radius:14px; padding:13px 15px;
+  }
+  .retomar-principal small{font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; opacity:.85;}
+  .retomar-principal b{font-family:'Unbounded', sans-serif; font-size:15px;}
+  .retomar-chips{display:flex; flex-direction:column; gap:6px; justify-content:center;}
+  .retomar-chips button{
+    background:var(--tint-violet); color:var(--ink-soft); border:none; border-radius:100px;
+    padding:5px 12px; cursor:pointer; font-family:'JetBrains Mono', monospace; font-size:11px; white-space:nowrap;
+  }
+  .modo-seletor{display:flex; gap:6px; background:var(--tint-violet); border-radius:100px; padding:4px; margin:0 0 6px;}
+  .modo-seletor button{
+    flex:1; border:none; border-radius:100px; padding:9px 4px; cursor:pointer; background:none; color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  }
+  .modo-seletor button.ativo{background:var(--violet); color:var(--on-violet);}
+  .genero-label{
+    display:flex; align-items:center; gap:9px; margin:18px 0 9px;
+    font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  .genero-ponto{width:9px; height:9px; border-radius:3px; flex:0 0 auto;}
+  .genero-linha{flex:1; height:1px; background:var(--border2);}
+  .genero-n{opacity:.7;}
+  .book-list{display:flex; flex-direction:column;}
+  .book-linha{
+    display:flex; align-items:center; gap:12px; width:100%; text-align:left; cursor:pointer;
+    background:none; border:none; border-bottom:1px solid var(--border2); padding:13px 6px; min-height:48px; color:var(--ink);
+  }
+  .book-linha:hover{background:var(--tint-violet);}
+  .bl-traco{width:4px; height:22px; border-radius:4px; flex:0 0 auto;}
+  .bl-nome{flex:1; font-size:15px;}
+  .bl-caps{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-soft);}
+  .bc-caps{font-family:'JetBrains Mono', monospace; font-size:10px; opacity:.8;}
+
   /* ===== Biblioteca (Ellen G. White) ===== */
   .egw-cards{display:flex; flex-direction:column; gap:10px;}
   .egw-card{
@@ -1196,6 +1245,7 @@
   .bible-header h1{display:flex; align-items:center; justify-content:center; gap:10px;}
   .header-icon{width:26px; height:26px; stroke:var(--violet); fill:none; stroke-width:2; flex-shrink:0;}
 
+  .gear-btn[hidden]{display:none;}
   .gear-btn{background:var(--tint-violet); border:none; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;}
   .gear-btn svg{width:18px; height:18px; stroke:var(--violet); fill:none; stroke-width:1.8;}
   .view-mode-menu{display:none; flex-direction:column; gap:6px; max-width:260px; margin:10px auto 0; background:var(--card); border:2px solid var(--border); border-radius:16px; padding:8px;}
@@ -1203,26 +1253,39 @@
   .view-mode-menu button{background:none; border:none; text-align:left; padding:10px 14px; border-radius:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink); cursor:pointer;}
   .view-mode-menu button.active{background:var(--tint-violet); color:var(--violet);}
 
-  .book-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
-  .book-card{border:none; border-radius:14px; padding:14px 8px; display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; color:#fff;}
-  .book-card .bc-abbr{font-family:'JetBrains Mono', monospace; font-weight:800; font-size:15px;}
-  .book-card .bc-name{font-size:10.5px; font-weight:600; text-align:center; line-height:1.2;}
+  /* Duas colunas com o nome inteiro: a cor do genero fica so na borda
+     esquerda, para o texto nunca perder contraste em nenhum dos 15 temas. */
+  .book-cards{display:grid; grid-template-columns:repeat(2,1fr); gap:8px;}
+  .book-card{
+    background:var(--card); border:1.5px solid var(--border); border-left-width:4px;
+    border-radius:12px; padding:11px 12px; display:flex; flex-direction:column; gap:2px;
+    align-items:flex-start; text-align:left; cursor:pointer; color:var(--ink); min-height:58px;
+  }
+  .book-card:hover{border-color:var(--violet); border-left-color:inherit;}
+  .book-card .bc-abbr{display:none;}
+  .book-card .bc-name{font-size:14px; font-weight:700; color:var(--heading); line-height:1.2;}
+  .book-card .bc-caps{font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--ink-soft);}
+  @media (min-width:620px){ .book-cards{grid-template-columns:repeat(3,1fr);} }
 
   .periodic-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:4px;}
   .periodic-cell{border:none; border-radius:6px; padding:6px 2px; display:flex; flex-direction:column; align-items:center; justify-content:center; aspect-ratio:1; cursor:pointer; color:#fff; overflow:hidden;}
   .periodic-cell .pc-abbr{font-family:'JetBrains Mono', monospace; font-weight:800; font-size:11px;}
   .periodic-cell .pc-name{font-size:6.5px; font-weight:600; text-align:center; line-height:1.1; opacity:0.9;}
 
-  .cat-law{background:linear-gradient(135deg,#6c4ce0,#8e6cff);}
-  .cat-histAT{background:linear-gradient(135deg,#ff8a5c,#ffab7c);}
-  .cat-wisdom{background:linear-gradient(135deg,#ffc857,#e0a83a);}
-  .cat-majorProph{background:linear-gradient(135deg,#ef4763,#ff6b85);}
-  .cat-minorProph{background:linear-gradient(135deg,#ff5d8f,#ff8ab0);}
-  .cat-gospel{background:linear-gradient(135deg,#2fd6c8,#22b8a6);}
-  .cat-histNT{background:linear-gradient(135deg,#a6e22e,#7ec91f);}
-  .cat-pauline{background:linear-gradient(135deg,#8e6cff,#6c4ce0);}
-  .cat-general{background:linear-gradient(135deg,#22b8a6,#1a8c7e);}
-  .cat-apocalyptic{background:linear-gradient(135deg,#171335,#241f52);}
+  .cat-law{--cor-cat:#6c4ce0; background:linear-gradient(135deg,#6c4ce0,#8e6cff);}
+  .cat-histAT{--cor-cat:#ff8a5c; background:linear-gradient(135deg,#ff8a5c,#ffab7c);}
+  .cat-wisdom{--cor-cat:#ffc857; background:linear-gradient(135deg,#ffc857,#e0a83a);}
+  .cat-majorProph{--cor-cat:#ef4763; background:linear-gradient(135deg,#ef4763,#ff6b85);}
+  .cat-minorProph{--cor-cat:#ff5d8f; background:linear-gradient(135deg,#ff5d8f,#ff8ab0);}
+  .cat-gospel{--cor-cat:#2fd6c8; background:linear-gradient(135deg,#2fd6c8,#22b8a6);}
+  .cat-histNT{--cor-cat:#a6e22e; background:linear-gradient(135deg,#a6e22e,#7ec91f);}
+  .cat-pauline{--cor-cat:#8e6cff; background:linear-gradient(135deg,#8e6cff,#6c4ce0);}
+  .cat-general{--cor-cat:#22b8a6; background:linear-gradient(135deg,#22b8a6,#1a8c7e);}
+  .cat-apocalyptic{--cor-cat:#171335; background:linear-gradient(135deg,#171335,#241f52);}
+  /* Nos cards e na lista a cor do genero vira borda/ponto, nunca fundo do texto */
+  .book-card[class*="cat-"]{background:var(--card); border-left-color:var(--cor-cat);}
+  .book-card[class*="cat-"]:hover{border-color:var(--violet); border-left-color:var(--cor-cat);}
+  .bl-traco[class*="cat-"], .genero-ponto[class*="cat-"]{background:var(--cor-cat);}
 
   .profile-card{background:linear-gradient(120deg, var(--violet), var(--pink));}
 
@@ -1855,11 +1918,18 @@ function lessonDateRangeLabel(id){
 }
 LESSONS_META.forEach(l => { l.start = lessonStart(l.id); l.dateLabel = lessonDateRangeLabel(l.id); });
 
+// A licao vira "atual" quando chega o PRIMEIRO dia dela (domingo), nao na
+// data de inicio (sabado). Antes, no sabado o app ja abria a licao nova,
+// com todos os sete dias no futuro - e o sabado daquele dia, que e o ultimo
+// dia da licao anterior, sumia da tela sem poder ser marcado.
 function getCurrentLessonId(){
-  const now = new Date();
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
   let current = LESSONS_META[0].id;
   for(const l of LESSONS_META){
-    if(now >= l.start) current = l.id;
+    const primeiroDia = new Date(l.start);
+    primeiroDia.setDate(primeiroDia.getDate() + 1);
+    primeiroDia.setHours(0,0,0,0);
+    if(hoje >= primeiroDia) current = l.id;
   }
   return current;
 }
@@ -2699,7 +2769,13 @@ async function marcarConcluido(btn){
   // aplicarSnapshotAoVivo). Evita marcacoes fantasma tipo sabado aparecer
   // "concluido" numa quinta-feira.
   const hoje = new Date(); hoje.setHours(0,0,0,0);
-  if(dayCalendarDate(lessonId, dayId) > hoje) return;
+  const data = dayCalendarDate(lessonId, dayId);
+  if(data > hoje){
+    // Antes isto saia calado: a pessoa tocava e nao acontecia nada.
+    const quando = data.toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {weekday:'long', day:'numeric', month:'long'});
+    avisoRapido(t('lesson.diaNaoChegou').replace('${dia}', quando));
+    return;
+  }
   const progress = progressCache[lessonId] || {days:{}, quiz:{}};
   if(!progress.days) progress.days = {};
   const estMinutes = estimateDayReadingMinutes(lessonId, dayId);
@@ -4467,6 +4543,49 @@ function buildReavivadosSeq(){
   return full.slice(anchorIndex).concat(full.slice(0, anchorIndex));
 }
 
+// ===== LEITURAS DE ELLEN WHITE DENTRO DOS PLANOS =====
+// Uma leitura do plano e {book, chapter}. Para os livros da Biblioteca o
+// "book" vem como "EGW:desejado", e o resto do motor (progresso, dias
+// concluidos, calendario) continua funcionando sem saber a diferenca.
+const EGW_PREFIXO = 'EGW:';
+const EGW_TITULOS = {
+  conflito: 'O Grande Conflito',
+  patriarcas: 'Patriarcas e Profetas',
+  profetas_reis: 'Profetas e Reis',
+  desejado: 'O Desejado de Todas as Nações',
+  atos: 'Atos dos Apóstolos'
+};
+// Ordem da serie e quantidade de capitulos de cada um (confere com
+// biblioteca/indice.json; se mudar la, mude aqui).
+const EGW_SERIE = [
+  ['patriarcas', 73], ['profetas_reis', 60], ['desejado', 87],
+  ['atos', 58], ['conflito', 42]
+];
+
+// Guarda de onde veio a leitura: pelo plano, o "voltar" tem de devolver ao
+// plano, e nao a lista de capitulos do livro.
+let egwVeioDoPlano = false;
+function ehLeituraEGW(bookId){ return String(bookId).startsWith(EGW_PREFIXO); }
+function idDoLivroEGW(bookId){ return String(bookId).slice(EGW_PREFIXO.length); }
+function nomeDaLeitura(bookId, chapter){
+  if(!ehLeituraEGW(bookId)) return `${bookDisplayName(bookId, idiomaConteudoAtual)} ${chapter}`;
+  return `${EGW_TITULOS[idDoLivroEGW(bookId)]} · ${t('bible.cap')} ${chapter}`;
+}
+function sequenciaEGW(){
+  const fora = [];
+  EGW_SERIE.forEach(([id, caps]) => {
+    for(let c = 1; c <= caps; c++) fora.push({ book: EGW_PREFIXO + id, chapter: c });
+  });
+  return fora;
+}
+// Intercala: cada dia leva os capitulos biblicos do dia e um capitulo de
+// Ellen White. Quando a serie acaba antes da Biblia, os ultimos dias ficam
+// so com a Biblia - nao da para inventar capitulo.
+function juntarComEGW(diasBiblicos){
+  const egw = sequenciaEGW();
+  return diasBiblicos.map((dia, i) => i < egw.length ? dia.concat([egw[i]]) : dia.slice());
+}
+
 const BIBLE_PLANS = {
   traditional: { name:'Tradicional', desc:'Do Gênesis ao Apocalipse, na ordem clássica dos livros.', pace:'~3,3 capítulos/dia · cerca de 1 ano', sequence: buildTraditionalSeq() },
   chronological: { name:'Cronológico', desc:'Na ordem aproximada em que os acontecimentos aconteceram — Jó logo após o início de Gênesis, os profetas ao lado dos reis da época, etc.', pace:'~3,3 capítulos/dia · cerca de 1 ano', sequence: CHRON_PLAN_DATA },
@@ -4474,6 +4593,8 @@ const BIBLE_PLANS = {
   nt90: { name:'Novo Testamento', desc:'Só o Novo Testamento — ótimo pra começar mais leve ou revisar os Evangelhos e cartas.', pace:'~2,9 capítulos/dia · 90 dias', sequence: buildNTSeq() },
   umPorDia: { name:'Um Capítulo por Dia', desc:'Exatamente um capítulo a cada dia, do Gênesis ao Apocalipse. Sem correria e sem dia pesado — o mesmo compromisso curto todos os dias.', pace:'1 capítulo/dia · 1.189 dias (cerca de 3 anos e 3 meses)', sequence: buildTraditionalSeq() },
   reavivados: { name:'Reavivados por Sua Palavra', desc:'Acompanha o calendário real do projeto Reavivados por Sua Palavra — hoje (18/09/2026) é Salmos 42, e o capítulo do dia avança junto com o calendário, não com a data em que você ativa o plano. Segue a ordem clássica dos livros até completar a Bíblia inteira.', pace:'1 capítulo/dia · cerca de 3 anos e 3 meses', sequence: buildReavivadosSeq() },
+  serieConflito: { name:'Série do Conflito · Ellen White', desc:'Os cinco livros da Série do Grande Conflito, na ordem da história: Patriarcas e Profetas, Profetas e Reis, O Desejado de Todas as Nações, Atos dos Apóstolos e O Grande Conflito. Um capítulo por dia, lido dentro da Biblioteca.', pace:'1 capítulo/dia · 320 dias (cerca de 10 meses e meio)', sequence: sequenciaEGW() },
+  jovemComEGW: { name:'Ano Bíblico Jovem + Ellen White', desc:'A mesma leitura do Ano Bíblico Jovem, com um capítulo da Série do Conflito a cada dia. Abre a Bíblia e a Biblioteca lado a lado, no mesmo dia do plano.', pace:'~2,6 capítulos da Bíblia + 1 de Ellen White por dia · cerca de 1 ano', sequence: YOUTH_PLAN_DAYS.flat().concat(sequenciaEGW()), days: juntarComEGW(YOUTH_PLAN_DAYS) },
   youthPlan1y: { name:'Ano Bíblico Jovem', desc:'Começa em Salmos, depois percorre a Bíblia inteira misturando poesia, história e os Evangelhos ao longo do ano — baseado no Ano Bíblico Jovem 2021.', pace:'~2,6 capítulos/dia · cerca de 1 ano', sequence: YOUTH_PLAN_DAYS.flat(), days: YOUTH_PLAN_DAYS },
 };
 
@@ -4483,6 +4604,8 @@ const BIBLE_PLANS = {
 // quando a chave/idioma nao tiver override).
 const BIBLE_PLANS_I18N = {
   en: {
+    serieConflito: { name:'Conflict Series · Ellen White', desc:'The five books of the Conflict of the Ages series, in story order: Patriarchs and Prophets, Prophets and Kings, The Desire of Ages, The Acts of the Apostles and The Great Controversy. One chapter a day, read inside the Library.', pace:'1 chapter/day · 320 days (about 10 and a half months)' },
+    jovemComEGW: { name:'Youth Bible Year + Ellen White', desc:'The same Youth Bible Year reading, with one chapter of the Conflict Series each day. Opens the Bible and the Library side by side, in the same plan day.', pace:'~2.6 Bible chapters + 1 Ellen White chapter a day · about 1 year' },
     traditional: { name:'Traditional', desc:'From Genesis to Revelation, in the classic book order.', pace:'~3.3 chapters/day · about 1 year' },
     chronological: { name:'Chronological', desc:'In the approximate order events happened — Job right after the start of Genesis, the prophets alongside the kings of their time, etc.', pace:'~3.3 chapters/day · about 1 year' },
     fast6: { name:'Accelerated', desc:'The whole Bible, in classic order, at a faster pace — for those who already have a reading habit.', pace:'~6.5 chapters/day · about 6 months' },
@@ -4491,6 +4614,8 @@ const BIBLE_PLANS_I18N = {
     youthPlan1y: { name:'Youth Bible Year', desc:'Starts in Psalms, then goes through the whole Bible mixing poetry, history, and the Gospels over the year — based on the 2021 Youth Bible Year.', pace:'~2.6 chapters/day · about 1 year' },
   },
   es: {
+    serieConflito: { name:'Serie del Conflicto · Elena G. de White', desc:'Los cinco libros de la serie del Gran Conflicto, en orden de la historia: Patriarcas y Profetas, Profetas y Reyes, El Deseado de Todas las Gentes, Los Hechos de los Apóstoles y El Conflicto de los Siglos. Un capítulo por día, leído dentro de la Biblioteca.', pace:'1 capítulo/día · 320 días (cerca de 10 meses y medio)' },
+    jovemComEGW: { name:'Año Bíblico Joven + Elena G. de White', desc:'La misma lectura del Año Bíblico Joven, con un capítulo de la Serie del Conflicto cada día. Abre la Biblia y la Biblioteca lado a lado, en el mismo día del plan.', pace:'~2,6 capítulos de la Biblia + 1 de Elena G. de White por día · cerca de 1 año' },
     traditional: { name:'Tradicional', desc:'De Génesis a Apocalipsis, en el orden clásico de los libros.', pace:'~3,3 capítulos/día · cerca de 1 año' },
     chronological: { name:'Cronológico', desc:'En el orden aproximado en que ocurrieron los acontecimientos — Job justo después del inicio de Génesis, los profetas junto a los reyes de su época, etc.', pace:'~3,3 capítulos/día · cerca de 1 año' },
     fast6: { name:'Acelerado', desc:'La Biblia entera, en el orden clásico, a un ritmo más intenso — para quien ya tiene el hábito de lectura.', pace:'~6,5 capítulos/día · cerca de 6 meses' },
@@ -4583,6 +4708,8 @@ BIBLE_PLANS.traditional.days = chunkEvenly(BIBLE_PLANS.traditional.sequence, 365
 BIBLE_PLANS.chronological.days = chunkEvenly(BIBLE_PLANS.chronological.sequence, 365);
 BIBLE_PLANS.fast6.days = chunkSixPlusTen(BIBLE_PLANS.fast6.sequence);
 BIBLE_PLANS.nt90.days = chunkEvenly(BIBLE_PLANS.nt90.sequence, 90);
+// Um capitulo de Ellen White por dia: tantos dias quanto capitulos.
+BIBLE_PLANS.serieConflito.days = chunkEvenly(BIBLE_PLANS.serieConflito.sequence, BIBLE_PLANS.serieConflito.sequence.length);
 // Um dia para cada capítulo: tantos dias quanto capítulos.
 BIBLE_PLANS.umPorDia.days = chunkEvenly(BIBLE_PLANS.umPorDia.sequence, BIBLE_PLANS.umPorDia.sequence.length);
 BIBLE_PLANS.reavivados.days = chunkEvenly(BIBLE_PLANS.reavivados.sequence, BIBLE_PLANS.reavivados.sequence.length);
@@ -4629,7 +4756,9 @@ async function estimateChapterReadingMinutes(bookId, chapter){
 // no tempo de leitura bíblica do dia (mesmo lugar que a dashboard já lê).
 async function markChapterRead(key, bookId, chapter){
   const ck = bookId+'-'+chapter;
-  const estMinutes = await estimateChapterReadingMinutes(bookId, chapter);
+  // Capitulo de Ellen White nao vem da API da Biblia: usa uma media da
+  // propria serie (cerca de 9 minutos por capitulo) em vez de tentar buscar.
+  const estMinutes = ehLeituraEGW(bookId) ? 9 : await estimateChapterReadingMinutes(bookId, chapter);
   planProgressCache[key].read[ck] = {read:true, estMinutes};
   await loadDailyTimeLog();
   const todayKey = dateKey(new Date());
@@ -4794,6 +4923,7 @@ async function renderBiblioteca(){
 }
 
 async function abrirLivroEGW(id){
+  egwVeioDoPlano = false;
   const container = document.getElementById('bible-container');
   if(!container) return;
   egwState = { livro: id, capitulo: null };
@@ -4843,7 +4973,9 @@ async function abrirCapituloEGW(id, indice){
   const anterior = indice > 0 ? `<button class="egw-nav" onclick="abrirCapituloEGW('${id}', ${indice-1})">← ${t('bible.anterior')}</button>` : '<span></span>';
   const proximo = indice < livro.capitulos.length-1 ? `<button class="egw-nav" onclick="abrirCapituloEGW('${id}', ${indice+1})">${t('bible.proximo')} →</button>` : '<span></span>';
   container.innerHTML = `<div class="bible-crumb">
-      <button onclick="abrirLivroEGW('${id}')">← ${escaparHtml(livro.titulo)}</button>
+      ${egwVeioDoPlano && currentPlanKey
+        ? `<button onclick="egwVeioDoPlano=false; renderBiblePlan()">← ${escaparHtml(planField(currentPlanKey,'name',idiomaConteudoAtual))}</button>`
+        : `<button onclick="abrirLivroEGW('${id}')">← ${escaparHtml(livro.titulo)}</button>`}
     </div>
     <div class="bible-wrap egw-leitura">
       <h2>${escaparHtml(cap.t)}</h2>
@@ -4853,6 +4985,7 @@ async function abrirCapituloEGW(id, indice){
   window.scrollTo(0,0);
   await guardarUltimoEGW(id, indice, `${livro.titulo} · ${t('bible.cap')} ${indice+1}`);
 }
+
 
 function bibleCrumbHtml(book){
   if(bibleState.returnTo === 'plan'){
@@ -5055,7 +5188,7 @@ function renderDayChapterList(){
   let html = '';
   reading.forEach(r=>{
     const done = !!prog.read[r.book+'-'+r.chapter];
-    const label = `${bookDisplayName(r.book, idiomaConteudoAtual)} ${r.chapter}`;
+    const label = nomeDaLeitura(r.book, r.chapter);
     html += `<div class="chapter-row ${done?'done':''}">
       <button class="chapter-check" onclick="toggleSingleChapter('${r.book}',${r.chapter})">${done?'✓':''}</button>
       <button class="chapter-open" onclick="openPlanChapterFromList('${r.book}',${r.chapter})"><span>${label}</span><span class="chevron">›</span></button>
@@ -5081,6 +5214,12 @@ async function openPlanChapterFromList(bookId, chapter){
   await markChapterRead(key, bookId, chapter);
   await savePlanProgress(key);
   await logBibleActivityToday();
+  if(ehLeituraEGW(bookId)){
+    // Capitulo de Ellen White abre na Biblioteca, na mesma tela de leitura.
+    egwVeioDoPlano = true;
+    await abrirCapituloEGW(idDoLivroEGW(bookId), chapter - 1);
+    return;
+  }
   bibleState.book = bookId;
   bibleState.returnTo = 'plan';
   openBibleChapter(chapter);
@@ -5411,6 +5550,7 @@ async function goBible(){
   document.getElementById('bible-container').style.display = 'block';
   document.getElementById('tab-bible').classList.add('active');
   bibleState = {book:null, chapter:null, returnTo:'read'};
+  await carregarLeituraRecente();
   renderBibleBooks();
   window.scrollTo(0,0);
   // Os tres cartoes do topo dizem em que pe esta cada coisa; estes dados
@@ -5635,6 +5775,21 @@ const UI_STRINGS = {
     'comments.enviando': 'Enviando…',
     'comments.rotulo': 'Comentários',
     'bible.biblioteca': 'Biblioteca',
+    'lesson.diaNaoChegou': 'Esse dia ainda não chegou — volta em ${dia}',
+    'bible.buscaPlaceholder': 'Buscar livro — ap, sl, joão 3…',
+    'bible.buscaVazia': 'Nenhum livro com esse nome.',
+    'bible.modoMapa': 'Mapa dos 66',
+    'bible.capAbrev': 'cap.',
+    'cat.law': 'Lei',
+    'cat.histAT': 'História (AT)',
+    'cat.wisdom': 'Poéticos',
+    'cat.majorProph': 'Profetas Maiores',
+    'cat.minorProph': 'Profetas Menores',
+    'cat.gospel': 'Evangelhos',
+    'cat.histNT': 'História (NT)',
+    'cat.pauline': 'Cartas de Paulo',
+    'cat.general': 'Cartas Gerais',
+    'cat.apocalyptic': 'Apocalíptico',
     'bible.bibliotecaSub': 'Livros de Ellen G. White, com o texto conferido com o original.',
     'bible.hubBiblia': '66 livros · Antigo e Novo Testamento',
     'bible.hubPlanoVazio': 'Escolha um plano de leitura',
@@ -5972,6 +6127,21 @@ const UI_STRINGS = {
     'comments.enviando': 'Sending…',
     'comments.rotulo': 'Comments',
     'bible.biblioteca': 'Library',
+    'lesson.diaNaoChegou': 'That day has not arrived yet — come back on ${dia}',
+    'bible.buscaPlaceholder': 'Find a book — rev, ps, john 3…',
+    'bible.buscaVazia': 'No book with that name.',
+    'bible.modoMapa': 'Map of the 66',
+    'bible.capAbrev': 'ch.',
+    'cat.law': 'Law',
+    'cat.histAT': 'History (OT)',
+    'cat.wisdom': 'Poetry',
+    'cat.majorProph': 'Major Prophets',
+    'cat.minorProph': 'Minor Prophets',
+    'cat.gospel': 'Gospels',
+    'cat.histNT': 'History (NT)',
+    'cat.pauline': "Paul's Letters",
+    'cat.general': 'General Letters',
+    'cat.apocalyptic': 'Apocalyptic',
     'bible.bibliotecaSub': 'Ellen G. White books, with the text checked against the original.',
     'bible.hubBiblia': '66 books · Old and New Testament',
     'bible.hubPlanoVazio': 'Pick a reading plan',
@@ -6309,6 +6479,21 @@ const UI_STRINGS = {
     'comments.enviando': 'Enviando…',
     'comments.rotulo': 'Comentarios',
     'bible.biblioteca': 'Biblioteca',
+    'lesson.diaNaoChegou': 'Ese día aún no llegó — vuelve el ${dia}',
+    'bible.buscaPlaceholder': 'Buscar libro — ap, sal, juan 3…',
+    'bible.buscaVazia': 'Ningún libro con ese nombre.',
+    'bible.modoMapa': 'Mapa de los 66',
+    'bible.capAbrev': 'cap.',
+    'cat.law': 'Ley',
+    'cat.histAT': 'Historia (AT)',
+    'cat.wisdom': 'Poéticos',
+    'cat.majorProph': 'Profetas Mayores',
+    'cat.minorProph': 'Profetas Menores',
+    'cat.gospel': 'Evangelios',
+    'cat.histNT': 'Historia (NT)',
+    'cat.pauline': 'Cartas de Pablo',
+    'cat.general': 'Cartas Generales',
+    'cat.apocalyptic': 'Apocalíptico',
     'bible.bibliotecaSub': 'Libros de Elena G. de White, con el texto cotejado con el original.',
     'bible.hubBiblia': '66 libros · Antiguo y Nuevo Testamento',
     'bible.hubPlanoVazio': 'Elige un plan de lectura',
@@ -6567,7 +6752,7 @@ async function recarregarConteudoNoIdiomaAtual(){
   }catch(e){ console.warn('⚠️ Não recarregou o conteúdo no novo idioma:', e.message); }
 }
 
-let bibleViewMode = 'list';
+let bibleViewMode = 'card';
 async function loadBibleViewMode(){
   try{
     const res = await window.storage.get('bible-view-mode', false);
@@ -6589,30 +6774,150 @@ function closeViewModeMenu(){
   if(menu) menu.classList.remove('open');
 }
 
+// Ordem em que os generos aparecem, do Genesis ao Apocalipse.
+const ORDEM_CATEGORIAS = ['law','histAT','wisdom','majorProph','minorProph','gospel','histNT','pauline','general','apocalyptic'];
+
+// Busca livro por nome, abreviacao, sem acento e perdoando 1 erro de
+// digitacao ("jeremais" acha Jeremias). Aceita tambem "joao 3".
+function normalizarBusca(t){
+  return String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,'').trim();
+}
+// Perdoa UM erro: letra trocada, letra a mais, letra a menos ou duas letras
+// invertidas ("jeremais" -> Jeremias, que era o caso mais comum nos testes).
+function pertoDe(a, b){
+  if(a === b) return true;
+  if(Math.abs(a.length - b.length) > 1) return false;
+  for(let i=0; i<Math.min(a.length, b.length); i++){
+    if(a[i] === b[i]) continue;
+    const resto = (x, y) => x.slice(i) === y.slice(i);
+    if(a.length === b.length){
+      if(resto(a.slice(0,i+1)+a.slice(i+1), b.slice(0,i+1)+b.slice(i+1)) && a.slice(i+1) === b.slice(i+1)) return true; // troca
+      if(a[i] === b[i+1] && a[i+1] === b[i] && a.slice(i+2) === b.slice(i+2)) return true;                              // inversao
+      return false;
+    }
+    return a.length > b.length ? a.slice(i+1) === b.slice(i) : a.slice(i) === b.slice(i+1);
+  }
+  return true;
+}
+function livrosQueCasam(termo){
+  const q = normalizarBusca(termo);
+  if(!q) return null;
+  const soLetras = q.replace(/[0-9 ]/g,'');
+  return BIBLE_BOOKS.filter(b => {
+    const nome = normalizarBusca(bookDisplayName(b.id, idiomaConteudoAtual));
+    const sigla = normalizarBusca(BOOK_ABBR_PT[b.id] || '');
+    return nome.startsWith(q) || nome.includes(q) || sigla === q || sigla.startsWith(q)
+        || (soLetras.length >= 4 && (nome.startsWith(soLetras) || pertoDe(soLetras, nome.split(' ').pop())));
+  });
+}
+
 function renderBookGrid(books){
   if(bibleViewMode === 'card'){
     return `<div class="book-cards">` + books.map(b=>
-      `<button class="book-card cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')">
+      `<button class="book-card cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')"
+         aria-label="${bookDisplayName(b.id, idiomaConteudoAtual)}, ${b.ch} ${t('bible.capitulos')}">
         <span class="bc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="bc-name">${bookDisplayName(b.id, idiomaConteudoAtual)}</span>
+        <span class="bc-caps">${b.ch} ${t('bible.capAbrev')}</span>
       </button>`).join('') + `</div>`;
   }
   if(bibleViewMode === 'periodic'){
     return `<div class="periodic-grid">` + books.map(b=>
-      `<button class="periodic-cell cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')" title="${bookDisplayName(b.id, idiomaConteudoAtual)}">
+      `<button class="periodic-cell cat-${BOOK_CATEGORY[b.id]}" onclick="openBibleBook('${b.id}')" title="${bookDisplayName(b.id, idiomaConteudoAtual)}"
+         aria-label="${bookDisplayName(b.id, idiomaConteudoAtual)}, ${b.ch} ${t('bible.capitulos')}">
         <span class="pc-abbr">${BOOK_ABBR_PT[b.id]}</span><span class="pc-name">${bookDisplayName(b.id, idiomaConteudoAtual)}</span>
       </button>`).join('') + `</div>`;
   }
-  return `<div class="book-grid">` + books.map(b=>
-    `<button class="book-btn" onclick="openBibleBook('${b.id}')">${bookDisplayName(b.id, idiomaConteudoAtual)}</button>`).join('') + `</div>`;
+  return `<div class="book-list">` + books.map(b=>
+    `<button class="book-linha" onclick="openBibleBook('${b.id}')"
+       aria-label="${bookDisplayName(b.id, idiomaConteudoAtual)}, ${b.ch} ${t('bible.capitulos')}">
+      <span class="bl-traco cat-${BOOK_CATEGORY[b.id]}"></span>
+      <span class="bl-nome">${bookDisplayName(b.id, idiomaConteudoAtual)}</span>
+      <span class="bl-caps">${b.ch}</span>
+    </button>`).join('') + `</div>`;
+}
+
+// Cada genero vira uma secao com rotulo escrito - cor sozinha nao serve,
+// tanto por daltonismo quanto por leitor de tela.
+function renderSecoesPorGenero(livros){
+  return ORDEM_CATEGORIAS.map(cat => {
+    const doGenero = livros.filter(b => BOOK_CATEGORY[b.id] === cat);
+    if(!doGenero.length) return '';
+    return `<div class="genero-label"><span class="genero-ponto cat-${cat}"></span>${t('cat.'+cat)}
+        <span class="genero-linha"></span><span class="genero-n">${doGenero.length}</span></div>`
+      + renderBookGrid(doGenero);
+  }).join('');
+}
+
+// Guarda onde a pessoa parou e os ultimos livros abertos, para o topo da
+// tela de livros - era o caminho mais pedido e o unico que nao existia.
+let ultimoCapituloLido = null;
+let livrosRecentes = [];
+
+async function carregarLeituraRecente(){
+  try{
+    const a = await window.storage.get('biblia-ultimo', false);
+    ultimoCapituloLido = a && a.value ? JSON.parse(a.value) : null;
+  }catch(e){ ultimoCapituloLido = null; }
+  try{
+    const b = await window.storage.get('biblia-recentes', false);
+    livrosRecentes = b && b.value ? JSON.parse(b.value) : [];
+  }catch(e){ livrosRecentes = []; }
+}
+
+async function guardarLeituraRecente(bookId, chapter){
+  ultimoCapituloLido = { book: bookId, chapter };
+  livrosRecentes = [bookId].concat(livrosRecentes.filter(x => x !== bookId)).slice(0, 3);
+  try{
+    await window.storage.set('biblia-ultimo', JSON.stringify(ultimoCapituloLido), false);
+    await window.storage.set('biblia-recentes', JSON.stringify(livrosRecentes), false);
+  }catch(e){}
+}
+
+function buscarLivro(valor){
+  const achados = livrosQueCasam(valor);
+  const alvo = document.getElementById('lista-livros');
+  if(!alvo) return;
+  if(achados === null){ alvo.innerHTML = renderSecoesPorGenero(BIBLE_BOOKS); return; }
+  if(!achados.length){ alvo.innerHTML = `<p class="cmt-vazio">${t('bible.buscaVazia')}</p>`; return; }
+  alvo.innerHTML = renderBookGrid(achados);
+  // "joao 3" abre o capitulo direto, como no Logos.
+  const num = String(valor).match(/\s(\d{1,3})\s*$/);
+  if(achados.length === 1 && num){
+    const cap = parseInt(num[1], 10);
+    if(cap >= 1 && cap <= achados[0].ch){
+      bibleState.returnTo = 'read'; bibleState.book = achados[0].id; bibleState.translation = 'ara';
+      openBibleChapter(cap);
+    }
+  }
 }
 
 function renderBibleBooks(){
   const container = document.getElementById('bible-container');
   if(!container) return;
   let html = bibleSubtabsHTML('read');
+  html += `<div class="bible-busca">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input type="search" id="campo-busca-livro" placeholder="${t('bible.buscaPlaceholder')}"
+      oninput="buscarLivro(this.value)" autocomplete="off" enterkeyhint="search">
+  </div>`;
+  if(ultimoCapituloLido && BIBLE_BOOKS.find(b=>b.id===ultimoCapituloLido.book)){
+    const nome = bookDisplayName(ultimoCapituloLido.book, idiomaConteudoAtual);
+    const recentes = livrosRecentes.filter(id => id !== ultimoCapituloLido.book).slice(0,3);
+    html += `<div class="bible-retomar">
+      <button class="retomar-principal" onclick="abrirCapituloSalvo()">
+        <small>${t('bible.continuarLeitura')}</small><b>${nome} ${ultimoCapituloLido.chapter}</b>
+      </button>
+      <div class="retomar-chips">${recentes.map(id =>
+        `<button onclick="openBibleBook('${id}')">${bookDisplayName(id, idiomaConteudoAtual)}</button>`).join('')}</div>
+    </div>`;
+  }
+  html += `<div class="modo-seletor">
+      ${[['list','bible.modoLista'],['card','bible.modoCards'],['periodic','bible.modoMapa']].map(([m,k]) =>
+        `<button class="${bibleViewMode===m?'ativo':''}" onclick="setBibleViewMode('${m}')">${t(k)}</button>`).join('')}
+    </div>`;
   html += `<div class="bible-header">
     <h1><svg class="header-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>${t('bible.titulo')}
-      <button class="gear-btn" onclick="toggleViewModeMenu()">
+      <button class="gear-btn" hidden onclick="toggleViewModeMenu()">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
     </h1>
@@ -6623,9 +6928,10 @@ function renderBibleBooks(){
     </div>
     <p>${t('bible.subtitulo')}</p></div>
   <div class="bible-wrap">`;
-  html += `<div class="testament-label">${t('bible.antigoTestamento')}</div>` + renderBookGrid(BIBLE_BOOKS.filter(b=>b.t==='AT'));
-  html += `<div class="testament-label">${t('bible.novoTestamento')}</div>` + renderBookGrid(BIBLE_BOOKS.filter(b=>b.t==='NT'));
-  html += `</div><footer>${t('bible.credito')}</footer>`;
+  html += `<div id="lista-livros">`;
+  html += `<div class="testament-label">${t('bible.antigoTestamento')}</div>` + renderSecoesPorGenero(BIBLE_BOOKS.filter(b=>b.t==='AT'));
+  html += `<div class="testament-label">${t('bible.novoTestamento')}</div>` + renderSecoesPorGenero(BIBLE_BOOKS.filter(b=>b.t==='NT'));
+  html += `</div></div><footer>${t('bible.credito')}</footer>`;
   container.innerHTML = html;
   container.dataset.view = 'books';
 }
@@ -6726,6 +7032,14 @@ async function renderChapterPopupVersion(idioma, version, book, chapter){
   }catch(e){
     updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,book.id,chapter)}<span class="vpop-loading">${t('bible.naoConseguiBuscarAqui')}</span>`);
   }
+}
+
+function abrirCapituloSalvo(){
+  if(!ultimoCapituloLido) return;
+  bibleState.returnTo = 'read';
+  bibleState.book = ultimoCapituloLido.book;
+  bibleState.translation = bibleState.translation || 'ara';
+  openBibleChapter(ultimoCapituloLido.chapter);
 }
 
 function openBibleBook(bookId){
@@ -6867,6 +7181,8 @@ async function fetchTranslation(idioma, book, chapter, translation){
 async function openBibleChapter(chapter){
   bibleState.chapter = chapter;
   bibleState.translation = bibleState.translation || 'ara';
+  // Marca onde a pessoa parou, para o "continuar" no topo da lista de livros.
+  guardarLeituraRecente(bibleState.book, chapter);
   const container = document.getElementById('bible-container');
   if(!container) return;
   const book = BIBLE_BOOKS.find(b=>b.id===bibleState.book);
