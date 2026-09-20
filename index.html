@@ -845,6 +845,58 @@
   }
   .acoes-admin[hidden]{display:none;}
   .acoes-admin b{color:var(--violet);}
+
+  /* ===== Porta de entrada da aba Bíblia ===== */
+  .hub-cards{display:flex; flex-direction:column; gap:10px; margin:18px 0 26px;}
+  .hub-card{
+    display:flex; align-items:center; gap:14px; width:100%; text-align:left;
+    background:var(--card); color:var(--ink); border:1.5px solid var(--border);
+    border-radius:16px; padding:15px 16px; cursor:pointer;
+    transition:border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  .hub-card:hover{border-color:var(--violet);}
+  .hub-card:active{transform:scale(.99);}
+  .hub-card.ativo{border-color:var(--violet); background:var(--tint-violet);}
+  .hub-ico{width:26px; height:26px; flex:0 0 auto; stroke:var(--ink-soft); fill:none; stroke-width:1.7; stroke-linejoin:round; stroke-linecap:round;}
+  .hub-card.ativo .hub-ico{stroke:var(--violet);}
+  .hub-txt{display:flex; flex-direction:column; gap:2px; min-width:0; flex:1;}
+  .hub-txt b{font-family:'Unbounded', sans-serif; font-size:15px; font-weight:700; color:var(--heading);}
+  .hub-txt small{font-size:12.5px; color:var(--ink-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .hub-seta{width:18px; height:18px; flex:0 0 auto; stroke:var(--ink-soft); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+
+  /* ===== Biblioteca (Ellen G. White) ===== */
+  .egw-cards{display:flex; flex-direction:column; gap:10px;}
+  .egw-card{
+    display:flex; flex-direction:column; gap:4px; text-align:left; width:100%;
+    background:var(--card); border:1.5px solid var(--border); border-radius:14px;
+    padding:14px 16px; cursor:pointer; color:var(--ink);
+  }
+  .egw-card:hover{border-color:var(--violet);}
+  .egw-card-nome{font-family:'Unbounded', sans-serif; font-weight:700; font-size:15px; color:var(--heading);}
+  .egw-card-meta{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-soft); letter-spacing:.04em;}
+  .egw-continuar{
+    margin-top:18px; width:100%; background:var(--violet); color:var(--on-violet); border:none;
+    border-radius:100px; padding:13px 18px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; cursor:pointer;
+  }
+  .egw-caps{display:flex; flex-direction:column;}
+  .egw-cap{
+    display:flex; align-items:baseline; gap:12px; text-align:left; width:100%;
+    background:none; border:none; border-bottom:1px solid var(--border2);
+    padding:13px 4px; cursor:pointer; color:var(--ink);
+  }
+  .egw-cap:hover{background:var(--tint-violet);}
+  .egw-cap-num{font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--violet); min-width:24px;}
+  .egw-cap-tit{font-size:14.5px;}
+  .egw-leitura h2{font-family:'Unbounded', sans-serif; font-size:1.35rem; color:var(--heading); margin:0 0 18px;}
+  .egw-texto p{font-size:16px; line-height:1.75; color:var(--ink); margin:0 0 16px; text-align:justify;}
+  .egw-ref{font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--ink-soft); opacity:.55; margin-left:8px; white-space:nowrap;}
+  .egw-rodape{display:flex; justify-content:space-between; gap:12px; margin:26px 0 10px;}
+  .egw-nav{
+    background:var(--card); color:var(--violet); border:1.5px solid var(--violet);
+    border-radius:100px; padding:10px 18px; cursor:pointer;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; text-transform:uppercase;
+  }
   .admin-tabela{margin-top:12px; display:flex; flex-direction:column; gap:2px; font-size:13.5px;}
   .admin-linha{display:grid; grid-template-columns:1fr auto auto auto; gap:10px; align-items:center; padding:7px 10px; border-radius:8px;}
   .admin-linha:nth-child(odd){background:var(--tint-violet);}
@@ -4630,15 +4682,176 @@ async function markDayDone(dayIndex){
   renderBiblePlan();
 }
 
+// Porta de entrada da aba Biblia: tres cartoes empilhados, cada um dizendo
+// em que pe esta. Antes eram duas abinhas horizontais, que so mostravam o
+// nome e ficavam apertadas no celular com um terceiro item.
+const ICONES_HUB = {
+  read: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  plan: '<rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  lib:  '<path d="M4 3h3v18H4z"/><path d="M9 3h3v18H9z"/><path d="M14.5 4.2l2.9-.8 3.6 13.4-2.9.8z"/><line x1="4" y1="8" x2="7" y2="8"/><line x1="9" y1="8" x2="12" y2="8"/>'
+};
+
+function subtituloPlanoHub(){
+  const plano = activeBiblePlan && BIBLE_PLANS[activeBiblePlan] ? activeBiblePlan : null;
+  if(!plano) return t('bible.hubPlanoVazio');
+  const prog = planProgressCache[plano];
+  const nome = planField(plano, 'name', idiomaConteudoAtual);
+  if(!prog) return nome;
+  const lidos = Object.keys(prog.read || {}).length;
+  const total = BIBLE_PLANS[plano].sequence.length || 1;
+  return `${nome} · ${Math.round(lidos/total*100)}%`;
+}
+
+function cartaoHub(chave, aoTocar, titulo, subtitulo, ativo){
+  return `<button class="hub-card${ativo ? ' ativo' : ''}" onclick="${aoTocar}">
+    <svg class="hub-ico" viewBox="0 0 24 24">${ICONES_HUB[chave]}</svg>
+    <span class="hub-txt"><b>${titulo}</b><small>${subtitulo}</small></span>
+    <svg class="hub-seta" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+  </button>`;
+}
+
 function bibleSubtabsHTML(active){
-  return `<div class="bible-subtabs">
-    <button class="bible-subtab ${active==='read'?'active':''}" onclick="goBible()">
-      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>${t('bible.titulo')}
-    </button>
-    <button class="bible-subtab ${active==='plan'?'active':''}" onclick="goBiblePlan()">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${t('bible.planoBiblico')}
-    </button>
-  </div>`;
+  return `<div class="hub-cards">`
+    + cartaoHub('read', 'goBible()', t('bible.titulo'), t('bible.hubBiblia'), active==='read')
+    + cartaoHub('plan', 'goBiblePlan()', t('bible.planoBiblico'), subtituloPlanoHub(), active==='plan')
+    + cartaoHub('lib', 'goBiblioteca()', t('bible.biblioteca'), ultimoEGW ? ultimoEGW.resumo : t('bible.hubBiblioteca'), active==='lib')
+    + `</div>`;
+}
+
+
+// ===== BIBLIOTECA (livros de Ellen G. White) =====
+// Os textos ficam em /biblioteca/*.json e so baixam quando a pessoa abre o
+// livro: o indice tem 8 KB, cada livro entre 0,9 e 1,7 MB. Sao os cinco da
+// Serie do Grande Conflito, com o texto ja revisado contra o original.
+let indiceEGW = null;
+const livrosEGW = {};
+let ultimoEGW = null;
+let egwState = { livro: null, capitulo: null };
+
+async function carregarIndiceEGW(){
+  if (indiceEGW) return indiceEGW;
+  const r = await fetch('biblioteca/indice.json');
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  indiceEGW = await r.json();
+  return indiceEGW;
+}
+
+async function carregarLivroEGW(id){
+  if (livrosEGW[id]) return livrosEGW[id];
+  const r = await fetch('biblioteca/' + id + '.json');
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  livrosEGW[id] = await r.json();
+  return livrosEGW[id];
+}
+
+async function carregarUltimoEGW(){
+  try{
+    const res = await window.storage.get('egw-ultimo', false);
+    ultimoEGW = res && res.value ? JSON.parse(res.value) : null;
+  }catch(e){ ultimoEGW = null; }
+  return ultimoEGW;
+}
+
+async function guardarUltimoEGW(id, capitulo, resumo){
+  ultimoEGW = { id, capitulo, resumo };
+  try{ await window.storage.set('egw-ultimo', JSON.stringify(ultimoEGW), false); }catch(e){}
+}
+
+async function goBiblioteca(){
+  hideAllViews();
+  document.getElementById('bible-container').style.display = 'block';
+  document.getElementById('tab-bible').classList.add('active');
+  await carregarUltimoEGW();
+  await renderBiblioteca();
+  window.scrollTo(0,0);
+}
+
+async function renderBiblioteca(){
+  const container = document.getElementById('bible-container');
+  if(!container) return;
+  container.dataset.view = 'biblioteca';
+  container.innerHTML = bibleSubtabsHTML('lib')
+    + `<div class="bible-header"><h1><svg class="header-icon" viewBox="0 0 24 24">${ICONES_HUB.lib}</svg>${t('bible.biblioteca')}</h1>
+       <p>${t('bible.bibliotecaSub')}</p></div>
+       <div class="bible-wrap"><p class="cmt-vazio">${t('admin.carregando')}</p></div>`;
+
+  let indice;
+  try{ indice = await carregarIndiceEGW(); }
+  catch(e){
+    container.querySelector('.bible-wrap').innerHTML = `<p class="cmt-vazio">${t('bible.bibliotecaFalhou')}</p>`;
+    return;
+  }
+
+  const cartoes = indice.livros.map(l => `
+    <button class="egw-card" onclick="abrirLivroEGW('${l.id}')">
+      <span class="egw-card-nome">${escaparHtml(l.titulo)}</span>
+      <span class="egw-card-meta">${l.ano} · ${l.capitulos} ${t('bible.capitulos')}</span>
+    </button>`).join('');
+
+  container.querySelector('.bible-wrap').innerHTML =
+    `<div class="testament-label">${escaparHtml(indice.serie)}</div><div class="egw-cards">${cartoes}</div>`
+    + (ultimoEGW ? `<button class="egw-continuar" onclick="abrirCapituloEGW('${ultimoEGW.id}', ${ultimoEGW.capitulo})">${t('bible.continuarLeitura')} · ${escaparHtml(ultimoEGW.resumo)}</button>` : '');
+}
+
+async function abrirLivroEGW(id){
+  const container = document.getElementById('bible-container');
+  if(!container) return;
+  egwState = { livro: id, capitulo: null };
+  container.dataset.view = 'egw-livro';
+  container.innerHTML = `<div class="bible-wrap"><p class="cmt-vazio">${t('admin.carregando')}</p></div>`;
+  let livro;
+  try{ livro = await carregarLivroEGW(id); }
+  catch(e){
+    container.innerHTML = `<div class="bible-wrap"><p class="cmt-vazio">${t('bible.bibliotecaFalhou')}</p></div>`;
+    return;
+  }
+  const lista = livro.capitulos.map((c,i) => `
+    <button class="egw-cap" onclick="abrirCapituloEGW('${id}', ${i})">
+      <span class="egw-cap-num">${i+1}</span>
+      <span class="egw-cap-tit">${escaparHtml(c.t)}</span>
+    </button>`).join('');
+  container.innerHTML = `<div class="bible-crumb"><button onclick="renderBiblioteca()">← ${t('bible.biblioteca')}</button></div>
+    <div class="bible-header"><h1>${escaparHtml(livro.titulo)}</h1><p>${livro.capitulos.length} ${t('bible.capitulos')}</p></div>
+    <div class="bible-wrap"><div class="egw-caps">${lista}</div></div>`;
+  window.scrollTo(0,0);
+}
+
+async function abrirCapituloEGW(id, indice){
+  const container = document.getElementById('bible-container');
+  if(!container) return;
+  hideAllViews();
+  container.style.display = 'block';
+  document.getElementById('tab-bible').classList.add('active');
+  let livro;
+  try{ livro = await carregarLivroEGW(id); }
+  catch(e){
+    container.innerHTML = `<div class="bible-wrap"><p class="cmt-vazio">${t('bible.bibliotecaFalhou')}</p></div>`;
+    return;
+  }
+  const cap = livro.capitulos[indice];
+  if(!cap) return;
+  egwState = { livro: id, capitulo: indice };
+  container.dataset.view = 'egw-capitulo';
+  // Cada parágrafo termina com a referência oficial de citação ("DTN 9.1").
+  // Ela serve para citar, mas atrapalha a leitura: fica pequena e apagada.
+  const corpo = cap.p.map(par => {
+    const m = String(par).match(/^(.*?)\s([A-ZÁ-Ú]{2,4}\s?\d+\.\d+)\s*$/);
+    return m
+      ? `<p>${escaparHtml(m[1])}<span class="egw-ref">${escaparHtml(m[2])}</span></p>`
+      : `<p>${escaparHtml(par)}</p>`;
+  }).join('');
+  const anterior = indice > 0 ? `<button class="egw-nav" onclick="abrirCapituloEGW('${id}', ${indice-1})">← ${t('bible.anterior')}</button>` : '<span></span>';
+  const proximo = indice < livro.capitulos.length-1 ? `<button class="egw-nav" onclick="abrirCapituloEGW('${id}', ${indice+1})">${t('bible.proximo')} →</button>` : '<span></span>';
+  container.innerHTML = `<div class="bible-crumb">
+      <button onclick="abrirLivroEGW('${id}')">← ${escaparHtml(livro.titulo)}</button>
+    </div>
+    <div class="bible-wrap egw-leitura">
+      <h2>${escaparHtml(cap.t)}</h2>
+      <div class="egw-texto">${corpo}</div>
+      <div class="egw-rodape">${anterior}${proximo}</div>
+    </div>`;
+  window.scrollTo(0,0);
+  await guardarUltimoEGW(id, indice, `${livro.titulo} · ${t('bible.cap')} ${indice+1}`);
 }
 
 function bibleCrumbHtml(book){
@@ -5193,13 +5406,20 @@ function jumpToBibleChapter(bookId, chapter){
   window.scrollTo(0,0);
 }
 
-function goBible(){
+async function goBible(){
   hideAllViews();
   document.getElementById('bible-container').style.display = 'block';
   document.getElementById('tab-bible').classList.add('active');
   bibleState = {book:null, chapter:null, returnTo:'read'};
   renderBibleBooks();
   window.scrollTo(0,0);
+  // Os tres cartoes do topo dizem em que pe esta cada coisa; estes dados
+  // chegam do disco, entao o desenho sai primeiro e eles entram logo apos.
+  await loadActiveBiblePlan();
+  if (activeBiblePlan && BIBLE_PLANS[activeBiblePlan]) await loadPlanProgress(activeBiblePlan);
+  await carregarUltimoEGW();
+  const hub = document.querySelector('#bible-container .hub-cards');
+  if (hub) hub.outerHTML = bibleSubtabsHTML('read');
 }
 
 const BOOK_CATEGORY = {
@@ -5414,6 +5634,17 @@ const UI_STRINGS = {
     'comments.comentar': 'Comentar',
     'comments.enviando': 'Enviando…',
     'comments.rotulo': 'Comentários',
+    'bible.biblioteca': 'Biblioteca',
+    'bible.bibliotecaSub': 'Livros de Ellen G. White, com o texto conferido com o original.',
+    'bible.hubBiblia': '66 livros · Antigo e Novo Testamento',
+    'bible.hubPlanoVazio': 'Escolha um plano de leitura',
+    'bible.hubBiblioteca': 'Ellen G. White · 5 livros',
+    'bible.bibliotecaFalhou': 'Não foi possível abrir a biblioteca agora. Tente de novo em instantes.',
+    'bible.continuarLeitura': 'Continuar',
+    'bible.capitulos': 'capítulos',
+    'bible.cap': 'cap.',
+    'bible.anterior': 'Anterior',
+    'bible.proximo': 'Próximo',
     'acoes.curtir': 'Curtir',
     'acoes.curtirMinusculo': 'curtir',
     'acoes.curtirComentario': 'Curtir comentário',
@@ -5740,6 +5971,17 @@ const UI_STRINGS = {
     'comments.comentar': 'Comment',
     'comments.enviando': 'Sending…',
     'comments.rotulo': 'Comments',
+    'bible.biblioteca': 'Library',
+    'bible.bibliotecaSub': 'Ellen G. White books, with the text checked against the original.',
+    'bible.hubBiblia': '66 books · Old and New Testament',
+    'bible.hubPlanoVazio': 'Pick a reading plan',
+    'bible.hubBiblioteca': 'Ellen G. White · 5 books',
+    'bible.bibliotecaFalhou': 'Could not open the library right now. Try again in a moment.',
+    'bible.continuarLeitura': 'Continue',
+    'bible.capitulos': 'chapters',
+    'bible.cap': 'ch.',
+    'bible.anterior': 'Previous',
+    'bible.proximo': 'Next',
     'acoes.curtir': 'Like',
     'acoes.curtirMinusculo': 'like',
     'acoes.curtirComentario': 'Like comment',
@@ -6066,6 +6308,17 @@ const UI_STRINGS = {
     'comments.comentar': 'Comentar',
     'comments.enviando': 'Enviando…',
     'comments.rotulo': 'Comentarios',
+    'bible.biblioteca': 'Biblioteca',
+    'bible.bibliotecaSub': 'Libros de Elena G. de White, con el texto cotejado con el original.',
+    'bible.hubBiblia': '66 libros · Antiguo y Nuevo Testamento',
+    'bible.hubPlanoVazio': 'Elige un plan de lectura',
+    'bible.hubBiblioteca': 'Elena G. de White · 5 libros',
+    'bible.bibliotecaFalhou': 'No se pudo abrir la biblioteca ahora. Inténtalo de nuevo en un momento.',
+    'bible.continuarLeitura': 'Continuar',
+    'bible.capitulos': 'capítulos',
+    'bible.cap': 'cap.',
+    'bible.anterior': 'Anterior',
+    'bible.proximo': 'Siguiente',
     'acoes.curtir': 'Me gusta',
     'acoes.curtirMinusculo': 'dar me gusta',
     'acoes.curtirComentario': 'Me gusta el comentario',
