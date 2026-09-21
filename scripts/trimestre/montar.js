@@ -73,7 +73,18 @@ for (const id of ids) {
       d.quiz = { answers, questions };
 
       if (!f.tf || f.tf.length !== 4) erro(`${id}/${dia}: V/F precisa de 4 itens`);
-      d.tf = { answers: (f.tf || []).map(x => x[1]), items: (f.tf || []).map(x => x[0]) };
+      // O app NAO embaralha o V/F na tela. Escrevendo a mao a gente tende a
+      // alternar (V F V F), e isso vira um padrao que da para chutar. Aqui a
+      // ordem sai de um padrao que muda de dia para dia e nunca alterna.
+      const PADROES = ['VVFF', 'FVVF', 'VFFV', 'FFVV', 'VFFV', 'FVVF'];
+      const vs = (f.tf || []).filter(x => x[1] === 'V'), fs_ = (f.tf || []).filter(x => x[1] === 'F');
+      let ordenado = f.tf || [];
+      if (vs.length === 2 && fs_.length === 2) {
+        const padrao = PADROES[(iDia + Number(id)) % PADROES.length];
+        const filaV = [...vs], filaF = [...fs_];
+        ordenado = [...padrao].map(c => c === 'V' ? filaV.shift() : filaF.shift());
+      } else erro(`${id}/${dia}: V/F precisa de 2 verdadeiros e 2 falsos (tem ${vs.length} V e ${fs_.length} F)`);
+      d.tf = { answers: ordenado.map(x => x[1]), items: ordenado.map(x => x[0]) };
       d.tf.answers.forEach(a => { if (a === 'V') tfV++; else if (a === 'F') tfF++; else erro(`${id}/${dia}: V/F invalido "${a}"`); });
     }
     saida.days[dia] = d;
