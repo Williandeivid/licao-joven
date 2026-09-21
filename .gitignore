@@ -15,3 +15,7 @@ Thumbs.db
 # cada um com seu proprio .gitignore pros artefatos de build deles.
 node_modules/
 www/
+
+# Credenciais do Firebase por plataforma (login nativo) - nunca versionar
+android/app/google-services.json
+ios/App/App/GoogleService-Info.plist

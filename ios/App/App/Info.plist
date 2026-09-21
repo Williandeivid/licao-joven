@@ -66,5 +66,21 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<!-- Login com Google nativo (@capacitor-firebase/authentication): troque
+	     "com.googleusercontent.apps.SUBSTITUA-PELO-REVERSED-CLIENT-ID" pelo
+	     valor REVERSED_CLIENT_ID de dentro do GoogleService-Info.plist (que
+	     precisa existir em ios/App/App/GoogleService-Info.plist - baixe no
+	     Firebase Console depois de registrar o app iOS com o bundle ID
+	     com.licaojovemiasd.app). Sem isso, o botao de login nativo no iOS
+	     nao retorna pro app depois de escolher a conta Google. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.SUBSTITUA-PELO-REVERSED-CLIENT-ID</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

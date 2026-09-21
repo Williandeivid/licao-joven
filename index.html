@@ -10,6 +10,27 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<!-- Ponte de login nativo (Android/iOS via Capacitor) - o mapa de import so
+     e' usado por esses arquivos gerados dentro de www/vendor/ (ver
+     `npm run build:www`); na versao web normal esses arquivos nao existem
+     e o bloco abaixo nunca executa (window.Capacitor nao existe fora do
+     app nativo), entao o login continua 100% pelo signInWithPopup/Redirect
+     mais abaixo, sem depender de nada disto. -->
+<script type="importmap">
+{"imports": {"@capacitor/core": "./vendor/capacitor-core.esm.js"}}
+</script>
+<script>
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    import('./vendor/capacitor-firebase-authentication/index.js').then(m => {
+      window.__signInWithGoogleNative = async () => {
+        const result = await m.FirebaseAuthentication.signInWithGoogle();
+        const idToken = result && result.credential && result.credential.idToken;
+        if (!idToken) throw new Error('Login nativo nao retornou idToken.');
+        return idToken;
+      };
+    }).catch(e => console.error('❌ Nao carregou a ponte de login nativo:', e));
+  }
+</script>
 <script>
   /* ===================================================================
      CONFIGURACAO DO FIREBASE
@@ -8848,6 +8869,23 @@ function initFirebaseAuth() {
 async function loginWithGoogle() {
   if (!firebaseAuthReady) {
     alert('O login ainda nao esta configurado.\n\nFalta colar a apiKey do Firebase no topo do arquivo (firebaseConfig).');
+    return;
+  }
+  // Dentro do app Android/iOS (Capacitor), signInWithPopup/Redirect nao
+  // funciona de forma confiavel em webview nativa - usa o plugin nativo
+  // pra pegar o idToken do Google e entra na mesma sessao do SDK web
+  // (firebase.auth()) via signInWithCredential, mantendo currentUser/
+  // getAuthToken/etc. exatamente iguais ao fluxo web de sempre.
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    try {
+      if (!window.__signInWithGoogleNative) throw new Error('Login nativo ainda nao carregou - tente de novo em instantes.');
+      const idToken = await window.__signInWithGoogleNative();
+      const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+      await firebase.auth().signInWithCredential(credential);
+    } catch(e) {
+      alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
+      console.error('❌ Erro no login nativo:', e);
+    }
     return;
   }
   const provider = new firebase.auth.GoogleAuthProvider();
