@@ -8,3 +8,10 @@ index.html.pre-*
 *.log
 .DS_Store
 Thumbs.db
+
+# Capacitor (apps Android/iOS) - node_modules e www/ sao gerados;
+# rode `npm run build:www` (ou `npm run cap:sync`) pra recriar www/.
+# android/ e ios/ SAO versionados (tem config nativa editada nas IDEs),
+# cada um com seu proprio .gitignore pros artefatos de build deles.
+node_modules/
+www/
