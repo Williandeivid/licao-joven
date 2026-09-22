@@ -2021,6 +2021,24 @@ function hashStr(s){
   for(let i=0;i<s.length;i++){ h = (Math.imul(31,h) + s.charCodeAt(i)) | 0; }
   return h>>>0;
 }
+// O 3o trimestre usa Fácil/Intermediária/Avançada; o 4o, Fácil/Média/Difícil
+// e as "Bíblica · ...". A cor segue o nível, e o rótulo segue o idioma - a
+// tradução não traz a dificuldade, então ela vem do português e é traduzida aqui.
+const DIFICULDADES = {
+  'Fácil':                   { classe:'facil',    en:'Easy',                es:'Fácil' },
+  'Média':                   { classe:'inter',    en:'Medium',              es:'Media' },
+  'Intermediária':           { classe:'inter',    en:'Intermediate',        es:'Intermedia' },
+  'Difícil':                 { classe:'avancada', en:'Hard',                es:'Difícil' },
+  'Avançada':                { classe:'avancada', en:'Advanced',            es:'Avanzada' },
+  'Bíblica · Intermediária': { classe:'inter',    en:'Bible · Intermediate', es:'Bíblica · Intermedia' },
+  'Bíblica · Difícil':       { classe:'avancada', en:'Bible · Hard',        es:'Bíblica · Difícil' }
+};
+function nivelDaDificuldade(diff){
+  const d = DIFICULDADES[diff];
+  if (!d) return { classe:'avancada', rotulo: diff || '' };
+  return { classe: d.classe, rotulo: idiomaConteudoAtual === 'pt' ? diff : (d[idiomaConteudoAtual] || diff) };
+}
+
 function shuffleOptions(opts, correctLetter, seed){
   const idx = opts.map((o,i)=>i);
   const correctIdx = correctLetter.charCodeAt(0)-65;
@@ -2195,8 +2213,8 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
       <h3>${t('lesson.quizMultiplaEscolha')}</h3>
       <div class="quiz-timer"><svg class="timer-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg><span>${t('lesson.tempoDoisPontos')}<span class="tval" data-timer>${savedQuiz ? formatTime(savedQuiz.time) : '00:00'}</span></span></div>`;
     day.quiz.questions.forEach((q, i)=>{
-      const diffClass = q.diff==='Fácil'?'diff-facil':(q.diff==='Intermediária'?'diff-inter':'diff-avancada');
-      html += `<div class="q-block" data-q="${i+1}"><span class="diff ${diffClass}">${q.diff}</span>
+      const nivel = nivelDaDificuldade(q.diff);
+      html += `<div class="q-block" data-q="${i+1}"><span class="diff diff-${nivel.classe}">${nivel.rotulo}</span>
         <div class="q-text">${i+1}. ${(q.text || '').replace(/^\d+[\.\)]\s*/, '')}</div>
         <div class="options">${shuffledQ[i].opts.map((o,oi)=>`<button class="opt ${kahootClasses[oi]}" data-v="${String.fromCharCode(65+oi)}">${o}</button>`).join('')}</div>
       </div>`;

@@ -9492,5 +9492,736 @@
         ]
       }
     ]
+  },
+  {
+    "id": 14,
+    "title": "El Creador habla",
+    "keyword": "VOZ",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Comunicación en el Edén",
+        "summary": "Dios creó al ser humano para una comunión directa con Él y con el prójimo. El pecado interrumpió esa conversación cara a cara, y el Señor comenzó a hablar por medio de profetas.",
+        "body": [
+          "<p>Génesis 1 y 2 muestran que los seres humanos fueron hechos para una relación directa con el Creador y entre sí. De todas las criaturas, solo ellos fueron hechos “a imagen de Dios” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"1\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Gén. 1:27</span><span class=\"vref-pop\"></span>): creados para amar y caminar en comunión con el Señor. Al formar a Eva porque “no es bueno que el hombre esté solo” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"2\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Gén. 2:18</span><span class=\"vref-pop\"></span>), Dios estableció la familia como la primera institución humana, que se convertiría en uno de los blancos favoritos de Satanás.</p>",
+          "<p>En el Edén, la comunicación era diaria: Adán y Eva se encontraban con el Creador “al aire del día” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Gén. 3:8</span><span class=\"vref-pop\"></span>). El sábado, apartado desde la creación (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"2\" data-v1=\"2\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Gén. 2:2, 3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"EXO\" data-chapter=\"20\" data-v1=\"8\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Éx. 20:8-11</span><span class=\"vref-pop\"></span>), era un tiempo aún más especial de esa comunión, en el que nuestros primeros padres experimentaban de forma única el amor y el cuidado de Dios.</p>",
+          "<p>Con la caída, todo cambió: la tierra comenzó a producir espinos, el trabajo se volvió pesado y la muerte entró en la historia (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"18\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Gén. 3:18, 19</span><span class=\"vref-pop\"></span>). La pérdida más profunda fue la de la conversación cara a cara con Dios. Para restaurar esa comunicación, el Señor comenzó a hablar por medio de profetas, Sus mensajeros: algunos de sus escritos se conservaron en la Biblia; otros no llegaron hasta nosotros.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Si fuiste creado para conversar con Dios todos los días, ¿qué cambiaría en tu rutina a partir de hoy?",
+          "¿Por qué crees que Satanás apunta justamente a la familia, la primera institución que Dios creó?",
+          "¿Cómo puede el sábado ser, para ti, una cita con Dios y no solo un día de reglas?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Génesis 3",
+                "Éxodo 20",
+                "Isaías 6",
+                "Juan 10"
+              ]
+            },
+            {
+              "text": "Según Génesis 1:27, ¿qué distingue a los seres humanos de las demás criaturas?",
+              "opts": [
+                "Fueron creados antes que los animales",
+                "Fueron hechos a imagen de Dios",
+                "No necesitan descanso",
+                "Viven para siempre"
+              ]
+            },
+            {
+              "text": "¿Por qué creó Dios a Eva, según Génesis 2:18?",
+              "opts": [
+                "Para poner nombre a los animales",
+                "Para vigilar el árbol prohibido",
+                "Porque no era bueno que el hombre estuviera solo",
+                "Para cultivar el huerto en lugar de Adán"
+              ]
+            },
+            {
+              "text": "¿Cuál fue la primera institución social humana, según la lección?",
+              "opts": [
+                "La iglesia",
+                "El gobierno",
+                "La escuela",
+                "La familia"
+              ]
+            },
+            {
+              "text": "¿En qué momento del día Adán y Eva se encontraban con el Creador (Gén. 3:8)?",
+              "opts": [
+                "Al aire del día",
+                "Al salir el sol",
+                "A medianoche",
+                "Solo una vez al año"
+              ]
+            },
+            {
+              "text": "¿Cuál fue la pérdida más profunda causada por el pecado, según la lección?",
+              "opts": [
+                "El huerto, en ese mismo instante",
+                "La comunicación cara a cara con Dios",
+                "La capacidad de hablar",
+                "El sábado"
+              ]
+            },
+            {
+              "text": "Según Génesis 3:18, ¿qué comenzó a producir la tierra después de la caída?",
+              "opts": [
+                "Solo frutos dulces",
+                "Oro y piedras preciosas",
+                "Espinos y cardos",
+                "Nada más"
+              ]
+            },
+            {
+              "text": "¿Qué textos cita la lección para mostrar el sábado apartado desde la creación?",
+              "opts": [
+                "Gén. 12:1-3 y Éx. 3:5",
+                "Sal. 23:1 y Juan 3:16",
+                "Apoc. 14:7 y Mat. 5:17",
+                "Gén. 2:2, 3 y Éx. 20:8-11"
+              ]
+            },
+            {
+              "text": "Según Génesis 3:19, ¿cuál sería el destino del ser humano después de la caída?",
+              "opts": [
+                "Volver al polvo",
+                "Vivir para siempre en el Edén",
+                "Ser como los ángeles",
+                "Gobernar a la serpiente"
+              ]
+            },
+            {
+              "text": "¿Cómo comenzó Dios a restaurar la comunicación con la humanidad, según la lección?",
+              "opts": [
+                "Solo por medio de sueños",
+                "Por medio de profetas, Sus mensajeros",
+                "Solo por medio de la naturaleza",
+                "Dejó de comunicarse"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Según Génesis 1:27, solo los seres humanos fueron creados a imagen de Dios.",
+            "Adán y Eva se encontraban con Dios solo una vez al año.",
+            "Todos los mensajes de los profetas se conservaron en la Biblia.",
+            "El sábado fue apartado como parte del acto creador de Dios."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Escondiéndose de Dios",
+        "summary": "Porque es amor, Dios creó personas libres para elegir. Engañados por Satanás, Adán y Eva desobedecieron, perdieron su manto de luz e intentaron esconderse: la culpa siempre nos aleja de Él.",
+        "body": [
+          "<p>Dios es amor (<span class=\"vref\" data-book=\"1JN\" data-chapter=\"4\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">1 Juan 4:8</span><span class=\"vref-pop\"></span>), y el amor verdadero no se impone: por eso Adán y Eva fueron creados libres, capaces de obedecer o de desobedecer. La misma prohibición del árbol del conocimiento del bien y del mal (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"2\" data-v1=\"15\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Gén. 2:15-17</span><span class=\"vref-pop\"></span>) lo muestra: nadie advierte a quien no tiene opción. Elena G. de White lo resume: sin libertad de elección, su obediencia “no habría sido voluntaria, sino forzada” (Patriarcas y profetas).</p>",
+          "<p>En Génesis 3, la serpiente usó palabras, emociones y atractivos. Eva vio que el árbol era “bueno para comer”, “agradable a los ojos” y “codiciable para alcanzar la sabiduría” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Gén. 3:6</span><span class=\"vref-pop\"></span>), y la promesa de ser “como Dios” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"5\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Gén. 3:5</span><span class=\"vref-pop\"></span>) le pareció irresistible. Lo que Satanás ocultó fueron las consecuencias.</p>",
+          "<p>En cuanto desobedecieron, se les abrieron los ojos y se dieron cuenta de que estaban desnudos (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Gén. 3:7</span><span class=\"vref-pop\"></span>): el manto de luz que reflejaba la gloria divina (<span class=\"vref\" data-book=\"PSA\" data-chapter=\"104\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Sal. 104:1, 2</span><span class=\"vref-pop\"></span>) había desaparecido. Entonces intentaron esconderse del Creador, como si eso fuera posible (<span class=\"vref\" data-book=\"JER\" data-chapter=\"23\" data-v1=\"24\" data-v2=\"24\" onclick=\"toggleVerseLive(this)\">Jer. 23:24</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"HEB\" data-chapter=\"4\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Heb. 4:13</span><span class=\"vref-pop\"></span>). Eso hace el pecado: nos llena de culpa y nos hace huir justamente de Aquel que puede restaurarnos.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué Adán y Eva intentaron esconderse de Dios después de desobedecer? Compara Génesis 3:1-8 con Jeremías 23:24 y Hebreos 4:13.",
+          "¿Qué “atractivos” usa hoy la tentación para parecer irresistible en tu vida?",
+          "Cuando te equivocas, ¿tiendes a correr hacia Dios o a esconderte de Él? ¿Por qué?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué texto usa la lección para afirmar que Dios es amor?",
+              "opts": [
+                "Juan 3:16",
+                "1 Juan 4:8",
+                "Romanos 8:28",
+                "Salmo 23:1"
+              ]
+            },
+            {
+              "text": "¿Por qué Dios no creó a los seres humanos como “robots”?",
+              "opts": [
+                "Porque los robots no pueden trabajar",
+                "Porque quería que se equivocaran",
+                "Porque el amor verdadero exige libertad de elección",
+                "Porque no había tiempo en la creación"
+              ]
+            },
+            {
+              "text": "¿De qué árbol prohibió Dios a Adán y Eva comer?",
+              "opts": [
+                "Del árbol de la vida",
+                "Del olivo del huerto",
+                "De la higuera",
+                "Del árbol del conocimiento del bien y del mal"
+              ]
+            },
+            {
+              "text": "Según Elena G. de White, ¿cómo sería su obediencia sin libertad de elección?",
+              "opts": [
+                "Forzada, y no voluntaria",
+                "Perfecta",
+                "Más fácil",
+                "Más duradera"
+              ]
+            },
+            {
+              "text": "¿Qué promesa de Satanás le pareció irresistible a Eva (Gén. 3:5)?",
+              "opts": [
+                "Que nunca envejecerían",
+                "Que serían como Dios, conocedores del bien y del mal",
+                "Que gobernarían a los ángeles",
+                "Que tendrían riquezas"
+              ]
+            },
+            {
+              "text": "¿Qué perdieron Adán y Eva justo después de desobedecer, según la lección?",
+              "opts": [
+                "La capacidad de hablar",
+                "El recuerdo del huerto",
+                "El manto de luz y gloria que Dios les había dado",
+                "El derecho a trabajar"
+              ]
+            },
+            {
+              "text": "Según Génesis 3:6, ¿cómo vio Eva el árbol?",
+              "opts": [
+                "Aterrador y oscuro",
+                "Pequeño y sin frutos",
+                "Igual a todos los demás",
+                "Bueno para comer, agradable a los ojos y codiciable para alcanzar la sabiduría"
+              ]
+            },
+            {
+              "text": "¿Qué texto cita la lección sobre el manto de luz que reflejaba la gloria de Dios?",
+              "opts": [
+                "Salmo 104:1, 2",
+                "Isaías 53:5",
+                "Mateo 6:33",
+                "Génesis 12:1"
+              ]
+            },
+            {
+              "text": "¿Qué textos muestran que es imposible esconderse de Dios?",
+              "opts": [
+                "Proverbios 3:5 y Filipenses 4:13",
+                "Jeremías 23:24 y Hebreos 4:13",
+                "Génesis 1:1 y Juan 1:1",
+                "Salmo 1:1 y Mateo 5:3"
+              ]
+            },
+            {
+              "text": "¿Qué libro de Elena G. de White cita la lección sobre la libertad de nuestros primeros padres?",
+              "opts": [
+                "El conflicto de los siglos",
+                "El camino a Cristo",
+                "Patriarcas y profetas",
+                "La educación"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Satanás le contó a Eva todas las consecuencias de la desobediencia.",
+            "La culpa del pecado nos acerca naturalmente a Dios.",
+            "La prohibición de un árbol muestra que Adán y Eva eran libres para desobedecer.",
+            "Después de pecar, Adán y Eva se dieron cuenta de que estaban desnudos."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Dios busca a la humanidad",
+        "summary": "Después de la caída, fue Dios quien tomó la iniciativa: “¿Dónde estás?”. Mientras Adán y Eva se culpaban mutuamente, el Señor seguía buscándolos, y sigue buscándonos para llevarnos a Jesús.",
+        "body": [
+          "<p>En Génesis 3:9 y 10, es Dios quien va tras Sus hijos caídos con la pregunta “¿Dónde estás?”. Él sabía exactamente dónde estaban; la pregunta era una invitación a retomar el diálogo. El verbo hebreo qara, traducido como “llamar”, aparece muchas veces para describir el llamado de Dios a Su pueblo. Y Él sigue haciéndolo: después de que Pedro lo negara tres veces, Jesús “se volvió y miró” a Pedro (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"22\" data-v1=\"61\" data-v2=\"61\" onclick=\"toggleVerseLive(this)\">Luc. 22:61</span><span class=\"vref-pop\"></span>); sin decir nada, buscaba a Su amigo.</p>",
+          "<p>El pecado también sacudió la relación de la pareja. Adán culpó a Eva e, indirectamente, a Dios mismo: “La mujer que me diste por compañera me dio del árbol” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Gén. 3:12</span><span class=\"vref-pop\"></span>). Eva culpó a la serpiente (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Gén. 3:13</span><span class=\"vref-pop\"></span>). Nadie asumió su propia culpa, y poco ha cambiado en seis mil años.</p>",
+          "<p>Pablo describe esa lucha con honestidad: “lo que aborrezco, eso hago” (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"7\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Rom. 7:15</span><span class=\"vref-pop\"></span>). La única salida es la liberación “por Jesucristo Señor nuestro” (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"7\" data-v1=\"25\" data-v2=\"25\" onclick=\"toggleVerseLive(this)\">Rom. 7:25</span><span class=\"vref-pop\"></span>). Por eso Dios sigue buscándonos, como el padre de la parábola del hijo pródigo (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"15\" data-v1=\"11\" data-v2=\"32\" onclick=\"toggleVerseLive(this)\">Luc. 15:11-32</span><span class=\"vref-pop\"></span>): para llevarnos a Jesús, el único que puede restaurarnos a Su imagen.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿De qué maneras Dios ya fue tras de ti para llamar tu atención y traerte de vuelta?",
+          "¿Por qué es mucho más fácil culpar a otro que asumir el propio error?",
+          "¿Cómo ayuda la parábola del hijo pródigo (Luc. 15:11-32) a entender la pregunta de Dios en Génesis 3:9?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué pregunta le hizo Dios a Adán en Génesis 3:9?",
+              "opts": [
+                "“¿Por qué hiciste esto?”",
+                "“¿Quién eres?”",
+                "“¿Dónde estás?”",
+                "“¿Qué comiste?”"
+              ]
+            },
+            {
+              "text": "¿Quién tomó la iniciativa de restablecer la comunicación después de la caída?",
+              "opts": [
+                "Adán",
+                "Eva",
+                "La serpiente",
+                "Dios"
+              ]
+            },
+            {
+              "text": "¿Qué verbo hebreo, traducido como “llamar”, destaca la lección?",
+              "opts": [
+                "Qara",
+                "Shalom",
+                "Hesed",
+                "Torah"
+              ]
+            },
+            {
+              "text": "¿A quién culpó Adán por lo que hizo?",
+              "opts": [
+                "A la serpiente",
+                "A la mujer e, indirectamente, a Dios",
+                "A sí mismo",
+                "A los ángeles"
+              ]
+            },
+            {
+              "text": "¿Qué hizo Jesús después de que Pedro lo negara tres veces (Luc. 22:61)?",
+              "opts": [
+                "Despidió a Pedro",
+                "Fingió no haberlo visto",
+                "Se volvió y lo miró",
+                "Pidió que lo arrestaran"
+              ]
+            },
+            {
+              "text": "¿Por qué se dice que la pregunta de Dios a Adán es retórica?",
+              "opts": [
+                "Porque Dios no sabía la respuesta",
+                "Porque Adán no podía responder",
+                "Porque era una orden disfrazada",
+                "Porque Dios ya sabía dónde estaban y lo que habían hecho"
+              ]
+            },
+            {
+              "text": "Según Génesis 3:13, ¿a quién culpó Eva?",
+              "opts": [
+                "A la serpiente",
+                "A Adán",
+                "A Dios",
+                "A sí misma"
+              ]
+            },
+            {
+              "text": "Según Romanos 7:15, ¿qué angustia describe Pablo?",
+              "opts": [
+                "No tener recursos para viajar",
+                "Hacer lo que aborrece en lugar de lo que quiere",
+                "No ser escuchado por las iglesias",
+                "No conocer la ley"
+              ]
+            },
+            {
+              "text": "Según Romanos 7:25, ¿cuál es nuestra esperanza de liberación?",
+              "opts": [
+                "Nuestros propios esfuerzos",
+                "La ley de Moisés",
+                "Jesucristo, Señor nuestro",
+                "El paso del tiempo"
+              ]
+            },
+            {
+              "text": "¿Qué parábola usa la lección para entender Génesis 3:9 y 10?",
+              "opts": [
+                "El sembrador",
+                "El buen samaritano",
+                "Las diez vírgenes",
+                "El hijo pródigo"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El verbo hebreo qara se usa con frecuencia para el llamado de Dios a Su pueblo.",
+            "Después de la caída, fue Adán quien buscó primero a Dios.",
+            "Adán y Eva asumieron de inmediato su propia culpa.",
+            "Dios sigue buscándonos para llevarnos a Jesús."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Tres voces de Dios",
+        "summary": "Desde la caída, Dios nunca se ha quedado en silencio: habla por medio de la naturaleza, de los profetas y las Escrituras y, sobre todo, en Jesús, la revelación más completa del corazón del Padre.",
+        "body": [
+          "<p>Desde que entró el pecado, Dios nunca dejó a la humanidad sin testimonio. La naturaleza habla: el orden del universo, la belleza de la creación y la complejidad de la vida apuntan a un Creador sabio, poderoso y bondadoso (<span class=\"vref\" data-book=\"PSA\" data-chapter=\"19\" data-v1=\"1\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Sal. 19:1-4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ROM\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Rom. 1:19, 20</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>También llamó a hombres y mujeres para transmitir Su mensaje (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"12\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Núm. 12:6</span><span class=\"vref-pop\"></span>). Inspirados por Dios, trajeron advertencias, promesas, consuelo y dirección, y mucho de eso se conservó en las Escrituras, que siguen siendo una fuente segura de verdad y orientación para la vida (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16, 17</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Sobre todo, Dios se reveló en Jesús. Cristo no solo habló de Dios: mostró quién es Dios. “El que me ha visto a mí, ha visto al Padre” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"14\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Juan 14:9</span><span class=\"vref-pop\"></span>). Por eso, oír la voz del Buen Pastor y seguirlo (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"10\" data-v1=\"27\" data-v2=\"30\" onclick=\"toggleVerseLive(this)\">Juan 10:27-30</span><span class=\"vref-pop\"></span>) es conocer la revelación más completa del corazón del Padre (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Heb. 1:1, 2</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿En cuál de estas voces —naturaleza, Escrituras o Jesús— percibes más a Dios hablándote hoy?",
+          "Si armaras un mapa mental con la palabra “Comunicación” en el centro, ¿qué le conectarías después de esta semana?",
+          "¿Por qué se dice que la revelación de Dios en Jesús es “suprema”?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿cuál es la revelación más plena de Dios?",
+              "opts": [
+                "La naturaleza",
+                "Los sueños",
+                "La tradición de la iglesia",
+                "Jesucristo"
+              ]
+            },
+            {
+              "text": "¿Qué salmo muestra que los cielos cuentan la gloria de Dios?",
+              "opts": [
+                "Salmo 19",
+                "Salmo 23",
+                "Salmo 51",
+                "Salmo 119"
+              ]
+            },
+            {
+              "text": "Además de la naturaleza, ¿por medio de quién transmitió Dios Su mensaje?",
+              "opts": [
+                "Solo de reyes",
+                "De hombres y mujeres llamados como profetas",
+                "Solo de sacerdotes",
+                "De filósofos griegos"
+              ]
+            },
+            {
+              "text": "Según 2 Timoteo 3:16, 17, ¿para qué sirve la Escritura inspirada?",
+              "opts": [
+                "Solo para contar historias antiguas",
+                "Para guardarla sin leerla",
+                "Para enseñar, redargüir, corregir e instruir en justicia",
+                "Para reemplazar la oración"
+              ]
+            },
+            {
+              "text": "¿Qué afirma la lección sobre Jesús y la revelación de Dios?",
+              "opts": [
+                "Habló menos que los profetas",
+                "Reveló solo la ley",
+                "No reveló al Padre",
+                "Mostró quién es Dios, y no solo habló de Él"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Romanos muestra que Dios se revela por medio de la creación?",
+              "opts": [
+                "Romanos 1:19, 20",
+                "Romanos 3:23",
+                "Romanos 6:23",
+                "Romanos 12:1"
+              ]
+            },
+            {
+              "text": "¿Qué afirma Jesús en Juan 14:9?",
+              "opts": [
+                "“Yo soy la vid”",
+                "“El que me ha visto a mí, ha visto al Padre”",
+                "“Yo soy el pan de vida”",
+                "“Consumado es”"
+              ]
+            },
+            {
+              "text": "Según Números 12:6, ¿cómo se revelaba Dios a los profetas?",
+              "opts": [
+                "Solo por escrito",
+                "Por sorteo",
+                "En visiones y en sueños",
+                "Solo por la voz de ángeles"
+              ]
+            },
+            {
+              "text": "Según Juan 10:27, ¿qué hacen las ovejas de Jesús?",
+              "opts": [
+                "Huyen al oír Su voz",
+                "Se quedan quietas en el redil",
+                "Siguen cualquier voz",
+                "Oyen Su voz y lo siguen"
+              ]
+            },
+            {
+              "text": "Según Hebreos 1:1, 2, ¿por medio de quién habló Dios “en estos postreros días”?",
+              "opts": [
+                "Por el Hijo",
+                "Por los ángeles",
+                "Por los reyes",
+                "Por los jueces"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Después del pecado, Dios dejó a la humanidad sin testimonio.",
+            "La naturaleza es una de las formas en que Dios sigue hablando.",
+            "Hebreos 1:1, 2 dice que Dios habló antes por los profetas y ahora por el Hijo.",
+            "Según la lección, Jesús solo habló de Dios, sin revelar quién es Él."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "Dios todavía habla",
+        "summary": "A pesar del pecado, Dios sigue hablando: por medio de la creación, de los profetas —muchos conservados en la Biblia—, plenamente en Jesús y, después de la ascensión, por medio del Espíritu Santo, que nos guía a toda la verdad.",
+        "body": [
+          "<p>Aun después del pecado, Dios encontró muchas formas de hablar. La creación revela Sus obras y, al mismo tiempo, las consecuencias de la caída. También eligió profetas como portavoces —Noé, Abraham, Moisés, Daniel— para mostrar que no se había olvidado de Sus hijos y seguía a su lado.</p>",
+          "<p>No todo profeta escribió un libro: Enoc, Natán, Hulda y Juan el Bautista, por ejemplo, dejaron mensajes para tiempos y lugares específicos. Pero muchos mensajes se conservaron en las Escrituras para nosotros (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16, 17</span><span class=\"vref-pop\"></span>), y en ellas aprendemos quién es Dios, quiénes somos, de dónde venimos y hacia dónde vamos.</p>",
+          "<p>La forma más plena en que Dios habla es Jesús. Así como buscó a Adán y Eva, Cristo “vino a buscar y a salvar lo que se había perdido” (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"19\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Luc. 19:10</span><span class=\"vref-pop\"></span>) y cumplió la promesa hecha en el Edén (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Gén. 3:15</span><span class=\"vref-pop\"></span>). Después de Su ascensión, el Espíritu Santo sigue guiándonos “a toda la verdad” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"16\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Juan 16:13</span><span class=\"vref-pop\"></span>), incluso por medio de mensajes dados a personas escogidas para Su pueblo (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"21\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Ped. 1:21</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Jesús revela quién es Dios por medio de Su amor y sacrificio. ¿Cómo fortalece tu fe esta verdad?",
+          "¿Por qué Dios elegiría hablar por medio de personas comunes, con defectos, en lugar de usar solo ángeles?",
+          "¿Cómo percibes hoy al Espíritu Santo guiándote “a toda la verdad”?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según Lucas 19:10, ¿para qué vino Cristo?",
+              "opts": [
+                "Para buscar y salvar lo que se había perdido",
+                "Para juzgar a los pecadores",
+                "Para fundar un reino terrenal",
+                "Para terminar la obra de los profetas"
+              ]
+            },
+            {
+              "text": "¿Quién nos guía “a toda la verdad” después de la ascensión de Jesús (Juan 16:13)?",
+              "opts": [
+                "Los ángeles",
+                "El Espíritu Santo",
+                "Los reyes",
+                "Los sacerdotes"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos profetas NO escribió un libro de la Biblia, según la lección?",
+              "opts": [
+                "Isaías",
+                "Jeremías",
+                "Natán",
+                "Daniel"
+              ]
+            },
+            {
+              "text": "¿Qué promesa hecha en el Edén cumplió Jesús?",
+              "opts": [
+                "Génesis 12:3",
+                "Éxodo 20:3",
+                "Salmo 23:1",
+                "Génesis 3:15"
+              ]
+            },
+            {
+              "text": "Además de los profetas, ¿qué otra forma de hablar de Dios menciona la lección al principio?",
+              "opts": [
+                "La creación",
+                "La astrología",
+                "El azar",
+                "Las tradiciones humanas"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué aprendemos por medio de la Biblia?",
+              "opts": [
+                "Solo una lista de reglas",
+                "Quién es Dios, quiénes somos, de dónde venimos y hacia dónde vamos",
+                "Solo la historia de Israel",
+                "La fecha exacta del regreso de Jesús"
+              ]
+            },
+            {
+              "text": "¿Qué texto afirma que toda la Escritura es inspirada por Dios?",
+              "opts": [
+                "Juan 3:16",
+                "Romanos 3:23",
+                "2 Timoteo 3:16, 17",
+                "Gálatas 5:22"
+              ]
+            },
+            {
+              "text": "En Juan 14:9, Jesús dice que quien lo ve…",
+              "opts": [
+                "ve a los ángeles",
+                "ve a Moisés",
+                "ve el templo",
+                "ve al Padre"
+              ]
+            },
+            {
+              "text": "Según 2 Pedro 1:21, ¿cómo se transmitieron los mensajes proféticos?",
+              "opts": [
+                "Hombres hablaron de parte de Dios inspirados por el Espíritu Santo",
+                "Por voluntad humana",
+                "Por sorteo",
+                "Copiados de otros pueblos"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos menciona la lección como portavoz de Dios?",
+              "opts": [
+                "Nabucodonosor",
+                "Noé",
+                "Faraón",
+                "Herodes"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Jesús cumplió la promesa hecha a Adán y Eva en Génesis 3:15.",
+            "La creación revela las obras de Dios y también las consecuencias de la caída.",
+            "Todos los profetas de la Biblia escribieron algún libro.",
+            "El Espíritu Santo dejó de hablar después de la ascensión de Jesús."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Presentando a Elena G. de White",
+        "summary": "La comunicación de Dios no se detuvo en los tiempos bíblicos. Elena Harmon, una niña marcada por un accidente y por el miedo a Dios, descubrió Su amor y lo sirvió durante toda su vida.",
+        "body": [
+          "<p>Elena Gould Harmon (después White) y su hermana gemela, Isabel, nacieron el 26 de noviembre de 1827 en Gorham, Maine, Estados Unidos: las menores de los ocho hijos de Robert y Eunice Harmon. Algunos años después, la familia se mudó a Portland.</p>",
+          "<p>A los 9 años, una compañera de escuela le lanzó una piedra que golpeó el rostro de Elena y la dejó semiinconsciente durante semanas. El accidente interrumpió sus estudios, le trajo problemas de salud para toda la vida y la avergonzó de su propia apariencia. En ese tiempo de dolor comenzó a pensar seriamente en Dios, pero le tenía miedo y se sentía indigna del cielo, incluso después de bautizarse en la Iglesia Metodista, en 1842.</p>",
+          "<p>Dos sueños y las conversaciones con el pastor metodista Levi Stockman lo cambiaron todo. Ella escribió que ahora veía a Dios “como un padre bondadoso y tierno, más bien que como un tirano severo” (Vida y enseñanzas). Al comprender también el estado de los muertos y que no existe un infierno eterno, su visión del carácter de Dios se transformó, y lo sirvió fielmente toda su vida.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué tipo de comunicación deseaba tener Dios con los seres humanos desde el principio? (Gén. 1:26; 2:18, 19)",
+          "Después de la decisión de Adán y Eva, ¿cómo tomó el Señor la iniciativa de restablecer la comunicación con ellos? (Gén. 3:8-13)",
+          "Elena cambió la imagen de un Dios tirano por la de un Padre afectuoso. ¿Cómo ves a Dios hoy?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿En qué año nació Elena Harmon?",
+              "opts": [
+                "1844",
+                "1827",
+                "1798",
+                "1915"
+              ]
+            },
+            {
+              "text": "¿Cómo se llamaba la hermana gemela de Elena?",
+              "opts": [
+                "María",
+                "Sara",
+                "Isabel",
+                "Ana"
+              ]
+            },
+            {
+              "text": "¿En qué estado de los Estados Unidos nació Elena?",
+              "opts": [
+                "Texas",
+                "California",
+                "Míchigan",
+                "Maine"
+              ]
+            },
+            {
+              "text": "¿Cuántos años tenía Elena cuando fue golpeada por una piedra?",
+              "opts": [
+                "9 años",
+                "15 años",
+                "5 años",
+                "18 años"
+              ]
+            },
+            {
+              "text": "¿En qué iglesia fue bautizada Elena por inmersión en 1842?",
+              "opts": [
+                "En la Iglesia Bautista",
+                "En la Iglesia Metodista",
+                "En la Iglesia Católica",
+                "En la Iglesia Presbiteriana"
+              ]
+            },
+            {
+              "text": "¿Qué pastor ayudó a Elena a comprender el amor y la gracia de Dios?",
+              "opts": [
+                "Guillermo Miller",
+                "Jaime White",
+                "Levi Stockman",
+                "José Bates"
+              ]
+            },
+            {
+              "text": "¿De qué libro es la frase sobre ver a Dios “como un padre bondadoso y tierno”?",
+              "opts": [
+                "El conflicto de los siglos",
+                "El camino a Cristo",
+                "La educación",
+                "Vida y enseñanzas"
+              ]
+            },
+            {
+              "text": "¿Qué doctrina bíblica ayudó a Elena a entender que no existe un infierno eterno?",
+              "opts": [
+                "El estado de los muertos",
+                "El diezmo",
+                "La reforma pro salud",
+                "El santuario"
+              ]
+            },
+            {
+              "text": "¿Qué predicador anunciaba el pronto regreso de Jesús e influyó en la familia Harmon?",
+              "opts": [
+                "Levi Stockman",
+                "Guillermo Miller",
+                "Martín Lutero",
+                "Juan Wesley"
+              ]
+            },
+            {
+              "text": "Según Juan 16:13, ¿quién nos guía a toda la verdad después de que Jesús volvió al cielo?",
+              "opts": [
+                "Los discípulos",
+                "Los ángeles",
+                "El Espíritu Santo",
+                "Los profetas antiguos"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El accidente que sufrió Elena a los 9 años no tuvo consecuencias duraderas.",
+            "Elena G. de White tuvo una hermana gemela llamada Isabel.",
+            "Aun después de bautizada, Elena todavía se sentía indigna del amor de Dios.",
+            "Elena siempre vio a Dios como un Padre bondadoso, desde niña."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Entre tantas voces",
+        "summary": "En una generación rodeada de voces, el problema no es un cielo en silencio, sino que estamos demasiado distraídos. Quien convive con el Buen Pastor aprende a reconocer Su voz.",
+        "body": [
+          "<p>En 2007, el violinista Joshua Bell tocó durante unos 45 minutos en una estación de metro de Washington, con un violín de millones de dólares, y casi nadie se detuvo a escuchar. La noche anterior había llenado un teatro. El problema no era la música; era la prisa de quienes pasaban.</p>",
+          "<p>Tal vez nuestra generación no sufra de falta de información, sino de falta de discernimiento. Las redes sociales, los influencers y las notificaciones compiten por nuestra atención todo el tiempo, y se vuelve difícil reconocer cuándo es Dios quien habla. Jesús dijo: “Mis ovejas oyen mi voz” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"10\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Juan 10:27</span><span class=\"vref-pop\"></span>). El Señor sigue hablando; somos nosotros los que estamos distraídos.</p>",
+          "<p>Cuanto más convivimos con alguien, más fácilmente reconocemos su voz. En la vida espiritual es igual: en la oración, en la lectura de la Biblia y en los momentos de silencio aprendemos a discernir la voz del Buen Pastor, y quien aprende a oírlo encuentra dirección, identidad y propósito, incluso en medio del caos.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Qué voces influyen más en mis decisiones actualmente?",
+          "¿Cómo puedo desarrollar discernimiento espiritual para reconocer la voz de Dios entre tantas otras voces?",
+          "¿Qué podría cambiar en mi vida si creara más momentos de comunión sincera con Dios a lo largo de la semana?"
+        ]
+      }
+    ]
   }
 ]

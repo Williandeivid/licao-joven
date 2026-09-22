@@ -9492,5 +9492,736 @@
         ]
       }
     ]
+  },
+  {
+    "id": 14,
+    "title": "The Creator Speaks",
+    "keyword": "VOICE",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Communication in Eden",
+        "summary": "God created human beings for direct fellowship with Him and with one another. Sin broke that face-to-face conversation, and the Lord began to speak through prophets.",
+        "body": [
+          "<p>Genesis 1 and 2 show that human beings were made for a direct relationship with the Creator and with one another. Of all creatures, only they were made “in the image of God” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"1\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Gen. 1:27</span><span class=\"vref-pop\"></span>) — created to love and to walk in fellowship with the Lord. By forming Eve because “it is not good that the man should be alone” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"2\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Gen. 2:18</span><span class=\"vref-pop\"></span>), God established the family as the first human institution, which would become one of Satan’s favorite targets.</p>",
+          "<p>In Eden, communication happened every day: Adam and Eve met with the Creator “in the cool of the day” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Gen. 3:8</span><span class=\"vref-pop\"></span>). The Sabbath, set apart since creation (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"2\" data-v1=\"2\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Gen. 2:2, 3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"EXO\" data-chapter=\"20\" data-v1=\"8\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Exod. 20:8-11</span><span class=\"vref-pop\"></span>), was an even more special time of that fellowship, when our first parents experienced God’s love and care in a unique way.</p>",
+          "<p>With the fall, everything changed: the ground began to produce thorns, work became hard and death entered history (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"18\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Gen. 3:18, 19</span><span class=\"vref-pop\"></span>). The deepest loss was the face-to-face conversation with God. To restore that communication, the Lord began to speak through prophets, His messengers — some of their writings were preserved in the Bible, others did not reach us.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "If you were created to talk with God every day, what would change in your routine starting today?",
+          "Why do you think Satan aims precisely at the family, the first institution God created?",
+          "How can the Sabbath be, for you, an appointment with God and not just a day of rules?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What is the main Bible passage for this week?",
+              "opts": [
+                "Genesis 3",
+                "Exodus 20",
+                "Isaiah 6",
+                "John 10"
+              ]
+            },
+            {
+              "text": "According to Genesis 1:27, what sets human beings apart from other creatures?",
+              "opts": [
+                "They were created before the animals",
+                "They were made in the image of God",
+                "They do not need rest",
+                "They live forever"
+              ]
+            },
+            {
+              "text": "Why did God create Eve, according to Genesis 2:18?",
+              "opts": [
+                "To name the animals",
+                "To guard the forbidden tree",
+                "Because it was not good for the man to be alone",
+                "To tend the garden in Adam’s place"
+              ]
+            },
+            {
+              "text": "What was the first human social institution, according to the lesson?",
+              "opts": [
+                "The church",
+                "The government",
+                "The school",
+                "The family"
+              ]
+            },
+            {
+              "text": "At what time of day did Adam and Eve meet with the Creator (Gen. 3:8)?",
+              "opts": [
+                "In the cool of the day",
+                "At sunrise",
+                "At midnight",
+                "Only once a year"
+              ]
+            },
+            {
+              "text": "What was the deepest loss caused by sin, according to the lesson?",
+              "opts": [
+                "The garden, at that very moment",
+                "Face-to-face communication with God",
+                "The ability to speak",
+                "The Sabbath"
+              ]
+            },
+            {
+              "text": "According to Genesis 3:18, what did the ground begin to produce after the fall?",
+              "opts": [
+                "Only sweet fruit",
+                "Gold and precious stones",
+                "Thorns and thistles",
+                "Nothing at all"
+              ]
+            },
+            {
+              "text": "Which texts does the lesson cite to show the Sabbath set apart since creation?",
+              "opts": [
+                "Gen. 12:1-3 and Exod. 3:5",
+                "Ps. 23:1 and John 3:16",
+                "Rev. 14:7 and Matt. 5:17",
+                "Gen. 2:2, 3 and Exod. 20:8-11"
+              ]
+            },
+            {
+              "text": "According to Genesis 3:19, what would be the destiny of human beings after the fall?",
+              "opts": [
+                "To return to dust",
+                "To live forever in Eden",
+                "To become like the angels",
+                "To rule over the serpent"
+              ]
+            },
+            {
+              "text": "How did God begin to restore communication with humanity, according to the lesson?",
+              "opts": [
+                "Only through dreams",
+                "Through prophets, His messengers",
+                "Only through nature",
+                "He stopped communicating"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "According to Genesis 1:27, only human beings were created in the image of God.",
+            "Adam and Eve met with God only once a year.",
+            "All the prophets’ messages were preserved in the Bible.",
+            "The Sabbath was set apart as part of God’s act of creation."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Hiding From God",
+        "summary": "Because He is love, God created people free to choose. Deceived by Satan, Adam and Eve disobeyed, lost their robe of light and tried to hide — guilt always pushes us away from Him.",
+        "body": [
+          "<p>God is love (<span class=\"vref\" data-book=\"1JN\" data-chapter=\"4\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">1 John 4:8</span><span class=\"vref-pop\"></span>), and true love is not forced: that is why Adam and Eve were created free, able to obey or to disobey. The very prohibition of the tree of the knowledge of good and evil (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"2\" data-v1=\"15\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Gen. 2:15-17</span><span class=\"vref-pop\"></span>) shows this — no one warns someone who has no choice. Ellen G. White sums it up: without freedom of choice, their obedience “would not have been voluntary, but forced” (Patriarchs and Prophets).</p>",
+          "<p>In Genesis 3, the serpent used words, emotions and attractive appeals. Eve saw that the tree was “good for food,” “pleasant to the eyes” and “desired to make one wise” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Gen. 3:6</span><span class=\"vref-pop\"></span>), and the promise of being “as gods” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"5\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Gen. 3:5</span><span class=\"vref-pop\"></span>) seemed irresistible. What Satan hid were the consequences.</p>",
+          "<p>As soon as they disobeyed, their eyes were opened and they realized they were naked (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Gen. 3:7</span><span class=\"vref-pop\"></span>): the robe of light that reflected divine glory (<span class=\"vref\" data-book=\"PSA\" data-chapter=\"104\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Ps. 104:1, 2</span><span class=\"vref-pop\"></span>) had disappeared. Then they tried to hide from the Creator — as if that were possible (<span class=\"vref\" data-book=\"JER\" data-chapter=\"23\" data-v1=\"24\" data-v2=\"24\" onclick=\"toggleVerseLive(this)\">Jer. 23:24</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"HEB\" data-chapter=\"4\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Heb. 4:13</span><span class=\"vref-pop\"></span>). That is what sin does: it fills us with guilt and makes us run from the very One who can restore us.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why did Adam and Eve try to hide from God after disobeying? Compare Genesis 3:1-8 with Jeremiah 23:24 and Hebrews 4:13.",
+          "What “attractive appeals” does temptation use today to seem irresistible in your life?",
+          "When you make a mistake, do you tend to run to God or hide from Him? Why?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Which text does the lesson use to state that God is love?",
+              "opts": [
+                "John 3:16",
+                "1 John 4:8",
+                "Romans 8:28",
+                "Psalm 23:1"
+              ]
+            },
+            {
+              "text": "Why didn’t God create human beings as “robots”?",
+              "opts": [
+                "Because robots cannot work",
+                "Because He wanted them to make mistakes",
+                "Because true love requires freedom of choice",
+                "Because there was no time during creation"
+              ]
+            },
+            {
+              "text": "From which tree did God forbid Adam and Eve to eat?",
+              "opts": [
+                "The tree of life",
+                "The olive tree of the garden",
+                "The fig tree",
+                "The tree of the knowledge of good and evil"
+              ]
+            },
+            {
+              "text": "According to Ellen G. White, what would their obedience be like without freedom of choice?",
+              "opts": [
+                "Forced, not voluntary",
+                "Perfect",
+                "Easier",
+                "Longer lasting"
+              ]
+            },
+            {
+              "text": "Which promise from Satan sounded irresistible to Eve (Gen. 3:5)?",
+              "opts": [
+                "That they would never grow old",
+                "That they would be like God, knowing good and evil",
+                "That they would rule over the angels",
+                "That they would have riches"
+              ]
+            },
+            {
+              "text": "What did Adam and Eve lose right after disobeying, according to the lesson?",
+              "opts": [
+                "The ability to speak",
+                "The memory of the garden",
+                "The robe of light and glory God had given them",
+                "The right to work"
+              ]
+            },
+            {
+              "text": "According to Genesis 3:6, how did Eve see the tree?",
+              "opts": [
+                "Frightening and dark",
+                "Small and without fruit",
+                "Just like all the others",
+                "Good for food, pleasant to the eyes and desired to make one wise"
+              ]
+            },
+            {
+              "text": "Which text does the lesson cite about the robe of light that reflected God’s glory?",
+              "opts": [
+                "Psalm 104:1, 2",
+                "Isaiah 53:5",
+                "Matthew 6:33",
+                "Genesis 12:1"
+              ]
+            },
+            {
+              "text": "Which texts show that it is impossible to hide from God?",
+              "opts": [
+                "Proverbs 3:5 and Philippians 4:13",
+                "Jeremiah 23:24 and Hebrews 4:13",
+                "Genesis 1:1 and John 1:1",
+                "Psalm 1:1 and Matthew 5:3"
+              ]
+            },
+            {
+              "text": "Which book by Ellen G. White does the lesson cite about the freedom of our first parents?",
+              "opts": [
+                "The Great Controversy",
+                "Steps to Christ",
+                "Patriarchs and Prophets",
+                "Education"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Satan told Eve all the consequences of disobedience.",
+            "The guilt of sin naturally draws us closer to God.",
+            "The prohibition of one tree shows that Adam and Eve were free to disobey.",
+            "After sinning, Adam and Eve realized they were naked."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "God Seeks Humanity",
+        "summary": "After the fall, it was God who took the initiative: “Where are you?” While Adam and Eve blamed each other, the Lord kept seeking them — and He keeps seeking us to lead us to Jesus.",
+        "body": [
+          "<p>In Genesis 3:9 and 10, it is God who goes after His fallen children with the question “Where are you?” He knew exactly where they were; the question was an invitation to resume the conversation. The Hebrew verb qara, translated “to call,” often describes God’s call to His people. And He keeps doing this: after Peter denied Him three times, Jesus “turned, and looked upon” him (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"22\" data-v1=\"61\" data-v2=\"61\" onclick=\"toggleVerseLive(this)\">Luke 22:61</span><span class=\"vref-pop\"></span>) — without a word, He was seeking His friend.</p>",
+          "<p>Sin also shook the couple’s relationship. Adam blamed Eve and, indirectly, God Himself: “The woman whom thou gavest to be with me, she gave me of the tree” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Gen. 3:12</span><span class=\"vref-pop\"></span>). Eve blamed the serpent (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Gen. 3:13</span><span class=\"vref-pop\"></span>). No one took responsibility — and little has changed in six thousand years.</p>",
+          "<p>Paul describes this struggle honestly: “what I hate, that do I” (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"7\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Rom. 7:15</span><span class=\"vref-pop\"></span>). The only way out is deliverance “through Jesus Christ our Lord” (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"7\" data-v1=\"25\" data-v2=\"25\" onclick=\"toggleVerseLive(this)\">Rom. 7:25</span><span class=\"vref-pop\"></span>). That is why God keeps seeking us, like the father in the parable of the prodigal son (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"15\" data-v1=\"11\" data-v2=\"32\" onclick=\"toggleVerseLive(this)\">Luke 15:11-32</span><span class=\"vref-pop\"></span>): to lead us to Jesus, the only One who can restore us to His image.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "In what ways has God already come after you to get your attention and bring you back?",
+          "Why is it so much easier to blame someone else than to own our mistakes?",
+          "How does the parable of the prodigal son (Luke 15:11-32) help us understand God’s question in Genesis 3:9?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What question did God ask Adam in Genesis 3:9?",
+              "opts": [
+                "“Why did you do this?”",
+                "“Who are you?”",
+                "“Where are you?”",
+                "“What did you eat?”"
+              ]
+            },
+            {
+              "text": "Who took the initiative to restore communication after the fall?",
+              "opts": [
+                "Adam",
+                "Eve",
+                "The serpent",
+                "God"
+              ]
+            },
+            {
+              "text": "Which Hebrew verb, translated “to call,” does the lesson highlight?",
+              "opts": [
+                "Qara",
+                "Shalom",
+                "Hesed",
+                "Torah"
+              ]
+            },
+            {
+              "text": "Whom did Adam blame for what he did?",
+              "opts": [
+                "The serpent",
+                "The woman and, indirectly, God",
+                "Himself",
+                "The angels"
+              ]
+            },
+            {
+              "text": "What did Jesus do after Peter denied Him three times (Luke 22:61)?",
+              "opts": [
+                "He sent Peter away",
+                "He pretended not to see",
+                "He turned and looked at him",
+                "He asked for him to be arrested"
+              ]
+            },
+            {
+              "text": "Why is God’s question to Adam called rhetorical?",
+              "opts": [
+                "Because God did not know the answer",
+                "Because Adam could not answer",
+                "Because it was a disguised order",
+                "Because God already knew where they were and what they had done"
+              ]
+            },
+            {
+              "text": "According to Genesis 3:13, whom did Eve blame?",
+              "opts": [
+                "The serpent",
+                "Adam",
+                "God",
+                "Herself"
+              ]
+            },
+            {
+              "text": "According to Romans 7:15, what anguish does Paul describe?",
+              "opts": [
+                "Not having money to travel",
+                "Doing what he hates instead of what he wants",
+                "Not being heard by the churches",
+                "Not knowing the law"
+              ]
+            },
+            {
+              "text": "According to Romans 7:25, what is our hope of deliverance?",
+              "opts": [
+                "Our own efforts",
+                "The law of Moses",
+                "Jesus Christ our Lord",
+                "The passing of time"
+              ]
+            },
+            {
+              "text": "Which parable does the lesson use to understand Genesis 3:9 and 10?",
+              "opts": [
+                "The sower",
+                "The good Samaritan",
+                "The ten virgins",
+                "The prodigal son"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "The Hebrew verb qara is often used for God’s call to His people.",
+            "After the fall, it was Adam who sought God first.",
+            "Adam and Eve immediately took responsibility for their guilt.",
+            "God keeps seeking us to lead us to Jesus."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Three Voices of God",
+        "summary": "Since the fall, God has never been silent: He speaks through nature, through the prophets and the Scriptures and, above all, in Jesus, the fullest revelation of the Father’s heart.",
+        "body": [
+          "<p>Since sin entered, God has never left humanity without a witness. Nature speaks: the order of the universe, the beauty of creation and the complexity of life point to a wise, powerful and good Creator (<span class=\"vref\" data-book=\"PSA\" data-chapter=\"19\" data-v1=\"1\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Ps. 19:1-4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ROM\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Rom. 1:19, 20</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>He also called men and women to pass on His message (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"12\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Num. 12:6</span><span class=\"vref-pop\"></span>). Inspired by God, they brought warnings, promises, comfort and direction, and much of it was preserved in the Scriptures, which remain a safe source of truth and guidance for life (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16, 17</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Above all, God revealed Himself in Jesus. Christ did not just speak about God — He showed who God is: “He that hath seen me hath seen the Father” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"14\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">John 14:9</span><span class=\"vref-pop\"></span>). That is why hearing the voice of the Good Shepherd and following Him (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"10\" data-v1=\"27\" data-v2=\"30\" onclick=\"toggleVerseLive(this)\">John 10:27-30</span><span class=\"vref-pop\"></span>) is knowing the fullest revelation of the Father’s heart (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Heb. 1:1, 2</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "In which of these voices — nature, Scripture or Jesus — do you most sense God speaking to you today?",
+          "If you built a mind map with the word “Communication” in the center, what would you connect to it after this week?",
+          "Why is God’s revelation in Jesus called “supreme”?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "According to the lesson, what is the fullest revelation of God?",
+              "opts": [
+                "Nature",
+                "Dreams",
+                "Church tradition",
+                "Jesus Christ"
+              ]
+            },
+            {
+              "text": "Which psalm shows that the heavens declare the glory of God?",
+              "opts": [
+                "Psalm 19",
+                "Psalm 23",
+                "Psalm 51",
+                "Psalm 119"
+              ]
+            },
+            {
+              "text": "Besides nature, through whom did God pass on His message?",
+              "opts": [
+                "Only kings",
+                "Men and women called as prophets",
+                "Only priests",
+                "Greek philosophers"
+              ]
+            },
+            {
+              "text": "According to 2 Timothy 3:16, 17, what is inspired Scripture for?",
+              "opts": [
+                "Only for telling old stories",
+                "To be kept without being read",
+                "For teaching, reproof, correction and training in righteousness",
+                "To replace prayer"
+              ]
+            },
+            {
+              "text": "What does the lesson say about Jesus and the revelation of God?",
+              "opts": [
+                "He spoke less than the prophets",
+                "He revealed only the law",
+                "He did not reveal the Father",
+                "He showed who God is, not just spoke about Him"
+              ]
+            },
+            {
+              "text": "Which text in Romans shows that God reveals Himself through creation?",
+              "opts": [
+                "Romans 1:19, 20",
+                "Romans 3:23",
+                "Romans 6:23",
+                "Romans 12:1"
+              ]
+            },
+            {
+              "text": "What does Jesus say in John 14:9?",
+              "opts": [
+                "“I am the vine”",
+                "“He who has seen Me has seen the Father”",
+                "“I am the bread of life”",
+                "“It is finished”"
+              ]
+            },
+            {
+              "text": "According to Numbers 12:6, how did God reveal Himself to the prophets?",
+              "opts": [
+                "Only in writing",
+                "By casting lots",
+                "In visions and in dreams",
+                "Only through the voice of angels"
+              ]
+            },
+            {
+              "text": "According to John 10:27, what do Jesus’ sheep do?",
+              "opts": [
+                "They run away when they hear His voice",
+                "They stay still in the fold",
+                "They follow any voice",
+                "They hear His voice and follow Him"
+              ]
+            },
+            {
+              "text": "According to Hebrews 1:1, 2, through whom did God speak “in these last days”?",
+              "opts": [
+                "Through the Son",
+                "Through the angels",
+                "Through the kings",
+                "Through the judges"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "After sin, God left humanity without a witness.",
+            "Nature is one of the ways God keeps speaking.",
+            "Hebrews 1:1, 2 says God spoke in the past through the prophets and now through the Son.",
+            "According to the lesson, Jesus only spoke about God, without revealing who He is."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "God Still Speaks",
+        "summary": "Despite sin, God keeps speaking: through creation, through the prophets — many preserved in the Bible —, fully in Jesus and, after the ascension, through the Holy Spirit, who guides us into all truth.",
+        "body": [
+          "<p>Even after sin, God found many ways to speak. Creation reveals His works and, at the same time, the consequences of the fall. He also chose prophets as spokespersons — Noah, Abraham, Moses, Daniel — to show that He had not forgotten His children and was still at their side.</p>",
+          "<p>Not every prophet wrote a book: Enoch, Nathan, Huldah and John the Baptist, for example, left messages for specific times and places. But many messages were preserved in the Scriptures for us (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16, 17</span><span class=\"vref-pop\"></span>), and in them we learn who God is, who we are, where we came from and where we are going.</p>",
+          "<p>The fullest way God speaks is Jesus. Just as He sought Adam and Eve, Christ “came to seek and to save that which was lost” (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"19\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Luke 19:10</span><span class=\"vref-pop\"></span>) and fulfilled the promise made in Eden (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Gen. 3:15</span><span class=\"vref-pop\"></span>). After His ascension, the Holy Spirit continues to guide us “into all truth” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"16\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">John 16:13</span><span class=\"vref-pop\"></span>), including through messages given to people chosen for His people (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"21\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Pet. 1:21</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Jesus reveals who God is through His love and sacrifice. How does this truth strengthen your faith?",
+          "Why would God choose to speak through ordinary people, with flaws, instead of using only angels?",
+          "How do you sense the Holy Spirit guiding you “into all truth” today?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "According to Luke 19:10, why did Christ come?",
+              "opts": [
+                "To seek and to save the lost",
+                "To judge sinners",
+                "To found an earthly kingdom",
+                "To end the work of the prophets"
+              ]
+            },
+            {
+              "text": "Who guides us “into all truth” after Jesus’ ascension (John 16:13)?",
+              "opts": [
+                "The angels",
+                "The Holy Spirit",
+                "The kings",
+                "The priests"
+              ]
+            },
+            {
+              "text": "Which of these prophets did NOT write a book of the Bible, according to the lesson?",
+              "opts": [
+                "Isaiah",
+                "Jeremiah",
+                "Nathan",
+                "Daniel"
+              ]
+            },
+            {
+              "text": "Which promise made in Eden did Jesus fulfill?",
+              "opts": [
+                "Genesis 12:3",
+                "Exodus 20:3",
+                "Psalm 23:1",
+                "Genesis 3:15"
+              ]
+            },
+            {
+              "text": "Besides the prophets, what other way of God speaking does the lesson mention at the start?",
+              "opts": [
+                "Creation",
+                "Astrology",
+                "Chance",
+                "Human traditions"
+              ]
+            },
+            {
+              "text": "According to the lesson, what do we learn through the Bible?",
+              "opts": [
+                "Only a list of rules",
+                "Who God is, who we are, where we came from and where we are going",
+                "Only the history of Israel",
+                "The exact date of Jesus’ return"
+              ]
+            },
+            {
+              "text": "Which text states that all Scripture is inspired by God?",
+              "opts": [
+                "John 3:16",
+                "Romans 3:23",
+                "2 Timothy 3:16, 17",
+                "Galatians 5:22"
+              ]
+            },
+            {
+              "text": "In John 14:9, Jesus says that whoever sees Him…",
+              "opts": [
+                "sees the angels",
+                "sees Moses",
+                "sees the temple",
+                "sees the Father"
+              ]
+            },
+            {
+              "text": "According to 2 Peter 1:21, how were the prophetic messages given?",
+              "opts": [
+                "Men spoke from God as they were moved by the Holy Spirit",
+                "By human will",
+                "By casting lots",
+                "Copied from other peoples"
+              ]
+            },
+            {
+              "text": "Which of these does the lesson mention as a spokesperson for God?",
+              "opts": [
+                "Nebuchadnezzar",
+                "Noah",
+                "Pharaoh",
+                "Herod"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Jesus fulfilled the promise made to Adam and Eve in Genesis 3:15.",
+            "Creation reveals God’s works and also the consequences of the fall.",
+            "All the prophets of the Bible wrote a book.",
+            "The Holy Spirit stopped speaking after Jesus’ ascension."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Introducing Ellen G. White",
+        "summary": "God’s communication did not stop in Bible times. Ellen Harmon, a girl marked by an accident and by fear of God, discovered His love and served Him for the rest of her life.",
+        "body": [
+          "<p>Ellen Gould Harmon (later White) and her twin sister, Elizabeth, were born on November 26, 1827, in Gorham, Maine, United States — the youngest of Robert and Eunice Harmon’s eight children. A few years later, the family moved to Portland.</p>",
+          "<p>At age 9, a schoolmate threw a stone that hit Ellen’s face and left her semiconscious for weeks. The accident ended her schooling, brought lifelong health problems and left her embarrassed about her appearance. In that time of pain, she began to think seriously about God — but she was afraid of Him and felt unworthy of heaven, even after being baptized in the Methodist Church in 1842.</p>",
+          "<p>Two dreams and conversations with the Methodist pastor Levi Stockman changed everything. She wrote that she now regarded God “as a kind and tender parent, rather than a stern tyrant” (Christian Experience and Teachings). As she also understood the state of the dead and that there is no eternal hell, her view of God’s character was transformed — and she served Him faithfully all her life.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "What kind of communication did God want to have with human beings from the beginning? (Gen. 1:26; 2:18, 19)",
+          "After Adam and Eve’s decision, how did the Lord take the initiative to restore communication with them? (Gen. 3:8-13)",
+          "Ellen exchanged the image of a tyrant God for that of a loving Father. How do you see God today?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "In what year was Ellen Harmon born?",
+              "opts": [
+                "1844",
+                "1827",
+                "1798",
+                "1915"
+              ]
+            },
+            {
+              "text": "What was the name of Ellen’s twin sister?",
+              "opts": [
+                "Mary",
+                "Sarah",
+                "Elizabeth",
+                "Anna"
+              ]
+            },
+            {
+              "text": "In which U.S. state was Ellen born?",
+              "opts": [
+                "Texas",
+                "California",
+                "Michigan",
+                "Maine"
+              ]
+            },
+            {
+              "text": "How old was Ellen when she was hit by a stone?",
+              "opts": [
+                "9 years old",
+                "15 years old",
+                "5 years old",
+                "18 years old"
+              ]
+            },
+            {
+              "text": "In which church was Ellen baptized by immersion in 1842?",
+              "opts": [
+                "The Baptist Church",
+                "The Methodist Church",
+                "The Catholic Church",
+                "The Presbyterian Church"
+              ]
+            },
+            {
+              "text": "Which pastor helped Ellen understand God’s love and grace?",
+              "opts": [
+                "William Miller",
+                "James White",
+                "Levi Stockman",
+                "Joseph Bates"
+              ]
+            },
+            {
+              "text": "Which book contains the phrase about seeing God as “a kind and tender parent”?",
+              "opts": [
+                "The Great Controversy",
+                "Steps to Christ",
+                "Education",
+                "Christian Experience and Teachings"
+              ]
+            },
+            {
+              "text": "Which Bible doctrine helped Ellen understand that there is no eternal hell?",
+              "opts": [
+                "The state of the dead",
+                "Tithing",
+                "Health reform",
+                "The sanctuary"
+              ]
+            },
+            {
+              "text": "Which preacher announced Jesus’ soon return and influenced the Harmon family?",
+              "opts": [
+                "Levi Stockman",
+                "William Miller",
+                "Martin Luther",
+                "John Wesley"
+              ]
+            },
+            {
+              "text": "According to John 16:13, who guides us into all truth after Jesus returned to heaven?",
+              "opts": [
+                "The disciples",
+                "The angels",
+                "The Holy Spirit",
+                "The ancient prophets"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "The accident Ellen suffered at age 9 had no lasting consequences.",
+            "Ellen G. White had a twin sister named Elizabeth.",
+            "Even after being baptized, Ellen still felt unworthy of God’s love.",
+            "Ellen always saw God as a kind Father, ever since she was a child."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Among So Many Voices",
+        "summary": "In a generation surrounded by voices, the problem is not a silent heaven, but that we are too distracted. Those who spend time with the Good Shepherd learn to recognize His voice.",
+        "body": [
+          "<p>In 2007, violinist Joshua Bell played for about 45 minutes in a Washington subway station, on a violin worth millions of dollars — and almost no one stopped to listen. The night before, he had filled a concert hall. The problem was not the music; it was the hurry of those passing by.</p>",
+          "<p>Maybe our generation does not suffer from a lack of information, but from a lack of discernment. Social media, influencers and notifications compete for our attention all the time, and it becomes hard to recognize when it is God who is speaking. Jesus said: “My sheep hear my voice” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"10\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">John 10:27</span><span class=\"vref-pop\"></span>). The Lord keeps speaking; we are the ones who are distracted.</p>",
+          "<p>The more time we spend with someone, the more easily we recognize their voice. The spiritual life is the same: it is in prayer, in Bible reading and in moments of silence that we learn to discern the voice of the Good Shepherd — and those who learn to hear Him find direction, identity and purpose, even in the middle of chaos.</p>"
+        ],
+        "reflectTitle": "Open Dialogue (group discussion)",
+        "reflect": [
+          "Which voices influence my decisions the most right now?",
+          "How can I develop spiritual discernment to recognize God’s voice among so many other voices?",
+          "What could change in my life if I created more moments of sincere fellowship with God throughout the week?"
+        ]
+      }
+    ]
   }
 ]
