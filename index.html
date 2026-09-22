@@ -4606,7 +4606,8 @@ const EGW_TITULOS = {
   patriarcas: 'Patriarcas e Profetas',
   profetas_reis: 'Profetas e Reis',
   desejado: 'O Desejado de Todas as Nações',
-  atos: 'Atos dos Apóstolos'
+  atos: 'Atos dos Apóstolos',
+  caminho: 'Caminho a Cristo'
 };
 // Ordem da serie e quantidade de capitulos de cada um (confere com
 // biblioteca/indice.json; se mudar la, mude aqui).
@@ -4920,12 +4921,55 @@ async function carregarIndiceEGW(){
   return indiceEGW;
 }
 
+// Cópia no aparelho de cada capítulo já aberto: na segunda vez abre sem
+// internet. Mudou o texto de algum livro? Suba o número do nome.
+const CACHE_BIBLIOTECA = 'biblioteca-v1';
+
+async function buscarJsonComCopia(url){
+  if ('caches' in window) {
+    try{
+      const cache = await caches.open(CACHE_BIBLIOTECA);
+      const guardado = await cache.match(url);
+      if (guardado) return await guardado.json();
+      const r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      cache.put(url, r.clone()).catch(()=>{});
+      return await r.json();
+    }catch(e){
+      if (String(e.message).startsWith('HTTP')) throw e;
+      // sem Cache API (aba anônima, cota cheia): segue pela rede
+    }
+  }
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+// Livro "porCapitulo" no indice: nada de arquivo inteiro de 1 MB, só a lista
+// de títulos; cada capítulo (~10 KB) desce quando a pessoa abre.
 async function carregarLivroEGW(id){
   if (livrosEGW[id]) return livrosEGW[id];
+  const indice = await carregarIndiceEGW();
+  const meta = indice.livros.find(l => l.id === id);
+  if (meta && meta.porCapitulo) {
+    livrosEGW[id] = { titulo: meta.titulo, porCapitulo: true,
+      capitulos: meta.titulosCapitulos.map(t => ({ t, p: null })) };
+    return livrosEGW[id];
+  }
   const r = await fetch('biblioteca/' + id + '.json');
   if (!r.ok) throw new Error('HTTP ' + r.status);
   livrosEGW[id] = await r.json();
   return livrosEGW[id];
+}
+
+async function carregarCapituloEGW(id, indice){
+  const livro = await carregarLivroEGW(id);
+  const cap = livro.capitulos[indice];
+  if (!cap || cap.p) return cap;
+  const arquivo = 'biblioteca/' + id + '/' + String(indice + 1).padStart(2, '0') + '.json';
+  const baixado = await buscarJsonComCopia(arquivo);
+  cap.p = baixado.p;
+  return cap;
 }
 
 async function carregarUltimoEGW(){
@@ -4966,14 +5010,23 @@ async function renderBiblioteca(){
     return;
   }
 
-  const cartoes = indice.livros.map(l => `
+  const cartao = l => `
     <button class="egw-card" onclick="abrirLivroEGW('${l.id}')">
       <span class="egw-card-nome">${escaparHtml(l.titulo)}</span>
       <span class="egw-card-meta">${l.ano} · ${l.capitulos} ${t('bible.capitulos')}</span>
-    </button>`).join('');
+    </button>`;
+  // Livro sem "grupo" é da Série do Grande Conflito; os outros ficam em
+  // seções próprias, na ordem em que aparecem no indice.
+  const grupos = [];
+  indice.livros.forEach(l => {
+    const nome = l.grupo || indice.serie;
+    let g = grupos.find(x => x.nome === nome);
+    if(!g){ g = { nome, livros: [] }; grupos.push(g); }
+    g.livros.push(l);
+  });
 
   container.querySelector('.bible-wrap').innerHTML =
-    `<div class="testament-label">${escaparHtml(indice.serie)}</div><div class="egw-cards">${cartoes}</div>`
+    grupos.map(g => `<div class="testament-label">${escaparHtml(g.nome)}</div><div class="egw-cards">${g.livros.map(cartao).join('')}</div>`).join('')
     + (ultimoEGW ? `<button class="egw-continuar" onclick="abrirCapituloEGW('${ultimoEGW.id}', ${ultimoEGW.capitulo})">${t('bible.continuarLeitura')} · ${escaparHtml(ultimoEGW.resumo)}</button>` : '');
 }
 
@@ -5007,14 +5060,18 @@ async function abrirCapituloEGW(id, indice){
   hideAllViews();
   container.style.display = 'block';
   document.getElementById('tab-bible').classList.add('active');
-  let livro;
-  try{ livro = await carregarLivroEGW(id); }
+  let livro, cap;
+  try{
+    livro = await carregarLivroEGW(id);
+    cap = await carregarCapituloEGW(id, indice);
+  }
   catch(e){
     container.innerHTML = `<div class="bible-wrap"><p class="cmt-vazio">${t('bible.bibliotecaFalhou')}</p></div>`;
     return;
   }
-  const cap = livro.capitulos[indice];
   if(!cap) return;
+  // Já deixa o próximo capítulo guardado, para a leitura seguir sem internet.
+  if(livro.porCapitulo && indice + 1 < livro.capitulos.length) carregarCapituloEGW(id, indice + 1).catch(()=>{});
   egwState = { livro: id, capitulo: indice };
   container.dataset.view = 'egw-capitulo';
   // Cada parágrafo termina com a referência oficial de citação ("DTN 9.1").
@@ -5849,7 +5906,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Livros de Ellen G. White, com o texto conferido com o original.',
     'bible.hubBiblia': '66 livros · Antigo e Novo Testamento',
     'bible.hubPlanoVazio': 'Escolha um plano de leitura',
-    'bible.hubBiblioteca': 'Ellen G. White · 5 livros',
+    'bible.hubBiblioteca': 'Ellen G. White · 6 livros',
     'bible.bibliotecaFalhou': 'Não foi possível abrir a biblioteca agora. Tente de novo em instantes.',
     'bible.continuarLeitura': 'Continuar',
     'bible.capitulos': 'capítulos',
@@ -6202,7 +6259,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Ellen G. White books, with the text checked against the original.',
     'bible.hubBiblia': '66 books · Old and New Testament',
     'bible.hubPlanoVazio': 'Pick a reading plan',
-    'bible.hubBiblioteca': 'Ellen G. White · 5 books',
+    'bible.hubBiblioteca': 'Ellen G. White · 6 books',
     'bible.bibliotecaFalhou': 'Could not open the library right now. Try again in a moment.',
     'bible.continuarLeitura': 'Continue',
     'bible.capitulos': 'chapters',
@@ -6555,7 +6612,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Libros de Elena G. de White, con el texto cotejado con el original.',
     'bible.hubBiblia': '66 libros · Antiguo y Nuevo Testamento',
     'bible.hubPlanoVazio': 'Elige un plan de lectura',
-    'bible.hubBiblioteca': 'Elena G. de White · 5 libros',
+    'bible.hubBiblioteca': 'Elena G. de White · 6 libros',
     'bible.bibliotecaFalhou': 'No se pudo abrir la biblioteca ahora. Inténtalo de nuevo en un momento.',
     'bible.continuarLeitura': 'Continuar',
     'bible.capitulos': 'capítulos',
