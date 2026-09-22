@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lições — Escola Sabatina Jovem</title>
+<!-- Prévia do link no WhatsApp: o robô dele não roda JavaScript, então as
+     tags têm de estar aqui no HTML. A imagem precisa de endereço completo. -->
+<meta name="description" content="A lição de cada dia com resumo, quiz e a Bíblia no celular.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lição Jovem">
+<meta property="og:title" content="Lição Jovem · Escola Sabatina Jovem">
+<meta property="og:description" content="A lição de cada dia com resumo, quiz e a Bíblia no celular.">
+<meta property="og:url" content="https://licaojovem-iasd.pages.dev/">
+<meta property="og:image" content="https://licaojovem-iasd.pages.dev/og-imagem.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- Firebase SDK (compat) - carregado do CDN oficial do Google -->
@@ -985,13 +997,37 @@
   @keyframes folhaSobe{from{transform:translateY(100%)}to{transform:none}}
   .share-folha .alca{width:40px; height:4px; border-radius:4px; background:var(--border); margin:0 auto 10px;}
   .share-folha h4{margin:0 0 8px; font-size:15px; text-align:center; color:var(--heading);}
-  .share-folha button{
-    display:flex; align-items:center; gap:12px; width:100%; padding:13px 10px;
-    background:none; border:none; border-radius:12px; cursor:pointer; font-size:15px; color:var(--ink); text-align:left;
+  /* Prévia do story à esquerda, os dois botões à direita. */
+  .share-corpo{display:flex; gap:14px; align-items:stretch;}
+  .share-previa{
+    flex:0 0 108px; aspect-ratio:9/16; border-radius:12px; overflow:hidden;
+    background:linear-gradient(160deg,#6c4ce0,#ff5d8f); display:flex; align-items:center; justify-content:center;
   }
-  .share-folha button:hover{background:var(--tint-violet);}
-  .share-folha .ico{font-size:20px; width:28px; text-align:center;}
-  .share-folha small{color:var(--ink-soft); font-size:12.5px; margin-left:2px;}
+  .share-previa img{width:100%; height:100%; object-fit:cover; display:block;}
+  .share-previa-vazia{color:#fff; font-size:11px; text-align:center; padding:8px; opacity:.85;}
+  .share-botoes{flex:1; display:flex; flex-direction:column; gap:10px; justify-content:center;}
+  .share-btn{
+    display:flex; align-items:center; gap:12px; width:100%; padding:14px;
+    border:none; border-radius:16px; cursor:pointer; color:#fff; text-align:left; font:inherit; font-size:15px;
+    transition:transform .1s ease, opacity .2s ease;
+  }
+  .share-btn:active{transform:scale(.97);}
+  .share-btn:disabled{opacity:.55; cursor:default;}
+  .share-btn svg{width:28px; height:28px; flex:0 0 28px;}
+  .share-btn span{display:flex; flex-direction:column; gap:2px;}
+  .share-btn small{font-size:12px; opacity:.9;}
+  .share-whats{background:#1faa53;}
+
+  /* QR do convite em tela cheia: fundo sempre claro para a câmera ler. */
+  .qr-tela{position:fixed; inset:0; z-index:3200; background:#fff; display:flex; align-items:center; justify-content:center; padding:16px;}
+  .qr-caixa{display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; color:#1c1735; max-width:520px; width:100%;}
+  .qr-selo{font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:700; letter-spacing:.08em; color:#6c4ce0; background:#efeafd; padding:6px 14px; border-radius:100px;}
+  .qr-caixa h2{font-family:'Unbounded', sans-serif; font-size:30px; margin:4px 0 6px; color:#1c1735;}
+  .qr-codigo{width:min(78vw, 58vh, 440px); aspect-ratio:1;}
+  .qr-codigo svg{width:100%; height:100%; display:block;}
+  .qr-dica{margin:6px 0 0; font-size:15px; color:#1c1735;}
+  .qr-link{margin:0 0 8px; font-family:'JetBrains Mono', monospace; font-size:13px; color:#6b6585;}
+  .share-insta{background:linear-gradient(45deg,#f58529,#dd2a7b 50%,#8134af);}
   .share-aviso{
     position:fixed; left:50%; bottom:90px; transform:translateX(-50%); z-index:3100;
     display:flex; align-items:center; gap:12px; max-width:92vw;
@@ -3186,6 +3222,18 @@ async function renderConta(){
               <span class="fav-item-label">${f.label}</span>
               <span class="fav-item-date">${new Date(f.date+'T00:00:00').toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR',{day:'2-digit',month:'short'})}</span>
             </div>`).join('')}</div>`}
+    </div>
+
+    <div class="conta-card">
+      <div class="conta-section-title">${t('convite.titulo')}</div>
+      <div class="conta-row">
+        <div><div class="conta-row-title">${t('convite.qr')}</div><div class="conta-row-sub">${t('convite.qrNota')}</div></div>
+        <button class="conta-btn" onclick="mostrarQrConvite()">${t('convite.mostrar')}</button>
+      </div>
+      <div class="conta-row">
+        <div><div class="conta-row-title">WhatsApp</div><div class="conta-row-sub">${t('convite.whatsNota')}</div></div>
+        <button class="conta-btn conta-btn-secondary" onclick="convidarPeloWhats()">${t('convite.enviar')}</button>
+      </div>
     </div>
 
     <div class="conta-card">
@@ -5861,15 +5909,12 @@ const UI_STRINGS = {
     'acoes.curtirComentario': 'Curtir comentário',
     'acoes.compartilhar': 'Compartilhar',
     'acoes.licao': 'Lição',
-    'acoes.noApp': 'No app Lição Jovem:',
     'acoes.estudeNoApp': 'Estude esse dia no app Lição Jovem:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · ESCOLA SABATINA',
     'acoes.entrar': 'Entrar',
     'acoes.entreParaX': 'Entre na sua conta para ${acao}',
     'acoes.curtirFalhou': 'Não foi possível curtir agora',
     'acoes.linkCopiado': 'Link copiado',
-    'acoes.gerandoImagem': 'Gerando a imagem…',
-    'acoes.imagemBaixada': 'Imagem baixada',
     'acoes.imagemFalhou': 'Não foi possível gerar a imagem',
     'acoes.voceCurtiu': 'Você curtiu',
     'acoes.curtidoPorVoceMais': 'Curtido por <b>você</b> e mais ${resto}',
@@ -5882,12 +5927,22 @@ const UI_STRINGS = {
     'acoes.verNComentarios': 'Ver os ${n} comentários',
     'share.titulo': 'Compartilhar',
     'share.whatsResumo': 'resumo e link',
-    'share.whatsTodo': 'texto do dia inteiro',
-    'share.stories': 'Imagem para stories',
-    'share.copiarLink': 'Copiar link',
-    'share.outrosApps': 'Outros apps',
-    'share.baixarTexto': 'Baixar texto',
-    'share.copieOLink': 'Copie o link:',
+    'share.stories': 'Stories',
+    'share.storiesSub': 'Instagram ou status',
+    'share.preparando': 'Preparando a imagem…',
+    'share.linkNaFigurinha': 'Link copiado: cole na figurinha de link',
+    'share.imagemSalva': 'Imagem salva. Abra o Instagram pelo celular',
+    'convite.titulo': 'Convide seus amigos',
+    'convite.qr': 'QR code do app',
+    'convite.qrNota': 'Mostre na classe: quem apontar a câmera abre o app.',
+    'convite.mostrar': 'Mostrar',
+    'convite.whatsNota': 'Mande o convite com o link do app.',
+    'convite.enviar': 'Enviar',
+    'convite.qrFalhou': 'Não foi possível abrir o QR code. Confira a internet.',
+    'convite.selo': 'ESCOLA SABATINA JOVEM',
+    'convite.aponteACamera': 'Aponte a câmera do celular para abrir o app',
+    'convite.fechar': 'Fechar',
+    'convite.textoWhats': '📖 Estou estudando a Lição da Escola Sabatina Jovem pelo app Lição Jovem: resumo do dia, quiz e a Bíblia no celular. Estuda comigo?',
     'admin.acompanhamento': 'Acompanhamento da semana',
     'admin.acompanhamentoSub': 'Quantas pessoas concluíram cada dia e fizeram o quiz',
     'admin.carregando': 'Carregando…',
@@ -6214,15 +6269,12 @@ const UI_STRINGS = {
     'acoes.curtirComentario': 'Like comment',
     'acoes.compartilhar': 'Share',
     'acoes.licao': 'Lesson',
-    'acoes.noApp': 'In the Lição Jovem app:',
     'acoes.estudeNoApp': 'Study this day in the Lição Jovem app:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · SABBATH SCHOOL',
     'acoes.entrar': 'Sign in',
     'acoes.entreParaX': 'Sign in to your account to ${acao}',
     'acoes.curtirFalhou': 'Could not like right now',
     'acoes.linkCopiado': 'Link copied',
-    'acoes.gerandoImagem': 'Creating the image…',
-    'acoes.imagemBaixada': 'Image downloaded',
     'acoes.imagemFalhou': 'Could not create the image',
     'acoes.voceCurtiu': 'You liked this',
     'acoes.curtidoPorVoceMais': 'Liked by <b>you</b> and ${resto}',
@@ -6235,12 +6287,22 @@ const UI_STRINGS = {
     'acoes.verNComentarios': 'View all ${n} comments',
     'share.titulo': 'Share',
     'share.whatsResumo': 'summary and link',
-    'share.whatsTodo': 'the whole day',
-    'share.stories': 'Image for stories',
-    'share.copiarLink': 'Copy link',
-    'share.outrosApps': 'Other apps',
-    'share.baixarTexto': 'Download text',
-    'share.copieOLink': 'Copy the link:',
+    'share.stories': 'Stories',
+    'share.storiesSub': 'Instagram or WhatsApp status',
+    'share.preparando': 'Preparing the image…',
+    'share.linkNaFigurinha': 'Link copied: paste it in a link sticker',
+    'share.imagemSalva': 'Image saved. Open Instagram on your phone',
+    'convite.titulo': 'Invite your friends',
+    'convite.qr': 'App QR code',
+    'convite.qrNota': 'Show it in class: whoever points the camera opens the app.',
+    'convite.mostrar': 'Show',
+    'convite.whatsNota': 'Send the invite with the app link.',
+    'convite.enviar': 'Send',
+    'convite.qrFalhou': 'Could not open the QR code. Check your internet.',
+    'convite.selo': 'YOUTH SABBATH SCHOOL',
+    'convite.aponteACamera': 'Point your phone camera here to open the app',
+    'convite.fechar': 'Close',
+    'convite.textoWhats': '📖 I am studying the Youth Sabbath School lesson on the Lição Jovem app: daily summary, quiz and the Bible on your phone. Study with me?',
     'admin.acompanhamento': 'This week tracking',
     'admin.acompanhamentoSub': 'How many people finished each day and took the quiz',
     'admin.carregando': 'Loading…',
@@ -6567,15 +6629,12 @@ const UI_STRINGS = {
     'acoes.curtirComentario': 'Me gusta el comentario',
     'acoes.compartilhar': 'Compartir',
     'acoes.licao': 'Lección',
-    'acoes.noApp': 'En la app Lição Jovem:',
     'acoes.estudeNoApp': 'Estudia este día en la app Lição Jovem:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · ESCUELA SABÁTICA',
     'acoes.entrar': 'Entrar',
     'acoes.entreParaX': 'Entra en tu cuenta para ${acao}',
     'acoes.curtirFalhou': 'No se pudo dar me gusta ahora',
     'acoes.linkCopiado': 'Enlace copiado',
-    'acoes.gerandoImagem': 'Creando la imagen…',
-    'acoes.imagemBaixada': 'Imagen descargada',
     'acoes.imagemFalhou': 'No se pudo crear la imagen',
     'acoes.voceCurtiu': 'Te gustó',
     'acoes.curtidoPorVoceMais': 'Le gusta a <b>ti</b> y a ${resto}',
@@ -6588,12 +6647,22 @@ const UI_STRINGS = {
     'acoes.verNComentarios': 'Ver los ${n} comentarios',
     'share.titulo': 'Compartir',
     'share.whatsResumo': 'resumen y enlace',
-    'share.whatsTodo': 'el día completo',
-    'share.stories': 'Imagen para stories',
-    'share.copiarLink': 'Copiar enlace',
-    'share.outrosApps': 'Otras apps',
-    'share.baixarTexto': 'Descargar texto',
-    'share.copieOLink': 'Copia el enlace:',
+    'share.stories': 'Stories',
+    'share.storiesSub': 'Instagram o estado',
+    'share.preparando': 'Preparando la imagen…',
+    'share.linkNaFigurinha': 'Enlace copiado: pégalo en un sticker de enlace',
+    'share.imagemSalva': 'Imagen guardada. Abre Instagram en el celular',
+    'convite.titulo': 'Invita a tus amigos',
+    'convite.qr': 'Código QR de la app',
+    'convite.qrNota': 'Muéstralo en la clase: quien apunte la cámara abre la app.',
+    'convite.mostrar': 'Mostrar',
+    'convite.whatsNota': 'Envía la invitación con el enlace de la app.',
+    'convite.enviar': 'Enviar',
+    'convite.qrFalhou': 'No se pudo abrir el código QR. Revisa tu internet.',
+    'convite.selo': 'ESCUELA SABÁTICA JOVEN',
+    'convite.aponteACamera': 'Apunta la cámara del celular para abrir la app',
+    'convite.fechar': 'Cerrar',
+    'convite.textoWhats': '📖 Estoy estudiando la lección de la Escuela Sabática Joven en la app Lição Jovem: resumen del día, quiz y la Biblia en el celular. ¿Estudias conmigo?',
     'admin.acompanhamento': 'Seguimiento de la semana',
     'admin.acompanhamentoSub': 'Cuántas personas completaron cada día e hicieron el quiz',
     'admin.carregando': 'Cargando…',
@@ -8501,25 +8570,9 @@ async function curtirComentario(lessonId, dayId, cmtId, btn){
   }
 }
 
-// Texto completo do dia, do próprio conteúdo da lição (não do que está na
-// tela): sai igual tendo a aba Oficial ou Resumo aberta.
-function textoCompletoDoDia(lessonId, dayId){
-  const {content, day} = dadosDoDia(lessonId, dayId);
-  if (!day) return null;
-  const limpo = txt => String(txt || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  const linhas = [
-    `📖 *${t('acoes.licao')} ${numeroDaLicao(lessonId)}${content && content.title ? ' · ' + content.title : ''}*`,
-    `*${day.title}* — ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual)}`
-  ];
-  if (day.centraltexts && day.centraltexts.length) linhas.push('', '_' + day.centraltexts.join(' · ') + '_');
-  linhas.push('', (day.body || []).map(limpo).filter(Boolean).join('\n\n'));
-  linhas.push('', t('acoes.noApp'), linkDoDia(lessonId, dayId));
-  return linhas.join('\n');
-}
-
 // ===== IMAGEM PARA STORIES =====
-// Desenha 1080x1920 num canvas: no celular vai direto para o menu de
-// compartilhar (Instagram aparece lá); no computador baixa o PNG.
+// 1080x1920. O Instagram cobre ~250 px em cima e embaixo com a propria
+// interface, entao tudo que importa fica entre y=250 e y=1670.
 function quebrarLinhas(ctx, texto, largura){
   const linhas = [];
   String(texto || '').split('\n').forEach(paragrafo => {
@@ -8534,84 +8587,92 @@ function quebrarLinhas(ctx, texto, largura){
   return linhas;
 }
 
+// Uma frase curta para o card: story com parágrafo inteiro ninguém lê.
+// Fecha na última frase que cabe em ~30 palavras; se nenhuma cabe, corta.
+function fraseDoCard(texto){
+  const limpo = String(texto || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const palavras = limpo.split(' ');
+  if (palavras.length <= 30) return limpo;
+  const frases = limpo.match(/[^.!?]+[.!?]+/g) || [];
+  let saida = '';
+  for (const f of frases){
+    const junto = (saida + f).trim();
+    if (junto.split(' ').length > 30) break;
+    saida = junto + ' ';
+  }
+  return saida.trim() || palavras.slice(0, 28).join(' ') + '…';
+}
+
+function retanguloRedondo(ctx, x, y, l, a, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.arcTo(x + l, y, x + l, y + a, r); ctx.arcTo(x + l, y + a, x, y + a, r);
+  ctx.arcTo(x, y + a, x, y, r); ctx.arcTo(x, y, x + l, y, r); ctx.closePath();
+}
+
 async function gerarImagemStories(lessonId, dayId){
-  const {content, day} = dadosDoDia(lessonId, dayId);
+  const {day} = dadosDoDia(lessonId, dayId);
   if (!day) return null;
   try{ await document.fonts.ready; }catch(e){}
 
-  const L = 1080, A = 1920, margem = 96;
+  const L = 1080, A = 1920, margem = 104, topo = 300, base = 1540;
   const cv = Object.assign(document.createElement('canvas'), {width:L, height:A});
   const ctx = cv.getContext('2d');
 
   const fundo = ctx.createLinearGradient(0, 0, L, A);
   fundo.addColorStop(0, '#6c4ce0'); fundo.addColorStop(1, '#ff5d8f');
   ctx.fillStyle = fundo; ctx.fillRect(0, 0, L, A);
-  // Dois círculos claros ao fundo, para não ficar um degradê chapado.
   ctx.fillStyle = 'rgba(255,255,255,.08)';
-  ctx.beginPath(); ctx.arc(L*0.85, A*0.16, 300, 0, 7); ctx.fill();
-  ctx.beginPath(); ctx.arc(L*0.1, A*0.82, 240, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(L*0.88, A*0.14, 300, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(L*0.08, A*0.86, 260, 0, 7); ctx.fill();
 
-  // Mede tudo antes de desenhar, para o bloco ficar centralizado na vertical
-  // em vez de sobrar um vazio embaixo quando o resumo e curto.
-  ctx.font = '800 82px Unbounded, sans-serif';
-  const linhasTitulo = quebrarLinhas(ctx, day.title, L - margem*2);
+  const selo = `${t('acoes.licao').toUpperCase()} ${numeroDaLicao(lessonId)} · ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual).split(' · ')[0].toUpperCase()}`;
+  ctx.font = '800 84px Unbounded, sans-serif';
+  const linhasTitulo = quebrarLinhas(ctx, day.title, L - margem*2).slice(0, 4);
   const verso = (day.centraltexts && day.centraltexts.length) ? day.centraltexts[0] : '';
-  ctx.font = '500 46px "Plus Jakarta Sans", sans-serif';
-  const resumo = String(day.summary || (day.body || [])[0] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  const linhasResumo = quebrarLinhas(ctx, resumo, L - margem*2).slice(0, 16);
+  ctx.font = '600 54px "Plus Jakarta Sans", sans-serif';
+  const linhasFrase = quebrarLinhas(ctx, fraseDoCard(day.summary || (day.body || [])[0]), L - margem*2 - 20).slice(0, 9);
 
-  const altura = 60 + linhasTitulo.length*96 + (verso ? 100 : 0) + 64 + linhasResumo.length*66;
-  let y = Math.max(320, (A - altura)/2);
+  // Mede antes de desenhar para centralizar o bloco dentro da area segura.
+  const altura = 80 + 60 + linhasTitulo.length*100 + (verso ? 70 : 0) + 110 + linhasFrase.length*76;
+  let y = topo + Math.max(0, (base - topo - altura) / 2);
 
-  ctx.fillStyle = 'rgba(255,255,255,.85)';
-  ctx.font = '600 34px "JetBrains Mono", monospace';
-  ctx.fillText(`${t('acoes.licao').toUpperCase()} ${numeroDaLicao(lessonId)} · ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual).split(' · ')[0].toUpperCase()}`, margem, y);
-
-  y += 96;
+  ctx.font = '700 32px "JetBrains Mono", monospace';
+  const larguraSelo = ctx.measureText(selo).width + 56;
+  ctx.fillStyle = 'rgba(255,255,255,.2)';
+  retanguloRedondo(ctx, margem, y, larguraSelo, 70, 35); ctx.fill();
   ctx.fillStyle = '#fff';
-  ctx.font = '800 82px Unbounded, sans-serif';
-  linhasTitulo.forEach(l => { ctx.fillText(l, margem, y); y += 96; });
+  ctx.fillText(selo, margem + 28, y + 46);
+  y += 80 + 60 + 70;
+
+  ctx.font = '800 84px Unbounded, sans-serif';
+  linhasTitulo.forEach(l => { ctx.fillText(l, margem, y); y += 100; });
 
   if (verso){
-    y += 24;
-    ctx.fillStyle = 'rgba(255,255,255,.9)';
+    ctx.fillStyle = 'rgba(255,255,255,.85)';
     ctx.font = '600 38px "Plus Jakarta Sans", sans-serif';
     ctx.fillText(verso, margem, y);
-    y += 40;
+    y += 70;
   }
 
-  y += 64;
+  // Aspas grandes e apagadas marcando a frase.
+  y += 40;
+  ctx.fillStyle = 'rgba(255,255,255,.3)';
+  ctx.font = '800 200px Unbounded, sans-serif';
+  ctx.fillText('“', margem - 10, y + 120);
+  y += 110;
   ctx.fillStyle = '#fff';
-  ctx.font = '500 46px "Plus Jakarta Sans", sans-serif';
-  linhasResumo.forEach(l => { ctx.fillText(l, margem, y); y += 66; });
+  ctx.font = '600 54px "Plus Jakarta Sans", sans-serif';
+  linhasFrase.forEach(l => { ctx.fillText(l, margem + 20, y); y += 76; });
 
-  ctx.fillStyle = 'rgba(255,255,255,.75)';
-  ctx.font = '600 32px "JetBrains Mono", monospace';
-  ctx.fillText(t('acoes.rodapeImagem'), margem, A - 150);
-  ctx.font = '400 30px "Plus Jakarta Sans", sans-serif';
-  ctx.fillText(location.host, margem, A - 100);
+  ctx.fillStyle = 'rgba(255,255,255,.85)';
+  ctx.font = '700 32px "JetBrains Mono", monospace';
+  ctx.fillText(t('acoes.rodapeImagem'), margem, 1600);
+  ctx.fillStyle = 'rgba(255,255,255,.7)';
+  ctx.font = '500 30px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText(location.host, margem, 1648);
 
-  // JPEG de alta qualidade: ~1/6 do tamanho do PNG, e o stories aceita igual.
+  // JPEG: ~1/6 do tamanho do PNG, e o stories aceita igual.
   return new Promise(res => cv.toBlob(res, 'image/jpeg', 0.92));
-}
-
-async function compartilharStories(lessonId, dayId){
-  const {day} = dadosDoDia(lessonId, dayId);
-  let blob;
-  try{ blob = await gerarImagemStories(lessonId, dayId); }
-  catch(e){ console.error('❌ Não gerou a imagem:', e); }
-  if (!blob){ avisoRapido(t('acoes.imagemFalhou')); return; }
-
-  const arquivo = new File([blob], `licao-${lessonId}-${dayId}.jpg`, {type:'image/jpeg'});
-  if (navigator.canShare && navigator.canShare({files:[arquivo]})){
-    try{ await navigator.share({files:[arquivo], title: day ? day.title : 'Lição Jovem'}); return; }
-    catch(e){ if (e && e.name === 'AbortError') return; }
-  }
-  const url = URL.createObjectURL(blob);
-  const a = Object.assign(document.createElement('a'), {href:url, download:`licao-${lessonId}-${dayId}.jpg`});
-  a.click();
-  URL.revokeObjectURL(url);
-  avisoRapido(t('acoes.imagemBaixada'));
 }
 
 function textoParaCompartilhar(lessonId, dayId){
@@ -8620,60 +8681,129 @@ function textoParaCompartilhar(lessonId, dayId){
   const quando = dayDisplayDate(lessonId, dayId, idiomaConteudoAtual).split(' · ')[0];
   const titulo = `${t('acoes.licao')} ${numeroDaLicao(lessonId)}${content && content.title ? ' · ' + content.title : ''}`;
   const linhas = [`📖 *${titulo}*`, `${quando ? quando + ' — ' : ''}*${day.title}*`];
+  if (day.centraltexts && day.centraltexts.length) linhas.push('_' + day.centraltexts[0] + '_');
   if (day.summary) linhas.push('', resumirTexto(day.summary, 220));
   linhas.push('', t('acoes.estudeNoApp'));
   return {titulo, texto: linhas.join('\n'), link: linkDoDia(lessonId, dayId)};
 }
 
-// A folha é sempre nossa, porque ela também guarda o "Baixar texto" que saiu
-// do menu ⋮. "Outros apps" chama o menu do próprio celular, quando existe.
+// Dois caminhos só: WhatsApp (texto + link, 1 toque) e Stories (imagem pelo
+// menu do celular, onde aparecem Instagram e status do WhatsApp).
 function compartilharDia(lessonId, dayId){
   const s = textoParaCompartilhar(lessonId, dayId);
   if (s) abrirFolhaCompartilhar(s, lessonId, dayId);
 }
 
+const ICONE_WHATS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3Z"/></svg>';
+const ICONE_INSTA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM21.4 8c-.1-1.5-.4-2.8-1.5-3.9S17.5 2.7 16 2.6c-1.6-.1-6.4-.1-8 0-1.5.1-2.8.4-3.9 1.5S2.7 6.5 2.6 8c-.1 1.6-.1 6.4 0 8 .1 1.5.4 2.8 1.5 3.9s2.4 1.4 3.9 1.5c1.6.1 6.4.1 8 0 1.5-.1 2.8-.4 3.9-1.5s1.4-2.4 1.5-3.9c.1-1.6.1-6.4 0-8Zm-2.1 9.7a3.2 3.2 0 0 1-1.8 1.8c-1.3.5-4.3.4-5.5.4s-4.3.1-5.5-.4a3.2 3.2 0 0 1-1.8-1.8c-.5-1.3-.4-4.3-.4-5.7s-.1-4.3.4-5.6a3.2 3.2 0 0 1 1.8-1.9c1.3-.5 4.3-.4 5.5-.4s4.3-.1 5.5.4a3.2 3.2 0 0 1 1.8 1.9c.5 1.3.4 4.3.4 5.6s.1 4.4-.4 5.7Z"/></svg>';
+
 function abrirFolhaCompartilhar(s, lessonId, dayId){
   document.querySelectorAll('.share-fundo').forEach(el => el.remove());
   const fundo = document.createElement('div');
   fundo.className = 'share-fundo';
-  fundo.innerHTML = `<div class="share-folha" role="dialog" aria-label="Compartilhar">
+  fundo.innerHTML = `<div class="share-folha" role="dialog" aria-label="${t('share.titulo')}">
     <div class="alca"></div>
     <h4>${t('share.titulo')}</h4>
-    <button data-acao="whats"><span class="ico">💬</span> WhatsApp <small>${t('share.whatsResumo')}</small></button>
-    <button data-acao="whats-todo"><span class="ico">📝</span> WhatsApp <small>${t('share.whatsTodo')}</small></button>
-    <button data-acao="stories"><span class="ico">🖼️</span> ${t('share.stories')}</button>
-    <button data-acao="copiar"><span class="ico">🔗</span> ${t('share.copiarLink')}</button>
-    ${navigator.share ? `<button data-acao="outros"><span class="ico">📤</span> ${t('share.outrosApps')}</button>` : ''}
-    <button data-acao="baixar"><span class="ico">📄</span> ${t('share.baixarTexto')}</button>
+    <div class="share-corpo">
+      <div class="share-previa"><span class="share-previa-vazia">${t('share.preparando')}</span></div>
+      <div class="share-botoes">
+        <button class="share-btn share-whats" data-acao="whats">${ICONE_WHATS}<span><b>WhatsApp</b><small>${t('share.whatsResumo')}</small></span></button>
+        <button class="share-btn share-insta" data-acao="stories" disabled>${ICONE_INSTA}<span><b>${t('share.stories')}</b><small>${t('share.preparando')}</small></span></button>
+      </div>
+    </div>
   </div>`;
-  const fechar = () => fundo.remove();
-  const acao = (nome, fn) => {
-    const b = fundo.querySelector(`[data-acao="${nome}"]`);
-    if (b) b.addEventListener('click', fn);
-  };
+  let arquivo = null, urlPrevia = null;
+  const fechar = () => { fundo.remove(); if (urlPrevia) URL.revokeObjectURL(urlPrevia); };
   fundo.addEventListener('click', e => { if (e.target === fundo) fechar(); });
-  acao('whats', () => {
+
+  fundo.querySelector('[data-acao="whats"]').addEventListener('click', () => {
     window.open(`https://wa.me/?text=${encodeURIComponent(s.texto + '\n' + s.link)}`, '_blank');
     fechar();
   });
-  acao('whats-todo', () => {
-    const t = textoCompletoDoDia(lessonId, dayId);
-    if (t) window.open(`https://wa.me/?text=${encodeURIComponent(t)}`, '_blank');
-    fechar();
+
+  const baixar = () => {
+    const a = Object.assign(document.createElement('a'), {href: urlPrevia, download: arquivo.name});
+    a.click();
+    avisoRapido(t('share.imagemSalva'));
+  };
+  // No iPhone o menu de compartilhar só abre se for chamado colado ao toque:
+  // por isso a imagem já vem pronta de antes, e nada é esperado aqui.
+  const botaoStories = fundo.querySelector('[data-acao="stories"]');
+  botaoStories.addEventListener('click', () => {
+    if (!arquivo) return;
+    let copiou = false;
+    try{ navigator.clipboard.writeText(s.link).then(() => { copiou = true; }, () => {}); }catch(e){}
+    if (navigator.canShare && navigator.canShare({files:[arquivo]})){
+      // Só o arquivo: com título ou texto junto o Instagram abre como Reels.
+      navigator.share({files:[arquivo]})
+        .then(() => { if (copiou) avisoRapido(t('share.linkNaFigurinha')); fechar(); })
+        .catch(e => { if (!e || e.name !== 'AbortError') baixar(); });
+      return;
+    }
+    baixar();
   });
-  acao('stories', () => { fechar(); avisoRapido(t('acoes.gerandoImagem')); compartilharStories(lessonId, dayId); });
-  acao('copiar', async () => {
-    try{ await navigator.clipboard.writeText(s.link); avisoRapido(t('acoes.linkCopiado')); }
-    catch(e){ prompt(t('share.copieOLink'), s.link); }
-    fechar();
-  });
-  acao('outros', async () => {
-    fechar();
-    try{ await navigator.share({title: s.titulo, text: s.texto, url: s.link}); }
-    catch(e){ /* fechou o menu do aparelho: nada a fazer */ }
-  });
-  acao('baixar', () => { fechar(); exportarPDF(lessonId, dayId); });
+
   document.body.appendChild(fundo);
+
+  gerarImagemStories(lessonId, dayId).then(blob => {
+    if (!blob) throw new Error('sem imagem');
+    arquivo = new File([blob], `licao-${numeroDaLicao(lessonId)}-${dayId}.jpg`, {type:'image/jpeg'});
+    urlPrevia = URL.createObjectURL(blob);
+    fundo.querySelector('.share-previa').innerHTML = `<img src="${urlPrevia}" alt="">`;
+    botaoStories.disabled = false;
+    botaoStories.querySelector('small').textContent = t('share.storiesSub');
+  }).catch(e => {
+    console.error('❌ Não gerou a imagem:', e);
+    fundo.querySelector('.share-previa').remove();
+    botaoStories.querySelector('small').textContent = t('acoes.imagemFalhou');
+  });
+}
+
+// ===== CONVITE (QR CODE E WHATSAPP) =====
+// Endereço fixo do site oficial: aberto numa prévia de branch, o convite
+// ainda leva ao app de verdade.
+const LINK_DO_APP = 'https://licaojovem-iasd.pages.dev/';
+let _qrPronto = null;
+
+// A biblioteca do QR (~20 KB) só desce quando alguém pede o QR.
+function carregarBibliotecaQr(){
+  if (window.qrcode) return Promise.resolve();
+  if (_qrPronto) return _qrPronto;
+  _qrPronto = new Promise((ok, falhou) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+    s.onload = ok;
+    s.onerror = () => { _qrPronto = null; falhou(new Error('não carregou a biblioteca do QR')); };
+    document.head.appendChild(s);
+  });
+  return _qrPronto;
+}
+
+// Tela cheia e fundo branco: é para projetar na classe ou virar o celular
+// para quem está do lado apontar a câmera.
+async function mostrarQrConvite(){
+  try{ await carregarBibliotecaQr(); }
+  catch(e){ console.error('❌', e.message); avisoRapido(t('convite.qrFalhou')); return; }
+  const qr = qrcode(0, 'M');
+  qr.addData(LINK_DO_APP);
+  qr.make();
+  const tela = document.createElement('div');
+  tela.className = 'qr-tela';
+  tela.innerHTML = `<div class="qr-caixa">
+      <div class="qr-selo">${t('convite.selo')}</div>
+      <h2>Lição Jovem</h2>
+      <div class="qr-codigo">${qr.createSvgTag({cellSize: 8, margin: 2, scalable: true})}</div>
+      <p class="qr-dica">${t('convite.aponteACamera')}</p>
+      <p class="qr-link">${LINK_DO_APP.replace(/^https:\/\//, '').replace(/\/$/, '')}</p>
+      <button class="conta-btn">${t('convite.fechar')}</button>
+    </div>`;
+  tela.addEventListener('click', () => tela.remove());
+  document.body.appendChild(tela);
+}
+
+function convidarPeloWhats(){
+  const texto = t('convite.textoWhats') + '\n' + LINK_DO_APP;
+  window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
 }
 
 // Aviso curto no rodapé. Com rótulo, vira um atalho ("Entrar") e fica mais tempo.
@@ -8788,6 +8918,42 @@ function pararEscutaAoVivo() {
   _refUsuario = null;
   _ouvinteAtivo = null;
 }
+
+// O plano gratuito do Realtime Database aguenta 100 conexões ao mesmo tempo,
+// e cada app aberto segura uma - inclusive aberto esquecido numa aba. Só o
+// .off() não solta: o websocket continua de pé. goOffline() fecha de verdade
+// e goOnline() volta; a escuta se refaz sozinha e traz o que mudou.
+// Os 10 s evitam cair e voltar a cada troca rápida de app; e o celular pode
+// congelar timers de aba escondida, por isso não dá para esperar muito.
+let _timerSegundoPlano = null;
+let _desligadoPorSegundoPlano = false;
+
+function soltarConexaoAoVivo(){
+  clearTimeout(_timerSegundoPlano);
+  _timerSegundoPlano = null;
+  if (!_refUsuario || _desligadoPorSegundoPlano) return;
+  try{
+    firebase.database().goOffline();
+    _desligadoPorSegundoPlano = true;
+    console.log('📴 Conexão ao vivo solta (app em segundo plano)');
+  }catch(e){}
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    clearTimeout(_timerSegundoPlano);
+    _timerSegundoPlano = setTimeout(soltarConexaoAoVivo, 10000);
+    return;
+  }
+  clearTimeout(_timerSegundoPlano);
+  _timerSegundoPlano = null;
+  if (_desligadoPorSegundoPlano) {
+    _desligadoPorSegundoPlano = false;
+    try{ firebase.database().goOnline(); console.log('📡 Conexão ao vivo de volta'); }catch(e){}
+  }
+});
+// Fechando a aba ou saindo do site: solta na hora.
+window.addEventListener('pagehide', soltarConexaoAoVivo);
 
 // ===== FIREBASE AUTH (Google) =====
 function initFirebaseAuth() {
@@ -9588,26 +9754,6 @@ function resumirTexto(texto, limite){
   if(limpo.length <= limite) return limpo;
   const corte = limpo.slice(0, limite);
   return corte.slice(0, corte.lastIndexOf(' ') > 0 ? corte.lastIndexOf(' ') : limite).trim() + '…';
-}
-
-// Continua gerando .txt - o menu passou a dizer "Baixar texto", que é o que
-// o arquivo realmente é. PDF de verdade fica registrado em IDEIAS.md.
-function exportarPDF(lessonId, dayId){
-  const dayEl = document.getElementById(`day-${dayId}`);
-  if(!dayEl) return;
-  const {content, day} = dadosDoDia(lessonId, dayId);
-
-  const titulo = day ? `Lição ${numeroDaLicao(lessonId)} · ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual)}${labelEspecialDoDia(day.date)}\n${day.title}` : (dayEl.querySelector('h2')?.textContent || 'Lição');
-  const corpo = dayEl.querySelector('.source-panel.active')?.innerText || 'Conteúdo indisponível';
-
-  const text = `${titulo}\n\n${corpo}\n\n—\n${linkDoDia(lessonId, dayId)}`;
-  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `licao-${lessonId}-${dayId}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 // Abre a lição e o dia vindos de um link compartilhado (?licao=11&dia=qua).
