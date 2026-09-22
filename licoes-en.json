@@ -14609,5 +14609,1467 @@
         ]
       }
     ]
+  },
+  {
+    "id": 21,
+    "title": "Interpreting the Prophecies",
+    "keyword": "INTERPRET",
+    "days": [
+      {
+        "id": "dom",
+        "title": "What Does This Text Mean?",
+        "summary": "The disciples on the road to Emmaus knew the prophecies, but understood them only in part. Interpreting well requires context, harmony with the whole Bible and humility — isolated texts lead to distortions.",
+        "body": [
+          "<p>The prophecies never came with a guarantee that everyone would understand them correctly — and that is serious: a good interpretation leads to truth; a bad one, to confusion. The disciples on the road to Emmaus confessed: “We trusted that it had been he which should have redeemed Israel” (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"24\" data-v1=\"21\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">Luke 24:21</span><span class=\"vref-pop\"></span>). They expected a political Messiah. The problem was not a lack of prophecies, but a partial reading of them. Jesus explained “in all the scriptures the things concerning himself” (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"24\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Luke 24:27</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Every Christian needs to study the Bible for themselves. It is clear about salvation and deep enough to always challenge us. Jesus asked the expert in the law: “How readest thou?” (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"10\" data-v1=\"26\" data-v2=\"26\" onclick=\"toggleVerseLive(this)\">Luke 10:26</span><span class=\"vref-pop\"></span>). We need to consider the meaning of the words, the immediate context, the historical and cultural context and harmony with the rest of Scripture.</p>",
+          "<p>Many heresies are born from texts taken out of context — sometimes out of ignorance, sometimes on purpose, as Satan did when tempting Jesus. That is why interpreters must combine depth and humility, seeking “sound doctrine” (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">2 Tim. 4:1-5</span><span class=\"vref-pop\"></span>) and starting with what is clear. Philip and the Ethiopian official (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"8\" data-v1=\"26\" data-v2=\"40\" onclick=\"toggleVerseLive(this)\">Acts 8:26-40</span><span class=\"vref-pop\"></span>) show this principle: the prophecies point to Jesus.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Have you ever understood a verse one way and later realized the context said something else?",
+          "Why does Satan like texts taken out of context so much?",
+          "How can we combine depth and humility in Bible study?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What is the main Bible passage for this week?",
+              "opts": [
+                "Acts 8:26-40",
+                "Acts 2:1-21",
+                "Luke 24:1-12",
+                "Isaiah 53"
+              ]
+            },
+            {
+              "text": "What kind of Messiah did the disciples on the road to Emmaus expect?",
+              "opts": [
+                "A Messiah who would die on the cross",
+                "A political Messiah who would free Israel from Rome",
+                "A priest of the temple",
+                "A prophet of the desert"
+              ]
+            },
+            {
+              "text": "What was the problem of the disciples on the road to Emmaus, according to the lesson?",
+              "opts": [
+                "A lack of prophecies",
+                "Not knowing how to read",
+                "A partial and biased understanding of the prophecies",
+                "Not knowing Jesus"
+              ]
+            },
+            {
+              "text": "What question did Jesus ask the expert in the law in Luke 10:26?",
+              "opts": [
+                "“Who is my neighbor?”",
+                "“Why did you doubt?”",
+                "“Where is your faith?”",
+                "“How do you read it?”"
+              ]
+            },
+            {
+              "text": "Which of these is NOT among the steps for understanding a text, according to the lesson?",
+              "opts": [
+                "Reading only the verse, without the rest of the Bible",
+                "Considering the immediate context",
+                "Considering the historical and cultural context",
+                "Checking harmony with Scripture"
+              ]
+            },
+            {
+              "text": "According to the lesson, where do many heresies come from?",
+              "opts": [
+                "Studying in groups",
+                "The habit of taking texts out of their original setting",
+                "Reading aloud",
+                "Praying before studying"
+              ]
+            },
+            {
+              "text": "According to Luke 24:27, what did Jesus explain to the disciples?",
+              "opts": [
+                "The plans to defeat Rome",
+                "The date of His return",
+                "What was said about Him in all the Scriptures",
+                "The rules of the temple"
+              ]
+            },
+            {
+              "text": "According to Luke 24:45, what did Christ open for the disciples?",
+              "opts": [
+                "The doors of the temple",
+                "The empty tomb",
+                "A new book",
+                "Their understanding, so they could understand the Scriptures"
+              ]
+            },
+            {
+              "text": "Which text does the lesson cite about seeking “sound doctrine”?",
+              "opts": [
+                "2 Timothy 4:1-5",
+                "Titus 1:1-4",
+                "1 Timothy 6:10",
+                "Hebrews 11:1"
+              ]
+            },
+            {
+              "text": "Who deliberately twisted the Scriptures when tempting Jesus?",
+              "opts": [
+                "The disciples",
+                "Satan",
+                "Peter",
+                "The shepherds of Bethlehem"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Texts isolated from their context never lead to distortions.",
+            "According to the lesson, only pastors need to study the Bible.",
+            "Sincere people can also misinterpret the Bible.",
+            "Some questions will only be fully answered in eternity."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Understanding the Prophets",
+        "summary": "The Ethiopian official was reading Isaiah 53 without understanding, and God sent Philip to explain that the prophecy spoke of Jesus. The study ended in baptism — and shows that we should study together and share.",
+        "body": [
+          "<p>An official from Ethiopia had come to worship in Jerusalem (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"8\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Acts 8:27</span><span class=\"vref-pop\"></span>) and, on the way back, was reading a scroll of Isaiah. He could not understand the prophecy of the Suffering Servant (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"53\" data-v1=\"3\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Isa. 53:3-7</span><span class=\"vref-pop\"></span>) and wished someone would explain it. In answer to his search, an angel sent Philip, who asked whether he understood what he was reading — and the man admitted he needed help.</p>",
+          "<p>Philip showed that Jesus was rejected, unjustly tried and executed, fulfilling Isaiah, and that He died for our sins. The explanation touched the official’s heart, and he wanted to be baptized (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"8\" data-v1=\"35\" data-v2=\"39\" onclick=\"toggleVerseLive(this)\">Acts 8:35-39</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>The story teaches three things: reading a text is not always enough to understand it; we should learn from one another and not always study alone; and we have a responsibility to share a well-grounded message. God could use angels, but He sends people. All study should make us grow and lead others to Jesus (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"17\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">John 17:17</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Even when we need help to understand the Bible, why do we need to be convinced for ourselves of what we believe?",
+          "Who has been a “Philip” in your life? For whom could you be one?",
+          "Why does God prefer to send people, not angels, to explain His Word?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Where was the official who was reading Isaiah on the road from?",
+              "opts": [
+                "Egypt",
+                "Ethiopia",
+                "Rome",
+                "Greece"
+              ]
+            },
+            {
+              "text": "Who was sent to explain the prophecy to the official?",
+              "opts": [
+                "Peter",
+                "Paul",
+                "Philip",
+                "Barnabas"
+              ]
+            },
+            {
+              "text": "Which prophecy could the official not understand?",
+              "opts": [
+                "The statue of Daniel 2",
+                "The valley of dry bones",
+                "The seventy weeks",
+                "The Suffering Servant, in Isaiah 53"
+              ]
+            },
+            {
+              "text": "How did the official react to Philip’s explanation?",
+              "opts": [
+                "He wanted to be baptized",
+                "He rejected the message",
+                "He went back to Jerusalem to argue",
+                "He asked for years to think about it"
+              ]
+            },
+            {
+              "text": "Which of these is one of the lessons of the story, according to the lesson?",
+              "opts": [
+                "The Bible should always be studied alone",
+                "In Bible study we should learn from one another",
+                "Only angels can explain prophecies",
+                "Reading guarantees understanding everything"
+              ]
+            },
+            {
+              "text": "What are the two goals of Bible study, according to the lesson?",
+              "opts": [
+                "Winning arguments and gaining status",
+                "Memorizing verses and passing tests",
+                "Growing spiritually and leading others to Jesus",
+                "Learning history and geography"
+              ]
+            },
+            {
+              "text": "According to Acts 8:27, why had the official gone to Jerusalem?",
+              "opts": [
+                "To trade",
+                "To arrest Christians",
+                "To visit the king",
+                "To worship"
+              ]
+            },
+            {
+              "text": "Who sent Philip to meet the official?",
+              "opts": [
+                "An angel",
+                "The apostles in Rome",
+                "The king of Ethiopia",
+                "The high priest"
+              ]
+            },
+            {
+              "text": "Which verses tell of Philip’s explanation and the official’s baptism?",
+              "opts": [
+                "Acts 2:38-41",
+                "Acts 8:35-39",
+                "Acts 9:17-19",
+                "Acts 16:30-34"
+              ]
+            },
+            {
+              "text": "According to the lesson, what did Philip show about Jesus from Isaiah?",
+              "opts": [
+                "That He would be king of Ethiopia",
+                "That He was not the Messiah",
+                "That He was rejected, unjustly tried and died for our sins",
+                "That He would return the following year"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "The Ethiopian official already knew something of the Jewish faith.",
+            "The official fully understood Isaiah 53 before meeting Philip.",
+            "Simply reading a text always leads to deep understanding.",
+            "God sends people to help others understand His Word."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Historical and Cultural Context",
+        "summary": "Out of context, Isaiah 65:20 seems to say there will be death on the new earth. In its historical context, it speaks of the blessings of long life for a faithful Israel. And Paul’s “holy kiss” teaches a principle: welcome others warmly.",
+        "body": [
+          "<p>Taken out of context, Isaiah 65:20 could suggest death and sinners on the new earth — which contradicts Isaiah himself, who promises the resurrection of the righteous (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"26\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Isa. 26:19</span><span class=\"vref-pop\"></span>) and the end of death and weeping (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"25\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Isa. 25:8</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ISA\" data-chapter=\"65\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Isa. 65:19</span><span class=\"vref-pop\"></span>). Read in its historical context (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"65\" data-v1=\"17\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Isa. 65:17-20</span><span class=\"vref-pop\"></span>), the text uses poetic language for the blessings of long life Israel would have if it was faithful to the covenant (compare Deuteronomy 28).</p>",
+          "<p>Like Jesus in Matthew 24, Isaiah connects near events to distant realities: what would happen in the present would be a foretaste of the new heavens and the new earth. The new creation was already beginning to break in, with God limiting the power of death over His people.</p>",
+          "<p>Other texts ask us to discover how to apply the principle today. “Greet ye one another with an holy kiss” (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"16\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">1 Cor. 16:20</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ROM\" data-chapter=\"16\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Rom. 16:16</span><span class=\"vref-pop\"></span>) reflected the Greek custom among relatives and friends. The principle is to welcome fellow believers warmly, making them feel part of God’s family — with a handshake, a hug or another way suited to each culture.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "How can we show, in our culture, the eternal principles of Scripture?",
+          "How does your church welcome those who come for the first time? What can you do differently?",
+          "Why does knowing the historical context protect us from wrong interpretations?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What greeting does Paul recommend in 1 Corinthians 16:20?",
+              "opts": [
+                "A handshake",
+                "A bow",
+                "A holy kiss",
+                "A brotherly hug"
+              ]
+            },
+            {
+              "text": "What is the principle behind the “holy kiss,” according to the lesson?",
+              "opts": [
+                "Kissing everyone as an obligation",
+                "Avoiding contact at church",
+                "Greeting only the leaders",
+                "Welcoming fellow believers warmly"
+              ]
+            },
+            {
+              "text": "What does Isaiah 65:20 seem to suggest when read out of context?",
+              "opts": [
+                "That there would be death and sinners on the new earth",
+                "That there would be no new earth",
+                "That the angels would die",
+                "That Israel would disappear"
+              ]
+            },
+            {
+              "text": "In its historical context, what did Isaiah 65:20 refer to?",
+              "opts": [
+                "The destruction of Jerusalem",
+                "The blessings of long life for an Israel faithful to the covenant",
+                "The birth of Jesus",
+                "The fall of Babylon"
+              ]
+            },
+            {
+              "text": "With which text does the lesson say to compare the covenant blessings?",
+              "opts": [
+                "Leviticus 11",
+                "Numbers 6",
+                "Deuteronomy 28",
+                "Joshua 24"
+              ]
+            },
+            {
+              "text": "According to the lesson, who else connected near events to distant realities, like Isaiah?",
+              "opts": [
+                "Paul, in Romans 8",
+                "Peter, in Acts 2",
+                "John, in Revelation 21",
+                "Jesus, in Matthew 24"
+              ]
+            },
+            {
+              "text": "Which text in Isaiah promises that the righteous will rise again?",
+              "opts": [
+                "Isaiah 26:19",
+                "Isaiah 1:18",
+                "Isaiah 7:14",
+                "Isaiah 40:31"
+              ]
+            },
+            {
+              "text": "Which text in Isaiah promises the end of death?",
+              "opts": [
+                "Isaiah 9:6",
+                "Isaiah 25:8",
+                "Isaiah 53:5",
+                "Isaiah 60:1"
+              ]
+            },
+            {
+              "text": "In which culture was greeting with a kiss common among relatives and friends, according to the lesson?",
+              "opts": [
+                "Egyptian culture",
+                "Persian culture",
+                "The Greek culture of the New Testament",
+                "Only imperial Roman culture"
+              ]
+            },
+            {
+              "text": "In which of these letters does Paul also speak of the holy kiss?",
+              "opts": [
+                "Galatians 6:2",
+                "Philippians 4:4",
+                "Titus 3:5",
+                "1 Thessalonians 5:26"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Isaiah 65:20 teaches that there will be sinners on the new earth.",
+            "Out of context, Isaiah 65:20 can seem to contradict other promises.",
+            "The principle of the holy kiss can be lived out in different ways in each culture.",
+            "The historical context does not help us understand a text’s original meaning."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "How Do You Read It?",
+        "summary": "Even Satan quoted the Bible to tempt Jesus. Reading is not enough: we must study in context, compare texts, let Scripture interpret itself and pray for discernment.",
+        "body": [
+          "<p>Understanding the Bible correctly is essential because even Satan distorted the Scriptures when tempting Jesus (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"4\" data-v1=\"5\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Matt. 4:5-7</span><span class=\"vref-pop\"></span>), as he had already done in Eden (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Gen. 3:1-5</span><span class=\"vref-pop\"></span>). Peter also warns that some twist difficult texts “unto their own destruction” (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">2 Pet. 3:16</span><span class=\"vref-pop\"></span>). It is not enough to read the Word: we must understand it correctly.</p>",
+          "<p>God uses people to help others understand the Bible — teachers, preachers, parents and friends — and we too are called to do this. To avoid private interpretations (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">2 Pet. 1:20</span><span class=\"vref-pop\"></span>), we should study in context, compare texts, let Scripture interpret itself and rightly divide the word of truth (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"2\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">2 Tim. 2:15</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>And pray. The psalmist asked: “Give me understanding” (<span class=\"vref\" data-book=\"PSA\" data-chapter=\"119\" data-v1=\"125\" data-v2=\"125\" onclick=\"toggleVerseLive(this)\">Ps. 119:125</span><span class=\"vref-pop\"></span>), and Daniel acknowledged that the people had not sought to understand God’s truth (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"9\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Dan. 9:13</span><span class=\"vref-pop\"></span>). The Bible is a harmonious whole that points to the saving truth of Christ.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Where do you see Bible texts being taken out of context today?",
+          "What step could you add to your Bible study to interpret it better?",
+          "Why is prayer part of interpretation, and not just the start of study?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Who distorted the Scriptures when tempting Jesus in the wilderness?",
+              "opts": [
+                "The Pharisees",
+                "Pilate",
+                "Judas",
+                "Satan"
+              ]
+            },
+            {
+              "text": "According to the lesson, is it enough just to read the Word?",
+              "opts": [
+                "No, we must understand it correctly",
+                "Yes, reading is enough",
+                "Yes, if it is aloud",
+                "Yes, if it is on the Sabbath"
+              ]
+            },
+            {
+              "text": "Which of these is a recommended step to avoid being misled?",
+              "opts": [
+                "Always following your first impression",
+                "Letting Scripture interpret itself",
+                "Using only one verse per topic",
+                "Ignoring the context"
+              ]
+            },
+            {
+              "text": "Whom does God often use to help others understand the Bible?",
+              "opts": [
+                "Only angels",
+                "Only theology books",
+                "People, such as teachers, parents and friends",
+                "No one; each person is on their own"
+              ]
+            },
+            {
+              "text": "According to the lesson, what does the Bible, as a harmonious whole, point to?",
+              "opts": [
+                "Only the history of Israel",
+                "Civil laws",
+                "The deeds of the kings",
+                "The saving truth of Christ"
+              ]
+            },
+            {
+              "text": "At what other moment did Satan distort God’s word, according to the lesson’s texts?",
+              "opts": [
+                "In Eden, with Eve",
+                "On Mount Sinai",
+                "At the tower of Babel",
+                "On Noah’s ark"
+              ]
+            },
+            {
+              "text": "Which text speaks of rightly dividing the word of truth?",
+              "opts": [
+                "2 Timothy 1:7",
+                "2 Timothy 2:15",
+                "2 Timothy 4:7",
+                "1 Timothy 4:12"
+              ]
+            },
+            {
+              "text": "According to 2 Peter 1:20, no prophecy of Scripture is of…",
+              "opts": [
+                "divine origin",
+                "value for today",
+                "private interpretation",
+                "human authorship"
+              ]
+            },
+            {
+              "text": "Which text speaks of people who twist difficult texts to their own destruction?",
+              "opts": [
+                "1 Peter 3:15",
+                "2 Peter 1:19",
+                "Jude 3",
+                "2 Peter 3:16"
+              ]
+            },
+            {
+              "text": "Which text contains the request “Give me understanding”?",
+              "opts": [
+                "Psalm 119:125",
+                "Psalm 23:1",
+                "Psalm 51:10",
+                "Psalm 1:1"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Satan used the Bible to tempt Jesus.",
+            "Prayer is part of the path to understanding the Word.",
+            "Every personal interpretation of the Bible is equally valid.",
+            "Comparing texts gets in the way of understanding the Bible."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "The Bible, Its Own Interpreter",
+        "summary": "Those who believe all Scripture is inspired see its unity and let the Bible interpret itself. Often the explanation is in the same book, or in a later prophet.",
+        "body": [
+          "<p>The way we interpret depends on the presuppositions we bring to the Bible. Those who see it only as a collection of ancient writings do not notice the unity between the books. Starting from the fact that “all scripture is given by inspiration of God, and is profitable” (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16</span><span class=\"vref-pop\"></span>), we recognize that unity and let the Bible be its own interpreter.</p>",
+          "<p>The New Testament expands the Old. In the Sermon on the Mount, Jesus did not replace the law; He revealed its deeper dimensions (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"5\" data-v1=\"17\" data-v2=\"48\" onclick=\"toggleVerseLive(this)\">Matt. 5:17-48</span><span class=\"vref-pop\"></span>), fulfilling the promise of the new covenant, in which the law would be written on the heart (<span class=\"vref\" data-book=\"JER\" data-chapter=\"31\" data-v1=\"31\" data-v2=\"33\" onclick=\"toggleVerseLive(this)\">Jer. 31:31-33</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"HEB\" data-chapter=\"8\" data-v1=\"8\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Heb. 8:8-10</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Often the interpretation is in the same book: Nebuchadnezzar’s dream (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"2\" data-v1=\"31\" data-v2=\"35\" onclick=\"toggleVerseLive(this)\">Dan. 2:31-35</span><span class=\"vref-pop\"></span>) is followed by the explanation (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"2\" data-v1=\"36\" data-v2=\"45\" onclick=\"toggleVerseLive(this)\">Dan. 2:36-45</span><span class=\"vref-pop\"></span>), and the parable of the sower (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"13\" data-v1=\"1\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Matt. 13:1-9</span><span class=\"vref-pop\"></span>) is explained later (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"13\" data-v1=\"18\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Matt. 13:18-23</span><span class=\"vref-pop\"></span>). Other times it comes from a later prophet: 2 Chronicles 36:22, 23 confirms the fulfillment of the 70 years announced by Jeremiah (<span class=\"vref\" data-book=\"JER\" data-chapter=\"25\" data-v1=\"11\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Jer. 25:11, 12</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"29\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Jer. 29:10</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why is it important to recognize our presuppositions when studying the Bible?",
+          "What changes when we start from the principle that the Bible judges us, and not we it?",
+          "Which difficult text could you understand better by comparing it with another part of the Bible?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "According to the lesson, who should interpret the Bible?",
+              "opts": [
+                "The Bible itself",
+                "The majority opinion",
+                "The philosophers",
+                "The culture of each age"
+              ]
+            },
+            {
+              "text": "What did Jesus do with the law in the Sermon on the Mount, according to the lesson?",
+              "opts": [
+                "He abolished the law",
+                "He revealed its deeper, spiritual dimensions",
+                "He replaced it with new laws",
+                "He ignored the Old Testament"
+              ]
+            },
+            {
+              "text": "What deeply influences the way we interpret the Bible?",
+              "opts": [
+                "The color of the cover",
+                "The size of the print",
+                "The presuppositions we bring to it",
+                "The time of day we read"
+              ]
+            },
+            {
+              "text": "Where is the interpretation of Nebuchadnezzar’s dream?",
+              "opts": [
+                "Only in Revelation",
+                "In Ezekiel",
+                "There is no interpretation",
+                "In the book of Daniel itself"
+              ]
+            },
+            {
+              "text": "Which prophecy does 2 Chronicles 36:22, 23 confirm was fulfilled?",
+              "opts": [
+                "The 70 years announced by Jeremiah",
+                "The 2,300 evenings and mornings",
+                "The seventy weeks",
+                "The 400 years in Egypt"
+              ]
+            },
+            {
+              "text": "According to the new covenant, where would God’s law be written?",
+              "opts": [
+                "On tablets of gold",
+                "On the people’s minds and hearts",
+                "On the walls of the temple",
+                "Only on scrolls"
+              ]
+            },
+            {
+              "text": "Which text contains the promise of the new covenant with the law on the heart?",
+              "opts": [
+                "Jeremiah 1:4-10",
+                "Jeremiah 17:9",
+                "Jeremiah 31:31-33",
+                "Jeremiah 52:1-3"
+              ]
+            },
+            {
+              "text": "Where is the explanation of the parable of the sower?",
+              "opts": [
+                "Matthew 5:3-12",
+                "Matthew 25:31-46",
+                "Matthew 28:18-20",
+                "Matthew 13:18-23"
+              ]
+            },
+            {
+              "text": "In which texts does Jeremiah announce the 70 years?",
+              "opts": [
+                "Jeremiah 25:11, 12 and 29:10",
+                "Jeremiah 1:5 and 1:10",
+                "Jeremiah 7:23 and 7:26",
+                "Jeremiah 36:3 and 36:18"
+              ]
+            },
+            {
+              "text": "Which texts in Hebrews does the lesson link to the promise of the new covenant?",
+              "opts": [
+                "Hebrews 1:1-3 and 4:12",
+                "Hebrews 8:8-10 and 10:16",
+                "Hebrews 11:1 and 11:6",
+                "Hebrews 12:1 and 13:8"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "In the Sermon on the Mount, Jesus abolished the teachings of the Old Testament.",
+            "Those who see the Bible only as a collection of ancient writings do not notice its unity.",
+            "Sometimes the interpretation of a text comes from a later prophet.",
+            "According to the lesson, we are the ones who judge the Bible, and not it us."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Reading Ellen White’s Writings",
+        "summary": "To read Ellen White well: prayer and an open mind, context, focus on the principle, everything she wrote on the subject — and checking whether she actually said what is quoted.",
+        "body": [
+          "<p>First, read with prayer and an open mind, not with suspicion. She herself warned: “If you search the Scriptures to vindicate your own opinions, you will never reach the truth” (Christ’s Object Lessons) — the same applies to her writings. Second, consider the context: “time and place must be considered” (Selected Messages, book 1). Isolated sentences have already caused many problems.</p>",
+          "<p>Third, look for the principle. In 1894, she advised the members in Battle Creek against buying bicycles (Testimonies for the Church, vol. 8); the principle was the responsible use of money, because bicycles were very expensive at the time. Fourth, study everything she wrote on the subject: she regretted that quotations were used to make her testify in favor of things that were not in harmony with her thinking (Selected Messages, book 1).</p>",
+          "<p>Finally, check whether she actually said what is quoted — many sentences attributed to her are not hers, especially with quick searches and artificial intelligence that are not always accurate. The safest way is to check the original reference.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why did the Ethiopian official need someone to help him understand Isaiah? (Acts 8:26-35)",
+          "What was the result of that Bible study? (Acts 8:36-40)",
+          "How did Jesus help the disciples understand the Scriptures? (Luke 24:25-27, 44, 45)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "With what attitude should we approach Ellen White’s writings?",
+              "opts": [
+                "With suspicion and doubt",
+                "With prayer, a teachable spirit and an open mind",
+                "In a hurry",
+                "Looking for sentences to argue with"
+              ]
+            },
+            {
+              "text": "What is the safest way to know whether a quote from Ellen White is authentic?",
+              "opts": [
+                "See how many likes it has",
+                "Ask a friend",
+                "Check the original reference",
+                "Trust the first search result"
+              ]
+            },
+            {
+              "text": "What did Ellen White advise the members in Battle Creek against in 1894?",
+              "opts": [
+                "Buying cars",
+                "Using telephones",
+                "Reading newspapers",
+                "Buying bicycles"
+              ]
+            },
+            {
+              "text": "What was the principle behind the counsel about bicycles?",
+              "opts": [
+                "The responsible use of money",
+                "The danger of accidents",
+                "A ban on sports",
+                "Sabbath rest"
+              ]
+            },
+            {
+              "text": "According to Ellen White, what happens to those who search the Scriptures to vindicate their own opinions?",
+              "opts": [
+                "They will become wiser",
+                "They will never reach the truth",
+                "They will convince everyone",
+                "They will find new prophecies"
+              ]
+            },
+            {
+              "text": "Why does the lesson warn about quick searches with artificial intelligence?",
+              "opts": [
+                "Because the church forbids them",
+                "Because they only work in English",
+                "Because they are not always accurate and sentences that are not hers circulate",
+                "Because they always invent true references"
+              ]
+            },
+            {
+              "text": "Which work contains the phrase “time and place must be considered”?",
+              "opts": [
+                "Christ’s Object Lessons",
+                "Steps to Christ",
+                "The Great Controversy",
+                "Selected Messages, book 1"
+              ]
+            },
+            {
+              "text": "Which work contains the warning about searching the Scriptures to vindicate one’s own opinions?",
+              "opts": [
+                "Christ’s Object Lessons",
+                "Early Writings",
+                "Education",
+                "Christian Experience and Teachings"
+              ]
+            },
+            {
+              "text": "Where is the message about bicycles?",
+              "opts": [
+                "Testimonies for the Church, vol. 1",
+                "Testimonies for the Church, vol. 8",
+                "Selected Messages, book 3",
+                "Counsels on Health"
+              ]
+            },
+            {
+              "text": "Facing a difficult statement by Ellen White, what does the lesson recommend?",
+              "opts": [
+                "Discard it",
+                "Apply it literally, without thinking",
+                "Analyze it together with everything she wrote on the subject",
+                "Consider it above the Bible"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Many sentences attributed to Ellen White are not hers.",
+            "An isolated sentence is enough to understand Ellen White’s thinking.",
+            "Time and place do not need to be considered when reading Ellen White.",
+            "Ellen White regretted the improper use of her writings."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Interpreting the Bible the Right Way",
+        "summary": "“We need to talk” can be scary until you find out it was a surprise. It is the same with the Bible: the message is right; the risk is in the interpretation.",
+        "body": [
+          "<p>A boy got a text on his phone: “We need to talk. I’ll explain later.” In minutes he came up with a thousand theories — and hours later found out it was a birthday surprise. The message was right; the problem was the interpretation. Many people do the same with the Bible: they take an isolated verse, understand it their own way and create a wrong picture of God.</p>",
+          "<p>The disciples on the road to Emmaus knew the prophecies, but expected a political Messiah. When Jesus explained the Scriptures (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"24\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Luke 24:27</span><span class=\"vref-pop\"></span>), their hearts burned: understood the right way, the Bible stops being information and becomes transformation. The Ethiopian official also had the humility to say: “How can I, except some man should guide me?”</p>",
+          "<p>The Bible was not made to become a loose quote on the internet. Study with prayer, context and humility, letting the Holy Spirit teach you. Studying the Bible is not about winning arguments; it is about knowing God’s heart better.</p>"
+        ],
+        "reflectTitle": "Open Dialogue (group discussion)",
+        "reflect": [
+          "Have you ever interpreted something completely wrong and realized it later?",
+          "Why are there so many different interpretations of the Bible today?",
+          "What most keeps young people from really studying the Bible?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Testing the Prophets",
+    "keyword": "TEST",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Like a Diamond",
+        "summary": "Just as a real diamond withstands testing, the gift of prophecy needs to be tested. Supernatural signs alone are not enough; the Bible is the final standard for evaluating any claim.",
+        "body": [
+          "<p>To find out whether a diamond is real, you can heat it and plunge it into cold water: the real one holds up, while an imitation will probably shatter. The gift of prophecy is worth far more than a diamond — so we should not accept without examination anyone who claims to have it (<span class=\"vref\" data-book=\"1TH\" data-chapter=\"5\" data-v1=\"19\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">1 Thess. 5:19-21</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"1JN\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">1 John 4:1</span><span class=\"vref-pop\"></span>). No single piece of evidence is enough.</p>",
+          "<p>A prophet receives direct communication from God, often through dreams and visions (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"12\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Num. 12:6</span><span class=\"vref-pop\"></span>), sometimes with physical phenomena: Daniel lost his strength and had no breath left in him (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"10\" data-v1=\"7\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Dan. 10:7-19</span><span class=\"vref-pop\"></span>). But supernatural phenomena do not, by themselves, prove that someone is inspired by God (<span class=\"vref\" data-book=\"DEU\" data-chapter=\"13\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Deut. 13:1-3</span><span class=\"vref-pop\"></span>) — Satan also produces manifestations.</p>",
+          "<p>The prophets returned to the earlier writings as their standard. They brought progressive clarifications, but they never contradicted what had already been revealed since Genesis 3:15. That is why the Bible is the final standard: a true prophet never contradicts, diminishes or draws attention away from biblical truth.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why is a supernatural sign not enough to trust someone who claims to speak for God?",
+          "How do you test the “spiritual messages” that reach you on your phone?",
+          "What does it mean to say that the Bible is the final standard?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What is the main Bible passage for this week?",
+              "opts": [
+                "Matthew 7:13-29",
+                "Matthew 24:1-14",
+                "Acts 8:26-40",
+                "Jeremiah 36"
+              ]
+            },
+            {
+              "text": "What does the lesson compare the gift of prophecy to?",
+              "opts": [
+                "A sword",
+                "A diamond",
+                "A lighthouse",
+                "A key"
+              ]
+            },
+            {
+              "text": "According to the lesson, is a single piece of evidence enough to confirm a prophet?",
+              "opts": [
+                "Yes, if it is a miracle",
+                "Yes, if it is a vision",
+                "No",
+                "Yes, if many people believe"
+              ]
+            },
+            {
+              "text": "What happened to Daniel when he received visions (Dan. 10)?",
+              "opts": [
+                "He became stronger than before",
+                "He began to sing",
+                "Nothing unusual",
+                "He lost his strength and had no breath left"
+              ]
+            },
+            {
+              "text": "Why do supernatural phenomena not prove that someone is inspired by God?",
+              "opts": [
+                "Because Satan can also produce supernatural manifestations",
+                "Because supernatural phenomena do not exist",
+                "Because only priests can have visions",
+                "Because God never uses signs"
+              ]
+            },
+            {
+              "text": "What does a true prophet never do with biblical truth?",
+              "opts": [
+                "Study it",
+                "Contradict, diminish or draw attention away from it",
+                "Quote it",
+                "Explain it"
+              ]
+            },
+            {
+              "text": "Which text warns that a sign that comes true is not enough if the prophet leads to other gods?",
+              "opts": [
+                "Deuteronomy 6:4-9",
+                "Deuteronomy 28:1, 2",
+                "Deuteronomy 13:1-3",
+                "Deuteronomy 34:10"
+              ]
+            },
+            {
+              "text": "Since which text did God begin to reveal the plan of redemption, according to the lesson?",
+              "opts": [
+                "Genesis 12:1",
+                "Exodus 20:1",
+                "Isaiah 53:5",
+                "Genesis 3:15"
+              ]
+            },
+            {
+              "text": "Which text says not to despise prophecies, but to test all things?",
+              "opts": [
+                "1 Thessalonians 5:19-21",
+                "1 Thessalonians 4:16",
+                "Philippians 4:8",
+                "Colossians 2:8"
+              ]
+            },
+            {
+              "text": "Which text by Ellen G. White is recommended this week?",
+              "opts": [
+                "Steps to Christ, chapter 3",
+                "Christian Experience and Teachings, appendix 2: “Tested by the Word”",
+                "Prophets and Kings, chapter 14",
+                "The Great Controversy, chapter 37"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "A real diamond withstands the test of heat and cold water.",
+            "We should accept without examination anyone who claims to have the gift of prophecy.",
+            "Physical phenomena alone prove that a prophet is from God.",
+            "The prophets never contradicted what had already been revealed."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Good Fruit",
+        "summary": "Jesus said false prophets would be known by their fruit. True prophets also have flaws, but their lives do not contradict the message and they show love for God and for the people.",
+        "body": [
+          "<p>In the Sermon on the Mount, Jesus warned that false prophets would arise (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"7\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Matt. 7:15</span><span class=\"vref-pop\"></span>) and gave a criterion: “by their fruits ye shall know them” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"7\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Matt. 7:20</span><span class=\"vref-pop\"></span>). Fruit takes time: a tree that bears bad fruit cannot hide the problem forever. False prophets often lead people into sin and live with arrogance, extravagance and double lives.</p>",
+          "<p>Being a prophet does not make anyone infallible. Jonah, Paul and Peter had flaws (<span class=\"vref\" data-book=\"JON\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Jon. 1:1-3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ACT\" data-chapter=\"15\" data-v1=\"36\" data-v2=\"39\" onclick=\"toggleVerseLive(this)\">Acts 15:36-39</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"GAL\" data-chapter=\"2\" data-v1=\"11\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Gal. 2:11-14</span><span class=\"vref-pop\"></span>). Only God is perfect. But a prophet’s life should reflect the character of Jesus and cannot contradict the message he or she delivers.</p>",
+          "<p>Many prophets bore good fruit: Moses led Israel in the wilderness (<span class=\"vref\" data-book=\"DEU\" data-chapter=\"34\" data-v1=\"10\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Deut. 34:10-12</span><span class=\"vref-pop\"></span>); Haggai encouraged Judah to resume work on the temple, which had stopped for 19 years (<span class=\"vref\" data-book=\"HAG\" data-chapter=\"1\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Hag. 1:12</span><span class=\"vref-pop\"></span>); Isaiah served four kings (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Isa. 1:1</span><span class=\"vref-pop\"></span>). And we do not forget Daniel’s confession (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"9\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Dan. 9:15</span><span class=\"vref-pop\"></span>) and Jeremiah’s tears (<span class=\"vref\" data-book=\"JER\" data-chapter=\"9\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Jer. 9:1</span><span class=\"vref-pop\"></span>) for the people. Even when persecuted, they always showed genuine love for God and His people.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "What kind of fruit would you expect to find in the life of someone who claims to be a prophet?",
+          "Why is time necessary to evaluate someone’s fruit?",
+          "What fruit has your own life shown about what you believe?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "According to Matthew 7:20, how are false prophets recognized?",
+              "opts": [
+                "By their clothes",
+                "By their fruit",
+                "By the number of followers",
+                "By their age"
+              ]
+            },
+            {
+              "text": "In which sermon did Jesus give criteria for evaluating prophets?",
+              "opts": [
+                "The prophetic sermon on the Mount of Olives",
+                "The Bread of Life discourse",
+                "The Sermon on the Mount",
+                "The high priestly prayer"
+              ]
+            },
+            {
+              "text": "Does being a prophet make someone free from sin?",
+              "opts": [
+                "Yes, always",
+                "Yes, after the first vision",
+                "Only the Old Testament prophets",
+                "No; only God is perfect"
+              ]
+            },
+            {
+              "text": "For how many years had the rebuilding of the temple been stopped when Haggai encouraged the people?",
+              "opts": [
+                "19 years",
+                "70 years",
+                "3 years",
+                "40 years"
+              ]
+            },
+            {
+              "text": "How many kings of Judah did Isaiah serve, according to the lesson?",
+              "opts": [
+                "One",
+                "Four",
+                "Two",
+                "Seven"
+              ]
+            },
+            {
+              "text": "What is the essential mark of a fruitful prophetic ministry, according to the lesson?",
+              "opts": [
+                "Personal wealth",
+                "Popularity",
+                "Genuine love for God and His people",
+                "Public miracles"
+              ]
+            },
+            {
+              "text": "Which text shows Peter’s failing rebuked by Paul?",
+              "opts": [
+                "Galatians 5:1",
+                "Galatians 6:9",
+                "Galatians 3:28",
+                "Galatians 2:11-14"
+              ]
+            },
+            {
+              "text": "Which text shows Jonah fleeing from God’s call?",
+              "opts": [
+                "Jonah 1:1-3",
+                "Jonah 3:4",
+                "Jonah 2:1",
+                "Jonah 4:11"
+              ]
+            },
+            {
+              "text": "Which text highlights Moses’ unique ministry leading Israel?",
+              "opts": [
+                "Deuteronomy 5:6-21",
+                "Deuteronomy 34:10-12",
+                "Deuteronomy 31:6",
+                "Deuteronomy 11:1"
+              ]
+            },
+            {
+              "text": "Which text shows the disagreement between Paul and Barnabas?",
+              "opts": [
+                "Acts 2:42-47",
+                "Acts 9:1-9",
+                "Acts 15:36-39",
+                "Acts 17:22-31"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "True prophets never had character flaws.",
+            "A tree’s fruit can only be evaluated over time.",
+            "A prophet’s life cannot contradict the message he or she delivers.",
+            "False prophets are always exposed on the first day."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Conditional Prophecies",
+        "summary": "One test of a prophet is the fulfillment of his predictions. But some prophecies are conditional: they depend on people’s response — which is why Nineveh, which repented, was not destroyed in forty days.",
+        "body": [
+          "<p>Prophesying goes far beyond predicting the future: prophets call people back to the Word, guide, warn and encourage. Even so, the fulfillment of prophecies is an important test: if the prophet’s word does not come to pass, “that is the thing which the Lord hath not spoken” (<span class=\"vref\" data-book=\"DEU\" data-chapter=\"18\" data-v1=\"22\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">Deut. 18:22</span><span class=\"vref-pop\"></span>). Jeremiah challenged the people to compare his predictions with those of the other prophets (<span class=\"vref\" data-book=\"JER\" data-chapter=\"28\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Jer. 28:9</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"28\" data-v1=\"15\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Jer. 28:15-17</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>But some prophecies are conditional: they depend on people’s response. Jonah announced: “Yet forty days, and Nineveh shall be overthrown” (<span class=\"vref\" data-book=\"JON\" data-chapter=\"3\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jon. 3:4</span><span class=\"vref-pop\"></span>), and it did not happen. Why? God promised to withhold judgment if a nation repented (<span class=\"vref\" data-book=\"JER\" data-chapter=\"18\" data-v1=\"7\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Jer. 18:7, 8</span><span class=\"vref-pop\"></span>) and to withdraw the blessings from a nation that turned away from Him (<span class=\"vref\" data-book=\"JER\" data-chapter=\"18\" data-v1=\"9\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Jer. 18:9, 10</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>The Ninevites believed and changed course, and God did not destroy them at that time (<span class=\"vref\" data-book=\"JON\" data-chapter=\"3\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Jon. 3:10</span><span class=\"vref-pop\"></span>). Later, when Nineveh returned to wickedness, judgment came. Our choices largely determine the reality we will live.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why is it important to understand the concept of conditional prophecy?",
+          "What does the story of Nineveh reveal about God’s willingness to forgive?",
+          "What choice of yours today could change the course of your future?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Which prophet announced that Nineveh would be destroyed in forty days?",
+              "opts": [
+                "Jeremiah",
+                "Nahum",
+                "Jonah",
+                "Elijah"
+              ]
+            },
+            {
+              "text": "Why was Nineveh not destroyed at that time?",
+              "opts": [
+                "Because Jonah got the prophecy wrong",
+                "Because God forgot",
+                "Because an army defended it",
+                "Because the people believed and repented"
+              ]
+            },
+            {
+              "text": "What is a conditional prophecy?",
+              "opts": [
+                "A prophecy that depends on people’s response",
+                "A false prophecy",
+                "A prophecy without a date",
+                "A prophecy only for kings"
+              ]
+            },
+            {
+              "text": "According to the lesson, is the prophet’s mission limited to predicting the future?",
+              "opts": [
+                "Yes, only that",
+                "No; it includes guiding, warning and encouraging",
+                "Yes, and performing miracles",
+                "No, it is only to punish"
+              ]
+            },
+            {
+              "text": "What happened to Nineveh later, according to the lesson?",
+              "opts": [
+                "It became the capital of Israel",
+                "It never sinned again",
+                "It returned to wickedness and judgment came",
+                "It was rebuilt by Jonah"
+              ]
+            },
+            {
+              "text": "What did Jeremiah challenge the people to do?",
+              "opts": [
+                "Ignore all the prophets",
+                "Flee to Egypt",
+                "Cast lots",
+                "Compare his predictions with those of the other prophets"
+              ]
+            },
+            {
+              "text": "According to Deuteronomy 18:22, what shows that the Lord has not spoken through a prophet?",
+              "opts": [
+                "The word does not come to pass",
+                "The prophet is young",
+                "The prophet is poor",
+                "The prophet is a foreigner"
+              ]
+            },
+            {
+              "text": "According to Jeremiah 18:7, 8, what does God do if the warned nation repents?",
+              "opts": [
+                "He increases the punishment",
+                "He withholds the announced judgment",
+                "He ignores the repentance",
+                "He sends another prophet"
+              ]
+            },
+            {
+              "text": "Which text records that God did not destroy Nineveh when He saw its repentance?",
+              "opts": [
+                "Jonah 1:17",
+                "Jonah 2:10",
+                "Jonah 3:10",
+                "Jonah 4:6"
+              ]
+            },
+            {
+              "text": "According to Jeremiah 18:9, 10, what happens to a blessed nation that turns away from God?",
+              "opts": [
+                "The blessings continue forever",
+                "It receives double blessings",
+                "Nothing changes",
+                "God withdraws the promised blessings"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "The fulfillment of prophecies is a criterion for testing a prophet.",
+            "Some prophecies depend on people’s response.",
+            "Jonah was a false prophet, because his prophecy did not come true.",
+            "Our choices have nothing to do with what we will live in the future."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "A Time of Counterfeits",
+        "summary": "Fake profiles, scams and AI videos imitate what is real — and the same happens in the spiritual realm. False prophets tend to say only what pleases and speak from their own hearts, not from the mouth of the Lord.",
+        "body": [
+          "<p>We live surrounded by counterfeits: fake profiles, manipulated news, online scams, pirated products and AI-generated videos. The spiritual realm is no different — many claim to speak for God, sometimes with physical phenomena. Jesus warned that false prophets would arise and taught us to recognize them by their fruit.</p>",
+          "<p>A common mark of false prophets is pleasant messages. The people asked not to be told what is right (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"30\" data-v1=\"9\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Isa. 30:9, 10</span><span class=\"vref-pop\"></span>), loved prophets who lied (<span class=\"vref\" data-book=\"JER\" data-chapter=\"5\" data-v1=\"30\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Jer. 5:30, 31</span><span class=\"vref-pop\"></span>), and times would come when people would look for teachers who say what they want to hear (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"4\" data-v1=\"3\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">2 Tim. 4:3, 4</span><span class=\"vref-pop\"></span>). Jesus warned: “Woe unto you, when all men shall speak well of you!” (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"6\" data-v1=\"26\" data-v2=\"26\" onclick=\"toggleVerseLive(this)\">Luke 6:26</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Another mark is speaking from their own hearts. Jeremiah said they speak “a vision of their own heart, and not out of the mouth of the Lord” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"23\" data-v1=\"16\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Jer. 23:16, 17</span><span class=\"vref-pop\"></span>), and Ezekiel denounced those who prophesied following their own spirit, having seen nothing (<span class=\"vref\" data-book=\"EZK\" data-chapter=\"13\" data-v1=\"1\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Ezek. 13:1-10</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "If someone said they were a prophet with a message for your life, how would you react?",
+          "Why are messages that only please so attractive — and so dangerous?",
+          "How do you recognize a fake video or piece of news? What parallels are there with the spiritual life?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "According to Jesus, how would false prophets be recognized?",
+              "opts": [
+                "By their clothes",
+                "By their titles",
+                "By their voice",
+                "By their fruit"
+              ]
+            },
+            {
+              "text": "What kind of message is a common mark of false prophets?",
+              "opts": [
+                "Pleasant messages that only say what people want to hear",
+                "Messages of repentance",
+                "Bible-based messages",
+                "Messages of warning"
+              ]
+            },
+            {
+              "text": "Which of these does the lesson mention as an example of a modern counterfeit?",
+              "opts": [
+                "History books",
+                "Videos created with artificial intelligence",
+                "Old maps",
+                "Dictionaries"
+              ]
+            },
+            {
+              "text": "Can false prophets come with physical phenomena, according to the lesson?",
+              "opts": [
+                "No, never",
+                "Only in dreams",
+                "Yes",
+                "Only in the Old Testament"
+              ]
+            },
+            {
+              "text": "According to Jeremiah 23:16, where do the false prophets’ visions come from?",
+              "opts": [
+                "The mouth of the Lord",
+                "The angels",
+                "The temple",
+                "Their own heart"
+              ]
+            },
+            {
+              "text": "According to 2 Timothy 4:3, 4, what would people look for?",
+              "opts": [
+                "Teachers who say what they want to hear",
+                "Sound doctrine",
+                "Prophets who would confront them",
+                "More time for Bible study"
+              ]
+            },
+            {
+              "text": "What does Jesus say in Luke 6:26?",
+              "opts": [
+                "“Blessed are the peacemakers”",
+                "“Woe to you when all men speak well of you!”",
+                "“Love your enemies”",
+                "“Judge not”"
+              ]
+            },
+            {
+              "text": "Which text shows the people loving prophets who lie?",
+              "opts": [
+                "Jeremiah 29:11",
+                "Jeremiah 31:3",
+                "Jeremiah 5:30, 31",
+                "Jeremiah 1:5"
+              ]
+            },
+            {
+              "text": "Which text denounces prophets who followed their own spirit without having seen anything?",
+              "opts": [
+                "Ezekiel 37:1-10",
+                "Ezekiel 36:26",
+                "Ezekiel 1:1-4",
+                "Ezekiel 13:1-10"
+              ]
+            },
+            {
+              "text": "Which text in Isaiah shows the people asking not to be told what is right?",
+              "opts": [
+                "Isaiah 30:9, 10",
+                "Isaiah 6:8",
+                "Isaiah 9:6",
+                "Isaiah 40:31"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "False prophets usually announce messages that confront sin.",
+            "Counterfeits also exist in the spiritual realm.",
+            "False prophets often speak according to their own hearts.",
+            "A pleasant message is always a sign that it comes from God."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "The Incarnation of Christ",
+        "summary": "A decisive test is what the prophet teaches about Jesus. Whoever does not confess that Christ came in the flesh is not from God — and true prophets place the whole truth about Jesus at the center.",
+        "body": [
+          "<p>Another fundamental test is what the prophet teaches about Jesus. According to John, whoever does not confess that “Jesus Christ is come in the flesh” is not of God (<span class=\"vref\" data-book=\"1JN\" data-chapter=\"4\" data-v1=\"2\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">1 John 4:2, 3</span><span class=\"vref-pop\"></span>). John was fighting false teachers who said Jesus only seemed human — but the test goes beyond admitting that He existed, something even secular historians acknowledge.</p>",
+          "<p>True prophets recognize that Jesus is God incarnate and truly human (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">John 1:1-3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">John 1:14</span><span class=\"vref-pop\"></span>), that He was tempted and never sinned (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"4\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Heb. 4:15</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2CO\" data-chapter=\"5\" data-v1=\"21\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Cor. 5:21</span><span class=\"vref-pop\"></span>). They help people understand His mission to save sinners (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">John 3:16</span><span class=\"vref-pop\"></span>), and they strengthen faith in the resurrection and hope in Christ’s return (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"11\" data-v1=\"25\" data-v2=\"25\" onclick=\"toggleVerseLive(this)\">John 11:25</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JHN\" data-chapter=\"14\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">John 14:1-3</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>In short, they accept the whole biblical truth about Christ: His mission, sinless life, atoning death, resurrection, ministry in heaven and second coming. Prophets who exalt Jesus do not form their own group of followers or promote themselves (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"4\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Acts 4:12</span><span class=\"vref-pop\"></span>); they always point to Him.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Jesus is fully God, yet He died as our Substitute. Why is this truth central to our faith?",
+          "How can you tell when someone is promoting themselves instead of Jesus?",
+          "Which truth about Christ most sustains your faith today?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "According to 1 John 4:2, 3, what does the spirit that is from God confess?",
+              "opts": [
+                "That Jesus Christ has come in the flesh",
+                "That Jesus was only a good teacher",
+                "That Jesus only seemed human",
+                "That Jesus did not rise again"
+              ]
+            },
+            {
+              "text": "According to the lesson, who should be at the center of a prophet’s teachings?",
+              "opts": [
+                "The prophet himself",
+                "Jesus",
+                "The angels",
+                "The church"
+              ]
+            },
+            {
+              "text": "Which false teachers was John fighting when he wrote 1 John 4?",
+              "opts": [
+                "Those who said Jesus was only human",
+                "Those who denied creation",
+                "Those who taught that Jesus was not really human",
+                "Those who kept the Sabbath"
+              ]
+            },
+            {
+              "text": "What do even secular historians acknowledge, according to the lesson?",
+              "opts": [
+                "That Jesus is God",
+                "That Jesus rose again",
+                "That Jesus will return",
+                "That Jesus was a real person who lived on earth"
+              ]
+            },
+            {
+              "text": "What do true prophets teach about Jesus’ temptations?",
+              "opts": [
+                "That He was tempted, but never sinned",
+                "That He was never tempted",
+                "That He sinned once",
+                "That the temptations were only an appearance"
+              ]
+            },
+            {
+              "text": "How do prophets who exalt Jesus act, according to the lesson?",
+              "opts": [
+                "They seek followers loyal to them",
+                "They do not form their own group or promote themselves",
+                "They charge for their messages",
+                "They demand blind obedience"
+              ]
+            },
+            {
+              "text": "Which text states that Jesus was tempted in all points, yet without sin?",
+              "opts": [
+                "Hebrews 11:1",
+                "Hebrews 1:3",
+                "Hebrews 4:15",
+                "Hebrews 13:8"
+              ]
+            },
+            {
+              "text": "Which text speaks of Jesus’ mission to save those who believe?",
+              "opts": [
+                "John 2:1",
+                "John 4:24",
+                "John 21:15",
+                "John 3:16"
+              ]
+            },
+            {
+              "text": "Which text states that there is salvation in no other name?",
+              "opts": [
+                "Acts 4:12",
+                "Acts 1:8",
+                "Acts 2:38",
+                "Acts 20:35"
+              ]
+            },
+            {
+              "text": "Which texts does the lesson cite about the resurrection and Christ’s return?",
+              "opts": [
+                "John 6:35 and 8:12",
+                "John 11:25 and 14:1-3",
+                "John 10:11 and 15:5",
+                "John 1:29 and 19:30"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "True prophets recognize Jesus as God incarnate and truly human.",
+            "Acknowledging only that Jesus existed is enough to pass the test of 1 John 4.",
+            "True prophets usually form groups of followers for themselves.",
+            "God’s prophets were also sinners who needed the gospel."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Taste and See",
+        "summary": "Faced with skepticism, the early Adventists presented arguments in favor of Ellen White’s gift: a biblical basis, good fruit, supernatural signs and messages that exalt Christ and the Bible. The strongest proof is to read her writings for yourself.",
+        "body": [
+          "<p>After her first vision, in December 1844, some questioned Ellen White’s gift, and the early Adventists developed arguments in its defense. First, a theological basis: with Joel 2:28, 29 and Revelation 12:17, they concluded that the gift of prophecy would remain until the last days as a mark of God’s people. Second, good fruit: her counsel helped unify the participants of the Sabbath Conferences at the end of the 1840s.</p>",
+          "<p>Third, the supernatural elements: in vision she mentioned facts impossible to know naturally, announced future events, did not breathe and did not control when the visions began or ended. Fourth, as 1 John 4 requires, her messages exalted Christ and the Bible: “Lift up Jesus, you that teach the people” (Gospel Workers). In her last talk at a General Conference session, she lifted up the Bible and said: “I commend unto you this Book.”</p>",
+          "<p>The strongest evidence, however, is personal experience with her writings, read with prayer. A good start is Steps to Christ; then the five-volume Conflict of the Ages series, from Genesis to Revelation. Taste and see for yourself!</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why is it important to look at the life and ministry of someone who claims to be a prophet? (Matt. 7:15-20)",
+          "Even with good fruit, can true prophets also make mistakes and have flaws? (Jon. 1:1-3; Acts 15:36-39; Gal. 2:11-14)",
+          "How should we react when someone claims to receive prophetic messages? (1 Thess. 5:19-21)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "In what month and year did Ellen White have her first vision?",
+              "opts": [
+                "October 1844",
+                "December 1844",
+                "January 1863",
+                "May 1909"
+              ]
+            },
+            {
+              "text": "Which book by Ellen White does the lesson suggest as a starting point?",
+              "opts": [
+                "Selected Messages",
+                "Testimonies for the Church",
+                "Steps to Christ",
+                "Gospel Workers"
+              ]
+            },
+            {
+              "text": "Which texts did the early Adventists use to show that the gift would continue until the end?",
+              "opts": [
+                "Genesis 1:1 and John 1:1",
+                "Psalm 23 and Matthew 5",
+                "Isaiah 6 and Daniel 2",
+                "Joel 2:28, 29 and Revelation 12:17"
+              ]
+            },
+            {
+              "text": "What did Ellen’s gift help unify at the end of the 1840s?",
+              "opts": [
+                "The participants of the Sabbath Conferences",
+                "The Methodist churches",
+                "The local governments",
+                "The public schools"
+              ]
+            },
+            {
+              "text": "What did Ellen White do in her last talk at a General Conference session?",
+              "opts": [
+                "She announced the date of Jesus’ return",
+                "She lifted up the Bible and said: “I commend unto you this Book”",
+                "She read from her own book",
+                "She asked to be elected president"
+              ]
+            },
+            {
+              "text": "According to the lesson, what is one of the strongest evidences in favor of Ellen White’s gift?",
+              "opts": [
+                "The number of books sold",
+                "The critics’ opinion",
+                "Personal experience with her writings, read with prayer",
+                "Old photographs"
+              ]
+            },
+            {
+              "text": "Which work contains the quote “Lift up Jesus, you that teach the people”?",
+              "opts": [
+                "Steps to Christ",
+                "The Great Controversy",
+                "Education",
+                "Gospel Workers"
+              ]
+            },
+            {
+              "text": "How many volumes does the Conflict of the Ages series suggested in the lesson have?",
+              "opts": [
+                "Five",
+                "Three",
+                "Nine",
+                "Twelve"
+              ]
+            },
+            {
+              "text": "Where are Ellen White’s writings available electronically, according to the lesson?",
+              "opts": [
+                "Only in libraries",
+                "On the EGWWritings.org website",
+                "Only on paper",
+                "Nowhere"
+              ]
+            },
+            {
+              "text": "Which of these is NOT among the early Adventists’ arguments cited in the lesson?",
+              "opts": [
+                "The biblical basis for the gift in the end time",
+                "The good fruit of her ministry",
+                "The fact that she was rich and influential",
+                "The supernatural elements of the visions"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "The early Adventists believed the gift of prophecy ended with the apostles.",
+            "Ellen White controlled the beginning and end of her visions.",
+            "Some questioned Ellen White’s gift soon after her first vision.",
+            "Ellen White’s messages pointed people to the Scriptures."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Listen to God’s Voice",
+        "summary": "Facing a huge army, Jehoshaphat sought God, and the answer came through a prophet. The people believed, and the Lord fought for them — an invitation to truly listen to the prophetic voice.",
+        "body": [
+          "<p>A great army was advancing against Judah, much stronger than the people. King Jehoshaphat sought the Lord, and the answer came through a prophet. The people believed and obeyed, and victory came without human fighting: “believe his prophets, so shall ye prosper” (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"20\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">2 Chron. 20:20</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>We must “try the spirits” (<span class=\"vref\" data-book=\"1JN\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">1 John 4:1</span><span class=\"vref-pop\"></span>), but once their authenticity is confirmed, we need to have faith in the prophetic word. Sometimes we try harder to judge the prophet than to heed the message.</p>",
+          "<p>We believe that the prophetic gift continues among God’s people until the end. But have we been reaping, in our personal lives and in the church, the blessings of this gift? It does little good to ask for guidance if we are not willing to listen. Let us seek to discern God’s voice — and, even more, a heart willing to accept it.</p>"
+        ],
+        "reflectTitle": "Open Dialogue (group discussion)",
+        "reflect": [
+          "How do I react when someone in my church claims to have received a prophecy?",
+          "Jesus revealed Himself as “the Truth” (John 14:6). How can that help me not be deceived by false prophets?",
+          "Have I been trying harder to judge the message or to practice it?"
+        ]
+      }
+    ]
   }
 ]
