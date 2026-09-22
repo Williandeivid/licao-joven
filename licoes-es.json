@@ -13147,5 +13147,1467 @@
         ]
       }
     ]
+  },
+  {
+    "id": 19,
+    "title": "Los escritos proféticos",
+    "keyword": "ESCRITOS",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Géneros y estilos literarios",
+        "summary": "Los profetas comunicaron el mensaje de tres formas: hablando, escribiendo y representándolo. Los escritos se dieron para llevar a la salvación, y ningún estilo literario tiene más autoridad que otro.",
+        "body": [
+          "<p>La Biblia muestra tres formas principales de comunicar el mensaje de Dios: oralmente, por escrito y por medio de acciones simbólicas. La más antigua era la comunicación directa: voz audible, sueños o ángeles. Solo en tiempos de Moisés aparece la primera orden de registrar en “un libro” lo que Dios había dicho (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"17\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Éx. 17:14</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Los escritos proféticos se dieron para llevar al pueblo a la salvación, no para satisfacer la curiosidad sobre el futuro (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Jer. 36:3</span><span class=\"vref-pop\"></span>). Siempre que los mensajeros eran impresionados a escribir, el Espíritu Santo los capacitaba: en el desierto, huyendo de Saúl o desterrados en Babilonia.</p>",
+          "<p>Hay estilos muy diferentes: textos parecidos a un diario (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"33\" data-v1=\"1\" data-v2=\"49\" onclick=\"toggleVerseLive(this)\">Núm. 33:1-49</span><span class=\"vref-pop\"></span>), metáforas e hipérboles, y escritos apocalípticos en Daniel, Zacarías y Apocalipsis, con fuerte simbolismo y temas cósmicos. Aun así, no hay diferencia de autoridad entre un estilo y otro.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué mandó Dios registrar por escrito lo que antes solo se decía?",
+          "¿Lees la Biblia más por curiosidad sobre el futuro o buscando salvación y dirección?",
+          "¿Qué estilo de la Biblia te resulta más difícil de leer? ¿Qué te ayudaría a entenderlo?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Jeremías 36:1-19",
+                "Apocalipsis 1",
+                "Isaías 6",
+                "Efesios 2"
+              ]
+            },
+            {
+              "text": "¿Cuáles son las tres formas principales de comunicar el mensaje profético?",
+              "opts": [
+                "Solo por escrito",
+                "Oralmente, por escrito y por representaciones",
+                "Por música, danza y pintura",
+                "Por sorteo, sueño y oráculo"
+              ]
+            },
+            {
+              "text": "¿En qué época aparece la primera orden de registrar en un libro lo que Dios dijo?",
+              "opts": [
+                "En tiempos de Adán",
+                "En tiempos de David",
+                "En tiempos de Moisés",
+                "En tiempos de Jesús"
+              ]
+            },
+            {
+              "text": "¿Para qué se dieron los escritos proféticos, según la lección?",
+              "opts": [
+                "Para satisfacer la curiosidad sobre el futuro",
+                "Para exaltar a los profetas",
+                "Para reemplazar la oración",
+                "Para conducir al pueblo a la salvación"
+              ]
+            },
+            {
+              "text": "¿Qué libros cita la lección como ejemplos de escritos apocalípticos?",
+              "opts": [
+                "Daniel, Zacarías y Apocalipsis",
+                "Salmos, Proverbios y Cantares",
+                "Génesis, Éxodo y Números",
+                "Mateo, Marcos y Lucas"
+              ]
+            },
+            {
+              "text": "¿Cuál es la diferencia de autoridad entre los estilos literarios de la Biblia?",
+              "opts": [
+                "La poesía tiene menos autoridad",
+                "Ninguna",
+                "Los textos apocalípticos tienen más autoridad",
+                "Solo las leyes tienen autoridad"
+              ]
+            },
+            {
+              "text": "¿Qué texto registra la primera orden de escribir en un libro lo que Dios dijo?",
+              "opts": [
+                "Éxodo 3:14",
+                "Génesis 1:1",
+                "Éxodo 17:14",
+                "Deuteronomio 6:4"
+              ]
+            },
+            {
+              "text": "¿Qué texto cita la lección como ejemplo de escrito parecido a un diario?",
+              "opts": [
+                "Salmo 23",
+                "Isaías 53",
+                "Juan 3",
+                "Números 33:1-49"
+              ]
+            },
+            {
+              "text": "Según Jeremías 36:3, ¿cuál era el objetivo del mensaje escrito?",
+              "opts": [
+                "Que el pueblo se volviera y fuera perdonado",
+                "Que el rey fuera honrado",
+                "Que Jeremías se hiciera conocido",
+                "Que Babilonia fuera destruida"
+              ]
+            },
+            {
+              "text": "¿Qué obra de Elena G. de White se indica esta semana?",
+              "opts": [
+                "Patriarcas y profetas, capítulo 3",
+                "Fundamentos de la educación cristiana, capítulo 15",
+                "El conflicto de los siglos, capítulo 37",
+                "El camino a Cristo, capítulo 3"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Los escritos proféticos se dieron principalmente para satisfacer la curiosidad sobre el futuro.",
+            "La comunicación oral directa fue la forma más antigua en que Dios se comunicó.",
+            "El Espíritu Santo capacitaba a los profetas para escribir en cualquier circunstancia.",
+            "Los textos apocalípticos tienen más autoridad que los demás estilos."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Asistentes literarios",
+        "summary": "Jeremías dictó sus mensajes a Baruc, y Pablo usó a Tercio para escribir Romanos. Los secretarios eran fieles al sentido, pero podían influir en el vocabulario: lo que está inspirado es el pensamiento del profeta.",
+        "body": [
+          "<p>Cuando las autoridades de Jerusalén oyeron a Baruc leer el rollo de Jeremías, preguntaron cómo había sido escrito. Él explicó: “Él me dictaba todas estas palabras, y yo escribía con tinta en el libro” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Jer. 36:18</span><span class=\"vref-pop\"></span>). Jeremías podría haber escrito solo, pero confió en un secretario.</p>",
+          "<p>En el Nuevo Testamento, Tercio dice: “Yo Tercio, que escribí la epístola, os saludo en el Señor” (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"16\" data-v1=\"22\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">Rom. 16:22</span><span class=\"vref-pop\"></span>). Era el amanuense de Pablo, es decir, el asistente que registraba sus palabras. Muchos estudiosos explican así las diferencias de estilo entre las cartas de Pablo y entre 1 y 2 Pedro: si hasta Pablo, que dominaba el griego, usaba secretarios, Pedro, que hablaba arameo, probablemente también.</p>",
+          "<p>Los secretarios eran fieles al pensamiento y al sentido que el profeta quería transmitir, pero el vocabulario y la construcción de las frases podían reflejar su habilidad. En última instancia, lo inspirado es el pensamiento del profeta, no necesariamente cada palabra elegida para expresarlo.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Quién contribuyó para que pudieras leer la Biblia en tu propio idioma?",
+          "¿Qué podemos hacer hoy para ayudar a más personas a conocer el mensaje de los profetas?",
+          "¿Por qué saber que los profetas usaron secretarios no disminuye la confianza en la Biblia?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Quién era el secretario de Jeremías?",
+              "opts": [
+                "Tercio",
+                "Baruc",
+                "Giezi",
+                "Esdras"
+              ]
+            },
+            {
+              "text": "¿Quién escribió la carta a los Romanos a pedido de Pablo?",
+              "opts": [
+                "Timoteo",
+                "Lucas",
+                "Tercio",
+                "Silas"
+              ]
+            },
+            {
+              "text": "¿Qué significa amanuense?",
+              "opts": [
+                "Traductor oficial del templo",
+                "Profeta de segunda categoría",
+                "Copista de la Edad Media",
+                "Secretario o asistente que registra las palabras de otro"
+              ]
+            },
+            {
+              "text": "¿Cómo produjo Jeremías el rollo que leyó Baruc?",
+              "opts": [
+                "Dictó las palabras, y Baruc las escribió",
+                "Lo escribió todo solo",
+                "Lo copió de otro profeta",
+                "Un ángel lo escribió"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cómo pueden explicarse las diferencias de estilo entre 1 y 2 Pedro?",
+              "opts": [
+                "Por ser de autores sin relación",
+                "Por el probable uso de un secretario",
+                "Por una mala traducción",
+                "Porque Pedro olvidó el griego"
+              ]
+            },
+            {
+              "text": "¿Cuál era la lengua materna de Pedro, según la lección?",
+              "opts": [
+                "El griego",
+                "El latín",
+                "El arameo",
+                "El egipcio"
+              ]
+            },
+            {
+              "text": "En Jeremías 36:18, ¿con qué escribió Baruc en el rollo?",
+              "opts": [
+                "Con carbón",
+                "Con sangre",
+                "Con cera",
+                "Con tinta"
+              ]
+            },
+            {
+              "text": "¿Qué texto contiene el saludo de Tercio?",
+              "opts": [
+                "Romanos 16:22",
+                "Romanos 1:1",
+                "Romanos 8:1",
+                "Romanos 12:1"
+              ]
+            },
+            {
+              "text": "¿Qué es lo inspirado, en última instancia, según la lección?",
+              "opts": [
+                "Cada palabra elegida por el secretario",
+                "El pensamiento del profeta",
+                "La tinta y el rollo",
+                "La traducción al portugués"
+              ]
+            },
+            {
+              "text": "¿Agregaban los secretarios pensamientos propios al mensaje?",
+              "opts": [
+                "Sí, siempre",
+                "Solo en las cartas de Pedro",
+                "No; eran fieles al sentido que quería el profeta",
+                "Solo cuando el profeta lo pedía"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Baruc leyó el rollo de Jeremías a las autoridades de Jerusalén.",
+            "Pablo nunca usó secretarios para escribir sus cartas.",
+            "Según la lección, cada palabra elegida por el secretario es inspirada de modo independiente.",
+            "El vocabulario de una carta podía reflejar la habilidad del secretario."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Fuentes literarias",
+        "summary": "Los profetas también usaron fuentes externas: Salomón reunió proverbios, Esdras y Nehemías copiaron cartas y listas, Lucas investigó y Judas citó un libro no bíblico. El Espíritu Santo guió incluso esa selección.",
+        "body": [
+          "<p>Salomón no compuso todos los proverbios que registró: “hizo escuchar, e hizo escudriñar, y compuso muchos proverbios” y “procuró hallar palabras agradables” (<span class=\"vref\" data-book=\"ECC\" data-chapter=\"12\" data-v1=\"9\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Ecl. 12:9, 10</span><span class=\"vref-pop\"></span>). La descripción de la mujer virtuosa de Proverbios 31 se atribuye a la madre del rey Lemuel (<span class=\"vref\" data-book=\"PRO\" data-chapter=\"31\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Prov. 31:1</span><span class=\"vref-pop\"></span>), y hay indicios de influencia de la literatura egipcia en partes del libro.</p>",
+          "<p>Esdras incluyó copias de cartas y decretos reales (Esd. 4–7), y Nehemías incorporó listas genealógicas que encontró (<span class=\"vref\" data-book=\"NEH\" data-chapter=\"7\" data-v1=\"5\" data-v2=\"72\" onclick=\"toggleVerseLive(this)\">Neh. 7:5-72</span><span class=\"vref-pop\"></span>). En el Nuevo Testamento, Lucas investigó con cuidado y reunió relatos de testigos oculares (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Luc. 1:1-4</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Otros autores citaron obras fuera de la Biblia: Pablo citó a filósofos griegos sin nombrarlos (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"17\" data-v1=\"28\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">Hech. 17:28</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"TIT\" data-chapter=\"1\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Tito 1:12</span><span class=\"vref-pop\"></span>), y Judas parece citar el llamado “Primer libro de Enoc”, una obra judía que no fue escrita por Enoc. El Espíritu Santo no solo dio visiones y sueños, sino que también guió a los mensajeros en la elección de lo que usarían.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Los autores bíblicos fueron guiados a seleccionar materiales de otras fuentes. ¿Por qué es importante recordarlo?",
+          "¿Qué enseña la investigación cuidadosa de Lucas sobre la fe y el estudio?",
+          "¿Cómo distingues hoy una buena fuente de una dudosa?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Quién “escudriñó y compuso” muchos proverbios, según Eclesiastés 12:9?",
+              "opts": [
+                "David",
+                "Moisés",
+                "Salomón",
+                "Ezequías"
+              ]
+            },
+            {
+              "text": "¿Qué evangelista investigó con cuidado y reunió relatos de testigos?",
+              "opts": [
+                "Marcos",
+                "Juan",
+                "Mateo",
+                "Lucas"
+              ]
+            },
+            {
+              "text": "¿A quién se atribuye la descripción de la mujer virtuosa de Proverbios 31?",
+              "opts": [
+                "A la madre del rey Lemuel",
+                "A Salomón",
+                "A David",
+                "A la reina de Sabá"
+              ]
+            },
+            {
+              "text": "¿Qué tipo de documentos incluyó Esdras en su libro?",
+              "opts": [
+                "Poemas de amor",
+                "Copias de cartas y decretos reales",
+                "Recetas del templo",
+                "Profecías sobre Roma"
+              ]
+            },
+            {
+              "text": "¿Qué obra no canónica parece haber citado Judas?",
+              "opts": [
+                "El libro de los Macabeos",
+                "La Odisea",
+                "El Primer libro de Enoc",
+                "El Talmud"
+              ]
+            },
+            {
+              "text": "¿De qué literatura extranjera hay indicios de influencia en Proverbios?",
+              "opts": [
+                "De la literatura china",
+                "De la literatura romana",
+                "De la literatura persa",
+                "De la literatura egipcia"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Lucas explicando cómo investigó para escribir?",
+              "opts": [
+                "Lucas 1:1-4",
+                "Lucas 4:16-21",
+                "Lucas 10:25-37",
+                "Lucas 23:44-49"
+              ]
+            },
+            {
+              "text": "¿Dónde incorporó Nehemías listas genealógicas que encontró?",
+              "opts": [
+                "Nehemías 1:1-11",
+                "Nehemías 7:5-72",
+                "Nehemías 8:1-8",
+                "Nehemías 13:15-22"
+              ]
+            },
+            {
+              "text": "¿En qué textos cita Pablo a filósofos griegos?",
+              "opts": [
+                "Romanos 3:23 y 6:23",
+                "Gálatas 2:20 y 5:1",
+                "Hechos 17:28 y Tito 1:12",
+                "Efesios 6:1 y 6:4"
+              ]
+            },
+            {
+              "text": "¿En qué capítulos de Esdras están las cartas y decretos reales?",
+              "opts": [
+                "Capítulos 1 al 2",
+                "Capítulos 9 al 10",
+                "Solo en el capítulo 8",
+                "Capítulos 4 al 7"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Salomón compuso personalmente todos los proverbios que registró.",
+            "El Primer libro de Enoc fue escrito por el propio Enoc.",
+            "Lucas reunió relatos de testigos oculares.",
+            "El Espíritu Santo también guió a los mensajeros en la selección de materiales."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Un tesoro divino y humano",
+        "summary": "La Biblia nació del encuentro entre el Espíritu Santo y personas imperfectas. Dios prefirió pastores, pescadores y reyes a los ángeles: la misma lógica de la encarnación, una Palabra divina y humana a la vez.",
+        "body": [
+          "<p>La Biblia no cayó del cielo como un documento escrito por ángeles en lenguaje celestial. Nació del encuentro entre el Espíritu Santo y seres humanos imperfectos: Salomón seleccionó proverbios, los historiadores citaron archivos reales y Pablo citó poetas griegos para alcanzar a quienes no conocían las Escrituras.</p>",
+          "<p>Dios podría haber usado ángeles como escribas, pero prefirió pastores, pescadores, reyes y antiguos perseguidores: un tesoro en vasos de barro (<span class=\"vref\" data-book=\"2CO\" data-chapter=\"4\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">2 Cor. 4:7</span><span class=\"vref-pop\"></span>). No fue un descuido: es la lógica de la encarnación. El Verbo que se hizo carne (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Juan 1:14</span><span class=\"vref-pop\"></span>) muestra el mismo principio de toda la Escritura: una Palabra perfectamente divina y genuinamente humana.</p>",
+          "<p>Jesús preguntaba muchas veces “¿No habéis leído?” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"12\" data-v1=\"3\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Mat. 12:3-5</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"19\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Mat. 19:4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MRK\" data-chapter=\"12\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Mar. 12:10</span><span class=\"vref-pop\"></span>), mostrando la importancia de leer y estudiar ante las dudas. Y todo lo que se escribió en el pasado se escribió para nuestra enseñanza y esperanza (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"15\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Rom. 15:4</span><span class=\"vref-pop\"></span>), con una bendición para quien lee y guarda (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Apoc. 1:3</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué crees que Dios prefirió personas imperfectas a ángeles para escribir la Biblia?",
+          "Cuando surge una duda, ¿tu primera reacción es buscar en la Palabra o en internet?",
+          "Con la lógica de la encarnación en mente, ¿cómo lees las partes “humanas” de la Biblia?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿cómo se produjo la Biblia?",
+              "opts": [
+                "Escrita por ángeles en lenguaje celestial",
+                "Cayó lista del cielo",
+                "Escrita solo por sacerdotes",
+                "Del encuentro entre el Espíritu Santo y seres humanos imperfectos"
+              ]
+            },
+            {
+              "text": "¿Qué imagen usa Pablo para el tesoro de Dios en manos humanas?",
+              "opts": [
+                "Vasos de barro",
+                "Cofres de oro",
+                "Tinajas de vino nuevo",
+                "Piedras preciosas"
+              ]
+            },
+            {
+              "text": "¿Con qué verdad compara la lección la naturaleza divina y humana de la Biblia?",
+              "opts": [
+                "Con la creación de los ángeles",
+                "Con la encarnación de Jesús",
+                "Con la construcción del templo",
+                "Con la caída de Adán"
+              ]
+            },
+            {
+              "text": "¿A quiénes escogió Dios como escritores en lugar de ángeles?",
+              "opts": [
+                "Solo sacerdotes",
+                "Solo reyes",
+                "Pastores, pescadores, reyes y antiguos perseguidores",
+                "Solo filósofos"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿por qué citó Pablo a poetas y filósofos griegos?",
+              "opts": [
+                "Porque no conocía la Biblia",
+                "Para mostrar que los griegos eran inspirados",
+                "Para impresionar a los apóstoles",
+                "Para comunicar verdades eternas a quienes no conocían las Escrituras"
+              ]
+            },
+            {
+              "text": "¿Qué preguntaba Jesús con frecuencia a quienes lo cuestionaban?",
+              "opts": [
+                "“¿No habéis leído?”",
+                "“¿No habéis visto?”",
+                "“¿Quién es el mayor?”",
+                "“¿Dónde está vuestra fe?”"
+              ]
+            },
+            {
+              "text": "¿Dónde está la frase sobre el tesoro en vasos de barro?",
+              "opts": [
+                "1 Corintios 13:12",
+                "2 Corintios 4:7",
+                "Gálatas 6:7",
+                "Filipenses 4:13"
+              ]
+            },
+            {
+              "text": "Según Romanos 15:4, ¿para qué se escribió lo que se escribió en el pasado?",
+              "opts": [
+                "Solo para los judíos",
+                "Para ser olvidado",
+                "Para nuestra enseñanza y esperanza",
+                "Solo para los sacerdotes"
+              ]
+            },
+            {
+              "text": "¿Qué texto promete una bendición a quien lee y guarda la profecía?",
+              "opts": [
+                "Apocalipsis 3:20",
+                "Apocalipsis 12:17",
+                "Apocalipsis 22:13",
+                "Apocalipsis 1:3"
+              ]
+            },
+            {
+              "text": "¿Qué texto afirma que el Verbo se hizo carne?",
+              "opts": [
+                "Juan 1:14",
+                "Juan 3:16",
+                "Juan 14:6",
+                "Juan 20:31"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "La Biblia es a la vez divina y humana.",
+            "La Biblia fue escrita por ángeles en lenguaje celestial.",
+            "Usar personas imperfectas fue un descuido de Dios.",
+            "Las Escrituras fueron escritas para nuestra enseñanza y esperanza."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "Tesoro en vasos de barro",
+        "summary": "Los profetas usaron un lenguaje humano imperfecto para comunicar pensamientos perfectos de Dios. Unos pocos pasajes difíciles no afectan la esencia del mensaje, y podemos confiar en la exactitud de las verdades reveladas.",
+        "body": [
+          "<p>Los mensajes proféticos unen la acción divina y la participación humana: Dios habla, y los profetas usan un lenguaje humano imperfecto para comunicar Sus pensamientos perfectos. Pablo lo resume: “Pero tenemos este tesoro en vasos de barro, para que la excelencia del poder sea de Dios, y no de nosotros” (<span class=\"vref\" data-book=\"2CO\" data-chapter=\"4\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">2 Cor. 4:7</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Los mensajeros no fueron protegidos de fallas personales —piensa en Moisés, Elías, David, Jonás y Pedro—, y sus escritos también reflejan límites de comprensión y de lenguaje. Así como Jesús tenía naturaleza divina y humana, la Biblia también tiene las dos dimensiones: las verdades reveladas son inspiradas por Dios, pero están expresadas en palabras de hombres (Testimonios para la iglesia, t. 5).</p>",
+          "<p>El Espíritu Santo no impidió que algunos textos parezcan hoy difíciles de armonizar. Son pocos, y no es sensato dejar que se conviertan en tropiezo: nos sometemos a la Palabra tal como la entendemos y confiamos en Dios en lo que todavía no entendemos. Esos puntos no afectan la esencia del mensaje, y las verdades de Dios están reveladas con exactitud.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué eligió Dios usar a seres humanos falibles, y no a ángeles sin pecado, como Sus principales mensajeros?",
+          "¿Cómo reaccionas cuando encuentras un texto bíblico difícil de entender?",
+          "¿Qué dice de ti la lista de mensajeros con fallas (Moisés, Elías, David, Jonás, Pedro)?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál de estos cita la lección como mensajero de Dios que tuvo fallas?",
+              "opts": [
+                "Jonás",
+                "Enoc, que nunca se equivocó",
+                "Un ángel sin pecado",
+                "Ninguno, los profetas eran perfectos"
+              ]
+            },
+            {
+              "text": "¿Qué tipo de lenguaje usaron los profetas para comunicar los pensamientos de Dios?",
+              "opts": [
+                "Un lenguaje celestial perfecto",
+                "Un lenguaje humano imperfecto",
+                "Una lengua secreta",
+                "Solo símbolos"
+              ]
+            },
+            {
+              "text": "¿Con qué compara la lección las dos dimensiones de la Biblia?",
+              "opts": [
+                "Con el cielo y la tierra",
+                "Con la ley y la gracia",
+                "Con las dos naturalezas de Jesús, divina y humana",
+                "Con el día y la noche"
+              ]
+            },
+            {
+              "text": "¿Qué recomienda la lección ante textos difíciles de armonizar?",
+              "opts": [
+                "Descartar esos textos",
+                "Dejar de leer la Biblia",
+                "Elegir solo los textos fáciles",
+                "Confiar en Dios y no hacer de ellos motivo de tropiezo"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿afectan los textos difíciles la esencia del mensaje bíblico?",
+              "opts": [
+                "No",
+                "Sí, completamente",
+                "Sí, en los evangelios",
+                "Solo en el Antiguo Testamento"
+              ]
+            },
+            {
+              "text": "Según 2 Corintios 4:7, ¿por qué está el tesoro en vasos de barro?",
+              "opts": [
+                "Porque Dios no tenía otro recipiente",
+                "Para mostrar que el poder viene de Dios, no de nosotros",
+                "Para que fuera más barato",
+                "Para esconder el mensaje"
+              ]
+            },
+            {
+              "text": "¿De qué obra de Elena de White es la cita sobre la unión de lo divino y lo humano en la Biblia?",
+              "opts": [
+                "Primeros escritos",
+                "El conflicto de los siglos",
+                "Testimonios para la iglesia, t. 5",
+                "Vida y enseñanzas"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿cómo se expresan las verdades reveladas en la Biblia?",
+              "opts": [
+                "Con palabras de ángeles",
+                "En un lenguaje perfecto y celestial",
+                "Solo por medio de símbolos",
+                "Con palabras de hombres, adaptadas a las necesidades humanas"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos mensajeros de Dios cita la lección como ejemplo de alguien con fallas?",
+              "opts": [
+                "David",
+                "Enoc",
+                "José de Egipto, que nunca se equivocó",
+                "Daniel, citado como perfecto"
+              ]
+            },
+            {
+              "text": "¿Cómo podemos confiar en las verdades de las Escrituras, según la lección?",
+              "opts": [
+                "Porque los mensajeros eran perfectos",
+                "Están reveladas con exactitud, a pesar de las imperfecciones de los mensajeros",
+                "Porque no hay nada difícil en la Biblia",
+                "Porque fueron dictadas letra por letra"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Los mensajeros de Dios fueron protegidos de toda falla personal.",
+            "La Biblia tiene una dimensión divina y una humana.",
+            "Podemos confiar en Dios aun sin entenderlo todo.",
+            "Según la lección, los textos difíciles son muchos y comprometen el mensaje."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Los escritos de Elena de White",
+        "summary": "Debilitada después del accidente, Elena de White oyó al ángel decir: “Escribe”. Como los profetas bíblicos, contó con secretarios y usó otras fuentes, sin intentar nunca parecer más de lo que era.",
+        "body": [
+          "<p>Elena de White también recibió la misión de escribir lo que se le revelaba. Debilitada por el accidente que casi le costó la vida, pensó que no podría hacerlo. Pero el ángel insistió: “Escribe las cosas que te doy”. Ella tomó una pequeña tablilla y descubrió que podía trazar las palabras con facilidad (General Conference Bulletin, 31 de mayo de 1909).</p>",
+          "<p>Como los escritores bíblicos, contó con asistentes literarios. Sus secretarios hacían un trabajo de edición: ayudaban a expresar el mensaje con claridad, sin agregar pensamientos propios; no eran “escritores fantasma” ni coautores. También citó y adaptó otras fuentes, y recomendaba los mismos libros que usaba, sin intención de engañar a nadie.</p>",
+          "<p>Sus rasgos humanos no fueron anulados por el llamado: creció y maduró a lo largo de la vida. Y corrigió a quienes pensaban que cada palabra suya venía del cielo: había que escribir cartas comunes, y esas palabras e informaciones no se daban bajo inspiración especial (Mensajes selectos, t. 3). Nunca intentó parecer más de lo que era.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo ayudó Baruc a Jeremías a escribir su libro y llevar su mensaje al pueblo? (Jer. 36:1-6, 14-17)",
+          "¿Quién ayudó a Pablo a escribir la carta a los Romanos? (Rom. 16:22)",
+          "¿Hasta dónde habrían llegado los mensajes de los profetas sin ayudantes, escribas y traductores? ¿Qué papel puedes tener tú hoy?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué le ordenó el ángel a Elena de White cuando estaba debilitada?",
+              "opts": [
+                "“Descansa y no escribas más”",
+                "“Escribe las cosas que te doy”",
+                "“Múdate a otro país”",
+                "“Predica en Portland”"
+              ]
+            },
+            {
+              "text": "¿Qué usó Elena para escribir aquella noche?",
+              "opts": [
+                "Una máquina de escribir",
+                "Un rollo de pergamino",
+                "Una pequeña tablilla",
+                "Una pizarra de la escuela"
+              ]
+            },
+            {
+              "text": "¿Cómo define la lección el trabajo de los secretarios de Elena de White?",
+              "opts": [
+                "Coautoría",
+                "Escritores fantasma",
+                "Traducción al latín",
+                "Trabajo de edición, sin agregar pensamientos propios"
+              ]
+            },
+            {
+              "text": "¿Qué pasó cuando Elena intentó escribir?",
+              "opts": [
+                "Pudo trazar las palabras con facilidad",
+                "No pudo escribir nada",
+                "Escribió en otro idioma",
+                "Se desmayó"
+              ]
+            },
+            {
+              "text": "¿Por qué dice la lección que Elena no pretendía engañar al usar otras fuentes?",
+              "opts": [
+                "Porque nunca usó otras fuentes",
+                "Porque recomendaba a los lectores algunos de los mismos libros que usaba",
+                "Porque escondía los libros",
+                "Porque solo citaba la Biblia"
+              ]
+            },
+            {
+              "text": "¿Qué dice la lección sobre el crecimiento de Elena de White?",
+              "opts": [
+                "Ya nació madura",
+                "Nunca cambió de opinión",
+                "Creció y maduró a lo largo de la vida",
+                "Dejó de crecer a los 17 años"
+              ]
+            },
+            {
+              "text": "¿Dónde se publicó el relato de Elena sobre la orden de escribir?",
+              "opts": [
+                "En Primeros escritos, en 1851",
+                "En la Review and Herald, en 1844",
+                "En El camino a Cristo, en 1892",
+                "En el General Conference Bulletin, en 1909"
+              ]
+            },
+            {
+              "text": "¿De qué obra es la cita sobre “cartas comunes” no inspiradas en esta lección?",
+              "opts": [
+                "Mensajes selectos, t. 3",
+                "Mensajes selectos, t. 1",
+                "El conflicto de los siglos",
+                "La educación"
+              ]
+            },
+            {
+              "text": "¿Eran los secretarios de Elena coautores de sus escritos?",
+              "opts": [
+                "Sí, escribían capítulos enteros",
+                "No; dependían totalmente del material de ella",
+                "Sí, en los libros de salud",
+                "Solo en las cartas"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué cuenta a favor de Elena de White al evaluar sus escritos?",
+              "opts": [
+                "Nunca se equivocó",
+                "Escribió sola, sin ayuda",
+                "Nunca intentó parecer más de lo que realmente era",
+                "Nunca leyó a otros autores"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Elena de White contó con asistentes literarios.",
+            "Elena de White citó y adaptó materiales de otros autores.",
+            "Los secretarios de Elena agregaban ideas propias a los mensajes.",
+            "Elena afirmaba que cada palabra suya venía directamente del cielo."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Entre tendencias y verdades eternas",
+        "summary": "Nunca tuvimos tanto acceso a la Biblia y tan poco conocimiento de ella. Tal vez el mayor peligro no sea rechazarla, sino acostumbrarnos a ella.",
+        "body": [
+          "<p>Somos la generación con más acceso a la Biblia de la historia, y una de las que menos la conoce a fondo. Muchos jóvenes saben más tendencias, memes y canciones virales que promesas de las Escrituras. Tal vez el mayor peligro no sea rechazar la Biblia, sino acostumbrarnos a ella: leer sin percibir, abrir el texto sin dejar que abra el corazón.</p>",
+          "<p>Los profetas no trataban el mensaje como algo común. Jeremías dijo: “Fueron halladas tus palabras, y yo las comí” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"15\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Jer. 15:16</span><span class=\"vref-pop\"></span>). Daniel estudiaba los escritos anteriores, y hubo personas que arriesgaron la vida para preservar esos textos, mientras nosotros muchas veces dejamos la Biblia cerrada por distracción.</p>",
+          "<p>Una generación fuerte no nace solo de cultos emocionantes, sino de jóvenes que aprenden a amar la Palabra en secreto. Estudia contexto, historia y profecías, pero recuerda: el conocimiento sin transformación produce solo información religiosa.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Cuánto tiempo paso alimentando mi mente con contenidos de internet en comparación con el tiempo que dejo que la Palabra de Dios transforme mi corazón?",
+          "¿Cómo fortalece mi confianza en la Biblia y en el ministerio de Elena de White el estudio sobre inspiración, imperfecciones humanas, géneros literarios y asistentes de los profetas?",
+          "¿Qué paso práctico puedo dar esta semana para leer la Biblia con más atención y menos prisa?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "¡Presta atención!",
+    "keyword": "ATENCIÓN",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Enojados con el mensaje de Dios",
+        "summary": "Cuando la “verdad” personal choca con la Verdad de Dios, muchos se rebelan. Josué y Caleb y, después, Jeremías permanecieron firmes aun ante una oposición violenta.",
+        "body": [
+          "<p>Hoy muchos son animados a tratar su propia “verdad” —experiencias, opiniones, convicciones— como absoluta. El problema aparece cuando choca con la Verdad revelada en Jesús y en Su Palabra. Los profetas llevaban mensajes que el pueblo no quería oír y, por eso, muchos fueron rechazados, perseguidos y muertos (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"11\" data-v1=\"32\" data-v2=\"38\" onclick=\"toggleVerseLive(this)\">Heb. 11:32-38</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Cuando los espías volvieron de Canaán hablando de gigantes y ciudades fortificadas, el pueblo entró en pánico, quiso volver a Egipto y se levantó contra Moisés y Aarón (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"13\" data-v1=\"31\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Núm. 13:31</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"NUM\" data-chapter=\"14\" data-v1=\"1\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Núm. 14:1-4</span><span class=\"vref-pop\"></span>). Josué y Caleb permanecieron fieles y rogaron: “No seáis rebeldes contra Jehová” (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"14\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Núm. 14:9</span><span class=\"vref-pop\"></span>). La reacción fue tan hostil que casi los mataron.</p>",
+          "<p>El mismo conflicto marcó el ministerio de Jeremías. Dios le mandó decir todo lo que se le ordenara, sin miedo (<span class=\"vref\" data-book=\"JER\" data-chapter=\"1\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Jer. 1:17</span><span class=\"vref-pop\"></span>), y prometió hacerlo firme como una “columna de hierro” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"1\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Jer. 1:18</span><span class=\"vref-pop\"></span>). Aun con una resistencia intensa, permaneció fiel, sostenido por la fuerza divina.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Cuando tu “verdad” choca con la Biblia, ¿cuál de las dos suele ganar?",
+          "¿Qué “gigantes” te hacen querer volver a “Egipto”?",
+          "¿Qué ayudó a Josué y a Caleb a mantenerse firmes cuando todos estaban en desacuerdo con ellos?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Jeremías 36:20-32",
+                "Jeremías 1:1-10",
+                "Isaías 6",
+                "Apocalipsis 1"
+              ]
+            },
+            {
+              "text": "¿Qué espías permanecieron fieles ante la rebelión del pueblo?",
+              "opts": [
+                "Moisés y Aarón",
+                "Josué y Caleb",
+                "Datán y Abiram",
+                "Josué y Aarón"
+              ]
+            },
+            {
+              "text": "¿Qué describieron los espías al volver de Canaán?",
+              "opts": [
+                "Desiertos sin agua",
+                "Un pueblo pequeño y débil",
+                "Gigantes y ciudades fortificadas",
+                "Mares imposibles de cruzar"
+              ]
+            },
+            {
+              "text": "¿Adónde quiso volver el pueblo, dominado por el miedo?",
+              "opts": [
+                "A Ur de los caldeos",
+                "A Babilonia",
+                "Al monte Sinaí",
+                "A Egipto"
+              ]
+            },
+            {
+              "text": "¿Con qué imagen prometió Dios fortalecer a Jeremías?",
+              "opts": [
+                "Una columna de hierro",
+                "Un muro de oro",
+                "Una torre de marfil",
+                "Una roca de sal"
+              ]
+            },
+            {
+              "text": "Según Elena de White, citada en la lección, ¿qué le pasa a quien se entrega a la incredulidad?",
+              "opts": [
+                "Se convierte en profeta",
+                "Se coloca bajo la influencia de Satanás",
+                "Se fortalece en la fe",
+                "Gana discernimiento"
+              ]
+            },
+            {
+              "text": "¿Cuál fue el ruego de Josué y Caleb en Números 14:9?",
+              "opts": [
+                "“Volvamos a Egipto”",
+                "“Escojamos otro líder”",
+                "“No seáis rebeldes contra Jehová”",
+                "“Esperemos cuarenta años más”"
+              ]
+            },
+            {
+              "text": "Según Jeremías 1:17, ¿cómo debía hablar Jeremías?",
+              "opts": [
+                "Solo lo que el rey quisiera oír",
+                "Solo los sábados",
+                "Solo por escrito",
+                "Todo lo que Dios mandara, sin miedo"
+              ]
+            },
+            {
+              "text": "¿Qué texto habla de los héroes de la fe que fueron perseguidos y muertos?",
+              "opts": [
+                "Hebreos 11:32-38",
+                "Hebreos 4:12-16",
+                "Hebreos 1:1-3",
+                "Hebreos 13:1-6"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de Profetas y reyes se indica esta semana?",
+              "opts": [
+                "Capítulo 14: “Con el espíritu y el poder de Elías”",
+                "Capítulo 35: “La ruina inminente”",
+                "Capítulo 26: “He aquí vuestro Dios”",
+                "Capítulo 3: “La tentación y la caída”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Josué y Caleb casi fueron muertos por defender la confianza en Dios.",
+            "Los profetas bíblicos siempre llevaron mensajes que al pueblo le gustaba oír.",
+            "Ante el informe de los espías, todo el pueblo confió en Dios.",
+            "Jeremías permaneció fiel a pesar de la intensa resistencia."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Destruyendo el mensaje",
+        "summary": "Aun con los pecados de Judá, Dios insistió con amor: Jeremías compró un campo como señal de esperanza y escribió un llamado final. El rey Joacim cortó el rollo y lo quemó, pero el mensaje no desapareció.",
+        "body": [
+          "<p>La idolatría, el sacrificio de niños, el adulterio y la opresión eran comunes en los días de Jeremías, y los llamados del profeta eran ignorados. Aun así, los mensajes de Dios seguían siendo redentores. Mandó a Jeremías comprar un campo y guardar la escritura: “Aún se comprarán casas, heredades y viñas en esta tierra” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"32\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Jer. 32:15</span><span class=\"vref-pop\"></span>), una señal de que el pueblo volvería del exilio.</p>",
+          "<p>Por amor, Dios mandó registrar un llamado final. Baruc escribió y leyó el mensaje en Jerusalén; las autoridades, alarmadas, aconsejaron a Baruc y a Jeremías que se escondieran (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Jer. 36:19</span><span class=\"vref-pop\"></span>). El rey Joacim oyó solo el comienzo, se enfureció, cortó el rollo en pedazos y lo echó al fuego (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"20\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Jer. 36:20-23</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>A veces pensamos que, si ignoramos o destruimos el mensaje de Dios, desaparece. Pero el desinterés no borra la Palabra; solo agrava las consecuencias. La profecía sobre el fin de Joacim (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"30\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Jer. 36:30, 31</span><span class=\"vref-pop\"></span>) es una advertencia: ignoramos las advertencias divinas por nuestra cuenta y riesgo.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué revela sobre el carácter de Dios Su persistencia en alcanzar a Su pueblo rebelde?",
+          "Imagina que Joacim hubiera aceptado el mensaje. ¿Cómo podría haber cambiado la historia de Jerusalén?",
+          "¿Qué “rollo” te dan ganas de echar al fuego cuando la Palabra te confronta?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué rey cortó el rollo de Jeremías y lo echó al fuego?",
+              "opts": [
+                "Sedequías",
+                "Joacim",
+                "Josías",
+                "Nabucodonosor"
+              ]
+            },
+            {
+              "text": "¿Quién escribió y leyó el mensaje de Jeremías en Jerusalén?",
+              "opts": [
+                "Esdras",
+                "Tercio",
+                "Baruc",
+                "Nehemías"
+              ]
+            },
+            {
+              "text": "¿Qué mandó Dios comprar a Jeremías como señal de esperanza?",
+              "opts": [
+                "Un camello",
+                "Una casa en Babilonia",
+                "Un barco",
+                "Un campo"
+              ]
+            },
+            {
+              "text": "¿Qué aconsejaron las autoridades a Baruc y a Jeremías?",
+              "opts": [
+                "Que se escondieran",
+                "Que huyeran a Egipto",
+                "Que quemaran el rollo",
+                "Que pidieran perdón al rey"
+              ]
+            },
+            {
+              "text": "¿Cuánto del mensaje oyó Joacim antes de enfurecerse?",
+              "opts": [
+                "Todo, hasta el final",
+                "Solo el comienzo",
+                "Nada, se negó a oír",
+                "Solo la última página"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué pasa cuando despreciamos el mensaje de Dios?",
+              "opts": [
+                "El mensaje deja de valer",
+                "Dios desiste de hablar",
+                "El mensaje no desaparece y las consecuencias se agravan",
+                "Nada cambia"
+              ]
+            },
+            {
+              "text": "Según Jeremías 32:15, ¿qué ocurriría todavía en la tierra?",
+              "opts": [
+                "La tierra quedaría desierta para siempre",
+                "Un nuevo templo sería de oro",
+                "Los caldeos reinarían para siempre",
+                "Aún se comprarían casas, heredades y viñas"
+              ]
+            },
+            {
+              "text": "¿Qué texto narra al rey quemando el rollo?",
+              "opts": [
+                "Jeremías 36:20-23",
+                "Jeremías 1:4-10",
+                "Jeremías 29:10-14",
+                "Jeremías 52:1-11"
+              ]
+            },
+            {
+              "text": "¿Qué texto contiene la profecía sobre el fin de Joacim?",
+              "opts": [
+                "Jeremías 31:31-34",
+                "Jeremías 36:30, 31",
+                "Jeremías 17:5-8",
+                "Jeremías 7:1-7"
+              ]
+            },
+            {
+              "text": "¿Qué demostraba la compra del campo, según la lección?",
+              "opts": [
+                "El deseo de Jeremías de enriquecerse",
+                "Que no habría exilio",
+                "La fe de que el pueblo volvería después del exilio",
+                "La alianza con Egipto"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Joacim leyó con atención todo el mensaje y se arrepintió.",
+            "Destruir el rollo hizo que el mensaje de Dios perdiera su efecto.",
+            "Los pecados de Judá incluían la idolatría y la opresión.",
+            "Aun ante la rebeldía, los mensajes de Dios tenían carácter redentor."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Historia de resistencia",
+        "summary": "Jeremías profetizó durante cinco reinados. Sedequías no se humilló ante quien le hablaba “de parte de Jehová”, y el rechazo a los profetas llevó a Judá al exilio: una historia que entristeció a Jesús.",
+        "body": [
+          "<p>El ministerio de Jeremías atravesó los reinados de Josías, Joacaz, Joacim, Joaquín y Sedequías. Cuando Sedequías subió al trono, a los 21 años (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">2 Crón. 36:11</span><span class=\"vref-pop\"></span>), Nabucodonosor ya había saqueado Jerusalén. La Biblia dice que “hizo lo malo” y “no se humilló delante del profeta Jeremías, que le hablaba de parte de Jehová” (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">2 Crón. 36:12</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Jeremías era un hombre pecador como cualquiera, pero representaba al Señor. Durante siglos, Dios envió mensajeros a Su pueblo (<span class=\"vref\" data-book=\"JER\" data-chapter=\"25\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jer. 25:4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"11\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Mat. 11:13</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"LUK\" data-chapter=\"11\" data-v1=\"49\" data-v2=\"49\" onclick=\"toggleVerseLive(this)\">Luc. 11:49</span><span class=\"vref-pop\"></span>), porque no quiere “que ninguno perezca, sino que todos procedan al arrepentimiento” (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"3\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">2 Ped. 3:9</span><span class=\"vref-pop\"></span>). La historia de Israel y Judá es el relato del empeño incansable de Dios por alcanzar a un pueblo infiel.</p>",
+          "<p>Al final, la gracia ofrecida por Jeremías fue recibida con burla y desprecio. El rechazo a los profetas llevó al exilio en Babilonia (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"15\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Crón. 36:15-21</span><span class=\"vref-pop\"></span>) y entristeció a Jesús: “¡Jerusalén, Jerusalén, que matas a los profetas, y apedreas a los que te son enviados!” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"23\" data-v1=\"37\" data-v2=\"37\" onclick=\"toggleVerseLive(this)\">Mat. 23:37</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué es tan común que los profetas enfrenten una fuerte oposición?",
+          "¿Cómo afecta nuestra relación con Jesús el rechazo repetido de Sus mensajes?",
+          "¿Qué revela 2 Pedro 3:9 sobre por qué Dios insiste tanto con quien no quiere oír?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Durante cuántos reinados se extendió el ministerio de Jeremías?",
+              "opts": [
+                "Dos",
+                "Siete",
+                "Cinco",
+                "Doce"
+              ]
+            },
+            {
+              "text": "¿Quién era el rey de Babilonia que saqueó Jerusalén?",
+              "opts": [
+                "Ciro",
+                "Darío",
+                "Faraón Necao",
+                "Nabucodonosor"
+              ]
+            },
+            {
+              "text": "¿Con cuántos años subió Sedequías al trono?",
+              "opts": [
+                "21 años",
+                "8 años",
+                "40 años",
+                "16 años"
+              ]
+            },
+            {
+              "text": "¿Cómo describe la Biblia la actitud de Sedequías ante Jeremías?",
+              "opts": [
+                "Obedeció todo",
+                "No se humilló delante del profeta",
+                "Hizo de Jeremías su consejero",
+                "Pidió perdón públicamente"
+              ]
+            },
+            {
+              "text": "¿Cómo fue recibida la gracia ofrecida por Jeremías al final de la historia de Judá?",
+              "opts": [
+                "Con humildad y arrepentimiento",
+                "Con fiesta y alegría",
+                "Con burla, desprecio y escarnio",
+                "Con total indiferencia, sin reacción"
+              ]
+            },
+            {
+              "text": "¿Cuál fue la consecuencia del largo rechazo a los profetas?",
+              "opts": [
+                "La victoria sobre Babilonia",
+                "La construcción de un nuevo templo",
+                "El regreso a Egipto",
+                "El exilio de Judá en Babilonia"
+              ]
+            },
+            {
+              "text": "Según 2 Pedro 3:9, ¿qué desea Dios?",
+              "opts": [
+                "Que ninguno perezca y todos procedan al arrepentimiento",
+                "Que solo Israel sea salvo",
+                "Que los impíos sean destruidos pronto",
+                "Que nadie escuche a los profetas"
+              ]
+            },
+            {
+              "text": "¿Qué dijo Jesús sobre Jerusalén en Mateo 23:37?",
+              "opts": [
+                "Que era la ciudad más fiel",
+                "Que mataba a los profetas y apedreaba a los enviados",
+                "Que nunca sería destruida",
+                "Que era el lugar de Su reino terrenal"
+              ]
+            },
+            {
+              "text": "¿Qué texto describe a Sedequías haciendo lo malo ante los ojos de Jehová?",
+              "opts": [
+                "2 Crónicas 7:14",
+                "1 Reyes 3:9",
+                "2 Crónicas 36:12",
+                "2 Reyes 22:2"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos reyes NO está entre los reinados del ministerio de Jeremías?",
+              "opts": [
+                "Josías",
+                "Joacim",
+                "Sedequías",
+                "Ezequías"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Jeremías hablaba de parte de Jehová.",
+            "Jeremías era un hombre sin pecado.",
+            "Sedequías se humilló ante el mensaje de Jeremías.",
+            "El rechazo a los profetas entristeció a Jesús."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "El precio de ser profeta",
+        "summary": "Las rebeliones de Israel fueron registradas como advertencia para nosotros. Tal vez no nos burlemos abiertamente de los mensajeros, pero podemos rechazar el mensaje aceptando solo lo que nos agrada.",
+        "body": [
+          "<p>La historia de Israel en el desierto fue registrada como advertencia: Pablo dice que esos relatos fueron escritos para que no repitamos los mismos errores (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"6\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:6-11</span><span class=\"vref-pop\"></span>). Y Dios promete fuerza para vencer la tentación (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"12\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:12, 13</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Hoy tal vez no nos burlemos abiertamente de los mensajeros de Dios, pero podemos rechazar el mensaje de formas sutiles: ignorando consejos bíblicos, relativizando la verdad o aceptando solo lo que nos agrada. Rechazar el mensaje divino es, al final, rechazar a Dios mismo.</p>",
+          "<p>Jeremías sintió ese peso. Lloraba por el pueblo (<span class=\"vref\" data-book=\"JER\" data-chapter=\"9\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Jer. 9:1</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"13\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Jer. 13:17</span><span class=\"vref-pop\"></span>), llegó a maldecir el día en que nació (<span class=\"vref\" data-book=\"JER\" data-chapter=\"20\" data-v1=\"14\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Jer. 20:14-18</span><span class=\"vref-pop\"></span>) y fue amenazado de muerte (<span class=\"vref\" data-book=\"JER\" data-chapter=\"26\" data-v1=\"8\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Jer. 26:8-11</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"38\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jer. 38:4</span><span class=\"vref-pop\"></span>). Aun así, no podía callarse: la palabra de Dios era como un fuego ardiente metido en sus huesos (<span class=\"vref\" data-book=\"JER\" data-chapter=\"20\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Jer. 20:9</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿De qué formas sutiles podrías estar rechazando mensajes de Dios?",
+          "Jeremías lloraba por el pueblo que lo rechazaba. ¿Por quién has llorado tú?",
+          "¿Qué significa tener la Palabra de Dios “como fuego en los huesos”?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Por qué fueron registradas las historias de rebelión de Israel, según Pablo?",
+              "opts": [
+                "Para avergonzar a Israel",
+                "Como simple entretenimiento",
+                "Para mostrar que Dios desistió",
+                "Como advertencia, para que no repitamos los errores"
+              ]
+            },
+            {
+              "text": "¿Qué profeta es llamado un profeta marcado por la tristeza?",
+              "opts": [
+                "Jeremías",
+                "Jonás",
+                "Elías",
+                "Isaías"
+              ]
+            },
+            {
+              "text": "¿Cuál de estas es una forma sutil de rechazar el mensaje de Dios, según la lección?",
+              "opts": [
+                "Estudiar la Biblia con atención",
+                "Aceptar solo lo que nos agrada",
+                "Pedir consejo a quien conoce la Palabra",
+                "Orar antes de decidir"
+              ]
+            },
+            {
+              "text": "Rechazar el mensaje divino es, en última instancia, rechazar ¿a quién?",
+              "opts": [
+                "Solo al profeta",
+                "Solo a la iglesia",
+                "A Dios mismo",
+                "A nadie"
+              ]
+            },
+            {
+              "text": "¿Qué promete Dios para vencer las tentaciones, según 1 Corintios 10:13?",
+              "opts": [
+                "Que nunca seremos tentados",
+                "Que la tentación siempre será fácil",
+                "Que otros lucharán por nosotros",
+                "Fuerza y una salida"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿por qué se entristece Jesús cuando despreciamos a quien Él envía?",
+              "opts": [
+                "Porque rechazar el mensaje es rechazar a Dios mismo",
+                "Porque pierde seguidores",
+                "Porque los mensajeros se ofenden",
+                "Porque la iglesia se achica"
+              ]
+            },
+            {
+              "text": "¿En qué texto dice Jeremías que la palabra era como fuego en sus huesos?",
+              "opts": [
+                "Jeremías 1:5",
+                "Jeremías 20:9",
+                "Jeremías 29:11",
+                "Jeremías 31:3"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Jeremías maldiciendo el día en que nació?",
+              "opts": [
+                "Jeremías 33:3",
+                "Jeremías 17:7, 8",
+                "Jeremías 20:14-18",
+                "Jeremías 10:23"
+              ]
+            },
+            {
+              "text": "¿Qué textos muestran a Jeremías amenazado de muerte?",
+              "opts": [
+                "Jeremías 1:9 y 1:10",
+                "Jeremías 31:31 y 31:33",
+                "Jeremías 29:7 y 29:11",
+                "Jeremías 26:8-11 y 38:4"
+              ]
+            },
+            {
+              "text": "En Jeremías 9:1, ¿qué deseaba el profeta?",
+              "opts": [
+                "Que sus ojos fueran un manantial de lágrimas por el pueblo",
+                "Que el pueblo fuera destruido",
+                "Que Dios lo llevara al cielo",
+                "Que el rey lo recompensara"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Solo rechaza el mensaje de Dios quien se burla abiertamente de los profetas.",
+            "Los relatos del desierto fueron escritos como advertencia para nosotros.",
+            "Jeremías sufrió profundamente a causa de su misión.",
+            "Dios no ofrece fuerza para vencer la tentación."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "Para nuestra advertencia",
+        "summary": "Las historias tristes del Antiguo Testamento fueron preservadas para que aprendamos de ellas. No estamos condenados a repetir los errores del pasado si tomamos en serio las advertencias de Dios.",
+        "body": [
+          "<p>Los relatos del Antiguo Testamento, por tristes que sean, fueron preservados para que aprendamos lo que pasa cuando nos rebelamos contra Dios. “Estas cosas sucedieron como ejemplos para nosotros, para que no codiciemos cosas malas, como ellos codiciaron” (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:6</span><span class=\"vref-pop\"></span>). El pasado nos ayuda a entender el presente y el futuro.</p>",
+          "<p>Pablo dice que esas cosas “están escritas para amonestarnos a nosotros, a quienes han alcanzado los fines de los siglos” (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:11</span><span class=\"vref-pop\"></span>), uniendo al antiguo Israel con la iglesia de hoy (<span class=\"vref\" data-book=\"GAL\" data-chapter=\"6\" data-v1=\"14\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Gál. 6:14-16</span><span class=\"vref-pop\"></span>). No estamos condenados a repetir los errores de generaciones anteriores si tomamos en serio las advertencias. “El que piensa estar firme, mire que no caiga” (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:12</span><span class=\"vref-pop\"></span>), y Dios da fuerza para vencer (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:13</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Si estamos dispuestos a oír y obedecer, estaremos seguros y seremos prosperados (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"20\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">2 Crón. 20:20</span><span class=\"vref-pop\"></span>). Dios no desperdicia palabras: permanecen para siempre (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"40\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Isa. 40:8</span><span class=\"vref-pop\"></span>). Y si eso ya valía en los días de Pablo, vale aún más para nosotros.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué lecciones de los relatos bíblicos de rebelión e incredulidad quieres llevar contigo para no seguir el mismo camino?",
+          "¿En qué área de tu vida “piensas estar firme” y necesitas tener cuidado?",
+          "¿Qué error de tu familia o de tu generación no quieres repetir?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Por qué fueron preservados los relatos tristes del Antiguo Testamento?",
+              "opts": [
+                "Para que aprendamos de ellos",
+                "Por casualidad",
+                "Para avergonzar a los judíos",
+                "Solo por valor histórico"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿estamos condenados a repetir los errores del pasado?",
+              "opts": [
+                "Sí, siempre",
+                "No, si tomamos en serio las advertencias",
+                "Sí, excepto los pastores",
+                "Depende de la suerte"
+              ]
+            },
+            {
+              "text": "Según 1 Corintios 10:11, ¿para quiénes se escribieron esas cosas como advertencia?",
+              "opts": [
+                "Solo para los israelitas en el desierto",
+                "Solo para los apóstoles",
+                "Para nosotros, a quienes han alcanzado los fines de los siglos",
+                "Para los ángeles"
+              ]
+            },
+            {
+              "text": "¿Qué dice Pablo a quien piensa estar firme (1 Cor. 10:12)?",
+              "opts": [
+                "Que puede descansar tranquilo",
+                "Que ya está salvo y no necesita preocuparse",
+                "Que debe juzgar a los demás",
+                "Que mire que no caiga"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál es la relación entre el pasado y el presente?",
+              "opts": [
+                "El pasado nos ayuda a entender el presente y el futuro",
+                "No hay relación",
+                "El pasado debe olvidarse",
+                "Solo importa el futuro"
+              ]
+            },
+            {
+              "text": "Según 2 Crónicas 20:20, ¿qué le pasa a quien cree a los profetas de Dios?",
+              "opts": [
+                "Será perseguido",
+                "Será prosperado",
+                "Se hará rico",
+                "Será olvidado"
+              ]
+            },
+            {
+              "text": "Según Isaías 40:8, ¿qué permanece para siempre?",
+              "opts": [
+                "La hierba del campo",
+                "Las flores",
+                "La palabra de Dios",
+                "Los reinos humanos"
+              ]
+            },
+            {
+              "text": "¿Qué texto afirma que esas cosas sucedieron como ejemplos para nosotros?",
+              "opts": [
+                "1 Corintios 15:3",
+                "2 Corintios 5:17",
+                "Romanos 12:2",
+                "1 Corintios 10:6"
+              ]
+            },
+            {
+              "text": "¿Qué texto usa la lección para unir al antiguo Israel con la iglesia?",
+              "opts": [
+                "Gálatas 6:14-16",
+                "Gálatas 2:20",
+                "Gálatas 5:22, 23",
+                "Gálatas 1:6-9"
+              ]
+            },
+            {
+              "text": "Según 1 Corintios 10:13, ¿qué no permite Dios?",
+              "opts": [
+                "Que seamos tentados de ninguna manera",
+                "Que seamos tentados más de lo que podemos resistir",
+                "Que tengamos dificultades",
+                "Que alguna vez nos equivoquemos"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Pablo une las experiencias del antiguo Israel con la iglesia de hoy.",
+            "Dios da fuerza para aprender del pasado y vencer hoy.",
+            "Las palabras de Dios pierden validez con el tiempo.",
+            "Según la lección, los relatos de rebelión deben ignorarse."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Sueños y visiones",
+        "summary": "Elena de White recibió cientos de visiones, algunas acompañadas de señales sobrenaturales y presenciadas por escépticos. Como en los tiempos bíblicos, unos aceptaron y otros rechazaron, y ella pedía paciencia y amor con quienes dudaban.",
+        "body": [
+          "<p>Elena de White recibió cientos de visiones y sueños, que duraban desde minutos hasta horas y a veces eran presenciados por grandes grupos, incluso escépticos. En 1868, su esposo, Jaime White, lo describió: ella quedaba totalmente inconsciente de lo que la rodeaba, no respiraba, los músculos se ponían rígidos, pero los gestos eran “libres y agraciados” y los ojos permanecían abiertos. Nadie controlaba cuándo llegaban las visiones.</p>",
+          "<p>Como en los tiempos bíblicos, algunos aceptaban los mensajes y otros los rechazaban. Ella escribió que no había escogido por sí misma esa obra desagradable, y que advertiría, aconsejaría, reprendería y animaría, la escucharan o no (Testimonios para la iglesia, t. 4).</p>",
+          "<p>Muchos rechazaban sus mensajes por incredulidad o por desavenencias personales, no por motivos teológicos. Trataba a los escépticos con cortesía y pidió que fueran tratados con “paciencia y amor fraternal” (t. 1). Para ella, la confirmación del don estaba en los propios mensajes, y Dios da evidencia suficiente para que la fe se apoye del lado de la verdad.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo reaccionó el rey Joacim a la advertencia profética, y cómo recibió Sedequías el mensaje de Jeremías? (Jer. 36:20-26; 2 Crón. 36:11, 12)",
+          "¿Cómo reaccionó Judá a los mensajes de los profetas, y por qué eso entristeció tanto a Jesús? (2 Crón. 36:15, 16; Mat. 23:37)",
+          "¿Cómo tratas a alguien que tiene dudas sobre lo que crees?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuántas visiones y sueños recibió Elena de White a lo largo de su vida?",
+              "opts": [
+                "Solo dos",
+                "Cientos",
+                "Unas diez",
+                "Ninguna después de 1844"
+              ]
+            },
+            {
+              "text": "¿Quién describió en 1868 el estado de Elena durante una visión?",
+              "opts": [
+                "Guillermo Miller",
+                "Levi Stockman",
+                "Jaime White, su esposo",
+                "José Bates"
+              ]
+            },
+            {
+              "text": "Según Jaime White, ¿cómo quedaba Elena durante la visión?",
+              "opts": [
+                "Dormía profundamente",
+                "Hablaba en lenguas desconocidas",
+                "Tenía los ojos cerrados y susurraba",
+                "No respiraba, pero los ojos permanecían abiertos"
+              ]
+            },
+            {
+              "text": "¿Quién controlaba el momento y la duración de las visiones?",
+              "opts": [
+                "Nadie; eran inesperadas incluso para Elena",
+                "La propia Elena",
+                "Jaime White",
+                "Los líderes de la iglesia"
+              ]
+            },
+            {
+              "text": "¿Por qué muchos rechazaban los mensajes de Elena, según la lección?",
+              "opts": [
+                "Porque los mensajes contradecían la Biblia",
+                "Por incredulidad o desavenencias personales, no por motivos teológicos",
+                "Porque cobraba por las visiones",
+                "Porque nadie podía verlas"
+              ]
+            },
+            {
+              "text": "¿Cómo pedía Elena que se tratara a los escépticos?",
+              "opts": [
+                "Con expulsión inmediata",
+                "Con silencio y desprecio",
+                "Con paciencia y amor fraternal",
+                "Con debates públicos"
+              ]
+            },
+            {
+              "text": "¿De qué obra es la afirmación de hablar “la escuchen o no”?",
+              "opts": [
+                "Primeros escritos",
+                "El Deseado de todas las gentes",
+                "El camino a Cristo",
+                "Testimonios para la iglesia, t. 4"
+              ]
+            },
+            {
+              "text": "Según Elena, ¿dónde estaba la verdadera confirmación de su don?",
+              "opts": [
+                "En los mensajes que Dios le había dado",
+                "En el número de seguidores",
+                "En las señales físicas de las visiones",
+                "En la aprobación de los líderes"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿qué nos dio Dios para que la fe se apoye del lado de la verdad?",
+              "opts": [
+                "Pruebas absolutas que hacen innecesaria la fe",
+                "Evidencia suficiente",
+                "Ninguna evidencia",
+                "Solo sentimientos"
+              ]
+            },
+            {
+              "text": "¿En qué año hizo Jaime White la descripción detallada de las visiones?",
+              "opts": [
+                "1844",
+                "1827",
+                "1868",
+                "1915"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Elena podía provocar una visión cuando quisiera.",
+            "Algunas visiones de Elena de White fueron presenciadas por escépticos.",
+            "Elena decía que no había escogido esa obra por sí misma.",
+            "Elena trataba con desprecio a quienes dudaban de su don."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Cuando la verdad confronta el corazón",
+        "summary": "Nuestra cultura dice que sigas tu propia “verdad”. Cuando choca con la verdad de Dios, hay que elegir, y los profetas enfrentaron resistencia justamente por llamar al cambio.",
+        "body": [
+          "<p>Nuestra cultura anima a cada uno a seguir su propia “verdad”. Cuando choca con la verdad de Dios, tenemos que elegir entre Su orientación y nuestro propio camino. Los profetas enfrentaron resistencia justamente porque llamaban al arrepentimiento y al cambio.</p>",
+          "<p>Israel dejó que el miedo a Canaán se convirtiera en incredulidad y rebelión, mientras Josué y Caleb confiaron en las promesas. Jeremías también tuvo que mantenerse firme ante las críticas. Y Joacim quemó el rollo, mostrando que rechazar la Palabra no elimina sus consecuencias.</p>",
+          "<p>Las historias bíblicas fueron preservadas como advertencia (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:11</span><span class=\"vref-pop\"></span>). Dios quiere que aprendamos de los errores del pasado y cultivemos una vida de confianza, humildad y obediencia.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Cómo distinguir mis sentimientos de la verdad de Dios?",
+          "¿Qué miedos pueden debilitar hoy mi confianza en Dios?",
+          "¿De qué maneras podría estar ignorando la voz del Señor sin darme cuenta?"
+        ]
+      }
+    ]
   }
 ]

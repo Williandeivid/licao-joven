@@ -13147,5 +13147,1467 @@
         ]
       }
     ]
+  },
+  {
+    "id": 19,
+    "title": "The Prophetic Writings",
+    "keyword": "WRITINGS",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Literary Genres and Styles",
+        "summary": "The prophets communicated the message in three ways: speaking, writing and acting it out. The writings were given to lead to salvation, and no literary style has more authority than another.",
+        "body": [
+          "<p>The Bible shows three main ways of communicating God’s message: orally, in writing and through symbolic acts. The oldest was direct communication — an audible voice, dreams or angels. Only in Moses’ time do we find the first command to record in “a book” what God had spoken (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"17\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Exod. 17:14</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>The prophetic writings were given to lead the people to salvation, not to satisfy curiosity about the future (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Jer. 36:3</span><span class=\"vref-pop\"></span>). Whenever the messengers were impressed to write, the Holy Spirit enabled them — in the desert, fleeing from Saul or exiled in Babylon.</p>",
+          "<p>There are very different styles: texts that resemble a diary (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"33\" data-v1=\"1\" data-v2=\"49\" onclick=\"toggleVerseLive(this)\">Num. 33:1-49</span><span class=\"vref-pop\"></span>), metaphors and hyperboles, and apocalyptic writings in Daniel, Zechariah and Revelation, with strong symbolism and cosmic themes. Even so, there is no difference in authority between one style and another.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why did God command that what had only been spoken be written down?",
+          "Do you read the Bible more out of curiosity about the future or seeking salvation and direction?",
+          "Which style in the Bible do you find hardest to read? What would help you understand it?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What is the main Bible passage for this week?",
+              "opts": [
+                "Jeremiah 36:1-19",
+                "Revelation 1",
+                "Isaiah 6",
+                "Ephesians 2"
+              ]
+            },
+            {
+              "text": "What are the three main ways of communicating the prophetic message?",
+              "opts": [
+                "Only in writing",
+                "Orally, in writing and through symbolic acts",
+                "Through music, dance and painting",
+                "Through lots, dreams and oracles"
+              ]
+            },
+            {
+              "text": "In what period does the first command to record in a book what God said appear?",
+              "opts": [
+                "In Adam’s time",
+                "In David’s time",
+                "In Moses’ time",
+                "In Jesus’ time"
+              ]
+            },
+            {
+              "text": "What were the prophetic writings given for, according to the lesson?",
+              "opts": [
+                "To satisfy curiosity about the future",
+                "To exalt the prophets",
+                "To replace prayer",
+                "To lead the people to salvation"
+              ]
+            },
+            {
+              "text": "Which books does the lesson mention as examples of apocalyptic writings?",
+              "opts": [
+                "Daniel, Zechariah and Revelation",
+                "Psalms, Proverbs and Song of Solomon",
+                "Genesis, Exodus and Numbers",
+                "Matthew, Mark and Luke"
+              ]
+            },
+            {
+              "text": "What is the difference in authority between the Bible’s literary styles?",
+              "opts": [
+                "Poetry has less authority",
+                "None",
+                "Apocalyptic texts have more authority",
+                "Only the laws have authority"
+              ]
+            },
+            {
+              "text": "Which text records the first command to write in a book what God said?",
+              "opts": [
+                "Exodus 3:14",
+                "Genesis 1:1",
+                "Exodus 17:14",
+                "Deuteronomy 6:4"
+              ]
+            },
+            {
+              "text": "Which text does the lesson cite as an example of writing that resembles a diary?",
+              "opts": [
+                "Psalm 23",
+                "Isaiah 53",
+                "John 3",
+                "Numbers 33:1-49"
+              ]
+            },
+            {
+              "text": "According to Jeremiah 36:3, what was the purpose of the written message?",
+              "opts": [
+                "That the people would turn back and be forgiven",
+                "That the king would be honored",
+                "That Jeremiah would become famous",
+                "That Babylon would be destroyed"
+              ]
+            },
+            {
+              "text": "Which work by Ellen G. White is recommended this week?",
+              "opts": [
+                "Patriarchs and Prophets, chapter 3",
+                "Fundamentals of Christian Education, chapter 15",
+                "The Great Controversy, chapter 37",
+                "Steps to Christ, chapter 3"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "The prophetic writings were given mainly to satisfy curiosity about the future.",
+            "Direct oral communication was God’s oldest way of communicating.",
+            "The Holy Spirit enabled the prophets to write in any circumstance.",
+            "Apocalyptic texts have more authority than the other styles."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Literary Assistants",
+        "summary": "Jeremiah dictated his messages to Baruch, and Paul used Tertius to write Romans. The secretaries were faithful to the meaning but could influence the vocabulary — what is inspired is the prophet’s thought.",
+        "body": [
+          "<p>When the officials in Jerusalem heard Baruch read Jeremiah’s scroll, they asked how it had been written. He explained: “He pronounced all these words unto me with his mouth, and I wrote them with ink in the book” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Jer. 36:18</span><span class=\"vref-pop\"></span>). Jeremiah could have written alone, but he trusted a secretary.</p>",
+          "<p>In the New Testament, Tertius says: “I Tertius, who wrote this epistle, salute you in the Lord” (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"16\" data-v1=\"22\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">Rom. 16:22</span><span class=\"vref-pop\"></span>). He was Paul’s amanuensis, that is, the assistant who recorded his words. Many scholars explain in this way the differences in style between Paul’s letters and between 1 and 2 Peter: if even Paul, fluent in Greek, used secretaries, Peter, who spoke Aramaic, probably did too.</p>",
+          "<p>The secretaries were faithful to the thought and meaning the prophet wanted to convey, but the vocabulary and sentence structure could reflect their skill. In the end, what is inspired is the prophet’s thought, not necessarily every word chosen to express it.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Who helped make it possible for you to read the Bible in your own language?",
+          "What can we do today to help more people know the prophets’ message?",
+          "Why does knowing that the prophets used secretaries not lessen our confidence in the Bible?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Who was Jeremiah’s secretary?",
+              "opts": [
+                "Tertius",
+                "Baruch",
+                "Gehazi",
+                "Ezra"
+              ]
+            },
+            {
+              "text": "Who wrote the letter to the Romans at Paul’s request?",
+              "opts": [
+                "Timothy",
+                "Luke",
+                "Tertius",
+                "Silas"
+              ]
+            },
+            {
+              "text": "What does amanuensis mean?",
+              "opts": [
+                "An official translator of the temple",
+                "A second-class prophet",
+                "A medieval copyist",
+                "A secretary or assistant who records another person’s words"
+              ]
+            },
+            {
+              "text": "How did Jeremiah produce the scroll Baruch read?",
+              "opts": [
+                "He dictated the words, and Baruch wrote them",
+                "He wrote everything alone",
+                "He copied it from another prophet",
+                "An angel wrote it"
+              ]
+            },
+            {
+              "text": "According to the lesson, how can the differences in style between 1 and 2 Peter be explained?",
+              "opts": [
+                "By being from unrelated authors",
+                "By the probable use of a secretary",
+                "By a poor translation",
+                "By Peter having forgotten Greek"
+              ]
+            },
+            {
+              "text": "What was Peter’s native language, according to the lesson?",
+              "opts": [
+                "Greek",
+                "Latin",
+                "Aramaic",
+                "Egyptian"
+              ]
+            },
+            {
+              "text": "In Jeremiah 36:18, what did Baruch write on the scroll with?",
+              "opts": [
+                "With charcoal",
+                "With blood",
+                "With wax",
+                "With ink"
+              ]
+            },
+            {
+              "text": "Which text contains Tertius’ greeting?",
+              "opts": [
+                "Romans 16:22",
+                "Romans 1:1",
+                "Romans 8:1",
+                "Romans 12:1"
+              ]
+            },
+            {
+              "text": "What is ultimately inspired, according to the lesson?",
+              "opts": [
+                "Every word chosen by the secretary",
+                "The prophet’s thought",
+                "The ink and the scroll",
+                "The translation into Portuguese"
+              ]
+            },
+            {
+              "text": "Did the secretaries add their own thoughts to the message?",
+              "opts": [
+                "Yes, always",
+                "Only in Peter’s letters",
+                "No; they were faithful to the meaning the prophet intended",
+                "Only when the prophet asked"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Baruch read Jeremiah’s scroll to the officials in Jerusalem.",
+            "Paul never used secretaries to write his letters.",
+            "According to the lesson, every word chosen by the secretary is inspired independently.",
+            "A letter’s vocabulary could reflect the secretary’s skill."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Literary Sources",
+        "summary": "The prophets also used outside sources: Solomon collected proverbs, Ezra and Nehemiah copied letters and lists, Luke did research and Jude quoted a non-biblical book. The Holy Spirit guided even that selection.",
+        "body": [
+          "<p>Solomon did not compose all the proverbs he recorded: he “gave good heed, and sought out, and set in order many proverbs” and “sought to find out acceptable words” (<span class=\"vref\" data-book=\"ECC\" data-chapter=\"12\" data-v1=\"9\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Eccles. 12:9, 10</span><span class=\"vref-pop\"></span>). The description of the virtuous woman in Proverbs 31 is attributed to the mother of King Lemuel (<span class=\"vref\" data-book=\"PRO\" data-chapter=\"31\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Prov. 31:1</span><span class=\"vref-pop\"></span>), and there are signs of the influence of Egyptian literature in parts of the book.</p>",
+          "<p>Ezra included copies of royal letters and decrees (Ezra 4–7), and Nehemiah incorporated genealogical lists he found (<span class=\"vref\" data-book=\"NEH\" data-chapter=\"7\" data-v1=\"5\" data-v2=\"72\" onclick=\"toggleVerseLive(this)\">Neh. 7:5-72</span><span class=\"vref-pop\"></span>). In the New Testament, Luke carefully researched and gathered eyewitness accounts (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Luke 1:1-4</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Other authors quoted works outside the Bible: Paul quoted Greek philosophers without naming them (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"17\" data-v1=\"28\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">Acts 17:28</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"TIT\" data-chapter=\"1\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Titus 1:12</span><span class=\"vref-pop\"></span>), and Jude seems to quote the so-called “First Book of Enoch,” a Jewish work that was not written by Enoch. The Holy Spirit not only gave visions and dreams, but also guided the messengers in choosing what to use.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "The Bible authors were guided to select material from other sources. Why is it important to remember this?",
+          "What does Luke’s careful research teach about faith and study?",
+          "How do you tell a good source from a doubtful one today?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Who “sought out and set in order” many proverbs, according to Ecclesiastes 12:9?",
+              "opts": [
+                "David",
+                "Moses",
+                "Solomon",
+                "Hezekiah"
+              ]
+            },
+            {
+              "text": "Which Gospel writer carefully researched and gathered eyewitness accounts?",
+              "opts": [
+                "Mark",
+                "John",
+                "Matthew",
+                "Luke"
+              ]
+            },
+            {
+              "text": "To whom is the description of the virtuous woman in Proverbs 31 attributed?",
+              "opts": [
+                "The mother of King Lemuel",
+                "Solomon",
+                "David",
+                "The queen of Sheba"
+              ]
+            },
+            {
+              "text": "What kind of documents did Ezra include in his book?",
+              "opts": [
+                "Love poems",
+                "Copies of royal letters and decrees",
+                "Temple recipes",
+                "Prophecies about Rome"
+              ]
+            },
+            {
+              "text": "Which non-canonical work does Jude seem to have quoted?",
+              "opts": [
+                "The book of Maccabees",
+                "The Odyssey",
+                "The First Book of Enoch",
+                "The Talmud"
+              ]
+            },
+            {
+              "text": "Which foreign literature shows signs of influence in Proverbs?",
+              "opts": [
+                "Chinese literature",
+                "Roman literature",
+                "Persian literature",
+                "Egyptian literature"
+              ]
+            },
+            {
+              "text": "Which text shows Luke explaining how he researched in order to write?",
+              "opts": [
+                "Luke 1:1-4",
+                "Luke 4:16-21",
+                "Luke 10:25-37",
+                "Luke 23:44-49"
+              ]
+            },
+            {
+              "text": "Where did Nehemiah incorporate genealogical lists he found?",
+              "opts": [
+                "Nehemiah 1:1-11",
+                "Nehemiah 7:5-72",
+                "Nehemiah 8:1-8",
+                "Nehemiah 13:15-22"
+              ]
+            },
+            {
+              "text": "In which texts does Paul quote Greek philosophers?",
+              "opts": [
+                "Romans 3:23 and 6:23",
+                "Galatians 2:20 and 5:1",
+                "Acts 17:28 and Titus 1:12",
+                "Ephesians 6:1 and 6:4"
+              ]
+            },
+            {
+              "text": "In which chapters of Ezra are the royal letters and decrees?",
+              "opts": [
+                "Chapters 1 to 2",
+                "Chapters 9 to 10",
+                "Only chapter 8",
+                "Chapters 4 to 7"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Solomon personally composed all the proverbs he recorded.",
+            "The First Book of Enoch was written by Enoch himself.",
+            "Luke gathered eyewitness accounts.",
+            "The Holy Spirit also guided the messengers in selecting material."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "A Divine and Human Treasure",
+        "summary": "The Bible was born from the meeting between the Holy Spirit and imperfect people. God preferred shepherds, fishermen and kings to angels — the same logic as the incarnation: a Word both divine and human.",
+        "body": [
+          "<p>The Bible did not fall from heaven as a document written by angels in heavenly language. It was born from the meeting between the Holy Spirit and imperfect human beings: Solomon selected proverbs, the historians quoted royal archives and Paul quoted Greek poets to reach those who did not know the Scriptures.</p>",
+          "<p>God could have used angels as scribes, but He preferred shepherds, fishermen, kings and former persecutors — a treasure in earthen vessels (<span class=\"vref\" data-book=\"2CO\" data-chapter=\"4\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">2 Cor. 4:7</span><span class=\"vref-pop\"></span>). It was not carelessness: it is the logic of the incarnation. The Word who became flesh (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">John 1:14</span><span class=\"vref-pop\"></span>) shows the same principle as all of Scripture: a Word perfectly divine and genuinely human.</p>",
+          "<p>Jesus often asked “Have ye not read?” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"12\" data-v1=\"3\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Matt. 12:3-5</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"19\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Matt. 19:4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MRK\" data-chapter=\"12\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Mark 12:10</span><span class=\"vref-pop\"></span>), showing the importance of reading and studying when doubts arise. And everything written in the past was written for our learning and hope (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"15\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Rom. 15:4</span><span class=\"vref-pop\"></span>) — with a blessing for those who read and keep it (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Rev. 1:3</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why do you think God preferred imperfect people to angels to write the Bible?",
+          "When a doubt comes up, is your first reaction to search the Word or the internet?",
+          "With the logic of the incarnation in mind, how do you read the “human” parts of the Bible?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "According to the lesson, how was the Bible produced?",
+              "opts": [
+                "Written by angels in heavenly language",
+                "It fell ready-made from heaven",
+                "Written only by priests",
+                "From the meeting between the Holy Spirit and imperfect human beings"
+              ]
+            },
+            {
+              "text": "What image does Paul use for God’s treasure in human hands?",
+              "opts": [
+                "Earthen vessels",
+                "Golden chests",
+                "Jars of new wine",
+                "Precious stones"
+              ]
+            },
+            {
+              "text": "To which truth does the lesson compare the Bible’s divine and human nature?",
+              "opts": [
+                "The creation of the angels",
+                "The incarnation of Jesus",
+                "The building of the temple",
+                "Adam’s fall"
+              ]
+            },
+            {
+              "text": "Whom did God choose as writers instead of angels?",
+              "opts": [
+                "Only priests",
+                "Only kings",
+                "Shepherds, fishermen, kings and former persecutors",
+                "Only philosophers"
+              ]
+            },
+            {
+              "text": "According to the lesson, why did Paul quote Greek poets and philosophers?",
+              "opts": [
+                "Because he did not know the Bible",
+                "To show that the Greeks were inspired",
+                "To impress the apostles",
+                "To communicate eternal truths to those who did not know the Scriptures"
+              ]
+            },
+            {
+              "text": "What did Jesus often ask those who questioned Him?",
+              "opts": [
+                "“Have you not read?”",
+                "“Have you not seen?”",
+                "“Who is the greatest?”",
+                "“Where is your faith?”"
+              ]
+            },
+            {
+              "text": "Where is the phrase about treasure in earthen vessels?",
+              "opts": [
+                "1 Corinthians 13:12",
+                "2 Corinthians 4:7",
+                "Galatians 6:7",
+                "Philippians 4:13"
+              ]
+            },
+            {
+              "text": "According to Romans 15:4, why was what was written in the past written?",
+              "opts": [
+                "Only for the Jews",
+                "To be forgotten",
+                "For our learning and hope",
+                "Only for the priests"
+              ]
+            },
+            {
+              "text": "Which text promises a blessing to those who read and keep the prophecy?",
+              "opts": [
+                "Revelation 3:20",
+                "Revelation 12:17",
+                "Revelation 22:13",
+                "Revelation 1:3"
+              ]
+            },
+            {
+              "text": "Which text states that the Word became flesh?",
+              "opts": [
+                "John 1:14",
+                "John 3:16",
+                "John 14:6",
+                "John 20:31"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "The Bible is both divine and human.",
+            "The Bible was written by angels in heavenly language.",
+            "Using imperfect people was carelessness on God’s part.",
+            "The Scriptures were written for our learning and hope."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "Treasure in Earthen Vessels",
+        "summary": "The prophets used imperfect human language to communicate God’s perfect thoughts. A few difficult passages do not affect the essence of the message, and we can trust the accuracy of the revealed truths.",
+        "body": [
+          "<p>Prophetic messages combine divine action and human participation: God speaks, and the prophets use imperfect human language to communicate His perfect thoughts. Paul sums it up: “But we have this treasure in earthen vessels, that the excellency of the power may be of God, and not of us” (<span class=\"vref\" data-book=\"2CO\" data-chapter=\"4\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">2 Cor. 4:7</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>The messengers were not protected from personal failings — think of Moses, Elijah, David, Jonah and Peter — and their writings also reflect limits of understanding and language. Just as Jesus had a divine and a human nature, the Bible also has both dimensions: “The truths revealed are all ‘given by inspiration of God’; yet they are expressed in the words of men” (Testimonies for the Church, vol. 5).</p>",
+          "<p>The Holy Spirit did not prevent some texts from seeming hard to harmonize today. They are few, and it is not wise to let them become a stumbling block: we submit to the Word as we understand it and trust God in what we do not yet understand. These points do not affect the essence of the message, and God’s truths are revealed accurately.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why did God choose to use fallible human beings, and not sinless angels, as His main messengers?",
+          "How do you react when you come across a Bible text that is hard to understand?",
+          "What does the list of flawed messengers (Moses, Elijah, David, Jonah, Peter) say about you?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Which of these does the lesson mention as a messenger of God who had flaws?",
+              "opts": [
+                "Jonah",
+                "Enoch, who never made mistakes",
+                "A sinless angel",
+                "None, the prophets were perfect"
+              ]
+            },
+            {
+              "text": "What kind of language did the prophets use to communicate God’s thoughts?",
+              "opts": [
+                "Perfect heavenly language",
+                "Imperfect human language",
+                "A secret language",
+                "Only symbols"
+              ]
+            },
+            {
+              "text": "To what does the lesson compare the two dimensions of the Bible?",
+              "opts": [
+                "Heaven and earth",
+                "Law and grace",
+                "Jesus’ two natures, divine and human",
+                "Day and night"
+              ]
+            },
+            {
+              "text": "What does the lesson recommend regarding texts that are hard to harmonize?",
+              "opts": [
+                "Discard those texts",
+                "Stop reading the Bible",
+                "Choose only the easy texts",
+                "Trust God and not let them become a stumbling block"
+              ]
+            },
+            {
+              "text": "According to the lesson, do the difficult texts affect the essence of the Bible’s message?",
+              "opts": [
+                "No",
+                "Yes, completely",
+                "Yes, in the Gospels",
+                "Only in the Old Testament"
+              ]
+            },
+            {
+              "text": "According to 2 Corinthians 4:7, why is the treasure in earthen vessels?",
+              "opts": [
+                "Because God had no other container",
+                "To show that the power comes from God, not from us",
+                "To make it cheaper",
+                "To hide the message"
+              ]
+            },
+            {
+              "text": "Which work by Ellen White contains the quote about the union of the divine and the human in the Bible?",
+              "opts": [
+                "Early Writings",
+                "The Great Controversy",
+                "Testimonies for the Church, vol. 5",
+                "Christian Experience and Teachings"
+              ]
+            },
+            {
+              "text": "According to Ellen White, how are the truths revealed in the Bible expressed?",
+              "opts": [
+                "In the words of angels",
+                "In perfect, heavenly language",
+                "Only through symbols",
+                "In the words of men, adapted to human needs"
+              ]
+            },
+            {
+              "text": "Which of these messengers of God is mentioned in the lesson as an example of someone with flaws?",
+              "opts": [
+                "David",
+                "Enoch",
+                "Joseph of Egypt, who never made mistakes",
+                "Daniel, cited as perfect"
+              ]
+            },
+            {
+              "text": "How can we trust the truths of Scripture, according to the lesson?",
+              "opts": [
+                "Because the messengers were perfect",
+                "They are revealed accurately, despite the messengers’ imperfections",
+                "Because nothing in the Bible is difficult",
+                "Because they were dictated letter by letter"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "God’s messengers were protected from every personal failing.",
+            "The Bible has a divine and a human dimension.",
+            "We can trust God even without understanding everything.",
+            "According to the lesson, the difficult texts are many and compromise the message."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "The Writings of Ellen White",
+        "summary": "Weakened after her accident, Ellen White heard the angel say: “Write.” Like the Bible prophets, she relied on secretaries and used other sources, without ever trying to seem more than she was.",
+        "body": [
+          "<p>Ellen White also received the task of writing what was revealed to her. Weakened by the accident that nearly cost her life, she thought she could not do it. But the angel insisted: “Write the things I give you.” She took a small writing board and found that she could trace the words with ease (General Conference Bulletin, May 31, 1909).</p>",
+          "<p>Like the Bible writers, she relied on literary assistants. Her secretaries did editorial work: they helped express the message clearly, without adding their own thoughts — they were not “ghostwriters” or co-authors. She also quoted and adapted other sources, and she recommended the same books she used, with no intention of deceiving anyone.</p>",
+          "<p>Her human traits were not erased by the call: she grew and matured throughout her life. And she corrected those who thought every word she spoke came from heaven: common letters had to be written, and such words and information were “not given under special inspiration” (Selected Messages, book 3). She never tried to seem more than she was.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "How did Baruch help Jeremiah write his book and bring his message to the people? (Jer. 36:1-6, 14-17)",
+          "Who helped Paul write the letter to the Romans? (Rom. 16:22)",
+          "How far would the prophets’ messages have gone without assistants, scribes and translators? What role can you play today?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What did the angel command Ellen White when she was weakened?",
+              "opts": [
+                "“Rest and do not write anymore”",
+                "“Write the things I give you”",
+                "“Move to another country”",
+                "“Preach in Portland”"
+              ]
+            },
+            {
+              "text": "What did Ellen use to write that night?",
+              "opts": [
+                "A typewriter",
+                "A parchment scroll",
+                "A small writing board",
+                "A school slate"
+              ]
+            },
+            {
+              "text": "How does the lesson describe the work of Ellen White’s secretaries?",
+              "opts": [
+                "Co-authorship",
+                "Ghostwriting",
+                "Translation into Latin",
+                "Editorial work, without adding their own thoughts"
+              ]
+            },
+            {
+              "text": "What happened when Ellen tried to write?",
+              "opts": [
+                "She was able to trace the words with ease",
+                "She could not write anything",
+                "She wrote in another language",
+                "She fainted"
+              ]
+            },
+            {
+              "text": "Why does the lesson say Ellen did not intend to deceive by using other sources?",
+              "opts": [
+                "Because she never used other sources",
+                "Because she recommended to readers some of the same books she used",
+                "Because she hid the books",
+                "Because she only quoted the Bible"
+              ]
+            },
+            {
+              "text": "What does the lesson say about Ellen White’s growth?",
+              "opts": [
+                "She was born mature",
+                "She never changed her mind",
+                "She grew and matured throughout her life",
+                "She stopped growing at 17"
+              ]
+            },
+            {
+              "text": "Where was Ellen’s account of the command to write published?",
+              "opts": [
+                "In Early Writings, in 1851",
+                "In the Review and Herald, in 1844",
+                "In Steps to Christ, in 1892",
+                "In the General Conference Bulletin, in 1909"
+              ]
+            },
+            {
+              "text": "Which work contains the quote about uninspired “common letters” in this lesson?",
+              "opts": [
+                "Selected Messages, book 3",
+                "Selected Messages, book 1",
+                "The Great Controversy",
+                "Education"
+              ]
+            },
+            {
+              "text": "Were Ellen’s secretaries co-authors of her writings?",
+              "opts": [
+                "Yes, they wrote whole chapters",
+                "No; they depended entirely on her material",
+                "Yes, in the health books",
+                "Only in the letters"
+              ]
+            },
+            {
+              "text": "According to the lesson, what counts in Ellen White’s favor when we evaluate her writings?",
+              "opts": [
+                "She never made mistakes",
+                "She wrote alone, without help",
+                "She never tried to seem more than she really was",
+                "She never read other authors"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Ellen White relied on literary assistants.",
+            "Ellen White quoted and adapted material from other authors.",
+            "Ellen’s secretaries added their own ideas to the messages.",
+            "Ellen claimed that every word she spoke came directly from heaven."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Between Trends and Eternal Truths",
+        "summary": "We have never had so much access to the Bible and so little knowledge of it. The greatest danger may not be rejecting it, but getting used to it.",
+        "body": [
+          "<p>We are the generation with the most access to the Bible in history — and one of those that knows it least deeply. Many young people know more trends, memes and viral songs than promises from Scripture. Perhaps the greatest danger is not rejecting the Bible, but getting used to it: reading without noticing, opening the text without letting it open the heart.</p>",
+          "<p>The prophets did not treat the message as something ordinary. Jeremiah said: “Thy words were found, and I did eat them” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"15\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Jer. 15:16</span><span class=\"vref-pop\"></span>). Daniel studied the earlier writings, and people risked their lives to preserve these texts — while we often leave the Bible closed out of distraction.</p>",
+          "<p>A strong generation is not born only from exciting services, but from young people who learn to love the Word in secret. Study context, history and prophecy, but remember: knowledge without transformation produces only religious information.</p>"
+        ],
+        "reflectTitle": "Open Dialogue (group discussion)",
+        "reflect": [
+          "How much time do I spend feeding my mind with online content compared to the time I spend letting God’s Word transform my heart?",
+          "How does studying inspiration, human imperfections, literary genres and the prophets’ assistants strengthen my confidence in the Bible and in Ellen White’s ministry?",
+          "What practical step can I take this week to read the Bible with more attention and less hurry?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Pay Attention!",
+    "keyword": "ATTENTION",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Angry at God’s Message",
+        "summary": "When personal “truth” clashes with God’s Truth, many rebel. Joshua and Caleb, and later Jeremiah, stood firm even in the face of violent opposition.",
+        "body": [
+          "<p>Today many are encouraged to treat their own “truth” — experiences, opinions, convictions — as absolute. The problem arises when it clashes with the Truth revealed in Jesus and in His Word. The prophets brought messages the people did not want to hear, and so many were rejected, persecuted and killed (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"11\" data-v1=\"32\" data-v2=\"38\" onclick=\"toggleVerseLive(this)\">Heb. 11:32-38</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>When the spies returned from Canaan talking about giants and fortified cities, the people panicked, wanted to go back to Egypt and turned against Moses and Aaron (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"13\" data-v1=\"31\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Num. 13:31</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"NUM\" data-chapter=\"14\" data-v1=\"1\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Num. 14:1-4</span><span class=\"vref-pop\"></span>). Joshua and Caleb stayed faithful and pleaded: “Only rebel not ye against the Lord” (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"14\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Num. 14:9</span><span class=\"vref-pop\"></span>). The reaction was so hostile that they were almost killed.</p>",
+          "<p>The same conflict marked Jeremiah’s ministry. God told him to speak everything he was commanded, without fear (<span class=\"vref\" data-book=\"JER\" data-chapter=\"1\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Jer. 1:17</span><span class=\"vref-pop\"></span>), and promised to make him firm as “an iron pillar” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"1\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Jer. 1:18</span><span class=\"vref-pop\"></span>). Even with intense resistance, he remained faithful, sustained by divine strength.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "When your “truth” clashes with the Bible, which one usually wins?",
+          "What “giants” make you want to go back to “Egypt”?",
+          "What helped Joshua and Caleb stand firm when everyone disagreed with them?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "What is the main Bible passage for this week?",
+              "opts": [
+                "Jeremiah 36:20-32",
+                "Jeremiah 1:1-10",
+                "Isaiah 6",
+                "Revelation 1"
+              ]
+            },
+            {
+              "text": "Which spies remained faithful in the face of the people’s rebellion?",
+              "opts": [
+                "Moses and Aaron",
+                "Joshua and Caleb",
+                "Dathan and Abiram",
+                "Joshua and Aaron"
+              ]
+            },
+            {
+              "text": "What did the spies describe when they returned from Canaan?",
+              "opts": [
+                "Deserts without water",
+                "A small, weak people",
+                "Giants and fortified cities",
+                "Seas impossible to cross"
+              ]
+            },
+            {
+              "text": "Where did the people want to go back to, overcome by fear?",
+              "opts": [
+                "Ur of the Chaldeans",
+                "Babylon",
+                "Mount Sinai",
+                "Egypt"
+              ]
+            },
+            {
+              "text": "With what image did God promise to strengthen Jeremiah?",
+              "opts": [
+                "An iron pillar",
+                "A wall of gold",
+                "An ivory tower",
+                "A rock of salt"
+              ]
+            },
+            {
+              "text": "According to Ellen White, quoted in the lesson, what happens to those who give in to unbelief?",
+              "opts": [
+                "They become prophets",
+                "They place themselves under Satan’s influence",
+                "They grow stronger in faith",
+                "They gain discernment"
+              ]
+            },
+            {
+              "text": "What was Joshua and Caleb’s appeal in Numbers 14:9?",
+              "opts": [
+                "“Let us go back to Egypt”",
+                "“Let us choose another leader”",
+                "“Do not rebel against the Lord”",
+                "“Let us wait forty more years”"
+              ]
+            },
+            {
+              "text": "According to Jeremiah 1:17, how was Jeremiah to speak?",
+              "opts": [
+                "Only what the king wanted to hear",
+                "Only on Sabbaths",
+                "Only in writing",
+                "Everything God commanded, without fear"
+              ]
+            },
+            {
+              "text": "Which text speaks of the heroes of faith who were persecuted and killed?",
+              "opts": [
+                "Hebrews 11:32-38",
+                "Hebrews 4:12-16",
+                "Hebrews 1:1-3",
+                "Hebrews 13:1-6"
+              ]
+            },
+            {
+              "text": "Which chapter of Prophets and Kings is recommended this week?",
+              "opts": [
+                "Chapter 14: “In the Spirit and Power of Elias”",
+                "Chapter 35: “Approaching Doom”",
+                "Chapter 26: “Behold Your God”",
+                "Chapter 3: “Temptation and Fall”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Joshua and Caleb were almost killed for defending trust in God.",
+            "The Bible prophets always brought messages the people liked to hear.",
+            "After the spies’ report, all the people trusted God.",
+            "Jeremiah remained faithful despite intense resistance."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Destroying the Message",
+        "summary": "Even with Judah’s sins, God insisted in love: Jeremiah bought a field as a sign of hope and wrote a final appeal. King Jehoiakim cut up the scroll and burned it — but the message did not disappear.",
+        "body": [
+          "<p>Idolatry, child sacrifice, adultery and oppression were common in Jeremiah’s day, and the prophet’s appeals were ignored. Even so, God’s messages remained redemptive. He told Jeremiah to buy a field and keep the deed: “Houses and fields and vineyards shall be possessed again in this land” (<span class=\"vref\" data-book=\"JER\" data-chapter=\"32\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Jer. 32:15</span><span class=\"vref-pop\"></span>) — a sign that the people would return from exile.</p>",
+          "<p>Out of love, God had a final appeal written down. Baruch wrote and read the message in Jerusalem; the officials, alarmed, advised Baruch and Jeremiah to hide (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Jer. 36:19</span><span class=\"vref-pop\"></span>). King Jehoiakim heard only the beginning, became furious, cut the scroll into pieces and threw it into the fire (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"20\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Jer. 36:20-23</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Sometimes we think that if we ignore or destroy God’s message, it will disappear. But indifference does not erase the Word; it only makes the consequences worse. The prophecy about Jehoiakim’s end (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"30\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Jer. 36:30, 31</span><span class=\"vref-pop\"></span>) is a warning: we ignore divine warnings at our own risk.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "What does God’s persistence in reaching His rebellious people reveal about His character?",
+          "Imagine Jehoiakim had accepted the message. How might the history of Jerusalem have changed?",
+          "What “scroll” do you feel like throwing into the fire when the Word confronts you?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Which king cut up Jeremiah’s scroll and threw it into the fire?",
+              "opts": [
+                "Zedekiah",
+                "Jehoiakim",
+                "Josiah",
+                "Nebuchadnezzar"
+              ]
+            },
+            {
+              "text": "Who wrote and read Jeremiah’s message in Jerusalem?",
+              "opts": [
+                "Ezra",
+                "Tertius",
+                "Baruch",
+                "Nehemiah"
+              ]
+            },
+            {
+              "text": "What did God tell Jeremiah to buy as a sign of hope?",
+              "opts": [
+                "A camel",
+                "A house in Babylon",
+                "A boat",
+                "A field"
+              ]
+            },
+            {
+              "text": "What did the officials advise Baruch and Jeremiah to do?",
+              "opts": [
+                "Hide",
+                "Flee to Egypt",
+                "Burn the scroll",
+                "Ask the king for forgiveness"
+              ]
+            },
+            {
+              "text": "How much of the message did Jehoiakim hear before becoming furious?",
+              "opts": [
+                "All of it, to the end",
+                "Only the beginning",
+                "None; he refused to listen",
+                "Only the last page"
+              ]
+            },
+            {
+              "text": "According to the lesson, what happens when we despise God’s message?",
+              "opts": [
+                "The message stops being valid",
+                "God gives up speaking",
+                "The message does not disappear and the consequences get worse",
+                "Nothing changes"
+              ]
+            },
+            {
+              "text": "According to Jeremiah 32:15, what would still happen in the land?",
+              "opts": [
+                "The land would be deserted forever",
+                "A new temple would be made of gold",
+                "The Chaldeans would reign forever",
+                "Houses, fields and vineyards would be bought again"
+              ]
+            },
+            {
+              "text": "Which text tells of the king burning the scroll?",
+              "opts": [
+                "Jeremiah 36:20-23",
+                "Jeremiah 1:4-10",
+                "Jeremiah 29:10-14",
+                "Jeremiah 52:1-11"
+              ]
+            },
+            {
+              "text": "Which text contains the prophecy about Jehoiakim’s end?",
+              "opts": [
+                "Jeremiah 31:31-34",
+                "Jeremiah 36:30, 31",
+                "Jeremiah 17:5-8",
+                "Jeremiah 7:1-7"
+              ]
+            },
+            {
+              "text": "What did the purchase of the field show, according to the lesson?",
+              "opts": [
+                "Jeremiah’s desire to get rich",
+                "That there would be no exile",
+                "Faith that the people would return after the exile",
+                "The alliance with Egypt"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Jehoiakim carefully read the whole message and repented.",
+            "Destroying the scroll made God’s message lose its effect.",
+            "Judah’s sins included idolatry and oppression.",
+            "Even in the face of rebellion, God’s messages were redemptive."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "A History of Resistance",
+        "summary": "Jeremiah prophesied through five reigns. Zedekiah did not humble himself before the one who spoke “from the mouth of the Lord,” and the rejection of the prophets led Judah into exile — a story that grieved Jesus.",
+        "body": [
+          "<p>Jeremiah’s ministry spanned the reigns of Josiah, Jehoahaz, Jehoiakim, Jehoiachin and Zedekiah. When Zedekiah took the throne at 21 (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">2 Chron. 36:11</span><span class=\"vref-pop\"></span>), Nebuchadnezzar had already plundered Jerusalem. The Bible says he “did that which was evil” and “humbled not himself before Jeremiah the prophet speaking from the mouth of the Lord” (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">2 Chron. 36:12</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Jeremiah was a sinful man like anyone else, but he represented the Lord. For centuries, God sent messengers to His people (<span class=\"vref\" data-book=\"JER\" data-chapter=\"25\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jer. 25:4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"11\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Matt. 11:13</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"LUK\" data-chapter=\"11\" data-v1=\"49\" data-v2=\"49\" onclick=\"toggleVerseLive(this)\">Luke 11:49</span><span class=\"vref-pop\"></span>), because He is “not willing that any should perish, but that all should come to repentance” (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"3\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">2 Pet. 3:9</span><span class=\"vref-pop\"></span>). The history of Israel and Judah is the account of God’s tireless effort to reach an unfaithful people.</p>",
+          "<p>In the end, the grace Jeremiah offered was met with mockery and contempt. The rejection of the prophets led to exile in Babylon (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"15\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Chron. 36:15-21</span><span class=\"vref-pop\"></span>) and grieved Jesus: “O Jerusalem, Jerusalem, thou that killest the prophets, and stonest them which are sent unto thee” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"23\" data-v1=\"37\" data-v2=\"37\" onclick=\"toggleVerseLive(this)\">Matt. 23:37</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "Why is it so common for prophets to face strong opposition?",
+          "How does repeatedly rejecting Jesus’ messages affect our relationship with Him?",
+          "What does 2 Peter 3:9 reveal about why God insists so much with those who do not want to listen?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Through how many reigns did Jeremiah’s ministry extend?",
+              "opts": [
+                "Two",
+                "Seven",
+                "Five",
+                "Twelve"
+              ]
+            },
+            {
+              "text": "Who was the king of Babylon who plundered Jerusalem?",
+              "opts": [
+                "Cyrus",
+                "Darius",
+                "Pharaoh Necho",
+                "Nebuchadnezzar"
+              ]
+            },
+            {
+              "text": "How old was Zedekiah when he took the throne?",
+              "opts": [
+                "21 years old",
+                "8 years old",
+                "40 years old",
+                "16 years old"
+              ]
+            },
+            {
+              "text": "How does the Bible describe Zedekiah’s attitude toward Jeremiah?",
+              "opts": [
+                "He obeyed everything",
+                "He did not humble himself before the prophet",
+                "He made Jeremiah his counselor",
+                "He asked for forgiveness publicly"
+              ]
+            },
+            {
+              "text": "How was the grace Jeremiah offered received at the end of Judah’s history?",
+              "opts": [
+                "With humility and repentance",
+                "With celebration and joy",
+                "With mockery, contempt and scorn",
+                "With total indifference, no reaction"
+              ]
+            },
+            {
+              "text": "What was the consequence of the long rejection of the prophets?",
+              "opts": [
+                "Victory over Babylon",
+                "The building of a new temple",
+                "The return to Egypt",
+                "Judah’s exile in Babylon"
+              ]
+            },
+            {
+              "text": "According to 2 Peter 3:9, what does God desire?",
+              "opts": [
+                "That no one perish and all come to repentance",
+                "That only Israel be saved",
+                "That the wicked be destroyed soon",
+                "That no one listen to the prophets"
+              ]
+            },
+            {
+              "text": "What did Jesus say about Jerusalem in Matthew 23:37?",
+              "opts": [
+                "That it was the most faithful city",
+                "That it killed the prophets and stoned those sent to it",
+                "That it would never be destroyed",
+                "That it was the place of His earthly kingdom"
+              ]
+            },
+            {
+              "text": "Which text describes Zedekiah doing evil in the sight of the Lord?",
+              "opts": [
+                "2 Chronicles 7:14",
+                "1 Kings 3:9",
+                "2 Chronicles 36:12",
+                "2 Kings 22:2"
+              ]
+            },
+            {
+              "text": "Which of these kings is NOT among the reigns of Jeremiah’s ministry?",
+              "opts": [
+                "Josiah",
+                "Jehoiakim",
+                "Zedekiah",
+                "Hezekiah"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Jeremiah spoke from the mouth of the Lord.",
+            "Jeremiah was a man without sin.",
+            "Zedekiah humbled himself before Jeremiah’s message.",
+            "The rejection of the prophets grieved Jesus."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "The Price of Being a Prophet",
+        "summary": "Israel’s rebellions were recorded as a warning for us. We may not openly mock the messengers, but we can reject the message by accepting only what pleases us.",
+        "body": [
+          "<p>Israel’s history in the wilderness was recorded as a warning: Paul says these accounts were written so that we would not repeat the same mistakes (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"6\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:6-11</span><span class=\"vref-pop\"></span>). And God promises strength to overcome temptation (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"12\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:12, 13</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Today we may not openly mock God’s messengers, but we can reject the message in subtle ways: ignoring biblical counsel, relativizing the truth or accepting only what pleases us. Rejecting the divine message is, in the end, rejecting God Himself.</p>",
+          "<p>Jeremiah felt the weight of this. He wept for the people (<span class=\"vref\" data-book=\"JER\" data-chapter=\"9\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Jer. 9:1</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"13\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Jer. 13:17</span><span class=\"vref-pop\"></span>), even cursed the day he was born (<span class=\"vref\" data-book=\"JER\" data-chapter=\"20\" data-v1=\"14\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Jer. 20:14-18</span><span class=\"vref-pop\"></span>) and was threatened with death (<span class=\"vref\" data-book=\"JER\" data-chapter=\"26\" data-v1=\"8\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Jer. 26:8-11</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"38\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jer. 38:4</span><span class=\"vref-pop\"></span>). Even so, he could not keep quiet: God’s word was like a fire shut up in his bones (<span class=\"vref\" data-book=\"JER\" data-chapter=\"20\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Jer. 20:9</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "In what subtle ways might you be rejecting God’s messages?",
+          "Jeremiah wept for the people who rejected him. For whom have you been weeping?",
+          "What does it mean to have God’s Word “like fire in your bones”?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Why were Israel’s stories of rebellion recorded, according to Paul?",
+              "opts": [
+                "To shame Israel",
+                "As mere entertainment",
+                "To show that God gave up",
+                "As a warning, so that we would not repeat the mistakes"
+              ]
+            },
+            {
+              "text": "Which prophet is called a prophet marked by sorrow?",
+              "opts": [
+                "Jeremiah",
+                "Jonah",
+                "Elijah",
+                "Isaiah"
+              ]
+            },
+            {
+              "text": "Which of these is a subtle way of rejecting God’s message, according to the lesson?",
+              "opts": [
+                "Studying the Bible carefully",
+                "Accepting only what pleases us",
+                "Asking advice from those who know the Word",
+                "Praying before deciding"
+              ]
+            },
+            {
+              "text": "Rejecting the divine message is ultimately rejecting whom?",
+              "opts": [
+                "Only the prophet",
+                "Only the church",
+                "God Himself",
+                "No one"
+              ]
+            },
+            {
+              "text": "What does God promise so that we can overcome temptation, according to 1 Corinthians 10:13?",
+              "opts": [
+                "That we will never be tempted",
+                "That temptation will always be easy",
+                "That others will fight for us",
+                "Strength and a way of escape"
+              ]
+            },
+            {
+              "text": "According to the lesson, why is Jesus saddened when we despise those He sends?",
+              "opts": [
+                "Because rejecting the message is rejecting God Himself",
+                "Because He loses followers",
+                "Because the messengers are offended",
+                "Because the church gets smaller"
+              ]
+            },
+            {
+              "text": "In which text does Jeremiah say the word was like fire in his bones?",
+              "opts": [
+                "Jeremiah 1:5",
+                "Jeremiah 20:9",
+                "Jeremiah 29:11",
+                "Jeremiah 31:3"
+              ]
+            },
+            {
+              "text": "Which text shows Jeremiah cursing the day he was born?",
+              "opts": [
+                "Jeremiah 33:3",
+                "Jeremiah 17:7, 8",
+                "Jeremiah 20:14-18",
+                "Jeremiah 10:23"
+              ]
+            },
+            {
+              "text": "Which texts show Jeremiah being threatened with death?",
+              "opts": [
+                "Jeremiah 1:9 and 1:10",
+                "Jeremiah 31:31 and 31:33",
+                "Jeremiah 29:7 and 29:11",
+                "Jeremiah 26:8-11 and 38:4"
+              ]
+            },
+            {
+              "text": "In Jeremiah 9:1, what did the prophet wish?",
+              "opts": [
+                "That his eyes were a fountain of tears for the people",
+                "That the people would be destroyed",
+                "That God would take him to heaven",
+                "That the king would reward him"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Only those who openly mock the prophets reject God’s message.",
+            "The wilderness accounts were written as a warning for us.",
+            "Jeremiah suffered deeply because of his mission.",
+            "God does not offer strength to overcome temptation."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "For Our Admonition",
+        "summary": "The sad stories of the Old Testament were preserved so that we can learn from them. We are not doomed to repeat the mistakes of the past if we take God’s warnings seriously.",
+        "body": [
+          "<p>The Old Testament accounts, as sad as they are, were preserved so that we would learn what happens when we rebel against God. “These things were our examples, to the intent we should not lust after evil things, as they also lusted” (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:6</span><span class=\"vref-pop\"></span>). The past helps us understand the present and the future.</p>",
+          "<p>Paul says these things “are written for our admonition, upon whom the ends of the world are come” (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:11</span><span class=\"vref-pop\"></span>), linking ancient Israel to the church today (<span class=\"vref\" data-book=\"GAL\" data-chapter=\"6\" data-v1=\"14\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Gal. 6:14-16</span><span class=\"vref-pop\"></span>). We are not doomed to repeat the mistakes of earlier generations if we take the warnings seriously. “Let him that thinketh he standeth take heed lest he fall” (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:12</span><span class=\"vref-pop\"></span>) — and God gives strength to overcome (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:13</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>If we are willing to listen and obey, we will be safe and prosper (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"20\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">2 Chron. 20:20</span><span class=\"vref-pop\"></span>). God does not waste words: they stand forever (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"40\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Isa. 40:8</span><span class=\"vref-pop\"></span>). And if that was true in Paul’s day, it is even more true for us.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "What lessons from the Bible accounts of rebellion and unbelief do you want to take with you so as not to follow the same path?",
+          "In what area of your life do you “think you stand” and need to be careful?",
+          "What mistake from your family or your generation do you not want to repeat?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Why were the sad accounts of the Old Testament preserved?",
+              "opts": [
+                "So that we can learn from them",
+                "By chance",
+                "To shame the Jews",
+                "Only for historical value"
+              ]
+            },
+            {
+              "text": "According to the lesson, are we doomed to repeat the mistakes of the past?",
+              "opts": [
+                "Yes, always",
+                "No, if we take the warnings seriously",
+                "Yes, except for pastors",
+                "It depends on luck"
+              ]
+            },
+            {
+              "text": "According to 1 Corinthians 10:11, for whom were these things written as a warning?",
+              "opts": [
+                "Only for the Israelites in the wilderness",
+                "Only for the apostles",
+                "For us, upon whom the ends of the world have come",
+                "For the angels"
+              ]
+            },
+            {
+              "text": "What does Paul tell those who think they stand (1 Cor. 10:12)?",
+              "opts": [
+                "That they can relax",
+                "That they are already saved and need not worry",
+                "That they should judge others",
+                "To take heed lest they fall"
+              ]
+            },
+            {
+              "text": "According to the lesson, what is the relationship between the past and the present?",
+              "opts": [
+                "The past helps us understand the present and the future",
+                "There is no relationship",
+                "The past should be forgotten",
+                "Only the future matters"
+              ]
+            },
+            {
+              "text": "According to 2 Chronicles 20:20, what happens to those who believe God’s prophets?",
+              "opts": [
+                "They will be persecuted",
+                "They will prosper",
+                "They will become rich",
+                "They will be forgotten"
+              ]
+            },
+            {
+              "text": "According to Isaiah 40:8, what stands forever?",
+              "opts": [
+                "The grass of the field",
+                "The flowers",
+                "The word of God",
+                "Human kingdoms"
+              ]
+            },
+            {
+              "text": "Which text states that these things happened as examples for us?",
+              "opts": [
+                "1 Corinthians 15:3",
+                "2 Corinthians 5:17",
+                "Romans 12:2",
+                "1 Corinthians 10:6"
+              ]
+            },
+            {
+              "text": "Which text does the lesson use to link ancient Israel to the church?",
+              "opts": [
+                "Galatians 6:14-16",
+                "Galatians 2:20",
+                "Galatians 5:22, 23",
+                "Galatians 1:6-9"
+              ]
+            },
+            {
+              "text": "According to 1 Corinthians 10:13, what does God not allow?",
+              "opts": [
+                "That we be tempted at all",
+                "That we be tempted beyond what we can bear",
+                "That we have difficulties",
+                "That we ever make a mistake"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Paul links the experiences of ancient Israel to the church today.",
+            "God gives strength to learn from the past and overcome today.",
+            "God’s words lose their validity over time.",
+            "According to the lesson, the accounts of rebellion should be ignored."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Dreams and Visions",
+        "summary": "Ellen White received hundreds of visions, some accompanied by supernatural signs and witnessed by skeptics. As in Bible times, some accepted and others rejected — and she asked for patience and love toward those who doubted.",
+        "body": [
+          "<p>Ellen White received hundreds of visions and dreams, lasting from minutes to hours and sometimes witnessed by large groups, including skeptics. In 1868, her husband, James White, described it: she was completely unaware of her surroundings, did not breathe, her muscles were rigid, yet her gestures were “free and graceful” and her eyes remained open. No one controlled when the visions came.</p>",
+          "<p>As in Bible times, some accepted the messages and others rejected them. She wrote that she had not chosen this unpleasant work for herself and that she would warn, counsel, reprove and encourage, whether people listened or not (Testimonies for the Church, vol. 4).</p>",
+          "<p>Many rejected her messages out of unbelief or personal disputes, not for theological reasons. She treated skeptics courteously and asked that they be treated with “patience and brotherly love” (vol. 1). For her, the confirmation of the gift was in the messages themselves, and God gives sufficient evidence for faith to rest on the side of truth.</p>"
+        ],
+        "reflectTitle": "Reflection Questions",
+        "reflect": [
+          "How did King Jehoiakim react to the prophetic warning, and how did Zedekiah receive Jeremiah’s message? (Jer. 36:20-26; 2 Chron. 36:11, 12)",
+          "How did Judah react to the prophets’ messages, and why did that grieve Jesus so much? (2 Chron. 36:15, 16; Matt. 23:37)",
+          "How do you treat someone who has doubts about what you believe?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "How many visions and dreams did Ellen White receive in her life?",
+              "opts": [
+                "Only two",
+                "Hundreds",
+                "About ten",
+                "None after 1844"
+              ]
+            },
+            {
+              "text": "Who described Ellen’s condition during a vision in 1868?",
+              "opts": [
+                "William Miller",
+                "Levi Stockman",
+                "James White, her husband",
+                "Joseph Bates"
+              ]
+            },
+            {
+              "text": "According to James White, what was Ellen like during a vision?",
+              "opts": [
+                "She slept deeply",
+                "She spoke in unknown tongues",
+                "She kept her eyes closed and whispered",
+                "She did not breathe, but her eyes stayed open"
+              ]
+            },
+            {
+              "text": "Who controlled the timing and length of the visions?",
+              "opts": [
+                "No one; they were unexpected even for Ellen",
+                "Ellen herself",
+                "James White",
+                "The church leaders"
+              ]
+            },
+            {
+              "text": "Why did many reject Ellen’s messages, according to the lesson?",
+              "opts": [
+                "Because the messages contradicted the Bible",
+                "Out of unbelief or personal disputes, not for theological reasons",
+                "Because she charged for the visions",
+                "Because no one could see them"
+              ]
+            },
+            {
+              "text": "How did Ellen ask that skeptics be treated?",
+              "opts": [
+                "With immediate expulsion",
+                "With silence and contempt",
+                "With patience and brotherly love",
+                "With public debates"
+              ]
+            },
+            {
+              "text": "Which work contains the statement about speaking “whether men will hear or forbear”?",
+              "opts": [
+                "Early Writings",
+                "The Desire of Ages",
+                "Steps to Christ",
+                "Testimonies for the Church, vol. 4"
+              ]
+            },
+            {
+              "text": "According to Ellen, where was the true confirmation of her gift?",
+              "opts": [
+                "In the messages God had given her",
+                "In the number of followers",
+                "In the physical signs of the visions",
+                "In the leaders’ approval"
+              ]
+            },
+            {
+              "text": "According to Ellen White, what has God given us so that faith can rest on the side of truth?",
+              "opts": [
+                "Absolute proofs that make faith unnecessary",
+                "Sufficient evidence",
+                "No evidence",
+                "Only feelings"
+              ]
+            },
+            {
+              "text": "In what year did James White give the detailed description of the visions?",
+              "opts": [
+                "1844",
+                "1827",
+                "1868",
+                "1915"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Ellen could call up a vision whenever she wanted.",
+            "Some of Ellen White’s visions were witnessed by skeptics.",
+            "Ellen said she had not chosen this work for herself.",
+            "Ellen treated those who doubted her gift with contempt."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "When Truth Confronts the Heart",
+        "summary": "Our culture says to follow your own “truth.” When it clashes with God’s truth, we have to choose — and the prophets faced resistance precisely because they called for change.",
+        "body": [
+          "<p>Our culture encourages everyone to follow their own “truth.” When it clashes with God’s truth, we have to choose between His guidance and our own way. The prophets faced resistance precisely because they called people to repentance and change.</p>",
+          "<p>Israel let the fear of Canaan turn into unbelief and rebellion, while Joshua and Caleb trusted the promises. Jeremiah also had to stand firm in the face of criticism. And Jehoiakim burned the scroll — showing that rejecting the Word does not remove its consequences.</p>",
+          "<p>The Bible stories were preserved as a warning (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:11</span><span class=\"vref-pop\"></span>). God wants us to learn from the mistakes of the past and to cultivate a life of trust, humility and obedience.</p>"
+        ],
+        "reflectTitle": "Open Dialogue (group discussion)",
+        "reflect": [
+          "How can I tell my feelings apart from God’s truth?",
+          "What fears today might weaken my trust in God?",
+          "In what ways might I be ignoring the Lord’s voice without realizing it?"
+        ]
+      }
+    ]
   }
 ]
