@@ -10223,5 +10223,2929 @@
         ]
       }
     ]
+  },
+  {
+    "id": 15,
+    "title": "El llamado del profeta",
+    "keyword": "LLAMADO",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Un llamado desafiante",
+        "summary": "Los profetas fueron llamados para llevar al pueblo de vuelta a la fidelidad y señalar al Mesías. Abraham, rodeado de apostasía, aprendió a confiar en las promesas de Dios incluso ante una orden dolorosa.",
+        "body": [
+          "<p>En los tiempos bíblicos, los profetas tuvieron un papel decisivo en la historia del pueblo de Dios. Sin embargo, su llamado solía venir acompañado de rechazo, sufrimiento e incomprensión. Más que anunciar juicios, eran enviados para traer al pueblo de vuelta a la fidelidad, denunciando la apostasía y la injusticia y, sobre todo, señalando la salvación por medio del Mesías.</p>",
+          "<p>El primer llamado de la semana es el del “padre de la fe”. Rodeado de apostasía y relativismo moral, Abraham fue llamado a dejar su tierra rumbo a lo desconocido. Dios hizo un pacto con él y le reveló el plan de salvación (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"15\" data-v1=\"6\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Gén. 15:6-17</span><span class=\"vref-pop\"></span>). Más tarde, para probar su fe e ilustrar el sacrificio del Hijo, le pidió que ofreciera a Isaac (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"22\" data-v1=\"1\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Gén. 22:1-17</span><span class=\"vref-pop\"></span>). Abraham obedeció, y Dios proveyó un carnero en lugar del muchacho.</p>",
+          "<p>Aun siendo un hombre con fallas, Abraham aprendió a creer en las promesas y a confiar en la dirección del Señor en cualquier circunstancia (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"15\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Gén. 15:6</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"GAL\" data-chapter=\"3\" data-v1=\"6\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Gál. 3:6-9</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"HEB\" data-chapter=\"11\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Heb. 11:8</span><span class=\"vref-pop\"></span>). Hoy, en una generación marcada por la violencia, la codicia y la inmoralidad, somos llamados a escuchar a los profetas de Dios y a compartir la esperanza que ellos anunciaron (<span class=\"vref\" data-book=\"REV\" data-chapter=\"12\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Apoc. 12:17</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Abraham salió sin saber adónde iba. ¿En qué área de tu vida te está pidiendo Dios que confíes sin tener el mapa completo?",
+          "¿Por qué la voz profética suele ser rechazada cuando confronta la cultura dominante?",
+          "¿Qué enseña el carnero provisto en lugar de Isaac sobre el sacrificio de Cristo?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Isaías 6",
+                "Génesis 3",
+                "Daniel 2",
+                "Jeremías 36"
+              ]
+            },
+            {
+              "text": "¿A quién llama la lección el “padre de la fe”?",
+              "opts": [
+                "Moisés",
+                "Abraham",
+                "Noé",
+                "David"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál era la misión principal de los profetas?",
+              "opts": [
+                "Solo anunciar tragedias",
+                "Gobernar Israel",
+                "Llevar al pueblo de vuelta a la fidelidad y señalar al Mesías",
+                "Escribir la historia de los reyes"
+              ]
+            },
+            {
+              "text": "¿Qué le pidió Dios a Abraham para probar su fe?",
+              "opts": [
+                "Que construyera un arca",
+                "Que volviera a Ur",
+                "Que ayunara cuarenta días",
+                "Que ofreciera a Isaac"
+              ]
+            },
+            {
+              "text": "¿Qué proveyó Dios en lugar de Isaac?",
+              "opts": [
+                "Un carnero",
+                "Un cabrito",
+                "Una paloma",
+                "Un becerro"
+              ]
+            },
+            {
+              "text": "¿Qué ilustraba el sacrificio de Isaac, según la lección?",
+              "opts": [
+                "La salida de Egipto",
+                "El futuro sacrificio del Hijo de Dios",
+                "La construcción del templo",
+                "El diluvio"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Génesis relata el pacto de Dios con Abraham y el plan de salvación?",
+              "opts": [
+                "Génesis 1:1-5",
+                "Génesis 6:13-22",
+                "Génesis 15:6-17",
+                "Génesis 37:1-11"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Apocalipsis cita la lección sobre el pueblo fiel que guarda el testimonio?",
+              "opts": [
+                "Apocalipsis 1:1",
+                "Apocalipsis 21:4",
+                "Apocalipsis 22:20",
+                "Apocalipsis 12:17"
+              ]
+            },
+            {
+              "text": "¿Qué texto del Nuevo Testamento cita la lección sobre la fe de Abraham al partir?",
+              "opts": [
+                "Hebreos 11:8",
+                "Romanos 12:2",
+                "Santiago 1:5",
+                "1 Corintios 13:13"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de Profetas y reyes se indica en “Profundiza”?",
+              "opts": [
+                "Capítulo 1: “Salomón”",
+                "Capítulo 26: “He aquí vuestro Dios”",
+                "Capítulo 14: “Con el espíritu y el poder de Elías”",
+                "Capítulo 35: “La ruina inminente”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Abraham era un hombre sin fallas.",
+            "Según la lección, los profetas fueron enviados solo para anunciar juicios.",
+            "El llamado de los profetas solía venir acompañado de rechazo y sufrimiento.",
+            "Dios impidió la muerte de Isaac."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Isaías, el profeta del evangelio",
+        "summary": "Ante la santidad de Dios, Isaías reconoció su indignidad, fue purificado y respondió: “Heme aquí”. Sus profecías, especialmente Isaías 53, revelan con claridad la muerte sustitutiva de Cristo.",
+        "body": [
+          "<p>Isaías fue uno de los mayores profetas del Antiguo Testamento, y su libro es uno de los más citados en el Nuevo. Al ver la santidad y la majestad de Dios, percibió su propia indignidad; entonces un serafín tocó sus labios con un carbón encendido del altar y lo purificó. Cuando Dios preguntó “¿A quién enviaré?”, él respondió: “Heme aquí, envíame a mí” (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"6\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Isa. 6:8</span><span class=\"vref-pop\"></span>), una respuesta que también debería ser la nuestra.</p>",
+          "<p>Isaías anunció la misión del Mesías (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"53\" data-v1=\"3\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Isa. 53:3-5</span><span class=\"vref-pop\"></span>): sería llevado “como cordero” al matadero (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"53\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Isa. 53:7</span><span class=\"vref-pop\"></span>). “Todos nosotros nos descarriamos como ovejas […], mas Jehová cargó en él el pecado de todos nosotros” (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"53\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Isa. 53:6</span><span class=\"vref-pop\"></span>). El texto muestra a la vez la universalidad del pecado y el alcance universal de la cruz; tal vez ningún otro capítulo del Antiguo Testamento revele tan claramente el plan de salvación.</p>",
+          "<p>Dios preparó a Isaías para reacciones desalentadoras: muchas veces parecía que nadie escuchaba (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"6\" data-v1=\"9\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Isa. 6:9, 10</span><span class=\"vref-pop\"></span>). Muchos consideraron absurdas sus advertencias, como hoy muchos ignoran las consecuencias del pecado (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"6\" data-v1=\"23\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Rom. 6:23</span><span class=\"vref-pop\"></span>). La negativa persistente a practicar la justicia llevó a la destrucción de Jerusalén, y los mismos pecados marcarán el fin de los impíos en el regreso de Cristo.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Isaías 53 fue escrito unos 700 años antes de la cruz. ¿Qué enseña esto sobre el don profético?",
+          "¿Qué te impide decirle “Heme aquí” a Dios hoy?",
+          "¿Cómo manejarías un llamado en el que casi nadie parece escuchar?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál fue la respuesta de Isaías al llamado de Dios?",
+              "opts": [
+                "“Envía a otro, Señor”",
+                "“Heme aquí, envíame a mí”",
+                "“No sé hablar”",
+                "“Espera hasta que esté listo”"
+              ]
+            },
+            {
+              "text": "¿Qué le llevó el serafín a Isaías?",
+              "opts": [
+                "Un rollo escrito",
+                "Una vara de almendro",
+                "Un carbón encendido del altar",
+                "Una corona"
+              ]
+            },
+            {
+              "text": "¿Cómo se sintió Isaías ante la santidad y majestad de Dios?",
+              "opts": [
+                "Orgulloso",
+                "Indiferente",
+                "Listo para juzgar al pueblo",
+                "Indigno"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué capítulo de Isaías revela el plan de salvación de manera inequívoca?",
+              "opts": [
+                "Isaías 53",
+                "Isaías 1",
+                "Isaías 40",
+                "Isaías 65"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué muestra Isaías 53:6 al mismo tiempo?",
+              "opts": [
+                "La caída de Babilonia y el regreso del exilio",
+                "La universalidad del pecado y el alcance universal de la cruz",
+                "La gloria del templo y la riqueza de Salomón",
+                "El fin de los profetas y el inicio de los reyes"
+              ]
+            },
+            {
+              "text": "¿Qué llevó a la destrucción de Jerusalén, según el mensaje de Isaías?",
+              "opts": [
+                "La falta de sacerdotes",
+                "Una sequía prolongada",
+                "La persistente negativa a practicar la justicia y buscar la reforma",
+                "La muerte del rey Uzías"
+              ]
+            },
+            {
+              "text": "Según Isaías 53:7, ¿cómo fue llevado el Mesías?",
+              "opts": [
+                "Como rey en un carro de guerra",
+                "Como pastor al frente del rebaño",
+                "Como juez al tribunal",
+                "Como cordero al matadero"
+              ]
+            },
+            {
+              "text": "En Isaías 6:8, ¿qué pregunta hace Dios?",
+              "opts": [
+                "“¿A quién enviaré, y quién irá por nosotros?”",
+                "“¿Dónde estás?”",
+                "“¿Qué haces aquí?”",
+                "“¿Quién me ha tocado?”"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Romanos usa la lección sobre las consecuencias del pecado?",
+              "opts": [
+                "Romanos 1:16",
+                "Romanos 6:23",
+                "Romanos 8:1",
+                "Romanos 10:9"
+              ]
+            },
+            {
+              "text": "En Isaías 6:9, 10, ¿para qué preparó Dios al profeta?",
+              "opts": [
+                "Para ser rey de Judá",
+                "Para reconstruir el templo",
+                "Para mensajes que muchas veces no serían escuchados",
+                "Para dirigir el ejército"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El libro de Isaías es uno de los más citados en el Nuevo Testamento.",
+            "Isaías recibió el llamado por medio de otro profeta, y no directamente de Dios.",
+            "Todos aceptaron con alegría las advertencias de Isaías.",
+            "Isaías 53 describe la muerte sustitutiva de Cristo."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Daniel, el profeta fiel",
+        "summary": "Daniel permaneció fiel desde joven y, por medio de él, Dios se reveló a reyes paganos. Sus profecías anunciaron con precisión la sucesión de los imperios y apuntan al reino eterno de Dios.",
+        "body": [
+          "<p>Daniel fue otro gran profeta del Antiguo Testamento, y el mismo Jesús pidió a Sus seguidores que prestaran atención a sus profecías (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"24\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Mat. 24:15</span><span class=\"vref-pop\"></span>). Siendo aún joven, decidió no contaminarse con la comida del rey (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"1\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Dan. 1:8</span><span class=\"vref-pop\"></span>) y eligió una alimentación sencilla, de legumbres y agua (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"1\" data-v1=\"12\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Dan. 1:12-16</span><span class=\"vref-pop\"></span>): una primera prueba antes de pruebas mayores, como el foso de los leones en Daniel 6.</p>",
+          "<p>Los líderes paganos reconocieron la fidelidad de Daniel y el poder del Dios a quien él servía, llegando a llamarlo “Dios de dioses y Señor de los reyes” (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"2\" data-v1=\"47\" data-v2=\"47\" onclick=\"toggleVerseLive(this)\">Dan. 2:47</span><span class=\"vref-pop\"></span>). El tema central de sus profecías es el juicio, que culmina en el regreso de Cristo: muy apropiado para alguien cuyo nombre significa “Dios es mi Juez”.</p>",
+          "<p>En Daniel 2, escrito unos 600 años antes de Cristo, describe la sucesión de cuatro imperios: Babilonia, Medo-Persia, Grecia y Roma. Los pies y los dedos de la estatua representan las naciones de la Europa moderna, que “no se unirán el uno con el otro, como el hierro no se mezcla con el barro” (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"2\" data-v1=\"43\" data-v2=\"43\" onclick=\"toggleVerseLive(this)\">Dan. 2:43</span><span class=\"vref-pop\"></span>). Carlomagno, Napoleón y Hitler intentaron unificar Europa, y todos fracasaron. Los reinos humanos pasan; el reino de Dios es eterno (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"2\" data-v1=\"44\" data-v2=\"44\" onclick=\"toggleVerseLive(this)\">Dan. 2:44</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Todos los reinos de Daniel 2 surgieron y cayeron como se predijo. ¿Qué enseña esto sobre confiar en el reino eterno de Dios?",
+          "¿Qué “comida del rey” te exige hoy una decisión firme como la de Daniel?",
+          "¿Cómo puede tu fidelidad hacer que otros reconozcan al Dios a quien sirves?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué significa el nombre Daniel?",
+              "opts": [
+                "“Dios es salvación”",
+                "“Dios es fuerte”",
+                "“Dios es mi Juez”",
+                "“Regalo de Dios”"
+              ]
+            },
+            {
+              "text": "¿Qué eligió comer Daniel en lugar de la comida del rey?",
+              "opts": [
+                "Solo pan",
+                "Carne sin grasa",
+                "Frutas y vino",
+                "Legumbres y agua"
+              ]
+            },
+            {
+              "text": "¿Cuáles son los cuatro imperios de Daniel 2, en orden?",
+              "opts": [
+                "Babilonia, Medo-Persia, Grecia y Roma",
+                "Egipto, Asiria, Babilonia y Roma",
+                "Grecia, Roma, Babilonia y Persia",
+                "Asiria, Grecia, Egipto y Roma"
+              ]
+            },
+            {
+              "text": "¿Cuál es el tema recurrente de las profecías de Daniel?",
+              "opts": [
+                "La construcción del templo",
+                "El juicio, que culmina en la segunda venida de Cristo",
+                "La genealogía de los reyes",
+                "Las fiestas de Israel"
+              ]
+            },
+            {
+              "text": "¿Qué representan los pies y los dedos de la estatua de Daniel 2?",
+              "opts": [
+                "El imperio de Alejandro",
+                "Las doce tribus de Israel",
+                "Las naciones de la Europa moderna",
+                "Los discípulos de Jesús"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos intentos de unificar Europa cita la lección como fracasado?",
+              "opts": [
+                "El de Nabucodonosor",
+                "El de Ciro",
+                "El de Alejandro Magno",
+                "El de Napoleón"
+              ]
+            },
+            {
+              "text": "En Mateo 24:15, ¿qué animó Jesús a hacer a Sus seguidores?",
+              "opts": [
+                "Prestar atención a las profecías de Daniel",
+                "Olvidar a los profetas antiguos",
+                "Huir a Egipto",
+                "Construir un nuevo templo"
+              ]
+            },
+            {
+              "text": "En Daniel 2:47, ¿cómo llamó el rey al Dios de Daniel?",
+              "opts": [
+                "“El dios de Babilonia”",
+                "“Dios de dioses y Señor de los reyes”",
+                "“Un dios entre muchos”",
+                "“El dios de los sueños”"
+              ]
+            },
+            {
+              "text": "Según Daniel 2:43, ¿por qué no se unirán las naciones?",
+              "opts": [
+                "Porque hablan lenguas diferentes",
+                "Porque el oro es más fuerte que la plata",
+                "Porque el hierro no se mezcla con el barro",
+                "Porque el mar las separa"
+              ]
+            },
+            {
+              "text": "¿Cuántos años antes de Cristo dice la lección que fue escrito Daniel 2?",
+              "opts": [
+                "Unos 100 años",
+                "Unos 1.500 años",
+                "Unos 50 años",
+                "Unos 600 años"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Daniel 2 describe cinco grandes imperios mundiales.",
+            "Jesús animó a Sus seguidores a estudiar las profecías de Daniel.",
+            "Líderes paganos reconocieron el poder del Dios de Daniel.",
+            "Según la lección, Europa terminó siendo unificada por Carlomagno."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Fiel aun sin público",
+        "summary": "Isaías fue enviado a un pueblo terco, que prefería palabras agradables a la verdad. Aun así, permaneció fiel: la fidelidad profética no depende de que el mensaje sea aceptado.",
+        "body": [
+          "<p>El llamado de Isaías no fue dirigido a un pueblo sensible a la voz de Dios, sino a una nación marcada por la resistencia espiritual y la autosuficiencia. Dios lo describe como rebelde y terco (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"1\" data-v1=\"2\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Isa. 1:2-5</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ISA\" data-chapter=\"65\" data-v1=\"2\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Isa. 65:2-5</span><span class=\"vref-pop\"></span>): muchos mantenían la religión por fuera, mientras su corazón estaba lejos del Señor (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"29\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Isa. 29:13</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>La mayoría no quería oír verdades que expusieran sus errores. Llegaban a pedir a los profetas que no anunciaran lo recto, sino cosas halagüeñas (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"30\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Isa. 30:10</span><span class=\"vref-pop\"></span>). Preferían promesas que no perturbaran su falsa seguridad y se volvieron ciegos y sordos a los mensajes de Dios (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"42\" data-v1=\"18\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Isa. 42:18-20</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Aun así, Isaías permaneció fiel. Ante la indiferencia y el rechazo, siguió anunciando lo que había recibido. Su historia muestra que la fidelidad profética no se mide por la aceptación del mensaje, sino por la disposición a proclamarlo con valor, verdad y perseverancia, aun cuando pocos quieren escuchar.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Prefieres oír “cosas halagüeñas” o la verdad que puede exigir un cambio? Sé honesto.",
+          "¿Dónde corre tu religión el riesgo de ser solo “por fuera”?",
+          "Con la palabra “Llamado” en el centro de un mapa mental, ¿qué le conectarías después de esta semana?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cómo era el pueblo al que fue enviado Isaías?",
+              "opts": [
+                "Sensible y dispuesto a cambiar",
+                "Extranjero y sin religión",
+                "Pequeño y perseguido",
+                "Resistente, terco y rebelde"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿de qué depende la fidelidad profética?",
+              "opts": [
+                "De la disposición a proclamar el mensaje con valor",
+                "De la aceptación del pueblo",
+                "Del número de oyentes",
+                "Del apoyo del rey"
+              ]
+            },
+            {
+              "text": "¿Qué tipo de mensaje prefería oír la mayoría del pueblo?",
+              "opts": [
+                "Advertencias duras",
+                "Palabras agradables que no perturbaran su falsa seguridad",
+                "Llamados al arrepentimiento",
+                "Profecías sobre el Mesías"
+              ]
+            },
+            {
+              "text": "¿Qué mantenían muchos, aunque su corazón estuviera lejos de Dios?",
+              "opts": [
+                "Una vida de oración sincera",
+                "La fidelidad al pacto",
+                "Prácticas religiosas exteriores",
+                "El cuidado de los pobres"
+              ]
+            },
+            {
+              "text": "¿Cómo reaccionó Isaías ante la indiferencia y el rechazo del pueblo?",
+              "opts": [
+                "Abandonó su ministerio",
+                "Cambió el mensaje para agradar",
+                "Huyó a otra tierra",
+                "Siguió anunciando el mensaje recibido de Dios"
+              ]
+            },
+            {
+              "text": "¿Qué palabra clave propone la lección para el mapa mental de esta semana?",
+              "opts": [
+                "Llamado",
+                "Comunicación",
+                "Juicio",
+                "Pacto"
+              ]
+            },
+            {
+              "text": "Según Isaías 30:10, ¿qué pedía el pueblo a los profetas?",
+              "opts": [
+                "Que oraran por lluvia",
+                "Que dijeran cosas halagüeñas",
+                "Que ungieran a un nuevo rey",
+                "Que reconstruyeran el altar"
+              ]
+            },
+            {
+              "text": "¿Qué texto describe a un pueblo que honra a Dios con los labios, pero tiene el corazón lejos?",
+              "opts": [
+                "Isaías 40:31",
+                "Isaías 9:6",
+                "Isaías 29:13",
+                "Isaías 55:1"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Isaías describe al pueblo como ciego y sordo a los mensajes de Dios?",
+              "opts": [
+                "Isaías 11:1-5",
+                "Isaías 35:5, 6",
+                "Isaías 61:1-3",
+                "Isaías 42:18-20"
+              ]
+            },
+            {
+              "text": "En Isaías 1:2-5, ¿cómo describe Dios a Su pueblo?",
+              "opts": [
+                "Como hijos que se rebelaron contra Él",
+                "Como siervos fieles",
+                "Como un ejército victorioso",
+                "Como una novia preparada"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Muchos mantenían prácticas religiosas mientras su corazón estaba lejos del Señor.",
+            "Isaías permaneció fiel aun ante el rechazo.",
+            "Isaías fue enviado a un pueblo sensible y abierto a la voz de Dios.",
+            "Según la lección, el mensaje solo es fiel cuando lo acepta la mayoría."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "El precursor de Cristo",
+        "summary": "Después de más de cuatro siglos sin profetas, Juan el Bautista preparó el camino del Mesías llamando al pueblo al arrepentimiento. Encarcelado injustamente y sin entenderlo todo, permaneció fiel hasta la muerte.",
+        "body": [
+          "<p>Israel llevaba más de cuatro siglos sin profetas cuando surgió Juan el Bautista, a quien Jesús llamó “más que profeta” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"11\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Mat. 11:9</span><span class=\"vref-pop\"></span>). Fue el precursor del Mesías: preparó el camino llamando a las personas al arrepentimiento, cumpliendo la profecía de Isaías sobre la voz que clama en el desierto (<span class=\"vref\" data-book=\"MRK\" data-chapter=\"1\" data-v1=\"2\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Mar. 1:2-5</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ISA\" data-chapter=\"40\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Isa. 40:3</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>La voz de Juan desenmascaró la impiedad de sus oyentes a tal punto que Satanás temió perder su dominio (El Deseado de todas las gentes). Derrotado en la tentación de Jesús en el desierto, el enemigo cambió de táctica e hizo que Juan, primo de Jesús, fuera encarcelado: una forma de golpear al profeta y herir el corazón del Salvador. Aun sin entender por qué seguía preso, Juan recibió palabras de ánimo de Cristo (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"11\" data-v1=\"1\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Mat. 11:1-6</span><span class=\"vref-pop\"></span>) y permaneció fiel hasta la muerte.</p>",
+          "<p>Como los profetas del pasado, somos llamados a anunciar arrepentimiento, fe y confianza en la justicia de Cristo (<span class=\"vref\" data-book=\"REV\" data-chapter=\"14\" data-v1=\"6\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Apoc. 14:6-12</span><span class=\"vref-pop\"></span>). Satanás puede usar la incertidumbre para hacernos dudar, pero podemos recordar cómo Dios ya nos ha guiado y confiar en Su promesa de poder (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"1\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Hech. 1:8</span><span class=\"vref-pop\"></span>) para ser testigos fieles en cualquier circunstancia.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Lee Mateo 11:1-6. ¿Cómo fortaleció Jesús la fe de Juan mientras estaba en la cárcel?",
+          "Cuando Dios no hace lo que esperas, ¿qué te ayuda a seguir confiando?",
+          "¿Qué significa “preparar el camino” para Jesús en el lugar donde vives?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cómo describió Jesús a Juan el Bautista en Mateo 11:9?",
+              "opts": [
+                "“Más que profeta”",
+                "“El menor de los profetas”",
+                "“Un falso profeta”",
+                "“El último rey de Israel”"
+              ]
+            },
+            {
+              "text": "¿Qué parentesco había entre Juan el Bautista y Jesús?",
+              "opts": [
+                "Eran hermanos",
+                "Eran primos",
+                "Tío y sobrino",
+                "No eran parientes"
+              ]
+            },
+            {
+              "text": "¿Cuánto tiempo llevaba Israel sin profetas cuando surgió Juan?",
+              "opts": [
+                "Unos diez años",
+                "Menos de un siglo",
+                "Más de cuatro siglos",
+                "Dos mil años"
+              ]
+            },
+            {
+              "text": "¿A qué llamaba Juan el Bautista a las personas?",
+              "opts": [
+                "A la guerra contra Roma",
+                "A la construcción de un nuevo templo",
+                "A un ayuno de cuarenta días",
+                "Al arrepentimiento de sus pecados"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué hizo Satanás después de ser derrotado en la tentación de Jesús?",
+              "opts": [
+                "Hizo que Juan el Bautista fuera encarcelado",
+                "Desistió de tentar a Jesús",
+                "Tentó a los doce discípulos el mismo día",
+                "Huyó al desierto"
+              ]
+            },
+            {
+              "text": "¿Qué libro de Elena G. de White cita la lección sobre el temor de Satanás ante la voz de Juan?",
+              "opts": [
+                "Patriarcas y profetas",
+                "El Deseado de todas las gentes",
+                "Los hechos de los apóstoles",
+                "El camino a Cristo"
+              ]
+            },
+            {
+              "text": "El ministerio de Juan cumplió la profecía de qué profeta, según Marcos 1:2-5?",
+              "opts": [
+                "Jeremías",
+                "Ezequiel",
+                "Isaías",
+                "Oseas"
+              ]
+            },
+            {
+              "text": "¿Qué pasaje muestra a Jesús fortaleciendo la fe de Juan en la cárcel?",
+              "opts": [
+                "Mateo 5:1-12",
+                "Mateo 28:18-20",
+                "Mateo 6:9-13",
+                "Mateo 11:1-6"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Apocalipsis resume el mensaje que somos llamados a proclamar hoy?",
+              "opts": [
+                "Apocalipsis 14:6-12",
+                "Apocalipsis 4:1-11",
+                "Apocalipsis 20:1-6",
+                "Apocalipsis 22:1-5"
+              ]
+            },
+            {
+              "text": "Según Hechos 1:8, ¿qué prometió Dios para que cumplamos Su voluntad?",
+              "opts": [
+                "Riquezas",
+                "Poder",
+                "Fama",
+                "Descanso inmediato"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Juan entendió perfectamente por qué seguía preso.",
+            "Juan el Bautista fue el precursor del Mesías.",
+            "Juan permaneció fiel hasta la muerte.",
+            "El encarcelamiento de Juan no afectó el corazón de Jesús."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "El llamado de Elena Harmon",
+        "summary": "Pocas semanas después del Gran Chasco de 1844, Dios le dio a Elena Harmon, que tenía 17 años, su primera visión: un camino seguro hasta la ciudad santa para quien mantuviera los ojos en Jesús.",
+        "body": [
+          "<p>Dios llama profetas en momentos específicos, con los mensajes que las personas necesitan en ese tiempo. Los adventistas del séptimo día creen que Elena de White fue una de esas personas, en quien el don de profecía se manifestó más recientemente. Su llamado llegó en diciembre de 1844, pocas semanas después de que los seguidores de Guillermo Miller esperaran el regreso de Jesús basándose en Daniel 8:14.</p>",
+          "<p>Miller nunca fijó una fecha exacta, pero sus seguidores señalaron el 22 de octubre de 1844. Miles esperaron llenos de expectativa, y Cristo no apareció. Los milleritas vivieron uno de los episodios más devastadores de los tiempos modernos: el Gran Chasco.</p>",
+          "<p>En ese escenario, Elena Harmon recibió su primera visión: un camino que iba de la Tierra a la Jerusalén celestial. “Si mantenían los ojos fijos en Jesús […], estaban seguros” (Primeros escritos). El mensaje era claro: Jesús seguía con ellos y todavía volvería. A los 17 años fue llamada al ministerio profético y, como tantos profetas antes que ella, recibió el llamado con temor.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo hizo la visión de Isaías que se sintiera indigno, y qué lo motivó a aceptar el llamado? (Isa. 6:1-8)",
+          "¿Qué semejanzas percibes entre el llamado de Isaías y el de Abraham? (Gén. 12:1-6)",
+          "Después de una gran decepción, ¿qué significa para ti “mantener los ojos fijos en Jesús”?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿En qué mes y año recibió Elena Harmon su primer llamado?",
+              "opts": [
+                "Octubre de 1844",
+                "Diciembre de 1844",
+                "Enero de 1850",
+                "Noviembre de 1827"
+              ]
+            },
+            {
+              "text": "¿Cuántos años tenía Elena cuando fue llamada al ministerio profético?",
+              "opts": [
+                "9 años",
+                "25 años",
+                "17 años",
+                "12 años"
+              ]
+            },
+            {
+              "text": "¿Qué fecha señalaron los seguidores de Miller para el regreso de Cristo?",
+              "opts": [
+                "25 de diciembre de 1843",
+                "1 de enero de 1845",
+                "26 de noviembre de 1827",
+                "22 de octubre de 1844"
+              ]
+            },
+            {
+              "text": "¿Cómo se conoció el episodio en que Cristo no volvió en la fecha esperada?",
+              "opts": [
+                "El Gran Chasco",
+                "El Gran Despertar",
+                "La Reforma Protestante",
+                "El Gran Conflicto"
+              ]
+            },
+            {
+              "text": "¿Qué vio Elena en su primera visión?",
+              "opts": [
+                "Una estatua de cuatro metales",
+                "Un camino que iba de la Tierra a la Jerusalén celestial",
+                "Un rollo siendo quemado",
+                "Una escalera al cielo con ángeles"
+              ]
+            },
+            {
+              "text": "Según la visión, ¿qué mantenía seguro al pueblo en el camino?",
+              "opts": [
+                "Andar en grupos grandes",
+                "Llevar lámparas encendidas",
+                "Mantener los ojos fijos en Jesús",
+                "Conocer la fecha de llegada"
+              ]
+            },
+            {
+              "text": "¿En qué texto basaron los milleritas su expectativa del regreso de Jesús?",
+              "opts": [
+                "Daniel 2:44",
+                "Apocalipsis 14:6",
+                "Mateo 24:36",
+                "Daniel 8:14"
+              ]
+            },
+            {
+              "text": "Según Daniel 8:14, ¿qué ocurriría después de 2.300 tardes y mañanas?",
+              "opts": [
+                "El santuario sería purificado",
+                "El templo sería destruido",
+                "Jerusalén sería reconstruida",
+                "Babilonia caería"
+              ]
+            },
+            {
+              "text": "¿De qué libro es la descripción de la primera visión citada en la lección?",
+              "opts": [
+                "Vida y enseñanzas",
+                "Primeros escritos",
+                "El conflicto de los siglos",
+                "Testimonios para la iglesia"
+              ]
+            },
+            {
+              "text": "Según Amós 3:7, ¿qué hace Dios antes de actuar?",
+              "opts": [
+                "Consulta a los reyes de la Tierra",
+                "Envía un terremoto",
+                "Revela Su secreto a Sus siervos los profetas",
+                "Espera que el pueblo lo pida"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Elena recibió su primer llamado pocas semanas después del Gran Chasco.",
+            "Guillermo Miller fijó personalmente la fecha exacta del regreso de Cristo.",
+            "Elena recibió el llamado profético sin ningún temor.",
+            "La primera visión trajo el mensaje de que Jesús seguía guiando a Su pueblo."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "El camino de la fe",
+        "summary": "Dios no siempre muestra el camino completo, pero da luz suficiente para el próximo paso. No llama a personas listas, sino disponibles, y sostiene a quien responde.",
+        "body": [
+          "<p>Hay momentos en que Dios nos llama sin explicar todos los detalles del camino. Es como conducir por una carretera con niebla: solo se ven algunos metros, pero la carretera sigue ahí. El llamado profético muchas veces funciona así: luz suficiente para dar el próximo paso con fe (<span class=\"vref\" data-book=\"AMO\" data-chapter=\"3\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Amós 3:7</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>El ministerio profético nunca fue solo predecir el futuro. Antes de anunciar acontecimientos, el profeta revelaba el corazón del Señor: confrontaba el pecado, pero abría camino a la restauración. No era un pesimista profesional, sino alguien que veía la realidad con los ojos de Dios y, por eso, no podía callarse.</p>",
+          "<p>Dios no llama a personas listas, sino disponibles. Isaías se sintió impuro, Daniel vivió como extranjero, Juan el Bautista terminó en una cárcel y Elena de White comenzó muy joven, en un movimiento herido por el chasco. El llamado no depende de fuerza, popularidad o condiciones ideales: cuando Dios levanta a alguien, lo sostiene, lo purifica y confirma la misión. La pregunta es si estamos dispuestos a decir: “Señor, puedes contar conmigo”.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿En qué áreas de mi vida he querido entenderlo todo antes de obedecer lo que Dios ya reveló?",
+          "¿He recibido las advertencias del Señor como amenazas o como expresión de Su amor que intenta llevarme de vuelta?",
+          "Si Dios me llamara hoy a ser una voz de esperanza y fidelidad en el lugar donde vivo, ¿cuál sería mi respuesta?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Profetas del AT",
+    "keyword": "MENSAJEROS",
+    "days": [
+      {
+        "id": "dom",
+        "title": "GPS espiritual",
+        "summary": "Como un GPS espiritual, Elías le mostró a Israel su verdadera condición y lo llamó de vuelta a Dios. Antes del regreso de Cristo, la iglesia es llamada a proclamar otra vez ese mensaje.",
+        "body": [
+          "<p>Los profetas del Antiguo Testamento enfrentaron luchas parecidas a las nuestras. Uno de los mayores fue Elías, que no murió, sino que fue llevado al cielo en un torbellino, con un carro de fuego (<span class=\"vref\" data-book=\"2KI\" data-chapter=\"2\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">2 Rey. 2:11</span><span class=\"vref-pop\"></span>). Siglos después, todavía se lo recordaba tanto que la gente se preguntaba si Juan el Bautista o Jesús serían Elías (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"21\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">Juan 1:21</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MRK\" data-chapter=\"8\" data-v1=\"27\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">Mar. 8:27, 28</span><span class=\"vref-pop\"></span>), y en la cruz hubo quienes se burlaron diciendo que Elías no vendría a salvarlo (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"27\" data-v1=\"49\" data-v2=\"49\" onclick=\"toggleVerseLive(this)\">Mat. 27:49</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Como un GPS espiritual, Elías reveló la verdadera condición de Israel y advirtió sobre los peligros. Huyó al desierto para salvar su vida, después confrontó al rey Acab y reunió a la nación en el monte Carmelo, donde enfrentó a cientos de falsos profetas y llamó al pueblo a abandonar los ídolos.</p>",
+          "<p>Antes del regreso de Cristo, Dios pide a Su iglesia que proclame de nuevo el mensaje de Elías (<span class=\"vref\" data-book=\"MAL\" data-chapter=\"4\" data-v1=\"5\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Mal. 4:5, 6</span><span class=\"vref-pop\"></span>): abandonar los ídolos y prepararse para el gran Día del Señor. Según Malaquías 4:6, ese llamado sana corazones y hogares, y el reavivamiento en el hogar lleva el amor de Dios a la iglesia, a la comunidad y al mundo.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Si un “GPS espiritual” mostrara hoy la condición de tu vida, ¿qué ruta recalcularía?",
+          "¿Qué “ídolos” modernos confrontaría el mensaje de Elías en tu generación?",
+          "¿Por qué Malaquías relaciona el mensaje de Elías con la restauración de las familias?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "1 Reyes 19:1-16",
+                "Isaías 6",
+                "Génesis 3",
+                "Daniel 7"
+              ]
+            },
+            {
+              "text": "¿Cómo fue llevado Elías al cielo?",
+              "opts": [
+                "En una nube, delante de los discípulos",
+                "En un torbellino, con un carro de fuego",
+                "Cargado por ángeles mientras dormía",
+                "Murió y fue sepultado"
+              ]
+            },
+            {
+              "text": "¿Con qué compara la lección a Elías?",
+              "opts": [
+                "Con un faro en el mar",
+                "Con una brújula rota",
+                "Con un GPS espiritual",
+                "Con un reloj antiguo"
+              ]
+            },
+            {
+              "text": "¿Dónde enfrentó Elías a cientos de falsos profetas?",
+              "opts": [
+                "En el monte Sinaí",
+                "En el monte de los Olivos",
+                "En el monte Moriah",
+                "En el monte Carmelo"
+              ]
+            },
+            {
+              "text": "¿A qué rey confrontó Elías?",
+              "opts": [
+                "Acab",
+                "David",
+                "Ezequías",
+                "Josías"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué hace el reavivamiento en el hogar?",
+              "opts": [
+                "Reemplaza a la iglesia",
+                "Extiende el amor de Dios a la iglesia, a la comunidad y al mundo",
+                "Aísla a la familia de los demás",
+                "Hace innecesario el estudio de la Biblia"
+              ]
+            },
+            {
+              "text": "En Juan 1:21, ¿qué le preguntaron a Juan el Bautista?",
+              "opts": [
+                "Si él era rey",
+                "Si él era sacerdote de Jerusalén",
+                "Si él era Elías",
+                "Si él era Moisés resucitado"
+              ]
+            },
+            {
+              "text": "¿Qué texto anuncia que Elías sería enviado antes del gran Día del Señor?",
+              "opts": [
+                "Isaías 40:3",
+                "Joel 2:28",
+                "Zacarías 9:9",
+                "Malaquías 4:5, 6"
+              ]
+            },
+            {
+              "text": "Según Malaquías 4:6, ¿qué restaura el llamado del tiempo del fin?",
+              "opts": [
+                "El corazón de los padres hacia los hijos y de los hijos hacia los padres",
+                "El templo de Jerusalén",
+                "El reino de David",
+                "Las cosechas de Israel"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de Profetas y reyes se indica esta semana?",
+              "opts": [
+                "Capítulo 26: “He aquí vuestro Dios”",
+                "Capítulo 14: “Con el espíritu y el poder de Elías”",
+                "Capítulo 35: “La ruina inminente”",
+                "Capítulo 3: “La tentación y la caída”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Elías fue llevado al cielo sin pasar por la muerte.",
+            "Después de que Elías se fue, nadie en Israel lo recordó más.",
+            "Según la lección, el mensaje de Elías no tiene relación con el tiempo del fin.",
+            "Elías llamó a Israel a abandonar a los dioses falsos."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "La humanidad de los profetas",
+        "summary": "Justo después de la victoria en el Carmelo, Elías huyó con miedo y pidió morir. Su historia muestra que hasta los siervos de Dios tienen días oscuros: lo importante es recordar la fidelidad divina.",
+        "body": [
+          "<p>En el monte Carmelo, ante las palabras de Elías, descendió fuego del cielo: uno de los milagros más notables del Antiguo Testamento (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"18\" data-v1=\"38\" data-v2=\"38\" onclick=\"toggleVerseLive(this)\">1 Rey. 18:38</span><span class=\"vref-pop\"></span>). Sería natural esperar que estuviera lleno de confianza. Pero la cumbre de su ministerio fue seguida de inmediato por un período de profunda desesperación.</p>",
+          "<p>Amenazado por una reina idólatra, Elías entró en pánico y huyó. Olvidando cómo Dios acababa de protegerlo, fue dominado por el miedo y dijo: “Basta ya, oh Jehová, quítame la vida, pues no soy yo mejor que mis padres” (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"19\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">1 Rey. 19:4</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Tal vez el peso estaba en lo que él mismo dijo: “Solo yo he quedado, y me buscan para quitarme la vida” (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"19\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">1 Rey. 19:10</span><span class=\"vref-pop\"></span>). Elías parecía ver su propio ministerio como un fracaso, como si la reforma de la nación dependiera solo de él. Aquí vemos que “era hombre sujeto a pasiones semejantes a las nuestras”, y aprendemos que, incluso para los seguidores de Dios, no todos los días son buenos. Lo importante es recordar la fidelidad del Señor y no desistir.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿En qué momento o proyecto sentiste más la sensación de fracaso? ¿Qué promesas bíblicas pueden ayudarte a vencer el desánimo?",
+          "¿Por qué es tan común que las grandes victorias sean seguidas de grandes caídas emocionales?",
+          "¿Alguna vez sentiste, como Elías, que “solo quedaste tú”? ¿Qué te mostró Dios después?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué descendió del cielo en el monte Carmelo ante las palabras de Elías?",
+              "opts": [
+                "Granizo",
+                "Fuego",
+                "Maná",
+                "Una nube de langostas"
+              ]
+            },
+            {
+              "text": "¿Qué hizo Elías al ser amenazado por la reina?",
+              "opts": [
+                "Enfrentó a la reina en el palacio",
+                "Se escondió en el templo",
+                "Huyó para salvar su vida",
+                "Pidió ayuda al rey Acab"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué vino justo después de la cumbre del ministerio de Elías?",
+              "opts": [
+                "Una etapa de gran popularidad",
+                "El reinado de Elías",
+                "Un viaje misionero",
+                "Un período de profunda desesperación"
+              ]
+            },
+            {
+              "text": "¿Por qué fue dominado Elías por el miedo, según la lección?",
+              "opts": [
+                "Olvidó cómo el Señor acababa de protegerlo y guiarlo",
+                "Nunca había visto un milagro",
+                "Estaba enfermo desde hacía años",
+                "Los ángeles lo habían abandonado"
+              ]
+            },
+            {
+              "text": "¿Cómo parecía ver Elías su ministerio?",
+              "opts": [
+                "Como un éxito completo",
+                "Como un fracaso, como si todo dependiera solo de él",
+                "Como una tarea ya terminada",
+                "Como responsabilidad de los sacerdotes"
+              ]
+            },
+            {
+              "text": "¿Cuál es la lección principal de la historia de Elías en este día?",
+              "opts": [
+                "Los profetas nunca sienten miedo",
+                "Quien tiene fe nunca se desanima",
+                "Aun en los días malos, recordar la fidelidad de Dios y no desistir",
+                "Los grandes milagros terminan con toda dificultad"
+              ]
+            },
+            {
+              "text": "Según 1 Reyes 19:4, ¿qué le pidió Elías a Dios?",
+              "opts": [
+                "Que enviara lluvia",
+                "Que lo hiciera rey",
+                "Que destruyera a la reina",
+                "Que le quitara la vida"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo narra la victoria de Elías en el monte Carmelo?",
+              "opts": [
+                "1 Reyes 18",
+                "1 Reyes 3",
+                "2 Reyes 5",
+                "1 Samuel 17"
+              ]
+            },
+            {
+              "text": "En 1 Reyes 19:10, ¿qué afirma Elías?",
+              "opts": [
+                "“Heme aquí, envíame a mí”",
+                "“Solo yo he quedado, y me buscan para quitarme la vida”",
+                "“Jehová es mi pastor”",
+                "“No sé hablar, porque soy niño”"
+              ]
+            },
+            {
+              "text": "Según Elías, ¿qué habían hecho los hijos de Israel (1 Rey. 19:10)?",
+              "opts": [
+                "Construido un nuevo templo",
+                "Vuelto a Egipto",
+                "Dejado el pacto, derribado los altares y matado a los profetas",
+                "Coronado a Elías como rey"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "La victoria en el Carmelo fue seguida por un tiempo de alegría sin miedo.",
+            "Elías le pidió a Dios que le quitara la vida.",
+            "La lección muestra que Elías era humano como nosotros.",
+            "Según la lección, los seguidores de Dios solo tienen días buenos."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Confrontando a falsos profetas",
+        "summary": "Micaías se quedó solo ante 400 falsos profetas y no suavizó el mensaje de Dios, aunque el rey lo odiaba. La mayoría no siempre tiene razón: el desafío es reconocer el verdadero origen del mensaje.",
+        "body": [
+          "<p>Elías enfrentó a cientos de falsos profetas sostenidos por la familia real (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"18\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">1 Rey. 18:19</span><span class=\"vref-pop\"></span>), y ese tipo de conflicto existía desde el comienzo de Israel (<span class=\"vref\" data-book=\"DEU\" data-chapter=\"18\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Deut. 18:20</span><span class=\"vref-pop\"></span>). Cuando profetas verdaderos y falsos decían cosas opuestas, el pueblo tenía que decidir a quién creer.</p>",
+          "<p>Eso ocurrió cuando Acab, rey de Israel, llamó a Josafat, rey de Judá, a pelear contra Ramot de Galaad (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"22\" data-v1=\"3\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">1 Rey. 22:3, 4</span><span class=\"vref-pop\"></span>). Unos 400 “profetas” aprobaron la guerra a una sola voz (v. 6), pero Josafat desconfió y pidió “algún profeta de Jehová” (v. 7). Llamaron a Micaías, a quien Acab odiaba “porque nunca me profetiza bien, sino solamente mal” (v. 8).</p>",
+          "<p>El mensajero insistió en que Micaías estuviera de acuerdo con los demás (v. 13), pero él no cedió: esperó a que Dios le dijera qué hablar (v. 14). Solo ante 400, transmitió el mensaje con fidelidad, sin preocuparse por la reacción. No importa lo que Dios haga, Satanás siempre produce falsificaciones; por eso el desafío es reconocer el verdadero origen del mensaje.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Es fácil seguir la opinión de la mayoría. ¿Por qué la popularidad no siempre es una guía confiable para tus decisiones?",
+          "¿Alguna vez te presionaron para decir solo lo que otros querían oír? ¿Cómo reaccionaste?",
+          "¿Cómo reconocer hoy el “verdadero origen” de un mensaje que dice venir de Dios?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuántos profetas aprobaron a una sola voz la guerra de Acab?",
+              "opts": [
+                "12",
+                "70",
+                "Unos 400",
+                "Más de mil"
+              ]
+            },
+            {
+              "text": "¿Qué profeta de Jehová fue llamado para hablar a Acab y Josafat?",
+              "opts": [
+                "Elías",
+                "Eliseo",
+                "Natán",
+                "Micaías"
+              ]
+            },
+            {
+              "text": "¿Quién era Josafat?",
+              "opts": [
+                "El rey de Judá",
+                "El rey de Israel",
+                "El sumo sacerdote",
+                "Un profeta de Baal"
+              ]
+            },
+            {
+              "text": "¿Contra qué ciudad quería pelear Acab?",
+              "opts": [
+                "Jericó",
+                "Ramot de Galaad",
+                "Samaria",
+                "Nínive"
+              ]
+            },
+            {
+              "text": "¿Por qué odiaba Acab a Micaías?",
+              "opts": [
+                "Porque Micaías quería ser rey",
+                "Porque Micaías era extranjero",
+                "Porque nunca le profetizaba bien al rey, sino solamente mal",
+                "Porque Micaías adoraba a Baal"
+              ]
+            },
+            {
+              "text": "¿Qué hizo Micaías cuando lo presionaron para estar de acuerdo con los otros profetas?",
+              "opts": [
+                "Repitió lo que dijeron los 400",
+                "Se negó a ir ante el rey",
+                "Huyó al desierto",
+                "Esperó a que Dios le dijera qué hablar"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra que ya había falsos profetas desde el comienzo de la historia de Israel?",
+              "opts": [
+                "Deuteronomio 18:20",
+                "Génesis 12:1",
+                "Levítico 23:3",
+                "Números 6:24"
+              ]
+            },
+            {
+              "text": "En 1 Reyes 22:7, ¿qué pidió Josafat?",
+              "opts": [
+                "Que partieran pronto a la guerra",
+                "Que consultaran a algún profeta de Jehová",
+                "Que ofrecieran un sacrificio",
+                "Que llamaran a los sacerdotes de Baal"
+              ]
+            },
+            {
+              "text": "¿En qué capítulo de 1 Reyes está la historia de Micaías?",
+              "opts": [
+                "1 Reyes 8",
+                "1 Reyes 17",
+                "1 Reyes 22",
+                "1 Reyes 12"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué produce siempre Satanás ante lo que Dios hace?",
+              "opts": [
+                "Milagros verdaderos",
+                "Nuevos profetas fieles",
+                "Silencio completo",
+                "Falsificaciones"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Josafat desconfió de los 400 profetas.",
+            "La popularidad de un mensaje no garantiza que venga de Dios.",
+            "Micaías cedió a la presión y confirmó lo que dijeron los otros profetas.",
+            "A Acab le gustaba Micaías porque siempre decía cosas buenas."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Profetisas en el Antiguo Testamento",
+        "summary": "Dios también llamó a mujeres al don profético: María, Débora y Hulda guiaron al pueblo en momentos decisivos. El problema de una falsa profetisa nunca fue ser mujer, sino la infidelidad al llamado.",
+        "body": [
+          "<p>El Antiguo Testamento muestra que Dios también llamó a mujeres al don profético. María aparece como profetisa y líder durante el éxodo (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"15\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Éx. 15:20</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MIC\" data-chapter=\"6\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Miq. 6:4</span><span class=\"vref-pop\"></span>). Débora, además de profetisa, fue jueza y orientó a la nación con discernimiento en un período de crisis (<span class=\"vref\" data-book=\"JDG\" data-chapter=\"4\" data-v1=\"4\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Juec. 4:4, 5</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JDG\" data-chapter=\"5\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Juec. 5:7</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Hulda fue una profetisa respetada y consejera en un momento decisivo de Judá: cuando se encontró el Libro de la Ley, el rey y los líderes buscaron su orientación para entender el mensaje de Dios (<span class=\"vref\" data-book=\"2KI\" data-chapter=\"22\" data-v1=\"11\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">2 Rey. 22:11-14</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2CH\" data-chapter=\"34\" data-v1=\"19\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">2 Crón. 34:19-22</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>El Antiguo Testamento también menciona falsas profetisas que engañaban al pueblo (<span class=\"vref\" data-book=\"NEH\" data-chapter=\"6\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Neh. 6:14</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"EZK\" data-chapter=\"13\" data-v1=\"17\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Eze. 13:17, 18</span><span class=\"vref-pop\"></span>). Esto muestra que el problema no estaba en que fueran mujeres, sino en la fidelidad o infidelidad al llamado de Dios.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué revela la historia de María, Débora y Hulda sobre a quién puede llamar Dios?",
+          "¿Por qué el rey y los líderes buscaron a Hulda cuando se encontró el Libro de la Ley?",
+          "Con la palabra “Profetisas” en el centro de un mapa mental, ¿qué le conectarías?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué profetisa fue también jueza de Israel?",
+              "opts": [
+                "María",
+                "Hulda",
+                "Ana",
+                "Débora"
+              ]
+            },
+            {
+              "text": "¿Qué profetisa fue líder durante el éxodo?",
+              "opts": [
+                "María",
+                "Débora",
+                "Hulda",
+                "Noadías"
+              ]
+            },
+            {
+              "text": "¿A quién consultaron cuando se encontró el Libro de la Ley?",
+              "opts": [
+                "A María",
+                "A Hulda",
+                "A Débora",
+                "A Jezabel"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál era el problema de las falsas profetisas?",
+              "opts": [
+                "El hecho de ser mujeres",
+                "Su poca edad",
+                "La infidelidad al llamado de Dios",
+                "Ser extranjeras"
+              ]
+            },
+            {
+              "text": "¿Qué papel tuvo Hulda en Judá, según la lección?",
+              "opts": [
+                "Reina de Judá",
+                "Sacerdotisa del templo",
+                "Jueza de las tribus",
+                "Profetisa respetada y consejera"
+              ]
+            },
+            {
+              "text": "¿Qué palabra clave propone la lección para el mapa mental de esta semana?",
+              "opts": [
+                "Profetisas",
+                "Llamado",
+                "Comunicación",
+                "Autoridad"
+              ]
+            },
+            {
+              "text": "¿Qué texto presenta a María como profetisa?",
+              "opts": [
+                "Génesis 24:15",
+                "Éxodo 15:20",
+                "Rut 1:16",
+                "Ester 4:14"
+              ]
+            },
+            {
+              "text": "¿Qué texto presenta a Débora como profetisa y jueza?",
+              "opts": [
+                "Jueces 13:24",
+                "1 Samuel 1:20",
+                "Jueces 4:4, 5",
+                "Números 27:1"
+              ]
+            },
+            {
+              "text": "¿Qué textos narran la consulta a Hulda?",
+              "opts": [
+                "1 Reyes 3:16-28 y 2 Crónicas 1:7",
+                "Esdras 1:1-4 y Nehemías 2:1",
+                "Josué 2:1 y Jueces 1:1",
+                "2 Reyes 22:11-14 y 2 Crónicas 34:19-22"
+              ]
+            },
+            {
+              "text": "¿Qué textos cita la lección como ejemplos de falsas profetisas?",
+              "opts": [
+                "Nehemías 6:14 y Ezequiel 13:17, 18",
+                "Éxodo 15:20 y Miqueas 6:4",
+                "Jueces 5:7 y Rut 4:13",
+                "Lucas 2:36 y Hechos 21:9"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El Antiguo Testamento solo registra hombres como profetas.",
+            "Débora fue profetisa y jueza en Israel.",
+            "Hulda fue consultada después de que se encontró el Libro de la Ley.",
+            "Según la lección, una profetisa era falsa por ser mujer."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "Funciones de los profetas",
+        "summary": "Los profetas llevaban el mensaje de Dios a reyes, sacerdotes, al pueblo y a las naciones, y a veces lo registraban por escrito. Muchos pagaron caro por llamar a los infieles de vuelta a la obediencia.",
+        "body": [
+          "<p>Una de las funciones de los profetas era llevar mensajes a los reyes, una tarea muchas veces difícil. Samuel intentó evitar que Israel tuviera un rey, pero el pueblo insistió: “Constitúyenos ahora un rey que nos juzgue, como tienen todas las naciones” (<span class=\"vref\" data-book=\"1SA\" data-chapter=\"8\" data-v1=\"5\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">1 Sam. 8:5</span><span class=\"vref-pop\"></span>). Aun advertidos de las consecuencias (<span class=\"vref\" data-book=\"1SA\" data-chapter=\"8\" data-v1=\"11\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">1 Sam. 8:11-18</span><span class=\"vref-pop\"></span>), persistieron, y Samuel ungió a Saúl. Llamar a reyes infieles de vuelta a Dios les costó a muchos profetas amenazas, persecución y hasta la muerte (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"18\" data-v1=\"4\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">1 Rey. 18:4-19</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2CH\" data-chapter=\"24\" data-v1=\"20\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">2 Crón. 24:20-22</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Los profetas también se relacionaban con los sacerdotes. Moisés ungió a Aarón y a sus hijos como los primeros sacerdotes (<span class=\"vref\" data-book=\"LEV\" data-chapter=\"8\" data-v1=\"10\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Lev. 8:10-13</span><span class=\"vref-pop\"></span>), y Dios usó profetas para reprender a sacerdotes corruptos (<span class=\"vref\" data-book=\"HOS\" data-chapter=\"6\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Ose. 6:9</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAL\" data-chapter=\"2\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Mal. 2:1-3</span><span class=\"vref-pop\"></span>), como la familia de Elí (<span class=\"vref\" data-book=\"1SA\" data-chapter=\"2\" data-v1=\"27\" data-v2=\"36\" onclick=\"toggleVerseLive(this)\">1 Sam. 2:27-36</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Instruían al pueblo (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"34\" data-v1=\"1\" data-v2=\"33\" onclick=\"toggleVerseLive(this)\">2 Crón. 34:1-33</span><span class=\"vref-pop\"></span>), anunciaban la voluntad de Dios a las naciones vecinas (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"60\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Isa. 60:1-3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ISA\" data-chapter=\"62\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Isa. 62:1, 2</span><span class=\"vref-pop\"></span>) y, en algunos casos, escribían y conservaban los mensajes (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"13\" data-v1=\"22\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">2 Crón. 13:22</span><span class=\"vref-pop\"></span>). Frágiles como cualquier ser humano, eran personas de oración, estudiosas de la Palabra y dedicadas al servicio (<span class=\"vref\" data-book=\"JER\" data-chapter=\"42\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jer. 42:4</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo ayudan las funciones de los profetas del Antiguo Testamento a entender el papel de Jesús, también reconocido como profeta? (Mat. 21:11, 46; Luc. 7:16; 24:19)",
+          "¿Por qué quiso Israel un rey “como todas las naciones”? ¿Dónde sientes esa misma presión?",
+          "¿Qué le costaba a un profeta decirle la verdad a un rey? ¿Y a ti, decir la verdad hoy?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Quién fue el primer rey de Israel, ungido por Samuel?",
+              "opts": [
+                "Saúl",
+                "David",
+                "Salomón",
+                "Acab"
+              ]
+            },
+            {
+              "text": "¿Qué le pidió el pueblo a Samuel?",
+              "opts": [
+                "Un nuevo templo",
+                "Un rey, como todas las naciones",
+                "Un nuevo sacerdote",
+                "Una nueva ley"
+              ]
+            },
+            {
+              "text": "¿Quién ungió a Aarón y a sus hijos como los primeros sacerdotes?",
+              "opts": [
+                "Samuel",
+                "Elías",
+                "Moisés",
+                "David"
+              ]
+            },
+            {
+              "text": "¿Qué familia sacerdotal fue confrontada por un profeta a causa de sus pecados?",
+              "opts": [
+                "La familia de Sadoc",
+                "La familia de Aarón",
+                "La familia de Leví",
+                "La familia de Elí"
+              ]
+            },
+            {
+              "text": "¿Qué les pasó a muchos profetas que llamaban a reyes infieles de vuelta a Dios?",
+              "opts": [
+                "Fueron amenazados, perseguidos y hasta muertos",
+                "Recibieron tierras y riquezas",
+                "Se convirtieron en reyes",
+                "Fueron olvidados sin consecuencias"
+              ]
+            },
+            {
+              "text": "Además de hablar, ¿qué debían hacer algunos profetas con los mensajes?",
+              "opts": [
+                "Guardarlos en secreto",
+                "Escribirlos y conservarlos",
+                "Cambiarlos según el público",
+                "Borrarlos después de anunciarlos"
+              ]
+            },
+            {
+              "text": "Según 1 Samuel 8:5, ¿por qué quería el pueblo un rey?",
+              "opts": [
+                "Para volver a Egipto",
+                "Para construir el templo",
+                "Para ser gobernado como todas las naciones",
+                "Porque Samuel lo pidió"
+              ]
+            },
+            {
+              "text": "¿Qué texto relata la unción de Aarón y sus hijos?",
+              "opts": [
+                "Éxodo 3:1-6",
+                "Números 13:1-3",
+                "Deuteronomio 34:1-5",
+                "Levítico 8:10-13"
+              ]
+            },
+            {
+              "text": "¿Qué texto cita la lección sobre profetas que registraban mensajes por escrito?",
+              "opts": [
+                "2 Crónicas 13:22",
+                "2 Crónicas 7:14",
+                "Salmo 119:105",
+                "Proverbios 3:5"
+              ]
+            },
+            {
+              "text": "¿Qué textos usa la lección sobre la reprensión a sacerdotes corruptos?",
+              "opts": [
+                "Isaías 6:8 y Jeremías 1:5",
+                "Oseas 6:9 y Malaquías 2:1-3",
+                "Joel 2:28 y Hechos 2:17",
+                "Amós 3:7 y Daniel 2:47"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Los profetas también reprendían a sacerdotes corruptos.",
+            "Samuel animó al pueblo a pedir un rey.",
+            "Los profetas anunciaban la voluntad de Dios solo a Israel, nunca a las naciones vecinas.",
+            "Los profetas eran personas de oración y estudio de la Palabra."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Imperfecta, pero dispuesta",
+        "summary": "Joven, tímida y enferma, Elena Harmon pidió que el llamado pasara a otra persona. Después de mucha oración se rindió, y llegó a ser la voz más influyente de la naciente Iglesia Adventista.",
+        "body": [
+          "<p>Como los profetas bíblicos, Elena de White sintió angustia ante el llamado. Una semana después de la primera visión, una segunda le mostró las pruebas que vendrían y la orden de contar a otros lo que Dios había revelado. Tenía apenas 17 años, era tímida y sufría problemas de salud. Durante varios días, y hasta tarde en la noche, oró para que esa carga le fuera quitada y puesta sobre alguien más capaz (Testimonios para la iglesia, t. 1).</p>",
+          "<p>Elena llegó a desear la muerte como liberación. Pero, después de mucha oración y del ánimo de hermanos en la fe, se rindió y decidió cumplir la voluntad de Dios, fuera cual fuera. Siguió siendo humana, con fallas, pruebas físicas y dificultades, y justamente ahí está la lección: Dios escoge a personas imperfectas, pero dispuestas.</p>",
+          "<p>Su ministerio ayudó a los primeros adventistas a afirmarse en las verdades bíblicas y en la misión de los tres mensajes angélicos (<span class=\"vref\" data-book=\"REV\" data-chapter=\"14\" data-v1=\"6\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Apoc. 14:6-12</span><span class=\"vref-pop\"></span>). En 1863 se organizó la Iglesia Adventista del Séptimo Día, y su voz influyó en la expansión de los sistemas de salud y educación. Su contribución más importante, sin embargo, son sus escritos: unas 100.000 páginas.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo usó el Señor a las profetisas para guiar a Su pueblo? (Éx. 15:20, 21; Juec. 4:4, 5)",
+          "¿Por qué el rey Josías y el sacerdote Hilcías buscaron orientación espiritual? (2 Rey. 22:11-14)",
+          "¿Alguna vez le pediste a Dios que diera una tarea tuya “a alguien más capaz”? ¿Qué dice la historia de Elena sobre eso?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuántos años tenía Elena cuando recibió la segunda visión?",
+              "opts": [
+                "12 años",
+                "17 años",
+                "21 años",
+                "30 años"
+              ]
+            },
+            {
+              "text": "¿En qué año se organizó la Iglesia Adventista del Séptimo Día?",
+              "opts": [
+                "1844",
+                "1827",
+                "1863",
+                "1915"
+              ]
+            },
+            {
+              "text": "¿Cuánto tiempo después de la primera llegó la segunda visión?",
+              "opts": [
+                "Un año",
+                "Diez años",
+                "El mismo día",
+                "Alrededor de una semana"
+              ]
+            },
+            {
+              "text": "¿Qué pidió Elena en oración durante varios días?",
+              "opts": [
+                "Que la carga pasara a alguien más capaz",
+                "Recibir más visiones",
+                "Ser ordenada pastora",
+                "Hacerse famosa"
+              ]
+            },
+            {
+              "text": "¿Cuál es la gran lección de la historia de Elena en este día?",
+              "opts": [
+                "Dios solo llama a personas perfectas",
+                "Dios escoge a personas imperfectas, pero dispuestas",
+                "Los profetas nunca tienen miedo",
+                "El llamado de Dios siempre es fácil"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál es la contribución más importante del ministerio de Elena de White?",
+              "opts": [
+                "La construcción de templos",
+                "Los himnos que compuso",
+                "Sus escritos, unas 100.000 páginas",
+                "Los viajes que hizo"
+              ]
+            },
+            {
+              "text": "¿De qué obra es la cita sobre Elena pidiendo que se le quitara la carga?",
+              "opts": [
+                "Primeros escritos",
+                "El conflicto de los siglos",
+                "Vida y enseñanzas",
+                "Testimonios para la iglesia, t. 1"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Apocalipsis contiene los tres mensajes angélicos?",
+              "opts": [
+                "Apocalipsis 14:6-12",
+                "Apocalipsis 1:1-8",
+                "Apocalipsis 7:1-4",
+                "Apocalipsis 21:1-4"
+              ]
+            },
+            {
+              "text": "¿Qué áreas influyó la voz de Elena de White en la expansión adventista, según la lección?",
+              "opts": [
+                "Política y economía",
+                "Salud y educación",
+                "Música y deportes",
+                "Arquitectura y artes"
+              ]
+            },
+            {
+              "text": "¿Qué palabras resonaban continuamente en los oídos de Elena?",
+              "opts": [
+                "“Espera un poco más”",
+                "“Guárdalo todo en secreto”",
+                "“Comunica a otros lo que te he revelado”",
+                "“No se lo cuentes a nadie”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Elena aceptó el llamado de inmediato, sin dudar.",
+            "Después de aceptar el llamado, Elena dejó de tener fallas y dificultades.",
+            "La segunda visión mostró que el trabajo de Elena despertaría oposición.",
+            "Elena decidió cumplir la voluntad de Dios, fuera cual fuera."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Reconociendo la voz de Dios",
+        "summary": "Dios no estaba en el viento, ni en el terremoto, ni en el fuego, sino en un silbo apacible y delicado. Para oírlo, Elías tuvo que dejar de mirarse a sí mismo y descubrir que no estaba solo.",
+        "body": [
+          "<p>Delante de Elías pasaron un viento fuerte, un terremoto y un fuego, pero Dios no habló en ninguno de ellos: “tras el fuego un silbo apacible y delicado” (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"19\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">1 Rey. 19:12</span><span class=\"vref-pop\"></span>). Muchas veces también buscamos a Dios solo en lo extraordinario, cuando Él habla de una manera que exige un corazón atento.</p>",
+          "<p>Elías estaba agitado, centrado en sí mismo e indignado con quienes habían abandonado el pacto, al punto de verse solo. La respuesta de Dios fue sencilla: había 7.000 personas que no se habían arrodillado ante Baal (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"19\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">1 Rey. 19:18</span><span class=\"vref-pop\"></span>). Elías necesitaba dejar de mirar la poca información que tenía.</p>",
+          "<p>A veces lo que nos frena es información equivocada y un corazón preso del miedo. Elena de White escribe que es la voz suave y apacible del Espíritu de Dios la que tiene poder para cambiar el corazón (Profetas y reyes). Dios no siempre está en lo extraordinario; muchas veces habla en el silencio que solo un corazón dispuesto percibe.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Con qué relaciono el viento, el terremoto y el fuego que confundieron a Elías y que también pueden confundirme al percibir las manifestaciones divinas?",
+          "¿En qué momentos misioneros percibí a Dios actuando de forma más intensa?",
+          "¿Qué necesita cambiar en mi corazón para que pueda percibir la voz del Señor aun en los momentos más silenciosos de mi vida?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Profetas del NT",
+    "keyword": "TESTIGOS",
+    "days": [
+      {
+        "id": "dom",
+        "title": "La misma fuente",
+        "summary": "Dios habló por medio de profetas en el Antiguo y el Nuevo Testamento con un mensaje continuo, porque el Espíritu es el mismo y Cristo está en el centro. Apóstoles y profetas tenían el mismo grado de inspiración.",
+        "body": [
+          "<p>Dios habló por medio de profetas en ambos Testamentos con mensajes continuos y armoniosos, porque el Espíritu Santo es el mismo y mantiene a Cristo en el centro de la revelación (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Heb. 1:1-3</span><span class=\"vref-pop\"></span>). En el Nuevo Testamento también aparece el término apóstol, del griego apóstolos, “enviado”: en los evangelios se refiere a los doce, pero después se aplica a otras personas.</p>",
+          "<p>Pablo relacionaba su llamado con el mensaje de los profetas antiguos (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Rom. 1:1, 2</span><span class=\"vref-pop\"></span>) y se veía como apóstol de los gentiles (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"11\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Rom. 11:13</span><span class=\"vref-pop\"></span>), con su apostolado fundado en Cristo, el fundamento de la iglesia (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"2\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Efe. 2:20</span><span class=\"vref-pop\"></span>). A diferencia del sacerdocio, que pasaba de padre a hijo, profetas y apóstoles eran escogidos por Dios, y los apóstoles tenían el mismo grado de inspiración que los profetas (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"3\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Efe. 3:1-5</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Pedro pone a apóstoles y profetas en el mismo nivel de autoridad (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"3\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">2 Ped. 3:1, 2</span><span class=\"vref-pop\"></span>). Pero el don de profecía no se limitaba a los apóstoles, y no todo profeta era apóstol (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"15\" data-v1=\"32\" data-v2=\"32\" onclick=\"toggleVerseLive(this)\">Hech. 15:32</span><span class=\"vref-pop\"></span>). Por medio de sueños y revelaciones, Dios guiaba a Sus mensajeros (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"10\" data-v1=\"1\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Hech. 10:1-23</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ACT\" data-chapter=\"16\" data-v1=\"6\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Hech. 16:6-10</span><span class=\"vref-pop\"></span>), y el Espíritu les hizo recordar las palabras de Jesús y les reveló cosas futuras (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"14\" data-v1=\"26\" data-v2=\"26\" onclick=\"toggleVerseLive(this)\">Juan 14:26</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JHN\" data-chapter=\"16\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Juan 16:13</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué es importante que el mensaje de los profetas sea el mismo en ambos Testamentos?",
+          "¿Qué significa ser un “enviado” de Dios en el lugar donde estudias o trabajas?",
+          "¿Cómo te ha hecho recordar el Espíritu Santo las palabras de Jesús en el momento justo?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Efesios 2:19–3:7",
+                "Isaías 6",
+                "1 Reyes 19:1-16",
+                "Apocalipsis 1"
+              ]
+            },
+            {
+              "text": "¿Qué significa la palabra griega apóstolos?",
+              "opts": [
+                "Sacerdote",
+                "Enviado",
+                "Rey",
+                "Escritor"
+              ]
+            },
+            {
+              "text": "¿Por qué el mensaje de los profetas es armonioso en ambos Testamentos?",
+              "opts": [
+                "Porque los profetas se copiaban unos a otros",
+                "Porque todos eran de la misma familia",
+                "Porque el Espíritu Santo es el mismo y mantiene a Cristo en el centro",
+                "Porque escribieron en la misma época"
+              ]
+            },
+            {
+              "text": "¿Cómo se veía Pablo, según Romanos 11:13?",
+              "opts": [
+                "Como sumo sacerdote",
+                "Como rey de Israel",
+                "Como el último de los profetas",
+                "Como apóstol de los gentiles"
+              ]
+            },
+            {
+              "text": "¿Cuál es la diferencia entre el sacerdocio y el llamado de profetas y apóstoles?",
+              "opts": [
+                "El sacerdocio pasaba de padre a hijo; profetas y apóstoles eran escogidos por Dios",
+                "Los profetas eran elegidos por el pueblo",
+                "Los apóstoles heredaban el cargo de sus padres",
+                "No había ninguna diferencia"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál era el grado de inspiración de los apóstoles?",
+              "opts": [
+                "Menor que el de los profetas",
+                "El mismo que el de los profetas",
+                "Ninguno",
+                "Mayor que el de Jesús"
+              ]
+            },
+            {
+              "text": "Según Efesios 2:20, ¿cuál es el fundamento de la iglesia?",
+              "opts": [
+                "Pedro",
+                "El templo",
+                "Cristo",
+                "La ley de Moisés"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra que no todos los profetas eran apóstoles?",
+              "opts": [
+                "Hechos 1:8",
+                "Hechos 2:38",
+                "Hechos 9:15",
+                "Hechos 15:32"
+              ]
+            },
+            {
+              "text": "Según Juan 14:26, ¿qué haría el Espíritu Santo por los discípulos?",
+              "opts": [
+                "Les haría recordar las palabras de Jesús",
+                "Les haría olvidar las dificultades",
+                "Los convertiría en reyes",
+                "Los llevaría de vuelta al templo"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de El camino a Cristo se indica esta semana?",
+              "opts": [
+                "Capítulo 1: “El amor de Dios hacia el hombre”",
+                "Capítulo 3: “El arrepentimiento”",
+                "Capítulo 5: “La consagración”",
+                "Capítulo 13: “El regocijo en el Señor”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "En el Nuevo Testamento, solo los doce discípulos fueron llamados apóstoles.",
+            "El término apóstol es propio del Nuevo Testamento.",
+            "Pedro puso a los apóstoles en el mismo nivel de autoridad que los profetas.",
+            "Todos los profetas del Nuevo Testamento eran apóstoles."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Funciones de los profetas del NT",
+        "summary": "En el Nuevo Testamento, el don de profecía ayudó a formar y hacer crecer la iglesia. Además de advertir, los profetas animaban y fortalecían a los hermanos, siempre con Jesús en el centro.",
+        "body": [
+          "<p>Así como en el Antiguo Testamento, Dios usó profetas para guiar el surgimiento y el crecimiento de la iglesia. El don concedido a apóstoles y profetas fue esencial para su formación (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"2\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Efe. 2:20</span><span class=\"vref-pop\"></span>). Pablo recibió revelaciones (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"3\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Efe. 3:3</span><span class=\"vref-pop\"></span>), y el Espíritu le reveló a él y a otros el evangelio que debía anunciarse a todas las naciones (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"3\" data-v1=\"5\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Efe. 3:5</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>En Efesios 4:11-13, los profetas aparecen junto a apóstoles, evangelistas, pastores y maestros. Estos dones existen para preparar al pueblo de Dios para el servicio, edificar el cuerpo de Cristo y llevar a todos a la unidad de la fe y a la madurez, siempre con Jesús en el centro del mensaje.</p>",
+          "<p>Los profetas también animaban a la iglesia (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"14\" data-v1=\"31\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">1 Cor. 14:31</span><span class=\"vref-pop\"></span>). Judas y Silas, que no escribieron libros de la Biblia, “consolaron y confirmaron a los hermanos con abundancia de palabras” (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"15\" data-v1=\"32\" data-v2=\"32\" onclick=\"toggleVerseLive(this)\">Hech. 15:32</span><span class=\"vref-pop\"></span>). Aun cuando tienen que advertir, los profetas traen ánimo en tiempos difíciles. Y Jesús es “el Señor, el Dios de los espíritus de los profetas”, cuyas palabras son “fieles y verdaderas” (<span class=\"vref\" data-book=\"REV\" data-chapter=\"22\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Apoc. 22:6</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "El único registro de las palabras de apóstoles y profetas sobre Cristo es la Biblia. ¿Por qué debe ser la autoridad final sobre Jesús y Su muerte?",
+          "¿Cuándo te dio ánimo un mensaje de Dios en un tiempo difícil?",
+          "¿Qué don de Efesios 4:11 crees que Dios ha estado desarrollando en ti?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué dos profetas de Hechos 15:32 animaron y fortalecieron a los hermanos?",
+              "opts": [
+                "Pedro y Juan",
+                "Judas y Silas",
+                "Pablo y Bernabé",
+                "Santiago y Andrés"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿quién es el centro del mensaje de los profetas?",
+              "opts": [
+                "Los apóstoles",
+                "La iglesia",
+                "Jesús",
+                "Los propios profetas"
+              ]
+            },
+            {
+              "text": "En Efesios 4:11, ¿junto a quiénes se menciona a los profetas?",
+              "opts": [
+                "Reyes, jueces y sacerdotes",
+                "Soldados y gobernadores",
+                "Escribas y fariseos",
+                "Apóstoles, evangelistas, pastores y maestros"
+              ]
+            },
+            {
+              "text": "¿Escribieron Judas y Silas libros de la Biblia?",
+              "opts": [
+                "No",
+                "Sí, cada uno escribió un libro",
+                "Solo Silas",
+                "Solo Judas"
+              ]
+            },
+            {
+              "text": "Según Efesios 4:12, 13, ¿cuál es el objetivo de los dones espirituales?",
+              "opts": [
+                "Dar prestigio a quien los recibe",
+                "Preparar al pueblo para el servicio y edificar el cuerpo de Cristo",
+                "Reemplazar la Biblia",
+                "Separar a los más espirituales de los demás"
+              ]
+            },
+            {
+              "text": "Además de advertencias, ¿qué ofrecían los profetas del NT, según la lección?",
+              "opts": [
+                "Solo amenazas de juicio",
+                "Riquezas materiales",
+                "Palabras de ánimo y esperanza",
+                "Cargos en la iglesia"
+              ]
+            },
+            {
+              "text": "¿Qué texto menciona el ánimo en el contexto de la profecía?",
+              "opts": [
+                "1 Corintios 13:4",
+                "1 Corintios 1:18",
+                "1 Corintios 10:13",
+                "1 Corintios 14:31"
+              ]
+            },
+            {
+              "text": "Según Efesios 3:3, ¿qué recibió Pablo?",
+              "opts": [
+                "Revelaciones divinas",
+                "Una herencia de tierras",
+                "Un puesto en el sanedrín",
+                "Un lugar en el templo"
+              ]
+            },
+            {
+              "text": "¿Cómo se presenta a Jesús en Apocalipsis 22:6?",
+              "opts": [
+                "“El León de la tribu de Judá”",
+                "“El Señor, el Dios de los espíritus de los profetas”",
+                "“El Alfa y la Omega”",
+                "“El Buen Pastor”"
+              ]
+            },
+            {
+              "text": "Según Apocalipsis 22:6, ¿cómo son las palabras del Señor?",
+              "opts": [
+                "Difíciles y ocultas",
+                "Temporales",
+                "Fieles y verdaderas",
+                "Solo para los líderes"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El don de profecía fue esencial para la formación de la iglesia del Nuevo Testamento.",
+            "Los dones espirituales ayudan a la iglesia a llegar a la unidad de la fe.",
+            "Los profetas del Nuevo Testamento solo transmitían advertencias severas.",
+            "Judas y Silas escribieron los evangelios."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Profetisas y jóvenes pastores",
+        "summary": "En el Nuevo Testamento, mujeres como Ana y las hijas de Felipe tenían el don profético, y Pablo preparó a jóvenes como Timoteo y Tito para grandes responsabilidades. Todos tienen un papel en la obra de Dios.",
+        "body": [
+          "<p>Ana es la primera persona llamada profetisa en el Nuevo Testamento. Ella servía “de noche y de día con ayunos y oraciones” y hablaba del niño Jesús a todos (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"2\" data-v1=\"37\" data-v2=\"38\" onclick=\"toggleVerseLive(this)\">Luc. 2:37, 38</span><span class=\"vref-pop\"></span>). A los 84 años, en el templo, Dios habló por medio de ella al reconocer a Jesús como el Mesías. Hechos 21:9 también dice que Felipe tenía “cuatro hijas doncellas que profetizaban”, probablemente jóvenes.</p>",
+          "<p>Los apóstoles preparaban a líderes jóvenes. Pablo llamó a Timoteo “verdadero hijo en la fe” (<span class=\"vref\" data-book=\"1TI\" data-chapter=\"1\" data-v1=\"2\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">1 Tim. 1:2</span><span class=\"vref-pop\"></span>) y le dio instrucciones para “militar la buena milicia” (<span class=\"vref\" data-book=\"1TI\" data-chapter=\"1\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">1 Tim. 1:18</span><span class=\"vref-pop\"></span>). A Tito, también “verdadero hijo en la común fe” (<span class=\"vref\" data-book=\"TIT\" data-chapter=\"1\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Tito 1:4</span><span class=\"vref-pop\"></span>), le confió la tarea de establecer líderes en la desafiante iglesia de Creta.</p>",
+          "<p>Pablo animó a Tito a enseñar y corregir con autoridad, sin dejarse intimidar: “Nadie te menosprecie” (<span class=\"vref\" data-book=\"TIT\" data-chapter=\"2\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Tito 2:15</span><span class=\"vref-pop\"></span>). En la iglesia del Nuevo Testamento, personas de distintas generaciones, culturas e historias trabajaban juntas por el evangelio.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Sea cual sea tu edad, origen o experiencia, todos tenemos un papel en la obra de Dios. ¿Cuál es el tuyo, y cómo puedes hacer aún más?",
+          "¿Quién ha sido un “Pablo” para ti? ¿Y para quién podrías serlo tú?",
+          "¿Qué enseñan la historia de Ana, a los 84 años, y la de las hijas jóvenes de Felipe sobre la edad y el llamado?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Quién es la primera persona llamada profetisa en el Nuevo Testamento?",
+              "opts": [
+                "María",
+                "Priscila",
+                "Ana",
+                "Lidia"
+              ]
+            },
+            {
+              "text": "¿Cuántas hijas profetizaban en la casa de Felipe?",
+              "opts": [
+                "Dos",
+                "Siete",
+                "Doce",
+                "Cuatro"
+              ]
+            },
+            {
+              "text": "¿Cuántos años tenía Ana cuando reconoció a Jesús en el templo?",
+              "opts": [
+                "84 años",
+                "40 años",
+                "70 años",
+                "100 años"
+              ]
+            },
+            {
+              "text": "¿Cómo llamó Pablo a Timoteo?",
+              "opts": [
+                "“Mi siervo inútil”",
+                "“Verdadero hijo en la fe”",
+                "“Hermano de sangre”",
+                "“Profeta de Israel”"
+              ]
+            },
+            {
+              "text": "¿Qué tarea le confió Pablo a Tito?",
+              "opts": [
+                "Escribir el libro de Hechos",
+                "Gobernar Jerusalén",
+                "Establecer líderes entre los cristianos de Creta",
+                "Construir una sinagoga en Roma"
+              ]
+            },
+            {
+              "text": "Según Lucas 2:37, ¿cómo adoraba Ana a Dios?",
+              "opts": [
+                "Solo los sábados",
+                "Solo cantando en el coro",
+                "Ofreciendo sacrificios de animales",
+                "De noche y de día, con ayunos y oraciones"
+              ]
+            },
+            {
+              "text": "¿Qué texto habla de las hijas de Felipe que profetizaban?",
+              "opts": [
+                "Hechos 21:9",
+                "Hechos 2:17",
+                "Hechos 8:26",
+                "Hechos 16:14"
+              ]
+            },
+            {
+              "text": "Según 1 Timoteo 1:18, ¿para qué debían ayudar las instrucciones a Timoteo?",
+              "opts": [
+                "Para abandonar el ministerio",
+                "Para militar la buena milicia",
+                "Para volver a casa",
+                "Para hacerse sacerdote"
+              ]
+            },
+            {
+              "text": "En Tito 2:15, ¿qué le dice Pablo a Tito?",
+              "opts": [
+                "Que se quede callado",
+                "Que deje que otro lidere",
+                "Que enseñe, exhorte y reprenda con autoridad",
+                "Que evite corregir a alguien"
+              ]
+            },
+            {
+              "text": "¿Qué texto llama a Tito “verdadero hijo en la común fe”?",
+              "opts": [
+                "Tito 3:5",
+                "2 Timoteo 4:7",
+                "Filemón 1:10",
+                "Tito 1:4"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Las hijas de Felipe eran ancianas y casadas.",
+            "Ana reconoció a Jesús como el Mesías en el templo.",
+            "Pablo confió grandes responsabilidades al joven Timoteo.",
+            "La iglesia de Creta era considerada fácil de liderar."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Discerniendo a los falsos profetas",
+        "summary": "El Nuevo Testamento advierte que surgirán falsos profetas con señales y discursos convincentes. El verdadero profeta se reconoce por el carácter, la fidelidad a la voluntad de Dios y el cumplimiento de los mensajes.",
+        "body": [
+          "<p>El Nuevo Testamento advierte que el engaño espiritual marcará los últimos tiempos: surgirán falsos profetas capaces de hacer señales y de persuadir incluso a los sinceros (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"24\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Mat. 24:11</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"24\" data-v1=\"23\" data-v2=\"25\" onclick=\"toggleVerseLive(this)\">Mat. 24:23-25</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2PE\" data-chapter=\"2\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">2 Ped. 2:1-3</span><span class=\"vref-pop\"></span>). No todo el que habla en nombre de Jesús representa Su mensaje, y las falsificaciones pueden ser muy convincentes.</p>",
+          "<p>Por eso la orientación bíblica no es aceptarlo todo, sino examinar (<span class=\"vref\" data-book=\"1TH\" data-chapter=\"5\" data-v1=\"19\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">1 Tes. 5:19-22</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"1JN\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">1 Juan 4:1-6</span><span class=\"vref-pop\"></span>). Jesús enseñó que el árbol se conoce por sus frutos (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"7\" data-v1=\"15\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Mat. 7:15-20</span><span class=\"vref-pop\"></span>): el verdadero profeta no se reconoce solo por palabras o manifestaciones, sino por el carácter, la conformidad con la voluntad de Dios y el cumplimiento de sus mensajes.</p>",
+          "<p>El cristiano es llamado a estar firme, revestido de la armadura de Dios: verdad, fe y vigilancia (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"6\" data-v1=\"10\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Efe. 6:10-18</span><span class=\"vref-pop\"></span>). Y, aun ante fuerzas sobrenaturales, hay una certeza: nada puede separar al pueblo de Dios de Su amor (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"8\" data-v1=\"38\" data-v2=\"39\" onclick=\"toggleVerseLive(this)\">Rom. 8:38, 39</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué las falsificaciones muy convincentes exigen más estudio, y no menos?",
+          "¿Qué “frutos” observarías para saber si un mensaje espiritual viene de Dios?",
+          "¿Qué pieza de la armadura de Dios (Efe. 6:10-18) necesitas más hoy?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿qué marcará los últimos tiempos?",
+              "opts": [
+                "El fin de toda religión",
+                "La ausencia de señales",
+                "El silencio de Dios",
+                "El engaño espiritual y los falsos profetas"
+              ]
+            },
+            {
+              "text": "¿Cuál es la orientación bíblica ante los mensajes espirituales?",
+              "opts": [
+                "Examinarlos con atención, y no aceptarlo todo",
+                "Aceptar todo lo que tenga señales",
+                "Rechazar cualquier profecía",
+                "Seguir la opinión de la mayoría"
+              ]
+            },
+            {
+              "text": "¿Cómo se reconoce al verdadero profeta, según la lección?",
+              "opts": [
+                "Por la cantidad de seguidores",
+                "Por el carácter, la fidelidad a la voluntad de Dios y el cumplimiento de los mensajes",
+                "Por milagros espectaculares",
+                "Por la fama en las redes"
+              ]
+            },
+            {
+              "text": "¿Pueden los falsos profetas realizar señales, según la lección?",
+              "opts": [
+                "No, nunca",
+                "Solo en sueños",
+                "Sí, y con mensajes persuasivos",
+                "Solo en los tiempos bíblicos"
+              ]
+            },
+            {
+              "text": "¿De qué debe revestirse el cristiano para estar firme?",
+              "opts": [
+                "De fuerza física",
+                "De riquezas",
+                "De la opinión de los amigos",
+                "De la verdad, la fe y la vigilancia, por la gracia de Dios"
+              ]
+            },
+            {
+              "text": "¿Qué certeza da la lección ante las amenazas sobrenaturales?",
+              "opts": [
+                "Nada puede separar al pueblo de Dios de Su amor",
+                "Los falsos profetas desaparecerán solos",
+                "No existen fuerzas sobrenaturales",
+                "Solo los pastores están protegidos"
+              ]
+            },
+            {
+              "text": "En Mateo 7:15-20, ¿cómo dice Jesús que se reconoce a los falsos profetas?",
+              "opts": [
+                "Por su ropa",
+                "Por sus frutos",
+                "Por su edad",
+                "Por su tono de voz"
+              ]
+            },
+            {
+              "text": "¿Qué texto describe la armadura de Dios?",
+              "opts": [
+                "Efesios 1:3-6",
+                "Filipenses 4:6, 7",
+                "Efesios 6:10-18",
+                "Colosenses 3:1-4"
+              ]
+            },
+            {
+              "text": "¿Qué texto manda probar los espíritus para ver si son de Dios?",
+              "opts": [
+                "Juan 3:16-18",
+                "Santiago 1:2-4",
+                "Hebreos 11:1-3",
+                "1 Juan 4:1-6"
+              ]
+            },
+            {
+              "text": "¿Qué texto advierte que falsos maestros introducirían herejías destructoras?",
+              "opts": [
+                "2 Pedro 2:1-3",
+                "2 Pedro 3:18",
+                "1 Pedro 5:7",
+                "Judas 24, 25"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Las falsificaciones espirituales pueden ser muy convincentes.",
+            "Toda persona que habla en nombre de Jesús representa realmente Su mensaje.",
+            "Según la lección, es seguro aceptar cualquier mensaje que venga con señales.",
+            "El carácter es una de las señales del verdadero profeta."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "El Profeta supremo",
+        "summary": "Moisés anunció un profeta semejante a él, y el Nuevo Testamento muestra que era Jesús. El mismo Verbo que creó todas las cosas se hizo carne, y es la fuente de toda luz profética.",
+        "body": [
+          "<p>Moisés predijo: “Profeta de en medio de ti, de tus hermanos, como yo, te levantará Jehová tu Dios; a él oiréis” (<span class=\"vref\" data-book=\"DEU\" data-chapter=\"18\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Deut. 18:15</span><span class=\"vref-pop\"></span>). Pedro confirmó en Jerusalén que esa profecía apuntaba a Jesús (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"3\" data-v1=\"22\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">Hech. 3:22</span><span class=\"vref-pop\"></span>). Jesús es el Profeta supremo, Aquel a quien señalaban todos los profetas del Antiguo Testamento (<span class=\"vref\" data-book=\"MRK\" data-chapter=\"8\" data-v1=\"27\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">Mar. 8:27-29</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"LUK\" data-chapter=\"24\" data-v1=\"13\" data-v2=\"35\" onclick=\"toggleVerseLive(this)\">Luc. 24:13-35</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>La descripción del Verbo en Juan 1:1-5 no corresponde a ningún ser humano común: “Todas las cosas por él fueron hechas” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Juan 1:3</span><span class=\"vref-pop\"></span>). El Creador de todo se hizo carne (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Juan 1:14</span><span class=\"vref-pop\"></span>). En cada “Y dijo Dios” de Génesis 1 oímos la voz de Jesús, y Aquel que dijo “Sea la luz” (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"1\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Gén. 1:3</span><span class=\"vref-pop\"></span>) es “la luz de los hombres” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Juan 1:4</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Las palabras proféticas son como una antorcha que alumbra en lugar oscuro (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">2 Ped. 1:19</span><span class=\"vref-pop\"></span>), y seguirán alumbrando hasta que Jesús, “la estrella resplandeciente de la mañana” (<span class=\"vref\" data-book=\"REV\" data-chapter=\"22\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Apoc. 22:16</span><span class=\"vref-pop\"></span>), establezca Su reino eterno. Hasta entonces, por Su vida, muerte y resurrección, ofrece a todos la vida eterna; la decisión es aceptar o no ese regalo.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Jesús, el Creador, también murió en la cruz por tus pecados. ¿Qué revela esto sobre el amor de Dios por ti?",
+          "¿Qué cambia al leer Génesis 1 sabiendo que es la voz de Jesús diciendo “Sea la luz”?",
+          "¿Qué áreas “oscuras” de tu vida necesitan la luz de la palabra profética?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿A quién llama la lección el Profeta supremo?",
+              "opts": [
+                "Jesús",
+                "Moisés",
+                "Elías",
+                "Juan el Bautista"
+              ]
+            },
+            {
+              "text": "¿Quién predijo que Dios levantaría un profeta semejante a él?",
+              "opts": [
+                "Isaías",
+                "Moisés",
+                "David",
+                "Samuel"
+              ]
+            },
+            {
+              "text": "¿Qué apóstol confirmó en Jerusalén que la profecía de Moisés apuntaba a Jesús?",
+              "opts": [
+                "Pablo",
+                "Santiago",
+                "Pedro",
+                "Tomás"
+              ]
+            },
+            {
+              "text": "Cuando Jesús preguntó quién era Él, ¿qué respondieron los discípulos?",
+              "opts": [
+                "Que Él era Moisés",
+                "Que Él era un ángel",
+                "Que Él era un rey romano",
+                "Que Él era el Cristo"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿de quién es la voz en cada “Y dijo Dios” de Génesis 1?",
+              "opts": [
+                "De Jesús",
+                "De Moisés",
+                "De un ángel",
+                "De Adán"
+              ]
+            },
+            {
+              "text": "¿Con qué compara la lección las palabras proféticas?",
+              "opts": [
+                "Con una espada rota",
+                "Con una antorcha que alumbra en lugar oscuro",
+                "Con un muro alto",
+                "Con un río seco"
+              ]
+            },
+            {
+              "text": "¿Dónde está la profecía de Moisés sobre el profeta semejante a él?",
+              "opts": [
+                "Éxodo 20:3",
+                "Levítico 19:18",
+                "Deuteronomio 18:15",
+                "Números 6:24"
+              ]
+            },
+            {
+              "text": "Según Juan 1:3, ¿qué fue hecho por medio del Verbo?",
+              "opts": [
+                "Solo los ángeles",
+                "Solo el templo",
+                "Solo la ley",
+                "Todas las cosas"
+              ]
+            },
+            {
+              "text": "¿Cómo se llama a Jesús en Apocalipsis 22:16?",
+              "opts": [
+                "La estrella de la mañana",
+                "El Sol de justicia",
+                "La Roca eterna",
+                "El Pan del cielo"
+              ]
+            },
+            {
+              "text": "¿Qué texto afirma que el Verbo se hizo carne?",
+              "opts": [
+                "Juan 3:16",
+                "Juan 1:14",
+                "Juan 11:25",
+                "Juan 14:6"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El Verbo de Juan 1 es un ser humano común.",
+            "Según la lección, la profecía ya dejó de alumbrar al mundo.",
+            "La profecía de Deuteronomio 18:15 apuntaba a Jesús.",
+            "El Creador de todas las cosas se hizo carne."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Jesús y Su Palabra en el centro",
+        "summary": "El ministerio de Elena de White giraba en torno a dos cosas: llevar a las personas a Jesús y señalarles la Biblia. Ella veía sus escritos como una “luz menor” que conduce a la “luz mayor”.",
+        "body": [
+          "<p>Dios llamó a profetas para llevar a las personas a conocerlo y a tener una relación con Él, y ese fue el centro del ministerio de Elena de White. La serie El Gran Conflicto, en cinco tomos, comienza y termina con la frase “Dios es amor”. En El camino a Cristo escribió que nuestro crecimiento en la gracia depende de la comunión con Él, “diariamente, a cada hora”.</p>",
+          "<p>Mientras escribía El Deseado de todas las gentes en la década de 1890, anotó en su diario que se olvidaba de respirar como debía, porque no soportaba la intensidad del sentimiento que la invadía al pensar en lo que Cristo había sufrido (Mensajes selectos, t. 3).</p>",
+          "<p>Su segundo enfoque era la Biblia. Llamaba a sus escritos una “luz menor”, destinada a llevar a las personas a la “luz mayor”, las Escrituras, y decía: “Recomiendo al amable lector la Palabra de Dios como regla de su fe y práctica”. Para ella, quien tiene el don de profecía debe enseñar lo que Cristo enseñó (El Deseado de todas las gentes).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Quiénes fueron algunas profetisas del Nuevo Testamento? (Luc. 2:36-38; Hech. 21:9)",
+          "¿Todos los profetas eran apóstoles? ¿Todos escribieron libros de la Biblia? (Hech. 15:32)",
+          "¿Cómo podemos distinguir a los verdaderos mensajeros de Dios de los falsos? (Mat. 7:15-20; 1 Juan 4:1-3)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Con qué frase comienza y termina la serie El Gran Conflicto?",
+              "opts": [
+                "“En el principio”",
+                "“Dios es amor”",
+                "“He aquí, vengo pronto”",
+                "“Consumado es”"
+              ]
+            },
+            {
+              "text": "¿Cuántos tomos tiene la serie El Gran Conflicto?",
+              "opts": [
+                "Tres",
+                "Siete",
+                "Cinco",
+                "Doce"
+              ]
+            },
+            {
+              "text": "¿Cómo llamaba Elena de White a sus propios escritos?",
+              "opts": [
+                "Una “nueva Biblia”",
+                "La “luz final”",
+                "Una “ley superior”",
+                "Una “luz menor”"
+              ]
+            },
+            {
+              "text": "¿Hacia dónde debía guiar a las personas la “luz menor”?",
+              "opts": [
+                "Hacia la “luz mayor”, la Biblia",
+                "Hacia sus propios libros",
+                "Hacia los líderes de la iglesia",
+                "Hacia las tradiciones"
+              ]
+            },
+            {
+              "text": "¿Qué libro escribía Elena de White en la década de 1890 cuando dijo que se olvidaba de respirar?",
+              "opts": [
+                "Patriarcas y profetas",
+                "El Deseado de todas las gentes",
+                "La educación",
+                "Primeros escritos"
+              ]
+            },
+            {
+              "text": "Según El camino a Cristo, ¿de qué depende nuestro crecimiento en la gracia?",
+              "opts": [
+                "De nuestras obras",
+                "De nuestra posición en la iglesia",
+                "De nuestra unión con Cristo",
+                "De la cantidad de libros que leemos"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿cuál es la regla de fe y práctica?",
+              "opts": [
+                "Los escritos de Elena de White",
+                "Las decisiones de la iglesia",
+                "La conciencia de cada uno",
+                "La Palabra de Dios"
+              ]
+            },
+            {
+              "text": "¿Qué obra contiene la afirmación sobre enseñar lo que Cristo enseñó?",
+              "opts": [
+                "El Deseado de todas las gentes",
+                "El camino a Cristo",
+                "Primeros escritos",
+                "Vida y enseñanzas"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿dio Dios alguna luz adicional para ocupar el lugar de Su Palabra?",
+              "opts": [
+                "Sí, los Testimonios",
+                "No",
+                "Sí, las visiones",
+                "Sí, la tradición de la iglesia"
+              ]
+            },
+            {
+              "text": "¿Cuáles eran los dos grandes enfoques del ministerio de Elena de White, según la lección?",
+              "opts": [
+                "La salud y la educación",
+                "La música y el arte",
+                "Jesús y la Biblia",
+                "La política y la economía"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El camino a Cristo es tal vez el libro más conocido de Elena de White.",
+            "Elena de White veía sus escritos como sustitutos de la Biblia.",
+            "Para Elena de White, la enseñanza humana debe tener lugar junto a lo que Cristo enseñó.",
+            "Escribir sobre la vida de Cristo conmovía profundamente a Elena."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Muchas voces",
+        "summary": "Somos moldeados por lo que más vemos y oímos, muchas veces más por el algoritmo que por las Escrituras. Oír la voz de Dios exige disposición para silenciar nuestros propios deseos.",
+        "body": [
+          "<p>Las redes sociales, las opiniones y las tendencias intentan decirnos quiénes debemos ser y cómo vivir. Nunca tuvimos tanta información y, aun así, mucha gente se siente confundida. Poco a poco, nos damos cuenta de que estamos siendo moldeados más por el algoritmo que por las Escrituras (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"3\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Heb. 3:15</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Siendo aún joven, Samuel dormía en el templo cuando oyó que alguien lo llamaba. Pensó que era Elí; solo después entendió que era Dios (<span class=\"vref\" data-book=\"1SA\" data-chapter=\"3\" data-v1=\"1\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">1 Sam. 3:1-10</span><span class=\"vref-pop\"></span>). Antes de ser profeta, tuvo que aprender que oír la voz de Dios exige disposición. Nosotros, muchas veces, buscamos solo mensajes que confirmen lo que ya queremos oír.</p>",
+          "<p>Durante la Segunda Guerra Mundial, el pastor Dietrich Bonhoeffer eligió permanecer fiel al evangelio mientras muchos líderes religiosos callaban ante el nazismo, y eso le costó la libertad y la vida. En medio de tantas voces, Dios sigue hablando por la Biblia; el desafío es silenciar el propio corazón para oírlo.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Qué voces influyen más en mi manera de pensar y de tomar decisiones hoy?",
+          "¿Cómo puedo distinguir, en la práctica, la voz de Dios de las otras voces a mi alrededor?",
+          "¿De qué forma he permitido que lo que consumo cada día moldee mis decisiones más que la voz del Señor por medio de Su Palabra?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Revelación e inspiración",
+    "keyword": "INSPIRACIÓN",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Revelación general y especial",
+        "summary": "La naturaleza revela el poder y el amor de Dios, pero también muestra el mal. Solo la revelación especial —Jesús y la Biblia— interpreta correctamente ese mensaje, y el Espíritu Santo condujo a los profetas en todo el proceso.",
+        "body": [
+          "<p>Muchas veces Dios habla sin palabras: la revelación general, visible en la naturaleza, muestra Su poder y Su cuidado (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Rom. 1:19, 20</span><span class=\"vref-pop\"></span>). Pero el mundo natural también exhibe la presencia del mal (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"14\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Gén. 3:14-19</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"13\" data-v1=\"24\" data-v2=\"30\" onclick=\"toggleVerseLive(this)\">Mat. 13:24-30</span><span class=\"vref-pop\"></span>). Ese mensaje ambiguo solo se comprende correctamente por medio de la revelación especial: Jesús, la Palabra encarnada, y la Biblia, la Palabra escrita que da testimonio de Él (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"5\" data-v1=\"39\" data-v2=\"39\" onclick=\"toggleVerseLive(this)\">Juan 5:39</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Las Escrituras registran la creación, la caída, el plan de redención y la restauración final de la Tierra (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"20\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Ped. 1:20, 21</span><span class=\"vref-pop\"></span>). La inspiración profética es obra del Espíritu Santo: Él condujo a los profetas no solo a recibir los mensajes, sino también a transmitirlos con claridad.</p>",
+          "<p>Dios usó muchos métodos: visiones y sueños (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"12\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Núm. 12:6</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ISA\" data-chapter=\"6\" data-v1=\"1\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Isa. 6:1, 8</span><span class=\"vref-pop\"></span>), testigos oculares (<span class=\"vref\" data-book=\"1JN\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">1 Juan 1:1-3</span><span class=\"vref-pop\"></span>), investigación histórica guiada por el Espíritu (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Luc. 1:1-3</span><span class=\"vref-pop\"></span>) e impresiones en la mente (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"21\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Ped. 1:21</span><span class=\"vref-pop\"></span>). Y los profetas transmitían el mensaje oralmente, por escrito (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"20\" data-v1=\"30\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Juan 20:30, 31</span><span class=\"vref-pop\"></span>) o incluso por medio de representaciones simbólicas (<span class=\"vref\" data-book=\"EZK\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Eze. 4:1-8</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué parte de la naturaleza te habla más de Dios? ¿Y qué no logra explicar por sí sola?",
+          "¿Por qué necesitamos la revelación especial para entender el mundo en que vivimos?",
+          "¿Qué método de revelación te sorprende más? ¿Por qué?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Apocalipsis 1",
+                "Isaías 6",
+                "Efesios 2",
+                "Jeremías 36"
+              ]
+            },
+            {
+              "text": "¿Cómo se llama la revelación de Dios visible en el mundo natural?",
+              "opts": [
+                "Revelación especial",
+                "Revelación general",
+                "Revelación secreta",
+                "Revelación final"
+              ]
+            },
+            {
+              "text": "¿Por qué se dice que el mensaje de la naturaleza es ambiguo?",
+              "opts": [
+                "Porque no muestra nada sobre Dios",
+                "Porque solo puede verse de noche",
+                "Porque muestra el poder y el amor de Dios, pero también la presencia del mal",
+                "Porque cambia en cada estación"
+              ]
+            },
+            {
+              "text": "¿Qué forma la revelación especial de Dios?",
+              "opts": [
+                "La naturaleza y las estrellas",
+                "Los sueños de cada persona",
+                "Las tradiciones de la iglesia",
+                "Jesucristo y la Biblia"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿quién condujo a los profetas en todo el proceso de comunicar los mensajes?",
+              "opts": [
+                "El Espíritu Santo",
+                "Los sacerdotes",
+                "Los reyes de Israel",
+                "Los propios lectores"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos menciona la lección como forma de transmitir un mensaje profético?",
+              "opts": [
+                "Sorteos",
+                "Representaciones simbólicas",
+                "Consultas a los muertos",
+                "Astrología"
+              ]
+            },
+            {
+              "text": "Según Juan 5:39, ¿de quién dan testimonio las Escrituras?",
+              "opts": [
+                "De los reyes de Israel",
+                "De las leyes de Roma",
+                "De Cristo",
+                "De la sabiduría griega"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Lucas haciendo una investigación histórica guiada por el Espíritu?",
+              "opts": [
+                "Lucas 15:11",
+                "Lucas 24:13",
+                "Lucas 2:1",
+                "Lucas 1:1-3"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a un profeta transmitiendo el mensaje por medio de una representación?",
+              "opts": [
+                "Ezequiel 4:1-8",
+                "Ezequiel 37:1-14",
+                "Isaías 40:1-5",
+                "Jeremías 29:11"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de Mensajes selectos, t. 1, se indica esta semana?",
+              "opts": [
+                "Capítulo 2: “Elena G. de White y sus escritos”",
+                "Capítulo 1: “La inspiración de los escritores proféticos”",
+                "Capítulo 42: “Los misterios de la Biblia”",
+                "Capítulo 15: “El valor del estudio de la Biblia”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "La naturaleza revela el poder y el amor de Dios.",
+            "Dios usó sueños y visiones para hablar con los profetas.",
+            "La naturaleza, por sí sola, basta para entender todo el plan de salvación.",
+            "Todo mensaje profético se transmitió solo por escrito."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Recibir y transmitir",
+        "summary": "En el Apocalipsis, el mensaje pasó del Padre a Jesús, al ángel, a Juan y a los lectores. Jesús mandó a Juan escribir para que nada se perdiera, y el estilo de cada autor no disminuye la inspiración.",
+        "body": [
+          "<p>Desterrado en Patmos, Juan recibió mensajes para las siete iglesias de Asia y para los cristianos de todas las épocas (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Apoc. 1:1-3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"9\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Apoc. 1:9-11</span><span class=\"vref-pop\"></span>). La cadena de la revelación siguió este orden: Dios el Padre; Jesucristo; el ángel; Juan; y, por último, los lectores y oyentes: un ejemplo clásico de cómo Dios usa profetas para hablar a la humanidad.</p>",
+          "<p>Si Juan no hubiera escrito, el mensaje podría perderse o distorsionarse. Por eso Jesús ordenó: “Escribe las cosas que has visto” (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Apoc. 1:19</span><span class=\"vref-pop\"></span>). La escritura da permanencia a la palabra hablada. Los libros de la Biblia reflejan el estilo de cada escritor, pero eso no disminuye la validez de los mensajes: no hay “grados” de inspiración.</p>",
+          "<p>Los escritores a veces registraban mensajes que habían predicado, como Moisés en Deuteronomio. Llegaron a citar fuentes no inspiradas (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"17\" data-v1=\"28\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">Hech. 17:28</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"TIT\" data-chapter=\"1\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Tito 1:12</span><span class=\"vref-pop\"></span>) y hasta palabras de Satanás (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Gén. 3:1-5</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Mat. 4:1-11</span><span class=\"vref-pop\"></span>), y registraron ejemplos buenos y malos (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"10\" data-v1=\"1\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">1 Cor. 10:1-11</span><span class=\"vref-pop\"></span>). La Biblia no fue escrita en un lenguaje perfecto, pero transmite un mensaje infalible.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué Dios tiene tanto interés en hablar con nosotros?",
+          "La naturaleza señala al Creador. ¿Qué revela la Palabra escrita que la naturaleza sola no revela?",
+          "¿Por qué es importante saber que todas las partes de la Biblia son igualmente inspiradas, aun con estilos diferentes?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Dónde estaba Juan cuando recibió los mensajes del Apocalipsis?",
+              "opts": [
+                "Preso en Roma",
+                "Desterrado en Patmos",
+                "En Jerusalén",
+                "En Éfeso, predicando"
+              ]
+            },
+            {
+              "text": "¿Qué le ordenó Jesús a Juan en Apocalipsis 1:19?",
+              "opts": [
+                "Que guardara el secreto",
+                "Que volviera a pescar",
+                "Que escribiera lo que vio",
+                "Que construyera un templo"
+              ]
+            },
+            {
+              "text": "¿Cuál es el orden de la cadena de la revelación en el Apocalipsis?",
+              "opts": [
+                "Juan, ángel, Jesús, Padre, lectores",
+                "Ángel, Padre, Juan, Jesús, lectores",
+                "Lectores, Juan, ángel, Jesús, Padre",
+                "Padre, Jesús, ángel, Juan, lectores"
+              ]
+            },
+            {
+              "text": "¿Por qué era importante que Juan escribiera los mensajes?",
+              "opts": [
+                "Para que no se perdieran ni se distorsionaran",
+                "Para hacerse famoso",
+                "Para reemplazar el Antiguo Testamento",
+                "Para agradar al emperador"
+              ]
+            },
+            {
+              "text": "¿Qué afirma la lección sobre los “grados” de inspiración en la Biblia?",
+              "opts": [
+                "Los evangelios son más inspirados",
+                "No existen grados de inspiración",
+                "El Antiguo Testamento es menos inspirado",
+                "Solo las profecías son inspiradas"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cómo son el lenguaje de la Biblia y su mensaje?",
+              "opts": [
+                "El lenguaje es perfecto y el mensaje es falible",
+                "Ambos son imperfectos",
+                "El lenguaje no es perfecto, pero el mensaje es infalible",
+                "Ambos fueron dictados palabra por palabra"
+              ]
+            },
+            {
+              "text": "¿A quiénes estaban destinados los mensajes del Apocalipsis, según Apocalipsis 1:11?",
+              "opts": [
+                "A las doce tribus de Israel",
+                "A los sacerdotes del templo",
+                "Al emperador romano",
+                "A las siete iglesias de Asia"
+              ]
+            },
+            {
+              "text": "¿En qué libro registró Moisés sus últimos discursos?",
+              "opts": [
+                "Deuteronomio",
+                "Génesis",
+                "Levítico",
+                "Josué"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Pablo citando una fuente no inspirada?",
+              "opts": [
+                "Hechos 9:3-6",
+                "Hechos 17:28",
+                "Romanos 8:28",
+                "Efesios 2:8"
+              ]
+            },
+            {
+              "text": "¿Qué texto habla de ejemplos negativos registrados para nuestra advertencia?",
+              "opts": [
+                "1 Corintios 13:1-13",
+                "2 Corintios 5:17",
+                "1 Corintios 10:1-11",
+                "Gálatas 5:22, 23"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El Apocalipsis fue escrito solo para las iglesias del primer siglo.",
+            "La escritura da permanencia a la palabra hablada.",
+            "La Biblia registra incluso palabras de Satanás.",
+            "El estilo personal de cada escritor disminuye la validez del mensaje."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Símbolos, parábolas y representaciones",
+        "summary": "Daniel y Apocalipsis hablan por medio de símbolos, Jesús enseñaba con metáforas y parábolas, y profetas como Ezequiel y Oseas representaron mensajes. El impacto tenía un propósito: despertar a un pueblo que rechazaba las advertencias.",
+        "body": [
+          "<p>El Apocalipsis está lleno de símbolos —bestias y cuernos (<span class=\"vref\" data-book=\"REV\" data-chapter=\"13\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Apoc. 13:1</span><span class=\"vref-pop\"></span>), estrellas y candeleros (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Apoc. 1:20</span><span class=\"vref-pop\"></span>), mujeres simbólicas (<span class=\"vref\" data-book=\"REV\" data-chapter=\"12\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Apoc. 12:1</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"REV\" data-chapter=\"17\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Apoc. 17:3</span><span class=\"vref-pop\"></span>)—, en el mismo estilo de Daniel, que representa reinos con una estatua (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"2\" data-v1=\"31\" data-v2=\"45\" onclick=\"toggleVerseLive(this)\">Dan. 2:31-45</span><span class=\"vref-pop\"></span>), animales y cuernos (Dan. 7; 8). Parece difícil en una lectura rápida, pero el estudiante dedicado descubre que la propia Biblia da la interpretación. Incluso el sistema de sacrificios era un símbolo del sacrificio de Cristo y de Su sacerdocio celestial (<span class=\"vref\" data-book=\"HEB\" data-chapter=\"8\" data-v1=\"1\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Heb. 8:1-6</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Jesús enseñaba con metáforas: el Pan de vida (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"6\" data-v1=\"35\" data-v2=\"35\" onclick=\"toggleVerseLive(this)\">Juan 6:35</span><span class=\"vref-pop\"></span>), la Luz del mundo (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"8\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Juan 8:12</span><span class=\"vref-pop\"></span>) y la Vid verdadera (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"15\" data-v1=\"1\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Juan 15:1-8</span><span class=\"vref-pop\"></span>). También explicó Su reino con parábolas, como la del sembrador (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"13\" data-v1=\"1\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Mat. 13:1-9</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"13\" data-v1=\"18\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Mat. 13:18-23</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Ezequiel hizo una maqueta de Jerusalén y se acostó delante de ella 390 días sobre el lado izquierdo, por Israel, y 40 días sobre el derecho, por Judá (<span class=\"vref\" data-book=\"EZK\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Eze. 4:1-8</span><span class=\"vref-pop\"></span>). Oseas se casó con Gomer, una prostituta, simbolizando la infidelidad de Israel (<span class=\"vref\" data-book=\"HOS\" data-chapter=\"1\" data-v1=\"2\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Ose. 1:2-9</span><span class=\"vref-pop\"></span>). Esas escenas debían impactar: cuando las advertencias eran rechazadas (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"15\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Crón. 36:15-21</span><span class=\"vref-pop\"></span>), ese fue el último acto de misericordia para llevar al pueblo al arrepentimiento.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué Dios a veces habla por medio de símbolos, parábolas y representaciones, y no siempre de forma directa?",
+          "¿Qué metáfora de Jesús —Pan, Luz o Vid— te habla más hoy?",
+          "¿Qué revelan las representaciones impactantes de Ezequiel y Oseas sobre el amor de Dios por un pueblo terco?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿quién ofrece la interpretación correcta de los símbolos bíblicos?",
+              "opts": [
+                "La imaginación de cada lector",
+                "Los periódicos",
+                "La propia Biblia",
+                "La tradición popular"
+              ]
+            },
+            {
+              "text": "¿Cuál de estas metáforas usó Jesús para presentarse?",
+              "opts": [
+                "El Rey de los judíos romanos",
+                "La Piedra de Moisés",
+                "El Hijo de David escondido",
+                "El Pan de vida"
+              ]
+            },
+            {
+              "text": "¿Qué simbolizaba el sistema de sacrificios del Antiguo Testamento?",
+              "opts": [
+                "El sacrificio de Cristo y Su sacerdocio celestial",
+                "La riqueza de Israel",
+                "Las cosechas del año",
+                "Las victorias militares"
+              ]
+            },
+            {
+              "text": "¿Qué parábola cita la lección sobre el crecimiento del reino?",
+              "opts": [
+                "La del hijo pródigo",
+                "La del sembrador",
+                "La del buen samaritano",
+                "La de las diez vírgenes"
+              ]
+            },
+            {
+              "text": "¿Durante cuántos días se acostó Ezequiel sobre el lado izquierdo?",
+              "opts": [
+                "40 días",
+                "7 días",
+                "390 días",
+                "70 días"
+              ]
+            },
+            {
+              "text": "¿Con quién se casó Oseas por orden de Dios?",
+              "opts": [
+                "Con Rut, una moabita",
+                "Con Rahab, de Jericó",
+                "Con Ester, una reina",
+                "Con Gomer, una prostituta"
+              ]
+            },
+            {
+              "text": "En Daniel 2, ¿qué representa los reinos del mundo?",
+              "opts": [
+                "Las partes de una gran estatua",
+                "Las ramas de un árbol",
+                "Los peldaños de una escalera",
+                "Las piedras de un muro"
+              ]
+            },
+            {
+              "text": "¿Qué simbolizaba el matrimonio de Oseas?",
+              "opts": [
+                "La alianza con Egipto",
+                "La infidelidad espiritual de Israel",
+                "El regreso del exilio",
+                "La construcción del templo"
+              ]
+            },
+            {
+              "text": "¿Qué representaban los 40 días sobre el lado derecho, en Ezequiel 4?",
+              "opts": [
+                "El reino de Israel",
+                "Babilonia",
+                "El reino de Judá",
+                "Egipto"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra las advertencias de los profetas siendo rechazadas abiertamente?",
+              "opts": [
+                "1 Crónicas 16:8-12",
+                "Esdras 3:10-13",
+                "Nehemías 8:1-8",
+                "2 Crónicas 36:15-21"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Daniel y el Apocalipsis usan un estilo simbólico parecido.",
+            "Los mensajes simbólicos siempre son fáciles de entender en una lectura rápida.",
+            "Jesús nunca usó metáforas en Sus enseñanzas.",
+            "Las representaciones de Ezequiel y Oseas tenían el objetivo de causar impacto."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Cómo se comunica Dios",
+        "summary": "La Biblia fue escrita por personas reales, guiadas por el Espíritu Santo. Unos investigaron, otros vieron y tocaron, algunos solo predicaron, porque la Palabra encuentra la forma que el corazón humano necesita.",
+        "body": [
+          "<p>La Biblia fue escrita por personas reales, guiadas por el Espíritu Santo: “Toda la Escritura es inspirada por Dios, y útil para enseñar, para redargüir, para corregir, para instruir en justicia” (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16</span><span class=\"vref-pop\"></span>). Lucas consultó testigos, Juan dijo haber visto y tocado lo que describió, y Pablo llegó a citar poetas paganos: la inspiración no exige ignorar el mundo, sino discernimiento.</p>",
+          "<p>No todo profeta escribió: Noé predicó durante décadas sin dejar un libro, y Ezequiel representó profecías con ladrillos y planchas de hierro. Dios habla por medio de Sus siervos, los profetas (<span class=\"vref\" data-book=\"JER\" data-chapter=\"1\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Jer. 1:9</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"AMO\" data-chapter=\"3\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Amós 3:7</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"HEB\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Heb. 1:1, 2</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">2 Ped. 1:19-21</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Y Él insiste. Por compasión, envió mensajeros una y otra vez, desde temprano y sin cesar, pero el pueblo se burló de ellos (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"15\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">2 Crón. 36:15, 16</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"7\" data-v1=\"23\" data-v2=\"26\" onclick=\"toggleVerseLive(this)\">Jer. 7:23-26</span><span class=\"vref-pop\"></span>). La Palabra de Dios siempre encuentra la forma que el corazón humano necesita para recibir lo que todavía no quiere oír.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué cambia al saber que la Biblia fue escrita por personas reales, con estilos e historias diferentes?",
+          "¿Por qué Dios sigue insistiendo con quien no quiere oír?",
+          "¿Qué “forma” ha usado Dios últimamente para llegar a tu corazón?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según 2 Timoteo 3:16, ¿cuánto de la Escritura es inspirada por Dios?",
+              "opts": [
+                "Solo los evangelios",
+                "Solo las profecías",
+                "Solo la ley de Moisés",
+                "Toda la Escritura"
+              ]
+            },
+            {
+              "text": "¿Qué profeta predicó durante décadas sin dejar un libro?",
+              "opts": [
+                "Noé",
+                "Isaías",
+                "Daniel",
+                "Jeremías"
+              ]
+            },
+            {
+              "text": "¿Qué hizo Lucas, según la lección, para escribir su evangelio?",
+              "opts": [
+                "Copió un libro griego",
+                "Consultó a testigos oculares",
+                "Escribió solo de memoria",
+                "Inventó las historias"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué exige la inspiración en relación con el conocimiento del mundo?",
+              "opts": [
+                "Ignorancia total del mundo",
+                "Estudio de filosofía griega",
+                "Discernimiento para poner el conocimiento al servicio de la verdad",
+                "Abandono de toda cultura"
+              ]
+            },
+            {
+              "text": "¿Con qué representó Ezequiel profecías, según la lección?",
+              "opts": [
+                "Con piedras preciosas",
+                "Con vasijas de barro y vino",
+                "Con espadas y escudos",
+                "Con ladrillos y planchas de hierro"
+              ]
+            },
+            {
+              "text": "¿Quién citó poetas paganos para comunicar verdades eternas?",
+              "opts": [
+                "Pablo",
+                "Pedro",
+                "Moisés",
+                "David"
+              ]
+            },
+            {
+              "text": "Según Amós 3:7, ¿a quién revela Dios Su secreto?",
+              "opts": [
+                "A los reyes de las naciones",
+                "A Sus siervos los profetas",
+                "A los sabios de Babilonia",
+                "A nadie"
+              ]
+            },
+            {
+              "text": "¿Qué texto describe a Dios enviando mensajeros con insistencia y al pueblo burlándose de ellos?",
+              "opts": [
+                "Salmo 23:1-3",
+                "Proverbios 3:5, 6",
+                "2 Crónicas 36:15, 16",
+                "Isaías 40:31"
+              ]
+            },
+            {
+              "text": "¿Qué texto afirma que los profetas hablaron inspirados por el Espíritu Santo?",
+              "opts": [
+                "1 Pedro 2:9",
+                "Santiago 5:16",
+                "Judas 3",
+                "2 Pedro 1:21"
+              ]
+            },
+            {
+              "text": "En Jeremías 1:9, ¿qué hizo Dios con el profeta?",
+              "opts": [
+                "Puso Sus palabras en su boca",
+                "Le dio una corona",
+                "Le mandó quedarse callado",
+                "Le quitó la voz"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Todo profeta comunicó su mensaje por escrito.",
+            "Según la lección, la inspiración exige que el profeta ignore el mundo que lo rodea.",
+            "La Biblia fue escrita por personas reales guiadas por el Espíritu Santo.",
+            "Dios envió mensajeros al pueblo repetidamente, aun ante el rechazo."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "Mensajes orales",
+        "summary": "Antes de cualquier registro escrito, Dios habló de forma audible y clara. Noé, Elías, Juan el Bautista y el mismo Jesús transmitieron mensajes oralmente, con la misma autoridad que quienes escribieron.",
+        "body": [
+          "<p>Antes de cualquier texto, los mensajes de Dios se oían. Él habló con Adán y Eva antes y después de la caída (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"2\" data-v1=\"16\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Gén. 2:16, 17</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"9\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Gén. 3:9-19</span><span class=\"vref-pop\"></span>), y Su voz se oyó con claridad en el Sinaí (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"20\" data-v1=\"1\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Éx. 20:1-20</span><span class=\"vref-pop\"></span>), en el bautismo de Jesús y en la transfiguración (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"3\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Mat. 3:17</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"MAT\" data-chapter=\"17\" data-v1=\"5\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Mat. 17:5</span><span class=\"vref-pop\"></span>). Nosotros podemos entender mal a los demás, pero cuando Dios habla, de Su parte no hay error.</p>",
+          "<p>Isaías (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"8\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Isa. 8:1</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ISA\" data-chapter=\"8\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Isa. 8:11</span><span class=\"vref-pop\"></span>), Jeremías (<span class=\"vref\" data-book=\"JER\" data-chapter=\"1\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jer. 1:4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"JER\" data-chapter=\"1\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Jer. 1:9</span><span class=\"vref-pop\"></span>) y Ezequiel (<span class=\"vref\" data-book=\"EZK\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Eze. 3:16</span><span class=\"vref-pop\"></span>) dijeron haber oído la voz de Dios. Negarlo es cuestionar la honestidad de los profetas. Noé, “pregonero de justicia” (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"2\" data-v1=\"5\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">2 Ped. 2:5</span><span class=\"vref-pop\"></span>), no escribió nada de la Biblia, pero su predicación no era menos inspirada. Lo mismo vale para Natán, Elías, Eliseo y Juan el Bautista.</p>",
+          "<p>¿Y Jesús? El único registro de que escribió algo es cuando “escribía en tierra con el dedo” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"8\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Juan 8:6</span><span class=\"vref-pop\"></span>). Aun así, enseñaba “como quien tiene autoridad” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"7\" data-v1=\"29\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">Mat. 7:29</span><span class=\"vref-pop\"></span>), y los oyentes admitían: “¡Jamás hombre alguno ha hablado como este hombre!” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"7\" data-v1=\"46\" data-v2=\"46\" onclick=\"toggleVerseLive(this)\">Juan 7:46</span><span class=\"vref-pop\"></span>). Sus palabras no tenían menos autoridad por no haber escrito ningún libro.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo te ha hablado Dios? ¿Cómo puedes oírlo mejor?",
+          "¿Por qué Jesús prefirió enseñar hablando en lugar de escribir un libro?",
+          "¿Qué palabra de Dios oíste de la boca de alguien y nunca olvidaste?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿cómo fue la voz de Dios en el Sinaí?",
+              "opts": [
+                "Se oyó con absoluta claridad",
+                "Imposible de entender",
+                "Oída solo por Moisés, en sueños",
+                "Traducida por ángeles"
+              ]
+            },
+            {
+              "text": "¿Qué profeta es llamado “pregonero de justicia” en 2 Pedro 2:5?",
+              "opts": [
+                "Elías",
+                "Noé",
+                "Abraham",
+                "Samuel"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos profetas no dejó un libro bíblico escrito?",
+              "opts": [
+                "Jeremías",
+                "Ezequiel",
+                "Eliseo",
+                "Isaías"
+              ]
+            },
+            {
+              "text": "¿En qué momentos del ministerio de Jesús se oyó la voz de Dios, según la lección?",
+              "opts": [
+                "En el nacimiento y en la última cena",
+                "En la tentación y en el arresto",
+                "En las bodas de Caná",
+                "En el bautismo y en la transfiguración"
+              ]
+            },
+            {
+              "text": "¿Cuál es el único registro de Jesús escribiendo algo?",
+              "opts": [
+                "Cuando escribió en tierra con el dedo",
+                "Una carta a los discípulos",
+                "Un rollo en el templo",
+                "Una inscripción en la cruz"
+              ]
+            },
+            {
+              "text": "Según la lección, negar que los profetas oyeron la voz de Dios termina cuestionando ¿qué?",
+              "opts": [
+                "La existencia de los reyes",
+                "La honestidad de los profetas y la confiabilidad de la Biblia",
+                "La fecha de la creación",
+                "La traducción de las Escrituras"
+              ]
+            },
+            {
+              "text": "Según Mateo 7:29, ¿cómo enseñaba Jesús?",
+              "opts": [
+                "Como los escribas",
+                "Con miedo de las autoridades",
+                "Como quien tiene autoridad",
+                "Solo en parábolas escritas"
+              ]
+            },
+            {
+              "text": "¿Qué admitieron algunos oyentes de Jesús en Juan 7:46?",
+              "opts": [
+                "“Este es Elías”",
+                "“No sabe hablar”",
+                "“Es un falso profeta”",
+                "“¡Jamás hombre alguno ha hablado como este hombre!”"
+              ]
+            },
+            {
+              "text": "¿En qué texto habló Dios con Adán y Eva antes de la caída?",
+              "opts": [
+                "Génesis 2:16, 17",
+                "Génesis 4:9",
+                "Génesis 6:13",
+                "Génesis 12:1"
+              ]
+            },
+            {
+              "text": "Según Éxodo 6:2, ¿qué le dijo Dios a Moisés?",
+              "opts": [
+                "“Yo soy la vid”",
+                "“Yo soy Jehová”",
+                "“Levántate y anda”",
+                "“No temas, Abram”"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Dios habló de forma audible con Adán y Eva.",
+            "La predicación de Noé era menos inspirada que los libros escritos por los profetas.",
+            "Cuando Dios habla, Su comunicación puede contener error.",
+            "Jesús fue, sobre todo, un comunicador oral."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Revelación e inspiración",
+        "summary": "Elena de White recibió el mismo tipo de inspiración que los profetas bíblicos, pero nunca puso sus escritos al nivel de la Biblia. Entendía que Dios inspira a personas, no palabras, y que no todo lo que escribía era inspirado.",
+        "body": [
+          "<p>Los adventistas creen que Elena de White fue inspirada y que su vida y ministerio cumplen los criterios de un verdadero profeta. Recibió el mismo tipo de inspiración que los profetas bíblicos, pero nunca consideró sus escritos al nivel de las Escrituras, y nosotros tampoco. Para ella, la Biblia es la revelación infalible y con autoridad.</p>",
+          "<p>Entendía la inspiración como una interacción entre lo divino y lo humano: “No son las palabras de la Biblia las inspiradas, sino los hombres son los que fueron inspirados” (Mensajes selectos, t. 1). Dios comunica el pensamiento; el profeta lo expresa con sus propias palabras. La Biblia, escribió, presenta una unión de lo divino y lo humano.</p>",
+          "<p>También dejó claro que no todo era inspirado: hay momentos en que deben decirse cosas comunes y escribirse cartas comunes. Esa distinción importa al leer cartas y diarios personales, y nos ayuda a evitar extremos y a leer sus escritos con sabiduría.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué etapas usó el Señor para transmitir a Juan el mensaje del Apocalipsis? (Apoc. 1:1-3)",
+          "¿Por qué era esencial que algunos profetas registraran los mensajes? (Apoc. 1:19; Éx. 17:14; 1 Cor. 10:11)",
+          "¿De qué maneras revela el Señor mensajes a Sus profetas, y cómo habla Dios a Su pueblo? (Núm. 12:6; Heb. 1:1, 2; 2 Ped. 1:19-21)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Consideraba Elena de White sus escritos al mismo nivel que la Biblia?",
+              "opts": [
+                "Sí, siempre",
+                "No",
+                "Solo los libros sobre salud",
+                "Solo las cartas personales"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿qué es inspirado: las palabras o las personas?",
+              "opts": [
+                "Las palabras",
+                "Solo las traducciones",
+                "Las personas",
+                "Solo los copistas"
+              ]
+            },
+            {
+              "text": "¿Cómo llamaba Elena de White a la unión entre la revelación divina y la experiencia humana?",
+              "opts": [
+                "Dictado verbal",
+                "Inspiración automática",
+                "Revelación natural",
+                "Inspiración de pensamiento"
+              ]
+            },
+            {
+              "text": "¿Quién expresa el mensaje con sus propias palabras, según Elena de White?",
+              "opts": [
+                "El profeta",
+                "El ángel",
+                "El lector",
+                "El traductor"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿todas sus cartas y comunicaciones eran inspiradas?",
+              "opts": [
+                "Sí, cada palabra",
+                "No; había cosas comunes, no dadas bajo inspiración especial",
+                "Solo las que se publicaron",
+                "Solo las escritas a mano"
+              ]
+            },
+            {
+              "text": "¿Por qué es importante conocer cómo entendía Elena de White la inspiración?",
+              "opts": [
+                "Para reemplazar la Biblia",
+                "Para desconfiar de todo lo que escribió",
+                "Para evitar extremos y leer sus escritos con discernimiento",
+                "Para leer solo las cartas personales"
+              ]
+            },
+            {
+              "text": "¿Qué obra contiene la frase “No son las palabras de la Biblia las inspiradas, sino los hombres”?",
+              "opts": [
+                "El conflicto de los siglos",
+                "El camino a Cristo",
+                "La educación",
+                "Mensajes selectos, t. 1"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿la Biblia presenta una unión de qué?",
+              "opts": [
+                "De lo divino y lo humano",
+                "Del pasado y el futuro",
+                "De la ley y la tradición",
+                "De la ciencia y la filosofía"
+              ]
+            },
+            {
+              "text": "¿Qué tipo de textos exige más atención a esta distinción, según la lección?",
+              "opts": [
+                "Los libros de la serie El Gran Conflicto",
+                "Cartas y diarios personales",
+                "Las citas bíblicas",
+                "Los himnos"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué cumplen los escritos, la vida y el ministerio de Elena de White?",
+              "opts": [
+                "Las exigencias de un rey",
+                "Las reglas de un sacerdote",
+                "Los criterios de un verdadero profeta",
+                "Los requisitos de un apóstol del primer siglo"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Para Elena de White, Dios dictaba cada palabra que el profeta escribía.",
+            "Elena de White siempre exaltó la Biblia.",
+            "Elena de White afirmó que algunas de sus cartas trataban de cosas comunes.",
+            "Los adventistas consideran los escritos de Elena de White por encima de la Biblia."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Señales del Espíritu Santo en mi vida",
+        "summary": "No vemos al Espíritu Santo, pero percibimos Sus señales en las actitudes y decisiones, como un perfume en el aire. Tener el Espíritu no es ser perfecto, es estar en transformación.",
+        "body": [
+          "<p>Un perfume nuevo en la casa no necesita explicación: no lo ves, pero percibes que algo cambió. La acción del Espíritu Santo es parecida: no lo vemos, pero notamos Su presencia en las actitudes, las palabras y las decisiones de una persona.</p>",
+          "<p>El Espíritu Santo no es una fuerza impersonal ni una emoción religiosa: es una Persona divina, enviada para convencer, consolar, orientar y transformar. Pablo dice que produce fruto: “amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza” (<span class=\"vref\" data-book=\"GAL\" data-chapter=\"5\" data-v1=\"22\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Gál. 5:22, 23</span><span class=\"vref-pop\"></span>): un carácter moldeado día tras día.</p>",
+          "<p>Muchos buscan señales extraordinarias, pero las más importantes son pequeños cambios: querer pedir perdón, contener una respuesta dura, hacer lo correcto sin ganas, buscar la Palabra, incomodarse con el pecado. Tener el Espíritu no es ser perfecto, sino estar en proceso de transformación.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Qué señales del fruto del Espíritu he percibido en mi vida últimamente?",
+          "¿En qué áreas todavía necesito permitir que el Espíritu Santo transforme mis actitudes?",
+          "¿Qué decisión práctica puedo tomar esta semana para vivir más guiado por el Espíritu Santo?"
+        ]
+      }
+    ]
   }
 ]
