@@ -16071,5 +16071,1467 @@
         ]
       }
     ]
+  },
+  {
+    "id": 23,
+    "title": "Autoridad y relevancia",
+    "keyword": "AUTORIDAD",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Autoridad delegada",
+        "summary": "La Biblia es nuestra regla de fe y práctica. Los profetas que no escribieron libros bíblicos, como Natán, también tenían autoridad, que viene de la inspiración divina y no de estar en el canon, pero siempre por debajo de las Escrituras.",
+        "body": [
+          "<p>La Biblia es el medio especial por el cual Dios se revela: nuestra regla de fe y práctica y la norma suprema de la verdad. Hoy muchos la leen buscando errores, burlándose o considerándola anticuada, e incluso cristianos la usan solo para respaldar sus posiciones. Una de las formas más comunes de rechazar su autoridad es simplemente ignorarla: muchos reconocen que tiene autoridad, pero no aceptan lo que exige (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"5\" data-v1=\"29\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">Hech. 5:29</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"HEB\" data-chapter=\"4\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Heb. 4:12</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>¿Y los profetas no canónicos, cuyos escritos no entraron en la Biblia, como Natán, Juan el Bautista y Elena de White? Después del adulterio y el asesinato cometidos por David, Dios envió a Natán para confrontarlo (<span class=\"vref\" data-book=\"2SA\" data-chapter=\"12\" data-v1=\"7\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">2 Sam. 12:7-14</span><span class=\"vref-pop\"></span>). Natán no escribió un libro bíblico, pero David no cuestionó su autoridad.</p>",
+          "<p>La autoridad de un profeta viene de la inspiración divina, no de estar o no en el canon. Aun así, todos los verdaderos profetas no canónicos se consideraban sujetos a las Escrituras. No sabemos por qué algunos mensajes entraron en la Biblia y otros no, pero la Biblia enseña que los dones, incluido el de profecía, continúan hasta el fin (<span class=\"vref\" data-book=\"JOL\" data-chapter=\"2\" data-v1=\"28\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Joel 2:28-31</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿De qué maneras “ignorar la Biblia” puede ser una forma silenciosa de rechazar su autoridad?",
+          "¿Por qué David no cuestionó la autoridad de Natán, aunque no había escrito un libro?",
+          "¿Qué cambia para ti saber que la autoridad de un profeta viene de la inspiración y no del canon?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Éxodo 3; 4",
+                "Éxodo 20",
+                "Génesis 3",
+                "Mateo 7"
+              ]
+            },
+            {
+              "text": "¿Qué profeta envió Dios para confrontar a David?",
+              "opts": [
+                "Samuel",
+                "Natán",
+                "Elías",
+                "Gad"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál es una de las formas más comunes de rechazar la autoridad bíblica?",
+              "opts": [
+                "Estudiarla con oración",
+                "Compartirla",
+                "Simplemente ignorar la Biblia",
+                "Memorizarla"
+              ]
+            },
+            {
+              "text": "¿Qué son los profetas no canónicos?",
+              "opts": [
+                "Falsos profetas",
+                "Profetas sin inspiración",
+                "Profetas que solo hablaron a reyes",
+                "Profetas cuyos escritos no fueron incluidos en la Biblia"
+              ]
+            },
+            {
+              "text": "¿De dónde viene la autoridad del mensaje de un profeta, según la lección?",
+              "opts": [
+                "De la inspiración divina",
+                "De estar incluido en el canon",
+                "De la edad del profeta",
+                "Del número de seguidores"
+              ]
+            },
+            {
+              "text": "¿Cómo se veían los verdaderos profetas no canónicos en relación con las Escrituras?",
+              "opts": [
+                "Por encima de las Escrituras",
+                "Sujetos a la autoridad de las Escrituras",
+                "Iguales a los ángeles",
+                "Independientes de la Biblia"
+              ]
+            },
+            {
+              "text": "¿Qué texto narra a Natán confrontando a David?",
+              "opts": [
+                "1 Samuel 16:1-13",
+                "2 Samuel 7:1-17",
+                "2 Samuel 12:7-14",
+                "1 Reyes 1:11-14"
+              ]
+            },
+            {
+              "text": "¿Qué texto usa la lección para mostrar que los dones continúan hasta el fin?",
+              "opts": [
+                "Joel 1:1-4",
+                "Amós 5:24",
+                "Miqueas 6:8",
+                "Joel 2:28-31"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Hechos dice que es necesario obedecer a Dios antes que a los hombres?",
+              "opts": [
+                "Hechos 5:29",
+                "Hechos 2:42",
+                "Hechos 10:34",
+                "Hechos 17:11"
+              ]
+            },
+            {
+              "text": "¿Qué obra de Elena G. de White se indica esta semana?",
+              "opts": [
+                "Mensajes selectos, t. 1, capítulo 1",
+                "Testimonios para la iglesia, t. 5: “Los misterios de la Biblia, prueba de su inspiración”",
+                "Vida y enseñanzas, apéndice 2",
+                "El camino a Cristo, capítulo 3"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "David cuestionó la autoridad de Natán porque no había escrito un libro.",
+            "La Biblia es la regla de fe y práctica del cristiano.",
+            "Los profetas no canónicos también fueron inspirados por Dios.",
+            "Los profetas no canónicos se colocaban por encima de las Escrituras."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Mediando la autoridad divina",
+        "summary": "La educación de Egipto no preparó a Moisés para ser mensajero de Dios; los años en el desierto, sí. A los 80, lleno de excusas, fue llamado, y Dios le dio a Aarón como portavoz.",
+        "body": [
+          "<p>A los 40 años, Moisés intentó liberar a los israelitas y fracasó, huyendo de Egipto (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"2\" data-v1=\"11\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Éx. 2:11-15</span><span class=\"vref-pop\"></span>). Tenía la mejor educación de Egipto, pero eso no lo preparó para ser mensajero de Dios. Pasó otros 40 años en el desierto como pastor, lejos de las distracciones, conociendo al Dios en cuyo nombre hablaría. A veces necesitamos el silencio del desierto antes de oír la voz del Señor.</p>",
+          "<p>A los 80 años, Dios lo llamó. Moisés se sintió incapaz (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"3\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Éx. 3:11</span><span class=\"vref-pop\"></span>), y Dios prometió estar con él (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"3\" data-v1=\"12\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Éx. 3:12</span><span class=\"vref-pop\"></span>). Aun así, dudó de que alguien lo escuchara (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">Éx. 4:1</span><span class=\"vref-pop\"></span>): recordaba que su derecho a liderar ya había sido cuestionado (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"2\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Éx. 2:14</span><span class=\"vref-pop\"></span>). Después de que todas sus excusas fueron respondidas, todavía pidió que Dios enviara a otra persona (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"4\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Éx. 4:13</span><span class=\"vref-pop\"></span>), y el Señor lo reprendió con firmeza (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"4\" data-v1=\"14\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Éx. 4:14-17</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Moisés representaría a Dios, y Aarón sería su portavoz (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"4\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Éx. 4:16</span><span class=\"vref-pop\"></span>), una especie de “profeta” de Moisés (<span class=\"vref\" data-book=\"EXO\" data-chapter=\"7\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Éx. 7:1, 2</span><span class=\"vref-pop\"></span>). Así como Moisés le pasaba a Aarón los mensajes para el faraón, Dios les pasa a los profetas los mensajes para Su pueblo, y los ayuda a encontrar la mejor forma de comunicarlos.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué te ha llamado Dios a hacer por Él a lo largo de tu vida? ¿Cuál es la mejor forma de prepararte?",
+          "¿Qué “desierto” de tu vida puede estar preparándote para oír mejor a Dios?",
+          "¿Cuál es tu excusa favorita para no aceptar un llamado de Dios?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuántos años tenía Moisés cuando Dios lo llamó a ser Su portavoz?",
+              "opts": [
+                "40 años",
+                "80 años",
+                "20 años",
+                "120 años"
+              ]
+            },
+            {
+              "text": "¿A quién le fue dado a Moisés como portavoz?",
+              "opts": [
+                "Josué",
+                "Jetro",
+                "Aarón",
+                "Caleb"
+              ]
+            },
+            {
+              "text": "¿Qué hacía Moisés durante los 40 años en el desierto?",
+              "opts": [
+                "Era soldado del faraón",
+                "Construía pirámides",
+                "Era sacerdote en Egipto",
+                "Era pastor de ovejas"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿la educación en Egipto preparó a Moisés para ser mensajero de Dios?",
+              "opts": [
+                "No",
+                "Sí, completamente",
+                "Sí, más que el desierto",
+                "Solo para hablar con el faraón"
+              ]
+            },
+            {
+              "text": "¿Qué pidió Moisés después de que todas sus excusas fueron respondidas?",
+              "opts": [
+                "Que Dios mandara un ángel con él",
+                "Que Dios enviara a otra persona",
+                "Que el faraón muriera",
+                "Que Aarón fuera el líder"
+              ]
+            },
+            {
+              "text": "¿Cómo reaccionó Dios ante la resistencia final de Moisés?",
+              "opts": [
+                "Desistió de él",
+                "Escogió a otro líder",
+                "Habló con más firmeza y lo reprendió",
+                "Lo mandó solo de vuelta a Egipto"
+              ]
+            },
+            {
+              "text": "Según Éxodo 3:12, ¿qué le prometió Dios a Moisés?",
+              "opts": [
+                "Riquezas en Egipto",
+                "Una vida larga sin dificultades",
+                "Un ejército visible de ángeles",
+                "Estar con él"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Moisés pidiendo que Dios enviara a otra persona?",
+              "opts": [
+                "Éxodo 4:13",
+                "Éxodo 3:5",
+                "Éxodo 14:13",
+                "Éxodo 20:19"
+              ]
+            },
+            {
+              "text": "Según Éxodo 7:1 y 2, ¿qué papel tendría Aarón?",
+              "opts": [
+                "El de rey de Israel",
+                "El de “profeta” de Moisés, hablando en su lugar",
+                "El de juez de Egipto",
+                "El de escriba del faraón"
+              ]
+            },
+            {
+              "text": "¿Qué texto narra el primer intento fallido de Moisés y su huida de Egipto?",
+              "opts": [
+                "Éxodo 12:29-32",
+                "Éxodo 16:1-4",
+                "Éxodo 2:11-15",
+                "Éxodo 32:1-6"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Moisés recibió la mejor educación de Egipto.",
+            "Dios trató con paciencia los temores de Moisés.",
+            "Moisés aceptó el llamado de Dios en la primera conversación, sin dudar.",
+            "Aarón hablaría en nombre de Dios directamente al pueblo, sin pasar por Moisés."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Autoridad organizacional",
+        "summary": "Dios usó profetas para organizar a Israel y guiarlo en la guerra, el culto y el gobierno. En el Nuevo Testamento, el don de profecía ayudó a la iglesia a estructurarse, protegerse y avanzar en la misión.",
+        "body": [
+          "<p>Dios usa profetas para organizar a Su pueblo y llevarlo a la acción: por medio de Moisés, liberó a Israel y formó una nación (<span class=\"vref\" data-book=\"HOS\" data-chapter=\"12\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Ose. 12:13</span><span class=\"vref-pop\"></span>). En guerras y crisis, los profetas traían dirección y esperanza (<span class=\"vref\" data-book=\"JDG\" data-chapter=\"4\" data-v1=\"4\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Juec. 4:4-8</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2CH\" data-chapter=\"20\" data-v1=\"14\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">2 Crón. 20:14-20</span><span class=\"vref-pop\"></span>). También recibían instrucciones sobre el culto (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"29\" data-v1=\"25\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">2 Crón. 29:25-29</span><span class=\"vref-pop\"></span>) y sobre el gobierno de la nación (<span class=\"vref\" data-book=\"DEU\" data-chapter=\"1\" data-v1=\"9\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Deut. 1:9-16</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>En la iglesia del Nuevo Testamento, la situación era desafiante: Jesús había vuelto al cielo, estaba la orden de predicar a toda criatura (<span class=\"vref\" data-book=\"MRK\" data-chapter=\"16\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Mar. 16:15</span><span class=\"vref-pop\"></span>), pero no había una estructura definida. La iglesia enfrentó cuestiones de organización, misión, falsas enseñanzas e inmoralidad, y el don de profecía fue crucial para su protección (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"13\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Hech. 13:1, 2</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"1CO\" data-chapter=\"5\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">1 Cor. 5:1-5</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Cuando algunos se sintieron desatendidos y la división amenazó la unidad, Dios guió la creación de nuevas funciones (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"6\" data-v1=\"1\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Hech. 6:1-7</span><span class=\"vref-pop\"></span>). Y, al surgir nuevas comunidades, animó una organización sólida en cada congregación (<span class=\"vref\" data-book=\"TIT\" data-chapter=\"1\" data-v1=\"5\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Tito 1:5</span><span class=\"vref-pop\"></span>). Es difícil imaginar cómo habría comenzado la iglesia sin este don.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Algunas personas tienen reservas sobre la religión organizada. ¿Cuáles son las ventajas de formar parte de una iglesia organizada?",
+          "¿Cómo puede el episodio de Hechos 6 inspirar la resolución de conflictos en tu iglesia?",
+          "¿Qué función podrías asumir para ayudar a la misión de tu comunidad?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Por medio de qué profeta liberó Dios a Israel de Egipto, según Oseas 12:13?",
+              "opts": [
+                "Samuel",
+                "Elías",
+                "Moisés",
+                "Natán"
+              ]
+            },
+            {
+              "text": "¿Qué orden dio Jesús antes de volver al cielo, según Marcos 16:15?",
+              "opts": [
+                "Construir un templo",
+                "Esperar en silencio",
+                "Volver a Galilea a pescar",
+                "Predicar el evangelio a toda criatura"
+              ]
+            },
+            {
+              "text": "¿En qué áreas recibían instrucciones los profetas en Israel, según la lección?",
+              "opts": [
+                "Guerra, culto y gobierno de la nación",
+                "Solo en la agricultura",
+                "Solo en el comercio",
+                "Solo en las bodas reales"
+              ]
+            },
+            {
+              "text": "¿Qué desafío enfrentaba la iglesia del Nuevo Testamento al comienzo?",
+              "opts": [
+                "Tener demasiados líderes",
+                "No tener una estructura organizacional definida",
+                "Tener demasiados templos",
+                "No tener misión"
+              ]
+            },
+            {
+              "text": "¿Qué ocurrió en Hechos 6:1-7 cuando la división amenazó a la iglesia?",
+              "opts": [
+                "La iglesia se dividió en dos",
+                "Los apóstoles desistieron",
+                "Dios guió la creación de nuevas funciones",
+                "Los descontentos fueron expulsados"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál fue el papel del don de profecía en la iglesia apostólica?",
+              "opts": [
+                "Ninguno",
+                "Solo decorativo",
+                "Solo para predecir el futuro",
+                "Crucial para su supervivencia y protección"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Pablo orientando a Tito a organizar las iglesias en Creta?",
+              "opts": [
+                "Tito 1:5",
+                "Tito 2:11",
+                "Tito 3:5",
+                "Filemón 1:4"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Débora trayendo dirección en tiempo de guerra?",
+              "opts": [
+                "Jueces 6:11-16",
+                "Jueces 4:4-8",
+                "Jueces 13:1-5",
+                "Jueces 16:4-9"
+              ]
+            },
+            {
+              "text": "¿Qué texto cita la lección sobre los profetas y la organización del gobierno de la nación?",
+              "opts": [
+                "Deuteronomio 8:3",
+                "Deuteronomio 30:19",
+                "Deuteronomio 1:9-16",
+                "Deuteronomio 6:4-9"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra el don profético ayudando a enfrentar la inmoralidad en la iglesia?",
+              "opts": [
+                "1 Corintios 13:1-3",
+                "1 Corintios 15:51-55",
+                "1 Corintios 1:10-13",
+                "1 Corintios 5:1-5"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Ningún área de la vida de Israel recibía dirección de los profetas.",
+            "Los profetas ayudaron a organizar al pueblo de Dios.",
+            "En Hechos 6 se crearon nuevas funciones para preservar la unidad.",
+            "La iglesia del Nuevo Testamento comenzó con una estructura organizacional completa."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Portavoces de Dios",
+        "summary": "Los gobiernos y las empresas tienen portavoces; Dios también. La Biblia menciona libros de profetas que no llegaron hasta nosotros y grandes profetas que no dejaron libros: señal de que Dios usa más mensajeros que los que están en el canon.",
+        "body": [
+          "<p>Los gobiernos tienen representantes, las empresas tienen voceros, y los líderes hablan en nombre de instituciones. Cuanto mayor es la responsabilidad del mensaje, mayor es la necesidad de confianza en quien lo comunica. Dios también escogió portavoces que, más que comunicadores, representaban Su autoridad ante la nación.</p>",
+          "<p>La Biblia menciona libros que no llegaron hasta nosotros: el libro de Jaser (<span class=\"vref\" data-book=\"JOS\" data-chapter=\"10\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Jos. 10:13</span><span class=\"vref-pop\"></span>), los registros de los profetas Samuel, Natán y Gad (<span class=\"vref\" data-book=\"1CH\" data-chapter=\"29\" data-v1=\"29\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">1 Crón. 29:29</span><span class=\"vref-pop\"></span>), la profecía de Ahías y las visiones de Iddo (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"9\" data-v1=\"29\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">2 Crón. 9:29</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2CH\" data-chapter=\"12\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">2 Crón. 12:15</span><span class=\"vref-pop\"></span>). Hubo profetas cuyos escritos existieron, pero no fueron incluidos en la Biblia.</p>",
+          "<p>Y hubo grandes profetas sin libro conocido: Jesús dijo que, entre los nacidos de mujer, no había nadie mayor que Juan el Bautista (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"7\" data-v1=\"28\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">Luc. 7:28</span><span class=\"vref-pop\"></span>). Esto muestra que Dios sigue usando instrumentos para fortalecer y conducir a Su pueblo, además de los que escribieron las Escrituras.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué hace que alguien sea digno de confianza para hablar en nombre de otro?",
+          "¿Qué enseñan los libros perdidos mencionados en la Biblia sobre la forma en que Dios actúa?",
+          "¿Por qué Jesús llamó a Juan el Bautista el mayor, si no escribió ningún libro?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, cuanto mayor es la responsabilidad del mensaje, ¿mayor debe ser qué?",
+              "opts": [
+                "El volumen de la voz",
+                "El número de páginas",
+                "La distancia del pueblo",
+                "La confianza en quien lo comunica"
+              ]
+            },
+            {
+              "text": "¿A quién dijo Jesús que era el mayor entre los nacidos de mujer (Luc. 7:28)?",
+              "opts": [
+                "Juan el Bautista",
+                "Moisés",
+                "Elías",
+                "David"
+              ]
+            },
+            {
+              "text": "¿Qué muestra la lección con los libros citados en la Biblia que no llegaron hasta nosotros?",
+              "opts": [
+                "Que la Biblia está incompleta y equivocada",
+                "Que hubo escritos proféticos no incluidos en la Biblia",
+                "Que esos libros eran falsos",
+                "Que solo existían libros bíblicos"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos cita la lección como libro mencionado en Josué 10:13?",
+              "opts": [
+                "El libro de Enoc",
+                "El libro de los Macabeos",
+                "El libro de Jaser",
+                "El libro de Tobías"
+              ]
+            },
+            {
+              "text": "¿Qué profetas aparecen en 1 Crónicas 29:29 como autores de registros?",
+              "opts": [
+                "Elías, Eliseo y Jonás",
+                "Isaías, Jeremías y Ezequiel",
+                "Daniel, Esdras y Nehemías",
+                "Samuel, Natán y Gad"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿los portavoces de Dios eran solo comunicadores?",
+              "opts": [
+                "No; representaban la autoridad divina ante la nación",
+                "Sí, solo repetían frases",
+                "Sí, eran funcionarios del rey",
+                "No; eran reyes"
+              ]
+            },
+            {
+              "text": "¿Qué texto menciona la profecía de Ahías y las visiones de Iddo?",
+              "opts": [
+                "2 Crónicas 7:14",
+                "2 Crónicas 9:29",
+                "1 Reyes 8:27",
+                "2 Reyes 2:11"
+              ]
+            },
+            {
+              "text": "En Juan 8:56, Jesús habla de la alegría de quién al ver Su día?",
+              "opts": [
+                "Moisés",
+                "Isaías",
+                "Abraham",
+                "David"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos textos también menciona escritos de profetas fuera de la Biblia?",
+              "opts": [
+                "2 Crónicas 20:20",
+                "2 Crónicas 36:23",
+                "1 Crónicas 16:34",
+                "2 Crónicas 12:15"
+              ]
+            },
+            {
+              "text": "¿Qué palabra clave resume el tema de esta semana en la lección?",
+              "opts": [
+                "Autoridad",
+                "Llamado",
+                "Profetisas",
+                "Comunicación"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "La Biblia menciona libros que no llegaron hasta nosotros.",
+            "Todo profeta verdadero escribió un libro de la Biblia.",
+            "Según la lección, Dios dejó de usar instrumentos para guiar a Su pueblo.",
+            "Juan el Bautista fue un gran profeta, aun sin libro conocido."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "La autoridad divina de Cristo",
+        "summary": "Jesús tiene toda la autoridad en el cielo y en la Tierra, como Creador y Salvador. Perdonaba pecados, calmaba tempestades y ofrecía vida eterna, y nuestra apertura a Él se nota en cómo recibimos a quienes Él envía.",
+        "body": [
+          "<p>Los sacerdotes exigieron saber quién le había dado autoridad a Jesús (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"21\" data-v1=\"23\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Mat. 21:23-27</span><span class=\"vref-pop\"></span>). Él respondió preguntando sobre la autoridad de Juan el Bautista; al negarse a responder, negaron el poder de Dios que había acreditado a Juan y rechazaron la autoridad de Cristo. Toda autoridad pertenece a Jesús, como Creador (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Juan 1:3</span><span class=\"vref-pop\"></span>) y Salvador (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"3\" data-v1=\"24\" data-v2=\"24\" onclick=\"toggleVerseLive(this)\">Rom. 3:24</span><span class=\"vref-pop\"></span>), y Él enseñaba “como quien tiene autoridad” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"7\" data-v1=\"29\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">Mat. 7:29</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Los evangelios muestran esa autoridad: perdonaba pecados (<span class=\"vref\" data-book=\"MRK\" data-chapter=\"2\" data-v1=\"10\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Mar. 2:10, 11</span><span class=\"vref-pop\"></span>), expulsaba demonios (<span class=\"vref\" data-book=\"MRK\" data-chapter=\"3\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Mar. 3:15</span><span class=\"vref-pop\"></span>), conocía los pensamientos (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"2\" data-v1=\"24\" data-v2=\"25\" onclick=\"toggleVerseLive(this)\">Juan 2:24, 25</span><span class=\"vref-pop\"></span>), calmaba tempestades (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"8\" data-v1=\"22\" data-v2=\"25\" onclick=\"toggleVerseLive(this)\">Luc. 8:22-25</span><span class=\"vref-pop\"></span>), ofrecía vida eterna (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"10\" data-v1=\"28\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">Juan 10:28</span><span class=\"vref-pop\"></span>) y tenía autoridad para juzgar (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"5\" data-v1=\"25\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">Juan 5:25-29</span><span class=\"vref-pop\"></span>). Al mismo tiempo, dependía totalmente del Padre (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"5\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Juan 5:19</span><span class=\"vref-pop\"></span>), recurría a las Escrituras y delegaba autoridad a Sus discípulos (<span class=\"vref\" data-book=\"MRK\" data-chapter=\"6\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Mar. 6:7</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Su autoridad es completa, universal y eterna: “Toda potestad me es dada en el cielo y en la tierra” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"28\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Mat. 28:18</span><span class=\"vref-pop\"></span>). Quien rechaza a Cristo rechaza al Padre. Y nuestra apertura al Salvador se nota en la manera en que recibimos a quienes Él nos envía (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"10\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Luc. 10:16</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Aun con tantas evidencias, algunas personas rechazaron a Jesús. ¿Cómo evitar caer en la misma trampa?",
+          "¿En qué área de tu vida todavía no has dejado que Jesús ejerza autoridad?",
+          "¿Cómo recibes a las personas que Dios envía para aconsejarte?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según Mateo 28:18, ¿cuánta autoridad le fue dada a Jesús?",
+              "opts": [
+                "Toda la potestad en el cielo y en la tierra",
+                "Solo autoridad sobre Israel",
+                "Autoridad solo para enseñar",
+                "Ninguna autoridad"
+              ]
+            },
+            {
+              "text": "¿Quiénes cuestionaron la autoridad de Jesús en Mateo 21:23?",
+              "opts": [
+                "Los discípulos",
+                "Los sacerdotes",
+                "Los soldados romanos",
+                "Los niños del templo"
+              ]
+            },
+            {
+              "text": "¿Sobre la autoridad de quién preguntó Jesús a los sacerdotes?",
+              "opts": [
+                "De Moisés",
+                "De Pilato",
+                "De Juan el Bautista",
+                "De Herodes"
+              ]
+            },
+            {
+              "text": "¿Cuál de estas señales de la autoridad de Jesús cita la lección?",
+              "opts": [
+                "Construir el templo",
+                "Coronar reyes",
+                "Escribir un libro",
+                "Calmar la tempestad"
+              ]
+            },
+            {
+              "text": "Mientras estuvo en la Tierra, ¿cómo se relacionaba Jesús con el Padre, según la lección?",
+              "opts": [
+                "Dependía totalmente de Él",
+                "Actuaba de forma independiente",
+                "Discrepaba de Él",
+                "Ignoraba las Escrituras"
+              ]
+            },
+            {
+              "text": "Según la lección, quien rechaza a Cristo rechaza también ¿a quién?",
+              "opts": [
+                "Solo a los apóstoles",
+                "Al Padre",
+                "Solo a la iglesia",
+                "A nadie más"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Jesús perdonando pecados como señal de Su autoridad?",
+              "opts": [
+                "Marcos 10:45",
+                "Marcos 16:15",
+                "Marcos 2:10, 11",
+                "Marcos 1:1"
+              ]
+            },
+            {
+              "text": "Según Lucas 10:16, quien rechaza a los enviados de Jesús rechaza ¿a quién?",
+              "opts": [
+                "Solo a los discípulos",
+                "Solo a los profetas antiguos",
+                "A nadie",
+                "Al propio Jesús"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Jesús delegando autoridad a los discípulos?",
+              "opts": [
+                "Marcos 6:7",
+                "Marcos 4:39",
+                "Marcos 12:30",
+                "Marcos 14:22"
+              ]
+            },
+            {
+              "text": "Según Juan 5:19, ¿qué hace el Hijo por sí mismo?",
+              "opts": [
+                "Todo lo que quiere",
+                "Nada; hace lo que ve hacer al Padre",
+                "Solo milagros",
+                "Solo juicios"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Los sacerdotes respondieron con claridad la pregunta de Jesús sobre Juan el Bautista.",
+            "La autoridad de Jesús fue producida por esfuerzo humano.",
+            "La autoridad de Cristo es completa, universal y eterna.",
+            "Jesús podía delegar autoridad a Sus discípulos."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Hablando con autoridad",
+        "summary": "Hay profetas canónicos, no canónicos y posbíblicos, todos igualmente inspirados. Elena de White es una profetisa posbíblica: sus escritos no son un añadido a la Biblia, pero hablan con autoridad y relevancia para hoy.",
+        "body": [
+          "<p>Los profetas hablan con autoridad porque Dios los escogió. Hay tres grupos: canónicos (cuyos escritos están en la Biblia), no canónicos (que no escribieron libros de la Biblia) y posbíblicos no canónicos (que surgieron después del Nuevo Testamento). Todos fueron igualmente inspirados. Elena de White pertenece al tercer grupo.</p>",
+          "<p>Los adventistas no consideran sus escritos un añadido a la Biblia ni los ponen al mismo nivel, pero reconocen en ellos autoridad. Ella misma escribió que no escribía ni un solo artículo en la revista que expresara meramente sus propias ideas (Mensajes selectos, t. 1). Sus temas: la realidad del pecado, nuestra necesidad de Jesús y el gran conflicto entre el bien y el mal, desde la caída de Lucifer hasta el fin.</p>",
+          "<p>Advirtió sobre la unión entre la iglesia y el Estado, defendió la libertad religiosa y exaltó la ley de Dios. Nuestra comprensión de la marca de la bestia no se basa en ella, pero sus palabras amplían el entendimiento. Sus consejos sobre salud, educación, familia y espiritualidad han ayudado a muchas personas a cambiar de vida.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Existen profetas que escribieron libros no incluidos en la Biblia? (1 Crón. 29:29; 2 Crón. 9:29)",
+          "¿Tenían menos autoridad los profetas que no escribieron libros de la Biblia? (Luc. 7:28)",
+          "¿De qué maneras deben los escritos proféticos seguir orientando hoy la misión de la iglesia? (Amós 3:7; 2 Crón. 20:20)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿A qué grupo de profetas pertenece Elena de White?",
+              "opts": [
+                "Canónicos",
+                "Posbíblicos no canónicos",
+                "No canónicos del Antiguo Testamento",
+                "Apóstoles"
+              ]
+            },
+            {
+              "text": "¿Consideran los adventistas los escritos de Elena de White un añadido a la Biblia?",
+              "opts": [
+                "Sí",
+                "Solo los libros de salud",
+                "No",
+                "Solo las visiones"
+              ]
+            },
+            {
+              "text": "¿Cuántos grupos de profetas describe la lección?",
+              "opts": [
+                "Dos",
+                "Cinco",
+                "Doce",
+                "Tres"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos es un tema destacado en los escritos de Elena de White?",
+              "opts": [
+                "El gran conflicto entre el bien y el mal",
+                "La astrología",
+                "La política partidaria",
+                "El comercio internacional"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿nuestra comprensión de la marca de la bestia se basa en los escritos de Elena de White?",
+              "opts": [
+                "Sí, exclusivamente",
+                "No, pero sus palabras amplían la comprensión",
+                "Sí, más que en la Biblia",
+                "Ella nunca escribió sobre el tema"
+              ]
+            },
+            {
+              "text": "¿Sobre qué peligro advirtió Elena de White, según la lección?",
+              "opts": [
+                "El uso de la imprenta",
+                "La lectura de la Biblia",
+                "La unión entre la iglesia y el Estado",
+                "La organización de la iglesia"
+              ]
+            },
+            {
+              "text": "¿De qué obra es la afirmación de que no escribía artículos que expresaran meramente sus propias ideas?",
+              "opts": [
+                "El conflicto de los siglos",
+                "El camino a Cristo",
+                "La educación",
+                "Mensajes selectos, t. 1"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿de qué modo fueron inspirados los tres grupos de profetas?",
+              "opts": [
+                "Igualmente",
+                "Los canónicos más que los demás",
+                "Los posbíblicos menos que los demás",
+                "Ninguno fue inspirado"
+              ]
+            },
+            {
+              "text": "¿Dónde comienza el conflicto entre el bien y el mal descrito en los escritos de Elena de White?",
+              "opts": [
+                "En el diluvio",
+                "En la caída de Lucifer en el cielo",
+                "En la torre de Babel",
+                "En el exilio babilónico"
+              ]
+            },
+            {
+              "text": "¿En qué áreas prácticas han ayudado los consejos de Elena de White a muchas personas?",
+              "opts": [
+                "Deportes y competencias",
+                "Moda y entretenimiento",
+                "Salud, educación, familia y espiritualidad",
+                "Finanzas e inversiones"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Los profetas canónicos, no canónicos y posbíblicos fueron igualmente inspirados.",
+            "Los adventistas ponen los escritos de Elena de White al mismo nivel que la Biblia.",
+            "Los escritos de Elena de White no tienen relevancia para nuestros días.",
+            "Elena de White destacó la importancia de la libertad religiosa."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Dios todavía habla",
+        "summary": "Oír la voz de Dios también se aprende, como le pasó a Samuel. A veces Dios no está callado: somos nosotros los que estamos demasiado ocupados, cansados o distraídos.",
+        "body": [
+          "<p>Durante dos meses, la autora se despertó casi todas las madrugadas alrededor de las 2:19. Después de orar preguntando qué quería mostrarle Dios, percibió algo sencillo y profundo: su comunión con Él se estaba volviendo superficial, apresurada y acomodada.</p>",
+          "<p>Samuel servía en el templo, pero todavía no reconocía la voz de Dios: al oír su nombre, pensó que era Elí. Dios llamó más de una vez, y él necesitó orientación para entender. Su respuesta se convirtió en una de las oraciones más sencillas e importantes de la Biblia: “Habla, porque tu siervo oye” (<span class=\"vref\" data-book=\"1SA\" data-chapter=\"3\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">1 Sam. 3:10</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Dios puede hablar por medio de la Biblia, una oración, un consejo, una inquietud o una situación que se repite. El problema no siempre es que Dios esté callado; a veces estamos demasiado ocupados, cansados o distraídos. Una vida espiritual sana no se construye solo con las sobras de nuestro tiempo.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿En qué momentos de mi rutina me cuesta más detenerme a escuchar la voz de Dios?",
+          "¿Qué puede estar volviendo mi comunión con Dios superficial, automática o apresurada?",
+          "¿Qué actitud práctica puedo tomar esta semana para responder mejor al llamado de Dios?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Momentos decisivos",
+    "keyword": "DECISIÓN",
+    "days": [
+      {
+        "id": "dom",
+        "title": "Revelando Sus planes",
+        "summary": "En momentos decisivos de la historia, Dios intervino por medio de profetas para el bien de Su pueblo. El diluvio muestra juicio y gracia al mismo tiempo, y después de Noé, Dios siguió enviando mensajeros en cada época, hasta los últimos días.",
+        "body": [
+          "<p>Desde la caída, los seres humanos tienden a elegir los placeres pasajeros del pecado. Dios conoce esa realidad y, aun así, nos ama. Por eso, en momentos decisivos de la historia, intervino de manera especial por medio del ministerio profético (<span class=\"vref\" data-book=\"AMO\" data-chapter=\"3\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Amós 3:7</span><span class=\"vref-pop\"></span>). Pero cuando Sus iniciativas son rechazadas una y otra vez, también anuncia el juicio.</p>",
+          "<p>El diluvio muestra a la vez la profundidad de la depravación humana y la grandeza de la gracia de Dios. El Señor le reveló a Noé la llegada del diluvio, salvó a quienes entraron en el arca e hizo un pacto con toda la creación, prometiendo no volver a destruir el mundo con agua (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"9\" data-v1=\"8\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Gén. 9:8-17</span><span class=\"vref-pop\"></span>). Cada arcoíris lleva esa promesa.</p>",
+          "<p>Después de Noé, Dios siguió enviando profetas: en la época de los jueces, de los reyes, del exilio babilónico y del Nuevo Testamento. En los últimos días, los profetas vuelven a tener un papel importante (<span class=\"vref\" data-book=\"JOL\" data-chapter=\"2\" data-v1=\"28\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Joel 2:28-31</span><span class=\"vref-pop\"></span>). Esta semana veremos esos momentos cruciales, incluso cómo el ministerio de Elena de White fue decisivo para el movimiento adventista.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué Dios avisa antes de actuar, en lugar de simplemente ejecutar el juicio?",
+          "¿Qué puede recordarte el arcoíris sobre el carácter de Dios?",
+          "¿En qué “momento decisivo” de tu vida percibiste a Dios guiándote?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Jueces 4; 5",
+                "Éxodo 3; 4",
+                "Josué 1; 2",
+                "Rut 1; 2"
+              ]
+            },
+            {
+              "text": "¿Qué señal recuerda la promesa de Dios de no volver a destruir el mundo con agua?",
+              "opts": [
+                "La estrella de la mañana",
+                "El arcoíris",
+                "La luna llena",
+                "La paloma"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué revela el diluvio al mismo tiempo?",
+              "opts": [
+                "Solo la ira de Dios",
+                "Solo la fuerza de la naturaleza",
+                "La depravación humana y la grandeza de la gracia de Dios",
+                "Que Dios abandonó a la humanidad"
+              ]
+            },
+            {
+              "text": "¿Qué hace Dios cuando Sus iniciativas son rechazadas constantemente?",
+              "opts": [
+                "Deja de advertir",
+                "Cambia Su ley",
+                "Deja de amar al ser humano",
+                "Anuncia la llegada del juicio"
+              ]
+            },
+            {
+              "text": "¿Con quién hizo Dios el pacto después del diluvio?",
+              "opts": [
+                "Con Noé y con toda la creación",
+                "Solo con Noé",
+                "Solo con los hijos de Noé",
+                "Solo con los animales"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿en qué tiempo vuelven los profetas a tener un papel importante?",
+              "opts": [
+                "Solo antes del diluvio",
+                "En los últimos días",
+                "Solo en la época de los reyes",
+                "En ningún tiempo después de la Biblia"
+              ]
+            },
+            {
+              "text": "¿Qué texto dice que Dios no hace nada sin revelar Su secreto a los profetas?",
+              "opts": [
+                "Amós 5:24",
+                "Oseas 6:6",
+                "Amós 3:7",
+                "Miqueas 6:8"
+              ]
+            },
+            {
+              "text": "¿Dónde está el pacto de Dios con Noé y toda la creación?",
+              "opts": [
+                "Génesis 12:1-3",
+                "Génesis 6:1-4",
+                "Génesis 15:1-6",
+                "Génesis 9:8-17"
+              ]
+            },
+            {
+              "text": "¿Qué texto usa la lección para los profetas de los últimos días?",
+              "opts": [
+                "Joel 2:28-31",
+                "Joel 1:4",
+                "Malaquías 3:10",
+                "Zacarías 4:6"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de Elena G. de White se indica esta semana?",
+              "opts": [
+                "Patriarcas y profetas, capítulo 1",
+                "La historia de la redención, capítulo 8: “El diluvio”",
+                "El conflicto de los siglos, capítulo 1",
+                "El camino a Cristo, capítulo 1"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Dios intervino por medio de profetas en momentos decisivos de la historia.",
+            "Dios también envió profetas durante el exilio babilónico.",
+            "El diluvio muestra solo el juicio, sin ninguna gracia.",
+            "Después del diluvio, Dios dejó de enviar profetas."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "En la época de los jueces",
+        "summary": "Cuando Israel se apartó del pacto, Dios levantó jueces y profetas. Débora, profetisa y jueza, transmitió el mensaje con convicción y dio la orden de avanzar, y la victoria llevó al pueblo a glorificar a Dios.",
+        "body": [
+          "<p>Dios prometió bendecir a Israel en Canaán si era fiel, y advirtió sobre las consecuencias de quebrantar el pacto (Deut. 27–30). Después de la muerte de Josué, el pueblo se apartó, fue oprimido por sus vecinos y clamó por ayuda. Entonces “Jehová levantó jueces que los librasen de mano de los que les despojaban” (<span class=\"vref\" data-book=\"JDG\" data-chapter=\"2\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Juec. 2:16</span><span class=\"vref-pop\"></span>), y también envió profetas para renovar el pacto.</p>",
+          "<p>En ese escenario, Dios llamó a Débora como profetisa y jueza. Ella transmitió el mensaje a Barac, el comandante, y dio la orden de avanzar: “Levántate, porque este es el día en que Jehová ha entregado a Sísara en tus manos” (<span class=\"vref\" data-book=\"JDG\" data-chapter=\"4\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Juec. 4:14</span><span class=\"vref-pop\"></span>). La habilidad de Barac fue importante, pero no fue eso lo que garantizó la victoria.</p>",
+          "<p>Débora no cuestionó si habría soldados suficientes ni dijo que Israel era demasiado débil. Transmitió el mensaje con convicción y animó a Barac a confiar en Dios. Después de la victoria, la jueza y el comandante llevaron al pueblo a glorificar al Señor (<span class=\"vref\" data-book=\"JDG\" data-chapter=\"5\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Juec. 5:1-3</span><span class=\"vref-pop\"></span>): esa es la esencia del verdadero liderazgo espiritual.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo podemos aprender a confiar en Dios aun cuando la situación parece sin esperanza?",
+          "¿Qué enseña la actitud de Débora sobre transmitir un mensaje con convicción?",
+          "Después de una victoria, ¿a quién sueles darle el crédito?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Quién fue profetisa y jueza en Israel en esta historia?",
+              "opts": [
+                "María",
+                "Débora",
+                "Hulda",
+                "Ana"
+              ]
+            },
+            {
+              "text": "¿Quién era el comandante del ejército de Israel?",
+              "opts": [
+                "Gedeón",
+                "Sansón",
+                "Barac",
+                "Jefté"
+              ]
+            },
+            {
+              "text": "¿A quién entregó Dios en manos de Barac, según Jueces 4:14?",
+              "opts": [
+                "A Goliat",
+                "Al faraón",
+                "A Senaquerib",
+                "A Sísara"
+              ]
+            },
+            {
+              "text": "¿Después de la muerte de quién se apartaron los israelitas del pacto?",
+              "opts": [
+                "De Josué",
+                "De Moisés",
+                "De Samuel",
+                "De David"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué garantizó la victoria de Israel?",
+              "opts": [
+                "La habilidad militar de Barac",
+                "La fe en la promesa de Dios",
+                "El tamaño del ejército",
+                "Las armas de hierro"
+              ]
+            },
+            {
+              "text": "¿Qué hicieron la jueza y el comandante después de la victoria?",
+              "opts": [
+                "Coronaron rey a Barac",
+                "Construyeron una estatua",
+                "Llevaron al pueblo a glorificar a Dios",
+                "Repartieron el botín entre ellos"
+              ]
+            },
+            {
+              "text": "¿Qué texto dice que Jehová levantó jueces para librar al pueblo?",
+              "opts": [
+                "Jueces 21:25",
+                "Jueces 6:12",
+                "Jueces 13:5",
+                "Jueces 2:16"
+              ]
+            },
+            {
+              "text": "¿En qué capítulos de Deuteronomio están las bendiciones y advertencias del pacto citadas en la lección?",
+              "opts": [
+                "Deuteronomio 27–30",
+                "Deuteronomio 1–3",
+                "Deuteronomio 6–8",
+                "Deuteronomio 32–34"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo registra la celebración de la victoria con Débora y Barac?",
+              "opts": [
+                "Jueces 7",
+                "Jueces 5",
+                "Jueces 11",
+                "Jueces 16"
+              ]
+            },
+            {
+              "text": "Según Jueces 4:14, ¿qué le preguntó Débora a Barac?",
+              "opts": [
+                "Cuántos soldados tenía",
+                "Si tenía carros de hierro",
+                "Si Jehová no había salido delante de él",
+                "Por qué había llegado tarde"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Débora argumentó que Israel era demasiado débil para vencer.",
+            "Débora actuó como profetisa y jueza en Israel.",
+            "Dios también envió profetas para animar la renovación del pacto.",
+            "La victoria fue garantizada por la habilidad militar de Barac."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "De los reyes al exilio",
+        "summary": "Con la monarquía, los profetas pasaron a aconsejar y reprender a los reyes. Elías enfrentó a Acab y a los profetas de Baal; después de él, Dios envió profeta tras profeta, hasta el exilio, y siguió hablando incluso allí.",
+        "body": [
+          "<p>Con el pedido de un rey, terminó el período de los jueces (<span class=\"vref\" data-book=\"1SA\" data-chapter=\"8\" data-v1=\"1\" data-v2=\"22\" onclick=\"toggleVerseLive(this)\">1 Sam. 8:1-22</span><span class=\"vref-pop\"></span>), y creció la necesidad de profetas para aconsejar, corregir y reprender al rey y al pueblo. En el reinado de Acab, Elías anunció que no habría lluvia porque Israel adoraba a Baal (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"18\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">1 Rey. 18:18</span><span class=\"vref-pop\"></span>). Acab intentó matarlo y, en el tercer año de la sequía, todavía lo culpó por la falta de lluvia (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"18\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">1 Rey. 18:17</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Elías convocó a Israel al enfrentamiento con los profetas de Baal en el Carmelo (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"18\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">1 Rey. 18:19</span><span class=\"vref-pop\"></span>). El fuego del cielo, unido al mensaje del profeta, llevó al pueblo al arrepentimiento (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"18\" data-v1=\"38\" data-v2=\"39\" onclick=\"toggleVerseLive(this)\">1 Rey. 18:38, 39</span><span class=\"vref-pop\"></span>). Después de él, Dios envió muchos profetas, pero Israel y Judá llegaron a ser comparados con Sodoma y Gomorra (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"1\" data-v1=\"9\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Isa. 1:9, 10</span><span class=\"vref-pop\"></span>): orgullosos, idólatras y opresores de los pobres (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"58\" data-v1=\"3\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Isa. 58:3-7</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Israel fue llevado por Asiria (<span class=\"vref\" data-book=\"2KI\" data-chapter=\"17\" data-v1=\"1\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">2 Rey. 17:1-6</span><span class=\"vref-pop\"></span>), y Judá por Babilonia (2 Rey. 24; 25). Aun en el exilio, Dios envió profetas como Ezequiel y Daniel para dar esperanza. Durante siglos, advertencia tras advertencia, intentó alcanzar a Su pueblo, como dijo Jesús: “¡Cuántas veces quise juntar a tus hijos […], y no quisiste!” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"23\" data-v1=\"37\" data-v2=\"37\" onclick=\"toggleVerseLive(this)\">Mat. 23:37</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo podemos permanecer fieles a Dios cuando la cultura que nos rodea está tan lejos de Él?",
+          "¿Por qué Acab culpó a Elías en lugar de reconocer su propio pecado?",
+          "¿Qué revela sobre Dios Su paciencia durante siglos?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué profeta envió Dios al rey Acab?",
+              "opts": [
+                "Isaías",
+                "Jeremías",
+                "Elías",
+                "Natán"
+              ]
+            },
+            {
+              "text": "¿A qué dios falso adoraba Israel en tiempos de Acab?",
+              "opts": [
+                "Dagón",
+                "Moloc",
+                "Marduk",
+                "Baal"
+              ]
+            },
+            {
+              "text": "¿Qué anunció Elías como juicio sobre Israel?",
+              "opts": [
+                "Que no habría lluvia",
+                "Que habría un diluvio",
+                "Que el sol se detendría",
+                "Que vendrían langostas"
+              ]
+            },
+            {
+              "text": "¿Qué llevó al pueblo al arrepentimiento en el enfrentamiento con los profetas de Baal?",
+              "opts": [
+                "Un terremoto",
+                "El fuego del cielo, unido al mensaje de Elías",
+                "La muerte de Acab",
+                "Una nube de langostas"
+              ]
+            },
+            {
+              "text": "¿Qué nación llevó cautivo a Israel (el reino del norte)?",
+              "opts": [
+                "Babilonia",
+                "Egipto",
+                "Asiria",
+                "Persia"
+              ]
+            },
+            {
+              "text": "¿Qué profetas envió Dios al pueblo durante el exilio, según la lección?",
+              "opts": [
+                "Elías y Eliseo",
+                "Amós y Oseas",
+                "Natán y Gad",
+                "Ezequiel y Daniel"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra el fin del período de los jueces con el pedido de un rey?",
+              "opts": [
+                "1 Samuel 8:1-22",
+                "1 Samuel 3:1-10",
+                "1 Samuel 17:1-11",
+                "2 Samuel 7:1-17"
+              ]
+            },
+            {
+              "text": "Según Isaías 1:9 y 10, ¿con qué ciudades comparó Dios a Su pueblo?",
+              "opts": [
+                "Nínive y Babilonia",
+                "Sodoma y Gomorra",
+                "Tiro y Sidón",
+                "Jericó y Hai"
+              ]
+            },
+            {
+              "text": "En Mateo 23:37, ¿con qué compara Jesús Su deseo de reunir a Jerusalén?",
+              "opts": [
+                "Con el pastor que busca a la oveja",
+                "Con el águila que enseña a sus crías",
+                "Con la gallina que junta a sus polluelos",
+                "Con la madre que amamanta a su hijo"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de Isaías cita la lección sobre la opresión de trabajadores, viudas y extranjeros?",
+              "opts": [
+                "Isaías 53",
+                "Isaías 40",
+                "Isaías 6",
+                "Isaías 58"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Con la monarquía creció la necesidad de profetas para aconsejar a los reyes.",
+            "Acab se arrepintió en cuanto oyó el mensaje de Elías.",
+            "Dios abandonó a Su pueblo durante el exilio.",
+            "Judá fue deportado a Babilonia."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Dios revela Sus secretos",
+        "summary": "En medio de tantas voces, Dios no se queda en silencio. Revela Sus secretos a los profetas porque quiere una relación cercana con Su pueblo, y sigue hablando en los últimos días.",
+        "body": [
+          "<p>Vivimos una época de exceso de información y escasez de dirección: influencers, algoritmos, tendencias y opiniones compiten por nuestra atención. En medio de ese ruido, la Biblia muestra que, en los momentos más decisivos, Dios no se quedó en silencio: envió profetas para advertir, consolar, corregir y llamar a Su pueblo de vuelta.</p>",
+          "<p>¿Por qué revela Dios Sus secretos? Por Su relación cercana con Su pueblo. No quiso ocultarle a Abraham lo que haría (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"18\" data-v1=\"17\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Gén. 18:17-19</span><span class=\"vref-pop\"></span>), conoce de cerca a Su pueblo (<span class=\"vref\" data-book=\"AMO\" data-chapter=\"3\" data-v1=\"2\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Amós 3:2, 7</span><span class=\"vref-pop\"></span>), y Jesús llama amigos a Sus seguidores, porque les dio a conocer todo lo que oyó del Padre (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"15\" data-v1=\"15\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Juan 15:15</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Los misterios que estaban ocultos ahora son revelados (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"16\" data-v1=\"25\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Rom. 16:25-27</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"EPH\" data-chapter=\"3\" data-v1=\"3\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Efe. 3:3-5</span><span class=\"vref-pop\"></span>), y cada generación debe contar a la siguiente las obras de Dios (<span class=\"vref\" data-book=\"PSA\" data-chapter=\"78\" data-v1=\"1\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Sal. 78:1-7</span><span class=\"vref-pop\"></span>). Esto no quedó solo en el pasado: en los últimos días, Dios vuelve a usar profetas para preparar a Su pueblo. En un mundo de voces confusas, sigue hablando con claridad.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué voces compiten más por tu atención hoy?",
+          "¿Qué significa para ti que Jesús te llame “amigo” (Juan 15:15)?",
+          "¿Cómo puedes transmitir lo que Dios ha revelado, como pide el Salmo 78?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿nuestra época está marcada por exceso de qué?",
+              "opts": [
+                "Silencio",
+                "Dirección",
+                "Profetas",
+                "Información"
+              ]
+            },
+            {
+              "text": "En Juan 15:15, ¿cómo llama Jesús a Sus seguidores?",
+              "opts": [
+                "Amigos",
+                "Siervos",
+                "Soldados",
+                "Extraños"
+              ]
+            },
+            {
+              "text": "¿Por qué revela Dios Sus secretos a los profetas, según la lección?",
+              "opts": [
+                "Para asustar a las personas",
+                "Porque desea una relación cercana con Su pueblo",
+                "Para mostrar que los profetas son superiores",
+                "Porque no le importa el pueblo"
+              ]
+            },
+            {
+              "text": "En los momentos decisivos de la historia, ¿cómo actuó Dios según la lección?",
+              "opts": [
+                "Se quedó en silencio",
+                "Dejó que el pueblo decidiera solo",
+                "Envió profetas; no se quedó en silencio",
+                "Habló solo con los reyes"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿en qué período vuelve Dios a usar profetas?",
+              "opts": [
+                "Solo en el Antiguo Testamento",
+                "Solo en la época de los jueces",
+                "Nunca más después de Juan",
+                "En los últimos días"
+              ]
+            },
+            {
+              "text": "¿Qué palabra clave propone la lección para el mapa mental de esta semana?",
+              "opts": [
+                "Instrucción",
+                "Autoridad",
+                "Llamado",
+                "Revelación"
+              ]
+            },
+            {
+              "text": "¿En qué texto decide Dios no ocultarle a Abraham lo que haría?",
+              "opts": [
+                "Génesis 22:1, 2",
+                "Génesis 18:17-19",
+                "Génesis 12:1-3",
+                "Génesis 15:1"
+              ]
+            },
+            {
+              "text": "¿Qué texto habla de los misterios de Dios revelados a los apóstoles y profetas?",
+              "opts": [
+                "Efesios 6:10-12",
+                "Efesios 2:8, 9",
+                "Efesios 3:3-5",
+                "Efesios 4:11-13"
+              ]
+            },
+            {
+              "text": "¿Qué salmo habla de contar a las próximas generaciones las obras de Dios?",
+              "opts": [
+                "Salmo 23:1-6",
+                "Salmo 51:1-10",
+                "Salmo 119:105",
+                "Salmo 78:1-7"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Romanos habla del misterio guardado en silencio y ahora revelado?",
+              "opts": [
+                "Romanos 16:25-27",
+                "Romanos 8:28",
+                "Romanos 12:1, 2",
+                "Romanos 3:23"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Según la lección, Dios dejó de hablar después de los tiempos bíblicos.",
+            "En los momentos decisivos, Dios permaneció en silencio.",
+            "Dios desea mantener una relación cercana con Sus hijos.",
+            "Jesús les contó a los discípulos lo que oyó del Padre."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "Un profeta para el tiempo de espera",
+        "summary": "En el Nuevo Testamento, Dios siguió usando el don de profecía. Juan, desterrado en Patmos, registró visiones sobre el regreso de Jesús y el fin, y nosotros también somos llamados a ser testigos mientras esperamos.",
+        "body": [
+          "<p>En la época del Nuevo Testamento, el Espíritu Santo inspiró los evangelios y las cartas de Pablo y de otros apóstoles. Juan escribió el último libro de la Biblia para comunicar profecías que Jesús le transmitió por medio de un ángel (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">Apoc. 1:1, 2</span><span class=\"vref-pop\"></span>), y recibió la orden de registrarlas para que los lectores fueran bendecidos (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Apoc. 1:3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Apoc. 1:11</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Apoc. 1:19</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Desterrado en la isla de Patmos, Juan escribió sobre el regreso de Jesús (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"7\" data-v2=\"7\" onclick=\"toggleVerseLive(this)\">Apoc. 1:7</span><span class=\"vref-pop\"></span>), los mensajes a las siete iglesias (Apoc. 2; 3), el juicio (<span class=\"vref\" data-book=\"REV\" data-chapter=\"14\" data-v1=\"6\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Apoc. 14:6-12</span><span class=\"vref-pop\"></span>), la segunda venida (<span class=\"vref\" data-book=\"REV\" data-chapter=\"14\" data-v1=\"14\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">Apoc. 14:14-16</span><span class=\"vref-pop\"></span>), el fin del mundo (<span class=\"vref\" data-book=\"REV\" data-chapter=\"20\" data-v1=\"1\" data-v2=\"15\" onclick=\"toggleVerseLive(this)\">Apoc. 20:1-15</span><span class=\"vref-pop\"></span>) y la re-creación de la Tierra (Apoc. 21; 22). Se presentó como “vuestro hermano, y copartícipe vuestro en la tribulación” (<span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"9\" data-v2=\"9\" onclick=\"toggleVerseLive(this)\">Apoc. 1:9</span><span class=\"vref-pop\"></span>): sabía lo que era sufrir por la Palabra.</p>",
+          "<p>Así como Juan el Bautista anunció la primera venida (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"6\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Juan 1:6-8</span><span class=\"vref-pop\"></span>), Juan fue testigo profético de los últimos días. También somos llamados a guardar “el testimonio de Jesús” (<span class=\"vref\" data-book=\"REV\" data-chapter=\"19\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Apoc. 19:10</span><span class=\"vref-pop\"></span>). Tal vez no recibamos visiones, pero podemos esperar con perseverancia, testificando de Cristo en nuestra vida y atentos a las señales de nuestra liberación.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Piensa en toda la luz que Dios nos ha dado. ¿Qué responsabilidades pone eso sobre nosotros?",
+          "¿Qué significa esperar el regreso de Jesús con perseverancia?",
+          "¿Cómo puedes ser testigo de Cristo esta semana?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Quién escribió el último libro de la Biblia?",
+              "opts": [
+                "El apóstol Juan",
+                "Pablo",
+                "Pedro",
+                "Lucas"
+              ]
+            },
+            {
+              "text": "¿Dónde estaba desterrado Juan cuando escribió el Apocalipsis?",
+              "opts": [
+                "En Roma",
+                "En la isla de Patmos",
+                "En Babilonia",
+                "En Creta"
+              ]
+            },
+            {
+              "text": "¿Por medio de quién transmitió Jesús las profecías a Juan (Apoc. 1:1)?",
+              "opts": [
+                "Por medio de Pablo",
+                "Por medio de un sueño de Pedro",
+                "Por medio de un ángel",
+                "Por medio de un libro antiguo"
+              ]
+            },
+            {
+              "text": "¿Con qué otro Juan compara la lección al apóstol?",
+              "opts": [
+                "Con Juan Marcos, el evangelista",
+                "Con Juan Wycliffe, el reformador",
+                "Con Juan Hus, el mártir",
+                "Con Juan el Bautista, que anunció la primera venida"
+              ]
+            },
+            {
+              "text": "¿Cómo se presentó Juan en Apocalipsis 1:9?",
+              "opts": [
+                "Como hermano y copartícipe en la tribulación",
+                "Como líder supremo de la iglesia",
+                "Como el mayor de los apóstoles",
+                "Como juez de las iglesias"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué podemos hacer aun sin recibir visiones como Juan?",
+              "opts": [
+                "Dejar de leer el Apocalipsis",
+                "Esperar con perseverancia y testificar de Cristo",
+                "Fijar la fecha del regreso de Jesús",
+                "Esperar en silencio sin contarle a nadie"
+              ]
+            },
+            {
+              "text": "¿Qué capítulos contienen los mensajes a las siete iglesias?",
+              "opts": [
+                "Apocalipsis 12; 13",
+                "Apocalipsis 4; 5",
+                "Apocalipsis 2; 3",
+                "Apocalipsis 21; 22"
+              ]
+            },
+            {
+              "text": "¿Qué texto habla del “testimonio de Jesús”?",
+              "opts": [
+                "Apocalipsis 3:20",
+                "Apocalipsis 7:9",
+                "Apocalipsis 22:20",
+                "Apocalipsis 19:10"
+              ]
+            },
+            {
+              "text": "¿Qué capítulos describen la re-creación de la Tierra?",
+              "opts": [
+                "Apocalipsis 21; 22",
+                "Apocalipsis 6; 7",
+                "Apocalipsis 16; 17",
+                "Apocalipsis 8; 9"
+              ]
+            },
+            {
+              "text": "¿Qué texto describe la segunda venida de Cristo como una cosecha, según la lección?",
+              "opts": [
+                "Apocalipsis 11:15-19",
+                "Apocalipsis 14:14-16",
+                "Apocalipsis 13:11-18",
+                "Apocalipsis 1:12-16"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El Espíritu Santo inspiró a los escritores de los evangelios.",
+            "Juan escribió el Apocalipsis viviendo en paz y sin persecución.",
+            "El Apocalipsis contiene solo mensajes de reprensión, sin ánimo.",
+            "Juan recibió la orden de escribir lo que veía."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "La voz profética",
+        "summary": "En momentos decisivos de la historia adventista, Dios usó a Elena de White: para consolar tras el Gran Chasco, organizar la iglesia en 1863, promover la reforma pro salud y la educación y reequilibrar la teología de la salvación.",
+        "body": [
+          "<p>Si Dios siempre habló por medio de profetas en momentos cruciales, es lógico esperar que también hable en el tiempo del fin. Después del Gran Chasco, el 22 de octubre de 1844, llamó a Elena Harmon; su primera visión tenía el propósito de consolar a los creyentes chasqueados.</p>",
+          "<p>En la década de 1860, los adventistas guardadores del sábado ya eran varios miles y necesitaban organizarse para proclamar los tres mensajes angélicos (<span class=\"vref\" data-book=\"REV\" data-chapter=\"14\" data-v1=\"6\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Apoc. 14:6-12</span><span class=\"vref-pop\"></span>). A pesar de la oposición de algunos, Elena de White animó ese paso, y la iglesia fue fundada el 21 de mayo de 1863. Las visiones sobre salud, en 1863 y 1865, impulsaron la reforma pro salud, que marca a los adventistas hasta hoy.</p>",
+          "<p>Entre las décadas de 1870 y 1890, ayudó a formar el sistema educativo adventista, con una educación que desarrolla las facultades físicas, mentales y espirituales (La educación). En la década de 1880, enfatizó la gracia y la justificación por la fe; entre 1901 y 1903, ayudó a reorganizar la iglesia para la misión. La iglesia no existiría como la conocemos sin ese ministerio.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo usa Dios la revelación profética para guiar y sostener a Su iglesia mientras espera? (Apoc. 1–3)",
+          "¿Cuál es la importancia de los profetas en los últimos días? (Joel 2:28-31)",
+          "¿Por qué desea Jesús revelar todas las cosas a Su pueblo? (Juan 15:15)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿En qué fecha ocurrió el Gran Chasco?",
+              "opts": [
+                "21 de mayo de 1863",
+                "22 de octubre de 1844",
+                "25 de diciembre de 1844",
+                "1 de enero de 1900"
+              ]
+            },
+            {
+              "text": "¿Cuál era el apellido de soltera de Elena de White?",
+              "opts": [
+                "Miller",
+                "Bates",
+                "Harmon",
+                "Andrews"
+              ]
+            },
+            {
+              "text": "¿Cuál era el propósito de la primera visión de Elena Harmon?",
+              "opts": [
+                "Fijar una nueva fecha",
+                "Crear una escuela",
+                "Construir un hospital",
+                "Consolar a los creyentes chasqueados"
+              ]
+            },
+            {
+              "text": "¿En qué fecha fue fundada oficialmente la Iglesia Adventista del Séptimo Día?",
+              "opts": [
+                "21 de mayo de 1863",
+                "22 de octubre de 1844",
+                "1 de enero de 1860",
+                "10 de diciembre de 1901"
+              ]
+            },
+            {
+              "text": "¿En qué años recibió Elena de White las dos visiones sobre salud citadas en la lección?",
+              "opts": [
+                "1844 y 1846",
+                "1863 y 1865",
+                "1888 y 1890",
+                "1901 y 1903"
+              ]
+            },
+            {
+              "text": "¿Qué enfatizó Elena de White en la década de 1880, según la lección?",
+              "opts": [
+                "La fijación de fechas proféticas",
+                "La abolición de la ley",
+                "La gracia de Dios y la justificación por la fe",
+                "La construcción de templos"
+              ]
+            },
+            {
+              "text": "¿Para proclamar qué mensaje necesitaban organizarse los adventistas?",
+              "opts": [
+                "Las siete trompetas (Apoc. 8; 9)",
+                "Los siete sellos (Apoc. 6)",
+                "Las siete copas (Apoc. 16)",
+                "Los tres mensajes angélicos (Apoc. 14:6-12)"
+              ]
+            },
+            {
+              "text": "Según el libro La educación, ¿qué facultades desarrolla armoniosamente la verdadera educación?",
+              "opts": [
+                "Físicas, mentales y espirituales",
+                "Solo mentales",
+                "Solo profesionales",
+                "Artísticas y deportivas"
+              ]
+            },
+            {
+              "text": "¿En qué período ayudó Elena de White a reorganizar la estructura denominacional?",
+              "opts": [
+                "Entre 1844 y 1846",
+                "Entre 1901 y 1903",
+                "Entre 1863 y 1865",
+                "Entre 1915 y 1920"
+              ]
+            },
+            {
+              "text": "¿En qué período tuvo un papel fundamental en el sistema educativo adventista?",
+              "opts": [
+                "En las décadas de 1840 y 1850",
+                "Después de 1915",
+                "Entre las décadas de 1870 y 1890",
+                "Solo en 1863"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Todos los adventistas estuvieron de acuerdo con la organización de la iglesia desde el principio.",
+            "La primera visión de Elena Harmon llegó después del Gran Chasco.",
+            "Elena de White influyó en la reforma pro salud entre los adventistas.",
+            "Según Elena de White, la verdadera educación se reduce a terminar un curso de estudios."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Atrapados, pero no olvidados",
+        "summary": "Como los mineros atrapados en Chile, que resistieron porque recibían mensajes de la superficie, nosotros también recibimos mensajes de Dios. Mientras Él siga hablando, hay esperanza de rescate.",
+        "body": [
+          "<p>En 2010, 33 mineros quedaron atrapados a más de 600 metros de profundidad en Chile. Además de comida y oxígeno, lo más importante para ellos era la comunicación con el equipo de rescate: cada mensaje renovaba la esperanza de que no habían sido olvidados.</p>",
+          "<p>Dios nunca dejó a la humanidad sin dirección. En los días de Noé, de Débora y de Elías, en el Nuevo Testamento y al comienzo del movimiento adventista, envió mensajes de advertencia, ánimo y esperanza. Muchas veces la gente los ignoró porque el mensaje confrontaba decisiones que no quería abandonar. La verdadera profecía no exalta a personas; apunta a la transformación.</p>",
+          "<p>Muchos quieren un Dios que solo confirme sus deseos, pero quien ama también corrige, orienta y advierte. “No menospreciéis las profecías” (<span class=\"vref\" data-book=\"1TH\" data-chapter=\"5\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">1 Tes. 5:20</span><span class=\"vref-pop\"></span>). Mientras Dios siga hablando, todavía hay esperanza de rescate.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Por qué a muchas personas les cuesta aceptar mensajes que confrontan su manera de vivir?",
+          "¿Cómo distinguir una verdadera voz espiritual de influencias religiosas manipuladoras?",
+          "¿Qué me estará intentando mostrar Dios hoy que todavía me cuesta escuchar?"
+        ]
+      }
+    ]
   }
 ]
