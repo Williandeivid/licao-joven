@@ -17533,5 +17533,1467 @@
         ]
       }
     ]
+  },
+  {
+    "id": 25,
+    "title": "Luz para el tiempo del fin",
+    "keyword": "LUZ",
+    "days": [
+      {
+        "id": "dom",
+        "title": "¿Fecha de vencimiento?",
+        "summary": "El don de profecía aparece en todas las listas de dones de Pablo, para fortalecer a la iglesia hasta la madurez. Los profetas tienen marcas reconocibles y, justamente por eso, Satanás intenta falsificarlos.",
+        "body": [
+          "<p>¿Dejará de actuar el don de profecía antes del regreso de Jesús? En el Nuevo Testamento hay varias listas de dones (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"12\" data-v1=\"6\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Rom. 12:6-8</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"1CO\" data-chapter=\"12\" data-v1=\"8\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">1 Cor. 12:8-10</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"1CO\" data-chapter=\"12\" data-v1=\"28\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">1 Cor. 12:28</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"EPH\" data-chapter=\"4\" data-v1=\"11\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Efe. 4:11</span><span class=\"vref-pop\"></span>), todos para fortalecer el cuerpo de Cristo, anunciar el evangelio y llevar a los creyentes a la madurez (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"4\" data-v1=\"12\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Efe. 4:12, 13</span><span class=\"vref-pop\"></span>). En todas ellas Pablo menciona la profecía.</p>",
+          "<p>Algunas marcas de los profetas: son llamados por Dios y muchas veces se sienten indignos (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"6\" data-v1=\"1\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Isa. 6:1-13</span><span class=\"vref-pop\"></span>); Dios les habla por sueños, visiones o voz audible (<span class=\"vref\" data-book=\"NUM\" data-chapter=\"12\" data-v1=\"6\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Núm. 12:6</span><span class=\"vref-pop\"></span>); pueden perder las fuerzas y ser fortalecidos de nuevo (<span class=\"vref\" data-book=\"DAN\" data-chapter=\"10\" data-v1=\"8\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Dan. 10:8-10</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"DAN\" data-chapter=\"10\" data-v1=\"18\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">Dan. 10:18, 19</span><span class=\"vref-pop\"></span>); comunican por medio de palabras (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"21\" data-v1=\"10\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">Hech. 21:10-12</span><span class=\"vref-pop\"></span>), representaciones (<span class=\"vref\" data-book=\"EZK\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Eze. 4:1-8</span><span class=\"vref-pop\"></span>) o cartas (Apoc. 2; 3), a veces con ayudantes (<span class=\"vref\" data-book=\"JER\" data-chapter=\"36\" data-v1=\"1\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Jer. 36:1-4</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>El mensaje de un profeta debe estar de acuerdo con el de los anteriores, porque Dios no se contradice (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"8\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Isa. 8:20</span><span class=\"vref-pop\"></span>); el mensaje y la vida testifican de su origen divino (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"7\" data-v1=\"15\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">Mat. 7:15-20</span><span class=\"vref-pop\"></span>). Y Satanás siempre intenta falsificar lo divino, incluido el don profético (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"24\" data-v1=\"24\" data-v2=\"24\" onclick=\"toggleVerseLive(this)\">Mat. 24:24</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2PE\" data-chapter=\"2\" data-v1=\"1\" data-v2=\"1\" onclick=\"toggleVerseLive(this)\">2 Ped. 2:1</span><span class=\"vref-pop\"></span>). Esta semana estudiaremos ese don en el tiempo del fin.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué incluye Pablo la profecía en todas sus listas de dones?",
+          "¿Qué marca de los profetas te llamó más la atención?",
+          "¿Cómo debe afectar nuestra actitud la existencia de falsos profetas: miedo, desprecio o cuidado?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta semana?",
+              "opts": [
+                "Hechos 2:1-21",
+                "Hechos 9:1-19",
+                "Hechos 1:1-11",
+                "Hechos 15:1-21"
+              ]
+            },
+            {
+              "text": "¿Qué don menciona Pablo en todas sus listas de dones espirituales?",
+              "opts": [
+                "El don de lenguas",
+                "El don de profecía",
+                "El don de sanidad",
+                "El don de hospitalidad"
+              ]
+            },
+            {
+              "text": "¿Cuál es el propósito de los dones espirituales, según Efesios 4:12 y 13?",
+              "opts": [
+                "Dar fama a quien los recibe",
+                "Reemplazar la Biblia",
+                "Edificar el cuerpo de Cristo y llevar a la madurez",
+                "Dividir la iglesia en grupos"
+              ]
+            },
+            {
+              "text": "¿Por qué el mensaje de un profeta debe estar de acuerdo con el de los anteriores?",
+              "opts": [
+                "Porque los profetas se copiaban",
+                "Porque el rey lo exigía",
+                "Porque era una regla de la sinagoga",
+                "Porque Dios no se contradice"
+              ]
+            },
+            {
+              "text": "¿Cómo suelen reaccionar los profetas al llamado de Dios, según la lección?",
+              "opts": [
+                "Se sienten indignos, pero obedecen",
+                "Se sienten superiores",
+                "Siempre se niegan",
+                "Piden pago"
+              ]
+            },
+            {
+              "text": "Además del mensaje, ¿qué testifica del origen divino de un profeta (Mat. 7:15-20)?",
+              "opts": [
+                "Su riqueza",
+                "Su vida personal",
+                "Su número de seguidores",
+                "Su fama política"
+              ]
+            },
+            {
+              "text": "¿Qué texto se usa como prueba de armonía con la ley y el testimonio?",
+              "opts": [
+                "Isaías 1:18",
+                "Isaías 9:6",
+                "Isaías 8:20",
+                "Isaías 40:31"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a un profeta comunicando por medio de una representación simbólica?",
+              "opts": [
+                "Ezequiel 37",
+                "Ezequiel 1",
+                "Ezequiel 47",
+                "Ezequiel 4"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a un profeta contando con un asistente para escribir?",
+              "opts": [
+                "Jeremías 36:1-4",
+                "Jeremías 1:4-10",
+                "Jeremías 29:11",
+                "Jeremías 18:1-6"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Daniel perdiendo las fuerzas y siendo fortalecido durante una visión?",
+              "opts": [
+                "Daniel 6:10-13",
+                "Daniel 10:8-10, 18, 19",
+                "Daniel 3:24-27",
+                "Daniel 1:8-16"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Dios hablaba con los profetas solo por medio de una voz audible.",
+            "Los profetas son llamados por Dios.",
+            "Satanás intenta falsificar también el don profético.",
+            "El mensaje de un verdadero profeta puede contradecir el de los profetas anteriores."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Promesas para los últimos días",
+        "summary": "En Pentecostés, Pedro dijo que la profecía de Joel se estaba cumpliendo. Aquella fue la lluvia temprana; el cumplimiento final vendrá con la lluvia tardía, poco antes del regreso de Cristo, e incluirá el don de profecía.",
+        "body": [
+          "<p>En Hechos 2:17-21, Pedro citó Joel 2 y dijo que los versículos 28 al 31 se estaban cumpliendo en Pentecostés. ¿Y las señales? Podría haber recordado que, pocos días antes, en la cruz, el sol se había oscurecido durante tres horas (<span class=\"vref\" data-book=\"MRK\" data-chapter=\"15\" data-v1=\"33\" data-v2=\"33\" onclick=\"toggleVerseLive(this)\">Mar. 15:33</span><span class=\"vref-pop\"></span>). Aun así, todavía esperamos un cumplimiento más completo.</p>",
+          "<p>La clave está en el propio Joel: habla de la lluvia “temprana” y de la “tardía” (<span class=\"vref\" data-book=\"JOL\" data-chapter=\"2\" data-v1=\"23\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Joel 2:23</span><span class=\"vref-pop\"></span>). Hechos 2 es la lluvia temprana, el derramamiento del Espíritu al comienzo de la iglesia. El cumplimiento final vendrá con la lluvia tardía, poco antes del regreso de Cristo. Jesús y Juan también hablan de señales en el sol, la luna y las estrellas antes del fin (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"24\" data-v1=\"29\" data-v2=\"29\" onclick=\"toggleVerseLive(this)\">Mat. 24:29</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"REV\" data-chapter=\"6\" data-v1=\"12\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">Apoc. 6:12, 13</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>En el centro de la profecía de Joel está la promesa del Espíritu derramado sobre el pueblo de Dios, incluido el don de profecía. Dios usó profetas cuando derramó Su Espíritu sobre la iglesia apostólica, y podemos esperar algo semejante en la iglesia del tiempo del fin.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Según Hechos 2:21, ¿cuál será el resultado final del derramamiento del Espíritu y de las profecías de los últimos días?",
+          "¿Qué significa para ti la promesa de la lluvia tardía?",
+          "¿Cómo puedes prepararte para recibir el Espíritu Santo?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿A qué profeta citó Pedro en Pentecostés?",
+              "opts": [
+                "Isaías",
+                "Joel",
+                "Jeremías",
+                "Malaquías"
+              ]
+            },
+            {
+              "text": "¿Cómo se llama el derramamiento del Espíritu al comienzo de la iglesia?",
+              "opts": [
+                "Lluvia tardía",
+                "Lluvia de granizo",
+                "Lluvia temprana",
+                "Rocío de la mañana"
+              ]
+            },
+            {
+              "text": "¿Cuándo ocurrirá la lluvia tardía?",
+              "opts": [
+                "En Pentecostés",
+                "En tiempos de Joel",
+                "Durante el exilio",
+                "Poco antes del regreso de Cristo"
+              ]
+            },
+            {
+              "text": "¿Qué señal podría citar Pedro como ya cumplida, según la lección?",
+              "opts": [
+                "El sol oscurecido durante tres horas en la cruz",
+                "Un terremoto en Roma",
+                "La caída de una estrella",
+                "Un eclipse en Egipto"
+              ]
+            },
+            {
+              "text": "¿Qué incluirá el derramamiento especial del Espíritu al final, según la lección?",
+              "opts": [
+                "El fin de todos los dones",
+                "La manifestación del don de profecía",
+                "Una nueva Biblia",
+                "El regreso de los sacrificios"
+              ]
+            },
+            {
+              "text": "Según la lección, Hechos 2:17-21 es una de las citas más largas de qué en el Nuevo Testamento?",
+              "opts": [
+                "De las cartas de Pablo",
+                "De los evangelios",
+                "Del Antiguo Testamento",
+                "De los escritos rabínicos"
+              ]
+            },
+            {
+              "text": "¿Qué versículo de Joel menciona la lluvia temprana y la tardía?",
+              "opts": [
+                "Joel 1:4",
+                "Joel 3:10",
+                "Joel 2:13",
+                "Joel 2:23"
+              ]
+            },
+            {
+              "text": "¿Qué texto registra el sol oscurecido durante la crucifixión?",
+              "opts": [
+                "Marcos 15:33",
+                "Marcos 16:1",
+                "Marcos 13:24",
+                "Marcos 4:39"
+              ]
+            },
+            {
+              "text": "¿En qué texto habla Jesús de señales en el sol, la luna y las estrellas?",
+              "opts": [
+                "Mateo 5:14",
+                "Mateo 24:29",
+                "Mateo 13:43",
+                "Mateo 2:2"
+              ]
+            },
+            {
+              "text": "¿En qué texto describe Juan también las señales cósmicas?",
+              "opts": [
+                "Apocalipsis 1:16",
+                "Apocalipsis 12:1",
+                "Apocalipsis 6:12, 13",
+                "Apocalipsis 21:23"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Pedro citó a Joel en su sermón de Pentecostés.",
+            "Pentecostés fue el cumplimiento final y completo de la profecía de Joel.",
+            "La lluvia tardía ocurrió al comienzo de la historia de la iglesia.",
+            "Jesús también habló de señales en el sol y la luna antes del fin."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "Manifestaciones actuales",
+        "summary": "Pentecostés muestra cómo será el derramamiento final: exaltación de Jesús, arrepentimiento y un pueblo listo para la misión. Esas son las marcas de un mensajero del tiempo del fin, y marcaron el ministerio de Elena de White.",
+        "body": [
+          "<p>Muchos cristianos aceptan a los profetas bíblicos, pero dudan ante cualquier manifestación actual del don. Sin embargo, la Biblia promete que en los últimos días el Espíritu guiaría a Su pueblo por medio de visiones y sueños. ¿Qué esperar, entonces, de un profeta hoy?</p>",
+          "<p>Pentecostés, en el año 31 d.C., ilustra el derramamiento final a una escala mucho mayor: exaltación de Jesús, arrepentimiento y un pueblo capacitado para la misión. El mensaje de Pedro llevó a tres mil personas al bautismo. Como escribió Elena de White, la “lluvia temprana” hizo germinar la semilla y la “lluvia tardía” hará madurar la cosecha (El conflicto de los siglos).</p>",
+          "<p>Según Joel, el don profético en el fin será dado a jóvenes y ancianos, hombres y mujeres. El mensajero escogido por el Espíritu exaltará a Jesús, llamará al arrepentimiento y preparará para la misión. Esas tres marcas están en el centro del ministerio de Elena de White, cuyos escritos siguen llevando personas a Cristo.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo responderías a alguien que dice no creer en profetas hoy porque cree solo en la Biblia?",
+          "¿Cuál de las tres marcas percibes más en los escritos de Elena de White?",
+          "¿Qué significa que el don profético también se prometa a los jóvenes?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuántas personas fueron bautizadas después del sermón de Pedro en Pentecostés?",
+              "opts": [
+                "Quinientas",
+                "Cinco mil",
+                "Tres mil",
+                "Ciento veinte"
+              ]
+            },
+            {
+              "text": "Según Joel, ¿a quiénes se daría el don profético al final?",
+              "opts": [
+                "Solo a los sacerdotes",
+                "Solo a hombres ancianos",
+                "Solo a los reyes",
+                "A jóvenes y ancianos, hombres y mujeres"
+              ]
+            },
+            {
+              "text": "¿En qué año ocurrió Pentecostés, según la lección?",
+              "opts": [
+                "31 d.C.",
+                "70 d.C.",
+                "4 a.C.",
+                "100 d.C."
+              ]
+            },
+            {
+              "text": "¿Cuál de estas es una de las tres marcas del mensajero del tiempo del fin?",
+              "opts": [
+                "Fijar la fecha del regreso de Jesús",
+                "Exaltar a Jesús",
+                "Exaltarse a sí mismo",
+                "Crear una nueva Biblia"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿cuál es la función de la lluvia tardía?",
+              "opts": [
+                "Hacer germinar la semilla",
+                "Destruir la cosecha",
+                "Hacer madurar la cosecha",
+                "Reemplazar la lluvia temprana"
+              ]
+            },
+            {
+              "text": "¿Qué semilla preciosa plantó la lluvia temprana, según la lección?",
+              "opts": [
+                "El templo de Jerusalén",
+                "El Imperio Romano",
+                "La sinagoga",
+                "La iglesia"
+              ]
+            },
+            {
+              "text": "¿De qué obra es la cita sobre la lluvia temprana y la tardía?",
+              "opts": [
+                "El conflicto de los siglos",
+                "El camino a Cristo",
+                "La educación",
+                "El evangelismo"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Pedro citando la promesa de visiones y sueños en los últimos días?",
+              "opts": [
+                "Hechos 9:10",
+                "Hechos 2:17",
+                "Hechos 16:9",
+                "Hechos 27:23"
+              ]
+            },
+            {
+              "text": "¿Cuáles son las tres marcas del mensajero del tiempo del fin, según la lección?",
+              "opts": [
+                "Hacer milagros, predecir fechas y tener fama",
+                "Escribir libros, viajar y hablar en lenguas",
+                "Exaltar a Jesús, llamar al arrepentimiento y preparar para la misión",
+                "Ser anciano, ser hombre y ser sacerdote"
+              ]
+            },
+            {
+              "text": "Según la cita, ¿qué hace la lluvia temprana?",
+              "opts": [
+                "Hace madurar la cosecha",
+                "Destruye la cizaña",
+                "Riega las viñas",
+                "Hace germinar la preciosa semilla"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Según Joel, el don profético al final se daría solo a hombres.",
+            "La mayoría de los cristianos hoy acepta fácilmente cualquier manifestación actual del don de profecía.",
+            "Pentecostés ilustra el derramamiento final del Espíritu.",
+            "El mensaje de Pedro en Pentecostés estaba centrado en Cristo."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Llenos del Espíritu",
+        "summary": "Dios no dejó a Su iglesia librada a su suerte: la guía por medio del Espíritu y del mensaje profético. El don de profecía no reemplaza la Biblia; nos lleva de vuelta a ella y a Cristo.",
+        "body": [
+          "<p>Dios no abandonó a Su iglesia a su propia suerte. Desde los tiempos bíblicos, guía a Su pueblo por medio del Espíritu Santo y del mensaje profético. Las promesas de Joel y del Apocalipsis muestran que, en los últimos días, seguiría orientando a Sus hijos para prepararlos para el regreso de Jesús.</p>",
+          "<p>El don de profecía es esencial para la misión, pero su función no es reemplazar la Biblia: es llevar a las personas de vuelta a la Palabra y a Cristo. Los escritos de Elena de White han cumplido ese papel, llevando a muchos a la comunión con Dios, a la obediencia y a la misión.</p>",
+          "<p>Dios promete derramar Su Espíritu (<span class=\"vref\" data-book=\"PRO\" data-chapter=\"1\" data-v1=\"23\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Prov. 1:23</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ISA\" data-chapter=\"44\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Isa. 44:3</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ACT\" data-chapter=\"10\" data-v1=\"45\" data-v2=\"45\" onclick=\"toggleVerseLive(this)\">Hech. 10:45</span><span class=\"vref-pop\"></span>). Los discípulos fueron llenos del Espíritu (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"2\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Hech. 2:4</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"ACT\" data-chapter=\"4\" data-v1=\"31\" data-v2=\"31\" onclick=\"toggleVerseLive(this)\">Hech. 4:31</span><span class=\"vref-pop\"></span>), y Pablo nos invita a hacer lo mismo (<span class=\"vref\" data-book=\"EPH\" data-chapter=\"5\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Efe. 5:18</span><span class=\"vref-pop\"></span>). El resultado es poder para testificar (<span class=\"vref\" data-book=\"ACT\" data-chapter=\"1\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Hech. 1:8</span><span class=\"vref-pop\"></span>), ser guiados como hijos de Dios (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"8\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Rom. 8:14</span><span class=\"vref-pop\"></span>), ayuda en la oración (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"8\" data-v1=\"26\" data-v2=\"26\" onclick=\"toggleVerseLive(this)\">Rom. 8:26</span><span class=\"vref-pop\"></span>) y producir el fruto del Espíritu (<span class=\"vref\" data-book=\"GAL\" data-chapter=\"5\" data-v1=\"22\" data-v2=\"23\" onclick=\"toggleVerseLive(this)\">Gál. 5:22, 23</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo sería tu semana si pidieras cada día ser lleno del Espíritu?",
+          "¿Qué aspecto del fruto del Espíritu necesitas desarrollar más?",
+          "¿Cómo te ha llevado la lectura de Elena de White de vuelta a la Biblia?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿el don de profecía reemplaza la Biblia?",
+              "opts": [
+                "Sí, completamente",
+                "Sí, en los últimos días",
+                "Solo en algunas doctrinas",
+                "No; lleva a las personas de vuelta a la Palabra"
+              ]
+            },
+            {
+              "text": "¿Qué palabra clave propone la lección para el mapa mental de esta semana?",
+              "opts": [
+                "Plenitud",
+                "Instrucción",
+                "Autoridad",
+                "Validez"
+              ]
+            },
+            {
+              "text": "¿Por qué medios guía Dios a Su pueblo desde los tiempos bíblicos, según la lección?",
+              "opts": [
+                "Solo por tradiciones humanas",
+                "Por el Espíritu Santo y el mensaje profético",
+                "Solo por señales en el cielo",
+                "Solo por reyes y gobiernos"
+              ]
+            },
+            {
+              "text": "Según Hechos 1:8, ¿qué recibimos con el Espíritu Santo?",
+              "opts": [
+                "Riqueza material",
+                "Poder político",
+                "Poder para ser testigos",
+                "Liberación del sufrimiento"
+              ]
+            },
+            {
+              "text": "¿Para qué seguiría Dios orientando a Sus hijos en los últimos días, según la lección?",
+              "opts": [
+                "Para revelar la fecha exacta del regreso",
+                "Para reemplazar a la iglesia",
+                "Para eximirlos de la misión",
+                "Para fortalecerlos y prepararlos para el regreso de Jesús"
+              ]
+            },
+            {
+              "text": "Según Romanos 8:26, ¿cómo nos ayuda el Espíritu?",
+              "opts": [
+                "Intercediendo por nosotros en la oración",
+                "Respondiendo por nosotros en el juicio",
+                "Quitándonos las dificultades",
+                "Escribiendo nuevas Escrituras"
+              ]
+            },
+            {
+              "text": "¿Qué texto registra a los discípulos llenos del Espíritu en Pentecostés?",
+              "opts": [
+                "Hechos 9:3",
+                "Hechos 2:4",
+                "Hechos 12:7",
+                "Hechos 20:7"
+              ]
+            },
+            {
+              "text": "¿Qué texto aconseja: “sed llenos del Espíritu”?",
+              "opts": [
+                "Efesios 1:3",
+                "Efesios 2:10",
+                "Efesios 5:18",
+                "Efesios 6:1"
+              ]
+            },
+            {
+              "text": "¿Dónde está la lista del fruto del Espíritu?",
+              "opts": [
+                "Gálatas 2:20",
+                "Gálatas 6:7",
+                "Gálatas 3:28",
+                "Gálatas 5:22, 23"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra el Espíritu derramado también sobre los gentiles?",
+              "opts": [
+                "Hechos 10:45",
+                "Hechos 8:1",
+                "Hechos 13:2",
+                "Hechos 26:28"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Dios no abandonó a Su iglesia a su propia suerte.",
+            "La función del don de profecía es reemplazar la Biblia.",
+            "Ser lleno del Espíritu fue una experiencia solo de los apóstoles, sin invitación para nosotros.",
+            "El Espíritu Santo da poder para testificar."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "El testimonio de Jesús",
+        "summary": "Apocalipsis 12:17 señala dos marcas de la iglesia del fin: los mandamientos de Dios y el testimonio de Jesús. Comparando los textos, el testimonio viene de Jesús y es el espíritu de la profecía: Dios levantaría profetas en el tiempo del fin.",
+        "body": [
+          "<p>Apocalipsis 12 muestra el gran conflicto desde el cielo hasta el fin. En el versículo 17, la iglesia del tiempo del fin tiene dos marcas: guarda los mandamientos de Dios y tiene “el testimonio de Jesús”. El griego permite dos traducciones: el testimonio acerca de Jesús, o el testimonio que viene de Jesús, la verdad que Él revela (<span class=\"vref\" data-book=\"REV\" data-chapter=\"19\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Apoc. 19:10</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>¿Cuál tenía en mente Juan? Comparando las dos marcas: así como “los mandamientos de Dios” vienen de Dios, “el testimonio de Jesús” puede entenderse como el testimonio que viene de Jesús. En Apocalipsis 19:10 y 22:9, se lo identifica con “el espíritu de la profecía”: la revelación profética que Jesús da a Su iglesia.</p>",
+          "<p>Juan era profeta, ejemplo de lo que significa tener el testimonio de Jesús. Así como Dios envió profetas a Israel y Judá y envió a Juan a la iglesia del Nuevo Testamento, levantaría profetas en los últimos días. Jesús hace reconocible a Su iglesia también por el don de profecía.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué evidencias muestran que el ministerio de Elena de White puede entenderse como una manifestación del “espíritu de la profecía” (Apoc. 19:10)?",
+          "¿Por qué eligió Dios marcas tan claras para identificar a Su iglesia?",
+          "¿Cómo puede verse el testimonio de Jesús en tu vida?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuáles son las dos marcas de la iglesia del fin en Apocalipsis 12:17?",
+              "opts": [
+                "Guardar los mandamientos de Dios y tener el testimonio de Jesús",
+                "Tener templos y riquezas",
+                "Hablar en lenguas y hacer milagros",
+                "Guardar fiestas y ayunos"
+              ]
+            },
+            {
+              "text": "¿Con qué se identifica el “testimonio de Jesús” en Apocalipsis 19:10?",
+              "opts": [
+                "Con los Diez Mandamientos",
+                "Con el espíritu de la profecía",
+                "Con el bautismo",
+                "Con la santa cena"
+              ]
+            },
+            {
+              "text": "¿Cuántas traducciones permite el griego de “testimonio de Jesús”, según la lección?",
+              "opts": [
+                "Una",
+                "Tres",
+                "Dos",
+                "Ninguna"
+              ]
+            },
+            {
+              "text": "¿Qué comparación usa la lección para entender el “testimonio de Jesús” como proveniente de Él?",
+              "opts": [
+                "Así como el maná venía del cielo",
+                "Así como la ley venía de Moisés",
+                "Así como las cartas venían de Pablo",
+                "Así como los mandamientos de Dios vienen de Dios"
+              ]
+            },
+            {
+              "text": "¿Qué profeta cita la lección como ejemplo de quien tenía el testimonio de Jesús?",
+              "opts": [
+                "El apóstol Juan",
+                "Balaam",
+                "Jonás",
+                "Hageo"
+              ]
+            },
+            {
+              "text": "¿Qué panorama presenta Apocalipsis 12, según la lección?",
+              "opts": [
+                "Solo la creación del mundo",
+                "El gran conflicto, del cielo a los últimos días",
+                "Solo el exilio babilónico",
+                "Solo el ministerio de Pablo"
+              ]
+            },
+            {
+              "text": "¿Qué otro texto de Apocalipsis también relaciona el testimonio con los profetas?",
+              "opts": [
+                "Apocalipsis 3:14",
+                "Apocalipsis 5:5",
+                "Apocalipsis 22:9",
+                "Apocalipsis 11:3"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué versión traduce Apocalipsis 19:10 como la verdad revelada por Jesús?",
+              "opts": [
+                "La Reina-Valera",
+                "Una versión latina",
+                "Ninguna",
+                "Una versión portuguesa (NTLH)"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿con qué se aíra el dragón en Apocalipsis 12:17?",
+              "opts": [
+                "Con el remanente que guarda los mandamientos y tiene el testimonio de Jesús",
+                "Con los reyes de la Tierra",
+                "Con los ángeles caídos",
+                "Con los falsos profetas"
+              ]
+            },
+            {
+              "text": "¿Para quién es un profeta un mensajero especial, según la lección?",
+              "opts": [
+                "Solo para los gobernantes",
+                "Para el pueblo de Dios",
+                "Solo para los sacerdotes",
+                "Solo para los incrédulos"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El texto griego de Apocalipsis 12:17 solo permite una traducción.",
+            "La iglesia del fin guarda los mandamientos de Dios.",
+            "El testimonio de Jesús se identifica con el espíritu de la profecía.",
+            "Según la lección, Dios no levantaría profetas en los últimos días."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Compromiso con la misión",
+        "summary": "Los dones existen para capacitar para la misión, y el ministerio de Elena de White también. Ella pedía que Cristo fuera el centro y que cada miembro trabajara; por eso Satanás intenta volver “irrelevantes” sus escritos.",
+        "body": [
+          "<p>En Efesios 4, Pablo muestra que los dones sirven para capacitar a los cristianos para la misión. El ministerio de Elena de White tenía ese propósito. Escribió que, entre todos los que profesan ser cristianos, los adventistas del séptimo día deben ser los primeros en ensalzar a Cristo ante el mundo: la verdad del sábado debe proclamarse, pero Cristo, el gran centro de atracción, no debe dejarse de lado (Obreros evangélicos).</p>",
+          "<p>Insistía en que cada miembro participara: no puede haber ociosos en la obra del Señor (El evangelismo). Fue misionera en Europa, en la década de 1880, y en Australia, en la de 1890. Por ese llamado a la misión, el dragón se aíra contra el pueblo de Dios del fin (<span class=\"vref\" data-book=\"REV\" data-chapter=\"12\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Apoc. 12:17</span><span class=\"vref-pop\"></span>), que tiene orientación profética: “Este es el camino, andad por él” (<span class=\"vref\" data-book=\"ISA\" data-chapter=\"30\" data-v1=\"21\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">Isa. 30:21</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Satanás intenta desacreditar la voz profética: llama irrelevante a Elena de White por haber vivido en otra época o la acusa de falsa profetisa. Pero la manera más eficaz de volverla “irrelevante” es alejar a las nuevas generaciones de leer sus escritos por sí mismas.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cuáles son las marcas que identifican a la iglesia de Dios en el tiempo del fin? (Apoc. 12:17)",
+          "¿Qué es el testimonio de Jesús? (Apoc. 19:10)",
+          "¿Quiénes son los “siervos de Dios” o “hermanos” que tienen el espíritu de profecía? (Apoc. 22:9)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según Efesios 4, ¿cuál es la finalidad principal de los dones espirituales?",
+              "opts": [
+                "Dar estatus a los líderes",
+                "Capacitar a los cristianos para la misión",
+                "Reemplazar la oración",
+                "Crear disputas"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿quién es “el gran centro de atracción”?",
+              "opts": [
+                "El sábado",
+                "La iglesia",
+                "Cristo Jesús",
+                "El propio profeta"
+              ]
+            },
+            {
+              "text": "¿En qué regiones actuó Elena de White como misionera, según la lección?",
+              "opts": [
+                "África y Asia",
+                "Brasil y México",
+                "India y China",
+                "Europa y Australia"
+              ]
+            },
+            {
+              "text": "Según Elena de White, ¿qué tipo de personas no puede haber en la obra del Señor?",
+              "opts": [
+                "Ociosos",
+                "Jóvenes",
+                "Extranjeros",
+                "Pescadores"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿cuál es la manera más eficaz de volver “irrelevante” a Elena de White?",
+              "opts": [
+                "Traducir sus libros",
+                "Alejar a las nuevas generaciones de leer sus escritos",
+                "Publicar sus libros en internet",
+                "Estudiar sus escritos con la Biblia"
+              ]
+            },
+            {
+              "text": "Según el Manuscrito 31 de 1890, ¿qué libro desenmascara los engaños de Satanás?",
+              "opts": [
+                "El camino a Cristo",
+                "La educación",
+                "El conflicto de los siglos",
+                "El ministerio de curación"
+              ]
+            },
+            {
+              "text": "¿De qué obra es la cita sobre ensalzar a Cristo ante el mundo?",
+              "opts": [
+                "El Deseado de todas las gentes",
+                "Mensajes para los jóvenes",
+                "Testimonios para los ministros",
+                "Obreros evangélicos"
+              ]
+            },
+            {
+              "text": "¿Qué texto dice: “Este es el camino, andad por él”?",
+              "opts": [
+                "Isaías 30:21",
+                "Isaías 55:6",
+                "Isaías 26:3",
+                "Isaías 43:2"
+              ]
+            },
+            {
+              "text": "¿Qué salmo cita Elena de White para decir que la misericordia y la verdad se encontraron en la cruz?",
+              "opts": [
+                "Salmo 23:4",
+                "Salmo 85:10",
+                "Salmo 46:1",
+                "Salmo 90:12"
+              ]
+            },
+            {
+              "text": "¿En qué décadas trabajó Elena de White en Europa y en Australia, respectivamente?",
+              "opts": [
+                "1840 y 1850",
+                "1860 y 1870",
+                "1880 y 1890",
+                "1900 y 1910"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Elena de White animó a cada miembro a participar activamente en la misión.",
+            "Satanás intenta desacreditar la voz profética de Dios.",
+            "Elena de White enseñó que el sábado debía ocupar el lugar de Cristo como centro del mensaje.",
+            "Elena de White nunca salió de los Estados Unidos para trabajar como misionera."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Guiados por la luz",
+        "summary": "Es fácil tratar la luz como algo común hasta que falta. El don profético no existe para satisfacer la curiosidad sobre el futuro, sino para acercarnos a Jesús hoy y formar discípulos fieles.",
+        "body": [
+          "<p>Quien vive en una ciudad siempre iluminada solo percibe el valor de la electricidad cuando todo queda a oscuras. Hacemos lo mismo con las orientaciones de Dios: mientras están disponibles, podemos ignorarlas; en tiempos de confusión, nos damos cuenta de que eran el faro del camino.</p>",
+          "<p>El don profético no fue dado para satisfacer la curiosidad sobre el futuro, sino para acercarnos a Jesús en el presente. La verdadera profecía no reemplaza la Biblia ni pone a una persona en el centro de la fe; nos hace mirar a Cristo y tomar en serio la Palabra. Dios no habla solo para informar; habla para transformar.</p>",
+          "<p>Tal vez nuestro problema no sea la falta de contenido, sino la falta de escucha. El mayor peligro es saber mucho sobre los últimos días y vivir distraídos. “No apaguéis al Espíritu. No menospreciéis las profecías. Examinadlo todo; retened lo bueno” (<span class=\"vref\" data-book=\"1TH\" data-chapter=\"5\" data-v1=\"19\" data-v2=\"21\" onclick=\"toggleVerseLive(this)\">1 Tes. 5:19-21</span><span class=\"vref-pop\"></span>).</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿He escuchado las orientaciones de Dios con deseo de obedecer, o solo como otra información religiosa?",
+          "¿Qué ha ocupado tanto mi atención que puede estar apagando la voz del Espíritu Santo?",
+          "¿Mi fe me ha llevado solo a conocer el futuro o a caminar más cerca de Jesús ahora?"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Bendiciones de la profecía",
+    "keyword": "BENDICIÓN",
+    "days": [
+      {
+        "id": "dom",
+        "title": "La profecía reafirma la Biblia",
+        "summary": "Los verdaderos profetas siempre reafirman y exaltan la Biblia como única regla de fe y práctica. Pablo y el mismo Jesús señalaron las Escrituras, y los falsos profetas, al contrario, debilitan la confianza en ellas.",
+        "body": [
+          "<p>El ministerio profético ayuda a la iglesia a reavivarse y a afirmar su fe en las Escrituras. Pablo destacó que toda la Escritura es inspirada (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"16\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:16</span><span class=\"vref-pop\"></span>) y advirtió a Timoteo que los engañadores irían de mal en peor (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"3\" data-v1=\"13\" data-v2=\"13\" onclick=\"toggleVerseLive(this)\">2 Tim. 3:13</span><span class=\"vref-pop\"></span>). Cuanto más nos acerquemos al fin, más dependeremos de la Palabra para distinguir lo verdadero de lo falso.</p>",
+          "<p>Pablo siguió el ejemplo de Jesús, el mayor Profeta. Él, que es la Palabra misma (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Juan 1:1-3</span><span class=\"vref-pop\"></span>), exaltó las Escrituras (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"7\" data-v1=\"38\" data-v2=\"38\" onclick=\"toggleVerseLive(this)\">Juan 7:38</span><span class=\"vref-pop\"></span>) y, después de la resurrección, las usó para fortalecer la fe de los discípulos (<span class=\"vref\" data-book=\"LUK\" data-chapter=\"24\" data-v1=\"27\" data-v2=\"27\" onclick=\"toggleVerseLive(this)\">Luc. 24:27</span><span class=\"vref-pop\"></span>). El don de profecía siempre señala la Biblia como la única regla de fe y práctica.</p>",
+          "<p>Hoy la Biblia está disponible en muchos formatos, pero en tiempos de Jesús solo existían los rollos del Antiguo Testamento, a los que generalmente tenían acceso sacerdotes y rabinos. Muchos que hoy se dicen profetas debilitan, de manera sutil, la confianza en la Biblia; los profetas genuinos la fortalecen y desafían a la iglesia a ser fiel a la misión.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo puede protegerte la lectura de la Biblia de enseñanzas engañosas?",
+          "¿Qué aprendes de Jesús usando las Escrituras para fortalecer a los discípulos (Luc. 24:27)?",
+          "Tienes fácil acceso a la Biblia. ¿Cómo has aprovechado ese privilegio?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál es el texto bíblico base de esta última semana del trimestre?",
+              "opts": [
+                "2 Crónicas 20",
+                "2 Crónicas 7",
+                "1 Reyes 18",
+                "Jueces 4"
+              ]
+            },
+            {
+              "text": "¿A quién advirtió Pablo sobre los falsos maestros, según la lección?",
+              "opts": [
+                "A Tito",
+                "Al joven Timoteo",
+                "A Filemón",
+                "A Bernabé"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿quién es el mayor Profeta de todos?",
+              "opts": [
+                "Moisés",
+                "Elías",
+                "Jesús",
+                "Pablo"
+              ]
+            },
+            {
+              "text": "¿Cómo se relacionan los profetas genuinos con la Biblia, según la lección?",
+              "opts": [
+                "Reemplazan las Escrituras",
+                "Debilitan la confianza en las Escrituras",
+                "Ignoran las Escrituras",
+                "Fortalecen la fe en las Escrituras"
+              ]
+            },
+            {
+              "text": "En tiempos de Jesús, ¿quiénes tenían generalmente acceso a los rollos del Antiguo Testamento?",
+              "opts": [
+                "Sacerdotes y rabinos",
+                "Todas las familias",
+                "Solo los soldados romanos",
+                "Solo las mujeres"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué pasaría con los falsos maestros hasta el fin de los tiempos?",
+              "opts": [
+                "Desaparecerían",
+                "Serían cada vez más comunes",
+                "Se convertirían todos",
+                "Dejarían de usar la Biblia"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a Jesús explicando las Escrituras a los discípulos después de la resurrección?",
+              "opts": [
+                "Lucas 2:46",
+                "Lucas 4:18",
+                "Lucas 24:27",
+                "Lucas 15:4"
+              ]
+            },
+            {
+              "text": "¿Qué texto afirma que toda la Escritura es inspirada por Dios?",
+              "opts": [
+                "2 Timoteo 1:7",
+                "2 Timoteo 2:15",
+                "2 Timoteo 4:7",
+                "2 Timoteo 3:16"
+              ]
+            },
+            {
+              "text": "¿Qué texto presenta a Jesús como la Palabra misma que creó todas las cosas?",
+              "opts": [
+                "Juan 1:1-3",
+                "Juan 3:16",
+                "Juan 14:6",
+                "Juan 20:31"
+              ]
+            },
+            {
+              "text": "¿Qué capítulo de Elena G. de White se indica esta semana?",
+              "opts": [
+                "El conflicto de los siglos, capítulo 1",
+                "El conflicto de los siglos, capítulo 37: “Las Escrituras, una salvaguardia”",
+                "Mensajes selectos, t. 1, capítulo 2",
+                "La historia de la redención, capítulo 8"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "El don de profecía señala la Biblia como única regla de fe y práctica.",
+            "En tiempos de Jesús, todos tenían fácil acceso a las Escrituras.",
+            "Los profetas genuinos debilitan la confianza en la Biblia.",
+            "Jesús usó las Escrituras para fortalecer la fe de los discípulos."
+          ]
+        }
+      },
+      {
+        "id": "seg",
+        "title": "Un pueblo seguro y próspero",
+        "summary": "Ante grandes ejércitos, Josafat llamó al pueblo a ayunar y orar. Dios respondió por medio del profeta Jahaziel, y Josafat dijo: “Creed en Jehová […]; creed a sus profetas, y seréis prosperados”.",
+        "body": [
+          "<p>Las bendiciones de Dios están ligadas a nuestra disposición a recibirlas. Muchas veces Israel perdió bendiciones por rechazar a los profetas, pero Josafat acogió el mensaje profético. Cuando moabitas, amonitas y sus aliados marcharon contra Judá, reunió a la nación para buscar al Señor con ayuno y oración, reconoció que no tenían fuerza ni sabiduría y se aferró a las promesas de Dios (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"20\" data-v1=\"1\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">2 Crón. 20:1-12</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Dios respondió por medio del profeta Jahaziel: no teman, porque la batalla es del Señor (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"20\" data-v1=\"14\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">2 Crón. 20:14-17</span><span class=\"vref-pop\"></span>). Habría sido fácil mirar el tamaño del enemigo, pero Josafat confió. A la mañana siguiente, se levantó temprano y dijo: “Creed en Jehová vuestro Dios, y estaréis seguros; creed a sus profetas, y seréis prosperados” (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"20\" data-v1=\"20\" data-v2=\"20\" onclick=\"toggleVerseLive(this)\">2 Crón. 20:20</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Los que creyeron avanzaron con valor y fe. Los profetas ayudaban a Israel a saber qué batallas enfrentar y cuál sería su resultado. Hoy, la palabra profética sigue siendo necesaria para entender nuestros desafíos y prepararnos: quien la rechaza se desvía, pero quien la escucha permanece firme.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cuál fue el resultado de la batalla cuando Josafat y el pueblo siguieron el consejo de los profetas?",
+          "¿Qué “gran ejército” estás enfrentando hoy? ¿Cómo sería buscar primero a Dios?",
+          "¿Qué significa para ti que “la batalla es del Señor”?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Qué rey de Judá es el protagonista de esta historia?",
+              "opts": [
+                "Ezequías",
+                "Josafat",
+                "Josías",
+                "Acaz"
+              ]
+            },
+            {
+              "text": "¿Por medio de qué profeta respondió Dios a Josafat?",
+              "opts": [
+                "Isaías",
+                "Elías",
+                "Jahaziel",
+                "Jeremías"
+              ]
+            },
+            {
+              "text": "¿Qué pueblos marcharon contra Judá?",
+              "opts": [
+                "Filisteos y egipcios",
+                "Asirios y babilonios",
+                "Persas y medos",
+                "Moabitas, amonitas y sus aliados"
+              ]
+            },
+            {
+              "text": "¿A qué convocó Josafat al pueblo ante la amenaza?",
+              "opts": [
+                "A buscar al Señor con ayuno y oración",
+                "A huir a Egipto",
+                "A pagar tributo al enemigo",
+                "A construir murallas más altas"
+              ]
+            },
+            {
+              "text": "¿Cuál fue el mensaje principal de Jahaziel?",
+              "opts": [
+                "Ríndanse al enemigo",
+                "No teman, porque la batalla es del Señor",
+                "Contraten soldados extranjeros",
+                "Esperen siete años"
+              ]
+            },
+            {
+              "text": "¿Qué hizo Josafat a la mañana siguiente del mensaje profético?",
+              "opts": [
+                "Huyó de la ciudad",
+                "Dudó del mensaje",
+                "Se levantó temprano para animar al pueblo",
+                "Pidió otro profeta"
+              ]
+            },
+            {
+              "text": "¿Qué versículo dice: “Creed a sus profetas, y seréis prosperados”?",
+              "opts": [
+                "2 Crónicas 7:14",
+                "2 Crónicas 16:9",
+                "2 Crónicas 36:16",
+                "2 Crónicas 20:20"
+              ]
+            },
+            {
+              "text": "¿Qué versículos contienen el mensaje de Jahaziel?",
+              "opts": [
+                "2 Crónicas 20:14-17",
+                "2 Crónicas 20:1-4",
+                "2 Crónicas 20:27-30",
+                "2 Crónicas 21:1-4"
+              ]
+            },
+            {
+              "text": "Según 2 Crónicas 20:20, ¿qué le pasa a quien cree en Jehová?",
+              "opts": [
+                "Se hará rico",
+                "Estará seguro",
+                "Vivirá para siempre en la Tierra",
+                "Nunca tendrá problemas"
+              ]
+            },
+            {
+              "text": "¿Qué versículos muestran la oración de Josafat reconociendo que no tenía fuerzas?",
+              "opts": [
+                "2 Crónicas 18:1-8",
+                "2 Crónicas 19:4-11",
+                "2 Crónicas 20:1-12",
+                "2 Crónicas 20:31-37"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Josafat miró el tamaño del enemigo y desistió de la batalla.",
+            "Según la lección, la palabra profética ya no es necesaria hoy.",
+            "Josafat reconoció públicamente que no tenía fuerza para vencer solo.",
+            "Dios habló al pueblo por medio del profeta Jahaziel."
+          ]
+        }
+      },
+      {
+        "id": "ter",
+        "title": "El detector de la verdad",
+        "summary": "Con tantas interpretaciones de la Biblia, ¿cómo encontrar la verdad? Satanás usa la confusión desde el Edén, mezclando verdad y error. Jesús respondió con “escrito está”, y las Escrituras siguen siendo el detector de la verdad.",
+        "body": [
+          "<p>Se estima que hoy existen más de 45.000 denominaciones cristianas, fruto de innumerables interpretaciones de la Biblia, que no pueden estar todas en lo cierto, pues muchas se contradicen. Desde el principio, la confusión es una de las principales armas de Satanás (<span class=\"vref\" data-book=\"GEN\" data-chapter=\"3\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Gén. 3:1-5</span><span class=\"vref-pop\"></span>): mezcla un poco de verdad con el error, engañó al pueblo a lo largo de la historia (<span class=\"vref\" data-book=\"2CH\" data-chapter=\"36\" data-v1=\"14\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">2 Crón. 36:14-16</span><span class=\"vref-pop\"></span>) e intentó engañar incluso a Jesús (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"11\" onclick=\"toggleVerseLive(this)\">Mat. 4:1-11</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Jesús respondió con un claro “escrito está” (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"4\" data-v1=\"4\" data-v2=\"4\" onclick=\"toggleVerseLive(this)\">Mat. 4:4</span><span class=\"vref-pop\"></span>). Pablo previó engaños cada vez más refinados: los verdaderos maestros predicarían fielmente la Palabra, aunque fuera impopular, mientras otros buscarían maestros que agradaran sus deseos con fábulas (<span class=\"vref\" data-book=\"2TI\" data-chapter=\"4\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">2 Tim. 4:1-5</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"2TH\" data-chapter=\"2\" data-v1=\"11\" data-v2=\"12\" onclick=\"toggleVerseLive(this)\">2 Tes. 2:11, 12</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Pero Jesús prometió a los receptivos: “Conoceréis la verdad” (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"8\" data-v1=\"32\" data-v2=\"32\" onclick=\"toggleVerseLive(this)\">Juan 8:32</span><span class=\"vref-pop\"></span>). Los escritos proféticos de la Biblia separan la verdad del error. La lección muestra, por ejemplo, que al aceptar el sábado bíblico y la enseñanza bíblica sobre el estado de los muertos, quedan muy pocas opciones de iglesia.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Cómo conociste tú o tu familia la Iglesia Adventista? ¿Qué te acerca a esta iglesia?",
+          "¿Cómo reconocer una “verdad a medias” mezclada con error?",
+          "¿Qué texto bíblico usarías como “escrito está” ante una tentación?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuántas denominaciones cristianas estiman algunos estudiosos que existen hoy?",
+              "opts": [
+                "Unas 100",
+                "Unas 12",
+                "Más de 45.000",
+                "Exactamente mil"
+              ]
+            },
+            {
+              "text": "¿Con qué expresión respondió Jesús a las tentaciones de Satanás?",
+              "opts": [
+                "“Así dice Moisés”",
+                "“Yo decido”",
+                "Solo “vete”",
+                "“Escrito está”"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿por qué surgieron tantas denominaciones?",
+              "opts": [
+                "Por las innumerables interpretaciones de la Biblia",
+                "Porque la Biblia fue escrita en muchas lenguas",
+                "Porque Jesús fundó varias iglesias",
+                "Porque los apóstoles discrepaban"
+              ]
+            },
+            {
+              "text": "¿Cuál es una de las principales armas de Satanás para desviar de la verdad, según la lección?",
+              "opts": [
+                "El silencio",
+                "La confusión",
+                "La lectura de la Biblia",
+                "La oración"
+              ]
+            },
+            {
+              "text": "¿Cómo engaña Satanás, según la lección?",
+              "opts": [
+                "Solo con mentiras evidentes",
+                "Solo con milagros",
+                "Mezclando un poco de verdad con el error",
+                "Enseñando solo la Biblia"
+              ]
+            },
+            {
+              "text": "Según Pablo, ¿cómo se reconocería a los verdaderos maestros?",
+              "opts": [
+                "Por su popularidad",
+                "Por sus milagros",
+                "Por agradar a los oyentes",
+                "Por predicar fielmente la Palabra, aunque sea impopular"
+              ]
+            },
+            {
+              "text": "¿Qué texto registra las tentaciones de Jesús en el desierto?",
+              "opts": [
+                "Mateo 4:1-11",
+                "Mateo 5:1-12",
+                "Mateo 17:1-8",
+                "Mateo 26:36-46"
+              ]
+            },
+            {
+              "text": "¿En qué texto promete Jesús: “Conoceréis la verdad”?",
+              "opts": [
+                "Juan 10:10",
+                "Juan 8:32",
+                "Juan 3:3",
+                "Juan 11:25"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Pablo prevé personas buscando maestros que agraden sus deseos?",
+              "opts": [
+                "1 Timoteo 4:12",
+                "Tito 2:11-14",
+                "2 Timoteo 4:1-5",
+                "Filipenses 4:6, 7"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra al pueblo de Dios burlándose de los mensajeros hasta que no hubo remedio?",
+              "opts": [
+                "2 Crónicas 5:13, 14",
+                "2 Crónicas 15:1-7",
+                "2 Crónicas 26:16-21",
+                "2 Crónicas 36:14-16"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Satanás intentó engañar incluso a Jesús.",
+            "Todas las interpretaciones de la Biblia pueden estar en lo cierto al mismo tiempo.",
+            "Jesús respondió a las tentaciones con argumentos propios, sin citar las Escrituras.",
+            "Pablo previó que los engaños serían cada vez más refinados."
+          ]
+        }
+      },
+      {
+        "id": "qua",
+        "title": "Una palabra más segura",
+        "summary": "Dios no pide fe ciega. Pedro oyó la voz del cielo en el monte, pero dijo que la palabra de los profetas es “más segura”. Nosotros también tenemos esa palabra; la cuestión es si estamos dispuestos a escucharla.",
+        "body": [
+          "<p>Dios nunca pide fe ciega. Aun después de milenios de pecado, la naturaleza testifica de un Dios de poder creador y de amor. Pedro tuvo la experiencia que muchos quisieran: oyó la voz del cielo en el monte santo. Aun así, dijo que había algo más seguro: “la palabra profética”, a la cual hacemos bien en estar atentos (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"18\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">2 Ped. 1:18, 19</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Tal vez no hayamos oído la voz de Dios como Pedro, pero tenemos esa palabra profética. Dios habla por medio de profetas canónicos y no canónicos. Recibir a los profetas trae bendición, como le ocurrió a la viuda de Sarepta que acogió a Elías (<span class=\"vref\" data-book=\"1KI\" data-chapter=\"17\" data-v1=\"9\" data-v2=\"16\" onclick=\"toggleVerseLive(this)\">1 Rey. 17:9-16</span><span class=\"vref-pop\"></span>), y quien recibe a un profeta recibe al propio Jesús (<span class=\"vref\" data-book=\"MAT\" data-chapter=\"10\" data-v1=\"40\" data-v2=\"41\" onclick=\"toggleVerseLive(this)\">Mat. 10:40, 41</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Oír y prestar atención también trae bendición (<span class=\"vref\" data-book=\"2PE\" data-chapter=\"1\" data-v1=\"19\" data-v2=\"19\" onclick=\"toggleVerseLive(this)\">2 Ped. 1:19</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"REV\" data-chapter=\"1\" data-v1=\"3\" data-v2=\"3\" onclick=\"toggleVerseLive(this)\">Apoc. 1:3</span><span class=\"vref-pop\"></span>). En cambio, rechazar la orientación profética tiene consecuencias: “Sin profecía el pueblo se desenfrena” (<span class=\"vref\" data-book=\"PRO\" data-chapter=\"29\" data-v1=\"18\" data-v2=\"18\" onclick=\"toggleVerseLive(this)\">Prov. 29:18</span><span class=\"vref-pop\"></span>; ver <span class=\"vref\" data-book=\"JER\" data-chapter=\"26\" data-v1=\"4\" data-v2=\"6\" onclick=\"toggleVerseLive(this)\">Jer. 26:4-6</span><span class=\"vref-pop\"></span>). ¿Estamos dispuestos a escuchar?</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Por qué consideró Pedro la palabra profética más segura que su propia experiencia en el monte?",
+          "¿Qué bendición has recibido al prestar atención a la Palabra de Dios?",
+          "¿Qué pasa cuando alguien ignora la orientación de Dios durante mucho tiempo?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "Según la lección, ¿pide Dios fe ciega?",
+              "opts": [
+                "Sí, siempre",
+                "Solo a los jóvenes",
+                "Solo en el Antiguo Testamento",
+                "No; da evidencias contundentes"
+              ]
+            },
+            {
+              "text": "¿Dónde oyó Pedro la voz venida del cielo, según 2 Pedro 1:18?",
+              "opts": [
+                "En el monte santo",
+                "En el mar de Galilea",
+                "En el templo",
+                "En la cárcel"
+              ]
+            },
+            {
+              "text": "¿Cómo describe Pedro la palabra de los profetas?",
+              "opts": [
+                "Menos importante que la experiencia",
+                "Más segura",
+                "Anticuada",
+                "Demasiado difícil de entender"
+              ]
+            },
+            {
+              "text": "¿Qué testifica la naturaleza, según la lección?",
+              "opts": [
+                "Que Dios no existe",
+                "Que todo surgió por casualidad",
+                "Un Dios de poder creador y de amor",
+                "Solo la fuerza humana"
+              ]
+            },
+            {
+              "text": "¿Por medio de qué tipos de profetas nos habla Dios, según la lección?",
+              "opts": [
+                "Solo canónicos",
+                "Solo no canónicos",
+                "Solo ángeles",
+                "Canónicos y no canónicos"
+              ]
+            },
+            {
+              "text": "¿Qué palabra clave propone la lección para el mapa mental de esta semana?",
+              "opts": [
+                "Seguridad",
+                "Plenitud",
+                "Instrucción",
+                "Autoridad"
+              ]
+            },
+            {
+              "text": "¿Qué texto muestra a la viuda de Sarepta bendecida al recibir a Elías?",
+              "opts": [
+                "1 Reyes 18:20-40",
+                "1 Reyes 17:9-16",
+                "1 Reyes 19:1-8",
+                "2 Reyes 4:1-7"
+              ]
+            },
+            {
+              "text": "¿Qué texto dice que quien recibe a un profeta recibe recompensa de profeta?",
+              "opts": [
+                "Mateo 6:33",
+                "Mateo 11:28",
+                "Mateo 10:40, 41",
+                "Mateo 18:20"
+              ]
+            },
+            {
+              "text": "¿Qué texto habla de las consecuencias de que al pueblo le falte la revelación divina?",
+              "opts": [
+                "Proverbios 3:5, 6",
+                "Proverbios 22:6",
+                "Proverbios 1:7",
+                "Proverbios 29:18"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Jeremías cita la lección sobre rechazar la orientación profética?",
+              "opts": [
+                "Jeremías 26:4-6",
+                "Jeremías 31:3",
+                "Jeremías 33:3",
+                "Jeremías 17:7, 8"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Pedro consideró su experiencia más segura que la palabra de los profetas.",
+            "Pedro oyó la voz de Dios en el monte santo.",
+            "Recibir a los profetas de Dios trae bendiciones.",
+            "Rechazar la orientación profética no tiene ninguna consecuencia."
+          ]
+        }
+      },
+      {
+        "id": "qui",
+        "title": "La profecía exalta a Cristo",
+        "summary": "El verdadero don profético siempre lleva a conocer mejor a Jesús y a comprometerse con Él. El Antiguo Testamento apunta al Salvador, el Nuevo muestra el cumplimiento, y la fe que salva es una cuestión del corazón, no solo de la mente.",
+        "body": [
+          "<p>La profecía conecta al pueblo con Dios; por eso el dragón se airó contra la iglesia y hace guerra contra el remanente que guarda los mandamientos y tiene el testimonio de Jesús (<span class=\"vref\" data-book=\"REV\" data-chapter=\"12\" data-v1=\"17\" data-v2=\"17\" onclick=\"toggleVerseLive(this)\">Apoc. 12:17</span><span class=\"vref-pop\"></span>), “el espíritu de la profecía” (<span class=\"vref\" data-book=\"REV\" data-chapter=\"19\" data-v1=\"10\" data-v2=\"10\" onclick=\"toggleVerseLive(this)\">Apoc. 19:10</span><span class=\"vref-pop\"></span>). Jesús es el tema central de ese mensaje, así como era el centro de la predicación de los apóstoles (<span class=\"vref\" data-book=\"1CO\" data-chapter=\"2\" data-v1=\"2\" data-v2=\"2\" onclick=\"toggleVerseLive(this)\">1 Cor. 2:2</span><span class=\"vref-pop\"></span>; <span class=\"vref\" data-book=\"GAL\" data-chapter=\"6\" data-v1=\"14\" data-v2=\"14\" onclick=\"toggleVerseLive(this)\">Gál. 6:14</span><span class=\"vref-pop\"></span>).</p>",
+          "<p>Los apóstoles aceptaron a Jesús por su propia experiencia y por el testimonio de los profetas. Hay una cadena sólida de evidencias: el Antiguo Testamento apunta al Salvador que había de venir, y el Nuevo muestra a Jesús cumpliéndolo todo. Pero la fe que salva no es solo intelectual; es moral. Cuando el corazón se cierra, la mente termina siguiendo el mismo camino.</p>",
+          "<p>Juan presenta a Jesús como el Verbo eterno que creó todas las cosas (<span class=\"vref\" data-book=\"JHN\" data-chapter=\"1\" data-v1=\"1\" data-v2=\"5\" onclick=\"toggleVerseLive(this)\">Juan 1:1-5</span><span class=\"vref-pop\"></span>), involucrado en los mensajes que Dios dio a los profetas. En los mensajes proféticos de la Biblia y en los que vinieron después, Jesús invita a Su pueblo a conocerlo y seguirlo. ¿Aceptaremos Su llamado?</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "Piensa en la inmensidad del universo y en que el Creador es el mismo Jesús que murió por nosotros. ¿Qué esperanza te ofrece eso?",
+          "¿Por qué la fe que salva involucra el corazón, y no solo la mente?",
+          "¿Cómo te han llevado los escritos proféticos a conocer mejor a Jesús?"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Quién es el tema central del mensaje profético para el tiempo del fin?",
+              "opts": [
+                "Jesús",
+                "El propio profeta",
+                "Los ángeles",
+                "La iglesia"
+              ]
+            },
+            {
+              "text": "Según Apocalipsis 19:10, ¿qué es el testimonio de Jesús?",
+              "opts": [
+                "La ley ceremonial",
+                "El espíritu de la profecía",
+                "El bautismo",
+                "La tradición"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿hacia dónde lleva siempre a las personas el verdadero don profético?",
+              "opts": [
+                "A admirar al profeta",
+                "A fijar fechas",
+                "A comprender mejor quién es Jesús",
+                "A dejar la Biblia"
+              ]
+            },
+            {
+              "text": "¿Qué hace el Antiguo Testamento en la cadena de evidencias descrita en la lección?",
+              "opts": [
+                "Niega la venida del Mesías",
+                "Habla solo de leyes",
+                "No tiene relación con Jesús",
+                "Apunta al Salvador que había de venir"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué es esencialmente la fe que salva?",
+              "opts": [
+                "Moral, cuestión del corazón, no solo de la mente",
+                "Solo intelectual",
+                "Solo emocional",
+                "Solo una tradición familiar"
+              ]
+            },
+            {
+              "text": "¿Qué pasa cuando las personas cierran el corazón, según la lección?",
+              "opts": [
+                "La mente se abre más",
+                "La mente termina siguiendo el mismo camino",
+                "Nada cambia",
+                "La fe se fortalece"
+              ]
+            },
+            {
+              "text": "¿En qué texto dice Pablo que se propuso no saber nada sino a Jesucristo crucificado?",
+              "opts": [
+                "1 Corintios 10:13",
+                "1 Corintios 3:16",
+                "1 Corintios 2:2",
+                "1 Corintios 9:24"
+              ]
+            },
+            {
+              "text": "¿Qué texto presenta a Jesús como el Verbo que creó todas las cosas?",
+              "opts": [
+                "Juan 4:24",
+                "Juan 13:34",
+                "Juan 21:15",
+                "Juan 1:1-5"
+              ]
+            },
+            {
+              "text": "¿En qué texto dice Pablo que solo se gloría en la cruz de Cristo?",
+              "opts": [
+                "Gálatas 6:14",
+                "Gálatas 1:8",
+                "Gálatas 4:4",
+                "Gálatas 5:1"
+              ]
+            },
+            {
+              "text": "Según Apocalipsis 12:17, ¿contra quién se airó el dragón?",
+              "opts": [
+                "Contra los reyes de la Tierra",
+                "Contra la mujer, la iglesia de Dios",
+                "Contra la bestia",
+                "Contra Babilonia"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Jesús era el centro del mensaje de los apóstoles.",
+            "El Nuevo Testamento muestra a Jesús cumpliendo lo prometido sobre el Salvador.",
+            "La fe que salva es solo una cuestión intelectual.",
+            "Los profetas cuyas palabras no mencionan a Jesús explícitamente no fueron inspirados por el Espíritu."
+          ]
+        }
+      },
+      {
+        "id": "sex",
+        "title": "Pruébalo de nuevo",
+        "summary": "No basta con estudiar sobre Elena de White; hay que leer lo que escribió. Una encuesta mostró que quienes leen sus escritos con regularidad tienen una relación más profunda con Cristo, más seguridad de salvación y más deseo de testificar.",
+        "body": [
+          "<p>Kellogg’s lanzó un eslogan para reconquistar clientes: “Pruébalos de nuevo, por primera vez”. Muchos adventistas pasan bastante tiempo aprendiendo sobre la Biblia y Elena de White, pero poco tiempo “probando” sus escritos. Los seminarios ayudan, pero solo quien lee, especialmente en su contexto, aprecia plenamente lo que Dios dio por medio de ella.</p>",
+          "<p>Una encuesta de Roger Dudley y Des Cummings Jr. mostró que quienes leen con regularidad los escritos de Elena de White tienen una relación más profunda con Cristo, más seguridad de salvación, culto familiar más regular y más deseo de testificar. La conclusión: la lectura regular produce una diferencia positiva en la vida y el testimonio cristiano (revista O Ministério Adventista, 1984).</p>",
+          "<p>Este trimestre vimos que Dios se comunica por medio de los profetas, y sus mensajes transforman todas las áreas de la vida. La invitación es: “Gustad, y ved que es bueno Jehová” (<span class=\"vref\" data-book=\"PSA\" data-chapter=\"34\" data-v1=\"8\" data-v2=\"8\" onclick=\"toggleVerseLive(this)\">Sal. 34:8</span><span class=\"vref-pop\"></span>). Los mensajes proféticos llaman a la santidad, a la transformación del carácter, al evangelismo y al servicio, mientras esperamos el regreso de Jesús.</p>"
+        ],
+        "reflectTitle": "Preguntas de Reflexión",
+        "reflect": [
+          "¿Qué ocurre en nuestro corazón cuando prestamos atención a la palabra profética? (2 Ped. 1:19)",
+          "Si Jesús elige hablar por medio de profetas (Apoc. 1:1-3), ¿por qué es tan importante evaluar con atención el don de profecía?",
+          "¿Cómo reafirma la Biblia el verdadero don profético? (2 Tim. 3:14-17)"
+        ],
+        "quiz": {
+          "questions": [
+            {
+              "text": "¿Cuál era el eslogan de Kellogg’s citado en la lección?",
+              "opts": [
+                "“Destapa la felicidad”",
+                "“Pruébalos de nuevo, por primera vez”",
+                "“Just do it”",
+                "“Piensa diferente”"
+              ]
+            },
+            {
+              "text": "¿Qué invitación del Salmo 34:8 destaca la lección?",
+              "opts": [
+                "“Jehová es mi pastor”",
+                "“Estad quietos, y conoced”",
+                "“Gustad, y ved que es bueno Jehová”",
+                "“Alabad a Jehová”"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿qué hace falta para apreciar plenamente los escritos de Elena de White?",
+              "opts": [
+                "Solo asistir a seminarios sobre ella",
+                "Memorizar fechas de su vida",
+                "Leer solo resúmenes",
+                "Leer sus escritos, especialmente en su contexto"
+              ]
+            },
+            {
+              "text": "¿Quiénes realizaron la encuesta sobre los lectores de Elena de White citada en la lección?",
+              "opts": [
+                "Roger Dudley y Des Cummings Jr.",
+                "Elena de White y Jaime White",
+                "Guillermo Miller y José Bates",
+                "Uriah Smith y J. N. Andrews"
+              ]
+            },
+            {
+              "text": "¿Cuál de estos resultados encontró la encuesta en quienes leen a Elena de White con regularidad?",
+              "opts": [
+                "Menos interés en testificar",
+                "Más seguridad de salvación",
+                "Menos culto familiar",
+                "Una relación más distante con Cristo"
+              ]
+            },
+            {
+              "text": "¿En qué revista y año se publicó el resultado de la encuesta, según la lección?",
+              "opts": [
+                "Revista Adventista, 1844",
+                "Nosso Amigo, 1990",
+                "O Ministério Adventista, 1984",
+                "Señales de los Tiempos, 1863"
+              ]
+            },
+            {
+              "text": "¿Qué texto habla de la palabra profética como una luz a la que debemos estar atentos?",
+              "opts": [
+                "2 Pedro 3:9",
+                "1 Pedro 5:7",
+                "1 Pedro 2:9",
+                "2 Pedro 1:19"
+              ]
+            },
+            {
+              "text": "¿Qué texto de Pablo se cita sobre el don profético que reafirma la Biblia?",
+              "opts": [
+                "2 Timoteo 3:14-17",
+                "Romanos 1:16, 17",
+                "Efesios 2:8-10",
+                "Colosenses 3:1-4"
+              ]
+            },
+            {
+              "text": "Según la lección, ¿a qué nos llaman los mensajes proféticos?",
+              "opts": [
+                "Al aislamiento del mundo y al silencio",
+                "A la santidad, la transformación del carácter, el evangelismo y el servicio",
+                "A la riqueza y la prosperidad",
+                "A discusiones teológicas interminables"
+              ]
+            },
+            {
+              "text": "¿Qué texto cita la lección para mostrar que Jesús elige hablar por medio de profetas?",
+              "opts": [
+                "Apocalipsis 3:20",
+                "Apocalipsis 14:6",
+                "Apocalipsis 1:1-3",
+                "Apocalipsis 21:4"
+              ]
+            }
+          ]
+        },
+        "tf": {
+          "items": [
+            "Asistir a seminarios sobre Elena de White reemplaza la lectura de sus escritos.",
+            "Quien lee a Elena de White con regularidad tiende a tener más deseo de testificar.",
+            "Los mensajes proféticos nos llaman a la transformación del carácter.",
+            "La encuesta concluyó que leer a Elena de White no produce ninguna diferencia en la vida cristiana."
+          ]
+        }
+      },
+      {
+        "id": "sab",
+        "title": "Victoria por la Palabra",
+        "summary": "Ante batallas para las que nos sentimos sin preparación, Josafat nos enseña a buscar a Dios antes que cualquier estrategia. A lo largo de la historia, Dios levantó profetas para orientar y fortalecer a Su pueblo.",
+        "body": [
+          "<p>Crisis familiar, ansiedad, presión en los estudios, miedo al futuro o lucha espiritual: todos enfrentamos batallas para las que nos sentimos sin preparación. Dios está con nosotros todos los días, pero no siempre percibimos Su presencia.</p>",
+          "<p>Josafat reconoció que no vencería solo. Antes de buscar estrategias, buscó a Dios; antes de correr, oró; antes de confiar en soldados, confió en la Palabra del Señor. Barac no fue a la guerra sin Débora; Naamán fue sanado al buscar a Eliseo; y Daniel interpretó el sueño de Nabucodonosor, salvando muchas vidas.</p>",
+          "<p>A lo largo de toda la historia, el Señor levantó profetas para orientar, fortalecer y traer al pueblo de vuelta a Su Palabra. Aun en medio del sufrimiento, podemos tener la certeza de que “a los que aman a Dios, todas las cosas les ayudan a bien” (<span class=\"vref\" data-book=\"ROM\" data-chapter=\"8\" data-v1=\"28\" data-v2=\"28\" onclick=\"toggleVerseLive(this)\">Rom. 8:28</span><span class=\"vref-pop\"></span>). Basta confiar en Su Palabra y en Sus profetas.</p>"
+        ],
+        "reflectTitle": "Diálogo Abierto (discusión en grupo)",
+        "reflect": [
+          "¿Qué historias bíblicas fortalecen mi fe en medio de las luchas?",
+          "¿Qué puedo hacer, en la práctica, cuando paso por una dificultad espiritual?",
+          "¿Qué lección de este trimestre me marcó más?"
+        ]
+      }
+    ]
   }
 ]
