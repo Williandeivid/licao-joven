@@ -1,0 +1,14 @@
+{
+  "appId": "com.licaojovemiasd.app",
+  "appName": "Lições Jovem",
+  "webDir": "www",
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": true,
+      "providers": [
+        "google.com",
+        "apple.com"
+      ]
+    }
+  }
+}
