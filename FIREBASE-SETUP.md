@@ -223,7 +223,7 @@ Nada de criar nós na mão. Nada de uid.
       ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
       "$licao": { "$dia": { "$uid": {
         ".write": "auth != null && auth.uid == $uid",
-        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10)) && (!newData.hasChild('e') || (newData.child('e').isString() && newData.child('e').val().length <= 30))"
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10)) && (!newData.hasChild('e') || (newData.child('e').isString() && newData.child('e').val().length <= 30)) && (!newData.hasChild('nm') || (newData.child('nm').isString() && newData.child('nm').val().length <= 40))"
       } } }
     },
     "stats_plano": {
@@ -237,7 +237,7 @@ Nada de criar nós na mão. Nada de uid.
       ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
       "$dia": { "$uid": {
         ".write": "auth != null && auth.uid == $uid",
-        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('n') || newData.child('n').isBoolean())"
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('n') || newData.child('n').isBoolean()) && (!newData.hasChild('nm') || (newData.child('nm').isString() && newData.child('nm').val().length <= 40))"
       } }
     }
   }
@@ -260,11 +260,15 @@ o resto do dia nem toca no banco. Quem não entra com o Google não é contado.
 | Nó | O que guarda | Quem lê |
 |---|---|---|
 | `visitas/{dia}/{uid}` | `{em, n}` — quem abriu o app naquele dia | só admin |
-| `stats/{licao}/{dia}/{uid}` | `{c, q, e}` — `e` é a lista das perguntas erradas ("3,7") | só admin |
+| `stats/{licao}/{dia}/{uid}` | `{c, q, e, nm}` — `e` é a lista das perguntas erradas ("3,7") e `nm` o primeiro nome | só admin |
 | `stats_plano/{uid}` | `{p, l, t, em}` — plano ativo e capítulos lidos | só admin |
 
 O progresso completo do plano continua em `usuarios/{uid}`, que **só a própria
 pessoa lê**. Em `stats_plano` vai apenas o resumo que o painel mostra.
+
+O `nm` é **só o primeiro nome** — o mesmo que já aparece no ranking e nas
+curtidas. É o que permite a lista "Quem está lendo" no painel. Na aba Conta há
+um aviso para todo mundo dizendo que os líderes veem quem estudou cada dia.
 
 ### Curtidas (desde 18/09)
 

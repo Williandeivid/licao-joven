@@ -3210,6 +3210,7 @@ async function renderConta(){
         <div><div class="conta-row-title">${t('conta.zerarTudo')}</div><div class="conta-row-sub">${t('conta.zerarTudoNota')}</div></div>
         <button class="conta-btn conta-btn-danger" onclick="confirmResetAll()">${t('conta.zerar')}</button>
       </div>
+      <p class="conta-note" style="margin:10px 0 0;">${t('conta.lideresVeem')}</p>
     </div>
 
     <div class="conta-card">
@@ -5928,6 +5929,11 @@ const UI_STRINGS = {
     'admin.planoSub': 'Quantas pessoas estão lendo e em que ponto',
     'admin.planoResumo': '${pessoas} pessoa(s) lendo · mais usado: ${plano} (${quantos}) · média de ${media} capítulo(s)',
     'admin.planoVazio': 'Ninguém começou um plano ainda.',
+    'admin.quemEstaLendo': 'Quem está lendo',
+    'admin.pessoa': 'Pessoa',
+    'admin.dias': 'Dias',
+    'admin.semNome': 'Sem nome',
+    'conta.lideresVeem': 'Os líderes da sua classe veem quem estudou cada dia e o resultado do quiz. Suas anotações continuam só suas.',
     'admin.dia': 'Dia',
     'admin.abriram': 'Abriram',
     'admin.novos': 'Novos',
@@ -6300,6 +6306,11 @@ const UI_STRINGS = {
     'admin.planoSub': 'How many people are reading and how far along',
     'admin.planoResumo': '${pessoas} person(s) reading · most used: ${plano} (${quantos}) · ${media} chapter(s) on average',
     'admin.planoVazio': 'No one has started a plan yet.',
+    'admin.quemEstaLendo': 'Who is reading',
+    'admin.pessoa': 'Person',
+    'admin.dias': 'Days',
+    'admin.semNome': 'No name',
+    'conta.lideresVeem': 'Your class leaders can see who studied each day and the quiz result. Your notes stay yours only.',
     'admin.dia': 'Day',
     'admin.abriram': 'Opened',
     'admin.novos': 'New',
@@ -6672,6 +6683,11 @@ const UI_STRINGS = {
     'admin.planoSub': 'Cuántas personas están leyendo y en qué punto',
     'admin.planoResumo': '${pessoas} persona(s) leyendo · más usado: ${plano} (${quantos}) · promedio de ${media} capítulo(s)',
     'admin.planoVazio': 'Nadie ha empezado un plan todavía.',
+    'admin.quemEstaLendo': 'Quién está leyendo',
+    'admin.pessoa': 'Persona',
+    'admin.dias': 'Días',
+    'admin.semNome': 'Sin nombre',
+    'conta.lideresVeem': 'Los líderes de tu clase ven quién estudió cada día y el resultado del quiz. Tus anotaciones siguen siendo solo tuyas.',
     'admin.dia': 'Día',
     'admin.abriram': 'Abrieron',
     'admin.novos': 'Nuevos',
@@ -8381,7 +8397,9 @@ async function registrarStat(lessonId, dayId, dados){
     const token = await getAuthToken();
     await fetch(`${FIREBASE_DB}/stats/${lessonId}/${dayId}/${currentUser.uid}.json?auth=${token}`, {
       method:'PATCH', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(Object.assign({em: Date.now()}, dados))
+      // "nm" é só o primeiro nome (o mesmo que aparece no ranking e nas
+      // curtidas), para o painel poder mostrar a lista de quem está lendo.
+      body: JSON.stringify(Object.assign({em: Date.now(), nm: primeiroNome()}, dados))
     });
   }catch(e){ /* estatistica e extra: nunca atrapalha quem esta estudando */ }
 }
@@ -8467,6 +8485,7 @@ async function carregarAcompanhamentoAdmin(lessonId){
   alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('acoes.licao')} ${numeroDaLicao(licao)}</span><span>${t('admin.leu')}</span><span>${t('admin.quiz')}</span><span>${t('admin.media')}</span></div>`
     + linhas
     + funilDaSemana(licao, dias)
+    + listaDeQuemEstaLendo(licao, dias)
     + perguntasMaisErradas(licao, dias)
     + `<p class="admin-total">${quantos} ${t('admin.registroNestaLicao')}</p>`;
   carregarConversaAdmin(licao);
@@ -8481,6 +8500,36 @@ function funilDaSemana(licao, dias){
   const ultimo = porDia[porDia.length - 1];
   const pct = Math.round(ultimo / maior * 100);
   return `<p class="admin-total">${t('admin.funil').replace('${inicio}', maior).replace('${fim}', ultimo).replace('${pct}', pct)}</p>`;
+}
+
+// Quem está lendo, um por linha: primeiro nome, dias concluídos e média do
+// quiz. Serve para o líder saber quem sumiu e puxar pelo braço - por isso só
+// admin vê, e só o primeiro nome (o mesmo que já aparece no ranking).
+function listaDeQuemEstaLendo(licao, dias){
+  const gente = {};
+  dias.forEach(d => {
+    Object.entries((statsLicao[licao] || {})[d.id] || {}).forEach(([uid, p]) => {
+      if (!p) return;
+      const g = gente[uid] || (gente[uid] = {nome: '', dias: 0, notas: []});
+      if (p.nm) g.nome = p.nm;
+      if (p.c) g.dias++;
+      if (typeof p.q === 'number') g.notas.push(p.q);
+    });
+  });
+  const lista = Object.values(gente).sort((a, b) => b.dias - a.dias || b.notas.length - a.notas.length);
+  if (!lista.length) return '';
+  const linhas = lista.map(g => {
+    const media = g.notas.length ? Math.round(g.notas.reduce((a, b) => a + b, 0) / g.notas.length * 10) + '%' : '—';
+    return `<div class="admin-linha">
+      <span>${escaparHtml(g.nome || t('admin.semNome'))}</span>
+      <span><b>${g.dias}</b>/${dias.length}</span>
+      <span>${media}</span>
+    </div>`;
+  }).join('');
+  return `<p class="admin-total" style="margin-bottom:2px;">${t('admin.quemEstaLendo')}</p>`
+    + `<div class="admin-tabela tres" style="margin-top:0;">`
+    + `<div class="admin-linha cabecalho"><span>${t('admin.pessoa')}</span><span>${t('admin.dias')}</span><span>${t('admin.media')}</span></div>`
+    + linhas + `</div>`;
 }
 
 // A pergunta que a turma mais erra: vem de stats/{licao}/{dia}/{uid}.e ("3,7").
@@ -8582,7 +8631,7 @@ async function registrarVisita(){
   }catch(e){ novo = true; }
   try{
     const token = await getAuthToken();
-    const corpo = { em: Date.now() };
+    const corpo = { em: Date.now(), nm: primeiroNome() };
     if (novo) corpo.n = true;
     const r = await fetch(`${FIREBASE_DB}/visitas/${hoje}/${currentUser.uid}.json?auth=${token}`, {
       method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(corpo)
