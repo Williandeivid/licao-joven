@@ -953,6 +953,9 @@
   .admin-linha span:not(:first-child){min-width:44px; text-align:right; font-variant-numeric:tabular-nums;}
   .admin-linha b{color:var(--violet);}
   .admin-tabela.tres .admin-linha{grid-template-columns:1fr auto auto;}
+  .admin-erradas{margin:0 0 4px; padding-left:18px; font-size:12.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:6px;}
+  .admin-erradas b{color:var(--violet);}
+  .admin-pergunta{color:var(--ink); font-size:12px;}
   .admin-tabela .admin-total{margin-top:6px; font-size:12.5px; color:var(--ink-soft);}
   .acoes-legenda b{font-weight:700; color:var(--heading);}
   .acoes-ver-cmt{
@@ -2926,7 +2929,9 @@ function bindDayInteractions(lessonId, content, progress){
     const answers = quizEl.dataset.answers.split(',');
     const timerEl = quizEl.querySelector('[data-timer]');
     const resultBox = quizEl.querySelector('.quiz-result');
-    let localState = {answered:0, correct:0, startTime: savedQuiz?null:null, timerInterval:null, done: !!savedQuiz};
+    // "erradas" guarda o NUMERO da pergunta que a pessoa errou (1 a 10). Vai
+    // para o painel do admin saber qual ponto da licao a turma nao entendeu.
+    let localState = {answered:0, correct:0, erradas:[], startTime: savedQuiz?null:null, timerInterval:null, done: !!savedQuiz};
 
     if(savedQuiz){
       quizEl.querySelectorAll('.q-block').forEach((block,qi)=>{
@@ -2957,6 +2962,7 @@ function bindDayInteractions(lessonId, content, progress){
           });
           localState.answered++;
           if(opt.dataset.v === correct) localState.correct++;
+          else localState.erradas.push(qIndex + 1);
 
           if(localState.answered === 10){
             clearInterval(localState.timerInterval);
@@ -2975,7 +2981,7 @@ function bindDayInteractions(lessonId, content, progress){
             p.days[day.id] = {studied:true, estMinutes};
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
-            registrarStat(lessonId, day.id, {c:true, q: localState.correct});
+            registrarStat(lessonId, day.id, {c:true, q: localState.correct, e: localState.erradas.join(',')});
 
             // Antes disso a tela inteira era reconstruida (renderLessonDetail),
             // o que parecia um refresh: piscava, perdia o scroll e fechava
@@ -3251,6 +3257,16 @@ async function renderConta(){
         <div class="conta-row-title">${t('admin.visitas')}</div>
         <div class="conta-row-sub">${t('admin.visitasSub')}</div>
         <div id="admin-visitas" class="admin-tabela tres">${t('admin.carregando')}</div>
+      </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.conversa')}</div>
+        <div class="conta-row-sub">${t('admin.conversaSub')}</div>
+        <div id="admin-conversa" class="admin-tabela"></div>
+      </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.plano')}</div>
+        <div class="conta-row-sub">${t('admin.planoSub')}</div>
+        <div id="admin-plano" class="admin-tabela"></div>
       </div>
       <p class="conta-note" style="margin:10px 0 0;">${t('conta.administracaoNota')}</p>
     </div>` : ''}
@@ -4791,6 +4807,7 @@ async function loadPlanProgress(key){
 }
 async function savePlanProgress(key){
   try{ await window.storage.set('bible-plan-progress-'+key, JSON.stringify(planProgressCache[key]), false); }catch(e){}
+  registrarStatPlano(key);
 }
 // Estima o tempo de leitura de um capítulo bíblico específico, usando o texto real
 // (contagem de palavras de verdade, não uma média genérica) — mesma lógica da lição.
@@ -5898,6 +5915,19 @@ const UI_STRINGS = {
     'admin.acompanhamentoSub': 'Quantas pessoas concluíram cada dia e fizeram o quiz',
     'admin.visitas': 'Quem abriu o app',
     'admin.visitasSub': 'Pessoas diferentes por dia, nos últimos 7 dias',
+    'admin.funil': 'Semana: ${inicio} no dia mais cheio → ${fim} no último dia (${pct}%)',
+    'admin.maisErradas': 'Perguntas que a turma mais erra',
+    'admin.erros': 'erro(s)',
+    'admin.perguntaN': '· pergunta ${n}',
+    'admin.voltaram': '${voltaram} de ${antes} da semana passada voltaram (${pct}%)',
+    'admin.semSemanaAnterior': 'Sem dados da semana passada ainda.',
+    'admin.conversa': 'Conversa da lição',
+    'admin.conversaSub': 'Comentários e curtidas desta semana',
+    'admin.conversaResumo': '${cmt} comentário(s) de ${pcmt} pessoa(s) · ${curt} curtida(s) de ${pcurt} pessoa(s)',
+    'admin.plano': 'Plano bíblico',
+    'admin.planoSub': 'Quantas pessoas estão lendo e em que ponto',
+    'admin.planoResumo': '${pessoas} pessoa(s) lendo · mais usado: ${plano} (${quantos}) · média de ${media} capítulo(s)',
+    'admin.planoVazio': 'Ninguém começou um plano ainda.',
     'admin.dia': 'Dia',
     'admin.abriram': 'Abriram',
     'admin.novos': 'Novos',
@@ -6257,6 +6287,19 @@ const UI_STRINGS = {
     'admin.acompanhamentoSub': 'How many people finished each day and took the quiz',
     'admin.visitas': 'Who opened the app',
     'admin.visitasSub': 'Different people per day, over the last 7 days',
+    'admin.funil': 'Week: ${inicio} on the busiest day → ${fim} on the last day (${pct}%)',
+    'admin.maisErradas': 'Questions the class gets wrong most',
+    'admin.erros': 'wrong',
+    'admin.perguntaN': '· question ${n}',
+    'admin.voltaram': '${voltaram} of ${antes} from last week came back (${pct}%)',
+    'admin.semSemanaAnterior': 'No data from last week yet.',
+    'admin.conversa': 'Lesson conversation',
+    'admin.conversaSub': 'Comments and likes this week',
+    'admin.conversaResumo': '${cmt} comment(s) from ${pcmt} person(s) · ${curt} like(s) from ${pcurt} person(s)',
+    'admin.plano': 'Bible plan',
+    'admin.planoSub': 'How many people are reading and how far along',
+    'admin.planoResumo': '${pessoas} person(s) reading · most used: ${plano} (${quantos}) · ${media} chapter(s) on average',
+    'admin.planoVazio': 'No one has started a plan yet.',
     'admin.dia': 'Day',
     'admin.abriram': 'Opened',
     'admin.novos': 'New',
@@ -6616,6 +6659,19 @@ const UI_STRINGS = {
     'admin.acompanhamentoSub': 'Cuántas personas completaron cada día e hicieron el quiz',
     'admin.visitas': 'Quién abrió la app',
     'admin.visitasSub': 'Personas diferentes por día, en los últimos 7 días',
+    'admin.funil': 'Semana: ${inicio} en el día más lleno → ${fim} en el último día (${pct}%)',
+    'admin.maisErradas': 'Preguntas que la clase más falla',
+    'admin.erros': 'fallo(s)',
+    'admin.perguntaN': '· pregunta ${n}',
+    'admin.voltaram': '${voltaram} de ${antes} de la semana pasada volvieron (${pct}%)',
+    'admin.semSemanaAnterior': 'Todavía no hay datos de la semana pasada.',
+    'admin.conversa': 'Conversación de la lección',
+    'admin.conversaSub': 'Comentarios y me gusta de esta semana',
+    'admin.conversaResumo': '${cmt} comentario(s) de ${pcmt} persona(s) · ${curt} me gusta de ${pcurt} persona(s)',
+    'admin.plano': 'Plan bíblico',
+    'admin.planoSub': 'Cuántas personas están leyendo y en qué punto',
+    'admin.planoResumo': '${pessoas} persona(s) leyendo · más usado: ${plano} (${quantos}) · promedio de ${media} capítulo(s)',
+    'admin.planoVazio': 'Nadie ha empezado un plan todavía.',
     'admin.dia': 'Día',
     'admin.abriram': 'Abrieron',
     'admin.novos': 'Nuevos',
@@ -8330,6 +8386,26 @@ async function registrarStat(lessonId, dayId, dados){
   }catch(e){ /* estatistica e extra: nunca atrapalha quem esta estudando */ }
 }
 
+// Resumo do plano bíblico para o painel (o progresso em si continua sendo da
+// pessoa, em `usuarios`, que só ela lê). Aqui vai só o essencial:
+//   stats_plano/{uid} = {p:<plano>, l:<capítulos lidos>, t:<total>, em}
+let _timerStatPlano = null;
+function registrarStatPlano(key){
+  if (!currentUser || !BIBLE_PLANS[key]) return;
+  clearTimeout(_timerStatPlano);
+  // Marcar um dia inteiro salva várias vezes seguidas: espera a poeira baixar.
+  _timerStatPlano = setTimeout(async () => {
+    try{
+      const prog = planProgressCache[key] || {read:{}};
+      const token = await getAuthToken();
+      await fetch(`${FIREBASE_DB}/stats_plano/${currentUser.uid}.json?auth=${token}`, {
+        method:'PUT', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ p: key, l: Object.keys(prog.read || {}).length, t: BIBLE_PLANS[key].sequence.length, em: Date.now() })
+      });
+    }catch(e){ /* contagem é extra */ }
+  }, 2000);
+}
+
 async function carregarStatsDaLicao(lessonId){
   if (!souAdmin()) return;
   try{
@@ -8390,7 +8466,96 @@ async function carregarAcompanhamentoAdmin(lessonId){
   const quantos = gente.size === 1 ? t('acoes.umaPessoa') : t('acoes.nPessoas').replace('${n}', gente.size);
   alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('acoes.licao')} ${numeroDaLicao(licao)}</span><span>${t('admin.leu')}</span><span>${t('admin.quiz')}</span><span>${t('admin.media')}</span></div>`
     + linhas
+    + funilDaSemana(licao, dias)
+    + perguntasMaisErradas(licao, dias)
     + `<p class="admin-total">${quantos} ${t('admin.registroNestaLicao')}</p>`;
+  carregarConversaAdmin(licao);
+  carregarPlanoAdmin();
+}
+
+// Onde a turma para no meio da semana: do dia mais cheio até o último dia.
+function funilDaSemana(licao, dias){
+  const porDia = dias.map(d => Object.values((statsLicao[licao] || {})[d.id] || {}).filter(p => p && p.c).length);
+  const maior = Math.max(...porDia, 0);
+  if (!maior) return '';
+  const ultimo = porDia[porDia.length - 1];
+  const pct = Math.round(ultimo / maior * 100);
+  return `<p class="admin-total">${t('admin.funil').replace('${inicio}', maior).replace('${fim}', ultimo).replace('${pct}', pct)}</p>`;
+}
+
+// A pergunta que a turma mais erra: vem de stats/{licao}/{dia}/{uid}.e ("3,7").
+function perguntasMaisErradas(licao, dias){
+  const content = LESSONS_CONTENT.find(c => c.id === licao);
+  const contagem = [];
+  dias.forEach(d => {
+    Object.values((statsLicao[licao] || {})[d.id] || {}).forEach(p => {
+      if (!p || typeof p.e !== 'string' || !p.e) return;
+      p.e.split(',').forEach(n => {
+        const num = parseInt(n, 10);
+        if (!num) return;
+        const achou = contagem.find(x => x.dia === d.id && x.num === num);
+        if (achou) achou.erros++;
+        else contagem.push({dia: d.id, num, erros: 1});
+      });
+    });
+  });
+  if (!contagem.length) return '';
+  const top = contagem.sort((a, b) => b.erros - a.erros).slice(0, 3);
+  const itens = top.map(x => {
+    const dia = content && content.days.find(dd => dd.id === x.dia);
+    const q = dia && dia.quiz && dia.quiz.questions[x.num - 1];
+    const texto = q ? resumirTexto(q.text, 70) : '—';
+    const nomeDia = dayDisplayDate(licao, x.dia, idiomaConteudoAtual).split(' · ')[0];
+    return `<li><b>${x.erros}</b> ${t('admin.erros')} · ${escaparHtml(nomeDia)} ${t('admin.perguntaN').replace('${n}', x.num)}<br><span class="admin-pergunta">${escaparHtml(texto)}</span></li>`;
+  }).join('');
+  return `<p class="admin-total" style="margin-bottom:2px;">${t('admin.maisErradas')}</p><ul class="admin-erradas">${itens}</ul>`;
+}
+
+// Comentários e curtidas da lição: o quanto a turma está conversando.
+async function carregarConversaAdmin(licao){
+  const alvo = document.getElementById('admin-conversa');
+  if (!alvo || !souAdmin()) return;
+  try{
+    const token = await getAuthToken();
+    const [rc, rl] = await Promise.all([
+      fetch(`${FIREBASE_DB}/comentarios/${licao}.json?auth=${token}`),
+      fetch(`${FIREBASE_DB}/curtidas/${licao}.json?auth=${token}`)
+    ]);
+    const cmts = rc.ok ? ((await rc.json()) || {}) : {};
+    const curt = rl.ok ? ((await rl.json()) || {}) : {};
+    let nCmt = 0; const quemCmt = new Set(), quemCurtiu = new Set();
+    Object.values(cmts).forEach(dia => Object.values(dia || {}).forEach(c => { if (c && c.uid){ nCmt++; quemCmt.add(c.uid); } }));
+    let nCurt = 0;
+    // curtidas/{licao}/{dia}/{uid} = {nome, em} -> a chave do último nível é a pessoa.
+    Object.values(curt).forEach(dia => Object.keys(dia || {}).forEach(uid => { nCurt++; quemCurtiu.add(uid); }));
+    alvo.innerHTML = `<p class="admin-total" style="margin:0;">`
+      + t('admin.conversaResumo').replace('${cmt}', nCmt).replace('${pcmt}', quemCmt.size)
+        .replace('${curt}', nCurt).replace('${pcurt}', quemCurtiu.size) + `</p>`;
+  }catch(e){ alvo.innerHTML = ''; }
+}
+
+// Plano bíblico: quantas pessoas estão lendo e em que ponto.
+async function carregarPlanoAdmin(){
+  const alvo = document.getElementById('admin-plano');
+  if (!alvo || !souAdmin()) return;
+  let dados;
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/stats_plano.json?auth=${token}`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    dados = (await r.json()) || {};
+  }catch(e){ alvo.innerHTML = ''; return; }
+  const pessoas = Object.values(dados).filter(p => p && p.p);
+  if (!pessoas.length){ alvo.innerHTML = `<p class="admin-total" style="margin:0;">${t('admin.planoVazio')}</p>`; return; }
+  const porPlano = {};
+  pessoas.forEach(p => { porPlano[p.p] = (porPlano[p.p] || 0) + 1; });
+  const favorito = Object.entries(porPlano).sort((a, b) => b[1] - a[1])[0];
+  const media = Math.round(pessoas.reduce((a, p) => a + (p.l || 0), 0) / pessoas.length);
+  const nomePlano = BIBLE_PLANS[favorito[0]] ? planField(favorito[0], 'name', idiomaConteudoAtual) : favorito[0];
+  alvo.innerHTML = `<p class="admin-total" style="margin:0;">`
+    + t('admin.planoResumo').replace('${pessoas}', pessoas.length)
+      .replace('${plano}', escaparHtml(nomePlano)).replace('${quantos}', favorito[1])
+      .replace('${media}', media) + `</p>`;
 }
 
 // ===== QUANTAS PESSOAS ABRIRAM O APP (só admin vê) =====
@@ -8432,16 +8597,16 @@ async function registrarVisita(){
 async function carregarVisitasAdmin(){
   const alvo = document.getElementById('admin-visitas');
   if (!alvo || !souAdmin()) return;
-  const dias = [];
-  for (let i = DIAS_NO_PAINEL - 1; i >= 0; i--){
+  const dias = [], anteriores = [];
+  for (let i = DIAS_NO_PAINEL * 2 - 1; i >= 0; i--){
     const d = new Date(); d.setDate(d.getDate() - i);
-    dias.push(dateKey(d));
+    (i >= DIAS_NO_PAINEL ? anteriores : dias).push(dateKey(d));
   }
   let dados;
   try{
     const token = await getAuthToken();
-    // orderBy "$key" com startAt: desce só a janela do painel, não o histórico inteiro.
-    const url = `${FIREBASE_DB}/visitas.json?auth=${token}&orderBy=%22%24key%22&startAt=%22${dias[0]}%22`;
+    // orderBy "$key" com startAt: desce só as duas semanas do painel, não o histórico inteiro.
+    const url = `${FIREBASE_DB}/visitas.json?auth=${token}&orderBy=%22%24key%22&startAt=%22${anteriores[0]}%22`;
     const r = await fetch(url);
     if (!r.ok) throw new Error('HTTP ' + r.status);
     dados = (await r.json()) || {};
@@ -8464,9 +8629,20 @@ async function carregarVisitasAdmin(){
     </div>`;
   }).join('');
 
+  // Quantos da semana passada voltaram nesta: é o número que mostra se o app
+  // virou hábito ou se a pessoa entra uma vez e some.
+  const antes = new Set();
+  anteriores.forEach(dia => Object.keys(dados[dia] || {}).forEach(uid => antes.add(uid)));
+  const voltaram = [...antes].filter(uid => semana.has(uid)).length;
+  const retorno = antes.size
+    ? t('admin.voltaram').replace('${voltaram}', voltaram).replace('${antes}', antes.size)
+        .replace('${pct}', Math.round(voltaram / antes.size * 100))
+    : t('admin.semSemanaAnterior');
+
   alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('admin.dia')}</span><span>${t('admin.abriram')}</span><span>${t('admin.novos')}</span></div>`
     + linhas
-    + `<p class="admin-total">${t('admin.totalSemana').replace('${pessoas}', semana.size).replace('${novos}', novos.size)}</p>`;
+    + `<p class="admin-total">${t('admin.totalSemana').replace('${pessoas}', semana.size).replace('${novos}', novos.size)}</p>`
+    + `<p class="admin-total" style="margin-top:2px;">${retorno}</p>`;
 }
 
 // ===== CURTIR E COMPARTILHAR (estilo Instagram) =====
