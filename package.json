@@ -6,7 +6,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "build:www": "rm -rf www && mkdir -p www/vendor/capacitor-firebase-authentication && cp index.html www/index.html && cp -r biblioteca www/biblioteca && cp node_modules/@capacitor/core/dist/index.js www/vendor/capacitor-core.esm.js && cp node_modules/@capacitor-firebase/authentication/dist/esm/*.js www/vendor/capacitor-firebase-authentication/",
+    "build:www": "rm -rf www && mkdir -p www/vendor/capacitor-firebase-authentication && cp index.html www/index.html && cp -r biblioteca www/biblioteca && cp node_modules/@capacitor/core/dist/index.js www/vendor/capacitor-core.esm.js && cp node_modules/@capacitor-firebase/authentication/dist/esm/*.js www/vendor/capacitor-firebase-authentication/ && node scripts/fix-vendor-imports.js",
     "cap:sync": "npm run build:www && npx cap sync",
     "cap:open:ios": "npm run cap:sync && npx cap open ios",
     "cap:open:android": "npm run cap:sync && npx cap open android"
