@@ -225,10 +225,28 @@ Nada de criar nós na mão. Nada de uid.
         ".write": "auth != null && auth.uid == $uid",
         ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10))"
       } } }
+    },
+    "visitas": {
+      ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
+      "$dia": { "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('n') || newData.child('n').isBoolean())"
+      } }
     }
   }
 }
 ```
+
+### Visitas (desde 23/09)
+
+| Regra | Efeito |
+|---|---|
+| `visitas/{AAAA-MM-DD}/{uid}` | cada pessoa grava só a **própria** visita, uma vez por dia |
+| `.read` só para admin | quem estuda nunca vê o número; é painel de quem cuida da turma |
+| `n: true` | marca o primeiro acesso da pessoa, para contar quem chegou agora |
+
+O app grava a visita logo depois do login e guarda uma marca no aparelho, então
+o resto do dia nem toca no banco. Quem não entra com o Google não é contado.
 
 ### Curtidas (desde 18/09)
 

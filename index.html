@@ -952,6 +952,7 @@
   .admin-linha.cabecalho{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); background:none;}
   .admin-linha span:not(:first-child){min-width:44px; text-align:right; font-variant-numeric:tabular-nums;}
   .admin-linha b{color:var(--violet);}
+  .admin-tabela.tres .admin-linha{grid-template-columns:1fr auto auto;}
   .admin-tabela .admin-total{margin-top:6px; font-size:12.5px; color:var(--ink-soft);}
   .acoes-legenda b{font-weight:700; color:var(--heading);}
   .acoes-ver-cmt{
@@ -3246,6 +3247,11 @@ async function renderConta(){
         <div class="conta-row-sub">${t('admin.acompanhamentoSub')}</div>
         <div id="admin-acompanhamento" class="admin-tabela">${t('admin.carregando')}</div>
       </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.visitas')}</div>
+        <div class="conta-row-sub">${t('admin.visitasSub')}</div>
+        <div id="admin-visitas" class="admin-tabela tres">${t('admin.carregando')}</div>
+      </div>
       <p class="conta-note" style="margin:10px 0 0;">${t('conta.administracaoNota')}</p>
     </div>` : ''}
 
@@ -3270,7 +3276,7 @@ async function renderConta(){
   // Sem esta chamada, quem ja esta logado veria "Entrar com Google" de novo.
   updateAuthUI();
   await atualizarRankingCheckboxConta();
-  if (souAdmin()) carregarAcompanhamentoAdmin();
+  if (souAdmin()) { carregarAcompanhamentoAdmin(); carregarVisitasAdmin(); }
 }
 
 async function saveContaName(name){
@@ -5890,6 +5896,12 @@ const UI_STRINGS = {
     'share.copieOLink': 'Copie o link:',
     'admin.acompanhamento': 'Acompanhamento da semana',
     'admin.acompanhamentoSub': 'Quantas pessoas concluíram cada dia e fizeram o quiz',
+    'admin.visitas': 'Quem abriu o app',
+    'admin.visitasSub': 'Pessoas diferentes por dia, nos últimos 7 dias',
+    'admin.dia': 'Dia',
+    'admin.abriram': 'Abriram',
+    'admin.novos': 'Novos',
+    'admin.totalSemana': '${pessoas} pessoa(s) nesta semana · ${novos} novo(s)',
     'admin.carregando': 'Carregando…',
     'admin.leu': 'Leu',
     'admin.quiz': 'Quiz',
@@ -6243,6 +6255,12 @@ const UI_STRINGS = {
     'share.copieOLink': 'Copy the link:',
     'admin.acompanhamento': 'This week tracking',
     'admin.acompanhamentoSub': 'How many people finished each day and took the quiz',
+    'admin.visitas': 'Who opened the app',
+    'admin.visitasSub': 'Different people per day, over the last 7 days',
+    'admin.dia': 'Day',
+    'admin.abriram': 'Opened',
+    'admin.novos': 'New',
+    'admin.totalSemana': '${pessoas} person(s) this week · ${novos} new',
     'admin.carregando': 'Loading…',
     'admin.leu': 'Read',
     'admin.quiz': 'Quiz',
@@ -6596,6 +6614,12 @@ const UI_STRINGS = {
     'share.copieOLink': 'Copia el enlace:',
     'admin.acompanhamento': 'Seguimiento de la semana',
     'admin.acompanhamentoSub': 'Cuántas personas completaron cada día e hicieron el quiz',
+    'admin.visitas': 'Quién abrió la app',
+    'admin.visitasSub': 'Personas diferentes por día, en los últimos 7 días',
+    'admin.dia': 'Día',
+    'admin.abriram': 'Abrieron',
+    'admin.novos': 'Nuevos',
+    'admin.totalSemana': '${pessoas} persona(s) esta semana · ${novos} nuevo(s)',
     'admin.carregando': 'Cargando…',
     'admin.leu': 'Leyó',
     'admin.quiz': 'Quiz',
@@ -8369,6 +8393,82 @@ async function carregarAcompanhamentoAdmin(lessonId){
     + `<p class="admin-total">${quantos} ${t('admin.registroNestaLicao')}</p>`;
 }
 
+// ===== QUANTAS PESSOAS ABRIRAM O APP (só admin vê) =====
+// Estrutura no banco:
+//   visitas/{AAAA-MM-DD}/{uid} = {em:<quando>, n:true no primeiro dia da pessoa}
+// É uma gravação por pessoa por dia (o resto do dia nem toca no banco), e só
+// conta quem está logado - sem conta não dá para gravar, e não vamos pedir
+// dado nenhum de quem só passa para ler.
+const DIAS_NO_PAINEL = 7;
+
+async function registrarVisita(){
+  if (!currentUser) return;
+  const hoje = dateKey(new Date());
+  const marca = 'visita-' + hoje;
+  try{
+    const res = await window.storage.get(marca, false);
+    if (res && res.value) return; // já contei esta pessoa hoje
+  }catch(e){ /* primeira vez no dia */ }
+  // "n" (novo) marca quem está abrindo o app pela primeira vez na vida.
+  let novo = false;
+  try{
+    const antes = await window.storage.get('visita-primeira', false);
+    novo = !(antes && antes.value);
+  }catch(e){ novo = true; }
+  try{
+    const token = await getAuthToken();
+    const corpo = { em: Date.now() };
+    if (novo) corpo.n = true;
+    const r = await fetch(`${FIREBASE_DB}/visitas/${hoje}/${currentUser.uid}.json?auth=${token}`, {
+      method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(corpo)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    await window.storage.set(marca, '1', false);
+    if (novo) await window.storage.set('visita-primeira', hoje, false);
+  }catch(e){ /* contagem é extra: nunca atrapalha quem está estudando */ }
+}
+
+// Tabela da aba Conta: últimos 7 dias, quantas pessoas abriram e quantas eram novas.
+async function carregarVisitasAdmin(){
+  const alvo = document.getElementById('admin-visitas');
+  if (!alvo || !souAdmin()) return;
+  const dias = [];
+  for (let i = DIAS_NO_PAINEL - 1; i >= 0; i--){
+    const d = new Date(); d.setDate(d.getDate() - i);
+    dias.push(dateKey(d));
+  }
+  let dados;
+  try{
+    const token = await getAuthToken();
+    // orderBy "$key" com startAt: desce só a janela do painel, não o histórico inteiro.
+    const url = `${FIREBASE_DB}/visitas.json?auth=${token}&orderBy=%22%24key%22&startAt=%22${dias[0]}%22`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    dados = (await r.json()) || {};
+  }catch(e){
+    alvo.innerHTML = `<p class="conta-note" style="margin:0;">${t('admin.semRegras').replace('${erro}', escaparHtml(e.message))}</p>`;
+    return;
+  }
+
+  const semana = new Set(), novos = new Set();
+  const linhas = dias.map(dia => {
+    const pessoas = Object.entries(dados[dia] || {});
+    pessoas.forEach(([uid, v]) => { semana.add(uid); if (v && v.n) novos.add(uid); });
+    const dNome = new Date(dia + 'T12:00:00').toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {weekday:'short', day:'2-digit', month:'2-digit'});
+    const doDia = pessoas.length;
+    const novosDoDia = pessoas.filter(([,v]) => v && v.n).length;
+    return `<div class="admin-linha">
+      <span>${escaparHtml(dNome)}</span>
+      <span><b>${doDia}</b></span>
+      <span>${novosDoDia ? '<b>+' + novosDoDia + '</b>' : '—'}</span>
+    </div>`;
+  }).join('');
+
+  alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('admin.dia')}</span><span>${t('admin.abriram')}</span><span>${t('admin.novos')}</span></div>`
+    + linhas
+    + `<p class="admin-total">${t('admin.totalSemana').replace('${pessoas}', semana.size).replace('${novos}', novos.size)}</p>`;
+}
+
 // ===== CURTIR E COMPARTILHAR (estilo Instagram) =====
 // Estrutura no banco:
 //   curtidas/{licao}/{dia}/{uid}            = {nome, em}  -> quem curtiu o dia
@@ -8827,6 +8927,7 @@ function initFirebaseAuth() {
         atualizarVisibilidadeComentarios();
         carregarSocialVisivel();
         iniciarEscutaAoVivo();
+        registrarVisita();
         await refrescarTelaAposLogin();
       } else {
         // Sem conta não há nuvem para esperar: o que está no aparelho é tudo.
