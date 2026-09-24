@@ -8435,6 +8435,15 @@ function agendarSync() {
   };
 })();
 
+// true se algum dia esta estudado aqui e nao esta estudado no progresso da nuvem.
+function progressoLocalTemMais(progressoNuvem){
+  return Object.keys(progressCache).some(id => {
+    const local = (progressCache[id] || {}).days || {};
+    const nuvem = ((progressoNuvem || {})[id] || {}).days || {};
+    return Object.keys(local).some(d => local[d] && !nuvem[d]);
+  });
+}
+
 // Uniao dia a dia do progresso de uma licao (days, quiz e tf). Em conflito
 // no mesmo dia, o que esta neste aparelho prevalece. Nao usa Object.assign
 // no objeto inteiro: isso trocaria todos os dias da nuvem pelos locais.
@@ -8444,6 +8453,11 @@ function mesclarProgressoLicao(local, nuvem) {
   ['days', 'quiz', 'tf'].forEach(campo => {
     if (l[campo] || n[campo]) r[campo] = Object.assign({}, n[campo] || {}, l[campo] || {});
   });
+  // "Estudado" vence "desmarcado": o editor do calendario grava `false` no dia,
+  // e sem esta regra o `false` de um aparelho apagava o dia estudado no outro e
+  // os dois nunca convergiam (18 dias num, 4 no outro). Contra: desmarcar um dia
+  // num aparelho volta a marcar se outro aparelho ainda o tem como estudado.
+  if (n.days) Object.keys(n.days).forEach(d => { if (n.days[d] && !r.days[d]) r.days[d] = n.days[d]; });
   if (!r.days) r.days = {};
   if (!r.quiz) r.quiz = {};
   return r;
@@ -9128,11 +9142,18 @@ const curtidasCmt = {};
 // os comentarios dos 7 dias de todo mundo.
 const curtidasUltimo = {};       // `${licao}-${dia}` -> {uid, nome, em} de quem curtiu por ultimo
 const _socialCarregado = {};     // `${licao}-${dia}` -> uid de quem ja carregou
+const _comentariosContagem = {}; // `${licao}-${dia}` -> quantidade de comentarios
 
 async function carregarSocialDoDia(lessonId, dia){
   const chave = `${lessonId}-${dia}`;
   const uid = currentUser && currentUser.uid;
-  if (!uid || _socialCarregado[chave] === uid) return;
+  if (!uid) return;
+  if (_socialCarregado[chave] === uid){
+    // Ja carregado: so redesenha, porque a licao pode ter sido refeita na tela.
+    desenharCurtidasDia(lessonId, dia);
+    if (chave in _comentariosContagem) atualizarBotaoComentarios(lessonId, dia, _comentariosContagem[chave]);
+    return;
+  }
   _socialCarregado[chave] = uid;
   try{
     const token = await getAuthToken();
@@ -9169,7 +9190,10 @@ async function carregarSocialDoDia(lessonId, dia){
     curtidasDia[chave] = mapa;
     curtidasUltimo[chave] = ultimo;
     desenharCurtidasDia(lessonId, dia);
-    if (rm && rm.ok) atualizarBotaoComentarios(lessonId, dia, Object.keys((await rm.json()) || {}).length);
+    if (rm && rm.ok){
+      _comentariosContagem[chave] = Object.keys((await rm.json()) || {}).length;
+      atualizarBotaoComentarios(lessonId, dia, _comentariosContagem[chave]);
+    }
   }catch(e){
     delete _socialCarregado[chave];
     console.warn('⚠️ Não carregou curtidas:', e.message);
@@ -9588,6 +9612,9 @@ async function aplicarSnapshotAoVivo(dados) {
 
     if (dados.progresso) {
       if (await aplicarProgressoDaNuvem(dados.progresso)) mudou = true;
+      // Este aparelho sabe de dias que a nuvem nao tem como estudados: devolve,
+      // senao o outro aparelho ficaria sem eles (a uniao so cresce, entao nao ha eco infinito).
+      if (progressoLocalTemMais(dados.progresso)) agendarSync();
     }
 
     if (dados.ajustes) {
