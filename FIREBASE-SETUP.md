@@ -161,6 +161,11 @@ Nada de criar nós na mão. Nada de uid.
 
 ## As regras (substituem as anteriores)
 
+> **Indices (`.indexOn`)**: o ranking le so as 200 maiores pontuacoes
+> (`orderBy="pontos"&limitToLast=200`) e a curtida mais recente do dia
+> (`orderBy="em"&limitToLast=1`). Sem os tres `.indexOn` abaixo o banco responde
+> 400 e o app volta a ler tudo, como antes: funciona, mas sem a economia de download.
+
 ```json
 {
   "rules": {
@@ -173,6 +178,7 @@ Nada de criar nós na mão. Nada de uid.
     "ranking": {
       ".read": "auth != null",
       "$semanaId": {
+        ".indexOn": ["pontos"],
         "$uid": {
           ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.hasChildren(['nome','diasConcluidos','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= 7 && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
@@ -182,6 +188,7 @@ Nada de criar nós na mão. Nada de uid.
     "ranking_trimestre": {
       ".read": "auth != null",
       "$trimestreId": {
+        ".indexOn": ["pontos"],
         "$uid": {
           ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.hasChildren(['nome','diasConcluidos','diasElapsados','notaMedia','pontos']) && newData.child('diasConcluidos').val() >= 0 && newData.child('diasConcluidos').val() <= newData.child('diasElapsados').val() && newData.child('notaMedia').val() >= 0 && newData.child('notaMedia').val() <= 100 && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('pontos').val() >= 0 && newData.child('pontos').val() <= 100"
@@ -207,7 +214,7 @@ Nada de criar nós na mão. Nada de uid.
     },
     "curtidas": {
       ".read": "auth != null",
-      "$licao": { "$dia": { "$uid": {
+      "$licao": { "$dia": { ".indexOn": ["em"], "$uid": {
         ".write": "auth != null && auth.uid == $uid && (!newData.exists() || !root.child('config/banidos/'+auth.uid).exists())",
         ".validate": "newData.hasChildren(['nome','em']) && newData.child('nome').isString() && newData.child('nome').val().length <= 40 && newData.child('em').isNumber()"
       } } }

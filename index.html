@@ -2390,7 +2390,10 @@ async function renderLessonDetail(lessonId, fromList){
   // 🔥 Carregar dados do Firebase (sincronizar com nuvem)
   // So busca na nuvem quando ha usuario logado: as regras do banco exigem
   // autenticacao, entao sem login a leitura voltaria 401 a cada licao aberta.
-  if(currentUser) {
+  // Depois do login a escuta ao vivo avisa quando outro aparelho grava, entao
+  // a leitura completa so acontece se ainda nao houve uma ou se a escuta nao
+  // esta ligada. Antes, cada licao aberta baixava o no inteiro do usuario.
+  if(currentUser && (!nuvemLida || !_ouvinteAtivo)) {
     try {
       await mesclarProgressoDaNuvem();
     } catch(e) {
@@ -2889,6 +2892,17 @@ function atualizarDashboardProgresso(lessonId){
   }
 }
 
+// Registro de "dia estudado". Guarda a data em que foi feito (doneAt) para o
+// desconto por atraso. Se o dia ja estava registrado, mantem a data original
+// (ex.: o quiz de um dia ja marcado nao renova a data).
+function registroDoDia(anterior, estMinutes){
+  if(anterior && typeof anterior === 'object'){
+    return Object.assign({}, anterior, {studied:true, estMinutes: anterior.estMinutes || estMinutes});
+  }
+  if(anterior) return {studied:true, estMinutes};   // registro antigo (true): sem data, conta em dia
+  return {studied:true, estMinutes, doneAt: dateKey(new Date())};
+}
+
 async function marcarConcluido(btn){
   if(btn.classList.contains('done')) return;
   const lessonId = parseInt(btn.dataset.lesson);
@@ -2908,7 +2922,7 @@ async function marcarConcluido(btn){
   const progress = progressCache[lessonId] || {days:{}, quiz:{}};
   if(!progress.days) progress.days = {};
   const estMinutes = estimateDayReadingMinutes(lessonId, dayId);
-  progress.days[dayId] = {studied:true, estMinutes};
+  progress.days[dayId] = registroDoDia(progress.days[dayId], estMinutes);
   progressCache[lessonId] = progress;
   btn.classList.add('done');
   btn.textContent = t('lesson.diaConcluido');
@@ -3060,9 +3074,9 @@ function bindDayInteractions(lessonId, content, progress){
             const p = progressCache[lessonId] || {days:{}, quiz:{}};
             if(!p.quiz) p.quiz = {};
             if(!p.days) p.days = {};
-            p.quiz[day.id] = {correct: localState.correct, total: 10, time: elapsed};
+            p.quiz[day.id] = {correct: localState.correct, total: 10, time: elapsed, doneAt: dateKey(new Date())};
             const estMinutes = estimateDayReadingMinutes(lessonId, day.id);
-            p.days[day.id] = {studied:true, estMinutes};
+            p.days[day.id] = registroDoDia(p.days[day.id], estMinutes);
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
             registrarStat(lessonId, day.id, {c:true, q: localState.correct, e: localState.erradas.join(',')});
@@ -3128,9 +3142,9 @@ function bindDayInteractions(lessonId, content, progress){
             const p = progressCache[lessonId] || {days:{}, quiz:{}};
             if(!p.tf) p.tf = {};
             if(!p.days) p.days = {};
-            p.tf[day.id] = {correct: tfState.correct, total: tfItems.length, time: elapsed};
+            p.tf[day.id] = {correct: tfState.correct, total: tfItems.length, time: elapsed, doneAt: dateKey(new Date())};
             const estMinutes = estimateDayReadingMinutes(lessonId, day.id);
-            if(!p.days[day.id]) p.days[day.id] = {studied:true, estMinutes};
+            if(!p.days[day.id]) p.days[day.id] = registroDoDia(undefined, estMinutes);
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
 
@@ -3591,6 +3605,36 @@ function licoesDoTrimestreEscolhido(){
 // ============ STATS VIEW ============
 const dayOffsets = {dom:1, seg:2, ter:3, qua:4, qui:5, sex:6, sab:7};
 function dateKey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+// ===== PONTUACAO: ATRASO E TEMPO =====
+// Cada atividade (dia marcado, quiz, verdadeiro/falso) vale menos quanto mais
+// tarde for feita em relacao ao dia da licao: no proprio dia vale 100%, no dia
+// seguinte 85%, depois 70%... ate o piso de 10% (a atividade nunca zera).
+// No quiz, responder mais rapido tambem rende mais: ate 60 s vale 100%, a
+// partir de 5 min vale 50%, e entre os dois cai em linha reta.
+// Registros antigos, sem a data em que foram feitos, contam como em dia.
+const PONTOS_PERDA_POR_DIA_ATRASO = 0.15;
+const PONTOS_PISO_ATRASO = 0.10;
+const QUIZ_TEMPO_RAPIDO_MS = 60 * 1000;
+const QUIZ_TEMPO_LENTO_MS = 300 * 1000;
+const QUIZ_PISO_TEMPO = 0.5;
+
+function diasDeAtraso(dataDoDia, feitoEm){
+  if(!feitoEm) return 0;
+  const feito = new Date(feitoEm + 'T00:00:00');
+  if(isNaN(feito)) return 0;
+  return Math.max(0, Math.round((feito - dataDoDia) / 86400000));
+}
+function fatorAtraso(dias){
+  return Math.max(PONTOS_PISO_ATRASO, 1 - PONTOS_PERDA_POR_DIA_ATRASO * (dias || 0));
+}
+function fatorTempoQuiz(ms){
+  if(typeof ms !== 'number' || !(ms >= 0)) return 1;
+  if(ms <= QUIZ_TEMPO_RAPIDO_MS) return 1;
+  if(ms >= QUIZ_TEMPO_LENTO_MS) return QUIZ_PISO_TEMPO;
+  const t = (ms - QUIZ_TEMPO_RAPIDO_MS) / (QUIZ_TEMPO_LENTO_MS - QUIZ_TEMPO_RAPIDO_MS);
+  return 1 - t * (1 - QUIZ_PISO_TEMPO);
+}
+
 function dayCalendarDate(lessonId, dayId){
   const d = new Date(lessonStart(lessonId));
   d.setDate(d.getDate() + dayOffsets[dayId]);
@@ -3674,6 +3718,14 @@ function buildProgressMap(){
         // pct mescla quiz e Verdadeiro/Falso quando os dois existem no dia
         // (a maioria) - com so um dos dois, usa so ele. Usado pela media do
         // ranking e por qualquer outro lugar que le buildProgressMap.
+        // Fator de atraso do dia marcado e nota ponderada (atraso e tempo do quiz)
+        // usados nos pontos do ranking. `pct` continua sendo a nota simples.
+        if(studied) map[key].fator = fatorAtraso(diasDeAtraso(date, dayEntry && dayEntry.doneAt));
+        const notasPonderadas = [];
+        if(quiz) notasPonderadas.push(quiz.correct/quiz.total * fatorAtraso(diasDeAtraso(date, quiz.doneAt)) * fatorTempoQuiz(quiz.time));
+        if(tf) notasPonderadas.push(tf.correct/tf.total * fatorAtraso(diasDeAtraso(date, tf.doneAt)));
+        map[key].pctPontos = notasPonderadas.length
+          ? Math.round(notasPonderadas.reduce((a,b)=>a+b,0)/notasPonderadas.length*100) : null;
         const quizPct = quiz ? quiz.correct/quiz.total*100 : null;
         const tfPct = tf ? tf.correct/tf.total*100 : null;
         if(quizPct !== null && tfPct !== null) map[key].pct = Math.round((quizPct+tfPct)/2);
@@ -3785,17 +3837,19 @@ function calcularRankingSemanal(){
   const progressMap = buildProgressMap();
   const today = new Date(); today.setHours(0,0,0,0);
   const sunday = new Date(today); sunday.setDate(today.getDate() - today.getDay());
-  let diasConcluidos = 0;
-  const notas = [];
+  let diasConcluidos = 0, somaFatores = 0;
+  const notas = [], notasPontos = [];
   const cursor = new Date(sunday);
   while(cursor <= today){
     const info = progressMap[dateKey(cursor)];
-    if(info && info.studied) diasConcluidos++;
+    if(info && info.studied){ diasConcluidos++; somaFatores += (info.fator === undefined ? 1 : info.fator); }
     if(info && info.pct !== null && info.pct !== undefined) notas.push(info.pct);
+    if(info && info.pctPontos !== null && info.pctPontos !== undefined) notasPontos.push(info.pctPontos);
     cursor.setDate(cursor.getDate() + 1);
   }
   const notaMedia = notas.length ? Math.round(notas.reduce((a,b)=>a+b,0)/notas.length) : 0;
-  const pontos = Math.round(diasConcluidos/7*60) + Math.round(notaMedia/100*40);
+  const notaPontos = notasPontos.length ? notasPontos.reduce((a,b)=>a+b,0)/notasPontos.length : 0;
+  const pontos = Math.round(somaFatores/7*60) + Math.round(notaPontos/100*40);
   return { semanaId: dateKey(sunday), diasConcluidos, notaMedia, pontos };
 }
 
@@ -3806,17 +3860,19 @@ function calcularRankingTrimestre(){
   const limite = today < end ? today : end;
   let diasElapsados = Math.floor((limite - start) / 86400000) + 1;
   if(diasElapsados < 1) diasElapsados = 1;
-  let diasConcluidos = 0;
-  const notas = [];
+  let diasConcluidos = 0, somaFatores = 0;
+  const notas = [], notasPontos = [];
   Object.keys(progressMap).forEach(key => {
     const dia = new Date(key + 'T00:00:00');
     if(dia < start || dia > limite) return;
     const info = progressMap[key];
-    if(info.studied) diasConcluidos++;
+    if(info.studied){ diasConcluidos++; somaFatores += (info.fator === undefined ? 1 : info.fator); }
     if(info.pct !== null && info.pct !== undefined) notas.push(info.pct);
+    if(info.pctPontos !== null && info.pctPontos !== undefined) notasPontos.push(info.pctPontos);
   });
   const notaMedia = notas.length ? Math.round(notas.reduce((a,b)=>a+b,0)/notas.length) : 0;
-  const pontos = Math.round(diasConcluidos/diasElapsados*60) + Math.round(notaMedia/100*40);
+  const notaPontos = notasPontos.length ? notasPontos.reduce((a,b)=>a+b,0)/notasPontos.length : 0;
+  const pontos = Math.round(somaFatores/diasElapsados*60) + Math.round(notaPontos/100*40);
   return { trimestreId: dateKey(start), diasConcluidos, diasElapsados, notaMedia, pontos };
 }
 
@@ -4325,6 +4381,7 @@ function renderStats(){
     </div>
     <div class="ranking-panel active" data-panel="semana"><p class="conta-note">${t('common.carregando')}</p></div>
     <div class="ranking-panel" data-panel="trimestre"></div>
+    <p class="conta-note" style="margin-top:10px;">${t('ranking.comoPontua')}</p>
   </div>
 
   <div class="stats-section-label">${t('stats.historico')}</div>
@@ -4392,20 +4449,10 @@ async function carregarRankingTab(tipo){
     panel.innerHTML = `<p class="conta-note">${t('common.carregando')}</p>`;
     const token = await getAuthToken();
     const meuId = getUserId();
-    let entradas;
-    if(tipo === 'semana'){
-      const { semanaId } = calcularRankingSemanal();
-      const url = `${FIREBASE_DB}/ranking/${semanaId}.json` + (token ? `?auth=${token}` : '');
-      const r = await fetch(url);
-      if(!r.ok) throw new Error('HTTP ' + r.status);
-      entradas = (await r.json()) || {};
-    } else {
-      const { trimestreId } = calcularRankingTrimestre();
-      const url = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}.json` + (token ? `?auth=${token}` : '');
-      const r = await fetch(url);
-      if(!r.ok) throw new Error('HTTP ' + r.status);
-      entradas = (await r.json()) || {};
-    }
+    const caminho = tipo === 'semana'
+      ? `ranking/${calcularRankingSemanal().semanaId}`
+      : `ranking_trimestre/${calcularRankingTrimestre().trimestreId}`;
+    const { entradas, parcial } = await lerRankingTopo(caminho, meuId, token);
 
     const lista = Object.keys(entradas).map(uid => Object.assign({uid}, entradas[uid]));
     lista.sort((a,b) => ((Number(b.pontos)||0) - (Number(a.pontos)||0)) || ((Number(b.notaMedia)||0) - (Number(a.notaMedia)||0)) || String(a.nome||'').localeCompare(String(b.nome||''), LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR'));
@@ -4427,9 +4474,12 @@ async function carregarRankingTab(tipo){
 
     if(meuIndex >= 50){
       const item = lista[meuIndex];
+      // Lista parcial: quem esta alem das RANKING_LEITURA_MAX primeiras posicoes
+      // nao tem posicao exata (seria preciso baixar o ranking inteiro).
+      const posicao = parcial && meuIndex >= RANKING_LEITURA_MAX ? RANKING_LEITURA_MAX + '+' : String(meuIndex+1);
       html += `<div class="ranking-sep">···</div>
       <div class="ranking-row me">
-        <span class="ranking-rank">${meuIndex+1}º</span>
+        <span class="ranking-rank">${posicao}º</span>
         <span class="ranking-name">${escaparHtml(item.nome || t('ranking.alguem'))}</span>
         <span class="ranking-score">${Number(item.pontos) || 0} ${t('ranking.pts')}</span>
       </div>`;
@@ -5997,6 +6047,7 @@ const UI_STRINGS = {
     'ranking.ninguemTrimestre': 'Ninguém no ranking esse trimestre ainda. Seja o primeiro!',
     'ranking.alguem': 'Alguém',
     'ranking.pts': 'pts',
+    'ranking.comoPontua': 'Pontos: dias estudados (60) + notas dos quizzes (40). Fazer depois do dia vale menos (−15% por dia de atraso) e responder o quiz mais rápido vale mais.',
     'conta.meusFavoritos': 'Meus versículos favoritos',
     'conta.semFavoritos': 'Nenhum favorito ainda. Toque na estrela ⭐ ao ler um versículo ou capítulo, na Bíblia ou no Plano Bíblico, pra salvar aqui.',
     'conta.zerarTudoNota': 'Apaga lições, plano bíblico e metas — sem volta',
@@ -6393,6 +6444,7 @@ const UI_STRINGS = {
     'ranking.ninguemTrimestre': "No one's on the leaderboard this quarter yet. Be the first!",
     'ranking.alguem': 'Someone',
     'ranking.pts': 'pts',
+    'ranking.comoPontua': 'Points: days studied (60) + quiz scores (40). Doing an activity after its day is worth less (−15% per day late), and answering the quiz faster is worth more.',
     'conta.meusFavoritos': 'My favorite verses',
     'conta.semFavoritos': 'No favorites yet. Tap the star ⭐ while reading a verse or chapter, in the Bible or in the Bible Plan, to save it here.',
     'conta.zerarTudoNota': "Deletes lessons, Bible plan, and goals — can't be undone",
@@ -6789,6 +6841,7 @@ const UI_STRINGS = {
     'ranking.ninguemTrimestre': 'Todavía nadie está en el ranking este trimestre. ¡Sé el primero!',
     'ranking.alguem': 'Alguien',
     'ranking.pts': 'pts',
+    'ranking.comoPontua': 'Puntos: días estudiados (60) + notas de los quizzes (40). Hacerlo después del día vale menos (−15% por día de atraso) y responder el quiz más rápido vale más.',
     'conta.meusFavoritos': 'Mis versículos favoritos',
     'conta.semFavoritos': 'Todavía no hay favoritos. Toca la estrella ⭐ al leer un versículo o capítulo, en la Biblia o en el Plan Bíblico, para guardarlo aquí.',
     'conta.zerarTudoNota': 'Borra lecciones, plan bíblico y metas — no se puede deshacer',
@@ -7992,6 +8045,63 @@ async function rankingOptInAtivo(){
   } catch(e) { return false; }
 }
 
+// Diagnostico de custo: no console, logado, rode `await medirNuvem()`.
+// Mostra quanto pesa no banco o no deste usuario e o que o ranking e as
+// curtidas do dia aberto custam por leitura (contagens via shallow, sem baixar tudo).
+async function medirNuvem(){
+  if (!currentUser) return 'Entre na conta primeiro.';
+  const token = await getAuthToken();
+  const kb = n => Math.round(n / 102.4) / 10;
+  const baixar = async (url) => { const r = await fetch(url); const t = await r.text(); return { ok: r.ok, bytes: new TextEncoder().encode(t).length, dados: r.ok ? JSON.parse(t) : null }; };
+  const res = {};
+  const u = await baixar(`${FIREBASE_DB}/usuarios/${currentUser.uid}.json?auth=${token}`);
+  res.noDoUsuario_KB = kb(u.bytes);
+  if (u.dados){
+    res.partes_KB = {};
+    Object.keys(u.dados).forEach(k => { res.partes_KB[k] = kb(new TextEncoder().encode(JSON.stringify(u.dados[k])).length); });
+    const aj = u.dados.ajustes || {};
+    res.maioresAjustes_KB = Object.entries(aj).map(([k, v]) => [k, kb(new TextEncoder().encode(String(v)).length)]).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  }
+  const { semanaId } = calcularRankingSemanal();
+  const rk = await baixar(`${FIREBASE_DB}/ranking/${semanaId}.json?shallow=true&auth=${token}`);
+  const nRank = rk.dados ? Object.keys(rk.dados).length : 0;
+  const rkTopo = await baixar(`${FIREBASE_DB}/ranking/${semanaId}.json?orderBy=%22pontos%22&limitToLast=${RANKING_LEITURA_MAX}&auth=${token}`);
+  res.ranking = { participantes: nRank, leituraCompleta_estimada_KB: rkTopo.ok && nRank ? kb(rkTopo.bytes / Math.min(nRank, RANKING_LEITURA_MAX) * nRank) : null, leituraTopo_KB: rkTopo.ok ? kb(rkTopo.bytes) : 'sem .indexOn (400)' };
+  const barra = document.querySelector('.acoes-dia');
+  if (barra){
+    const l = barra.dataset.lesson, d = barra.dataset.day;
+    const c = await baixar(`${FIREBASE_DB}/curtidas/${l}/${d}.json?auth=${token}`);
+    const cs = await baixar(`${FIREBASE_DB}/curtidas/${l}/${d}.json?shallow=true&auth=${token}`);
+    res.curtidasDoDia = { licao: l, dia: d, curtidas: c.dados ? Object.keys(c.dados).length : 0, completo_KB: kb(c.bytes), shallow_KB: kb(cs.bytes) };
+  }
+  console.table(res);
+  return res;
+}
+
+// Le so o topo do ranking (as RANKING_LEITURA_MAX maiores pontuacoes) em vez de
+// todo mundo que entrou. Precisa de ".indexOn": ["pontos"] nas regras; sem ele o
+// servidor responde 400 e cai na leitura completa de antes (mais cara, igual).
+const RANKING_LEITURA_MAX = 200;
+async function lerRankingTopo(caminho, meuId, token){
+  const auth = token ? `auth=${token}` : '';
+  const base = `${FIREBASE_DB}/${caminho}.json`;
+  let parcial = false;
+  let r = await fetch(`${base}?orderBy=%22pontos%22&limitToLast=${RANKING_LEITURA_MAX}` + (auth ? '&' + auth : ''));
+  if(r.ok) parcial = true;
+  else if(r.status === 400) r = await fetch(base + (auth ? '?' + auth : ''));
+  if(!r.ok) throw new Error('HTTP ' + r.status);
+  const entradas = (await r.json()) || {};
+  if(parcial && Object.keys(entradas).length < RANKING_LEITURA_MAX) parcial = false;   // veio tudo
+  // Fora do topo, busca so a propria linha para mostrar "Voce".
+  if(parcial && meuId && !(meuId in entradas)){
+    try{
+      const rm = await fetch(`${FIREBASE_DB}/${caminho}/${meuId}.json` + (auth ? '?' + auth : ''));
+      if(rm.ok){ const meu = await rm.json(); if(meu) entradas[meuId] = meu; }
+    }catch(e){ /* sem a propria linha: so o topo aparece */ }
+  }
+  return { entradas, parcial };
+}
+
 async function atualizarRankingSemanal(){
   if(!currentUser) return;
   try{
@@ -8083,6 +8193,9 @@ async function coletarDadosLocais() {
     const listed = await window.storage.list('', false);
     for (const key of (listed.keys || [])) {
       if (!chaveSincronizavel(key)) continue;
+      // O progresso das licoes ja sobe em `progresso` (cache completo): copiar
+      // 'progress:lessonN' aqui dobrava esse trecho no banco e no download.
+      if (/^progress:lesson\d+$/.test(key)) continue;
       try {
         const res = await window.storage.get(key, false);
         if (res && res.value !== undefined && res.value !== null) dados[key] = res.value;
@@ -8251,12 +8364,15 @@ async function montarPacoteSync(extra) {
     origem: SESSAO_ID
   };
 
+  const carimbo = new Date().toISOString();
+  _meusCarimbos.push(carimbo);
+  if (_meusCarimbos.length > 20) _meusCarimbos.shift();
   return Object.assign({
     progresso: progressCache,
     ajustes: await coletarDadosLocais(),
     ajustes_aparelho: prefs,
     origem: SESSAO_ID,
-    atualizado_em: new Date().toISOString()
+    atualizado_em: carimbo
   }, extra || {});
 }
 
@@ -8267,6 +8383,11 @@ let _syncTimer = null;
 // (ex.: 4 dias no iOS contra 18 na nuvem) e o PUT substitui o no inteiro.
 let nuvemLida = false;
 let _retentativaNuvem = null;
+// Carimbos (atualizado_em) que este aparelho gravou e o ultimo lido da nuvem:
+// a escuta ao vivo olha so esse carimbo (dezenas de bytes) e so baixa o no
+// completo quando ele e de outro aparelho.
+const _meusCarimbos = [];
+let _carimboLido = null;
 
 // Unico caminho para subir o pacote. Garante a leitura antes da gravacao.
 async function subirParaNuvem(extra) {
@@ -8314,6 +8435,15 @@ function agendarSync() {
   };
 })();
 
+// true se algum dia esta estudado aqui e nao esta estudado no progresso da nuvem.
+function progressoLocalTemMais(progressoNuvem){
+  return Object.keys(progressCache).some(id => {
+    const local = (progressCache[id] || {}).days || {};
+    const nuvem = ((progressoNuvem || {})[id] || {}).days || {};
+    return Object.keys(local).some(d => local[d] && !nuvem[d]);
+  });
+}
+
 // Uniao dia a dia do progresso de uma licao (days, quiz e tf). Em conflito
 // no mesmo dia, o que esta neste aparelho prevalece. Nao usa Object.assign
 // no objeto inteiro: isso trocaria todos os dias da nuvem pelos locais.
@@ -8323,6 +8453,11 @@ function mesclarProgressoLicao(local, nuvem) {
   ['days', 'quiz', 'tf'].forEach(campo => {
     if (l[campo] || n[campo]) r[campo] = Object.assign({}, n[campo] || {}, l[campo] || {});
   });
+  // "Estudado" vence "desmarcado": o editor do calendario grava `false` no dia,
+  // e sem esta regra o `false` de um aparelho apagava o dia estudado no outro e
+  // os dois nunca convergiam (18 dias num, 4 no outro). Contra: desmarcar um dia
+  // num aparelho volta a marcar se outro aparelho ainda o tem como estudado.
+  if (n.days) Object.keys(n.days).forEach(d => { if (n.days[d] && !r.days[d]) r.days[d] = n.days[d]; });
   if (!r.days) r.days = {};
   if (!r.quiz) r.quiz = {};
   return r;
@@ -8357,6 +8492,7 @@ async function mesclarProgressoDaNuvem() {
   try {
     const dados = await lerDoFirebase(getUserId());
     if (!dados) { nuvemLida = true; return true; }
+    _carimboLido = dados.atualizado_em || null;
 
     if (dados.progresso) {
       await aplicarProgressoDaNuvem(dados.progresso);
@@ -9001,27 +9137,86 @@ const curtidasCmt = {};
 
 // Busca curtidas (e contagem de comentários) da lição inteira de uma vez:
 // 2 requisições por lição aberta, em vez de 14 (uma por dia).
-async function carregarSocialDaLicao(lessonId){
-  const barras = document.querySelectorAll(`.acoes-dia[data-lesson="${lessonId}"]`);
-  if (!barras.length) return;
-  if (!currentUser){ barras.forEach(b => desenharCurtidasDia(lessonId, b.dataset.day)); return; }
+// Curtidas e contagem de comentarios sao lidas dia a dia, so quando a barra do
+// dia aparece na tela. Antes, abrir uma licao baixava as curtidas (com nome) e
+// os comentarios dos 7 dias de todo mundo.
+const curtidasUltimo = {};       // `${licao}-${dia}` -> {uid, nome, em} de quem curtiu por ultimo
+const _socialCarregado = {};     // `${licao}-${dia}` -> uid de quem ja carregou
+const _comentariosContagem = {}; // `${licao}-${dia}` -> quantidade de comentarios
+
+async function carregarSocialDoDia(lessonId, dia){
+  const chave = `${lessonId}-${dia}`;
+  const uid = currentUser && currentUser.uid;
+  if (!uid) return;
+  if (_socialCarregado[chave] === uid){
+    // Ja carregado: so redesenha, porque a licao pode ter sido refeita na tela.
+    desenharCurtidasDia(lessonId, dia);
+    if (chave in _comentariosContagem) atualizarBotaoComentarios(lessonId, dia, _comentariosContagem[chave]);
+    return;
+  }
+  _socialCarregado[chave] = uid;
   try{
     const token = await getAuthToken();
-    const pedidos = [fetch(`${FIREBASE_DB}/curtidas/${lessonId}.json?auth=${token}`)];
-    if (comentariosLigados()) pedidos.push(fetch(`${FIREBASE_DB}/comentarios/${lessonId}.json?auth=${token}`));
-    const [rc, rm] = await Promise.all(pedidos);
-    const curt = rc.ok ? ((await rc.json()) || {}) : {};
-    const cmts = rm && rm.ok ? ((await rm.json()) || {}) : null;
-    barras.forEach(b => {
-      const dia = b.dataset.day;
-      curtidasDia[`${lessonId}-${dia}`] = curt[dia] || {};
-      desenharCurtidasDia(lessonId, dia);
-      if (cmts) atualizarBotaoComentarios(lessonId, dia, Object.keys(cmts[dia] || {}).length);
-    });
-    carregarStatsDaLicao(lessonId);
+    const base = `${FIREBASE_DB}/curtidas/${lessonId}/${dia}.json`;
+    // shallow: so as chaves (quem curtiu), sem nome nem hora. O nome de quem
+    // curtiu por ultimo vem de uma consulta de 1 item (precisa de .indexOn 'em').
+    const pedidos = [
+      fetch(`${base}?shallow=true&auth=${token}`),
+      fetch(`${base}?orderBy=%22em%22&limitToLast=1&auth=${token}`)
+    ];
+    if (comentariosLigados()) pedidos.push(fetch(`${FIREBASE_DB}/comentarios/${lessonId}/${dia}.json?shallow=true&auth=${token}`));
+    const [rc, ru, rm] = await Promise.all(pedidos);
+    if (!rc.ok) throw new Error('HTTP ' + rc.status);
+    const chaves = (await rc.json()) || {};
+    let ultimo = null;
+    if (ru.ok){
+      const u = (await ru.json()) || {};
+      const k = Object.keys(u)[0];
+      if (k) ultimo = Object.assign({uid: k}, u[k]);
+    } else if (ru.status === 400 && Object.keys(chaves).length){
+      // Sem .indexOn nas regras: le o dia completo, como antes (so este dia).
+      const rf = await fetch(`${base}?auth=${token}`);
+      if (rf.ok){
+        const todos = (await rf.json()) || {};
+        const k = Object.keys(todos).sort((a,b) => ((todos[b]||{}).em||0) - ((todos[a]||{}).em||0))[0];
+        if (k) ultimo = Object.assign({uid: k}, todos[k]);
+      }
+    }
+    const mapa = {};
+    Object.keys(chaves).forEach(u => { mapa[u] = true; });
+    // Mantem a curtida feita nesta tela enquanto a resposta viajava.
+    const atual = curtidasDia[chave] || {};
+    if (atual[uid]) mapa[uid] = atual[uid];
+    curtidasDia[chave] = mapa;
+    curtidasUltimo[chave] = ultimo;
+    desenharCurtidasDia(lessonId, dia);
+    if (rm && rm.ok){
+      _comentariosContagem[chave] = Object.keys((await rm.json()) || {}).length;
+      atualizarBotaoComentarios(lessonId, dia, _comentariosContagem[chave]);
+    }
   }catch(e){
+    delete _socialCarregado[chave];
     console.warn('⚠️ Não carregou curtidas:', e.message);
   }
+}
+
+async function carregarSocialDaLicao(lessonId){
+  const barras = [...document.querySelectorAll(`.acoes-dia[data-lesson="${lessonId}"]`)];
+  if (!barras.length) return;
+  if (!currentUser){ barras.forEach(b => desenharCurtidasDia(lessonId, b.dataset.day)); return; }
+  if (typeof IntersectionObserver === 'function'){
+    const obs = new IntersectionObserver(entradas => {
+      entradas.forEach(e => {
+        if (!e.isIntersecting) return;
+        obs.unobserve(e.target);
+        carregarSocialDoDia(lessonId, e.target.dataset.day);
+      });
+    }, {rootMargin: '300px'});
+    barras.forEach(b => obs.observe(b));
+  } else {
+    for (const b of barras) await carregarSocialDoDia(lessonId, b.dataset.day);
+  }
+  carregarStatsDaLicao(lessonId);
 }
 
 // Depois do login a lição aberta não é redesenhada: atualiza só as barras.
@@ -9050,7 +9245,8 @@ function desenharCurtidasDia(lessonId, dayId){
     return;
   }
   // Mostra o nome de quem curtiu por último, como o Instagram.
-  const ultimo = uids.map(u => mapa[u]).sort((a,b) => (b.em||0) - (a.em||0))[0] || {};
+  const ultimo = curtidasUltimo[`${lessonId}-${dayId}`]
+    || uids.map(u => mapa[u]).filter(x => x && typeof x === 'object').sort((a,b) => (b.em||0) - (a.em||0))[0] || {};
   const nome = escaparHtml(ultimo.nome || t('acoes.alguem'));
   leg.innerHTML = (n > 1 ? t('acoes.curtidoPorMais').replace('${resto}', pessoas(n-1)) : t('acoes.curtidoPor')).replace('${nome}', nome);
 }
@@ -9073,7 +9269,13 @@ async function curtirDia(lessonId, dayId){
   const antes = mapa[uid];
   const curtindo = !antes;
   // Otimista: a tela responde na hora; se o banco recusar, desfaz.
-  if (curtindo) mapa[uid] = {nome: primeiroNome(), em: Date.now()}; else delete mapa[uid];
+  if (curtindo){
+    mapa[uid] = {nome: primeiroNome(), em: Date.now()};
+    curtidasUltimo[chave] = Object.assign({uid}, mapa[uid]);
+  } else {
+    delete mapa[uid];
+    if (curtidasUltimo[chave] && curtidasUltimo[chave].uid === uid) delete curtidasUltimo[chave];
+  }
   desenharCurtidasDia(lessonId, dayId);
   if (curtindo) pulsar(document.getElementById(`curtir-btn-${chave}`));
   try{
@@ -9086,6 +9288,7 @@ async function curtirDia(lessonId, dayId){
   }catch(e){
     console.error('❌ Não registrou a curtida:', e);
     if (antes) mapa[uid] = antes; else delete mapa[uid];
+    if (curtidasUltimo[chave] && curtidasUltimo[chave].uid === uid && !antes) delete curtidasUltimo[chave];
     desenharCurtidasDia(lessonId, dayId);
     avisoRapido(t('acoes.curtirFalhou'));
   }
@@ -9409,6 +9612,9 @@ async function aplicarSnapshotAoVivo(dados) {
 
     if (dados.progresso) {
       if (await aplicarProgressoDaNuvem(dados.progresso)) mudou = true;
+      // Este aparelho sabe de dias que a nuvem nao tem como estudados: devolve,
+      // senao o outro aparelho ficaria sem eles (a uniao so cresce, entao nao ha eco infinito).
+      if (progressoLocalTemMais(dados.progresso)) agendarSync();
     }
 
     if (dados.ajustes) {
@@ -9445,9 +9651,22 @@ function iniciarEscutaAoVivo() {
       return;
     }
     pararEscutaAoVivo();
-    _refUsuario = firebase.database().ref('usuarios/' + currentUser.uid);
+    // Escuta so o carimbo da ultima gravacao, nao o no inteiro: o listener em
+    // 'usuarios/{uid}' baixava o no completo a cada conexao. Aqui o download
+    // completo so acontece quando OUTRO aparelho grava.
+    const uid = currentUser.uid;
+    _refUsuario = firebase.database().ref('usuarios/' + uid + '/atualizado_em');
     _ouvinteAtivo = _refUsuario.on('value',
-      (snap) => aplicarSnapshotAoVivo(snap.val()),
+      async (snap) => {
+        const carimbo = snap.val();
+        if (!carimbo) return;
+        if (_meusCarimbos.indexOf(carimbo) !== -1) return;   // eco da minha gravacao
+        if (carimbo === _carimboLido) return;                 // ja tenho esta versao
+        const dados = await lerDoFirebase(uid).catch(() => null);
+        if (!dados) return;
+        _carimboLido = dados.atualizado_em || carimbo;
+        await aplicarSnapshotAoVivo(dados);
+      },
       (erro) => console.warn('⚠️ Escuta ao vivo interrompida:', erro.message)
     );
 
