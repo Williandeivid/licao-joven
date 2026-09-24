@@ -223,12 +223,52 @@ Nada de criar nós na mão. Nada de uid.
       ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
       "$licao": { "$dia": { "$uid": {
         ".write": "auth != null && auth.uid == $uid",
-        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10))"
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10)) && (!newData.hasChild('e') || (newData.child('e').isString() && newData.child('e').val().length <= 30)) && (!newData.hasChild('nm') || (newData.child('nm').isString() && newData.child('nm').val().length <= 40))"
       } } }
+    },
+    "stats_plano": {
+      ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.hasChildren(['p','l','em']) && newData.child('p').isString() && newData.child('p').val().length <= 30 && newData.child('l').isNumber() && newData.child('l').val() >= 0 && newData.child('em').isNumber()"
+      }
+    },
+    "visitas": {
+      ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
+      "$dia": { "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('n') || newData.child('n').isBoolean()) && (!newData.hasChild('nm') || (newData.child('nm').isString() && newData.child('nm').val().length <= 40))"
+      } }
     }
   }
 }
 ```
+
+### Visitas (desde 23/09)
+
+| Regra | Efeito |
+|---|---|
+| `visitas/{AAAA-MM-DD}/{uid}` | cada pessoa grava só a **própria** visita, uma vez por dia |
+| `.read` só para admin | quem estuda nunca vê o número; é painel de quem cuida da turma |
+| `n: true` | marca o primeiro acesso da pessoa, para contar quem chegou agora |
+
+O app grava a visita logo depois do login e guarda uma marca no aparelho, então
+o resto do dia nem toca no banco. Quem não entra com o Google não é contado.
+
+### Painel do admin (desde 23/09)
+
+| Nó | O que guarda | Quem lê |
+|---|---|---|
+| `visitas/{dia}/{uid}` | `{em, n}` — quem abriu o app naquele dia | só admin |
+| `stats/{licao}/{dia}/{uid}` | `{c, q, e, nm}` — `e` é a lista das perguntas erradas ("3,7") e `nm` o primeiro nome | só admin |
+| `stats_plano/{uid}` | `{p, l, t, em}` — plano ativo e capítulos lidos | só admin |
+
+O progresso completo do plano continua em `usuarios/{uid}`, que **só a própria
+pessoa lê**. Em `stats_plano` vai apenas o resumo que o painel mostra.
+
+O `nm` é **só o primeiro nome** — o mesmo que já aparece no ranking e nas
+curtidas. É o que permite a lista "Quem está lendo" no painel. Na aba Conta há
+um aviso para todo mundo dizendo que os líderes veem quem estudou cada dia.
 
 ### Curtidas (desde 18/09)
 

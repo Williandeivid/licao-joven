@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lições — Escola Sabatina Jovem</title>
+<!-- Prévia do link no WhatsApp: o robô dele não roda JavaScript, então as
+     tags têm de estar aqui no HTML. A imagem precisa de endereço completo. -->
+<meta name="description" content="A lição de cada dia com resumo, quiz e a Bíblia no celular.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lição Jovem">
+<meta property="og:title" content="Lição Jovem · Escola Sabatina Jovem">
+<meta property="og:description" content="A lição de cada dia com resumo, quiz e a Bíblia no celular.">
+<meta property="og:url" content="https://licaojovem-iasd.pages.dev/">
+<meta property="og:image" content="https://licaojovem-iasd.pages.dev/og-imagem.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- Firebase SDK (compat) - carregado do CDN oficial do Google -->
@@ -979,6 +991,10 @@
   .admin-linha.cabecalho{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); background:none;}
   .admin-linha span:not(:first-child){min-width:44px; text-align:right; font-variant-numeric:tabular-nums;}
   .admin-linha b{color:var(--violet);}
+  .admin-tabela.tres .admin-linha{grid-template-columns:1fr auto auto;}
+  .admin-erradas{margin:0 0 4px; padding-left:18px; font-size:12.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:6px;}
+  .admin-erradas b{color:var(--violet);}
+  .admin-pergunta{color:var(--ink); font-size:12px;}
   .admin-tabela .admin-total{margin-top:6px; font-size:12.5px; color:var(--ink-soft);}
   .acoes-legenda b{font-weight:700; color:var(--heading);}
   .acoes-ver-cmt{
@@ -1012,13 +1028,37 @@
   @keyframes folhaSobe{from{transform:translateY(100%)}to{transform:none}}
   .share-folha .alca{width:40px; height:4px; border-radius:4px; background:var(--border); margin:0 auto 10px;}
   .share-folha h4{margin:0 0 8px; font-size:15px; text-align:center; color:var(--heading);}
-  .share-folha button{
-    display:flex; align-items:center; gap:12px; width:100%; padding:13px 10px;
-    background:none; border:none; border-radius:12px; cursor:pointer; font-size:15px; color:var(--ink); text-align:left;
+  /* Prévia do story à esquerda, os dois botões à direita. */
+  .share-corpo{display:flex; gap:14px; align-items:stretch;}
+  .share-previa{
+    flex:0 0 108px; aspect-ratio:9/16; border-radius:12px; overflow:hidden;
+    background:linear-gradient(160deg,#6c4ce0,#ff5d8f); display:flex; align-items:center; justify-content:center;
   }
-  .share-folha button:hover{background:var(--tint-violet);}
-  .share-folha .ico{font-size:20px; width:28px; text-align:center;}
-  .share-folha small{color:var(--ink-soft); font-size:12.5px; margin-left:2px;}
+  .share-previa img{width:100%; height:100%; object-fit:cover; display:block;}
+  .share-previa-vazia{color:#fff; font-size:11px; text-align:center; padding:8px; opacity:.85;}
+  .share-botoes{flex:1; display:flex; flex-direction:column; gap:10px; justify-content:center;}
+  .share-btn{
+    display:flex; align-items:center; gap:12px; width:100%; padding:14px;
+    border:none; border-radius:16px; cursor:pointer; color:#fff; text-align:left; font:inherit; font-size:15px;
+    transition:transform .1s ease, opacity .2s ease;
+  }
+  .share-btn:active{transform:scale(.97);}
+  .share-btn:disabled{opacity:.55; cursor:default;}
+  .share-btn svg{width:28px; height:28px; flex:0 0 28px;}
+  .share-btn span{display:flex; flex-direction:column; gap:2px;}
+  .share-btn small{font-size:12px; opacity:.9;}
+  .share-whats{background:#1faa53;}
+
+  /* QR do convite em tela cheia: fundo sempre claro para a câmera ler. */
+  .qr-tela{position:fixed; inset:0; z-index:3200; background:#fff; display:flex; align-items:center; justify-content:center; padding:16px;}
+  .qr-caixa{display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; color:#1c1735; max-width:520px; width:100%;}
+  .qr-selo{font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:700; letter-spacing:.08em; color:#6c4ce0; background:#efeafd; padding:6px 14px; border-radius:100px;}
+  .qr-caixa h2{font-family:'Unbounded', sans-serif; font-size:30px; margin:4px 0 6px; color:#1c1735;}
+  .qr-codigo{width:min(78vw, 58vh, 440px); aspect-ratio:1;}
+  .qr-codigo svg{width:100%; height:100%; display:block;}
+  .qr-dica{margin:6px 0 0; font-size:15px; color:#1c1735;}
+  .qr-link{margin:0 0 8px; font-family:'JetBrains Mono', monospace; font-size:13px; color:#6b6585;}
+  .share-insta{background:linear-gradient(45deg,#f58529,#dd2a7b 50%,#8134af);}
   .share-aviso{
     position:fixed; left:50%; bottom:90px; transform:translateX(-50%); z-index:3100;
     display:flex; align-items:center; gap:12px; max-width:92vw;
@@ -2051,6 +2091,24 @@ function hashStr(s){
   for(let i=0;i<s.length;i++){ h = (Math.imul(31,h) + s.charCodeAt(i)) | 0; }
   return h>>>0;
 }
+// O 3o trimestre usa Fácil/Intermediária/Avançada; o 4o, Fácil/Média/Difícil
+// e as "Bíblica · ...". A cor segue o nível, e o rótulo segue o idioma - a
+// tradução não traz a dificuldade, então ela vem do português e é traduzida aqui.
+const DIFICULDADES = {
+  'Fácil':                   { classe:'facil',    en:'Easy',                es:'Fácil' },
+  'Média':                   { classe:'inter',    en:'Medium',              es:'Media' },
+  'Intermediária':           { classe:'inter',    en:'Intermediate',        es:'Intermedia' },
+  'Difícil':                 { classe:'avancada', en:'Hard',                es:'Difícil' },
+  'Avançada':                { classe:'avancada', en:'Advanced',            es:'Avanzada' },
+  'Bíblica · Intermediária': { classe:'inter',    en:'Bible · Intermediate', es:'Bíblica · Intermedia' },
+  'Bíblica · Difícil':       { classe:'avancada', en:'Bible · Hard',        es:'Bíblica · Difícil' }
+};
+function nivelDaDificuldade(diff){
+  const d = DIFICULDADES[diff];
+  if (!d) return { classe:'avancada', rotulo: diff || '' };
+  return { classe: d.classe, rotulo: idiomaConteudoAtual === 'pt' ? diff : (d[idiomaConteudoAtual] || diff) };
+}
+
 function shuffleOptions(opts, correctLetter, seed){
   const idx = opts.map((o,i)=>i);
   const correctIdx = correctLetter.charCodeAt(0)-65;
@@ -2225,8 +2283,8 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
       <h3>${t('lesson.quizMultiplaEscolha')}</h3>
       <div class="quiz-timer"><svg class="timer-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg><span>${t('lesson.tempoDoisPontos')}<span class="tval" data-timer>${savedQuiz ? formatTime(savedQuiz.time) : '00:00'}</span></span></div>`;
     day.quiz.questions.forEach((q, i)=>{
-      const diffClass = q.diff==='Fácil'?'diff-facil':(q.diff==='Intermediária'?'diff-inter':'diff-avancada');
-      html += `<div class="q-block" data-q="${i+1}"><span class="diff ${diffClass}">${q.diff}</span>
+      const nivel = nivelDaDificuldade(q.diff);
+      html += `<div class="q-block" data-q="${i+1}"><span class="diff diff-${nivel.classe}">${nivel.rotulo}</span>
         <div class="q-text">${i+1}. ${(q.text || '').replace(/^\d+[\.\)]\s*/, '')}</div>
         <div class="options">${shuffledQ[i].opts.map((o,oi)=>`<button class="opt ${kahootClasses[oi]}" data-v="${String.fromCharCode(65+oi)}">${o}</button>`).join('')}</div>
       </div>`;
@@ -2955,7 +3013,9 @@ function bindDayInteractions(lessonId, content, progress){
     const answers = quizEl.dataset.answers.split(',');
     const timerEl = quizEl.querySelector('[data-timer]');
     const resultBox = quizEl.querySelector('.quiz-result');
-    let localState = {answered:0, correct:0, startTime: savedQuiz?null:null, timerInterval:null, done: !!savedQuiz};
+    // "erradas" guarda o NUMERO da pergunta que a pessoa errou (1 a 10). Vai
+    // para o painel do admin saber qual ponto da licao a turma nao entendeu.
+    let localState = {answered:0, correct:0, erradas:[], startTime: savedQuiz?null:null, timerInterval:null, done: !!savedQuiz};
 
     if(savedQuiz){
       quizEl.querySelectorAll('.q-block').forEach((block,qi)=>{
@@ -2986,6 +3046,7 @@ function bindDayInteractions(lessonId, content, progress){
           });
           localState.answered++;
           if(opt.dataset.v === correct) localState.correct++;
+          else localState.erradas.push(qIndex + 1);
 
           if(localState.answered === 10){
             clearInterval(localState.timerInterval);
@@ -3004,7 +3065,7 @@ function bindDayInteractions(lessonId, content, progress){
             p.days[day.id] = {studied:true, estMinutes};
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
-            registrarStat(lessonId, day.id, {c:true, q: localState.correct});
+            registrarStat(lessonId, day.id, {c:true, q: localState.correct, e: localState.erradas.join(',')});
 
             // Antes disso a tela inteira era reconstruida (renderLessonDetail),
             // o que parecia um refresh: piscava, perdia o scroll e fechava
@@ -3219,6 +3280,18 @@ async function renderConta(){
     </div>
 
     <div class="conta-card">
+      <div class="conta-section-title">${t('convite.titulo')}</div>
+      <div class="conta-row">
+        <div><div class="conta-row-title">${t('convite.qr')}</div><div class="conta-row-sub">${t('convite.qrNota')}</div></div>
+        <button class="conta-btn" onclick="mostrarQrConvite()">${t('convite.mostrar')}</button>
+      </div>
+      <div class="conta-row">
+        <div><div class="conta-row-title">WhatsApp</div><div class="conta-row-sub">${t('convite.whatsNota')}</div></div>
+        <button class="conta-btn conta-btn-secondary" onclick="convidarPeloWhats()">${t('convite.enviar')}</button>
+      </div>
+    </div>
+
+    <div class="conta-card">
       <div class="conta-section-title">${t('conta.seusDados')}</div>
       <div class="conta-row">
         <div><div class="conta-row-title">${t('conta.fazerBackup')}</div><div class="conta-row-sub">${t('conta.fazerBackupNota')}</div></div>
@@ -3233,6 +3306,7 @@ async function renderConta(){
         <div><div class="conta-row-title">${t('conta.zerarTudo')}</div><div class="conta-row-sub">${t('conta.zerarTudoNota')}</div></div>
         <button class="conta-btn conta-btn-danger" onclick="confirmResetAll()">${t('conta.zerar')}</button>
       </div>
+      <p class="conta-note" style="margin:10px 0 0;">${t('conta.lideresVeem')}</p>
     </div>
 
     <div class="conta-card">
@@ -3294,6 +3368,21 @@ async function renderConta(){
         <div class="conta-row-sub">${t('admin.acompanhamentoSub')}</div>
         <div id="admin-acompanhamento" class="admin-tabela">${t('admin.carregando')}</div>
       </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.visitas')}</div>
+        <div class="conta-row-sub">${t('admin.visitasSub')}</div>
+        <div id="admin-visitas" class="admin-tabela tres">${t('admin.carregando')}</div>
+      </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.conversa')}</div>
+        <div class="conta-row-sub">${t('admin.conversaSub')}</div>
+        <div id="admin-conversa" class="admin-tabela"></div>
+      </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.plano')}</div>
+        <div class="conta-row-sub">${t('admin.planoSub')}</div>
+        <div id="admin-plano" class="admin-tabela"></div>
+      </div>
       <p class="conta-note" style="margin:10px 0 0;">${t('conta.administracaoNota')}</p>
     </div>` : ''}
 
@@ -3318,7 +3407,7 @@ async function renderConta(){
   // Sem esta chamada, quem ja esta logado veria "Entrar com Google" de novo.
   updateAuthUI();
   await atualizarRankingCheckboxConta();
-  if (souAdmin()) carregarAcompanhamentoAdmin();
+  if (souAdmin()) { carregarAcompanhamentoAdmin(); carregarVisitasAdmin(); }
 }
 
 async function saveContaName(name){
@@ -4644,7 +4733,8 @@ const EGW_TITULOS = {
   patriarcas: 'Patriarcas e Profetas',
   profetas_reis: 'Profetas e Reis',
   desejado: 'O Desejado de Todas as Nações',
-  atos: 'Atos dos Apóstolos'
+  atos: 'Atos dos Apóstolos',
+  caminho: 'Caminho a Cristo'
 };
 // Ordem da serie e quantidade de capitulos de cada um (confere com
 // biblioteca/indice.json; se mudar la, mude aqui).
@@ -4823,6 +4913,7 @@ async function loadPlanProgress(key){
 }
 async function savePlanProgress(key){
   try{ await window.storage.set('bible-plan-progress-'+key, JSON.stringify(planProgressCache[key]), false); }catch(e){}
+  registrarStatPlano(key);
 }
 // Estima o tempo de leitura de um capítulo bíblico específico, usando o texto real
 // (contagem de palavras de verdade, não uma média genérica) — mesma lógica da lição.
@@ -4958,12 +5049,55 @@ async function carregarIndiceEGW(){
   return indiceEGW;
 }
 
+// Cópia no aparelho de cada capítulo já aberto: na segunda vez abre sem
+// internet. Mudou o texto de algum livro? Suba o número do nome.
+const CACHE_BIBLIOTECA = 'biblioteca-v1';
+
+async function buscarJsonComCopia(url){
+  if ('caches' in window) {
+    try{
+      const cache = await caches.open(CACHE_BIBLIOTECA);
+      const guardado = await cache.match(url);
+      if (guardado) return await guardado.json();
+      const r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      cache.put(url, r.clone()).catch(()=>{});
+      return await r.json();
+    }catch(e){
+      if (String(e.message).startsWith('HTTP')) throw e;
+      // sem Cache API (aba anônima, cota cheia): segue pela rede
+    }
+  }
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+// Livro "porCapitulo" no indice: nada de arquivo inteiro de 1 MB, só a lista
+// de títulos; cada capítulo (~10 KB) desce quando a pessoa abre.
 async function carregarLivroEGW(id){
   if (livrosEGW[id]) return livrosEGW[id];
+  const indice = await carregarIndiceEGW();
+  const meta = indice.livros.find(l => l.id === id);
+  if (meta && meta.porCapitulo) {
+    livrosEGW[id] = { titulo: meta.titulo, porCapitulo: true,
+      capitulos: meta.titulosCapitulos.map(t => ({ t, p: null })) };
+    return livrosEGW[id];
+  }
   const r = await fetch('biblioteca/' + id + '.json');
   if (!r.ok) throw new Error('HTTP ' + r.status);
   livrosEGW[id] = await r.json();
   return livrosEGW[id];
+}
+
+async function carregarCapituloEGW(id, indice){
+  const livro = await carregarLivroEGW(id);
+  const cap = livro.capitulos[indice];
+  if (!cap || cap.p) return cap;
+  const arquivo = 'biblioteca/' + id + '/' + String(indice + 1).padStart(2, '0') + '.json';
+  const baixado = await buscarJsonComCopia(arquivo);
+  cap.p = baixado.p;
+  return cap;
 }
 
 async function carregarUltimoEGW(){
@@ -5004,14 +5138,23 @@ async function renderBiblioteca(){
     return;
   }
 
-  const cartoes = indice.livros.map(l => `
+  const cartao = l => `
     <button class="egw-card" onclick="abrirLivroEGW('${l.id}')">
       <span class="egw-card-nome">${escaparHtml(l.titulo)}</span>
       <span class="egw-card-meta">${l.ano} · ${l.capitulos} ${t('bible.capitulos')}</span>
-    </button>`).join('');
+    </button>`;
+  // Livro sem "grupo" é da Série do Grande Conflito; os outros ficam em
+  // seções próprias, na ordem em que aparecem no indice.
+  const grupos = [];
+  indice.livros.forEach(l => {
+    const nome = l.grupo || indice.serie;
+    let g = grupos.find(x => x.nome === nome);
+    if(!g){ g = { nome, livros: [] }; grupos.push(g); }
+    g.livros.push(l);
+  });
 
   container.querySelector('.bible-wrap').innerHTML =
-    `<div class="testament-label">${escaparHtml(indice.serie)}</div><div class="egw-cards">${cartoes}</div>`
+    grupos.map(g => `<div class="testament-label">${escaparHtml(g.nome)}</div><div class="egw-cards">${g.livros.map(cartao).join('')}</div>`).join('')
     + (ultimoEGW ? `<button class="egw-continuar" onclick="abrirCapituloEGW('${ultimoEGW.id}', ${ultimoEGW.capitulo})">${t('bible.continuarLeitura')} · ${escaparHtml(ultimoEGW.resumo)}</button>` : '');
 }
 
@@ -5045,14 +5188,18 @@ async function abrirCapituloEGW(id, indice){
   hideAllViews();
   container.style.display = 'block';
   document.getElementById('tab-bible').classList.add('active');
-  let livro;
-  try{ livro = await carregarLivroEGW(id); }
+  let livro, cap;
+  try{
+    livro = await carregarLivroEGW(id);
+    cap = await carregarCapituloEGW(id, indice);
+  }
   catch(e){
     container.innerHTML = `<div class="bible-wrap"><p class="cmt-vazio">${t('bible.bibliotecaFalhou')}</p></div>`;
     return;
   }
-  const cap = livro.capitulos[indice];
   if(!cap) return;
+  // Já deixa o próximo capítulo guardado, para a leitura seguir sem internet.
+  if(livro.porCapitulo && indice + 1 < livro.capitulos.length) carregarCapituloEGW(id, indice + 1).catch(()=>{});
   egwState = { livro: id, capitulo: indice };
   container.dataset.view = 'egw-capitulo';
   // Cada parágrafo termina com a referência oficial de citação ("DTN 9.1").
@@ -5894,7 +6041,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Livros de Ellen G. White, com o texto conferido com o original.',
     'bible.hubBiblia': '66 livros · Antigo e Novo Testamento',
     'bible.hubPlanoVazio': 'Escolha um plano de leitura',
-    'bible.hubBiblioteca': 'Ellen G. White · 5 livros',
+    'bible.hubBiblioteca': 'Ellen G. White · 6 livros',
     'bible.bibliotecaFalhou': 'Não foi possível abrir a biblioteca agora. Tente de novo em instantes.',
     'bible.continuarLeitura': 'Continuar',
     'bible.capitulos': 'capítulos',
@@ -5906,15 +6053,12 @@ const UI_STRINGS = {
     'acoes.curtirComentario': 'Curtir comentário',
     'acoes.compartilhar': 'Compartilhar',
     'acoes.licao': 'Lição',
-    'acoes.noApp': 'No app Lição Jovem:',
     'acoes.estudeNoApp': 'Estude esse dia no app Lição Jovem:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · ESCOLA SABATINA',
     'acoes.entrar': 'Entrar',
     'acoes.entreParaX': 'Entre na sua conta para ${acao}',
     'acoes.curtirFalhou': 'Não foi possível curtir agora',
     'acoes.linkCopiado': 'Link copiado',
-    'acoes.gerandoImagem': 'Gerando a imagem…',
-    'acoes.imagemBaixada': 'Imagem baixada',
     'acoes.imagemFalhou': 'Não foi possível gerar a imagem',
     'acoes.voceCurtiu': 'Você curtiu',
     'acoes.curtidoPorVoceMais': 'Curtido por <b>você</b> e mais ${resto}',
@@ -5927,14 +6071,48 @@ const UI_STRINGS = {
     'acoes.verNComentarios': 'Ver os ${n} comentários',
     'share.titulo': 'Compartilhar',
     'share.whatsResumo': 'resumo e link',
-    'share.whatsTodo': 'texto do dia inteiro',
-    'share.stories': 'Imagem para stories',
-    'share.copiarLink': 'Copiar link',
-    'share.outrosApps': 'Outros apps',
-    'share.baixarTexto': 'Baixar texto',
-    'share.copieOLink': 'Copie o link:',
+    'share.stories': 'Stories',
+    'share.storiesSub': 'Instagram ou status',
+    'share.preparando': 'Preparando a imagem…',
+    'share.linkNaFigurinha': 'Link copiado: cole na figurinha de link',
+    'share.imagemSalva': 'Imagem salva. Abra o Instagram pelo celular',
+    'convite.titulo': 'Convide seus amigos',
+    'convite.qr': 'QR code do app',
+    'convite.qrNota': 'Mostre na classe: quem apontar a câmera abre o app.',
+    'convite.mostrar': 'Mostrar',
+    'convite.whatsNota': 'Mande o convite com o link do app.',
+    'convite.enviar': 'Enviar',
+    'convite.qrFalhou': 'Não foi possível abrir o QR code. Confira a internet.',
+    'convite.selo': 'ESCOLA SABATINA JOVEM',
+    'convite.aponteACamera': 'Aponte a câmera do celular para abrir o app',
+    'convite.fechar': 'Fechar',
+    'convite.textoWhats': '📖 Estou estudando a Lição da Escola Sabatina Jovem pelo app Lição Jovem: resumo do dia, quiz e a Bíblia no celular. Estuda comigo?',
     'admin.acompanhamento': 'Acompanhamento da semana',
     'admin.acompanhamentoSub': 'Quantas pessoas concluíram cada dia e fizeram o quiz',
+    'admin.visitas': 'Quem abriu o app',
+    'admin.visitasSub': 'Pessoas diferentes por dia, nos últimos 7 dias',
+    'admin.funil': 'Semana: ${inicio} no dia mais cheio → ${fim} no último dia (${pct}%)',
+    'admin.maisErradas': 'Perguntas que a turma mais erra',
+    'admin.erros': 'erro(s)',
+    'admin.perguntaN': '· pergunta ${n}',
+    'admin.voltaram': '${voltaram} de ${antes} da semana passada voltaram (${pct}%)',
+    'admin.semSemanaAnterior': 'Sem dados da semana passada ainda.',
+    'admin.conversa': 'Conversa da lição',
+    'admin.conversaSub': 'Comentários e curtidas desta semana',
+    'admin.conversaResumo': '${cmt} comentário(s) de ${pcmt} pessoa(s) · ${curt} curtida(s) de ${pcurt} pessoa(s)',
+    'admin.plano': 'Plano bíblico',
+    'admin.planoSub': 'Quantas pessoas estão lendo e em que ponto',
+    'admin.planoResumo': '${pessoas} pessoa(s) lendo · mais usado: ${plano} (${quantos}) · média de ${media} capítulo(s)',
+    'admin.planoVazio': 'Ninguém começou um plano ainda.',
+    'admin.quemEstaLendo': 'Quem está lendo',
+    'admin.pessoa': 'Pessoa',
+    'admin.dias': 'Dias',
+    'admin.semNome': 'Sem nome',
+    'conta.lideresVeem': 'Os líderes da sua classe veem quem estudou cada dia e o resultado do quiz. Suas anotações continuam só suas.',
+    'admin.dia': 'Dia',
+    'admin.abriram': 'Abriram',
+    'admin.novos': 'Novos',
+    'admin.totalSemana': '${pessoas} pessoa(s) nesta semana · ${novos} novo(s)',
     'admin.carregando': 'Carregando…',
     'admin.leu': 'Leu',
     'admin.quiz': 'Quiz',
@@ -6257,7 +6435,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Ellen G. White books, with the text checked against the original.',
     'bible.hubBiblia': '66 books · Old and New Testament',
     'bible.hubPlanoVazio': 'Pick a reading plan',
-    'bible.hubBiblioteca': 'Ellen G. White · 5 books',
+    'bible.hubBiblioteca': 'Ellen G. White · 6 books',
     'bible.bibliotecaFalhou': 'Could not open the library right now. Try again in a moment.',
     'bible.continuarLeitura': 'Continue',
     'bible.capitulos': 'chapters',
@@ -6269,15 +6447,12 @@ const UI_STRINGS = {
     'acoes.curtirComentario': 'Like comment',
     'acoes.compartilhar': 'Share',
     'acoes.licao': 'Lesson',
-    'acoes.noApp': 'In the Lição Jovem app:',
     'acoes.estudeNoApp': 'Study this day in the Lição Jovem app:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · SABBATH SCHOOL',
     'acoes.entrar': 'Sign in',
     'acoes.entreParaX': 'Sign in to your account to ${acao}',
     'acoes.curtirFalhou': 'Could not like right now',
     'acoes.linkCopiado': 'Link copied',
-    'acoes.gerandoImagem': 'Creating the image…',
-    'acoes.imagemBaixada': 'Image downloaded',
     'acoes.imagemFalhou': 'Could not create the image',
     'acoes.voceCurtiu': 'You liked this',
     'acoes.curtidoPorVoceMais': 'Liked by <b>you</b> and ${resto}',
@@ -6290,14 +6465,48 @@ const UI_STRINGS = {
     'acoes.verNComentarios': 'View all ${n} comments',
     'share.titulo': 'Share',
     'share.whatsResumo': 'summary and link',
-    'share.whatsTodo': 'the whole day',
-    'share.stories': 'Image for stories',
-    'share.copiarLink': 'Copy link',
-    'share.outrosApps': 'Other apps',
-    'share.baixarTexto': 'Download text',
-    'share.copieOLink': 'Copy the link:',
+    'share.stories': 'Stories',
+    'share.storiesSub': 'Instagram or WhatsApp status',
+    'share.preparando': 'Preparing the image…',
+    'share.linkNaFigurinha': 'Link copied: paste it in a link sticker',
+    'share.imagemSalva': 'Image saved. Open Instagram on your phone',
+    'convite.titulo': 'Invite your friends',
+    'convite.qr': 'App QR code',
+    'convite.qrNota': 'Show it in class: whoever points the camera opens the app.',
+    'convite.mostrar': 'Show',
+    'convite.whatsNota': 'Send the invite with the app link.',
+    'convite.enviar': 'Send',
+    'convite.qrFalhou': 'Could not open the QR code. Check your internet.',
+    'convite.selo': 'YOUTH SABBATH SCHOOL',
+    'convite.aponteACamera': 'Point your phone camera here to open the app',
+    'convite.fechar': 'Close',
+    'convite.textoWhats': '📖 I am studying the Youth Sabbath School lesson on the Lição Jovem app: daily summary, quiz and the Bible on your phone. Study with me?',
     'admin.acompanhamento': 'This week tracking',
     'admin.acompanhamentoSub': 'How many people finished each day and took the quiz',
+    'admin.visitas': 'Who opened the app',
+    'admin.visitasSub': 'Different people per day, over the last 7 days',
+    'admin.funil': 'Week: ${inicio} on the busiest day → ${fim} on the last day (${pct}%)',
+    'admin.maisErradas': 'Questions the class gets wrong most',
+    'admin.erros': 'wrong',
+    'admin.perguntaN': '· question ${n}',
+    'admin.voltaram': '${voltaram} of ${antes} from last week came back (${pct}%)',
+    'admin.semSemanaAnterior': 'No data from last week yet.',
+    'admin.conversa': 'Lesson conversation',
+    'admin.conversaSub': 'Comments and likes this week',
+    'admin.conversaResumo': '${cmt} comment(s) from ${pcmt} person(s) · ${curt} like(s) from ${pcurt} person(s)',
+    'admin.plano': 'Bible plan',
+    'admin.planoSub': 'How many people are reading and how far along',
+    'admin.planoResumo': '${pessoas} person(s) reading · most used: ${plano} (${quantos}) · ${media} chapter(s) on average',
+    'admin.planoVazio': 'No one has started a plan yet.',
+    'admin.quemEstaLendo': 'Who is reading',
+    'admin.pessoa': 'Person',
+    'admin.dias': 'Days',
+    'admin.semNome': 'No name',
+    'conta.lideresVeem': 'Your class leaders can see who studied each day and the quiz result. Your notes stay yours only.',
+    'admin.dia': 'Day',
+    'admin.abriram': 'Opened',
+    'admin.novos': 'New',
+    'admin.totalSemana': '${pessoas} person(s) this week · ${novos} new',
     'admin.carregando': 'Loading…',
     'admin.leu': 'Read',
     'admin.quiz': 'Quiz',
@@ -6620,7 +6829,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Libros de Elena G. de White, con el texto cotejado con el original.',
     'bible.hubBiblia': '66 libros · Antiguo y Nuevo Testamento',
     'bible.hubPlanoVazio': 'Elige un plan de lectura',
-    'bible.hubBiblioteca': 'Elena G. de White · 5 libros',
+    'bible.hubBiblioteca': 'Elena G. de White · 6 libros',
     'bible.bibliotecaFalhou': 'No se pudo abrir la biblioteca ahora. Inténtalo de nuevo en un momento.',
     'bible.continuarLeitura': 'Continuar',
     'bible.capitulos': 'capítulos',
@@ -6632,15 +6841,12 @@ const UI_STRINGS = {
     'acoes.curtirComentario': 'Me gusta el comentario',
     'acoes.compartilhar': 'Compartir',
     'acoes.licao': 'Lección',
-    'acoes.noApp': 'En la app Lição Jovem:',
     'acoes.estudeNoApp': 'Estudia este día en la app Lição Jovem:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · ESCUELA SABÁTICA',
     'acoes.entrar': 'Entrar',
     'acoes.entreParaX': 'Entra en tu cuenta para ${acao}',
     'acoes.curtirFalhou': 'No se pudo dar me gusta ahora',
     'acoes.linkCopiado': 'Enlace copiado',
-    'acoes.gerandoImagem': 'Creando la imagen…',
-    'acoes.imagemBaixada': 'Imagen descargada',
     'acoes.imagemFalhou': 'No se pudo crear la imagen',
     'acoes.voceCurtiu': 'Te gustó',
     'acoes.curtidoPorVoceMais': 'Le gusta a <b>ti</b> y a ${resto}',
@@ -6653,14 +6859,48 @@ const UI_STRINGS = {
     'acoes.verNComentarios': 'Ver los ${n} comentarios',
     'share.titulo': 'Compartir',
     'share.whatsResumo': 'resumen y enlace',
-    'share.whatsTodo': 'el día completo',
-    'share.stories': 'Imagen para stories',
-    'share.copiarLink': 'Copiar enlace',
-    'share.outrosApps': 'Otras apps',
-    'share.baixarTexto': 'Descargar texto',
-    'share.copieOLink': 'Copia el enlace:',
+    'share.stories': 'Stories',
+    'share.storiesSub': 'Instagram o estado',
+    'share.preparando': 'Preparando la imagen…',
+    'share.linkNaFigurinha': 'Enlace copiado: pégalo en un sticker de enlace',
+    'share.imagemSalva': 'Imagen guardada. Abre Instagram en el celular',
+    'convite.titulo': 'Invita a tus amigos',
+    'convite.qr': 'Código QR de la app',
+    'convite.qrNota': 'Muéstralo en la clase: quien apunte la cámara abre la app.',
+    'convite.mostrar': 'Mostrar',
+    'convite.whatsNota': 'Envía la invitación con el enlace de la app.',
+    'convite.enviar': 'Enviar',
+    'convite.qrFalhou': 'No se pudo abrir el código QR. Revisa tu internet.',
+    'convite.selo': 'ESCUELA SABÁTICA JOVEN',
+    'convite.aponteACamera': 'Apunta la cámara del celular para abrir la app',
+    'convite.fechar': 'Cerrar',
+    'convite.textoWhats': '📖 Estoy estudiando la lección de la Escuela Sabática Joven en la app Lição Jovem: resumen del día, quiz y la Biblia en el celular. ¿Estudias conmigo?',
     'admin.acompanhamento': 'Seguimiento de la semana',
     'admin.acompanhamentoSub': 'Cuántas personas completaron cada día e hicieron el quiz',
+    'admin.visitas': 'Quién abrió la app',
+    'admin.visitasSub': 'Personas diferentes por día, en los últimos 7 días',
+    'admin.funil': 'Semana: ${inicio} en el día más lleno → ${fim} en el último día (${pct}%)',
+    'admin.maisErradas': 'Preguntas que la clase más falla',
+    'admin.erros': 'fallo(s)',
+    'admin.perguntaN': '· pregunta ${n}',
+    'admin.voltaram': '${voltaram} de ${antes} de la semana pasada volvieron (${pct}%)',
+    'admin.semSemanaAnterior': 'Todavía no hay datos de la semana pasada.',
+    'admin.conversa': 'Conversación de la lección',
+    'admin.conversaSub': 'Comentarios y me gusta de esta semana',
+    'admin.conversaResumo': '${cmt} comentario(s) de ${pcmt} persona(s) · ${curt} me gusta de ${pcurt} persona(s)',
+    'admin.plano': 'Plan bíblico',
+    'admin.planoSub': 'Cuántas personas están leyendo y en qué punto',
+    'admin.planoResumo': '${pessoas} persona(s) leyendo · más usado: ${plano} (${quantos}) · promedio de ${media} capítulo(s)',
+    'admin.planoVazio': 'Nadie ha empezado un plan todavía.',
+    'admin.quemEstaLendo': 'Quién está leyendo',
+    'admin.pessoa': 'Persona',
+    'admin.dias': 'Días',
+    'admin.semNome': 'Sin nombre',
+    'conta.lideresVeem': 'Los líderes de tu clase ven quién estudió cada día y el resultado del quiz. Tus anotaciones siguen siendo solo tuyas.',
+    'admin.dia': 'Día',
+    'admin.abriram': 'Abrieron',
+    'admin.novos': 'Nuevos',
+    'admin.totalSemana': '${pessoas} persona(s) esta semana · ${novos} nuevo(s)',
     'admin.carregando': 'Cargando…',
     'admin.leu': 'Leyó',
     'admin.quiz': 'Quiz',
@@ -8449,9 +8689,31 @@ async function registrarStat(lessonId, dayId, dados){
     const token = await getAuthToken();
     await fetch(`${FIREBASE_DB}/stats/${lessonId}/${dayId}/${currentUser.uid}.json?auth=${token}`, {
       method:'PATCH', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(Object.assign({em: Date.now()}, dados))
+      // "nm" é só o primeiro nome (o mesmo que aparece no ranking e nas
+      // curtidas), para o painel poder mostrar a lista de quem está lendo.
+      body: JSON.stringify(Object.assign({em: Date.now(), nm: primeiroNome()}, dados))
     });
   }catch(e){ /* estatistica e extra: nunca atrapalha quem esta estudando */ }
+}
+
+// Resumo do plano bíblico para o painel (o progresso em si continua sendo da
+// pessoa, em `usuarios`, que só ela lê). Aqui vai só o essencial:
+//   stats_plano/{uid} = {p:<plano>, l:<capítulos lidos>, t:<total>, em}
+let _timerStatPlano = null;
+function registrarStatPlano(key){
+  if (!currentUser || !BIBLE_PLANS[key]) return;
+  clearTimeout(_timerStatPlano);
+  // Marcar um dia inteiro salva várias vezes seguidas: espera a poeira baixar.
+  _timerStatPlano = setTimeout(async () => {
+    try{
+      const prog = planProgressCache[key] || {read:{}};
+      const token = await getAuthToken();
+      await fetch(`${FIREBASE_DB}/stats_plano/${currentUser.uid}.json?auth=${token}`, {
+        method:'PUT', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ p: key, l: Object.keys(prog.read || {}).length, t: BIBLE_PLANS[key].sequence.length, em: Date.now() })
+      });
+    }catch(e){ /* contagem é extra */ }
+  }, 2000);
 }
 
 async function carregarStatsDaLicao(lessonId){
@@ -8514,7 +8776,214 @@ async function carregarAcompanhamentoAdmin(lessonId){
   const quantos = gente.size === 1 ? t('acoes.umaPessoa') : t('acoes.nPessoas').replace('${n}', gente.size);
   alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('acoes.licao')} ${numeroDaLicao(licao)}</span><span>${t('admin.leu')}</span><span>${t('admin.quiz')}</span><span>${t('admin.media')}</span></div>`
     + linhas
+    + funilDaSemana(licao, dias)
+    + listaDeQuemEstaLendo(licao, dias)
+    + perguntasMaisErradas(licao, dias)
     + `<p class="admin-total">${quantos} ${t('admin.registroNestaLicao')}</p>`;
+  carregarConversaAdmin(licao);
+  carregarPlanoAdmin();
+}
+
+// Onde a turma para no meio da semana: do dia mais cheio até o último dia.
+function funilDaSemana(licao, dias){
+  const porDia = dias.map(d => Object.values((statsLicao[licao] || {})[d.id] || {}).filter(p => p && p.c).length);
+  const maior = Math.max(...porDia, 0);
+  if (!maior) return '';
+  const ultimo = porDia[porDia.length - 1];
+  const pct = Math.round(ultimo / maior * 100);
+  return `<p class="admin-total">${t('admin.funil').replace('${inicio}', maior).replace('${fim}', ultimo).replace('${pct}', pct)}</p>`;
+}
+
+// Quem está lendo, um por linha: primeiro nome, dias concluídos e média do
+// quiz. Serve para o líder saber quem sumiu e puxar pelo braço - por isso só
+// admin vê, e só o primeiro nome (o mesmo que já aparece no ranking).
+function listaDeQuemEstaLendo(licao, dias){
+  const gente = {};
+  dias.forEach(d => {
+    Object.entries((statsLicao[licao] || {})[d.id] || {}).forEach(([uid, p]) => {
+      if (!p) return;
+      const g = gente[uid] || (gente[uid] = {nome: '', dias: 0, notas: []});
+      if (p.nm) g.nome = p.nm;
+      if (p.c) g.dias++;
+      if (typeof p.q === 'number') g.notas.push(p.q);
+    });
+  });
+  const lista = Object.values(gente).sort((a, b) => b.dias - a.dias || b.notas.length - a.notas.length);
+  if (!lista.length) return '';
+  const linhas = lista.map(g => {
+    const media = g.notas.length ? Math.round(g.notas.reduce((a, b) => a + b, 0) / g.notas.length * 10) + '%' : '—';
+    return `<div class="admin-linha">
+      <span>${escaparHtml(g.nome || t('admin.semNome'))}</span>
+      <span><b>${g.dias}</b>/${dias.length}</span>
+      <span>${media}</span>
+    </div>`;
+  }).join('');
+  return `<p class="admin-total" style="margin-bottom:2px;">${t('admin.quemEstaLendo')}</p>`
+    + `<div class="admin-tabela tres" style="margin-top:0;">`
+    + `<div class="admin-linha cabecalho"><span>${t('admin.pessoa')}</span><span>${t('admin.dias')}</span><span>${t('admin.media')}</span></div>`
+    + linhas + `</div>`;
+}
+
+// A pergunta que a turma mais erra: vem de stats/{licao}/{dia}/{uid}.e ("3,7").
+function perguntasMaisErradas(licao, dias){
+  const content = LESSONS_CONTENT.find(c => c.id === licao);
+  const contagem = [];
+  dias.forEach(d => {
+    Object.values((statsLicao[licao] || {})[d.id] || {}).forEach(p => {
+      if (!p || typeof p.e !== 'string' || !p.e) return;
+      p.e.split(',').forEach(n => {
+        const num = parseInt(n, 10);
+        if (!num) return;
+        const achou = contagem.find(x => x.dia === d.id && x.num === num);
+        if (achou) achou.erros++;
+        else contagem.push({dia: d.id, num, erros: 1});
+      });
+    });
+  });
+  if (!contagem.length) return '';
+  const top = contagem.sort((a, b) => b.erros - a.erros).slice(0, 3);
+  const itens = top.map(x => {
+    const dia = content && content.days.find(dd => dd.id === x.dia);
+    const q = dia && dia.quiz && dia.quiz.questions[x.num - 1];
+    const texto = q ? resumirTexto(q.text, 70) : '—';
+    const nomeDia = dayDisplayDate(licao, x.dia, idiomaConteudoAtual).split(' · ')[0];
+    return `<li><b>${x.erros}</b> ${t('admin.erros')} · ${escaparHtml(nomeDia)} ${t('admin.perguntaN').replace('${n}', x.num)}<br><span class="admin-pergunta">${escaparHtml(texto)}</span></li>`;
+  }).join('');
+  return `<p class="admin-total" style="margin-bottom:2px;">${t('admin.maisErradas')}</p><ul class="admin-erradas">${itens}</ul>`;
+}
+
+// Comentários e curtidas da lição: o quanto a turma está conversando.
+async function carregarConversaAdmin(licao){
+  const alvo = document.getElementById('admin-conversa');
+  if (!alvo || !souAdmin()) return;
+  try{
+    const token = await getAuthToken();
+    const [rc, rl] = await Promise.all([
+      fetch(`${FIREBASE_DB}/comentarios/${licao}.json?auth=${token}`),
+      fetch(`${FIREBASE_DB}/curtidas/${licao}.json?auth=${token}`)
+    ]);
+    const cmts = rc.ok ? ((await rc.json()) || {}) : {};
+    const curt = rl.ok ? ((await rl.json()) || {}) : {};
+    let nCmt = 0; const quemCmt = new Set(), quemCurtiu = new Set();
+    Object.values(cmts).forEach(dia => Object.values(dia || {}).forEach(c => { if (c && c.uid){ nCmt++; quemCmt.add(c.uid); } }));
+    let nCurt = 0;
+    // curtidas/{licao}/{dia}/{uid} = {nome, em} -> a chave do último nível é a pessoa.
+    Object.values(curt).forEach(dia => Object.keys(dia || {}).forEach(uid => { nCurt++; quemCurtiu.add(uid); }));
+    alvo.innerHTML = `<p class="admin-total" style="margin:0;">`
+      + t('admin.conversaResumo').replace('${cmt}', nCmt).replace('${pcmt}', quemCmt.size)
+        .replace('${curt}', nCurt).replace('${pcurt}', quemCurtiu.size) + `</p>`;
+  }catch(e){ alvo.innerHTML = ''; }
+}
+
+// Plano bíblico: quantas pessoas estão lendo e em que ponto.
+async function carregarPlanoAdmin(){
+  const alvo = document.getElementById('admin-plano');
+  if (!alvo || !souAdmin()) return;
+  let dados;
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/stats_plano.json?auth=${token}`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    dados = (await r.json()) || {};
+  }catch(e){ alvo.innerHTML = ''; return; }
+  const pessoas = Object.values(dados).filter(p => p && p.p);
+  if (!pessoas.length){ alvo.innerHTML = `<p class="admin-total" style="margin:0;">${t('admin.planoVazio')}</p>`; return; }
+  const porPlano = {};
+  pessoas.forEach(p => { porPlano[p.p] = (porPlano[p.p] || 0) + 1; });
+  const favorito = Object.entries(porPlano).sort((a, b) => b[1] - a[1])[0];
+  const media = Math.round(pessoas.reduce((a, p) => a + (p.l || 0), 0) / pessoas.length);
+  const nomePlano = BIBLE_PLANS[favorito[0]] ? planField(favorito[0], 'name', idiomaConteudoAtual) : favorito[0];
+  alvo.innerHTML = `<p class="admin-total" style="margin:0;">`
+    + t('admin.planoResumo').replace('${pessoas}', pessoas.length)
+      .replace('${plano}', escaparHtml(nomePlano)).replace('${quantos}', favorito[1])
+      .replace('${media}', media) + `</p>`;
+}
+
+// ===== QUANTAS PESSOAS ABRIRAM O APP (só admin vê) =====
+// Estrutura no banco:
+//   visitas/{AAAA-MM-DD}/{uid} = {em:<quando>, n:true no primeiro dia da pessoa}
+// É uma gravação por pessoa por dia (o resto do dia nem toca no banco), e só
+// conta quem está logado - sem conta não dá para gravar, e não vamos pedir
+// dado nenhum de quem só passa para ler.
+const DIAS_NO_PAINEL = 7;
+
+async function registrarVisita(){
+  if (!currentUser) return;
+  const hoje = dateKey(new Date());
+  const marca = 'visita-' + hoje;
+  try{
+    const res = await window.storage.get(marca, false);
+    if (res && res.value) return; // já contei esta pessoa hoje
+  }catch(e){ /* primeira vez no dia */ }
+  // "n" (novo) marca quem está abrindo o app pela primeira vez na vida.
+  let novo = false;
+  try{
+    const antes = await window.storage.get('visita-primeira', false);
+    novo = !(antes && antes.value);
+  }catch(e){ novo = true; }
+  try{
+    const token = await getAuthToken();
+    const corpo = { em: Date.now(), nm: primeiroNome() };
+    if (novo) corpo.n = true;
+    const r = await fetch(`${FIREBASE_DB}/visitas/${hoje}/${currentUser.uid}.json?auth=${token}`, {
+      method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(corpo)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    await window.storage.set(marca, '1', false);
+    if (novo) await window.storage.set('visita-primeira', hoje, false);
+  }catch(e){ /* contagem é extra: nunca atrapalha quem está estudando */ }
+}
+
+// Tabela da aba Conta: últimos 7 dias, quantas pessoas abriram e quantas eram novas.
+async function carregarVisitasAdmin(){
+  const alvo = document.getElementById('admin-visitas');
+  if (!alvo || !souAdmin()) return;
+  const dias = [], anteriores = [];
+  for (let i = DIAS_NO_PAINEL * 2 - 1; i >= 0; i--){
+    const d = new Date(); d.setDate(d.getDate() - i);
+    (i >= DIAS_NO_PAINEL ? anteriores : dias).push(dateKey(d));
+  }
+  let dados;
+  try{
+    const token = await getAuthToken();
+    // orderBy "$key" com startAt: desce só as duas semanas do painel, não o histórico inteiro.
+    const url = `${FIREBASE_DB}/visitas.json?auth=${token}&orderBy=%22%24key%22&startAt=%22${anteriores[0]}%22`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    dados = (await r.json()) || {};
+  }catch(e){
+    alvo.innerHTML = `<p class="conta-note" style="margin:0;">${t('admin.semRegras').replace('${erro}', escaparHtml(e.message))}</p>`;
+    return;
+  }
+
+  const semana = new Set(), novos = new Set();
+  const linhas = dias.map(dia => {
+    const pessoas = Object.entries(dados[dia] || {});
+    pessoas.forEach(([uid, v]) => { semana.add(uid); if (v && v.n) novos.add(uid); });
+    const dNome = new Date(dia + 'T12:00:00').toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {weekday:'short', day:'2-digit', month:'2-digit'});
+    const doDia = pessoas.length;
+    const novosDoDia = pessoas.filter(([,v]) => v && v.n).length;
+    return `<div class="admin-linha">
+      <span>${escaparHtml(dNome)}</span>
+      <span><b>${doDia}</b></span>
+      <span>${novosDoDia ? '<b>+' + novosDoDia + '</b>' : '—'}</span>
+    </div>`;
+  }).join('');
+
+  // Quantos da semana passada voltaram nesta: é o número que mostra se o app
+  // virou hábito ou se a pessoa entra uma vez e some.
+  const antes = new Set();
+  anteriores.forEach(dia => Object.keys(dados[dia] || {}).forEach(uid => antes.add(uid)));
+  const voltaram = [...antes].filter(uid => semana.has(uid)).length;
+  const retorno = antes.size
+    ? t('admin.voltaram').replace('${voltaram}', voltaram).replace('${antes}', antes.size)
+        .replace('${pct}', Math.round(voltaram / antes.size * 100))
+    : t('admin.semSemanaAnterior');
+
+  alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('admin.dia')}</span><span>${t('admin.abriram')}</span><span>${t('admin.novos')}</span></div>`
+    + linhas
+    + `<p class="admin-total">${t('admin.totalSemana').replace('${pessoas}', semana.size).replace('${novos}', novos.size)}</p>`
+    + `<p class="admin-total" style="margin-top:2px;">${retorno}</p>`;
 }
 
 // ===== CURTIR E COMPARTILHAR (estilo Instagram) =====
@@ -8649,25 +9118,9 @@ async function curtirComentario(lessonId, dayId, cmtId, btn){
   }
 }
 
-// Texto completo do dia, do próprio conteúdo da lição (não do que está na
-// tela): sai igual tendo a aba Oficial ou Resumo aberta.
-function textoCompletoDoDia(lessonId, dayId){
-  const {content, day} = dadosDoDia(lessonId, dayId);
-  if (!day) return null;
-  const limpo = txt => String(txt || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  const linhas = [
-    `📖 *${t('acoes.licao')} ${numeroDaLicao(lessonId)}${content && content.title ? ' · ' + content.title : ''}*`,
-    `*${day.title}* — ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual)}`
-  ];
-  if (day.centraltexts && day.centraltexts.length) linhas.push('', '_' + day.centraltexts.join(' · ') + '_');
-  linhas.push('', (day.body || []).map(limpo).filter(Boolean).join('\n\n'));
-  linhas.push('', t('acoes.noApp'), linkDoDia(lessonId, dayId));
-  return linhas.join('\n');
-}
-
 // ===== IMAGEM PARA STORIES =====
-// Desenha 1080x1920 num canvas: no celular vai direto para o menu de
-// compartilhar (Instagram aparece lá); no computador baixa o PNG.
+// 1080x1920. O Instagram cobre ~250 px em cima e embaixo com a propria
+// interface, entao tudo que importa fica entre y=250 e y=1670.
 function quebrarLinhas(ctx, texto, largura){
   const linhas = [];
   String(texto || '').split('\n').forEach(paragrafo => {
@@ -8682,84 +9135,92 @@ function quebrarLinhas(ctx, texto, largura){
   return linhas;
 }
 
+// Uma frase curta para o card: story com parágrafo inteiro ninguém lê.
+// Fecha na última frase que cabe em ~30 palavras; se nenhuma cabe, corta.
+function fraseDoCard(texto){
+  const limpo = String(texto || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const palavras = limpo.split(' ');
+  if (palavras.length <= 30) return limpo;
+  const frases = limpo.match(/[^.!?]+[.!?]+/g) || [];
+  let saida = '';
+  for (const f of frases){
+    const junto = (saida + f).trim();
+    if (junto.split(' ').length > 30) break;
+    saida = junto + ' ';
+  }
+  return saida.trim() || palavras.slice(0, 28).join(' ') + '…';
+}
+
+function retanguloRedondo(ctx, x, y, l, a, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.arcTo(x + l, y, x + l, y + a, r); ctx.arcTo(x + l, y + a, x, y + a, r);
+  ctx.arcTo(x, y + a, x, y, r); ctx.arcTo(x, y, x + l, y, r); ctx.closePath();
+}
+
 async function gerarImagemStories(lessonId, dayId){
-  const {content, day} = dadosDoDia(lessonId, dayId);
+  const {day} = dadosDoDia(lessonId, dayId);
   if (!day) return null;
   try{ await document.fonts.ready; }catch(e){}
 
-  const L = 1080, A = 1920, margem = 96;
+  const L = 1080, A = 1920, margem = 104, topo = 300, base = 1540;
   const cv = Object.assign(document.createElement('canvas'), {width:L, height:A});
   const ctx = cv.getContext('2d');
 
   const fundo = ctx.createLinearGradient(0, 0, L, A);
   fundo.addColorStop(0, '#6c4ce0'); fundo.addColorStop(1, '#ff5d8f');
   ctx.fillStyle = fundo; ctx.fillRect(0, 0, L, A);
-  // Dois círculos claros ao fundo, para não ficar um degradê chapado.
   ctx.fillStyle = 'rgba(255,255,255,.08)';
-  ctx.beginPath(); ctx.arc(L*0.85, A*0.16, 300, 0, 7); ctx.fill();
-  ctx.beginPath(); ctx.arc(L*0.1, A*0.82, 240, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(L*0.88, A*0.14, 300, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(L*0.08, A*0.86, 260, 0, 7); ctx.fill();
 
-  // Mede tudo antes de desenhar, para o bloco ficar centralizado na vertical
-  // em vez de sobrar um vazio embaixo quando o resumo e curto.
-  ctx.font = '800 82px Unbounded, sans-serif';
-  const linhasTitulo = quebrarLinhas(ctx, day.title, L - margem*2);
+  const selo = `${t('acoes.licao').toUpperCase()} ${numeroDaLicao(lessonId)} · ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual).split(' · ')[0].toUpperCase()}`;
+  ctx.font = '800 84px Unbounded, sans-serif';
+  const linhasTitulo = quebrarLinhas(ctx, day.title, L - margem*2).slice(0, 4);
   const verso = (day.centraltexts && day.centraltexts.length) ? day.centraltexts[0] : '';
-  ctx.font = '500 46px "Plus Jakarta Sans", sans-serif';
-  const resumo = String(day.summary || (day.body || [])[0] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  const linhasResumo = quebrarLinhas(ctx, resumo, L - margem*2).slice(0, 16);
+  ctx.font = '600 54px "Plus Jakarta Sans", sans-serif';
+  const linhasFrase = quebrarLinhas(ctx, fraseDoCard(day.summary || (day.body || [])[0]), L - margem*2 - 20).slice(0, 9);
 
-  const altura = 60 + linhasTitulo.length*96 + (verso ? 100 : 0) + 64 + linhasResumo.length*66;
-  let y = Math.max(320, (A - altura)/2);
+  // Mede antes de desenhar para centralizar o bloco dentro da area segura.
+  const altura = 80 + 60 + linhasTitulo.length*100 + (verso ? 70 : 0) + 110 + linhasFrase.length*76;
+  let y = topo + Math.max(0, (base - topo - altura) / 2);
 
-  ctx.fillStyle = 'rgba(255,255,255,.85)';
-  ctx.font = '600 34px "JetBrains Mono", monospace';
-  ctx.fillText(`${t('acoes.licao').toUpperCase()} ${numeroDaLicao(lessonId)} · ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual).split(' · ')[0].toUpperCase()}`, margem, y);
-
-  y += 96;
+  ctx.font = '700 32px "JetBrains Mono", monospace';
+  const larguraSelo = ctx.measureText(selo).width + 56;
+  ctx.fillStyle = 'rgba(255,255,255,.2)';
+  retanguloRedondo(ctx, margem, y, larguraSelo, 70, 35); ctx.fill();
   ctx.fillStyle = '#fff';
-  ctx.font = '800 82px Unbounded, sans-serif';
-  linhasTitulo.forEach(l => { ctx.fillText(l, margem, y); y += 96; });
+  ctx.fillText(selo, margem + 28, y + 46);
+  y += 80 + 60 + 70;
+
+  ctx.font = '800 84px Unbounded, sans-serif';
+  linhasTitulo.forEach(l => { ctx.fillText(l, margem, y); y += 100; });
 
   if (verso){
-    y += 24;
-    ctx.fillStyle = 'rgba(255,255,255,.9)';
+    ctx.fillStyle = 'rgba(255,255,255,.85)';
     ctx.font = '600 38px "Plus Jakarta Sans", sans-serif';
     ctx.fillText(verso, margem, y);
-    y += 40;
+    y += 70;
   }
 
-  y += 64;
+  // Aspas grandes e apagadas marcando a frase.
+  y += 40;
+  ctx.fillStyle = 'rgba(255,255,255,.3)';
+  ctx.font = '800 200px Unbounded, sans-serif';
+  ctx.fillText('“', margem - 10, y + 120);
+  y += 110;
   ctx.fillStyle = '#fff';
-  ctx.font = '500 46px "Plus Jakarta Sans", sans-serif';
-  linhasResumo.forEach(l => { ctx.fillText(l, margem, y); y += 66; });
+  ctx.font = '600 54px "Plus Jakarta Sans", sans-serif';
+  linhasFrase.forEach(l => { ctx.fillText(l, margem + 20, y); y += 76; });
 
-  ctx.fillStyle = 'rgba(255,255,255,.75)';
-  ctx.font = '600 32px "JetBrains Mono", monospace';
-  ctx.fillText(t('acoes.rodapeImagem'), margem, A - 150);
-  ctx.font = '400 30px "Plus Jakarta Sans", sans-serif';
-  ctx.fillText(location.host, margem, A - 100);
+  ctx.fillStyle = 'rgba(255,255,255,.85)';
+  ctx.font = '700 32px "JetBrains Mono", monospace';
+  ctx.fillText(t('acoes.rodapeImagem'), margem, 1600);
+  ctx.fillStyle = 'rgba(255,255,255,.7)';
+  ctx.font = '500 30px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText(location.host, margem, 1648);
 
-  // JPEG de alta qualidade: ~1/6 do tamanho do PNG, e o stories aceita igual.
+  // JPEG: ~1/6 do tamanho do PNG, e o stories aceita igual.
   return new Promise(res => cv.toBlob(res, 'image/jpeg', 0.92));
-}
-
-async function compartilharStories(lessonId, dayId){
-  const {day} = dadosDoDia(lessonId, dayId);
-  let blob;
-  try{ blob = await gerarImagemStories(lessonId, dayId); }
-  catch(e){ console.error('❌ Não gerou a imagem:', e); }
-  if (!blob){ avisoRapido(t('acoes.imagemFalhou')); return; }
-
-  const arquivo = new File([blob], `licao-${lessonId}-${dayId}.jpg`, {type:'image/jpeg'});
-  if (navigator.canShare && navigator.canShare({files:[arquivo]})){
-    try{ await navigator.share({files:[arquivo], title: day ? day.title : 'Lição Jovem'}); return; }
-    catch(e){ if (e && e.name === 'AbortError') return; }
-  }
-  const url = URL.createObjectURL(blob);
-  const a = Object.assign(document.createElement('a'), {href:url, download:`licao-${lessonId}-${dayId}.jpg`});
-  a.click();
-  URL.revokeObjectURL(url);
-  avisoRapido(t('acoes.imagemBaixada'));
 }
 
 function textoParaCompartilhar(lessonId, dayId){
@@ -8768,60 +9229,129 @@ function textoParaCompartilhar(lessonId, dayId){
   const quando = dayDisplayDate(lessonId, dayId, idiomaConteudoAtual).split(' · ')[0];
   const titulo = `${t('acoes.licao')} ${numeroDaLicao(lessonId)}${content && content.title ? ' · ' + content.title : ''}`;
   const linhas = [`📖 *${titulo}*`, `${quando ? quando + ' — ' : ''}*${day.title}*`];
+  if (day.centraltexts && day.centraltexts.length) linhas.push('_' + day.centraltexts[0] + '_');
   if (day.summary) linhas.push('', resumirTexto(day.summary, 220));
   linhas.push('', t('acoes.estudeNoApp'));
   return {titulo, texto: linhas.join('\n'), link: linkDoDia(lessonId, dayId)};
 }
 
-// A folha é sempre nossa, porque ela também guarda o "Baixar texto" que saiu
-// do menu ⋮. "Outros apps" chama o menu do próprio celular, quando existe.
+// Dois caminhos só: WhatsApp (texto + link, 1 toque) e Stories (imagem pelo
+// menu do celular, onde aparecem Instagram e status do WhatsApp).
 function compartilharDia(lessonId, dayId){
   const s = textoParaCompartilhar(lessonId, dayId);
   if (s) abrirFolhaCompartilhar(s, lessonId, dayId);
 }
 
+const ICONE_WHATS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3Z"/></svg>';
+const ICONE_INSTA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM21.4 8c-.1-1.5-.4-2.8-1.5-3.9S17.5 2.7 16 2.6c-1.6-.1-6.4-.1-8 0-1.5.1-2.8.4-3.9 1.5S2.7 6.5 2.6 8c-.1 1.6-.1 6.4 0 8 .1 1.5.4 2.8 1.5 3.9s2.4 1.4 3.9 1.5c1.6.1 6.4.1 8 0 1.5-.1 2.8-.4 3.9-1.5s1.4-2.4 1.5-3.9c.1-1.6.1-6.4 0-8Zm-2.1 9.7a3.2 3.2 0 0 1-1.8 1.8c-1.3.5-4.3.4-5.5.4s-4.3.1-5.5-.4a3.2 3.2 0 0 1-1.8-1.8c-.5-1.3-.4-4.3-.4-5.7s-.1-4.3.4-5.6a3.2 3.2 0 0 1 1.8-1.9c1.3-.5 4.3-.4 5.5-.4s4.3-.1 5.5.4a3.2 3.2 0 0 1 1.8 1.9c.5 1.3.4 4.3.4 5.6s.1 4.4-.4 5.7Z"/></svg>';
+
 function abrirFolhaCompartilhar(s, lessonId, dayId){
   document.querySelectorAll('.share-fundo').forEach(el => el.remove());
   const fundo = document.createElement('div');
   fundo.className = 'share-fundo';
-  fundo.innerHTML = `<div class="share-folha" role="dialog" aria-label="Compartilhar">
+  fundo.innerHTML = `<div class="share-folha" role="dialog" aria-label="${t('share.titulo')}">
     <div class="alca"></div>
     <h4>${t('share.titulo')}</h4>
-    <button data-acao="whats"><span class="ico">💬</span> WhatsApp <small>${t('share.whatsResumo')}</small></button>
-    <button data-acao="whats-todo"><span class="ico">📝</span> WhatsApp <small>${t('share.whatsTodo')}</small></button>
-    <button data-acao="stories"><span class="ico">🖼️</span> ${t('share.stories')}</button>
-    <button data-acao="copiar"><span class="ico">🔗</span> ${t('share.copiarLink')}</button>
-    ${navigator.share ? `<button data-acao="outros"><span class="ico">📤</span> ${t('share.outrosApps')}</button>` : ''}
-    <button data-acao="baixar"><span class="ico">📄</span> ${t('share.baixarTexto')}</button>
+    <div class="share-corpo">
+      <div class="share-previa"><span class="share-previa-vazia">${t('share.preparando')}</span></div>
+      <div class="share-botoes">
+        <button class="share-btn share-whats" data-acao="whats">${ICONE_WHATS}<span><b>WhatsApp</b><small>${t('share.whatsResumo')}</small></span></button>
+        <button class="share-btn share-insta" data-acao="stories" disabled>${ICONE_INSTA}<span><b>${t('share.stories')}</b><small>${t('share.preparando')}</small></span></button>
+      </div>
+    </div>
   </div>`;
-  const fechar = () => fundo.remove();
-  const acao = (nome, fn) => {
-    const b = fundo.querySelector(`[data-acao="${nome}"]`);
-    if (b) b.addEventListener('click', fn);
-  };
+  let arquivo = null, urlPrevia = null;
+  const fechar = () => { fundo.remove(); if (urlPrevia) URL.revokeObjectURL(urlPrevia); };
   fundo.addEventListener('click', e => { if (e.target === fundo) fechar(); });
-  acao('whats', () => {
+
+  fundo.querySelector('[data-acao="whats"]').addEventListener('click', () => {
     window.open(`https://wa.me/?text=${encodeURIComponent(s.texto + '\n' + s.link)}`, '_blank');
     fechar();
   });
-  acao('whats-todo', () => {
-    const t = textoCompletoDoDia(lessonId, dayId);
-    if (t) window.open(`https://wa.me/?text=${encodeURIComponent(t)}`, '_blank');
-    fechar();
+
+  const baixar = () => {
+    const a = Object.assign(document.createElement('a'), {href: urlPrevia, download: arquivo.name});
+    a.click();
+    avisoRapido(t('share.imagemSalva'));
+  };
+  // No iPhone o menu de compartilhar só abre se for chamado colado ao toque:
+  // por isso a imagem já vem pronta de antes, e nada é esperado aqui.
+  const botaoStories = fundo.querySelector('[data-acao="stories"]');
+  botaoStories.addEventListener('click', () => {
+    if (!arquivo) return;
+    let copiou = false;
+    try{ navigator.clipboard.writeText(s.link).then(() => { copiou = true; }, () => {}); }catch(e){}
+    if (navigator.canShare && navigator.canShare({files:[arquivo]})){
+      // Só o arquivo: com título ou texto junto o Instagram abre como Reels.
+      navigator.share({files:[arquivo]})
+        .then(() => { if (copiou) avisoRapido(t('share.linkNaFigurinha')); fechar(); })
+        .catch(e => { if (!e || e.name !== 'AbortError') baixar(); });
+      return;
+    }
+    baixar();
   });
-  acao('stories', () => { fechar(); avisoRapido(t('acoes.gerandoImagem')); compartilharStories(lessonId, dayId); });
-  acao('copiar', async () => {
-    try{ await navigator.clipboard.writeText(s.link); avisoRapido(t('acoes.linkCopiado')); }
-    catch(e){ prompt(t('share.copieOLink'), s.link); }
-    fechar();
-  });
-  acao('outros', async () => {
-    fechar();
-    try{ await navigator.share({title: s.titulo, text: s.texto, url: s.link}); }
-    catch(e){ /* fechou o menu do aparelho: nada a fazer */ }
-  });
-  acao('baixar', () => { fechar(); exportarPDF(lessonId, dayId); });
+
   document.body.appendChild(fundo);
+
+  gerarImagemStories(lessonId, dayId).then(blob => {
+    if (!blob) throw new Error('sem imagem');
+    arquivo = new File([blob], `licao-${numeroDaLicao(lessonId)}-${dayId}.jpg`, {type:'image/jpeg'});
+    urlPrevia = URL.createObjectURL(blob);
+    fundo.querySelector('.share-previa').innerHTML = `<img src="${urlPrevia}" alt="">`;
+    botaoStories.disabled = false;
+    botaoStories.querySelector('small').textContent = t('share.storiesSub');
+  }).catch(e => {
+    console.error('❌ Não gerou a imagem:', e);
+    fundo.querySelector('.share-previa').remove();
+    botaoStories.querySelector('small').textContent = t('acoes.imagemFalhou');
+  });
+}
+
+// ===== CONVITE (QR CODE E WHATSAPP) =====
+// Endereço fixo do site oficial: aberto numa prévia de branch, o convite
+// ainda leva ao app de verdade.
+const LINK_DO_APP = 'https://licaojovem-iasd.pages.dev/';
+let _qrPronto = null;
+
+// A biblioteca do QR (~20 KB) só desce quando alguém pede o QR.
+function carregarBibliotecaQr(){
+  if (window.qrcode) return Promise.resolve();
+  if (_qrPronto) return _qrPronto;
+  _qrPronto = new Promise((ok, falhou) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+    s.onload = ok;
+    s.onerror = () => { _qrPronto = null; falhou(new Error('não carregou a biblioteca do QR')); };
+    document.head.appendChild(s);
+  });
+  return _qrPronto;
+}
+
+// Tela cheia e fundo branco: é para projetar na classe ou virar o celular
+// para quem está do lado apontar a câmera.
+async function mostrarQrConvite(){
+  try{ await carregarBibliotecaQr(); }
+  catch(e){ console.error('❌', e.message); avisoRapido(t('convite.qrFalhou')); return; }
+  const qr = qrcode(0, 'M');
+  qr.addData(LINK_DO_APP);
+  qr.make();
+  const tela = document.createElement('div');
+  tela.className = 'qr-tela';
+  tela.innerHTML = `<div class="qr-caixa">
+      <div class="qr-selo">${t('convite.selo')}</div>
+      <h2>Lição Jovem</h2>
+      <div class="qr-codigo">${qr.createSvgTag({cellSize: 8, margin: 2, scalable: true})}</div>
+      <p class="qr-dica">${t('convite.aponteACamera')}</p>
+      <p class="qr-link">${LINK_DO_APP.replace(/^https:\/\//, '').replace(/\/$/, '')}</p>
+      <button class="conta-btn">${t('convite.fechar')}</button>
+    </div>`;
+  tela.addEventListener('click', () => tela.remove());
+  document.body.appendChild(tela);
+}
+
+function convidarPeloWhats(){
+  const texto = t('convite.textoWhats') + '\n' + LINK_DO_APP;
+  window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
 }
 
 // Aviso curto no rodapé. Com rótulo, vira um atalho ("Entrar") e fica mais tempo.
@@ -8931,6 +9461,42 @@ function pararEscutaAoVivo() {
   _ouvinteAtivo = null;
 }
 
+// O plano gratuito do Realtime Database aguenta 100 conexões ao mesmo tempo,
+// e cada app aberto segura uma - inclusive aberto esquecido numa aba. Só o
+// .off() não solta: o websocket continua de pé. goOffline() fecha de verdade
+// e goOnline() volta; a escuta se refaz sozinha e traz o que mudou.
+// Os 10 s evitam cair e voltar a cada troca rápida de app; e o celular pode
+// congelar timers de aba escondida, por isso não dá para esperar muito.
+let _timerSegundoPlano = null;
+let _desligadoPorSegundoPlano = false;
+
+function soltarConexaoAoVivo(){
+  clearTimeout(_timerSegundoPlano);
+  _timerSegundoPlano = null;
+  if (!_refUsuario || _desligadoPorSegundoPlano) return;
+  try{
+    firebase.database().goOffline();
+    _desligadoPorSegundoPlano = true;
+    console.log('📴 Conexão ao vivo solta (app em segundo plano)');
+  }catch(e){}
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    clearTimeout(_timerSegundoPlano);
+    _timerSegundoPlano = setTimeout(soltarConexaoAoVivo, 10000);
+    return;
+  }
+  clearTimeout(_timerSegundoPlano);
+  _timerSegundoPlano = null;
+  if (_desligadoPorSegundoPlano) {
+    _desligadoPorSegundoPlano = false;
+    try{ firebase.database().goOnline(); console.log('📡 Conexão ao vivo de volta'); }catch(e){}
+  }
+});
+// Fechando a aba ou saindo do site: solta na hora.
+window.addEventListener('pagehide', soltarConexaoAoVivo);
+
 // ===== FIREBASE AUTH (Google) =====
 function initFirebaseAuth() {
   try {
@@ -8971,6 +9537,7 @@ function initFirebaseAuth() {
         atualizarVisibilidadeComentarios();
         carregarSocialVisivel();
         iniciarEscutaAoVivo();
+        registrarVisita();
         await refrescarTelaAposLogin();
       } else {
         // Sem conta não há nuvem para esperar: o que está no aparelho é tudo.
@@ -9851,26 +10418,6 @@ function resumirTexto(texto, limite){
   if(limpo.length <= limite) return limpo;
   const corte = limpo.slice(0, limite);
   return corte.slice(0, corte.lastIndexOf(' ') > 0 ? corte.lastIndexOf(' ') : limite).trim() + '…';
-}
-
-// Continua gerando .txt - o menu passou a dizer "Baixar texto", que é o que
-// o arquivo realmente é. PDF de verdade fica registrado em IDEIAS.md.
-function exportarPDF(lessonId, dayId){
-  const dayEl = document.getElementById(`day-${dayId}`);
-  if(!dayEl) return;
-  const {content, day} = dadosDoDia(lessonId, dayId);
-
-  const titulo = day ? `Lição ${numeroDaLicao(lessonId)} · ${dayDisplayDate(lessonId, dayId, idiomaConteudoAtual)}${labelEspecialDoDia(day.date)}\n${day.title}` : (dayEl.querySelector('h2')?.textContent || 'Lição');
-  const corpo = dayEl.querySelector('.source-panel.active')?.innerText || 'Conteúdo indisponível';
-
-  const text = `${titulo}\n\n${corpo}\n\n—\n${linkDoDia(lessonId, dayId)}`;
-  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `licao-${lessonId}-${dayId}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 // Abre a lição e o dia vindos de um link compartilhado (?licao=11&dia=qua).
