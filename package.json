@@ -1,0 +1,34 @@
+{
+  "name": "licoes-jovem",
+  "version": "1.0.0",
+  "description": "Lições Jovem — Escola Sabatina Jovem",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build:www": "rm -rf www && mkdir -p www/vendor/capacitor-firebase-authentication && cp index.html www/index.html && cp -r biblioteca www/biblioteca && cp node_modules/@capacitor/core/dist/index.js www/vendor/capacitor-core.esm.js && cp node_modules/@capacitor-firebase/authentication/dist/esm/*.js www/vendor/capacitor-firebase-authentication/ && node scripts/fix-vendor-imports.js",
+    "cap:sync": "npm run build:www && npx cap sync",
+    "cap:open:ios": "npm run cap:sync && npx cap open ios",
+    "cap:open:android": "npm run cap:sync && npx cap open android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Williandeivid/licao-joven.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Williandeivid/licao-joven/issues"
+  },
+  "homepage": "https://github.com/Williandeivid/licao-joven#readme",
+  "private": true,
+  "dependencies": {
+    "@capacitor-firebase/authentication": "^8.5.2",
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "@capacitor/ios": "^8.5.2"
+  }
+}
