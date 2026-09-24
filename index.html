@@ -2922,7 +2922,7 @@ async function marcarConcluido(btn){
   // 🔥 Auto-save no Firebase (so quando ha usuario logado)
   // Sem login o progresso ja ficou salvo em saveProgress() acima, no proprio navegador.
   if (currentUser) {
-    await salvarNoFirebase(getUserId(), await montarPacoteSync());
+    await subirParaNuvem();
     console.log('✅ Progresso sincronizado com Firebase!');
     await atualizarRankingSemanal();
     await atualizarRankingTrimestre();
@@ -3848,9 +3848,12 @@ async function registrarRankingPrivado(){
   } catch(e){ console.warn('⚠️ Não salvou o histórico privado do ranking:', e.message); }
 }
 
+// Fonte unica da sequencia (capa, aviso do foguinho, calendario e progresso).
+// Conta dias com licao estudada OU plano biblico. Continua viva se o ultimo
+// dia com atividade foi hoje ou ontem; dias futuros marcados nao entram.
 function computeDailyStreakSync(progressMap){
   const engaged = new Set();
-  Object.keys(progressMap).forEach(k => { if(progressMap[k].studied) engaged.add(k); });
+  Object.keys(progressMap||{}).forEach(k => { if(progressMap[k].studied) engaged.add(k); });
   Object.keys(bibleActivityLog||{}).forEach(k => engaged.add(k));
   let streak = 0;
   let cursor = new Date(); cursor.setHours(0,0,0,0);
@@ -4165,20 +4168,7 @@ function computeWeekStreak(progressMap){
 }
 async function computeDailyStreak(){
   await loadBibleActivityLog();
-  const engaged = new Set();
-  const progressMap = buildProgressMap();
-  Object.keys(progressMap).forEach(k => { if(progressMap[k].studied) engaged.add(k); });
-  Object.keys(bibleActivityLog||{}).forEach(k => engaged.add(k));
-
-  let streak = 0;
-  let cursor = new Date(); cursor.setHours(0,0,0,0);
-  // Se ainda não estudou hoje, começa a contagem de ontem — não zera só por ainda ser cedo
-  if(!engaged.has(dateKey(cursor))) cursor.setDate(cursor.getDate()-1);
-  while(engaged.has(dateKey(cursor))){
-    streak++;
-    cursor.setDate(cursor.getDate()-1);
-  }
-  return streak;
+  return computeDailyStreakSync(buildProgressMap());
 }
 function computeStreak(progressMap){
   const dates = Object.keys(progressMap).filter(k=>progressMap[k].studied).sort();
@@ -7963,7 +7953,9 @@ async function lerDoFirebase(usuarioId) {
     return dados;
   } catch(e) {
     console.error('❌ Erro ao ler do Firebase:', e);
-    return null;
+    // Relanca: "nao ha nada na nuvem" (null) e "nao consegui ler" sao coisas
+    // diferentes, e subir o progresso local no segundo caso apaga a nuvem.
+    throw e;
   }
 }
 
@@ -8109,9 +8101,18 @@ async function aplicarAjustesDaNuvem(remoto) {
     try {
       let local = null;
       try { const r = await window.storage.get(key, false); local = r ? r.value : null; } catch(e) { local = null; }
-      const resultado = (local === null || local === undefined)
-        ? parseValor(remoto[key])
-        : mesclarValor(local, remoto[key]);
+      const mLicao = /^progress:lesson(\d+)$/.exec(key);
+      let resultado;
+      if (mLicao) {
+        // Progresso de licao: uniao por dia, nunca troca o objeto `days` inteiro.
+        const nuvemLicao = filtrarDiasFuturos(mLicao[1], parseValor(remoto[key]) || {});
+        resultado = mesclarProgressoLicao(parseValor(local) || {}, nuvemLicao);
+        progressCache[mLicao[1]] = resultado;
+      } else {
+        resultado = (local === null || local === undefined)
+          ? parseValor(remoto[key])
+          : mesclarValor(local, remoto[key]);
+      }
       const texto = (typeof resultado === 'string') ? resultado : JSON.stringify(resultado);
       // setSemSync grava sem reagendar sync, evitando eco de volta para a nuvem.
       const gravar = window.storage.setSemSync || window.storage.set;
@@ -8236,12 +8237,30 @@ async function montarPacoteSync(extra) {
 
 // Agrupa gravacoes seguidas numa so ida a nuvem.
 let _syncTimer = null;
+// So fica true depois que a nuvem foi lida com sucesso neste aparelho.
+// Enquanto for false nada sobe: o progresso local pode estar incompleto
+// (ex.: 4 dias no iOS contra 18 na nuvem) e o PUT substitui o no inteiro.
+let nuvemLida = false;
+let _retentativaNuvem = null;
+
+// Unico caminho para subir o pacote. Garante a leitura antes da gravacao.
+async function subirParaNuvem(extra) {
+  if (!currentUser) return null;
+  if (!nuvemLida && !(await mesclarProgressoDaNuvem())) {
+    // Nao leu: nao grava. Tenta de novo em instantes.
+    clearTimeout(_retentativaNuvem);
+    _retentativaNuvem = setTimeout(() => { subirParaNuvem(); }, 10000);
+    return null;
+  }
+  return salvarNoFirebase(getUserId(), await montarPacoteSync(extra));
+}
+
 function agendarSync() {
-  if (!currentUser) return;
+  if (!currentUser || !nuvemLida) return;
   clearTimeout(_syncTimer);
   _syncTimer = setTimeout(async () => {
     try {
-      await salvarNoFirebase(getUserId(), await montarPacoteSync());
+      await subirParaNuvem();
       console.log('☁️ Ajustes sincronizados');
     } catch(e) {
       console.warn('⚠️ Sincronizacao adiada falhou:', e.message);
@@ -8270,22 +8289,49 @@ function agendarSync() {
   };
 })();
 
+// Uniao dia a dia do progresso de uma licao (days, quiz e tf). Em conflito
+// no mesmo dia, o que esta neste aparelho prevalece. Nao usa Object.assign
+// no objeto inteiro: isso trocaria todos os dias da nuvem pelos locais.
+function mesclarProgressoLicao(local, nuvem) {
+  const l = local || {}, n = nuvem || {};
+  const r = Object.assign({}, n, l);
+  ['days', 'quiz', 'tf'].forEach(campo => {
+    if (l[campo] || n[campo]) r[campo] = Object.assign({}, n[campo] || {}, l[campo] || {});
+  });
+  if (!r.days) r.days = {};
+  if (!r.quiz) r.quiz = {};
+  return r;
+}
+
+// Aplica o progresso vindo da nuvem no cache e grava o resultado mesclado
+// no armazenamento local (sem reagendar sync, para nao gerar eco).
+async function aplicarProgressoDaNuvem(progressoNuvem) {
+  let mudou = false;
+  const gravar = window.storage.setSemSync || window.storage.set;
+  for (const lessonId of Object.keys(progressoNuvem || {})) {
+    const nuvem = filtrarDiasFuturos(lessonId, progressoNuvem[lessonId] || {});
+    const antes = progressCache[lessonId];
+    const depois = antes ? mesclarProgressoLicao(antes, nuvem) : mesclarProgressoLicao({}, nuvem);
+    if (JSON.stringify(antes) === JSON.stringify(depois)) continue;
+    progressCache[lessonId] = depois;
+    mudou = true;
+    memoryFallback['progress:lesson' + lessonId] = depois;
+    try { await gravar.call(window.storage, 'progress:lesson' + lessonId, JSON.stringify(depois), false); }
+    catch(e) { /* sem storage: fica so em memoria nesta sessao */ }
+  }
+  return mudou;
+}
+
 // Traz o que esta na nuvem sem apagar o que foi feito offline.
 // Em caso de conflito, o que esta neste aparelho prevalece.
+// Devolve true se a nuvem foi lida (mesmo vazia) e false se a leitura falhou.
 async function mesclarProgressoDaNuvem() {
   try {
     const dados = await lerDoFirebase(getUserId());
-    if (!dados) return;
+    if (!dados) { nuvemLida = true; return true; }
 
     if (dados.progresso) {
-      Object.keys(dados.progresso).forEach(lessonId => {
-        const nuvem = filtrarDiasFuturos(lessonId, dados.progresso[lessonId] || {});
-        const local = progressCache[lessonId];
-        if (!local) { progressCache[lessonId] = nuvem; return; }
-        local.days = Object.assign({}, nuvem.days || {}, local.days || {});
-        local.quiz = Object.assign({}, nuvem.quiz || {}, local.quiz || {});
-        progressCache[lessonId] = local;
-      });
+      await aplicarProgressoDaNuvem(dados.progresso);
       console.log('✅ Progresso mesclado com a nuvem');
     }
 
@@ -8295,8 +8341,11 @@ async function mesclarProgressoDaNuvem() {
     }
 
     if (dados.ajustes_aparelho) await aplicarPrefsAparelho(dados.ajustes_aparelho);
+    nuvemLida = true;
+    return true;
   } catch(e) {
     console.warn('⚠️ Nao deu para mesclar da nuvem:', e.message);
+    return false;
   }
 }
 
@@ -9331,15 +9380,7 @@ async function aplicarSnapshotAoVivo(dados) {
     let mudou = false;
 
     if (dados.progresso) {
-      Object.keys(dados.progresso).forEach(lessonId => {
-        const nuvem = filtrarDiasFuturos(lessonId, dados.progresso[lessonId] || {});
-        const local = progressCache[lessonId];
-        if (!local) { progressCache[lessonId] = nuvem; mudou = true; return; }
-        local.days = Object.assign({}, nuvem.days || {}, local.days || {});
-        local.quiz = Object.assign({}, nuvem.quiz || {}, local.quiz || {});
-        progressCache[lessonId] = local;
-      });
-      mudou = true;
+      if (await aplicarProgressoDaNuvem(dados.progresso)) mudou = true;
     }
 
     if (dados.ajustes) {
@@ -9356,6 +9397,8 @@ async function aplicarSnapshotAoVivo(dados) {
     // Nao redesenha licao aberta de proposito: tiraria a pessoa do ponto
     // onde ela esta lendo.
     if (mudou) {
+      // A escuta zera bibleActivityLog; recarrega antes de refazer o selo.
+      try { await loadBibleActivityLog(); atualizarSeloSequencia(); } catch(e) {}
       const conta = document.getElementById('tab-conta');
       if (conta && conta.classList.contains('active')) await renderConta();
     }
@@ -9454,14 +9497,16 @@ function initFirebaseAuth() {
       updateAuthUI();
       if (user) {
         console.log('✅ Logado como', user.email);
+        nuvemLida = false;
         await mesclarProgressoDaNuvem();
         // Só agora o progresso da nuvem entrou: o selo de sequência pode
         // aparecer sem risco de mostrar um número que muda em seguida.
         liberarSequencia();
-        await salvarNoFirebase(getUserId(), await montarPacoteSync({
+        // subirParaNuvem so grava se a nuvem foi lida; se falhou, retenta.
+        await subirParaNuvem({
           email: user.email,
           nome: user.displayName || ''
-        }));
+        });
         await preencherNomeSeVazio();
         await carregarConfigComentarios(true);
         await tentarVirarAdmin();
@@ -9472,6 +9517,8 @@ function initFirebaseAuth() {
         await refrescarTelaAposLogin();
       } else {
         // Sem conta não há nuvem para esperar: o que está no aparelho é tudo.
+        nuvemLida = false;
+        clearTimeout(_retentativaNuvem);
         liberarSequencia();
         pararEscutaAoVivo();
       }
@@ -9645,8 +9692,9 @@ async function logout() {
     pararEscutaAoVivo();
     // Sobe o que estiver pendente antes de limpar.
     if (currentUser) {
-      try { await salvarNoFirebase(getUserId(), await montarPacoteSync()); } catch(e) {}
+      try { await subirParaNuvem(); } catch(e) {}
     }
+    nuvemLida = false;
     if (firebaseAuthReady) await firebase.auth().signOut();
     currentUser = null;
     await limparDadosLocaisDoUsuario();
@@ -9664,7 +9712,7 @@ async function manualSync() {
   const rotulo = btn ? btn.textContent : '';
   if (btn) { btn.disabled = true; btn.textContent = '⏳ Sincronizando...'; }
   try {
-    await mesclarProgressoDaNuvem();
+    if (!(await mesclarProgressoDaNuvem())) throw new Error('nuvem nao lida');
     await salvarNoFirebase(getUserId(), await montarPacoteSync());
     if (btn) btn.textContent = '✅ Sincronizado!';
     // A aba Conta pode ter recebido nome/metas novos vindos da nuvem.
@@ -9706,7 +9754,9 @@ let avisoDeSequenciaPendente = false;
 
 // Chamada quando a nuvem chega: acerta o selo da capa e solta o aviso que
 // ficou esperando, agora com o numero definitivo.
-function liberarSequencia(){
+async function liberarSequencia(){
+  // O log dos planos biblicos entra na conta da sequencia: carrega antes.
+  try { await loadBibleActivityLog(); } catch(e) {}
   nuvemPronta = true;
   atualizarSaudacaoHero();
   if (avisoDeSequenciaPendente){
@@ -9752,25 +9802,8 @@ function atualizarSaudacaoHero(){
 function sequenciaAtual() {
   try {
     if (typeof buildProgressMap !== 'function') return 0;
-    const mapa = buildProgressMap();
-    const hoje = dateKey(new Date());
-    const d = new Date(); d.setDate(d.getDate() - 1);
-    const ontem = dateKey(d);
-
-    const dias = Object.keys(mapa).filter(k => mapa[k].studied && k <= hoje).sort();
-    if (!dias.length) return 0;
-
-    const ultimo = dias[dias.length - 1];
-    if (ultimo !== hoje && ultimo !== ontem) return 0;   // sequencia quebrada
-
-    let n = 1;
-    for (let i = dias.length - 1; i > 0; i--) {
-      const dif = Math.round(
-        (new Date(dias[i] + 'T00:00:00') - new Date(dias[i - 1] + 'T00:00:00')) / 86400000
-      );
-      if (dif === 1) n++; else break;
-    }
-    return n;
+    // Mesma conta do aviso do foguinho e da aba Progresso.
+    return computeDailyStreakSync(buildProgressMap());
   } catch(e) {
     console.warn('⚠️ Nao calculou a sequencia:', e.message);
     return 0;
