@@ -223,12 +223,52 @@ Nada de criar nós na mão. Nada de uid.
       ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
       "$licao": { "$dia": { "$uid": {
         ".write": "auth != null && auth.uid == $uid",
-        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10))"
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('q') || (newData.child('q').val() >= 0 && newData.child('q').val() <= 10)) && (!newData.hasChild('e') || (newData.child('e').isString() && newData.child('e').val().length <= 30)) && (!newData.hasChild('nm') || (newData.child('nm').isString() && newData.child('nm').val().length <= 40))"
       } } }
+    },
+    "stats_plano": {
+      ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.hasChildren(['p','l','em']) && newData.child('p').isString() && newData.child('p').val().length <= 30 && newData.child('l').isNumber() && newData.child('l').val() >= 0 && newData.child('em').isNumber()"
+      }
+    },
+    "visitas": {
+      ".read": "auth != null && root.child('config/admins/'+auth.uid).exists()",
+      "$dia": { "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('n') || newData.child('n').isBoolean()) && (!newData.hasChild('nm') || (newData.child('nm').isString() && newData.child('nm').val().length <= 40))"
+      } }
     }
   }
 }
 ```
+
+### Visitas (desde 23/09)
+
+| Regra | Efeito |
+|---|---|
+| `visitas/{AAAA-MM-DD}/{uid}` | cada pessoa grava só a **própria** visita, uma vez por dia |
+| `.read` só para admin | quem estuda nunca vê o número; é painel de quem cuida da turma |
+| `n: true` | marca o primeiro acesso da pessoa, para contar quem chegou agora |
+
+O app grava a visita logo depois do login e guarda uma marca no aparelho, então
+o resto do dia nem toca no banco. Quem não entra com o Google não é contado.
+
+### Painel do admin (desde 23/09)
+
+| Nó | O que guarda | Quem lê |
+|---|---|---|
+| `visitas/{dia}/{uid}` | `{em, n}` — quem abriu o app naquele dia | só admin |
+| `stats/{licao}/{dia}/{uid}` | `{c, q, e, nm}` — `e` é a lista das perguntas erradas ("3,7") e `nm` o primeiro nome | só admin |
+| `stats_plano/{uid}` | `{p, l, t, em}` — plano ativo e capítulos lidos | só admin |
+
+O progresso completo do plano continua em `usuarios/{uid}`, que **só a própria
+pessoa lê**. Em `stats_plano` vai apenas o resumo que o painel mostra.
+
+O `nm` é **só o primeiro nome** — o mesmo que já aparece no ranking e nas
+curtidas. É o que permite a lista "Quem está lendo" no painel. Na aba Conta há
+um aviso para todo mundo dizendo que os líderes veem quem estudou cada dia.
 
 ### Curtidas (desde 18/09)
 
@@ -292,5 +332,57 @@ app mostra "Os comentários estão desligados no momento" e ninguém consegue po
 | `salvarNoFirebase` / `lerDoFirebase` | mandam `?auth=<token>` quando logado |
 | `mesclarProgressoDaNuvem()` | merge sem perda, local vence |
 | `initFirebaseAuth()` | `onAuthStateChanged` + retorno do redirect |
-| `loginWithGoogle()` | popup, com fallback para redirect no celular |
+| `loginWithGoogle()` | popup/redirect na web; plugin nativo dentro do app Android/iOS |
 | `updateAuthUI()` | chamado no fim de `renderConta()` |
+
+---
+
+## Login com Google dentro do app Android/iOS (Capacitor)
+
+`signInWithPopup`/`signInWithRedirect` (o login da versão web) não funciona de
+forma confiável dentro de uma webview nativa. Por isso o app Android/iOS usa o
+plugin `@capacitor-firebase/authentication` pra pegar as credenciais do Google
+pelo SDK nativo, e depois entra na mesma sessão do Firebase Auth de sempre via
+`signInWithCredential` — `currentUser`, `getAuthToken()`, `firebase.database()`
+etc. continuam funcionando exatamente iguais, sem precisar mudar mais nada.
+
+Isso já está todo configurado no código (`index.html`, `android/`, `ios/`).
+**Falta só isto, feito uma vez no [Firebase Console](https://console.firebase.google.com/)
+do projeto `licaojovem-iasd`:**
+
+### 1. Registrar o app Android
+
+1. Configurações do projeto → **Adicionar app** → Android.
+2. Nome do pacote: `com.licaojovemiasd.app` (tem que ser exatamente esse).
+3. SHA-1 de depuração: rode isto depois de abrir o projeto pelo menos uma vez
+   no Android Studio (`npm run cap:open:android`), que cria o keystore de
+   debug automaticamente:
+   ```
+   keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+   ```
+   Cole o valor `SHA1:` que aparecer.
+4. Baixe o `google-services.json` e salve em `android/app/google-services.json`
+   (esse arquivo é ignorado pelo git de propósito — tem credencial, nunca commitar).
+
+### 2. Registrar o app iOS
+
+1. Configurações do projeto → **Adicionar app** → iOS.
+2. Bundle ID: `com.licaojovemiasd.app` (o mesmo do Android).
+3. Baixe o `GoogleService-Info.plist` e salve em
+   `ios/App/App/GoogleService-Info.plist` (também ignorado pelo git).
+4. Abra o arquivo baixado, copie o valor de `REVERSED_CLIENT_ID`, e cole em
+   `ios/App/App/Info.plist`, substituindo
+   `com.googleusercontent.apps.SUBSTITUA-PELO-REVERSED-CLIENT-ID`
+   (já está marcado lá com um comentário `<!-- -->` explicando).
+
+### 3. Sincronizar e testar
+
+```
+npm run cap:sync
+npm run cap:open:android   # ou cap:open:ios
+```
+
+Sem os dois arquivos de config, o app continua abrindo normalmente (o Gradle
+detecta a ausência do `google-services.json` e só deixa de aplicar o plugin de
+push/login nativo) — só o botão de login dentro do app nativo não vai
+completar até você fazer os passos acima.

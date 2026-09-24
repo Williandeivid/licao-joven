@@ -22,6 +22,33 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<!-- Ponte de login nativo (Android/iOS via Capacitor) - o mapa de import so
+     e' usado por esses arquivos gerados dentro de www/vendor/ (ver
+     `npm run build:www`); na versao web normal esses arquivos nao existem
+     e o bloco abaixo nunca executa (window.Capacitor nao existe fora do
+     app nativo), entao o login continua 100% pelo signInWithPopup/Redirect
+     mais abaixo, sem depender de nada disto. -->
+<script type="importmap">
+{"imports": {"@capacitor/core": "./vendor/capacitor-core.esm.js"}}
+</script>
+<script>
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    import('./vendor/capacitor-firebase-authentication/index.js').then(m => {
+      window.__signInWithGoogleNative = async () => {
+        const result = await m.FirebaseAuthentication.signInWithGoogle();
+        const idToken = result && result.credential && result.credential.idToken;
+        if (!idToken) throw new Error('Login nativo nao retornou idToken.');
+        return idToken;
+      };
+      window.__signInWithAppleNative = async () => {
+        const result = await m.FirebaseAuthentication.signInWithApple();
+        const cred = result && result.credential;
+        if (!cred || !cred.idToken) throw new Error('Login nativo (Apple) nao retornou idToken.');
+        return { idToken: cred.idToken, nonce: cred.nonce };
+      };
+    }).catch(e => console.error('❌ Nao carregou a ponte de login nativo:', e));
+  }
+</script>
 <script>
   /* ===================================================================
      CONFIGURACAO DO FIREBASE
@@ -964,6 +991,10 @@
   .admin-linha.cabecalho{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); background:none;}
   .admin-linha span:not(:first-child){min-width:44px; text-align:right; font-variant-numeric:tabular-nums;}
   .admin-linha b{color:var(--violet);}
+  .admin-tabela.tres .admin-linha{grid-template-columns:1fr auto auto;}
+  .admin-erradas{margin:0 0 4px; padding-left:18px; font-size:12.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:6px;}
+  .admin-erradas b{color:var(--violet);}
+  .admin-pergunta{color:var(--ink); font-size:12px;}
   .admin-tabela .admin-total{margin-top:6px; font-size:12.5px; color:var(--ink-soft);}
   .acoes-legenda b{font-weight:700; color:var(--heading);}
   .acoes-ver-cmt{
@@ -2057,6 +2088,24 @@ function hashStr(s){
   for(let i=0;i<s.length;i++){ h = (Math.imul(31,h) + s.charCodeAt(i)) | 0; }
   return h>>>0;
 }
+// O 3o trimestre usa Fácil/Intermediária/Avançada; o 4o, Fácil/Média/Difícil
+// e as "Bíblica · ...". A cor segue o nível, e o rótulo segue o idioma - a
+// tradução não traz a dificuldade, então ela vem do português e é traduzida aqui.
+const DIFICULDADES = {
+  'Fácil':                   { classe:'facil',    en:'Easy',                es:'Fácil' },
+  'Média':                   { classe:'inter',    en:'Medium',              es:'Media' },
+  'Intermediária':           { classe:'inter',    en:'Intermediate',        es:'Intermedia' },
+  'Difícil':                 { classe:'avancada', en:'Hard',                es:'Difícil' },
+  'Avançada':                { classe:'avancada', en:'Advanced',            es:'Avanzada' },
+  'Bíblica · Intermediária': { classe:'inter',    en:'Bible · Intermediate', es:'Bíblica · Intermedia' },
+  'Bíblica · Difícil':       { classe:'avancada', en:'Bible · Hard',        es:'Bíblica · Difícil' }
+};
+function nivelDaDificuldade(diff){
+  const d = DIFICULDADES[diff];
+  if (!d) return { classe:'avancada', rotulo: diff || '' };
+  return { classe: d.classe, rotulo: idiomaConteudoAtual === 'pt' ? diff : (d[idiomaConteudoAtual] || diff) };
+}
+
 function shuffleOptions(opts, correctLetter, seed){
   const idx = opts.map((o,i)=>i);
   const correctIdx = correctLetter.charCodeAt(0)-65;
@@ -2231,8 +2280,8 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
       <h3>${t('lesson.quizMultiplaEscolha')}</h3>
       <div class="quiz-timer"><svg class="timer-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg><span>${t('lesson.tempoDoisPontos')}<span class="tval" data-timer>${savedQuiz ? formatTime(savedQuiz.time) : '00:00'}</span></span></div>`;
     day.quiz.questions.forEach((q, i)=>{
-      const diffClass = q.diff==='Fácil'?'diff-facil':(q.diff==='Intermediária'?'diff-inter':'diff-avancada');
-      html += `<div class="q-block" data-q="${i+1}"><span class="diff ${diffClass}">${q.diff}</span>
+      const nivel = nivelDaDificuldade(q.diff);
+      html += `<div class="q-block" data-q="${i+1}"><span class="diff diff-${nivel.classe}">${nivel.rotulo}</span>
         <div class="q-text">${i+1}. ${(q.text || '').replace(/^\d+[\.\)]\s*/, '')}</div>
         <div class="options">${shuffledQ[i].opts.map((o,oi)=>`<button class="opt ${kahootClasses[oi]}" data-v="${String.fromCharCode(65+oi)}">${o}</button>`).join('')}</div>
       </div>`;
@@ -2961,7 +3010,9 @@ function bindDayInteractions(lessonId, content, progress){
     const answers = quizEl.dataset.answers.split(',');
     const timerEl = quizEl.querySelector('[data-timer]');
     const resultBox = quizEl.querySelector('.quiz-result');
-    let localState = {answered:0, correct:0, startTime: savedQuiz?null:null, timerInterval:null, done: !!savedQuiz};
+    // "erradas" guarda o NUMERO da pergunta que a pessoa errou (1 a 10). Vai
+    // para o painel do admin saber qual ponto da licao a turma nao entendeu.
+    let localState = {answered:0, correct:0, erradas:[], startTime: savedQuiz?null:null, timerInterval:null, done: !!savedQuiz};
 
     if(savedQuiz){
       quizEl.querySelectorAll('.q-block').forEach((block,qi)=>{
@@ -2992,6 +3043,7 @@ function bindDayInteractions(lessonId, content, progress){
           });
           localState.answered++;
           if(opt.dataset.v === correct) localState.correct++;
+          else localState.erradas.push(qIndex + 1);
 
           if(localState.answered === 10){
             clearInterval(localState.timerInterval);
@@ -3010,7 +3062,7 @@ function bindDayInteractions(lessonId, content, progress){
             p.days[day.id] = {studied:true, estMinutes};
             progressCache[lessonId] = p;
             await saveProgress(lessonId, p);
-            registrarStat(lessonId, day.id, {c:true, q: localState.correct});
+            registrarStat(lessonId, day.id, {c:true, q: localState.correct, e: localState.erradas.join(',')});
 
             // Antes disso a tela inteira era reconstruida (renderLessonDetail),
             // o que parecia um refresh: piscava, perdia o scroll e fechava
@@ -3251,6 +3303,7 @@ async function renderConta(){
         <div><div class="conta-row-title">${t('conta.zerarTudo')}</div><div class="conta-row-sub">${t('conta.zerarTudoNota')}</div></div>
         <button class="conta-btn conta-btn-danger" onclick="confirmResetAll()">${t('conta.zerar')}</button>
       </div>
+      <p class="conta-note" style="margin:10px 0 0;">${t('conta.lideresVeem')}</p>
     </div>
 
     <div class="conta-card">
@@ -3268,6 +3321,24 @@ async function renderConta(){
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
           ${t('conta.entrarGoogle')}
         </button>
+        <button id="apple-login-btn" onclick="loginWithApple()" style="background:#000; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1-2 49.9-15.4 69.5-34.3z"/></svg>
+          ${t('conta.entrarApple')}
+        </button>
+        <div id="email-login-block" style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px; margin:2px 0;">
+            <div style="flex:1; height:1px; background:var(--border);"></div>
+            <span class="conta-note" style="margin:0;">${t('conta.ou')}</span>
+            <div style="flex:1; height:1px; background:var(--border);"></div>
+          </div>
+          <input type="email" id="email-input" placeholder="${t('conta.emailPlaceholder')}" autocomplete="email" style="background:var(--bg); border:2px solid var(--border); border-radius:10px; padding:12px 14px; font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink);">
+          <input type="password" id="password-input" placeholder="${t('conta.senhaPlaceholder')}" autocomplete="current-password" style="background:var(--bg); border:2px solid var(--border); border-radius:10px; padding:12px 14px; font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink);">
+          <div style="display:flex; gap:10px;">
+            <button class="conta-btn" style="flex:1; padding:12px; text-align:center;" onclick="loginWithEmail()">${t('conta.entrarEmail')}</button>
+            <button class="conta-btn conta-btn-secondary" style="flex:1; padding:12px; text-align:center;" onclick="signupWithEmail()">${t('conta.criarConta')}</button>
+          </div>
+          <a href="javascript:void(0)" onclick="resetPasswordEmail()" class="conta-note" style="text-decoration:underline; cursor:pointer; align-self:flex-start;">${t('conta.esqueceuSenha')}</a>
+        </div>
         <button id="logout-btn" onclick="logout()" style="background:#ff5d8f; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:none;">
           ${t('conta.sairConta')}
         </button>
@@ -3294,6 +3365,21 @@ async function renderConta(){
         <div class="conta-row-sub">${t('admin.acompanhamentoSub')}</div>
         <div id="admin-acompanhamento" class="admin-tabela">${t('admin.carregando')}</div>
       </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.visitas')}</div>
+        <div class="conta-row-sub">${t('admin.visitasSub')}</div>
+        <div id="admin-visitas" class="admin-tabela tres">${t('admin.carregando')}</div>
+      </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.conversa')}</div>
+        <div class="conta-row-sub">${t('admin.conversaSub')}</div>
+        <div id="admin-conversa" class="admin-tabela"></div>
+      </div>
+      <div class="conta-row" style="display:block;">
+        <div class="conta-row-title">${t('admin.plano')}</div>
+        <div class="conta-row-sub">${t('admin.planoSub')}</div>
+        <div id="admin-plano" class="admin-tabela"></div>
+      </div>
       <p class="conta-note" style="margin:10px 0 0;">${t('conta.administracaoNota')}</p>
     </div>` : ''}
 
@@ -3318,7 +3404,7 @@ async function renderConta(){
   // Sem esta chamada, quem ja esta logado veria "Entrar com Google" de novo.
   updateAuthUI();
   await atualizarRankingCheckboxConta();
-  if (souAdmin()) carregarAcompanhamentoAdmin();
+  if (souAdmin()) { carregarAcompanhamentoAdmin(); carregarVisitasAdmin(); }
 }
 
 async function saveContaName(name){
@@ -4654,7 +4740,8 @@ const EGW_TITULOS = {
   patriarcas: 'Patriarcas e Profetas',
   profetas_reis: 'Profetas e Reis',
   desejado: 'O Desejado de Todas as Nações',
-  atos: 'Atos dos Apóstolos'
+  atos: 'Atos dos Apóstolos',
+  caminho: 'Caminho a Cristo'
 };
 // Ordem da serie e quantidade de capitulos de cada um (confere com
 // biblioteca/indice.json; se mudar la, mude aqui).
@@ -4833,6 +4920,7 @@ async function loadPlanProgress(key){
 }
 async function savePlanProgress(key){
   try{ await window.storage.set('bible-plan-progress-'+key, JSON.stringify(planProgressCache[key]), false); }catch(e){}
+  registrarStatPlano(key);
 }
 // Estima o tempo de leitura de um capítulo bíblico específico, usando o texto real
 // (contagem de palavras de verdade, não uma média genérica) — mesma lógica da lição.
@@ -4968,12 +5056,55 @@ async function carregarIndiceEGW(){
   return indiceEGW;
 }
 
+// Cópia no aparelho de cada capítulo já aberto: na segunda vez abre sem
+// internet. Mudou o texto de algum livro? Suba o número do nome.
+const CACHE_BIBLIOTECA = 'biblioteca-v1';
+
+async function buscarJsonComCopia(url){
+  if ('caches' in window) {
+    try{
+      const cache = await caches.open(CACHE_BIBLIOTECA);
+      const guardado = await cache.match(url);
+      if (guardado) return await guardado.json();
+      const r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      cache.put(url, r.clone()).catch(()=>{});
+      return await r.json();
+    }catch(e){
+      if (String(e.message).startsWith('HTTP')) throw e;
+      // sem Cache API (aba anônima, cota cheia): segue pela rede
+    }
+  }
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+// Livro "porCapitulo" no indice: nada de arquivo inteiro de 1 MB, só a lista
+// de títulos; cada capítulo (~10 KB) desce quando a pessoa abre.
 async function carregarLivroEGW(id){
   if (livrosEGW[id]) return livrosEGW[id];
+  const indice = await carregarIndiceEGW();
+  const meta = indice.livros.find(l => l.id === id);
+  if (meta && meta.porCapitulo) {
+    livrosEGW[id] = { titulo: meta.titulo, porCapitulo: true,
+      capitulos: meta.titulosCapitulos.map(t => ({ t, p: null })) };
+    return livrosEGW[id];
+  }
   const r = await fetch('biblioteca/' + id + '.json');
   if (!r.ok) throw new Error('HTTP ' + r.status);
   livrosEGW[id] = await r.json();
   return livrosEGW[id];
+}
+
+async function carregarCapituloEGW(id, indice){
+  const livro = await carregarLivroEGW(id);
+  const cap = livro.capitulos[indice];
+  if (!cap || cap.p) return cap;
+  const arquivo = 'biblioteca/' + id + '/' + String(indice + 1).padStart(2, '0') + '.json';
+  const baixado = await buscarJsonComCopia(arquivo);
+  cap.p = baixado.p;
+  return cap;
 }
 
 async function carregarUltimoEGW(){
@@ -5014,14 +5145,23 @@ async function renderBiblioteca(){
     return;
   }
 
-  const cartoes = indice.livros.map(l => `
+  const cartao = l => `
     <button class="egw-card" onclick="abrirLivroEGW('${l.id}')">
       <span class="egw-card-nome">${escaparHtml(l.titulo)}</span>
       <span class="egw-card-meta">${l.ano} · ${l.capitulos} ${t('bible.capitulos')}</span>
-    </button>`).join('');
+    </button>`;
+  // Livro sem "grupo" é da Série do Grande Conflito; os outros ficam em
+  // seções próprias, na ordem em que aparecem no indice.
+  const grupos = [];
+  indice.livros.forEach(l => {
+    const nome = l.grupo || indice.serie;
+    let g = grupos.find(x => x.nome === nome);
+    if(!g){ g = { nome, livros: [] }; grupos.push(g); }
+    g.livros.push(l);
+  });
 
   container.querySelector('.bible-wrap').innerHTML =
-    `<div class="testament-label">${escaparHtml(indice.serie)}</div><div class="egw-cards">${cartoes}</div>`
+    grupos.map(g => `<div class="testament-label">${escaparHtml(g.nome)}</div><div class="egw-cards">${g.livros.map(cartao).join('')}</div>`).join('')
     + (ultimoEGW ? `<button class="egw-continuar" onclick="abrirCapituloEGW('${ultimoEGW.id}', ${ultimoEGW.capitulo})">${t('bible.continuarLeitura')} · ${escaparHtml(ultimoEGW.resumo)}</button>` : '');
 }
 
@@ -5055,14 +5195,18 @@ async function abrirCapituloEGW(id, indice){
   hideAllViews();
   container.style.display = 'block';
   document.getElementById('tab-bible').classList.add('active');
-  let livro;
-  try{ livro = await carregarLivroEGW(id); }
+  let livro, cap;
+  try{
+    livro = await carregarLivroEGW(id);
+    cap = await carregarCapituloEGW(id, indice);
+  }
   catch(e){
     container.innerHTML = `<div class="bible-wrap"><p class="cmt-vazio">${t('bible.bibliotecaFalhou')}</p></div>`;
     return;
   }
-  const cap = livro.capitulos[indice];
   if(!cap) return;
+  // Já deixa o próximo capítulo guardado, para a leitura seguir sem internet.
+  if(livro.porCapitulo && indice + 1 < livro.capitulos.length) carregarCapituloEGW(id, indice + 1).catch(()=>{});
   egwState = { livro: id, capitulo: indice };
   container.dataset.view = 'egw-capitulo';
   // Cada parágrafo termina com a referência oficial de citação ("DTN 9.1").
@@ -5827,11 +5971,18 @@ const UI_STRINGS = {
     'conta.subtitulo': 'Seu perfil, aparência e seus dados.',
     'conta.loginSync': 'Login e sincronização',
     'conta.entrarGoogle': 'Entrar com Google',
+    'conta.entrarApple': 'Entrar com Apple',
+    'conta.ou': 'ou',
+    'conta.emailPlaceholder': 'E-mail',
+    'conta.senhaPlaceholder': 'Senha',
+    'conta.entrarEmail': 'Entrar',
+    'conta.criarConta': 'Criar conta',
+    'conta.esqueceuSenha': 'Esqueceu a senha?',
     'conta.sairConta': 'Sair da conta',
     'conta.nomePlaceholder': 'Seu nome',
     'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar do ranking',
-    'conta.entreParaRanking': 'Entre com sua conta Google para participar do ranking.',
+    'conta.entreParaRanking': 'Entre na sua conta para participar do ranking.',
     'conta.ranking': 'Ranking',
     'conta.feedback': 'Feedback',
     'conta.reportarBug': 'Reportar bug ou sugestão',
@@ -5897,7 +6048,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Livros de Ellen G. White, com o texto conferido com o original.',
     'bible.hubBiblia': '66 livros · Antigo e Novo Testamento',
     'bible.hubPlanoVazio': 'Escolha um plano de leitura',
-    'bible.hubBiblioteca': 'Ellen G. White · 5 livros',
+    'bible.hubBiblioteca': 'Ellen G. White · 6 livros',
     'bible.bibliotecaFalhou': 'Não foi possível abrir a biblioteca agora. Tente de novo em instantes.',
     'bible.continuarLeitura': 'Continuar',
     'bible.capitulos': 'capítulos',
@@ -5945,6 +6096,30 @@ const UI_STRINGS = {
     'convite.textoWhats': '📖 Estou estudando a Lição da Escola Sabatina Jovem pelo app Lição Jovem: resumo do dia, quiz e a Bíblia no celular. Estuda comigo?',
     'admin.acompanhamento': 'Acompanhamento da semana',
     'admin.acompanhamentoSub': 'Quantas pessoas concluíram cada dia e fizeram o quiz',
+    'admin.visitas': 'Quem abriu o app',
+    'admin.visitasSub': 'Pessoas diferentes por dia, nos últimos 7 dias',
+    'admin.funil': 'Semana: ${inicio} no dia mais cheio → ${fim} no último dia (${pct}%)',
+    'admin.maisErradas': 'Perguntas que a turma mais erra',
+    'admin.erros': 'erro(s)',
+    'admin.perguntaN': '· pergunta ${n}',
+    'admin.voltaram': '${voltaram} de ${antes} da semana passada voltaram (${pct}%)',
+    'admin.semSemanaAnterior': 'Sem dados da semana passada ainda.',
+    'admin.conversa': 'Conversa da lição',
+    'admin.conversaSub': 'Comentários e curtidas desta semana',
+    'admin.conversaResumo': '${cmt} comentário(s) de ${pcmt} pessoa(s) · ${curt} curtida(s) de ${pcurt} pessoa(s)',
+    'admin.plano': 'Plano bíblico',
+    'admin.planoSub': 'Quantas pessoas estão lendo e em que ponto',
+    'admin.planoResumo': '${pessoas} pessoa(s) lendo · mais usado: ${plano} (${quantos}) · média de ${media} capítulo(s)',
+    'admin.planoVazio': 'Ninguém começou um plano ainda.',
+    'admin.quemEstaLendo': 'Quem está lendo',
+    'admin.pessoa': 'Pessoa',
+    'admin.dias': 'Dias',
+    'admin.semNome': 'Sem nome',
+    'conta.lideresVeem': 'Os líderes da sua classe veem quem estudou cada dia e o resultado do quiz. Suas anotações continuam só suas.',
+    'admin.dia': 'Dia',
+    'admin.abriram': 'Abriram',
+    'admin.novos': 'Novos',
+    'admin.totalSemana': '${pessoas} pessoa(s) nesta semana · ${novos} novo(s)',
     'admin.carregando': 'Carregando…',
     'admin.leu': 'Leu',
     'admin.quiz': 'Quiz',
@@ -5970,6 +6145,9 @@ const UI_STRINGS = {
     'alerts.confirmApagarComentario': 'Apagar este comentário?',
     'alerts.comentarioApagarFalhou': 'Não foi possível apagar agora. Tente de novo.',
     'alerts.loginFalhouPrefixo': 'Nao foi possivel entrar: ',
+    'alerts.preencherEmailSenha': 'Preencha e-mail e senha.',
+    'alerts.informeEmailParaRedefinir': 'Informe o e-mail no campo acima para redefinir a senha.',
+    'alerts.emailRedefinicaoEnviado': 'Enviamos um e-mail com o link para redefinir sua senha.',
     'alerts.confirmSair': 'Sair da conta?\n\nSeu progresso fica guardado na nuvem e volta ao entrar de novo. Ele sera removido deste aparelho para nao se misturar com o de outra pessoa.',
     'alerts.licaoGithubFalhou': 'Não conseguimos buscar a lição do GitHub. Usando versão local.',
     'lesson.correto': 'Correto!',
@@ -6187,11 +6365,18 @@ const UI_STRINGS = {
     'conta.subtitulo': 'Your profile, appearance, and your data.',
     'conta.loginSync': 'Login and sync',
     'conta.entrarGoogle': 'Sign in with Google',
+    'conta.entrarApple': 'Sign in with Apple',
+    'conta.ou': 'or',
+    'conta.emailPlaceholder': 'Email',
+    'conta.senhaPlaceholder': 'Password',
+    'conta.entrarEmail': 'Sign in',
+    'conta.criarConta': 'Create account',
+    'conta.esqueceuSenha': 'Forgot your password?',
     'conta.sairConta': 'Sign out',
     'conta.nomePlaceholder': 'Your name',
     'conta.conectadoComo': 'Signed in as ',
     'conta.participarRanking': 'Join the leaderboard',
-    'conta.entreParaRanking': 'Sign in with your Google account to join the leaderboard.',
+    'conta.entreParaRanking': 'Sign in to your account to join the leaderboard.',
     'conta.ranking': 'Leaderboard',
     'conta.feedback': 'Feedback',
     'conta.reportarBug': 'Report a bug or suggestion',
@@ -6257,7 +6442,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Ellen G. White books, with the text checked against the original.',
     'bible.hubBiblia': '66 books · Old and New Testament',
     'bible.hubPlanoVazio': 'Pick a reading plan',
-    'bible.hubBiblioteca': 'Ellen G. White · 5 books',
+    'bible.hubBiblioteca': 'Ellen G. White · 6 books',
     'bible.bibliotecaFalhou': 'Could not open the library right now. Try again in a moment.',
     'bible.continuarLeitura': 'Continue',
     'bible.capitulos': 'chapters',
@@ -6305,6 +6490,30 @@ const UI_STRINGS = {
     'convite.textoWhats': '📖 I am studying the Youth Sabbath School lesson on the Lição Jovem app: daily summary, quiz and the Bible on your phone. Study with me?',
     'admin.acompanhamento': 'This week tracking',
     'admin.acompanhamentoSub': 'How many people finished each day and took the quiz',
+    'admin.visitas': 'Who opened the app',
+    'admin.visitasSub': 'Different people per day, over the last 7 days',
+    'admin.funil': 'Week: ${inicio} on the busiest day → ${fim} on the last day (${pct}%)',
+    'admin.maisErradas': 'Questions the class gets wrong most',
+    'admin.erros': 'wrong',
+    'admin.perguntaN': '· question ${n}',
+    'admin.voltaram': '${voltaram} of ${antes} from last week came back (${pct}%)',
+    'admin.semSemanaAnterior': 'No data from last week yet.',
+    'admin.conversa': 'Lesson conversation',
+    'admin.conversaSub': 'Comments and likes this week',
+    'admin.conversaResumo': '${cmt} comment(s) from ${pcmt} person(s) · ${curt} like(s) from ${pcurt} person(s)',
+    'admin.plano': 'Bible plan',
+    'admin.planoSub': 'How many people are reading and how far along',
+    'admin.planoResumo': '${pessoas} person(s) reading · most used: ${plano} (${quantos}) · ${media} chapter(s) on average',
+    'admin.planoVazio': 'No one has started a plan yet.',
+    'admin.quemEstaLendo': 'Who is reading',
+    'admin.pessoa': 'Person',
+    'admin.dias': 'Days',
+    'admin.semNome': 'No name',
+    'conta.lideresVeem': 'Your class leaders can see who studied each day and the quiz result. Your notes stay yours only.',
+    'admin.dia': 'Day',
+    'admin.abriram': 'Opened',
+    'admin.novos': 'New',
+    'admin.totalSemana': '${pessoas} person(s) this week · ${novos} new',
     'admin.carregando': 'Loading…',
     'admin.leu': 'Read',
     'admin.quiz': 'Quiz',
@@ -6330,6 +6539,9 @@ const UI_STRINGS = {
     'alerts.confirmApagarComentario': 'Delete this comment?',
     'alerts.comentarioApagarFalhou': "Couldn't delete it right now. Try again.",
     'alerts.loginFalhouPrefixo': "Couldn't sign in: ",
+    'alerts.preencherEmailSenha': 'Fill in your email and password.',
+    'alerts.informeEmailParaRedefinir': 'Enter your email above to reset your password.',
+    'alerts.emailRedefinicaoEnviado': "We've sent an email with a link to reset your password.",
     'alerts.confirmSair': "Sign out?\n\nYour progress stays saved in the cloud and comes back when you sign in again. It will be removed from this device so it doesn't mix with someone else's.",
     'alerts.licaoGithubFalhou': "Couldn't fetch the lesson from GitHub. Using the local version.",
     'lesson.correto': 'Correct!',
@@ -6547,11 +6759,18 @@ const UI_STRINGS = {
     'conta.subtitulo': 'Tu perfil, apariencia y tus datos.',
     'conta.loginSync': 'Inicio de sesión y sincronización',
     'conta.entrarGoogle': 'Iniciar sesión con Google',
+    'conta.entrarApple': 'Iniciar sesión con Apple',
+    'conta.ou': 'o',
+    'conta.emailPlaceholder': 'Correo electrónico',
+    'conta.senhaPlaceholder': 'Contraseña',
+    'conta.entrarEmail': 'Iniciar sesión',
+    'conta.criarConta': 'Crear cuenta',
+    'conta.esqueceuSenha': '¿Olvidaste tu contraseña?',
     'conta.sairConta': 'Cerrar sesión',
     'conta.nomePlaceholder': 'Tu nombre',
     'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar en el ranking',
-    'conta.entreParaRanking': 'Inicia sesión con tu cuenta de Google para participar en el ranking.',
+    'conta.entreParaRanking': 'Inicia sesión en tu cuenta para participar en el ranking.',
     'conta.ranking': 'Ranking',
     'conta.feedback': 'Feedback',
     'conta.reportarBug': 'Reportar un error o sugerencia',
@@ -6617,7 +6836,7 @@ const UI_STRINGS = {
     'bible.bibliotecaSub': 'Libros de Elena G. de White, con el texto cotejado con el original.',
     'bible.hubBiblia': '66 libros · Antiguo y Nuevo Testamento',
     'bible.hubPlanoVazio': 'Elige un plan de lectura',
-    'bible.hubBiblioteca': 'Elena G. de White · 5 libros',
+    'bible.hubBiblioteca': 'Elena G. de White · 6 libros',
     'bible.bibliotecaFalhou': 'No se pudo abrir la biblioteca ahora. Inténtalo de nuevo en un momento.',
     'bible.continuarLeitura': 'Continuar',
     'bible.capitulos': 'capítulos',
@@ -6665,6 +6884,30 @@ const UI_STRINGS = {
     'convite.textoWhats': '📖 Estoy estudiando la lección de la Escuela Sabática Joven en la app Lição Jovem: resumen del día, quiz y la Biblia en el celular. ¿Estudias conmigo?',
     'admin.acompanhamento': 'Seguimiento de la semana',
     'admin.acompanhamentoSub': 'Cuántas personas completaron cada día e hicieron el quiz',
+    'admin.visitas': 'Quién abrió la app',
+    'admin.visitasSub': 'Personas diferentes por día, en los últimos 7 días',
+    'admin.funil': 'Semana: ${inicio} en el día más lleno → ${fim} en el último día (${pct}%)',
+    'admin.maisErradas': 'Preguntas que la clase más falla',
+    'admin.erros': 'fallo(s)',
+    'admin.perguntaN': '· pregunta ${n}',
+    'admin.voltaram': '${voltaram} de ${antes} de la semana pasada volvieron (${pct}%)',
+    'admin.semSemanaAnterior': 'Todavía no hay datos de la semana pasada.',
+    'admin.conversa': 'Conversación de la lección',
+    'admin.conversaSub': 'Comentarios y me gusta de esta semana',
+    'admin.conversaResumo': '${cmt} comentario(s) de ${pcmt} persona(s) · ${curt} me gusta de ${pcurt} persona(s)',
+    'admin.plano': 'Plan bíblico',
+    'admin.planoSub': 'Cuántas personas están leyendo y en qué punto',
+    'admin.planoResumo': '${pessoas} persona(s) leyendo · más usado: ${plano} (${quantos}) · promedio de ${media} capítulo(s)',
+    'admin.planoVazio': 'Nadie ha empezado un plan todavía.',
+    'admin.quemEstaLendo': 'Quién está leyendo',
+    'admin.pessoa': 'Persona',
+    'admin.dias': 'Días',
+    'admin.semNome': 'Sin nombre',
+    'conta.lideresVeem': 'Los líderes de tu clase ven quién estudió cada día y el resultado del quiz. Tus anotaciones siguen siendo solo tuyas.',
+    'admin.dia': 'Día',
+    'admin.abriram': 'Abrieron',
+    'admin.novos': 'Nuevos',
+    'admin.totalSemana': '${pessoas} persona(s) esta semana · ${novos} nuevo(s)',
     'admin.carregando': 'Cargando…',
     'admin.leu': 'Leyó',
     'admin.quiz': 'Quiz',
@@ -6690,6 +6933,9 @@ const UI_STRINGS = {
     'alerts.confirmApagarComentario': '¿Borrar este comentario?',
     'alerts.comentarioApagarFalhou': 'No se pudo borrar ahora. Intenta de nuevo.',
     'alerts.loginFalhouPrefixo': 'No se pudo iniciar sesión: ',
+    'alerts.preencherEmailSenha': 'Completa tu correo y contraseña.',
+    'alerts.informeEmailParaRedefinir': 'Ingresa tu correo electrónico arriba para restablecer tu contraseña.',
+    'alerts.emailRedefinicaoEnviado': 'Te enviamos un correo con el enlace para restablecer tu contraseña.',
     'alerts.confirmSair': '¿Cerrar sesión?\n\nTu progreso queda guardado en la nube y vuelve cuando inicies sesión de nuevo. Se eliminará de este dispositivo para no mezclarse con el de otra persona.',
     'alerts.licaoGithubFalhou': 'No pudimos buscar la lección de GitHub. Usando la versión local.',
     'lesson.correto': '¡Correcto!',
@@ -8370,9 +8616,31 @@ async function registrarStat(lessonId, dayId, dados){
     const token = await getAuthToken();
     await fetch(`${FIREBASE_DB}/stats/${lessonId}/${dayId}/${currentUser.uid}.json?auth=${token}`, {
       method:'PATCH', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(Object.assign({em: Date.now()}, dados))
+      // "nm" é só o primeiro nome (o mesmo que aparece no ranking e nas
+      // curtidas), para o painel poder mostrar a lista de quem está lendo.
+      body: JSON.stringify(Object.assign({em: Date.now(), nm: primeiroNome()}, dados))
     });
   }catch(e){ /* estatistica e extra: nunca atrapalha quem esta estudando */ }
+}
+
+// Resumo do plano bíblico para o painel (o progresso em si continua sendo da
+// pessoa, em `usuarios`, que só ela lê). Aqui vai só o essencial:
+//   stats_plano/{uid} = {p:<plano>, l:<capítulos lidos>, t:<total>, em}
+let _timerStatPlano = null;
+function registrarStatPlano(key){
+  if (!currentUser || !BIBLE_PLANS[key]) return;
+  clearTimeout(_timerStatPlano);
+  // Marcar um dia inteiro salva várias vezes seguidas: espera a poeira baixar.
+  _timerStatPlano = setTimeout(async () => {
+    try{
+      const prog = planProgressCache[key] || {read:{}};
+      const token = await getAuthToken();
+      await fetch(`${FIREBASE_DB}/stats_plano/${currentUser.uid}.json?auth=${token}`, {
+        method:'PUT', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ p: key, l: Object.keys(prog.read || {}).length, t: BIBLE_PLANS[key].sequence.length, em: Date.now() })
+      });
+    }catch(e){ /* contagem é extra */ }
+  }, 2000);
 }
 
 async function carregarStatsDaLicao(lessonId){
@@ -8435,7 +8703,214 @@ async function carregarAcompanhamentoAdmin(lessonId){
   const quantos = gente.size === 1 ? t('acoes.umaPessoa') : t('acoes.nPessoas').replace('${n}', gente.size);
   alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('acoes.licao')} ${numeroDaLicao(licao)}</span><span>${t('admin.leu')}</span><span>${t('admin.quiz')}</span><span>${t('admin.media')}</span></div>`
     + linhas
+    + funilDaSemana(licao, dias)
+    + listaDeQuemEstaLendo(licao, dias)
+    + perguntasMaisErradas(licao, dias)
     + `<p class="admin-total">${quantos} ${t('admin.registroNestaLicao')}</p>`;
+  carregarConversaAdmin(licao);
+  carregarPlanoAdmin();
+}
+
+// Onde a turma para no meio da semana: do dia mais cheio até o último dia.
+function funilDaSemana(licao, dias){
+  const porDia = dias.map(d => Object.values((statsLicao[licao] || {})[d.id] || {}).filter(p => p && p.c).length);
+  const maior = Math.max(...porDia, 0);
+  if (!maior) return '';
+  const ultimo = porDia[porDia.length - 1];
+  const pct = Math.round(ultimo / maior * 100);
+  return `<p class="admin-total">${t('admin.funil').replace('${inicio}', maior).replace('${fim}', ultimo).replace('${pct}', pct)}</p>`;
+}
+
+// Quem está lendo, um por linha: primeiro nome, dias concluídos e média do
+// quiz. Serve para o líder saber quem sumiu e puxar pelo braço - por isso só
+// admin vê, e só o primeiro nome (o mesmo que já aparece no ranking).
+function listaDeQuemEstaLendo(licao, dias){
+  const gente = {};
+  dias.forEach(d => {
+    Object.entries((statsLicao[licao] || {})[d.id] || {}).forEach(([uid, p]) => {
+      if (!p) return;
+      const g = gente[uid] || (gente[uid] = {nome: '', dias: 0, notas: []});
+      if (p.nm) g.nome = p.nm;
+      if (p.c) g.dias++;
+      if (typeof p.q === 'number') g.notas.push(p.q);
+    });
+  });
+  const lista = Object.values(gente).sort((a, b) => b.dias - a.dias || b.notas.length - a.notas.length);
+  if (!lista.length) return '';
+  const linhas = lista.map(g => {
+    const media = g.notas.length ? Math.round(g.notas.reduce((a, b) => a + b, 0) / g.notas.length * 10) + '%' : '—';
+    return `<div class="admin-linha">
+      <span>${escaparHtml(g.nome || t('admin.semNome'))}</span>
+      <span><b>${g.dias}</b>/${dias.length}</span>
+      <span>${media}</span>
+    </div>`;
+  }).join('');
+  return `<p class="admin-total" style="margin-bottom:2px;">${t('admin.quemEstaLendo')}</p>`
+    + `<div class="admin-tabela tres" style="margin-top:0;">`
+    + `<div class="admin-linha cabecalho"><span>${t('admin.pessoa')}</span><span>${t('admin.dias')}</span><span>${t('admin.media')}</span></div>`
+    + linhas + `</div>`;
+}
+
+// A pergunta que a turma mais erra: vem de stats/{licao}/{dia}/{uid}.e ("3,7").
+function perguntasMaisErradas(licao, dias){
+  const content = LESSONS_CONTENT.find(c => c.id === licao);
+  const contagem = [];
+  dias.forEach(d => {
+    Object.values((statsLicao[licao] || {})[d.id] || {}).forEach(p => {
+      if (!p || typeof p.e !== 'string' || !p.e) return;
+      p.e.split(',').forEach(n => {
+        const num = parseInt(n, 10);
+        if (!num) return;
+        const achou = contagem.find(x => x.dia === d.id && x.num === num);
+        if (achou) achou.erros++;
+        else contagem.push({dia: d.id, num, erros: 1});
+      });
+    });
+  });
+  if (!contagem.length) return '';
+  const top = contagem.sort((a, b) => b.erros - a.erros).slice(0, 3);
+  const itens = top.map(x => {
+    const dia = content && content.days.find(dd => dd.id === x.dia);
+    const q = dia && dia.quiz && dia.quiz.questions[x.num - 1];
+    const texto = q ? resumirTexto(q.text, 70) : '—';
+    const nomeDia = dayDisplayDate(licao, x.dia, idiomaConteudoAtual).split(' · ')[0];
+    return `<li><b>${x.erros}</b> ${t('admin.erros')} · ${escaparHtml(nomeDia)} ${t('admin.perguntaN').replace('${n}', x.num)}<br><span class="admin-pergunta">${escaparHtml(texto)}</span></li>`;
+  }).join('');
+  return `<p class="admin-total" style="margin-bottom:2px;">${t('admin.maisErradas')}</p><ul class="admin-erradas">${itens}</ul>`;
+}
+
+// Comentários e curtidas da lição: o quanto a turma está conversando.
+async function carregarConversaAdmin(licao){
+  const alvo = document.getElementById('admin-conversa');
+  if (!alvo || !souAdmin()) return;
+  try{
+    const token = await getAuthToken();
+    const [rc, rl] = await Promise.all([
+      fetch(`${FIREBASE_DB}/comentarios/${licao}.json?auth=${token}`),
+      fetch(`${FIREBASE_DB}/curtidas/${licao}.json?auth=${token}`)
+    ]);
+    const cmts = rc.ok ? ((await rc.json()) || {}) : {};
+    const curt = rl.ok ? ((await rl.json()) || {}) : {};
+    let nCmt = 0; const quemCmt = new Set(), quemCurtiu = new Set();
+    Object.values(cmts).forEach(dia => Object.values(dia || {}).forEach(c => { if (c && c.uid){ nCmt++; quemCmt.add(c.uid); } }));
+    let nCurt = 0;
+    // curtidas/{licao}/{dia}/{uid} = {nome, em} -> a chave do último nível é a pessoa.
+    Object.values(curt).forEach(dia => Object.keys(dia || {}).forEach(uid => { nCurt++; quemCurtiu.add(uid); }));
+    alvo.innerHTML = `<p class="admin-total" style="margin:0;">`
+      + t('admin.conversaResumo').replace('${cmt}', nCmt).replace('${pcmt}', quemCmt.size)
+        .replace('${curt}', nCurt).replace('${pcurt}', quemCurtiu.size) + `</p>`;
+  }catch(e){ alvo.innerHTML = ''; }
+}
+
+// Plano bíblico: quantas pessoas estão lendo e em que ponto.
+async function carregarPlanoAdmin(){
+  const alvo = document.getElementById('admin-plano');
+  if (!alvo || !souAdmin()) return;
+  let dados;
+  try{
+    const token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/stats_plano.json?auth=${token}`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    dados = (await r.json()) || {};
+  }catch(e){ alvo.innerHTML = ''; return; }
+  const pessoas = Object.values(dados).filter(p => p && p.p);
+  if (!pessoas.length){ alvo.innerHTML = `<p class="admin-total" style="margin:0;">${t('admin.planoVazio')}</p>`; return; }
+  const porPlano = {};
+  pessoas.forEach(p => { porPlano[p.p] = (porPlano[p.p] || 0) + 1; });
+  const favorito = Object.entries(porPlano).sort((a, b) => b[1] - a[1])[0];
+  const media = Math.round(pessoas.reduce((a, p) => a + (p.l || 0), 0) / pessoas.length);
+  const nomePlano = BIBLE_PLANS[favorito[0]] ? planField(favorito[0], 'name', idiomaConteudoAtual) : favorito[0];
+  alvo.innerHTML = `<p class="admin-total" style="margin:0;">`
+    + t('admin.planoResumo').replace('${pessoas}', pessoas.length)
+      .replace('${plano}', escaparHtml(nomePlano)).replace('${quantos}', favorito[1])
+      .replace('${media}', media) + `</p>`;
+}
+
+// ===== QUANTAS PESSOAS ABRIRAM O APP (só admin vê) =====
+// Estrutura no banco:
+//   visitas/{AAAA-MM-DD}/{uid} = {em:<quando>, n:true no primeiro dia da pessoa}
+// É uma gravação por pessoa por dia (o resto do dia nem toca no banco), e só
+// conta quem está logado - sem conta não dá para gravar, e não vamos pedir
+// dado nenhum de quem só passa para ler.
+const DIAS_NO_PAINEL = 7;
+
+async function registrarVisita(){
+  if (!currentUser) return;
+  const hoje = dateKey(new Date());
+  const marca = 'visita-' + hoje;
+  try{
+    const res = await window.storage.get(marca, false);
+    if (res && res.value) return; // já contei esta pessoa hoje
+  }catch(e){ /* primeira vez no dia */ }
+  // "n" (novo) marca quem está abrindo o app pela primeira vez na vida.
+  let novo = false;
+  try{
+    const antes = await window.storage.get('visita-primeira', false);
+    novo = !(antes && antes.value);
+  }catch(e){ novo = true; }
+  try{
+    const token = await getAuthToken();
+    const corpo = { em: Date.now(), nm: primeiroNome() };
+    if (novo) corpo.n = true;
+    const r = await fetch(`${FIREBASE_DB}/visitas/${hoje}/${currentUser.uid}.json?auth=${token}`, {
+      method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(corpo)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    await window.storage.set(marca, '1', false);
+    if (novo) await window.storage.set('visita-primeira', hoje, false);
+  }catch(e){ /* contagem é extra: nunca atrapalha quem está estudando */ }
+}
+
+// Tabela da aba Conta: últimos 7 dias, quantas pessoas abriram e quantas eram novas.
+async function carregarVisitasAdmin(){
+  const alvo = document.getElementById('admin-visitas');
+  if (!alvo || !souAdmin()) return;
+  const dias = [], anteriores = [];
+  for (let i = DIAS_NO_PAINEL * 2 - 1; i >= 0; i--){
+    const d = new Date(); d.setDate(d.getDate() - i);
+    (i >= DIAS_NO_PAINEL ? anteriores : dias).push(dateKey(d));
+  }
+  let dados;
+  try{
+    const token = await getAuthToken();
+    // orderBy "$key" com startAt: desce só as duas semanas do painel, não o histórico inteiro.
+    const url = `${FIREBASE_DB}/visitas.json?auth=${token}&orderBy=%22%24key%22&startAt=%22${anteriores[0]}%22`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    dados = (await r.json()) || {};
+  }catch(e){
+    alvo.innerHTML = `<p class="conta-note" style="margin:0;">${t('admin.semRegras').replace('${erro}', escaparHtml(e.message))}</p>`;
+    return;
+  }
+
+  const semana = new Set(), novos = new Set();
+  const linhas = dias.map(dia => {
+    const pessoas = Object.entries(dados[dia] || {});
+    pessoas.forEach(([uid, v]) => { semana.add(uid); if (v && v.n) novos.add(uid); });
+    const dNome = new Date(dia + 'T12:00:00').toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {weekday:'short', day:'2-digit', month:'2-digit'});
+    const doDia = pessoas.length;
+    const novosDoDia = pessoas.filter(([,v]) => v && v.n).length;
+    return `<div class="admin-linha">
+      <span>${escaparHtml(dNome)}</span>
+      <span><b>${doDia}</b></span>
+      <span>${novosDoDia ? '<b>+' + novosDoDia + '</b>' : '—'}</span>
+    </div>`;
+  }).join('');
+
+  // Quantos da semana passada voltaram nesta: é o número que mostra se o app
+  // virou hábito ou se a pessoa entra uma vez e some.
+  const antes = new Set();
+  anteriores.forEach(dia => Object.keys(dados[dia] || {}).forEach(uid => antes.add(uid)));
+  const voltaram = [...antes].filter(uid => semana.has(uid)).length;
+  const retorno = antes.size
+    ? t('admin.voltaram').replace('${voltaram}', voltaram).replace('${antes}', antes.size)
+        .replace('${pct}', Math.round(voltaram / antes.size * 100))
+    : t('admin.semSemanaAnterior');
+
+  alvo.innerHTML = `<div class="admin-linha cabecalho"><span>${t('admin.dia')}</span><span>${t('admin.abriram')}</span><span>${t('admin.novos')}</span></div>`
+    + linhas
+    + `<p class="admin-total">${t('admin.totalSemana').replace('${pessoas}', semana.size).replace('${novos}', novos.size)}</p>`
+    + `<p class="admin-total" style="margin-top:2px;">${retorno}</p>`;
 }
 
 // ===== CURTIR E COMPARTILHAR (estilo Instagram) =====
@@ -8993,6 +9468,7 @@ function initFirebaseAuth() {
         atualizarVisibilidadeComentarios();
         carregarSocialVisivel();
         iniciarEscutaAoVivo();
+        registrarVisita();
         await refrescarTelaAposLogin();
       } else {
         // Sem conta não há nuvem para esperar: o que está no aparelho é tudo.
@@ -9018,6 +9494,23 @@ async function loginWithGoogle() {
     alert('O login ainda nao esta configurado.\n\nFalta colar a apiKey do Firebase no topo do arquivo (firebaseConfig).');
     return;
   }
+  // Dentro do app Android/iOS (Capacitor), signInWithPopup/Redirect nao
+  // funciona de forma confiavel em webview nativa - usa o plugin nativo
+  // pra pegar o idToken do Google e entra na mesma sessao do SDK web
+  // (firebase.auth()) via signInWithCredential, mantendo currentUser/
+  // getAuthToken/etc. exatamente iguais ao fluxo web de sempre.
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    try {
+      if (!window.__signInWithGoogleNative) throw new Error('Login nativo ainda nao carregou - tente de novo em instantes.');
+      const idToken = await window.__signInWithGoogleNative();
+      const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+      await firebase.auth().signInWithCredential(credential);
+    } catch(e) {
+      alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
+      console.error('❌ Erro no login nativo:', e);
+    }
+    return;
+  }
   const provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({ prompt: 'select_account' });
   try {
@@ -9033,6 +9526,88 @@ async function loginWithGoogle() {
       alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
     }
     console.error('❌ Erro no login:', e);
+  }
+}
+
+async function loginWithApple() {
+  if (!firebaseAuthReady) {
+    alert('O login ainda nao esta configurado.\n\nFalta colar a apiKey do Firebase no topo do arquivo (firebaseConfig).');
+    return;
+  }
+  // Mesma logica do loginWithGoogle(): dentro do app nativo usa o plugin
+  // (idToken + nonce) via signInWithCredential; na web usa popup/redirect.
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    try {
+      if (!window.__signInWithAppleNative) throw new Error('Login nativo ainda nao carregou - tente de novo em instantes.');
+      const { idToken, nonce } = await window.__signInWithAppleNative();
+      const credential = new firebase.auth.OAuthProvider('apple.com').credential({ idToken: idToken, rawNonce: nonce });
+      await firebase.auth().signInWithCredential(credential);
+    } catch(e) {
+      alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
+      console.error('❌ Erro no login nativo (Apple):', e);
+    }
+    return;
+  }
+  const provider = new firebase.auth.OAuthProvider('apple.com');
+  provider.addScope('email');
+  provider.addScope('name');
+  try {
+    await firebase.auth().signInWithPopup(provider);
+  } catch(e) {
+    const quedaParaRedirect = ['auth/popup-blocked','auth/popup-closed-by-user','auth/cancelled-popup-request','auth/operation-not-supported-in-this-environment'];
+    if (quedaParaRedirect.indexOf(e.code) !== -1) {
+      try { await firebase.auth().signInWithRedirect(provider); return; } catch(e2) { e = e2; }
+    }
+    if (e.code === 'auth/unauthorized-domain') {
+      alert('Este dominio nao esta autorizado no Firebase.\n\nAdicione "' + location.hostname + '" em:\nFirebase Console > Authentication > Settings > Authorized domains');
+    } else {
+      alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
+    }
+    console.error('❌ Erro no login (Apple):', e);
+  }
+}
+
+function credenciaisEmailSenha() {
+  const email = (document.getElementById('email-input').value || '').trim();
+  const senha = document.getElementById('password-input').value || '';
+  if (!email || !senha) { alert(t('alerts.preencherEmailSenha')); return null; }
+  return { email, senha };
+}
+
+async function loginWithEmail() {
+  if (!firebaseAuthReady) return;
+  const dados = credenciaisEmailSenha();
+  if (!dados) return;
+  try {
+    await firebase.auth().signInWithEmailAndPassword(dados.email, dados.senha);
+  } catch(e) {
+    alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
+    console.error('❌ Erro no login por e-mail:', e);
+  }
+}
+
+async function signupWithEmail() {
+  if (!firebaseAuthReady) return;
+  const dados = credenciaisEmailSenha();
+  if (!dados) return;
+  try {
+    await firebase.auth().createUserWithEmailAndPassword(dados.email, dados.senha);
+  } catch(e) {
+    alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
+    console.error('❌ Erro ao criar conta por e-mail:', e);
+  }
+}
+
+async function resetPasswordEmail() {
+  if (!firebaseAuthReady) return;
+  const email = (document.getElementById('email-input').value || '').trim();
+  if (!email) { alert(t('alerts.informeEmailParaRedefinir')); return; }
+  try {
+    await firebase.auth().sendPasswordResetEmail(email);
+    alert(t('alerts.emailRedefinicaoEnviado'));
+  } catch(e) {
+    alert(t('alerts.loginFalhouPrefixo') + (e.message || e.code));
+    console.error('❌ Erro ao enviar redefinicao de senha:', e);
   }
 }
 
@@ -9308,13 +9883,17 @@ async function refrescarTelaAposLogin() {
 
 function updateAuthUI() {
   atualizarChipPerfil();
-  const loginBtn  = document.getElementById('login-btn');
-  const logoutBtn = document.getElementById('logout-btn');
-  const syncBtn   = document.getElementById('sync-btn');
-  const info      = document.getElementById('user-info');
-  const logado    = !!currentUser;
+  const loginBtn   = document.getElementById('login-btn');
+  const appleBtn   = document.getElementById('apple-login-btn');
+  const emailBlock = document.getElementById('email-login-block');
+  const logoutBtn  = document.getElementById('logout-btn');
+  const syncBtn    = document.getElementById('sync-btn');
+  const info       = document.getElementById('user-info');
+  const logado     = !!currentUser;
 
-  if (loginBtn)  loginBtn.style.display  = logado ? 'none' : 'flex';
+  if (loginBtn)   loginBtn.style.display   = logado ? 'none' : 'flex';
+  if (appleBtn)   appleBtn.style.display   = logado ? 'none' : 'flex';
+  if (emailBlock) emailBlock.style.display = logado ? 'none' : 'flex';
   if (logoutBtn) logoutBtn.style.display = logado ? 'block' : 'none';
   if (syncBtn)   syncBtn.style.display   = logado ? 'block' : 'none';
   if (info) {
