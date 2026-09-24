@@ -2063,7 +2063,10 @@ const progressCache = {}; // lessonId -> progress object
 
 async function preloadAllProgress(){
   await Promise.all(LESSONS_META.map(async l => {
-    progressCache[l.id] = await loadProgress(l.id);
+    const gravado = await loadProgress(l.id);
+    // Se o login ja trouxe a nuvem para o cache, une em vez de sobrescrever.
+    const emMemoria = progressCache[l.id];
+    progressCache[l.id] = emMemoria ? mesclarProgressoLicao(gravado, emMemoria) : gravado;
   }));
 }
 
@@ -7346,14 +7349,19 @@ function openBibleReference(ref){
 
   if(!book || !chapter) return;
 
-  openChapterPopup(book.id, chapter, ref);
+  // "João 14 a 16" / "João 14-16": abre o intervalo inteiro.
+  const intervalo = /^\d+\s*(?:a|à|al|até|to|through|[-–—])\s*(\d+)\s*$/.exec(rest);
+  const chapterEnd = intervalo && parseInt(intervalo[1]) > chapter && parseInt(intervalo[1]) - chapter < 30
+    ? parseInt(intervalo[1]) : 0;
+
+  openChapterPopup(book.id, chapter, ref, chapterEnd);
 }
 
 // So mostra alternador de versao em portugues - mesma razao do
 // versionSwitchRow do popup de versiculo (so 1 versao gratuita fora do pt).
-function chapterPopupVersionRow(idioma, activeVersion, bookId, chapter){
+function chapterPopupVersionRow(idioma, activeVersion, bookId, chapter, chapterEnd){
   if(idioma !== 'pt') return '';
-  const btn = (v, label) => `<button class="vpop-version-btn${v===activeVersion?' active':''}" onclick="switchChapterPopupVersion('${v}','${bookId}',${chapter})">${label}</button>`;
+  const btn = (v, label) => `<button class="vpop-version-btn${v===activeVersion?' active':''}" onclick="switchChapterPopupVersion('${v}','${bookId}',${chapter},${chapterEnd||0})">${label}</button>`;
   return `<div class="vpop-version-row">${btn('nvi','NVI')}${btn('ara','ARA')}</div>`;
 }
 
@@ -7362,38 +7370,51 @@ function chapterPopupVersionRow(idioma, activeVersion, bookId, chapter){
 // data-* do proprio elemento em vez de montar uma chamada dentro do
 // href, mesmo padrao que toggleVerseLive ja usa pra referencias de versiculo.
 function abrirCapituloDoTexto(el){
-  openChapterPopup(el.dataset.book, parseInt(el.dataset.chapter), el.textContent);
+  openChapterPopup(el.dataset.book, parseInt(el.dataset.chapter), el.textContent,
+                   parseInt(el.dataset.chapterEnd) || 0);
 }
 
-async function openChapterPopup(bookId, chapter, refLabel){
+async function openChapterPopup(bookId, chapter, refLabel, chapterEnd){
   const book = BIBLE_BOOKS.find(b=>b.id===bookId);
   if(!book) return;
   const idioma = idiomaConteudoAtual;
   const versaoInicial = idioma === 'pt' ? 'nvi' : IDIOMA_BIBLIA[idioma].versaoUnica;
   const title = refLabel || `${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`;
-  openVerseModal(title, `${chapterPopupVersionRow(idioma,versaoInicial,bookId,chapter)}<span class="vpop-loading">${t('bible.buscandoCapitulo')}</span>`, {book:bookId, chapter, v1:0, v2:0, label:`${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`});
-  await renderChapterPopupVersion(idioma, versaoInicial, book, chapter);
+  // Intervalo de capitulos: sem estrela de favorito (ela guarda um capitulo so).
+  const fav = chapterEnd ? null : {book:bookId, chapter, v1:0, v2:0, label:`${bookDisplayName(book.id, idiomaConteudoAtual)} ${chapter}`};
+  openVerseModal(title, `${chapterPopupVersionRow(idioma,versaoInicial,bookId,chapter,chapterEnd)}<span class="vpop-loading">${t('bible.buscandoCapitulo')}</span>`, fav);
+  await renderChapterPopupVersion(idioma, versaoInicial, book, chapter, chapterEnd);
 }
 
-async function switchChapterPopupVersion(version, bookId, chapter){
+async function switchChapterPopupVersion(version, bookId, chapter, chapterEnd){
   const book = BIBLE_BOOKS.find(b=>b.id===bookId);
   if(!book) return;
   const idioma = idiomaConteudoAtual;
-  updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,bookId,chapter)}<span class="vpop-loading">${t('bible.buscandoCapitulo')}</span>`);
-  await renderChapterPopupVersion(idioma, version, book, chapter);
+  updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,bookId,chapter,chapterEnd)}<span class="vpop-loading">${t('bible.buscandoCapitulo')}</span>`);
+  await renderChapterPopupVersion(idioma, version, book, chapter, chapterEnd);
 }
 
-async function renderChapterPopupVersion(idioma, version, book, chapter){
+async function renderChapterPopupVersion(idioma, version, book, chapter, chapterEnd){
+  const fim = chapterEnd && chapterEnd > chapter ? chapterEnd : chapter;
+  const linha = chapterPopupVersionRow(idioma, version, book.id, chapter, chapterEnd);
   try{
-    const result = await fetchTranslation(idioma, book, chapter, version);
-    let html = chapterPopupVersionRow(idioma, version, book.id, chapter);
-    html += `<div class="translation-note">${result.note||''}</div>`;
-    (result.verses||[]).forEach(v=>{
-      html += `<div class="verse-line">${v.verse?`<span class="verse-num">${v.verse}</span>`:''}${v.text}</div>`;
+    // Um pedido por capitulo; o intervalo aparece em sequencia, cada um com titulo.
+    const capitulos = [];
+    for(let c = chapter; c <= fim; c++) capitulos.push(c);
+    const resultados = await Promise.all(capitulos.map(c => fetchTranslation(idioma, book, c, version)));
+    let html = linha;
+    resultados.forEach((result, i) => {
+      if(fim > chapter){
+        html += `<div class="translation-note"><b>${bookDisplayName(book.id, idiomaConteudoAtual)} ${capitulos[i]}</b></div>`;
+      }
+      html += `<div class="translation-note">${result.note||''}</div>`;
+      (result.verses||[]).forEach(v=>{
+        html += `<div class="verse-line">${v.verse?`<span class="verse-num">${v.verse}</span>`:''}${v.text}</div>`;
+      });
     });
     updateVerseModalBody(html);
   }catch(e){
-    updateVerseModalBody(`${chapterPopupVersionRow(idioma,version,book.id,chapter)}<span class="vpop-loading">${t('bible.naoConseguiBuscarAqui')}</span>`);
+    updateVerseModalBody(`${linha}<span class="vpop-loading">${t('bible.naoConseguiBuscarAqui')}</span>`);
   }
 }
 
@@ -8310,9 +8331,12 @@ async function aplicarProgressoDaNuvem(progressoNuvem) {
   const gravar = window.storage.setSemSync || window.storage.set;
   for (const lessonId of Object.keys(progressoNuvem || {})) {
     const nuvem = filtrarDiasFuturos(lessonId, progressoNuvem[lessonId] || {});
-    const antes = progressCache[lessonId];
-    const depois = antes ? mesclarProgressoLicao(antes, nuvem) : mesclarProgressoLicao({}, nuvem);
-    if (JSON.stringify(antes) === JSON.stringify(depois)) continue;
+    // A nuvem pode chegar antes do preload do progresso local (no iOS o
+    // evento load demora): com o cache vazio, parte do que esta gravado no
+    // aparelho, senao a gravacao abaixo apagaria dias so locais.
+    const antes = progressCache[lessonId] || await loadProgress(lessonId);
+    const depois = mesclarProgressoLicao(antes, nuvem);
+    if (progressCache[lessonId] && JSON.stringify(antes) === JSON.stringify(depois)) continue;
     progressCache[lessonId] = depois;
     mudou = true;
     memoryFallback['progress:lesson' + lessonId] = depois;
@@ -10016,7 +10040,17 @@ const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 dias em ms
 // Sobe a cada correcao no parser de citacoes bíblicas (formatBibleReferences) -
 // invalida sozinho todo HTML ja processado e guardado no localStorage de quem
 // testou antes da correcao, sem precisar pedir pra pessoa limpar cache na mao.
-const OFICIAL_CACHE_VERSAO = 'v2';
+const OFICIAL_CACHE_VERSAO = 'v3';
+// Cada troca de versao deixaria o HTML da anterior ocupando localStorage:
+// apaga as entradas 'official-vN-*' de versoes que nao sao a atual.
+(function limparCachesOficiaisAntigos(){
+  try{
+    const atual = `official-${OFICIAL_CACHE_VERSAO}-`;
+    Object.keys(localStorage).forEach(k => {
+      if(/^official-v\d+-/.test(k) && k.indexOf(atual) !== 0) localStorage.removeItem(k);
+    });
+  }catch(e){ /* storage indisponivel: nada a limpar */ }
+})();
 
 function getCachedOfficial(lessonId, dayId){
   const key = `official-${OFICIAL_CACHE_VERSAO}-${idiomaConteudoAtual}-${lessonId}-${dayId}`;
@@ -10149,8 +10183,9 @@ async function buscarOficialDaRede(lessonId, dayId){
         v2 = v2 || v1;
         return `<span class="vref" data-book="${bookId}" data-chapter="${chapter}" data-v1="${v1}" data-v2="${v2}" onclick="toggleVerseLive(this)">${label}</span><span class="vref-pop"></span>`;
       }
-      function wrapChapter(bookId, chapter, label){
-        return `<a class="vref-chapter" data-book="${bookId}" data-chapter="${chapter}" onclick="abrirCapituloDoTexto(this)" style="color:var(--violet);text-decoration:underline;cursor:pointer;">${label}</a>`;
+      function wrapChapter(bookId, chapter, label, chapterEnd){
+        const fim = chapterEnd ? ` data-chapter-end="${chapterEnd}"` : '';
+        return `<a class="vref-chapter" data-book="${bookId}" data-chapter="${chapter}"${fim} onclick="abrirCapituloDoTexto(this)" style="color:var(--violet);text-decoration:underline;cursor:pointer;">${label}</a>`;
       }
 
       const bookKeys = Object.keys(dicionarioLivros).sort((a,b)=>b.length-a.length);
@@ -10159,14 +10194,31 @@ async function buscarOficialDaRede(lessonId, dayId){
       // português/inglês escrevem "Jo 11:43"/"John 11:43" (sem espaço) - \s? cobre os dois.
       // Range de versículo vem tanto com hífen comum ("6-8") quanto travessão ("1–5",
       // "43–12:33") dependendo do idioma/dia - [-–—] cobre os tres.
-      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::\\s?(\\d+)(?:[-–—](\\d+))?)?((?:,\\s?\\d+)*)', 'g');
+      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::\\s?(\\d+)(?:[-–—](\\d+))?|(\\s+(?:a|à|al|até|to|through|and|y|e)\\s+|\\s*[-–—]\\s*)(\\d+)(?!\\s*:))?((?:,\\s?\\d+)*)', 'g');
 
       // Primeiro: livro + capítulo[:versículos][, versículo extra...]
-      text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, extraList, offset, full) => {
+      text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, conector, chapterEnd, extraList, offset, full) => {
         const bookId = dicionarioLivros[bookName];
         if(!bookId) return match;
+        // Abreviacao que coincide com palavra comum ("Os 144 mil", "Os 12 apostolos"):
+        // capitulo que nao existe no livro (Oseias tem 14) ou numero seguido de
+        // quantidade/tempo nao e citacao biblica - deixa o texto como esta.
+        const livro = BIBLE_BOOKS.find(b => b.id === bookId);
+        if(livro && parseInt(chapter) > livro.ch) return match;
+        if(!v1 && /^\s+(mil|milh(?:ão|ões|ao|oes)|thousand|million|anos?|years?|años?|dias?|days?|días?|meses|months|semanas?|weeks?|horas?|hours?|vezes|times|veces|apóstolos|apostles|apóstoles|discípulos|disciples|tribos|tribes|tribus)\b/i.test(full.slice(offset + match.length))) return match;
         lastBookId = bookId; lastChapter = chapter;
         if(!v1){
+          // Intervalo de capitulos ("João 14 a 16", "John 14-16"): um so link que
+          // abre todos os capitulos. Intervalo invalido (fim <= inicio ou enorme)
+          // volta ao comportamento antigo: link so no primeiro capitulo.
+          if(chapterEnd){
+            const ini = parseInt(chapter), fim = parseInt(chapterEnd);
+            // "e/y/and" so liga capitulos consecutivos ("João 15 e 16"); "Ap 7 e 14" nao e intervalo.
+            const soPar = /\b(and|y|e)\b/i.test(conector);
+            if(fim > ini && fim - ini < 30 && (!soPar || fim === ini + 1)) return wrapChapter(bookId, chapter, match, chapterEnd);
+            const base = bookName + match.slice(bookName.length).match(/^\s+\d+/)[0];
+            return wrapChapter(bookId, chapter, base) + match.slice(base.length);
+          }
           // Sem versículo especificado: abre o capítulo inteiro (comportamento de antes)
           return wrapChapter(bookId, chapter, match);
         }
