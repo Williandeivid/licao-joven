@@ -3288,23 +3288,11 @@ async function renderConta(){
       </div>
     </div>
 
-    <div class="conta-card">
-      <div class="conta-section-title">${t('conta.seusDados')}</div>
-      <div class="conta-row">
-        <div><div class="conta-row-title">${t('conta.fazerBackup')}</div><div class="conta-row-sub">${t('conta.fazerBackupNota')}</div></div>
-        <button class="conta-btn" onclick="exportBackup()">${t('conta.baixar')}</button>
-      </div>
-      <div class="conta-row">
-        <div><div class="conta-row-title">${t('conta.restaurarBackup')}</div><div class="conta-row-sub">${t('conta.restaurarBackupNota')}</div></div>
-        <button class="conta-btn conta-btn-secondary" onclick="document.getElementById('conta-restore-input').click()">${t('conta.escolherArquivo')}</button>
-        <input type="file" id="conta-restore-input" accept=".json" style="display:none" onchange="importBackup(this.files[0])">
-      </div>
-      <div class="conta-row">
-        <div><div class="conta-row-title">${t('conta.zerarTudo')}</div><div class="conta-row-sub">${t('conta.zerarTudoNota')}</div></div>
-        <button class="conta-btn conta-btn-danger" onclick="confirmResetAll()">${t('conta.zerar')}</button>
-      </div>
-      <p class="conta-note" style="margin:10px 0 0;">${t('conta.lideresVeem')}</p>
-    </div>
+    <!-- O cartão "Seus dados" (backup, restaurar e zerar) saiu da tela em
+         23/09/2026 a pedido do Willian. O "Zerar" só apagava o aparelho: quem
+         tem conta via o progresso voltar da nuvem no login seguinte, o que
+         contrariava o "sem volta" escrito ali. As funções continuam no código
+         (exportBackup, importBackup, confirmResetAll) para voltar fácil. -->
 
     <div class="conta-card">
       <div class="conta-section-title">${t('conta.feedback')}</div>
@@ -3347,6 +3335,7 @@ async function renderConta(){
         </button>
         <p id="user-info" class="conta-note" style="margin:0; display:none;"></p>
       </div>
+      <p class="conta-note" style="margin:10px 0 0;">${t('conta.lideresVeem')}</p>
     </div>
     ${souAdmin() ? `
     <div class="conta-card">
@@ -5958,7 +5947,7 @@ const UI_STRINGS = {
     'stats.diaCompleto': 'Dia completo! 🔥',
     'stats.diaCompletoSub': 'Lição + Plano Bíblico feitos hoje.',
     'stats.notaMedia': 'nota média',
-    'conta.subtitulo': 'Seu perfil, aparência e seus dados.',
+    'conta.subtitulo': 'Seu perfil, aparência e sua conta.',
     'conta.loginSync': 'Login e sincronização',
     'conta.entrarGoogle': 'Entrar com Google',
     'conta.entrarApple': 'Entrar com Apple',
@@ -6352,7 +6341,7 @@ const UI_STRINGS = {
     'stats.diaCompleto': 'Complete day! 🔥',
     'stats.diaCompletoSub': 'Lesson + Bible Plan done today.',
     'stats.notaMedia': 'average score',
-    'conta.subtitulo': 'Your profile, appearance, and your data.',
+    'conta.subtitulo': 'Your profile, appearance and account.',
     'conta.loginSync': 'Login and sync',
     'conta.entrarGoogle': 'Sign in with Google',
     'conta.entrarApple': 'Sign in with Apple',
@@ -6746,7 +6735,7 @@ const UI_STRINGS = {
     'stats.diaCompleto': '¡Día completo! 🔥',
     'stats.diaCompletoSub': 'Lección + Plan Bíblico hechos hoy.',
     'stats.notaMedia': 'nota promedio',
-    'conta.subtitulo': 'Tu perfil, apariencia y tus datos.',
+    'conta.subtitulo': 'Tu perfil, apariencia y tu cuenta.',
     'conta.loginSync': 'Inicio de sesión y sincronización',
     'conta.entrarGoogle': 'Iniciar sesión con Google',
     'conta.entrarApple': 'Iniciar sesión con Apple',
