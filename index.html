@@ -2286,7 +2286,7 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
         <div class="options">${shuffledQ[i].opts.map((o,oi)=>`<button class="opt ${kahootClasses[oi]}" data-v="${String.fromCharCode(65+oi)}">${o}</button>`).join('')}</div>
       </div>`;
     });
-    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>${t('lesson.voceLevou')}<b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>${t('lesson.acertos')}<b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span><button class="quiz-refazer-btn" onclick="refazerQuiz(${lessonId},'${day.id}')">${t('lesson.refazer')}</button></div>
+    html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>${t('lesson.voceLevou')}<b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>${t('lesson.acertos')}<b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span></div>
     <button class="reveal-btn" onclick="toggleGabarito(this)">${t('lesson.verGabaritoCompleto')}</button>
     <div class="gabarito">${newAnswers.map((a,i)=>(i+1)+'-'+a).join(' · ')}</div>
     </div>`;
@@ -4468,26 +4468,34 @@ async function openDayEditor(targetKey){
     <div class="dayed-panel">
       <div class="dayed-head"><span>${dateLabel}</span><button class="dayed-close" onclick="closeDayEditor()">✕</button></div>`;
 
-  if(lessonMatch && dayHasQuiz){
-    html += `<div class="dayed-section">
-      <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>${lessonMatch.lessonTitle} — ${lessonMatch.dayTitle}</div>
-      <div class="dayed-row"><label>${t('lesson.acertosDe10')}</label><input type="number" id="ed-correct" min="0" max="10" value="${lessonQuiz?lessonQuiz.correct:''}" placeholder="—"></div>
-      <div class="dayed-row"><label>${t('lesson.tempoMinutos')}</label><input type="number" id="ed-lesson-min" min="0" value="${lessonQuiz?Math.round(lessonQuiz.time/60000):''}" placeholder="—"></div>
-    </div>`;
-  } else if(lessonMatch){
-    html += `<div class="dayed-section">
-      <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>${lessonMatch.lessonTitle} — ${lessonMatch.dayTitle}</div>
-      <div class="dayed-row"><label>${t('lesson.estudeiSemQuiz')}</label><input type="checkbox" id="ed-studied-only" ${isStudied?'checked':''} style="width:22px;height:22px;"></div>
-    </div>`;
+  // Só leitura desde 23/09/2026: antes dava para digitar a nota e marcar o dia
+  // na mão por aqui. Como o painel da classe agora mostra nome, dias e média,
+  // o número precisa ser o que a pessoa fez de verdade no app.
+  const linha = (rotulo, valor) => `<div class="dayed-row"><label>${rotulo}</label><b>${valor}</b></div>`;
+
+  if(lessonMatch){
+    const titulo = `<div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>${lessonMatch.lessonTitle} — ${lessonMatch.dayTitle}</div>`;
+    let corpo;
+    if(lessonQuiz){
+      corpo = linha(t('lesson.acertos'), lessonQuiz.correct + '/10')
+        + linha(t('lesson.voceLevou'), Math.max(1, Math.round(lessonQuiz.time/60000)) + ' min');
+    } else if(isStudied){
+      corpo = linha(t('lesson.diaConcluido'), '✓');
+    } else {
+      corpo = `<p class="conta-note" style="margin:0;">${t('stats.semRegistroDia')}</p>`;
+    }
+    html += `<div class="dayed-section">${titulo}${corpo}</div>`;
   } else {
     html += `<div class="dayed-section"><div class="dayed-label">${t('lesson.nenhumaLicaoPrevista')}</div></div>`;
   }
 
   html += `<div class="dayed-section">
     <div class="dayed-label"><svg class="dayed-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>${t('bible.planoBiblico')}</div>
-    <div class="dayed-row"><label>${t('lesson.tempoMinutos')}</label><input type="number" id="ed-bible-min" min="0" value="${bibleMinutes||''}" placeholder="—"></div>
+    ${bibleMinutes
+      ? linha(t('lesson.voceLevou'), bibleMinutes + ' min')
+      : `<p class="conta-note" style="margin:0;">${t('stats.semRegistroDia')}</p>`}
   </div>
-  <button class="dayed-save" onclick="saveDayEditor()">${t('common.salvar')}</button>
+  <p class="conta-note" style="margin:0;">${t('stats.vemDoApp')}</p>
   </div></div>`;
 
   const wrap = document.createElement('div');
@@ -6192,6 +6200,8 @@ const UI_STRINGS = {
     'lesson.tempoMinutos': 'Tempo (minutos)',
     'lesson.estudeiSemQuiz': 'Estudei esse dia (sem quiz)',
     'lesson.nenhumaLicaoPrevista': 'Nenhuma lição prevista para este dia.',
+    'stats.semRegistroDia': 'Nada registrado neste dia.',
+    'stats.vemDoApp': 'O que aparece aqui é o que você fez no app. Não dá para alterar na mão.',
     'lesson.mapaMentalSemana': 'Mapa mental da semana',
     'lesson.tirinhaOriginal': 'Tirinha original · ComTexto Bíblico, Lição ${n}',
     'lesson.textoBaseSemana': 'Texto-base da semana:',
@@ -6586,6 +6596,8 @@ const UI_STRINGS = {
     'lesson.tempoMinutos': 'Time (minutes)',
     'lesson.estudeiSemQuiz': 'I studied this day (no quiz)',
     'lesson.nenhumaLicaoPrevista': 'No lesson scheduled for this day.',
+    'stats.semRegistroDia': 'Nothing recorded on this day.',
+    'stats.vemDoApp': 'What you see here is what you did in the app. It cannot be changed by hand.',
     'lesson.mapaMentalSemana': "This week's mind map",
     'lesson.tirinhaOriginal': 'Original comic strip · ComTexto Bíblico, Lesson ${n}',
     'lesson.textoBaseSemana': "This week's key text:",
@@ -6980,6 +6992,8 @@ const UI_STRINGS = {
     'lesson.tempoMinutos': 'Tiempo (minutos)',
     'lesson.estudeiSemQuiz': 'Estudié este día (sin quiz)',
     'lesson.nenhumaLicaoPrevista': 'No hay lección prevista para este día.',
+    'stats.semRegistroDia': 'Nada registrado en este día.',
+    'stats.vemDoApp': 'Lo que aparece aquí es lo que hiciste en la app. No se puede cambiar a mano.',
     'lesson.mapaMentalSemana': 'Mapa mental de la semana',
     'lesson.tirinhaOriginal': 'Tira original · ComTexto Bíblico, Lección ${n}',
     'lesson.textoBaseSemana': 'Texto base de la semana:',
