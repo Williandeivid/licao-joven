@@ -2023,7 +2023,10 @@ const progressCache = {}; // lessonId -> progress object
 
 async function preloadAllProgress(){
   await Promise.all(LESSONS_META.map(async l => {
-    progressCache[l.id] = await loadProgress(l.id);
+    const gravado = await loadProgress(l.id);
+    // Se o login ja trouxe a nuvem para o cache, une em vez de sobrescrever.
+    const emMemoria = progressCache[l.id];
+    progressCache[l.id] = emMemoria ? mesclarProgressoLicao(gravado, emMemoria) : gravado;
   }));
 }
 
@@ -8088,9 +8091,12 @@ async function aplicarProgressoDaNuvem(progressoNuvem) {
   const gravar = window.storage.setSemSync || window.storage.set;
   for (const lessonId of Object.keys(progressoNuvem || {})) {
     const nuvem = filtrarDiasFuturos(lessonId, progressoNuvem[lessonId] || {});
-    const antes = progressCache[lessonId];
-    const depois = antes ? mesclarProgressoLicao(antes, nuvem) : mesclarProgressoLicao({}, nuvem);
-    if (JSON.stringify(antes) === JSON.stringify(depois)) continue;
+    // A nuvem pode chegar antes do preload do progresso local (no iOS o
+    // evento load demora): com o cache vazio, parte do que esta gravado no
+    // aparelho, senao a gravacao abaixo apagaria dias so locais.
+    const antes = progressCache[lessonId] || await loadProgress(lessonId);
+    const depois = mesclarProgressoLicao(antes, nuvem);
+    if (progressCache[lessonId] && JSON.stringify(antes) === JSON.stringify(depois)) continue;
     progressCache[lessonId] = depois;
     mudou = true;
     memoryFallback['progress:lesson' + lessonId] = depois;
@@ -9467,7 +9473,17 @@ const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 dias em ms
 // Sobe a cada correcao no parser de citacoes bíblicas (formatBibleReferences) -
 // invalida sozinho todo HTML ja processado e guardado no localStorage de quem
 // testou antes da correcao, sem precisar pedir pra pessoa limpar cache na mao.
-const OFICIAL_CACHE_VERSAO = 'v2';
+const OFICIAL_CACHE_VERSAO = 'v3';
+// Cada troca de versao deixaria o HTML da anterior ocupando localStorage:
+// apaga as entradas 'official-vN-*' de versoes que nao sao a atual.
+(function limparCachesOficiaisAntigos(){
+  try{
+    const atual = `official-${OFICIAL_CACHE_VERSAO}-`;
+    Object.keys(localStorage).forEach(k => {
+      if(/^official-v\d+-/.test(k) && k.indexOf(atual) !== 0) localStorage.removeItem(k);
+    });
+  }catch(e){ /* storage indisponivel: nada a limpar */ }
+})();
 
 function getCachedOfficial(lessonId, dayId){
   const key = `official-${OFICIAL_CACHE_VERSAO}-${idiomaConteudoAtual}-${lessonId}-${dayId}`;
@@ -9617,6 +9633,12 @@ async function buscarOficialDaRede(lessonId, dayId){
       text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, conector, chapterEnd, extraList, offset, full) => {
         const bookId = dicionarioLivros[bookName];
         if(!bookId) return match;
+        // Abreviacao que coincide com palavra comum ("Os 144 mil", "Os 12 apostolos"):
+        // capitulo que nao existe no livro (Oseias tem 14) ou numero seguido de
+        // quantidade/tempo nao e citacao biblica - deixa o texto como esta.
+        const livro = BIBLE_BOOKS.find(b => b.id === bookId);
+        if(livro && parseInt(chapter) > livro.ch) return match;
+        if(!v1 && /^\s+(mil|milh(?:ão|ões|ao|oes)|thousand|million|anos?|years?|años?|dias?|days?|días?|meses|months|semanas?|weeks?|horas?|hours?|vezes|times|veces|apóstolos|apostles|apóstoles|discípulos|disciples|tribos|tribes|tribus)\b/i.test(full.slice(offset + match.length))) return match;
         lastBookId = bookId; lastChapter = chapter;
         if(!v1){
           // Intervalo de capitulos ("João 14 a 16", "John 14-16"): um so link que
