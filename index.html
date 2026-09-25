@@ -2589,8 +2589,8 @@ function renderWeekCalendarMonth(lessonId, monthOffset){
   const today = new Date(); today.setHours(0,0,0,0);
   const monthLabel = firstDay.toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {month:'long', year:'numeric'});
 
-  const quarterStart = dayCalendarDate(1, 'dom');
-  const quarterEnd = dayCalendarDate(13, 'sab');
+  const quarterStart = dayCalendarDate(TRIMESTRES[0].primeira, 'dom');
+  const quarterEnd = dayCalendarDate(TRIMESTRES[TRIMESTRES.length-1].ultima, 'sab');
   const todayWeekStart = new Date(today); todayWeekStart.setDate(today.getDate() - today.getDay());
   const todayWeekEnd = new Date(todayWeekStart); todayWeekEnd.setDate(todayWeekStart.getDate() + 6);
 
