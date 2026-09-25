@@ -10263,7 +10263,7 @@ const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 dias em ms
 // Sobe a cada correcao no parser de citacoes bíblicas (formatBibleReferences) -
 // invalida sozinho todo HTML ja processado e guardado no localStorage de quem
 // testou antes da correcao, sem precisar pedir pra pessoa limpar cache na mao.
-const OFICIAL_CACHE_VERSAO = 'v3';
+const OFICIAL_CACHE_VERSAO = 'v4';
 // Cada troca de versao deixaria o HTML da anterior ocupando localStorage:
 // apaga as entradas 'official-vN-*' de versoes que nao sao a atual.
 (function limparCachesOficiaisAntigos(){
@@ -10417,10 +10417,14 @@ async function buscarOficialDaRede(lessonId, dayId){
       // português/inglês escrevem "Jo 11:43"/"John 11:43" (sem espaço) - \s? cobre os dois.
       // Range de versículo vem tanto com hífen comum ("6-8") quanto travessão ("1–5",
       // "43–12:33") dependendo do idioma/dia - [-–—] cobre os tres.
-      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::\\s?(\\d+)(?:[-–—](\\d+))?|(\\s+(?:a|à|al|até|to|through|and|y|e)\\s+|\\s*[-–—]\\s*)(\\d+)(?!\\s*:))?((?:,\\s?\\d+)*)', 'g');
+      // Depois de "capítulo:versículo" o intervalo também vem por extenso
+      // ("Gênesis 2:18 a 23", "Genesis 2:18 to 23", "Génesis 2:18 al 23"). Sem isso
+      // o link cobria só o versículo inicial. Só vale se o fim não abre outro
+      // capítulo ("2:18 a 3:5") e não é quantidade ("2:18 a 5 vezes").
+      const fullCiteRe = new RegExp('(?<![A-Za-zÀ-ÿ])(' + namesPattern + ')\\s+(\\d+)(?::\\s?(\\d+)(?:[-–—](\\d+))?(?:(\\s+(?:a|à|al|até|to|through)\\s+)(\\d+)(?!\\s*:)(?!\\s+(?:mil|milh|thousand|million|anos?|years?|años?|dias?|days?|días?|meses|months|semanas?|weeks?|horas?|hours?|vezes|times|veces|pessoas|people|personas)\\b))?|(\\s+(?:a|à|al|até|to|through|and|y|e)\\s+|\\s*[-–—]\\s*)(\\d+)(?!\\s*:))?((?:,\\s?\\d+)*)', 'g');
 
       // Primeiro: livro + capítulo[:versículos][, versículo extra...]
-      text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, conector, chapterEnd, extraList, offset, full) => {
+      text = text.replace(fullCiteRe, (match, bookName, chapter, v1, v2, conectorVerso, v2Extenso, conector, chapterEnd, extraList, offset, full) => {
         const bookId = dicionarioLivros[bookName];
         if(!bookId) return match;
         // Abreviacao que coincide com palavra comum ("Os 144 mil", "Os 12 apostolos"):
@@ -10452,7 +10456,18 @@ async function buscarOficialDaRede(lessonId, dayId){
         if(v2 && extraList === '' && full[offset + match.length] === ':'){
           v2 = undefined;
         }
-        let result = wrapVerse(bookId, chapter, v1, v2, `${bookName} ${chapter}:${v1}${v2 ? '-' + v2 : ''}`);
+        // Intervalo por extenso ("2:18 a 23"): o rótulo mantém o conector do texto
+        // original. Se o fim não for maior que o início, não é intervalo e o
+        // trecho " a N" volta como texto solto depois do link.
+        let rotuloFim = v2 ? '-' + v2 : '';
+        let sobra = '';
+        if(!v2 && v2Extenso){
+          if(parseInt(v2Extenso) > parseInt(v1)){ v2 = v2Extenso; rotuloFim = conectorVerso + v2Extenso; }
+          else { sobra = conectorVerso + v2Extenso; }
+        } else if(v2Extenso){
+          sobra = conectorVerso + v2Extenso;
+        }
+        let result = wrapVerse(bookId, chapter, v1, v2, `${bookName} ${chapter}:${v1}${rotuloFim}`) + sobra;
         if(extraList){
           result += extraList.replace(/,\s?(\d+)/g, (m2, vn) => ', ' + wrapVerse(bookId, chapter, vn, vn, vn));
         }
