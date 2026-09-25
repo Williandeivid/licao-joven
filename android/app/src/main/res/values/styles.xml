@@ -17,6 +17,10 @@
 
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
+        <!-- Antes do Android 12: imagem de tela cheia (drawable/splash.png) -->
         <item name="android:background">@drawable/splash</item>
+        <!-- Android 12 em diante: o sistema mostra o icone sobre esta cor (sem isto, fundo branco) -->
+        <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icone</item>
     </style>
 </resources>
