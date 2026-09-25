@@ -1,7 +1,7 @@
 #!/bin/bash
 # Gera a tela de abertura (splash) do iOS e do Android a partir de assets/icone/icone.svg.
-#   iOS     : ios/App/App/Assets.xcassets/Splash.imageset/*.png (2732x2732; o iOS corta no formato da tela)
-#   Android : drawable[-port|-land]-*/splash.png (usados antes do Android 12; do 12 em diante o
+#   iOS     : ios/App/App/Assets.xcassets/Splash.imageset/splash.jpg (2732x2732; o iOS corta no formato da tela)
+#   Android : drawable[-port|-land]-*/splash.jpg (usados antes do Android 12; do 12 em diante o
 #             sistema mostra o icone sobre windowSplashScreenBackground, ver values/styles.xml)
 # Precisa de: Google Chrome (renderiza o SVG com degrade) e ImageMagick (magick).
 set -euo pipefail
@@ -32,17 +32,38 @@ HTML
   --screenshot="$TMP/mestre.png" "file://$TMP/r.html" >/dev/null 2>&1
 magick "$TMP/mestre.png" -alpha off -strip "$TMP/mestre.png"
 
-# iOS: as 3 escalas usam a mesma imagem
+# iOS: uma unica imagem (JPEG q90, 4:4:4: a splash e opaca, e o PNG do degrade pesava 3,8 MB, 25x mais,
+# sem diferenca visivel). Antes eram 3 copias identicas (uma por escala), que o Xcode guardava as tres.
 IOS="$RAIZ/ios/App/App/Assets.xcassets/Splash.imageset"
-for f in splash-2732x2732.png splash-2732x2732-1.png splash-2732x2732-2.png; do cp "$TMP/mestre.png" "$IOS/$f"; done
+rm -f "$IOS"/*.png "$IOS"/*.jpg
+magick "$TMP/mestre.png" -sampling-factor 4:4:4 -quality 90 -strip "$IOS/splash.jpg"
+cat > "$IOS/Contents.json" <<'JSON'
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "splash.jpg"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
+JSON
 
-# Android: cada arquivo mantem o tamanho que ja tinha; recorta o centro do quadrado no formato dele
+# Android (antes do 12): cada arquivo mantem o tamanho que ja tinha; recorta o centro do quadrado no
+# formato dele. JPEG em vez de PNG (opaco; o mesmo nome de recurso @drawable/splash continua valendo).
 RES="$RAIZ/android/app/src/main/res"
-for f in $(find "$RES" -name splash.png); do
+for f in $(find "$RES" \( -name splash.png -o -name splash.jpg \)); do
   dim=$(magick identify -format "%wx%h" "$f"); w=${dim%x*}; h=${dim#*x}
+  d=$(dirname "$f")
   if [ "$w" -ge "$h" ]; then cw=$LADO; ch=$(( LADO * h / w )); else ch=$LADO; cw=$(( LADO * w / h )); fi
-  magick "$TMP/mestre.png" -gravity center -crop ${cw}x${ch}+0+0 +repage -resize ${w}x${h}! -strip "$f"
+  magick "$TMP/mestre.png" -gravity center -crop ${cw}x${ch}+0+0 +repage -resize ${w}x${h}! \
+    -sampling-factor 4:4:4 -quality 90 -strip "$TMP/novo.jpg"
+  rm -f "$d/splash.png" "$d/splash.jpg"; cp "$TMP/novo.jpg" "$d/splash.jpg"
 done
+
 # Android 12+: icone da splash em alta resolucao (o sistema amplia para ~288dp; a camada de frente do icone
 # adaptativo, de 432px, ficava borrada). Arte com ~60% da largura, dentro do circulo de 2/3 que o sistema mostra.
 python3 - "$SVG" "$TMP/icone_splash.svg" <<'PY'
