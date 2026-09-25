@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidade — Lições Jovem</title>
+<meta name="robots" content="index,follow">
+<style>
+  :root{ --bg:#f7f5ff; --card:#ffffff; --ink:#1c1735; --soft:#5b5580; --violet:#6c4ce0; --border:#e2ddf5; }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#100e1e; --card:#1c1832; --ink:#efeafd; --soft:#a9a2cf; --violet:#a591ff; --border:#332d54; }
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  main{ max-width:760px; margin:0 auto; padding:24px 18px 64px; }
+  header{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+  .idiomas{ display:flex; gap:8px; }
+  .idiomas a{ padding:6px 14px; border:2px solid var(--border); border-radius:999px; color:var(--soft); text-decoration:none; font-weight:700; font-size:14px; }
+  .idiomas a.ativo{ background:var(--violet); border-color:var(--violet); color:#fff; }
+  h1{ font-size:1.6rem; line-height:1.25; margin:18px 0 4px; }
+  h2{ font-size:1.15rem; margin:30px 0 8px; color:var(--violet); }
+  p, li{ color:var(--ink); }
+  .meta{ color:var(--soft); font-size:.9rem; margin:0 0 18px; }
+  ul{ padding-left:22px; }
+  li{ margin:4px 0; }
+  .caixa{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 18px; margin:14px 0; }
+  a{ color:var(--violet); }
+  table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.93rem; }
+  th, td{ text-align:left; vertical-align:top; padding:8px 10px; border-bottom:1px solid var(--border); }
+  th{ color:var(--soft); font-weight:700; }
+  section.lang{ display:none; }
+  section.lang.ativa{ display:block; }
+  noscript section.lang{ display:block; margin-bottom:48px; }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <strong>Lições Jovem</strong>
+  <nav class="idiomas" aria-label="Idioma / Language / Idioma">
+    <a href="#pt" data-lang="pt">Português</a>
+    <a href="#en" data-lang="en">English</a>
+    <a href="#es" data-lang="es">Español</a>
+  </nav>
+</header>
+
+<!-- ============================ PORTUGUÊS ============================ -->
+<section class="lang" id="pt" lang="pt-BR">
+  <h1>Política de Privacidade</h1>
+  <p class="meta">Aplicativo <strong>Lições Jovem</strong> (ComTexto Bíblico) · Última atualização: 25 de setembro de 2026</p>
+
+  <p>Este aplicativo ajuda jovens a estudar a Lição da Escola Sabatina e a Bíblia. Aqui explicamos quais dados usamos, para quê, com quem eles passam e como você apaga tudo.</p>
+
+  <div class="caixa">
+    <strong>Responsável pelos dados:</strong> Josias Gomes Lima, Brasil.<br>
+    <strong>Contato para pedidos sobre seus dados:</strong> <a href="mailto:josiaslgomes.jg@gmail.com">josiaslgomes.jg@gmail.com</a><br>
+    <strong>Idade mínima:</strong> 16 anos.
+  </div>
+
+  <h2>1. O que o aplicativo faz sem você entrar</h2>
+  <p>Você pode ler as lições e a Bíblia sem criar conta. Nesse caso, seu progresso, favoritos e ajustes ficam <strong>só no seu aparelho</strong> e não são enviados para nós.</p>
+
+  <h2>2. Dados que usamos quando você entra</h2>
+  <table>
+    <tr><th>Dado</th><th>Para quê</th></tr>
+    <tr><td>E-mail, nome e foto do perfil (do Google ou da Apple, se você permitir) e um identificador único da conta. Na Apple, você pode usar o e-mail privado dela.</td><td>Identificar sua conta e mostrar seu nome.</td></tr>
+    <tr><td>Progresso dos dias e das lições, notas e tempo dos quizzes, favoritos, marcações, planos bíblicos, metas e ajustes</td><td>Guardar seu estudo na nuvem e sincronizar entre aparelhos.</td></tr>
+    <tr><td>Comentários e curtidas nas lições (texto, seu nome e horário)</td><td>Recurso de comunidade. Outras pessoas que estão logadas veem seu nome e o comentário.</td></tr>
+    <tr><td>Nome, dias concluídos, nota média e pontos</td><td>Rankings, <strong>somente se você marcar a opção de participar</strong>.</td></tr>
+    <tr><td>Quem concluiu cada dia, o resultado do quiz e a data de acesso</td><td>Painel de quem cuida da turma (líderes/administradores). Quem estuda não vê esses números dos outros.</td></tr>
+  </table>
+  <p><strong>Não coletamos</strong> localização, contatos, fotos, microfone ou câmera. <strong>Não há anúncios, não vendemos dados e não usamos ferramentas de análise ou rastreamento.</strong> A senha de quem cria conta com e-mail é tratada pelo Firebase Authentication e nós não a vemos.</p>
+
+  <h2>3. Com quem os dados passam</h2>
+  <ul>
+    <li><strong>Google (Firebase Authentication e Realtime Database):</strong> login e armazenamento dos dados da conta. Os servidores podem estar fora do Brasil.</li>
+    <li><strong>Entrar com Google e Entrar com a Apple:</strong> se você usar, o Google ou a Apple faz a autenticação.</li>
+    <li><strong>Cloudflare:</strong> hospedagem da versão web do aplicativo.</li>
+    <li><strong>GitHub (Adventech):</strong> texto oficial das lições. O pedido inclui só o caminho da lição.</li>
+    <li><strong>bible-api.com e BíbliaOnline:</strong> texto bíblico. O pedido inclui livro e capítulo. Se falhar, o aplicativo pode usar serviços públicos de repasse (allorigins.win e codetabs.com) para buscar o mesmo texto.</li>
+    <li><strong>Google Fonts e cdnjs (Cloudflare):</strong> fontes e um componente de QR Code.</li>
+  </ul>
+  <p>Esses serviços recebem o endereço IP do seu aparelho ao atender os pedidos, como acontece em qualquer acesso à internet. Nenhum dado da sua conta é enviado a eles, exceto ao Google e à Apple no login. Links para sites externos (WhatsApp, Google Forms, BíbliaOnline) abrem fora do aplicativo e seguem as políticas deles.</p>
+
+  <h2>4. Por quanto tempo guardamos</h2>
+  <p>Enquanto sua conta existir. Ao excluir a conta, apagamos seus dados do banco de dados na hora (veja a seção 5). Cópias técnicas mantidas pelo provedor de infraestrutura podem levar um curto período para desaparecer, conforme a política dele.</p>
+
+  <h2>5. Como excluir sua conta e seus dados</h2>
+  <p>No aplicativo: aba <strong>Conta → Excluir minha conta</strong>. Isso apaga, da nuvem e do aparelho: perfil, progresso, notas, favoritos, marcações, planos, participação nos rankings, <strong>comentários e curtidas</strong>, registros de visita e estatísticas, e a própria conta de login. Não dá para desfazer. Para confirmar, o aplicativo pede que você entre de novo. Quem usou “Entrar com a Apple” no iPhone também tem o acesso revogado na Apple.</p>
+  <p>Se preferir, envie um e-mail para <a href="mailto:josiaslgomes.jg@gmail.com">josiaslgomes.jg@gmail.com</a> pedindo a exclusão, a partir do e-mail da conta.</p>
+
+  <h2>6. Seus direitos (LGPD)</h2>
+  <p>Você pode pedir confirmação de que tratamos seus dados, acesso, correção, portabilidade, eliminação, informação sobre com quem compartilhamos e revogar o consentimento, escrevendo para o e-mail acima. Também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+
+  <h2>7. Idade</h2>
+  <p>O aplicativo é para pessoas com <strong>16 anos ou mais</strong>. Se soubermos que uma conta é de alguém mais novo, ela será excluída.</p>
+
+  <h2>8. Segurança</h2>
+  <p>A comunicação usa HTTPS, e as regras do banco de dados permitem que cada pessoa leia e altere apenas os próprios dados (com as exceções de comunidade descritas acima). Nenhum sistema é totalmente à prova de falhas.</p>
+
+  <h2>9. Mudanças</h2>
+  <p>Se esta política mudar, a data no topo será atualizada e, em mudanças importantes, avisaremos no aplicativo.</p>
+</section>
+
+<!-- ============================ ENGLISH ============================ -->
+<section class="lang" id="en" lang="en">
+  <h1>Privacy Policy</h1>
+  <p class="meta"><strong>Lições Jovem</strong> app (ComTexto Bíblico) · Last updated: September 25, 2026</p>
+
+  <p>This app helps young people study the Sabbath School lesson and the Bible. Here we explain which data we use, why, who it passes through, and how you can delete everything.</p>
+
+  <div class="caixa">
+    <strong>Data controller:</strong> Josias Gomes Lima, Brazil.<br>
+    <strong>Contact for requests about your data:</strong> <a href="mailto:josiaslgomes.jg@gmail.com">josiaslgomes.jg@gmail.com</a><br>
+    <strong>Minimum age:</strong> 16 years old.
+  </div>
+
+  <h2>1. What the app does without signing in</h2>
+  <p>You can read the lessons and the Bible without creating an account. In that case your progress, favorites and settings stay <strong>only on your device</strong> and are not sent to us.</p>
+
+  <h2>2. Data we use when you sign in</h2>
+  <table>
+    <tr><th>Data</th><th>Purpose</th></tr>
+    <tr><td>Email, name and profile photo (from Google or Apple, if you allow it) and a unique account ID. With Apple you may use their private relay email.</td><td>Identify your account and show your name.</td></tr>
+    <tr><td>Day and lesson progress, quiz scores and times, favorites, highlights, Bible plans, goals and settings</td><td>Keep your study in the cloud and sync across devices.</td></tr>
+    <tr><td>Comments and likes on lessons (text, your name and time)</td><td>Community feature. Other signed-in people can see your name and comment.</td></tr>
+    <tr><td>Name, days completed, average score and points</td><td>Rankings, <strong>only if you opt in</strong>.</td></tr>
+    <tr><td>Who completed each day, quiz result and access date</td><td>Dashboard for the people who look after the class (leaders/administrators). Regular users do not see these numbers about others.</td></tr>
+  </table>
+  <p><strong>We do not collect</strong> location, contacts, photos, microphone or camera. <strong>There are no ads, we do not sell data and we do not use analytics or tracking tools.</strong> Passwords for email accounts are handled by Firebase Authentication and we never see them.</p>
+
+  <h2>3. Who the data passes through</h2>
+  <ul>
+    <li><strong>Google (Firebase Authentication and Realtime Database):</strong> sign-in and storage of account data. Servers may be outside Brazil.</li>
+    <li><strong>Sign in with Google and Sign in with Apple:</strong> if you use them, Google or Apple performs the authentication.</li>
+    <li><strong>Cloudflare:</strong> hosting of the web version of the app.</li>
+    <li><strong>GitHub (Adventech):</strong> official lesson text. The request contains only the lesson path.</li>
+    <li><strong>bible-api.com and BíbliaOnline:</strong> Bible text. The request contains the book and chapter. If it fails, the app may use public relay services (allorigins.win and codetabs.com) to fetch the same text.</li>
+    <li><strong>Google Fonts and cdnjs (Cloudflare):</strong> fonts and a QR Code component.</li>
+  </ul>
+  <p>These services receive your device's IP address when answering requests, as happens with any internet access. No account data is sent to them, except to Google and Apple when you sign in. Links to external sites (WhatsApp, Google Forms, BíbliaOnline) open outside the app and follow their own policies.</p>
+
+  <h2>4. How long we keep it</h2>
+  <p>As long as your account exists. When you delete the account, we erase your data from the database immediately (see section 5). Technical copies kept by the infrastructure provider may take a short time to disappear, according to its policy.</p>
+
+  <h2>5. How to delete your account and data</h2>
+  <p>In the app: <strong>Account tab → Delete my account</strong>. This erases, from the cloud and the device: profile, progress, scores, favorites, highlights, plans, ranking participation, <strong>comments and likes</strong>, visit records and statistics, and the sign-in account itself. It cannot be undone. To confirm, the app asks you to sign in again. If you used “Sign in with Apple” on iPhone, access is also revoked at Apple.</p>
+  <p>If you prefer, email <a href="mailto:josiaslgomes.jg@gmail.com">josiaslgomes.jg@gmail.com</a> asking for deletion, from the account's email address.</p>
+
+  <h2>6. Your rights</h2>
+  <p>You may ask for confirmation that we process your data, access, correction, portability, deletion, information about who we share it with, and withdraw consent, by writing to the email above. Under Brazilian law (LGPD) you may also complain to the National Data Protection Authority (ANPD).</p>
+
+  <h2>7. Age</h2>
+  <p>The app is for people aged <strong>16 or older</strong>. If we learn that an account belongs to someone younger, it will be deleted.</p>
+
+  <h2>8. Security</h2>
+  <p>Communication uses HTTPS, and the database rules let each person read and change only their own data (except for the community features described above). No system is completely fail-proof.</p>
+
+  <h2>9. Changes</h2>
+  <p>If this policy changes, the date above will be updated and, for important changes, we will notify you in the app.</p>
+</section>
+
+<!-- ============================ ESPAÑOL ============================ -->
+<section class="lang" id="es" lang="es">
+  <h1>Política de Privacidad</h1>
+  <p class="meta">Aplicación <strong>Lições Jovem</strong> (ComTexto Bíblico) · Última actualización: 25 de septiembre de 2026</p>
+
+  <p>Esta aplicación ayuda a los jóvenes a estudiar la Lección de la Escuela Sabática y la Biblia. Aquí explicamos qué datos usamos, para qué, por dónde pasan y cómo puedes borrar todo.</p>
+
+  <div class="caixa">
+    <strong>Responsable de los datos:</strong> Josias Gomes Lima, Brasil.<br>
+    <strong>Contacto para solicitudes sobre tus datos:</strong> <a href="mailto:josiaslgomes.jg@gmail.com">josiaslgomes.jg@gmail.com</a><br>
+    <strong>Edad mínima:</strong> 16 años.
+  </div>
+
+  <h2>1. Qué hace la aplicación sin iniciar sesión</h2>
+  <p>Puedes leer las lecciones y la Biblia sin crear una cuenta. En ese caso tu progreso, favoritos y ajustes quedan <strong>solo en tu dispositivo</strong> y no se envían a nosotros.</p>
+
+  <h2>2. Datos que usamos cuando inicias sesión</h2>
+  <table>
+    <tr><th>Dato</th><th>Para qué</th></tr>
+    <tr><td>Correo, nombre y foto de perfil (de Google o Apple, si lo permites) y un identificador único de la cuenta. Con Apple puedes usar su correo privado.</td><td>Identificar tu cuenta y mostrar tu nombre.</td></tr>
+    <tr><td>Progreso de los días y las lecciones, notas y tiempos de los quizzes, favoritos, marcas, planes bíblicos, metas y ajustes</td><td>Guardar tu estudio en la nube y sincronizarlo entre dispositivos.</td></tr>
+    <tr><td>Comentarios y me gusta en las lecciones (texto, tu nombre y hora)</td><td>Función de comunidad. Otras personas con sesión iniciada ven tu nombre y el comentario.</td></tr>
+    <tr><td>Nombre, días completados, nota media y puntos</td><td>Rankings, <strong>solo si activas la opción de participar</strong>.</td></tr>
+    <tr><td>Quién completó cada día, el resultado del quiz y la fecha de acceso</td><td>Panel de quienes cuidan de la clase (líderes/administradores). Quien estudia no ve esos números de los demás.</td></tr>
+  </table>
+  <p><strong>No recopilamos</strong> ubicación, contactos, fotos, micrófono ni cámara. <strong>No hay anuncios, no vendemos datos y no usamos herramientas de análisis ni de rastreo.</strong> La contraseña de quien crea cuenta con correo la gestiona Firebase Authentication y nosotros no la vemos.</p>
+
+  <h2>3. Por dónde pasan los datos</h2>
+  <ul>
+    <li><strong>Google (Firebase Authentication y Realtime Database):</strong> inicio de sesión y almacenamiento de los datos de la cuenta. Los servidores pueden estar fuera de Brasil.</li>
+    <li><strong>Iniciar sesión con Google y con Apple:</strong> si los usas, Google o Apple hace la autenticación.</li>
+    <li><strong>Cloudflare:</strong> alojamiento de la versión web de la aplicación.</li>
+    <li><strong>GitHub (Adventech):</strong> texto oficial de las lecciones. La solicitud incluye solo la ruta de la lección.</li>
+    <li><strong>bible-api.com y BíbliaOnline:</strong> texto bíblico. La solicitud incluye libro y capítulo. Si falla, la aplicación puede usar servicios públicos de reenvío (allorigins.win y codetabs.com) para obtener el mismo texto.</li>
+    <li><strong>Google Fonts y cdnjs (Cloudflare):</strong> tipografías y un componente de código QR.</li>
+  </ul>
+  <p>Estos servicios reciben la dirección IP de tu dispositivo al atender las solicitudes, como ocurre en cualquier acceso a internet. No se les envía ningún dato de tu cuenta, salvo a Google y Apple al iniciar sesión. Los enlaces a sitios externos (WhatsApp, Google Forms, BíbliaOnline) se abren fuera de la aplicación y siguen sus propias políticas.</p>
+
+  <h2>4. Cuánto tiempo los guardamos</h2>
+  <p>Mientras tu cuenta exista. Al eliminar la cuenta, borramos tus datos de la base de datos al instante (ver sección 5). Las copias técnicas que mantenga el proveedor de infraestructura pueden tardar un corto período en desaparecer, según su política.</p>
+
+  <h2>5. Cómo eliminar tu cuenta y tus datos</h2>
+  <p>En la aplicación: pestaña <strong>Cuenta → Eliminar mi cuenta</strong>. Esto borra, de la nube y del dispositivo: perfil, progreso, notas, favoritos, marcas, planes, participación en los rankings, <strong>comentarios y me gusta</strong>, registros de visita y estadísticas, y la propia cuenta de acceso. No se puede deshacer. Para confirmar, la aplicación te pide iniciar sesión de nuevo. Si usaste “Iniciar sesión con Apple” en iPhone, el acceso también se revoca en Apple.</p>
+  <p>Si prefieres, escribe a <a href="mailto:josiaslgomes.jg@gmail.com">josiaslgomes.jg@gmail.com</a> pidiendo la eliminación, desde el correo de la cuenta.</p>
+
+  <h2>6. Tus derechos</h2>
+  <p>Puedes solicitar confirmación de que tratamos tus datos, acceso, corrección, portabilidad, eliminación, información sobre con quién los compartimos y retirar el consentimiento, escribiendo al correo indicado. Según la ley brasileña (LGPD) también puedes presentar una queja ante la Autoridad Nacional de Protección de Datos (ANPD).</p>
+
+  <h2>7. Edad</h2>
+  <p>La aplicación es para personas de <strong>16 años o más</strong>. Si sabemos que una cuenta pertenece a alguien menor, se eliminará.</p>
+
+  <h2>8. Seguridad</h2>
+  <p>La comunicación usa HTTPS y las reglas de la base de datos permiten que cada persona lea y cambie solo sus propios datos (con las excepciones de comunidad descritas arriba). Ningún sistema es totalmente infalible.</p>
+
+  <h2>9. Cambios</h2>
+  <p>Si esta política cambia, se actualizará la fecha de arriba y, en cambios importantes, avisaremos en la aplicación.</p>
+</section>
+
+<noscript><p class="meta">Este documento está disponível em Português, English e Español acima.</p></noscript>
+</main>
+<script>
+  (function(){
+    var langs = ['pt', 'en', 'es'];
+    function escolher(){
+      var h = (location.hash || '').replace('#', '');
+      if (langs.indexOf(h) < 0) {
+        var n = (navigator.language || 'pt').slice(0, 2).toLowerCase();
+        h = langs.indexOf(n) >= 0 ? n : 'pt';
+      }
+      langs.forEach(function(l){
+        var s = document.getElementById(l);
+        if (s) s.classList.toggle('ativa', l === h);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.idiomas a'), function(a){
+        a.classList.toggle('ativo', a.getAttribute('data-lang') === h);
+      });
+      var titulos = { pt: 'Política de Privacidade — Lições Jovem', en: 'Privacy Policy — Lições Jovem', es: 'Política de Privacidad — Lições Jovem' };
+      document.title = titulos[h];
+      document.documentElement.lang = h === 'pt' ? 'pt-BR' : h;
+    }
+    window.addEventListener('hashchange', escolher);
+    escolher();
+  })();
+</script>
+</body>
+</html>
