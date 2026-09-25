@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="fundo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7f5ff2"/>
+      <stop offset="0.55" stop-color="#4a33b8"/>
+      <stop offset="1" stop-color="#1c1548"/>
+    </linearGradient>
+    <radialGradient id="brilho" cx="0.2" cy="0.95" r="0.75">
+      <stop offset="0" stop-color="#2fd6c8" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#2fd6c8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="luz" cx="0.75" cy="0.18" r="0.55">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#fundo)"/>
+  <rect width="1024" height="1024" fill="url(#brilho)"/>
+  <rect width="1024" height="1024" fill="url(#luz)"/>
+  <g id="arte">
+    <!-- espessura da capa -->
+    <path d="M226 674 C330 652 440 660 512 720 C584 660 694 652 798 674 L798 716 C694 694 584 704 512 764 C440 704 330 694 226 716 Z" fill="#a794f6"/>
+    <path d="M226 690 C330 668 440 676 512 736 C584 676 694 668 798 690 L798 716 C694 694 584 704 512 764 C440 704 330 694 226 716 Z" fill="#c9bbff"/>
+    <!-- pagina esquerda -->
+    <path d="M512 400 C440 360 340 352 250 372 L250 692 C340 672 440 680 512 722 Z" fill="#ffffff"/>
+    <!-- pagina direita -->
+    <path d="M512 400 C584 360 684 352 774 372 L774 692 C684 672 584 680 512 722 Z" fill="#efeaff"/>
+    <!-- linhas de texto -->
+    <g stroke="#d9d0fb" stroke-width="16" stroke-linecap="round" fill="none">
+      <path d="M312 470 C360 462 410 466 452 482"/>
+      <path d="M312 530 C360 522 410 526 452 542"/>
+      <path d="M312 590 C360 582 410 586 420 592"/>
+      <path d="M572 482 C614 466 664 462 712 470"/>
+      <path d="M572 542 C614 526 664 522 712 530"/>
+      <path d="M572 602 C594 592 640 586 672 590"/>
+    </g>
+    <!-- fita marcadora (lima) -->
+    <path d="M482 330 H542 V552 L512 522 L482 552 Z" fill="#a6e22e"/>
+    <path d="M482 330 H492 V546 L482 552 Z" fill="#84b822"/>
+    <!-- faisca de luz (dourada) -->
+    <path d="M744 214 C752 262 768 278 816 286 C768 294 752 310 744 358 C736 310 720 294 672 286 C720 278 736 262 744 214 Z" fill="#ffc857"/>
+    <circle cx="828" cy="380" r="15" fill="#ffc857"/>
+    <circle cx="668" cy="226" r="10" fill="#ff5d8f"/>
+  </g>
+</svg>
