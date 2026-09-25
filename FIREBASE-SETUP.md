@@ -393,3 +393,28 @@ Sem os dois arquivos de config, o app continua abrindo normalmente (o Gradle
 detecta a ausência do `google-services.json` e só deixa de aplicar o plugin de
 push/login nativo) — só o botão de login dentro do app nativo não vai
 completar até você fazer os passos acima.
+
+## Exclusão de conta e política de privacidade (desde 25/09/2026)
+
+Exigido pela App Store (5.1.1(v)) e pelo Google Play. No app: aba **Conta → Excluir minha conta**
+(`abrirExclusaoConta()` em `index.html`). A política fica em `privacidade.html` (pt/en/es),
+publicada em `https://licaojovem-iasd.pages.dev/privacidade.html`; use essa URL nas duas lojas.
+
+Ordem: reautentica (mesmo método do login) → apaga os dados → revoga o token da Apple (só iOS
+nativo) → exclui o usuário no Firebase → limpa o aparelho. Se qualquer dado falhar, a conta **não** é
+excluída e dá para tentar de novo.
+
+Caminhos apagados (`apagarDadosDaNuvem()`), sempre só o que é da própria pessoa:
+
+| Caminho | Como |
+|---|---|
+| `usuarios/{uid}`, `stats_plano/{uid}` | DELETE |
+| `ranking/*/{uid}`, `ranking_trimestre/*/{uid}` | semanas/trimestres listados com `?shallow=true` |
+| `comentarios/{licao}/{dia}/{id}` com `uid` da pessoa | lê cada lição (26 leituras) e apaga os dela |
+| `curtidas_cmt/{licao}/{dia}/{comentario}/{uid}` | idem |
+| `curtidas/{licao}/{dia}/{uid}`, `stats/{licao}/{dia}/{uid}` | 7 dias × todas as lições |
+| `visitas/{AAAA-MM-DD}/{uid}` | de 20/09/2026 até hoje |
+| `config/admins/{uid}` | só se a pessoa era admin |
+
+> **Ao criar qualquer dado novo por pessoa no banco, inclua o caminho em `apagarDadosDaNuvem()`**
+> e na política de privacidade. Sem isso, a exclusão deixa esse dado para trás.

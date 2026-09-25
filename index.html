@@ -56,7 +56,7 @@
         const result = await m.FirebaseAuthentication.signInWithApple();
         const cred = result && result.credential;
         if (!cred || !cred.idToken) throw new Error('Login nativo (Apple) nao retornou idToken.');
-        return { idToken: cred.idToken, nonce: cred.nonce };
+        return { idToken: cred.idToken, nonce: cred.nonce, authorizationCode: cred.authorizationCode };
       };
     }).catch(e => console.error('❌ Nao carregou a ponte de login nativo:', e));
   }
@@ -1455,7 +1455,7 @@
   .goals-editor .dayed-save{background:#fff; color:var(--violet);}
 
   .dayed-overlay{position:fixed; inset:0; background:rgba(10,8,20,0.55); z-index:200; display:flex; align-items:flex-end; justify-content:center;}
-  .dayed-panel{background:var(--card); width:100%; max-width:480px; border-radius:24px 24px 0 0; padding:22px 22px 30px; box-shadow:0 -20px 50px -20px rgba(0,0,0,0.5); animation:dayedUp .18s ease;}
+  .dayed-panel{background:var(--card); width:100%; max-width:480px; max-height:92vh; overflow-y:auto; border-radius:24px 24px 0 0; padding:22px 22px 30px; box-shadow:0 -20px 50px -20px rgba(0,0,0,0.5); animation:dayedUp .18s ease;}
   .verse-modal-panel{max-height:80vh; display:flex; flex-direction:column;}
   .verse-modal-body{overflow-y:auto; font-size:0.969rem; line-height:1.7; color:var(--ink);}
   .verse-modal-body b{color:var(--violet); font-weight:800; margin-right:2px;}
@@ -3339,9 +3339,13 @@ async function renderConta(){
         <button id="sync-btn" onclick="manualSync()" style="background:var(--violet); color:var(--on-violet); border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:none;">
           ${t('conta.sincronizarAgora')}
         </button>
+        <button id="delete-account-btn" onclick="abrirExclusaoConta()" style="background:transparent; color:#ff5d8f; border:2px solid #ff5d8f; padding:10px 20px; border-radius:8px; font-weight:700; cursor:pointer; display:none;">
+          ${t('conta.excluirConta')}
+        </button>
         <p id="user-info" class="conta-note" style="margin:0; display:none;"></p>
       </div>
       <p class="conta-note" style="margin:10px 0 0;">${t('conta.lideresVeem')}</p>
+      <p class="conta-note" style="margin:8px 0 0;">${t('conta.comoUsamosDados')} <a href="${urlPolitica()}" target="_blank" rel="noopener" style="color:var(--violet); text-decoration:underline;">${t('conta.politicaPrivacidade')}</a></p>
     </div>
 
     <div class="conta-card">
@@ -3429,6 +3433,7 @@ async function renderConta(){
     <div class="conta-card">
       <div class="conta-section-title">${t('conta.sobre')}</div>
       <p class="conta-note">ComTexto Bíblico — ${t('conta.sobreTema')}<br>${t('conta.sobreTrimestre')}</p>
+      <p class="conta-note" style="margin:8px 0 0;"><a href="${urlPolitica()}" target="_blank" rel="noopener" style="color:var(--violet); text-decoration:underline;">${t('conta.politicaPrivacidade')}</a></p>
     </div>
 
   </div>`;
@@ -6046,6 +6051,32 @@ const UI_STRINGS = {
     'conta.criarConta': 'Criar conta',
     'conta.esqueceuSenha': 'Esqueceu a senha?',
     'conta.sairConta': 'Sair da conta',
+    'conta.excluirConta': 'Excluir minha conta',
+    'conta.politicaPrivacidade': 'Política de privacidade',
+    'conta.comoUsamosDados': 'Como usamos seus dados:',
+    'excluir.titulo': 'Excluir conta',
+    'excluir.intro': 'Isto apaga de vez, da nuvem e deste aparelho:',
+    'excluir.item1': 'seu perfil, nome, metas, favoritos, marcações e planos',
+    'excluir.item2': 'seu progresso, notas e quizzes',
+    'excluir.item3': 'sua participação nos rankings',
+    'excluir.item4': 'seus comentários e curtidas',
+    'excluir.item5': 'seus registros de visita e estatísticas',
+    'excluir.item6': 'a própria conta de login',
+    'excluir.aviso': 'Não dá para desfazer. Se quiser guardar seu progresso, faça um backup antes, aqui na aba Conta.',
+    'excluir.senha': 'Digite sua senha para confirmar',
+    'excluir.senhaPlaceholder': 'Sua senha',
+    'excluir.reautentica': 'Para confirmar que é você, vamos pedir o login com {provedor} de novo.',
+    'excluir.cancelar': 'Cancelar',
+    'excluir.confirmar': 'Excluir definitivamente',
+    'excluir.statusConfirmando': 'Confirmando sua identidade…',
+    'excluir.statusApagando': 'Apagando seus dados… ({n}/{total})',
+    'excluir.statusConta': 'Excluindo a conta…',
+    'excluir.pronto': 'Sua conta e seus dados foram excluídos.',
+    'excluir.falhouDados': 'Não foi possível apagar tudo ({n} falhas). Sua conta NÃO foi excluída. Verifique a internet e tente de novo.',
+    'excluir.falhouGeral': 'Não foi possível excluir a conta: ',
+    'excluir.senhaVazia': 'Digite sua senha.',
+    'excluir.senhaErrada': 'Senha incorreta. Nada foi apagado.',
+    'excluir.cancelouLogin': 'Confirmação cancelada. Nada foi apagado.',
     'conta.nomePlaceholder': 'Seu nome',
     'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar do ranking',
@@ -6443,6 +6474,32 @@ const UI_STRINGS = {
     'conta.criarConta': 'Create account',
     'conta.esqueceuSenha': 'Forgot your password?',
     'conta.sairConta': 'Sign out',
+    'conta.excluirConta': 'Delete my account',
+    'conta.politicaPrivacidade': 'Privacy policy',
+    'conta.comoUsamosDados': 'How we use your data:',
+    'excluir.titulo': 'Delete account',
+    'excluir.intro': 'This permanently deletes, from the cloud and from this device:',
+    'excluir.item1': 'your profile, name, goals, favorites, highlights and plans',
+    'excluir.item2': 'your progress, scores and quizzes',
+    'excluir.item3': 'your participation in the rankings',
+    'excluir.item4': 'your comments and likes',
+    'excluir.item5': 'your visit records and statistics',
+    'excluir.item6': 'the sign-in account itself',
+    'excluir.aviso': "This can't be undone. If you want to keep your progress, make a backup first, here in the Account tab.",
+    'excluir.senha': 'Enter your password to confirm',
+    'excluir.senhaPlaceholder': 'Your password',
+    'excluir.reautentica': 'To confirm it is you, we will ask you to sign in with {provedor} again.',
+    'excluir.cancelar': 'Cancel',
+    'excluir.confirmar': 'Delete permanently',
+    'excluir.statusConfirmando': 'Confirming your identity…',
+    'excluir.statusApagando': 'Deleting your data… ({n}/{total})',
+    'excluir.statusConta': 'Deleting the account…',
+    'excluir.pronto': 'Your account and your data were deleted.',
+    'excluir.falhouDados': "Couldn't delete everything ({n} failures). Your account was NOT deleted. Check your connection and try again.",
+    'excluir.falhouGeral': "Couldn't delete the account: ",
+    'excluir.senhaVazia': 'Enter your password.',
+    'excluir.senhaErrada': 'Wrong password. Nothing was deleted.',
+    'excluir.cancelouLogin': 'Confirmation cancelled. Nothing was deleted.',
     'conta.nomePlaceholder': 'Your name',
     'conta.conectadoComo': 'Signed in as ',
     'conta.participarRanking': 'Join the leaderboard',
@@ -6840,6 +6897,32 @@ const UI_STRINGS = {
     'conta.criarConta': 'Crear cuenta',
     'conta.esqueceuSenha': '¿Olvidaste tu contraseña?',
     'conta.sairConta': 'Cerrar sesión',
+    'conta.excluirConta': 'Eliminar mi cuenta',
+    'conta.politicaPrivacidade': 'Política de privacidad',
+    'conta.comoUsamosDados': 'Cómo usamos tus datos:',
+    'excluir.titulo': 'Eliminar cuenta',
+    'excluir.intro': 'Esto elimina para siempre, de la nube y de este dispositivo:',
+    'excluir.item1': 'tu perfil, nombre, metas, favoritos, marcas y planes',
+    'excluir.item2': 'tu progreso, notas y quizzes',
+    'excluir.item3': 'tu participación en los rankings',
+    'excluir.item4': 'tus comentarios y me gusta',
+    'excluir.item5': 'tus registros de visita y estadísticas',
+    'excluir.item6': 'la propia cuenta de acceso',
+    'excluir.aviso': 'No se puede deshacer. Si quieres guardar tu progreso, haz una copia de seguridad antes, aquí en la pestaña Cuenta.',
+    'excluir.senha': 'Escribe tu contraseña para confirmar',
+    'excluir.senhaPlaceholder': 'Tu contraseña',
+    'excluir.reautentica': 'Para confirmar que eres tú, te pediremos iniciar sesión con {provedor} otra vez.',
+    'excluir.cancelar': 'Cancelar',
+    'excluir.confirmar': 'Eliminar definitivamente',
+    'excluir.statusConfirmando': 'Confirmando tu identidad…',
+    'excluir.statusApagando': 'Eliminando tus datos… ({n}/{total})',
+    'excluir.statusConta': 'Eliminando la cuenta…',
+    'excluir.pronto': 'Tu cuenta y tus datos fueron eliminados.',
+    'excluir.falhouDados': 'No se pudo eliminar todo ({n} fallos). Tu cuenta NO fue eliminada. Revisa tu conexión e inténtalo de nuevo.',
+    'excluir.falhouGeral': 'No se pudo eliminar la cuenta: ',
+    'excluir.senhaVazia': 'Escribe tu contraseña.',
+    'excluir.senhaErrada': 'Contraseña incorrecta. No se eliminó nada.',
+    'excluir.cancelouLogin': 'Confirmación cancelada. No se eliminó nada.',
     'conta.nomePlaceholder': 'Tu nombre',
     'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar en el ranking',
@@ -8006,6 +8089,9 @@ function generateRadialMindMap(lessonId) {
 // ============ INIT ============
 // Firebase REST API (Realtime Database) - Funciona no Cloudflare Pages!
 const FIREBASE_DB = 'https://licaojovem-iasd-default-rtdb.firebaseio.com';
+// Ligado enquanto a conta esta sendo excluida: nenhuma gravacao automatica pode
+// refazer no banco o que acabou de ser apagado.
+let excluindoConta = false;
 console.log('✓ Firebase REST API configurada:', FIREBASE_DB);
 
 // ===== IDENTIDADE DO USUARIO =====
@@ -8029,6 +8115,7 @@ async function getAuthToken() {
 
 // ===== FIREBASE REST API FUNCTIONS =====
 async function salvarNoFirebase(usuarioId, dados) {
+  if (excluindoConta) return null;
   try {
     const token = await getAuthToken();
     const url = `${FIREBASE_DB}/usuarios/${usuarioId}.json` + (token ? `?auth=${token}` : '');
@@ -8129,7 +8216,7 @@ async function lerRankingTopo(caminho, meuId, token){
 }
 
 async function atualizarRankingSemanal(){
-  if(!currentUser) return;
+  if(!currentUser || excluindoConta) return;
   try{
     if(!(await rankingOptInAtivo())) return;
     const { semanaId, diasConcluidos, notaMedia, pontos } = calcularRankingSemanal();
@@ -8146,7 +8233,7 @@ async function atualizarRankingSemanal(){
 }
 
 async function atualizarRankingTrimestre(){
-  if(!currentUser) return;
+  if(!currentUser || excluindoConta) return;
   try{
     if(!(await rankingOptInAtivo())) return;
     const { trimestreId, diasConcluidos, diasElapsados, notaMedia, pontos } = calcularRankingTrimestre();
@@ -8417,7 +8504,7 @@ let _carimboLido = null;
 
 // Unico caminho para subir o pacote. Garante a leitura antes da gravacao.
 async function subirParaNuvem(extra) {
-  if (!currentUser) return null;
+  if (!currentUser || excluindoConta) return null;
   if (!nuvemLida && !(await mesclarProgressoDaNuvem())) {
     // Nao leu: nao grava. Tenta de novo em instantes.
     clearTimeout(_retentativaNuvem);
@@ -8850,7 +8937,7 @@ async function apagarComentario(lessonId, dayId, id){
 const statsLicao = {};
 
 async function registrarStat(lessonId, dayId, dados){
-  if (!currentUser) return;
+  if (!currentUser || excluindoConta) return;
   try{
     const token = await getAuthToken();
     await fetch(`${FIREBASE_DB}/stats/${lessonId}/${dayId}/${currentUser.uid}.json?auth=${token}`, {
@@ -8867,7 +8954,7 @@ async function registrarStat(lessonId, dayId, dados){
 //   stats_plano/{uid} = {p:<plano>, l:<capítulos lidos>, t:<total>, em}
 let _timerStatPlano = null;
 function registrarStatPlano(key){
-  if (!currentUser || !BIBLE_PLANS[key]) return;
+  if (!currentUser || excluindoConta || !BIBLE_PLANS[key]) return;
   clearTimeout(_timerStatPlano);
   // Marcar um dia inteiro salva várias vezes seguidas: espera a poeira baixar.
   _timerStatPlano = setTimeout(async () => {
@@ -9074,7 +9161,7 @@ async function carregarPlanoAdmin(){
 const DIAS_NO_PAINEL = 7;
 
 async function registrarVisita(){
-  if (!currentUser) return;
+  if (!currentUser || excluindoConta) return;
   const hoje = dateKey(new Date());
   const marca = 'visita-' + hoje;
   try{
@@ -9980,6 +10067,214 @@ async function logout() {
   }
 }
 
+// ===== EXCLUIR CONTA E DADOS (exigido pela App Store e pelo Google Play) =====
+// Ordem: confirmar identidade -> apagar os dados no Realtime Database -> revogar o
+// token da Apple (so iOS nativo) -> excluir o usuario no Firebase -> limpar o
+// aparelho. Se qualquer dado falhar, a conta NAO e excluida: da para tentar de novo.
+const POLITICA_PRIVACIDADE_BASE = 'https://licaojovem-iasd.pages.dev/privacidade.html';
+function urlPolitica(){ return POLITICA_PRIVACIDADE_BASE + '#' + (idiomaConteudoAtual || 'pt'); }
+
+const DIAS_DO_BANCO = ['dom','seg','ter','qua','qui','sex','sab'];
+
+function provedorDaConta(user){
+  const ids = (user.providerData || []).map(p => p.providerId);
+  return ids.find(id => id !== 'firebase') || 'password';
+}
+function nomeDoProvedor(id){ return id === 'google.com' ? 'Google' : id === 'apple.com' ? 'Apple' : ''; }
+function loginCancelado(e){ return /cancel|1001|popup-closed|popup_closed/i.test(((e && e.message) || '') + ' ' + ((e && e.code) || '')); }
+
+// O Firebase so exclui usuario com login recente: entra de novo pelo mesmo metodo.
+// Devolve o authorizationCode da Apple (so existe no iOS nativo) para revogar o token.
+async function reautenticarParaExcluir(user, senha){
+  const provedor = provedorDaConta(user);
+  const nativo = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  if (provedor === 'password') {
+    await user.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(user.email, senha));
+    return {};
+  }
+  if (provedor === 'google.com') {
+    if (nativo) {
+      if (!window.__signInWithGoogleNative) throw new Error('Login nativo ainda nao carregou - tente de novo em instantes.');
+      const idToken = await window.__signInWithGoogleNative();
+      await user.reauthenticateWithCredential(firebase.auth.GoogleAuthProvider.credential(idToken));
+    } else {
+      await user.reauthenticateWithPopup(new firebase.auth.GoogleAuthProvider());
+    }
+    return {};
+  }
+  if (provedor === 'apple.com') {
+    if (nativo) {
+      if (!window.__signInWithAppleNative) throw new Error('Login nativo ainda nao carregou - tente de novo em instantes.');
+      const r = await window.__signInWithAppleNative();
+      await user.reauthenticateWithCredential(new firebase.auth.OAuthProvider('apple.com').credential({ idToken: r.idToken, rawNonce: r.nonce }));
+      return { authorizationCode: r.authorizationCode };
+    }
+    const prov = new firebase.auth.OAuthProvider('apple.com'); prov.addScope('email'); prov.addScope('name');
+    await user.reauthenticateWithPopup(prov);
+    return {};
+  }
+  throw new Error('Provedor de login desconhecido: ' + provedor);
+}
+
+// Apaga tudo o que a pessoa tem no Realtime Database. Devolve a lista de falhas (vazia = ok).
+// Cada pessoa so consegue apagar o que e dela (ver regras em FIREBASE-SETUP.md).
+async function apagarDadosDaNuvem(uid, aoProgredir){
+  const falhas = [];
+  let token = await getAuthToken();
+  const apagar = async (caminho) => {
+    const r = await fetch(`${FIREBASE_DB}/${caminho}.json?auth=${token}`, { method: 'DELETE' });
+    if (!r.ok) falhas.push(caminho + ' (HTTP ' + r.status + ')');
+  };
+  const ler = async (caminho, extra) => {
+    const r = await fetch(`${FIREBASE_DB}/${caminho}.json?auth=${token}${extra || ''}`);
+    if (!r.ok) { falhas.push('GET ' + caminho + ' (HTTP ' + r.status + ')'); return null; }
+    return await r.json();
+  };
+  const nulos = {};   // caminho -> null: apagados juntos, em lotes, por um PATCH na raiz
+
+  await apagar(`usuarios/${uid}`);
+  await apagar(`stats_plano/${uid}`);
+
+  // Rankings: uma entrada por semana e por trimestre.
+  for (const raiz of ['ranking', 'ranking_trimestre']) {
+    const chaves = await ler(raiz, '&shallow=true');
+    Object.keys(chaves || {}).forEach(k => { nulos[`${raiz}/${k}/${uid}`] = null; });
+  }
+
+  // Por licao: comentarios da pessoa, curtidas que ela deu, curtidas em comentarios e estatisticas.
+  const licoes = LESSONS_META.map(l => l.id);
+  for (let i = 0; i < licoes.length; i++) {
+    const l = licoes[i];
+    if (aoProgredir) aoProgredir(i + 1, licoes.length);
+    const comentarios = await ler(`comentarios/${l}`);
+    Object.keys(comentarios || {}).forEach(d => Object.keys(comentarios[d] || {}).forEach(id => {
+      if (comentarios[d][id] && comentarios[d][id].uid === uid) nulos[`comentarios/${l}/${d}/${id}`] = null;
+    }));
+    const curtidasCmt = await ler(`curtidas_cmt/${l}`);
+    Object.keys(curtidasCmt || {}).forEach(d => Object.keys(curtidasCmt[d] || {}).forEach(c => {
+      if (curtidasCmt[d][c] && curtidasCmt[d][c][uid]) nulos[`curtidas_cmt/${l}/${d}/${c}/${uid}`] = null;
+    }));
+    DIAS_DO_BANCO.forEach(d => { nulos[`curtidas/${l}/${d}/${uid}`] = null; nulos[`stats/${l}/${d}/${uid}`] = null; });
+  }
+
+  // Visitas: uma por dia desde o inicio do registro (20/09/2026).
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  for (const d = new Date(2026, 8, 20); d <= hoje; d.setDate(d.getDate() + 1)) nulos[`visitas/${dateKey(d)}/${uid}`] = null;
+
+  const caminhos = Object.keys(nulos);
+  for (let i = 0; i < caminhos.length; i += 100) {
+    const lote = caminhos.slice(i, i + 100);
+    const corpo = {}; lote.forEach(c => { corpo[c] = null; });
+    token = await getAuthToken();
+    const r = await fetch(`${FIREBASE_DB}/.json?auth=${token}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });
+    if (r.ok) continue;
+    // Um caminho negado derruba o lote inteiro: apaga um a um para achar qual falhou.
+    for (const c of lote) await apagar(c);
+  }
+
+  // Admin: se era admin, sai da lista (falhar aqui nao impede a exclusao).
+  if (souAdmin()) { try { await fetch(`${FIREBASE_DB}/config/admins/${uid}.json?auth=${token}`, { method: 'DELETE' }); } catch(e) {} }
+
+  // Confere: o registro principal nao pode mais existir.
+  const restou = await ler(`usuarios/${uid}`);
+  if (restou !== null && !falhas.length) falhas.push(`usuarios/${uid} ainda existe`);
+  return falhas;
+}
+
+async function excluirContaAgora(senha, status){
+  const user = currentUser;
+  if (!user || !firebaseAuthReady) throw new Error('Sem sessão ativa.');
+  excluindoConta = true;
+  try {
+    pararEscutaAoVivo();
+    status(t('excluir.statusConfirmando'));
+    const { authorizationCode } = await reautenticarParaExcluir(user, senha);
+    const falhas = await apagarDadosDaNuvem(user.uid, (n, total) =>
+      status(t('excluir.statusApagando').replace('{n}', n).replace('{total}', total)));
+    if (falhas.length) { console.warn('⚠️ Falhas ao apagar dados:', falhas); const err = new Error('falhas'); err.falhas = falhas; throw err; }
+    status(t('excluir.statusConta'));
+    if (authorizationCode) {
+      // A Apple exige revogar o token de "Entrar com Apple" quando a conta e excluida.
+      // O Auth do modo compat (firebase.auth()) nao expoe revokeAccessToken; a versao
+      // modular do mesmo SDK expoe e aceita a mesma instancia (._delegate).
+      try {
+        const { revokeAccessToken } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js');
+        await revokeAccessToken(firebase.auth()._delegate, authorizationCode);
+      } catch(e) { console.warn('⚠️ Nao revogou o token da Apple:', (e && e.message) || e); }
+    }
+    await user.delete();
+    nuvemLida = false;
+    currentUser = null;
+    await limparDadosLocaisDoUsuario();
+    updateAuthUI();
+    console.log('🗑️ Conta excluida');
+    const conta = document.getElementById('tab-conta');
+    if (conta && conta.classList.contains('active')) await renderConta();
+  } catch(e) {
+    if (currentUser) { try { iniciarEscutaAoVivo(); } catch(_) {} }   // a conta continua: religa a sincronizacao
+    throw e;
+  } finally {
+    excluindoConta = false;
+  }
+}
+
+function abrirExclusaoConta(){
+  if (!currentUser || document.getElementById('excluir-root')) return;
+  const provedor = provedorDaConta(currentUser);
+  const itens = ['item1','item2','item3','item4','item5','item6'].map(k => `<li>${t('excluir.' + k)}</li>`).join('');
+  const confirmacao = provedor === 'password'
+    ? `<div class="dayed-section">
+         <label class="conta-note" for="excluir-senha" style="display:block; margin:0 0 6px;">${t('excluir.senha')}</label>
+         <input type="password" id="excluir-senha" autocomplete="current-password" placeholder="${t('excluir.senhaPlaceholder')}" style="width:100%; box-sizing:border-box; background:var(--bg); border:2px solid var(--border); border-radius:10px; padding:12px 14px; font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink);">
+       </div>`
+    : `<p class="conta-note" style="margin:0 0 12px;">${t('excluir.reautentica').replace('{provedor}', nomeDoProvedor(provedor))}</p>`;
+  const wrap = document.createElement('div');
+  wrap.id = 'excluir-root';
+  wrap.innerHTML = `<div class="dayed-overlay" onclick="if(event.target===this && !excluindoConta) fecharExclusaoConta()">
+    <div class="dayed-panel">
+      <div class="dayed-head"><span>${t('excluir.titulo')}</span><button class="dayed-close" onclick="if(!excluindoConta) fecharExclusaoConta()">✕</button></div>
+      <div class="dayed-section">
+        <p class="conta-note" style="margin:0 0 8px;">${t('excluir.intro')}</p>
+        <ul style="margin:0 0 12px 18px; padding:0; color:var(--ink); font-size:13.5px; line-height:1.6;">${itens}</ul>
+        <p class="conta-note" style="margin:0; color:#ff5d8f; font-weight:700;">${t('excluir.aviso')}</p>
+      </div>
+      ${confirmacao}
+      <p id="excluir-status" class="conta-note" style="min-height:18px; margin:0 0 12px;"></p>
+      <div style="display:flex; gap:10px;">
+        <button id="excluir-cancelar" class="conta-btn conta-btn-secondary" style="flex:1; padding:12px; text-align:center;" onclick="fecharExclusaoConta()">${t('excluir.cancelar')}</button>
+        <button id="excluir-confirmar" class="conta-btn" style="flex:1; padding:12px; text-align:center; background:#ff5d8f;" onclick="confirmarExclusaoConta()">${t('excluir.confirmar')}</button>
+      </div>
+    </div></div>`;
+  document.body.appendChild(wrap);
+}
+function fecharExclusaoConta(){ const r = document.getElementById('excluir-root'); if (r) r.remove(); }
+
+async function confirmarExclusaoConta(){
+  if (excluindoConta || !currentUser) return;
+  const status = (msg) => { const el = document.getElementById('excluir-status'); if (el) el.textContent = msg; };
+  let senha = '';
+  if (provedorDaConta(currentUser) === 'password') {
+    senha = (document.getElementById('excluir-senha') || {}).value || '';
+    if (!senha) { status(t('excluir.senhaVazia')); return; }
+  }
+  const botoes = ['excluir-confirmar', 'excluir-cancelar'].map(id => document.getElementById(id));
+  botoes.forEach(b => { if (b) b.disabled = true; });
+  try {
+    await excluirContaAgora(senha, status);
+    fecharExclusaoConta();
+    alert(t('excluir.pronto'));
+  } catch(e) {
+    console.error('❌ Erro ao excluir a conta:', e);
+    let msg;
+    if (e && e.falhas) msg = t('excluir.falhouDados').replace('{n}', e.falhas.length);
+    else if (e && /wrong-password|invalid-credential|invalid-login-credentials/.test(e.code || '')) msg = t('excluir.senhaErrada');
+    else if (loginCancelado(e)) msg = t('excluir.cancelouLogin');
+    else msg = t('excluir.falhouGeral') + ((e && (e.message || e.code)) || '');
+    status(msg);
+    botoes.forEach(b => { if (b) b.disabled = false; });
+  }
+}
+
 async function manualSync() {
   const btn = document.getElementById('sync-btn');
   const rotulo = btn ? btn.textContent : '';
@@ -10194,6 +10489,7 @@ function updateAuthUI() {
   const emailBlock = document.getElementById('email-login-block');
   const logoutBtn  = document.getElementById('logout-btn');
   const syncBtn    = document.getElementById('sync-btn');
+  const deleteBtn  = document.getElementById('delete-account-btn');
   const info       = document.getElementById('user-info');
   const logado     = !!currentUser;
 
@@ -10202,6 +10498,7 @@ function updateAuthUI() {
   if (emailBlock) emailBlock.style.display = logado ? 'none' : 'flex';
   if (logoutBtn) logoutBtn.style.display = logado ? 'block' : 'none';
   if (syncBtn)   syncBtn.style.display   = logado ? 'block' : 'none';
+  if (deleteBtn) deleteBtn.style.display = logado ? 'block' : 'none';
   if (info) {
     info.style.display = logado ? 'block' : 'none';
     if (logado) {
