@@ -4268,8 +4268,8 @@ async function loadUserGoals(){
   if(userGoals) return userGoals;
   try{
     const res = await window.storage.get('user-goals', false);
-    userGoals = (res && res.value) ? JSON.parse(res.value) : {name:'', bibleMin:0, lessonMin:0, scoreGoal:0};
-  }catch(e){ userGoals = {name:'', bibleMin:0, lessonMin:0, scoreGoal:0}; }
+    userGoals = (res && res.value) ? JSON.parse(res.value) : {name:'', igreja:'', distrito:'', bibleMin:0, lessonMin:0, scoreGoal:0};
+  }catch(e){ userGoals = {name:'', igreja:'', distrito:'', bibleMin:0, lessonMin:0, scoreGoal:0}; }
   return userGoals;
 }
 function toggleGoalsEditor(){
@@ -4278,6 +4278,8 @@ function toggleGoalsEditor(){
 async function saveGoals(){
   userGoals = {
     name: document.getElementById('goal-name').value.trim(),
+    igreja: document.getElementById('goal-igreja').value.trim(),
+    distrito: document.getElementById('goal-distrito').value.trim(),
     bibleMin: Math.max(0, parseInt(document.getElementById('goal-bible-min').value)||0),
     lessonMin: Math.max(0, parseInt(document.getElementById('goal-lesson-min').value)||0),
     scoreGoal: Math.max(0, Math.min(10, parseInt(document.getElementById('goal-score').value)||0)),
@@ -4364,6 +4366,8 @@ function renderStats(){
       </div>
       <div class="goals-editor" id="goals-editor">
         <div class="dayed-row"><label>${t('conta.nomePlaceholder')}</label><input type="text" id="goal-name" value="${goals.name||''}" placeholder="${t('conta.nomePlaceholder')}"></div>
+        <div class="dayed-row"><label>${t('conta.igreja')}</label><input type="text" id="goal-igreja" value="${escaparHtml(goals.igreja||'')}" placeholder="${t('conta.igrejaPlaceholder')}"></div>
+        <div class="dayed-row"><label>${t('conta.distrito')}</label><input type="text" id="goal-distrito" value="${escaparHtml(goals.distrito||'')}" placeholder="${t('conta.distritoPlaceholder')}"></div>
         <div class="dayed-row"><label>${t('stats.metaBiblia')}</label><input type="number" id="goal-bible-min" min="0" value="${goals.bibleMin||''}"></div>
         <div class="dayed-row"><label>${t('stats.metaLicao')}</label><input type="number" id="goal-lesson-min" min="0" value="${goals.lessonMin||''}"></div>
         <div class="dayed-row"><label>${t('stats.metaNota')}</label><input type="number" id="goal-score" min="0" max="10" value="${goals.scoreGoal||''}"></div>
@@ -6078,6 +6082,14 @@ const UI_STRINGS = {
     'excluir.senhaErrada': 'Senha incorreta. Nada foi apagado.',
     'excluir.cancelouLogin': 'Confirmação cancelada. Nada foi apagado.',
     'conta.nomePlaceholder': 'Seu nome',
+    'conta.igreja': 'Igreja',
+    'conta.igrejaPlaceholder': 'Nome da sua igreja',
+    'conta.distrito': 'Distrito',
+    'conta.distritoPlaceholder': 'Nome do seu distrito',
+    'boasVindas.titulo': 'Bem-vindo(a)!',
+    'boasVindas.subtitulo': 'Conte pra gente de qual igreja e distrito você é. É opcional, e dá pra preencher depois na aba Progresso.',
+    'boasVindas.pular': 'Agora não',
+    'boasVindas.continuar': 'Continuar',
     'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar do ranking',
     'conta.entreParaRanking': 'Entre na sua conta para participar do ranking.',
@@ -6501,6 +6513,14 @@ const UI_STRINGS = {
     'excluir.senhaErrada': 'Wrong password. Nothing was deleted.',
     'excluir.cancelouLogin': 'Confirmation cancelled. Nothing was deleted.',
     'conta.nomePlaceholder': 'Your name',
+    'conta.igreja': 'Church',
+    'conta.igrejaPlaceholder': 'Your church name',
+    'conta.distrito': 'District',
+    'conta.distritoPlaceholder': 'Your district name',
+    'boasVindas.titulo': 'Welcome!',
+    'boasVindas.subtitulo': "Tell us which church and district you're from. It's optional, and you can fill it in later on the Progress tab.",
+    'boasVindas.pular': 'Not now',
+    'boasVindas.continuar': 'Continue',
     'conta.conectadoComo': 'Signed in as ',
     'conta.participarRanking': 'Join the leaderboard',
     'conta.entreParaRanking': 'Sign in to your account to join the leaderboard.',
@@ -6924,6 +6944,14 @@ const UI_STRINGS = {
     'excluir.senhaErrada': 'Contraseña incorrecta. No se eliminó nada.',
     'excluir.cancelouLogin': 'Confirmación cancelada. No se eliminó nada.',
     'conta.nomePlaceholder': 'Tu nombre',
+    'conta.igreja': 'Iglesia',
+    'conta.igrejaPlaceholder': 'Nombre de tu iglesia',
+    'conta.distrito': 'Distrito',
+    'conta.distritoPlaceholder': 'Nombre de tu distrito',
+    'boasVindas.titulo': '¡Bienvenido(a)!',
+    'boasVindas.subtitulo': 'Cuéntanos de qué iglesia y distrito eres. Es opcional, y puedes completarlo después en la pestaña Progreso.',
+    'boasVindas.pular': 'Ahora no',
+    'boasVindas.continuar': 'Continuar',
     'conta.conectadoComo': 'Conectado como ',
     'conta.participarRanking': 'Participar en el ranking',
     'conta.entreParaRanking': 'Inicia sesión en tu cuenta para participar en el ranking.',
@@ -8496,6 +8524,10 @@ let _syncTimer = null;
 // (ex.: 4 dias no iOS contra 18 na nuvem) e o PUT substitui o no inteiro.
 let nuvemLida = false;
 let _retentativaNuvem = null;
+// Ligada por mesclarProgressoDaNuvem() quando a conta acabou de ser criada
+// (mesmo sinal usado no opt-in do ranking); onAuthStateChanged abre o painel
+// de boas-vindas so uma vez, depois de todo o resto do login terminar.
+let contaRecemCriada = false;
 // Carimbos (atualizado_em) que este aparelho gravou e o ultimo lido da nuvem:
 // a escuta ao vivo olha so esse carimbo (dezenas de bytes) e so baixa o no
 // completo quando ele e de outro aparelho.
@@ -8610,6 +8642,7 @@ async function mesclarProgressoDaNuvem() {
       // escolhido algo no aparelho antes de entrar (uso anonimo antes do login).
       try { await window.storage.get('ranking-opt-in', false); }
       catch(e) { try { await window.storage.set('ranking-opt-in', JSON.stringify(true), false); } catch(e2) {} }
+      contaRecemCriada = true;
       nuvemLida = true;
       return true;
     }
@@ -9883,6 +9916,7 @@ function initFirebaseAuth() {
         iniciarEscutaAoVivo();
         registrarVisita();
         await refrescarTelaAposLogin();
+        if (contaRecemCriada) { contaRecemCriada = false; abrirBoasVindasConta(); }
       } else {
         // Sem conta não há nuvem para esperar: o que está no aparelho é tudo.
         nuvemLida = false;
@@ -10224,6 +10258,42 @@ async function excluirContaAgora(senha, status){
   } finally {
     excluindoConta = false;
   }
+}
+
+// Painel de boas-vindas: aberto uma unica vez, logo apos a conta ser criada
+// (ver contaRecemCriada em onAuthStateChanged). So pede igreja e distrito -
+// o nome ja chega preenchido pelo Google/Apple quando existe. Totalmente
+// opcional: fechar de qualquer jeito (pular, X ou clicar fora) so fecha,
+// nunca bloqueia o uso do app, e nao volta a aparecer nesta sessao.
+async function abrirBoasVindasConta(){
+  if (!currentUser || document.getElementById('boas-vindas-root')) return;
+  await loadUserGoals();
+  const wrap = document.createElement('div');
+  wrap.id = 'boas-vindas-root';
+  wrap.innerHTML = `<div class="dayed-overlay" onclick="if(event.target===this) fecharBoasVindasConta()">
+    <div class="dayed-panel">
+      <div class="dayed-head"><span>${t('boasVindas.titulo')}</span><button class="dayed-close" onclick="fecharBoasVindasConta()">✕</button></div>
+      <p class="conta-note" style="margin:0 0 16px;">${t('boasVindas.subtitulo')}</p>
+      <div class="dayed-section">
+        <div class="dayed-row"><label>${t('conta.igreja')}</label><input type="text" id="bv-igreja" value="${escaparHtml(userGoals.igreja||'')}" placeholder="${t('conta.igrejaPlaceholder')}" style="flex:1; background:var(--bg); border:2px solid var(--border); border-radius:10px; padding:10px 12px; font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink);"></div>
+        <div class="dayed-row"><label>${t('conta.distrito')}</label><input type="text" id="bv-distrito" value="${escaparHtml(userGoals.distrito||'')}" placeholder="${t('conta.distritoPlaceholder')}" style="flex:1; background:var(--bg); border:2px solid var(--border); border-radius:10px; padding:10px 12px; font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink);"></div>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button class="conta-btn conta-btn-secondary" style="flex:1; padding:12px; text-align:center;" onclick="fecharBoasVindasConta()">${t('boasVindas.pular')}</button>
+        <button class="conta-btn" style="flex:1; padding:12px; text-align:center;" onclick="salvarBoasVindasConta()">${t('boasVindas.continuar')}</button>
+      </div>
+    </div></div>`;
+  document.body.appendChild(wrap);
+}
+function fecharBoasVindasConta(){ const r = document.getElementById('boas-vindas-root'); if (r) r.remove(); }
+async function salvarBoasVindasConta(){
+  await loadUserGoals();
+  userGoals.igreja = (document.getElementById('bv-igreja') || {}).value?.trim() || '';
+  userGoals.distrito = (document.getElementById('bv-distrito') || {}).value?.trim() || '';
+  try{ await window.storage.set('user-goals', JSON.stringify(userGoals), false); }catch(e){}
+  fecharBoasVindasConta();
+  const stats = document.getElementById('tab-stats');
+  if (stats && stats.classList.contains('active')) renderStats();
 }
 
 function abrirExclusaoConta(){
