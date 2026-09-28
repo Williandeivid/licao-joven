@@ -4503,7 +4503,7 @@ async function carregarRankingTab(tipo){
     let html = top.map((item, i) => `
       <div class="ranking-row${item.uid===meuId?' me':''}">
         <span class="ranking-rank">${i+1}º</span>
-        <span class="ranking-name">${escaparHtml(item.nome || t('ranking.alguem'))}</span>
+        <span class="ranking-name">${escaparHtml(comSufixoIgrejaDistrito(item.nome || t('ranking.alguem'), item.igreja, item.distrito))}</span>
         <span class="ranking-score">${Number(item.pontos) || 0} ${t('ranking.pts')}</span>
       </div>`).join('');
 
@@ -4515,7 +4515,7 @@ async function carregarRankingTab(tipo){
       html += `<div class="ranking-sep">···</div>
       <div class="ranking-row me">
         <span class="ranking-rank">${posicao}º</span>
-        <span class="ranking-name">${escaparHtml(item.nome || t('ranking.alguem'))}</span>
+        <span class="ranking-name">${escaparHtml(comSufixoIgrejaDistrito(item.nome || t('ranking.alguem'), item.igreja, item.distrito))}</span>
         <span class="ranking-score">${Number(item.pontos) || 0} ${t('ranking.pts')}</span>
       </div>`;
     }
@@ -8251,10 +8251,14 @@ async function atualizarRankingSemanal(){
     if(diasConcluidos === 0 && pontos === 0) return;
     const token = await getAuthToken();
     const url = `${FIREBASE_DB}/ranking/${semanaId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
+    const { igreja, distrito } = await igrejaDistritoAtual();
+    const corpo = { nome: primeiroNome(), diasConcluidos, notaMedia, pontos, atualizado_em: new Date().toISOString() };
+    if (igreja) corpo.igreja = igreja;
+    if (distrito) corpo.distrito = distrito;
     const response = await fetch(url, {
       method: 'PUT',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, notaMedia, pontos, atualizado_em: new Date().toISOString() })
+      body: JSON.stringify(corpo)
     });
     if(!response.ok) throw new Error('HTTP ' + response.status);
   } catch(e){ console.warn('⚠️ Não atualizou o ranking semanal:', e.message); }
@@ -8268,10 +8272,14 @@ async function atualizarRankingTrimestre(){
     if(diasConcluidos === 0 && pontos === 0) return;
     const token = await getAuthToken();
     const url = `${FIREBASE_DB}/ranking_trimestre/${trimestreId}/${getUserId()}.json` + (token ? `?auth=${token}` : '');
+    const { igreja, distrito } = await igrejaDistritoAtual();
+    const corpo = { nome: primeiroNome(), diasConcluidos, diasElapsados, notaMedia, pontos, atualizado_em: new Date().toISOString() };
+    if (igreja) corpo.igreja = igreja;
+    if (distrito) corpo.distrito = distrito;
     const response = await fetch(url, {
       method: 'PUT',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ nome: primeiroNome(), diasConcluidos, diasElapsados, notaMedia, pontos, atualizado_em: new Date().toISOString() })
+      body: JSON.stringify(corpo)
     });
     if(!response.ok) throw new Error('HTTP ' + response.status);
   } catch(e){ console.warn('⚠️ Não atualizou o ranking do trimestre:', e.message); }
@@ -8981,11 +8989,16 @@ async function registrarStat(lessonId, dayId, dados){
   if (!currentUser || excluindoConta) return;
   try{
     const token = await getAuthToken();
+    // "nm" é só o primeiro nome (o mesmo que aparece no ranking e nas
+    // curtidas), para o painel poder mostrar a lista de quem está lendo.
+    // "ig"/"di" (igreja/distrito) só entram se a pessoa preencheu no perfil.
+    const { igreja, distrito } = await igrejaDistritoAtual();
+    const corpo = Object.assign({em: Date.now(), nm: primeiroNome()}, dados);
+    if (igreja) corpo.ig = igreja;
+    if (distrito) corpo.di = distrito;
     await fetch(`${FIREBASE_DB}/stats/${lessonId}/${dayId}/${currentUser.uid}.json?auth=${token}`, {
       method:'PATCH', headers:{'Content-Type':'application/json'},
-      // "nm" é só o primeiro nome (o mesmo que aparece no ranking e nas
-      // curtidas), para o painel poder mostrar a lista de quem está lendo.
-      body: JSON.stringify(Object.assign({em: Date.now(), nm: primeiroNome()}, dados))
+      body: JSON.stringify(corpo)
     });
   }catch(e){ /* estatistica e extra: nunca atrapalha quem esta estudando */ }
 }
@@ -9096,8 +9109,10 @@ function listaDeQuemEstaLendo(licao, dias){
   dias.forEach(d => {
     Object.entries((statsLicao[licao] || {})[d.id] || {}).forEach(([uid, p]) => {
       if (!p) return;
-      const g = gente[uid] || (gente[uid] = {nome: '', dias: 0, notas: []});
+      const g = gente[uid] || (gente[uid] = {nome: '', igreja: '', distrito: '', dias: 0, notas: []});
       if (p.nm) g.nome = p.nm;
+      if (p.ig) g.igreja = p.ig;
+      if (p.di) g.distrito = p.di;
       if (p.c) g.dias++;
       if (typeof p.q === 'number') g.notas.push(p.q);
     });
@@ -9107,7 +9122,7 @@ function listaDeQuemEstaLendo(licao, dias){
   const linhas = lista.map(g => {
     const media = g.notas.length ? Math.round(g.notas.reduce((a, b) => a + b, 0) / g.notas.length * 10) + '%' : '—';
     return `<div class="admin-linha">
-      <span>${escaparHtml(g.nome || t('admin.semNome'))}</span>
+      <span>${escaparHtml(comSufixoIgrejaDistrito(g.nome || t('admin.semNome'), g.igreja, g.distrito))}</span>
       <span><b>${g.dias}</b>/${dias.length}</span>
       <span>${media}</span>
     </div>`;
@@ -10386,6 +10401,25 @@ function escaparHtml(s) {
 function primeiroNome() {
   const bruto = (currentUser && (currentUser.displayName || currentUser.email)) || '';
   return String(bruto).trim().split(/[\s@.]+/)[0] || '';
+}
+
+// Igreja/distrito do perfil (aba Progresso > engrenagem), cortados para nao
+// inflar os registros do ranking/admin. Vazio quando a pessoa nunca preencheu.
+async function igrejaDistritoAtual() {
+  await loadUserGoals();
+  return {
+    igreja: String((userGoals && userGoals.igreja) || '').trim().slice(0, 60),
+    distrito: String((userGoals && userGoals.distrito) || '').trim().slice(0, 60)
+  };
+}
+
+// "Nome" -> "Nome · Igreja · Distrito", so com o que a pessoa preencheu. Usado
+// no ranking e no painel do admin - o nome vem primeiro de proposito, entao
+// se a linha nao couber e cortar (text-overflow:ellipsis), o que some e a
+// igreja/distrito, nunca o nome.
+function comSufixoIgrejaDistrito(nome, igreja, distrito) {
+  const extra = [igreja, distrito].filter(Boolean).join(' · ');
+  return extra ? nome + ' · ' + extra : nome;
 }
 
 // Sequencia para o hero. Diferente de computeStreak(), que conta a partir
