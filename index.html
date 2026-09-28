@@ -4286,6 +4286,11 @@ async function saveGoals(){
     daysPerWeek: Math.max(0, Math.min(7, parseInt(document.getElementById('goal-days-week').value)||0)),
   };
   try{ await window.storage.set('user-goals', JSON.stringify(userGoals), false); }catch(e){}
+  // Se ja existe uma entrada no ranking desta semana/trimestre, reescreve com a
+  // igreja/distrito novos na hora - sem isso, so refletia no proximo dia/quiz
+  // (atualizarRankingSemanal/Trimestre ja nao fazem nada se nao houver progresso).
+  await atualizarRankingSemanal();
+  await atualizarRankingTrimestre();
   renderStats();
 }
 
@@ -10306,6 +10311,8 @@ async function salvarBoasVindasConta(){
   userGoals.igreja = (document.getElementById('bv-igreja') || {}).value?.trim() || '';
   userGoals.distrito = (document.getElementById('bv-distrito') || {}).value?.trim() || '';
   try{ await window.storage.set('user-goals', JSON.stringify(userGoals), false); }catch(e){}
+  await atualizarRankingSemanal();
+  await atualizarRankingTrimestre();
   fecharBoasVindasConta();
   const stats = document.getElementById('tab-stats');
   if (stats && stats.classList.contains('active')) renderStats();
