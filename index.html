@@ -10418,7 +10418,11 @@ async function igrejaDistritoAtual() {
 // se a linha nao couber e cortar (text-overflow:ellipsis), o que some e a
 // igreja/distrito, nunca o nome.
 function comSufixoIgrejaDistrito(nome, igreja, distrito) {
-  const extra = [igreja, distrito].filter(Boolean).join(' · ');
+  igreja = String(igreja || '').trim();
+  distrito = String(distrito || '').trim();
+  // Igreja e distrito com o mesmo nome (ex.: "Batel" e "Batel") - mostra uma vez so.
+  const mesmoNome = igreja && distrito && igreja.toLowerCase() === distrito.toLowerCase();
+  const extra = mesmoNome ? igreja : [igreja, distrito].filter(Boolean).join(' · ');
   return extra ? nome + ' · ' + extra : nome;
 }
 
