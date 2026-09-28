@@ -8604,7 +8604,15 @@ async function aplicarProgressoDaNuvem(progressoNuvem) {
 async function mesclarProgressoDaNuvem() {
   try {
     const dados = await lerDoFirebase(getUserId());
-    if (!dados) { nuvemLida = true; return true; }
+    if (!dados) {
+      // Sem registro na nuvem = conta nova (Google/Apple/e-mail, tanto faz).
+      // Participa do ranking por padrao, a nao ser que a pessoa ja tenha
+      // escolhido algo no aparelho antes de entrar (uso anonimo antes do login).
+      try { await window.storage.get('ranking-opt-in', false); }
+      catch(e) { try { await window.storage.set('ranking-opt-in', JSON.stringify(true), false); } catch(e2) {} }
+      nuvemLida = true;
+      return true;
+    }
     _carimboLido = dados.atualizado_em || null;
 
     if (dados.progresso) {
