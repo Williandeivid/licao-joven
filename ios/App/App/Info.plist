@@ -22,6 +22,11 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<!-- O app so usa HTTPS padrao (WKWebView, Firebase) - nenhuma criptografia
+	     propria. Isso e isento de documentacao de exportacao; sem esta chave,
+	     a App Store Connect pergunta isso de novo a cada build enviado. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>
