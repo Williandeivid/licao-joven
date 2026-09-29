@@ -1,6 +1,6 @@
 {
   "appId": "com.licaojovemiasd.app",
-  "appName": "Lições Jovem",
+  "appName": "Sinergia JA",
   "webDir": "www",
   "plugins": {
     "FirebaseAuthentication": {
