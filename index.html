@@ -29,16 +29,47 @@
      app nativo), entao o login continua 100% pelo signInWithPopup/Redirect
      mais abaixo, sem depender de nada disto. -->
 <script>
-  /* No app iOS o WebView vai ate o topo da tela, por baixo da barra de status e da
-     Dynamic Island. viewport-fit=cover faz env(safe-area-inset-top) valer, e o
-     botao do menu (e o que fica ao lado dele) desce ate abaixo dessa faixa. So no
-     iOS nativo: no Android e na web env() vale 0 e nada muda. */
+  /* No app nativo (iOS e, desde o Android 15/targetSdk 35, tambem Android) o WebView
+     vai ate as bordas da tela, por baixo da barra de status/Dynamic Island (topo) e da
+     barra de navegacao do sistema - gestos ou 3 botoes (base). viewport-fit=cover faz
+     env(safe-area-inset-top/bottom) valerem de verdade, e o CSS usa isso pra empurrar o
+     topo e o menu inferior pra fora dessas faixas. Sem isto, no Android com barra de 3
+     botoes o rodape do app fica coberto/cortado por ela. So no nativo: na web (navegador
+     comum) env() continua 0 e nada muda aqui - esse caso e' tratado a parte, pelo script
+     seguinte (barra de enderecos do navegador). */
   try{
-    if (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === 'ios') {
+    var plataforma = window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform();
+    if (plataforma === 'ios' || plataforma === 'android') {
       var vpMeta = document.querySelector('meta[name="viewport"]');
       if (vpMeta && vpMeta.content.indexOf('viewport-fit') === -1) vpMeta.content += ', viewport-fit=cover';
     }
   }catch(e){}
+</script>
+<script>
+  /* No navegador (Safari do iPhone, Chrome do Android), a barra de endereco fica
+     "flutuando" por cima do fim da pagina ate o usuario rolar a tela - o CSS nao
+     sabe disso (continua achando que tem a tela inteira disponivel), entao o menu
+     fixo no rodape (.bottomnav) fica parcialmente escondido atras dela. window.
+     visualViewport sabe exatamente quanto da tela esta de fato visivel; usamos
+     isso pra empurrar o menu pra cima na hora certa. Dentro do app nativo
+     (Capacitor) isso normalmente da' 0 e nao muda nada. */
+  (function(){
+    function syncBottomGap(){
+      try{
+        var vv = window.visualViewport;
+        var gap = 0;
+        if (vv) gap = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+        document.documentElement.style.setProperty('--vv-bottom-gap', gap + 'px');
+      }catch(e){}
+    }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', syncBottomGap);
+      window.visualViewport.addEventListener('scroll', syncBottomGap);
+    }
+    window.addEventListener('load', syncBottomGap);
+    window.addEventListener('orientationchange', syncBottomGap);
+    syncBottomGap();
+  })();
 </script>
 <script type="importmap">
 {"imports": {"@capacitor/core": "./vendor/capacitor-core.esm.js"}}
@@ -550,8 +581,8 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   html{font-size:17px;}
-  /* Area segura de cima (barra de status / Dynamic Island). Vale 0 fora do iOS nativo
-     (o viewport-fit=cover so e ligado la), entao no Android e na web nada muda. */
+  /* Area segura de cima (barra de status / Dynamic Island). Vale 0 fora do app nativo
+     (o viewport-fit=cover so e ligado la - iOS e Android), entao na web nada muda. */
   :root{ --safe-top: env(safe-area-inset-top, 0px); }
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; font-size:1rem; line-height:1.6; padding-top:var(--safe-top); padding-bottom:82px;}
   /* Faixa com a cor do fundo por tras da barra de status: o conteudo rola por baixo
@@ -1650,7 +1681,10 @@
 
   /* ===== BOTTOM NAV ===== */
   .bottomnav{
-    position:fixed; bottom:0; left:0; right:0; z-index:50;
+    /* --vv-bottom-gap (definida via JS com visualViewport) empurra o menu pra
+       cima da barra de endereco do navegador quando ela esta "flutuando" por
+       cima do fim da pagina. Ver script logo apos o <head>. */
+    position:fixed; bottom:var(--vv-bottom-gap, 0px); left:0; right:0; z-index:50;
     background:rgba(255,255,255,0.92); backdrop-filter:blur(14px);
     border-top:2px solid var(--border); display:flex; justify-content:center; gap:6px;
     padding:10px 16px calc(10px + env(safe-area-inset-bottom));
