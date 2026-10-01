@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Sinergia JA — Escola Sabatina Jovem</title>
 <!-- Prévia do link no WhatsApp: o robô dele não roda JavaScript, então as
      tags têm de estar aqui no HTML. A imagem precisa de endereço completo. -->
@@ -42,6 +42,27 @@
     if (plataforma === 'ios' || plataforma === 'android') {
       var vpMeta = document.querySelector('meta[name="viewport"]');
       if (vpMeta && vpMeta.content.indexOf('viewport-fit') === -1) vpMeta.content += ', viewport-fit=cover';
+    }
+  }catch(e){}
+
+  /* Rede de seguranca do Android: em WebView antiga o env(safe-area-inset-bottom)
+     volta 0 mesmo com a barra de navegacao do sistema ocupando a base da tela, e o
+     menu de baixo acabava cortado. Se nem o env() nem a variavel do Capacitor
+     trouxerem valor, reservamos um minimo para a barra/area de gestos. */
+  try{
+    if (plataforma === 'android') {
+      var aplicarMinimo = function(){
+        var raiz = document.documentElement;
+        var doCapacitor = parseFloat(getComputedStyle(raiz).getPropertyValue('--safe-area-inset-bottom')) || 0;
+        var sonda = document.createElement('div');
+        sonda.style.cssText = 'position:fixed;left:-9999px;bottom:0;width:1px;height:env(safe-area-inset-bottom,0px);';
+        document.body.appendChild(sonda);
+        var doEnv = sonda.getBoundingClientRect().height || 0;
+        sonda.remove();
+        if (doCapacitor < 1 && doEnv < 1) raiz.style.setProperty('--safe-area-inset-bottom', '24px');
+      };
+      if (document.body) aplicarMinimo();
+      else document.addEventListener('DOMContentLoaded', aplicarMinimo);
     }
   }catch(e){}
 </script>
@@ -581,10 +602,18 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   html{font-size:17px;}
-  /* Area segura de cima (barra de status / Dynamic Island). Vale 0 fora do app nativo
-     (o viewport-fit=cover so e ligado la - iOS e Android), entao na web nada muda. */
-  :root{ --safe-top: env(safe-area-inset-top, 0px); }
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; font-size:1rem; line-height:1.6; padding-top:var(--safe-top); padding-bottom:82px;}
+  /* Area segura de cima (barra de status / Dynamic Island) e de baixo (barra de
+     navegacao do Android / indicador do iPhone). No navegador comum isso costuma
+     dar 0 e nada muda. */
+  /* Android com WebView antiga (< 140) devolve 0 em env(safe-area-inset-*), e foi
+     por isso que o menu de baixo aparecia cortado pela barra do sistema mesmo com
+     viewport-fit=cover. O Capacitor 8 injeta os valores certos em --safe-area-inset-*;
+     lemos essa variavel primeiro e caimos no env() (iOS e web) quando ela nao existe. */
+  :root{
+    --safe-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+    --safe-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  }
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; font-size:1rem; line-height:1.6; padding-top:var(--safe-top); padding-bottom:calc(82px + var(--safe-bottom));}
   /* Faixa com a cor do fundo por tras da barra de status: o conteudo rola por baixo
      dela sem passar atras do relogio. Altura 0 fora do iOS. */
   body::after{ content:""; position:fixed; top:0; left:0; right:0; height:var(--safe-top); background:var(--bg); z-index:55; pointer-events:none; }
@@ -1071,7 +1100,7 @@
   .share-fundo{position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:3000; display:flex; align-items:flex-end; justify-content:center;}
   .share-folha{
     background:var(--card); color:var(--ink); width:100%; max-width:480px;
-    border-radius:20px 20px 0 0; padding:10px 16px calc(18px + env(safe-area-inset-bottom));
+    border-radius:20px 20px 0 0; padding:10px 16px calc(18px + var(--safe-bottom));
     display:flex; flex-direction:column; gap:4px; animation:folhaSobe .2s ease;
   }
   @keyframes folhaSobe{from{transform:translateY(100%)}to{transform:none}}
@@ -1293,10 +1322,13 @@
   .mindmap-wrap h4{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:0.647rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--violet); margin:0 0 12px;}
 
   /* ===== NEW: STATS VIEW ===== */
-  .stats-header{padding:28px 20px 10px; text-align:center;}
+  /* 64px nas laterais: o botao flutuante (⋮) mora no canto superior direito, e o
+     titulo centralizado passava por baixo dele em tela estreita. O clamp evita o
+     titulo estourar quando o Android aumenta a fonte do sistema (vw nao escala). */
+  .stats-header{padding:28px 64px 10px; text-align:center;}
   .stats-section-label{font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); margin:22px 4px 4px; padding-left:2px;}
   .stats-wrap > .stats-section-label:first-child{margin-top:4px;}
-  .stats-header h1{font-family:'Unbounded', sans-serif; font-size:1.7rem; font-weight:800; color:var(--heading); margin:0 0 6px;}
+  .stats-header h1{font-family:'Unbounded', sans-serif; font-size:clamp(1.15rem, 6.5vw, 1.7rem); font-weight:800; color:var(--heading); margin:0 0 6px; overflow-wrap:anywhere;}
   .stats-header p{color:var(--ink-soft); font-size:14px; margin:0;}
   .stats-wrap{max-width:520px; margin:0 auto; padding:16px 20px 50px; display:grid; gap:18px;}
   .stats-card{background:var(--card); border-radius:22px; padding:20px 20px 22px; box-shadow:0 20px 44px -28px rgba(28,23,53,0.3);}
@@ -1339,8 +1371,8 @@
   .cal-mini-icon{width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2.5;}
   .stats-card h3 svg{width:19px; height:19px; stroke:var(--violet); fill:none; stroke-width:2; flex-shrink:0;}
 
-  .quarters-header{max-width:480px; margin:0 auto; padding:28px 20px 6px; text-align:center;}
-  .quarters-header h1{font-family:'Unbounded', sans-serif; font-weight:800; font-size:1.7rem; color:var(--heading); margin:0 0 6px;}
+  .quarters-header{max-width:480px; margin:0 auto; padding:28px 64px 6px; text-align:center;}
+  .quarters-header h1{font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(1.15rem, 6.5vw, 1.7rem); color:var(--heading); margin:0 0 6px; overflow-wrap:anywhere;}
   .quarters-header p{color:var(--ink-soft); font-size:14px; margin:0;}
   .quarters-list{max-width:480px; margin:0 auto; padding:16px 20px 50px; display:grid; gap:12px;}
   .quarter-card{background:var(--card); border-radius:20px; padding:18px 20px; cursor:pointer; box-shadow:0 14px 30px -22px rgba(28,23,53,0.35); border:2px solid transparent; transition:all .15s ease;}
@@ -1406,8 +1438,8 @@
 
   .profile-card{background:linear-gradient(120deg, var(--violet), var(--pink));}
 
-  .conta-header{max-width:480px; margin:0 auto; padding:28px 20px 6px; text-align:center;}
-  .conta-header h1{font-family:'Unbounded', sans-serif; font-weight:800; font-size:1.7rem; color:var(--heading); margin:0 0 6px;}
+  .conta-header{max-width:480px; margin:0 auto; padding:28px 64px 6px; text-align:center;}
+  .conta-header h1{font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(1.15rem, 6.5vw, 1.7rem); color:var(--heading); margin:0 0 6px; overflow-wrap:anywhere;}
   .conta-header p{color:var(--ink-soft); font-size:14px; margin:0;}
   .conta-wrap{max-width:480px; margin:0 auto; padding:16px 20px 50px;}
   .conta-card{background:var(--card); border-radius:20px; padding:18px 20px; margin-bottom:14px; box-shadow:0 12px 30px -22px rgba(28,23,53,0.3);}
@@ -1447,13 +1479,20 @@
   .profile-name{flex:1; font-family:'Unbounded', sans-serif; font-weight:800; font-size:16px; color:#fff;}
   .profile-card .gear-btn{background:rgba(255,255,255,0.2);}
   .profile-card .gear-btn svg{stroke:var(--violet);}
-  .goals-row{display:flex; gap:8px;}
-  .goal-chip{flex:1; background:rgba(255,255,255,0.15); border-radius:14px; padding:10px 8px; text-align:center;}
+  /* Grade em vez de flex: com flex os blocos nao encolhiam abaixo da largura do
+     rotulo ("DIAS/SEMANA" nao quebra), entao em tela estreita - ou com a fonte do
+     sistema aumentada - o ultimo ficava cortado pela borda. Com auto-fit eles
+     passam a 2 por linha quando nao cabem 4. */
+  .goals-row{display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px;}
+  @media (max-width:430px){ .goals-row{grid-template-columns:repeat(2, minmax(0, 1fr));} }
+  .goal-chip{min-width:0; background:rgba(255,255,255,0.15); border-radius:14px; padding:10px 8px; text-align:center;}
+  .goal-chip > *{overflow-wrap:anywhere;}
   .goal-mini-track{height:4px; background:rgba(255,255,255,0.25); border-radius:100px; margin-top:6px; overflow:hidden;}
   .goal-mini-fill{height:100%; background:#fff; border-radius:100px;}
   .celebrate-banner{display:flex; align-items:center; gap:12px; background:linear-gradient(120deg,var(--sun),var(--coral)); border-radius:18px; padding:14px 16px; margin-bottom:14px; box-shadow:0 14px 28px -16px rgba(255,157,60,0.5);}
-  .study-time-card{display:flex; gap:10px;}
-  .stc-item{flex:1; background:var(--tint-violet); border-radius:14px; padding:14px 10px; text-align:center;}
+  .study-time-card{display:grid; grid-template-columns:repeat(auto-fit, minmax(90px, 1fr)); gap:10px;}
+  .stc-item{min-width:0; background:var(--tint-violet); border-radius:14px; padding:14px 10px; text-align:center;}
+  .stc-label{overflow-wrap:anywhere;}
   .stc-value{display:block; font-family:'Unbounded', sans-serif; font-weight:800; font-size:22px; color:var(--violet);}
   .stc-value .stc-unit{font-size:12px; font-weight:700; margin-left:3px; color:var(--ink-soft);}
   .stc-label{display:block; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--ink-soft); margin-top:4px;}
@@ -1521,8 +1560,8 @@
   .stats-empty{color:var(--ink-soft); font-size:14px; text-align:center; padding:20px 0;}
 
   /* ===== NEW: BIBLE READER ===== */
-  .bible-header{padding:28px 20px 10px; text-align:center;}
-  .bible-header h1{font-family:'Unbounded', sans-serif; font-size:1.7rem; font-weight:800; color:var(--heading); margin:0 0 6px;}
+  .bible-header{padding:28px 64px 10px; text-align:center;}
+  .bible-header h1{font-family:'Unbounded', sans-serif; font-size:clamp(1.15rem, 6.5vw, 1.7rem); font-weight:800; color:var(--heading); margin:0 0 6px; overflow-wrap:anywhere;}
   .bible-header p{color:var(--ink-soft); font-size:14px; margin:0;}
   .bible-wrap{max-width:600px; margin:0 auto; padding:16px 20px 50px;}
   .bible-crumbs{display:flex; align-items:center; gap:8px; margin-bottom:18px; font-family:'JetBrains Mono', monospace; font-size:12.5px;}
@@ -1687,7 +1726,7 @@
     position:fixed; bottom:var(--vv-bottom-gap, 0px); left:0; right:0; z-index:50;
     background:rgba(255,255,255,0.92); backdrop-filter:blur(14px);
     border-top:2px solid var(--border); display:flex; justify-content:center; gap:6px;
-    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    padding:10px 16px calc(10px + var(--safe-bottom));
     transition:transform .28s ease;
   }
   [data-theme="dark"] .bottomnav{ background:rgba(42,42,62,0.98); border-top-color:#332d54; }
