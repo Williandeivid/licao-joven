@@ -341,6 +341,32 @@ Ao trocar de domínio, lembrar do redirecionamento 301 do
 
 ---
 
+## Curiosidade do dia (lâmpada) — lembrete de trabalho
+
+Publicado com **30 curiosidades**, todas verificadas em fonte primária e reescritas
+com texto próprio (`curiosidades.json`). Faltam **61 para chegar a 91**, que é o
+ponto em que o ano inteiro roda com no máximo duas repetições bem espaçadas —
+são 182 dias (26 lições × 7).
+
+Próximos lotes sugeridos, de 15 em 15:
+
+| Lote | Tema | Observação |
+|---|---|---|
+| A | Cotidiano e materiais | preço, comida, ferramentas, roupa, moedas — o mais rico e hoje quase vazio |
+| B | Mundo romano e viagem | estradas, naufrágio, correio, cidades — geografia, nunca profecia |
+| C | Patriarcas, Egito e êxodo | material forte, mas exige revisão por causa de cronologia |
+| D | Profetas, templo, mulheres e música | reforça as etiquetas que hoje têm 1 item só |
+
+Regras que valeram para as 30 e devem continuar valendo:
+- fonte primária (museu, publicação acadêmica, autoridade de antiguidades), nunca blog;
+- texto reescrito do zero, nada copiado — nem de Wikipedia (CC BY-SA contamina a licença);
+- nada doutrinário, nada enquadrado como "isso prova que a Bíblia é verdadeira";
+- nada anterior a ~3000 a.C., para não esbarrar em discussão de cronologia;
+- superlativo ("o único do mundo") envelhece: revisar uma vez por ano.
+
+Pendente: traduzir as 30 para inglês e espanhol. Enquanto isso, a lâmpada só
+aparece em português (`IDIOMAS_COM_CURIOSIDADE` no index.html).
+
 ## Decisões já tomadas (não reabrir sem motivo novo)
 
 | Tema | Decisão |

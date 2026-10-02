@@ -2222,40 +2222,70 @@ function seededRandom(seed){
   return ((t ^ t >>> 14) >>> 0) / 4294967296;
 }
 /* ===== CURIOSIDADE DO DIA =====
-   Conteudo de exemplo, so para ver o peso na tela: a lista de verdade vem depois,
-   num arquivo proprio e nos 3 idiomas. Criterio do conteudo: fonte de fora da
-   igreja, fato verificavel, nada doutrinario, no maximo 3 linhas.
-   A escolha e' pelo dia (mesma semente do quiz), entao nao muda a cada recarga. */
-const CURIOSIDADES = [
-  { etiqueta:'manuscritos',
-    texto:'O rolo de Isaías achado no mar Morto tem quase 2.000 anos e traz o livro quase inteiro. Dá para vê-lo hoje, exposto no Santuário do Livro, em Jerusalém.',
-    fonte:'Israel Museum, Jerusalém' },
-  { etiqueta:'arqueologia',
-    texto:'Em 1993 apareceu em Tel Dan um pedaço de pedra do século 9 a.C. com a expressão "casa de Davi" — a menção mais antiga ao rei fora da Bíblia.',
-    fonte:'Israel Antiquities Authority' },
-  { etiqueta:'engenharia',
-    texto:'O túnel de Ezequias tem 533 metros cavados na rocha por duas equipes que começaram em pontas opostas. Elas se encontraram no meio, e a água corre ali até hoje.',
-    fonte:'Biblical Archaeology Society' }
-];
+   O conteudo mora em curiosidades.json, carregado so no primeiro toque da
+   lampada - sao ~12 KB que nao precisam entrar na abertura do app.
+   A escolha e' deterministica: mesma licao + mesmo dia = mesma curiosidade, em
+   qualquer aparelho, sem guardar nada. Quando a licao tem etiqueta e ha
+   material suficiente com ela, o sorteio acontece dentro desse grupo; senao,
+   cai no acervo inteiro. Nenhuma curiosidade fica presa a uma data. */
+let CURIOSIDADES = null;
+let _curiosidadesPromessa = null;
 
-function curiosidadeDoDia(lessonId, dayId){
-  if(!CURIOSIDADES.length) return null;
-  return CURIOSIDADES[Math.abs(hashStr(lessonId + '-' + dayId)) % CURIOSIDADES.length];
+function carregarCuriosidades(){
+  if (CURIOSIDADES) return Promise.resolve(CURIOSIDADES);
+  if (!_curiosidadesPromessa){
+    _curiosidadesPromessa = fetch('curiosidades.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { CURIOSIDADES = (d && d.curiosidades) || []; return CURIOSIDADES; })
+      .catch(() => { CURIOSIDADES = []; return CURIOSIDADES; });
+  }
+  return _curiosidadesPromessa;
 }
 
-function toggleCuriosidade(lessonId, dayId){
+function curiosidadeDoDia(lessonId, dayId){
+  const acervo = (CURIOSIDADES || []).filter(c => c.texto && c.texto[idiomaConteudoAtual]);
+  if (!acervo.length) return null;
+  const etiquetas = (ETIQUETAS_DA_LICAO[lessonId] || []);
+  let grupo = acervo.filter(c => c.etiquetas.some(e => etiquetas.indexOf(e) !== -1));
+  if (grupo.length < 4) grupo = acervo;
+  /* Passo primo em cima da posicao do dia no ano (0..181), e nao um hash: assim
+     dois dias seguidos nunca caem na mesma curiosidade, o que o hash deixava
+     acontecer dentro de um grupo pequeno. */
+  const slot = (lessonId - 1) * 7 + Math.max(0, ORDEM_DOS_DIAS.indexOf(dayId));
+  return grupo[(slot * 7919) % grupo.length];
+}
+
+async function toggleCuriosidade(lessonId, dayId){
   const cartao = document.getElementById(`curio-${lessonId}-${dayId}`);
   const botao = cartao && cartao.parentElement.querySelector('.acao-curiosidade');
-  if(!cartao || !botao) return;
+  if (!cartao || !botao) return;
   const abrindo = cartao.hidden;
-  if(abrindo){
+  if (abrindo){
+    await carregarCuriosidades();
     const c = curiosidadeDoDia(lessonId, dayId);
-    if(!c) return;
-    cartao.innerHTML = `${escaparHtml(c.texto)}<span class="curiosidade-fonte">${t('curiosidade.fonte')}: ${escaparHtml(c.fonte)}</span>`;
+    if (!c) return;
+    const txt = c.texto[idiomaConteudoAtual];
+    cartao.innerHTML = `${escaparHtml(txt.curta)}<span class="curiosidade-fonte">${t('curiosidade.fonte')}: ${escaparHtml(c.fonte)}</span>`;
   }
   cartao.hidden = !abrindo;
   botao.setAttribute('aria-expanded', abrindo ? 'true' : 'false');
 }
+
+/* Tema de cada licao, so para aproximar a curiosidade do assunto da semana.
+   Licao sem etiqueta aqui simplesmente cai no acervo inteiro. */
+/* Enquanto as 30 nao estiverem traduzidas, a lampada so aparece em portugues:
+   melhor nao mostrar do que mostrar portugues para quem escolheu outro idioma. */
+const IDIOMAS_COM_CURIOSIDADE = ['pt'];
+const ORDEM_DOS_DIAS = ['dom','seg','ter','qua','qui','sex','sab'];
+
+const ETIQUETAS_DA_LICAO = {
+  1:['evangelhos'], 2:['evangelhos'], 3:['evangelhos'], 4:['evangelhos'], 5:['evangelhos'],
+  6:['evangelhos'], 7:['evangelhos'], 8:['evangelhos'], 9:['evangelhos'], 10:['evangelhos'],
+  11:['evangelhos'], 12:['evangelhos'], 13:['escrita'],
+  14:['geral'], 15:['profetas'], 16:['profetas','reis'], 17:['paulo'], 18:['escrita'],
+  19:['profetas','escrita'], 20:['profetas','escrita'], 21:['paulo','escrita'], 22:['evangelhos'],
+  23:['reis'], 24:['reis'], 25:['paulo'], 26:['reis','templo']
+};
 
 function hashStr(s){
   let h = 0;
@@ -2424,9 +2454,9 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
       <button class="acao acao-compartilhar" onclick="compartilharDia(${lessonId}, '${day.id}')" title="${t('acoes.compartilhar')}" data-i18n-title="acoes.compartilhar">
         <svg viewBox="0 0 24 24"><path d="M22 3L9.2 10.1M22 3l-6.5 18-3.3-8.6L3 9.4 22 3z"/></svg>
       </button>
-      <button class="acao acao-curiosidade" onclick="toggleCuriosidade(${lessonId}, '${day.id}')" aria-expanded="false" aria-controls="curio-${lessonId}-${day.id}" title="${t('curiosidade.botao')}" data-i18n-title="curiosidade.botao">
+      ${IDIOMAS_COM_CURIOSIDADE.indexOf(idiomaConteudoAtual) === -1 ? '' : `<button class="acao acao-curiosidade" onclick="toggleCuriosidade(${lessonId}, '${day.id}')" aria-expanded="false" aria-controls="curio-${lessonId}-${day.id}" title="${t('curiosidade.botao')}" data-i18n-title="curiosidade.botao">
         <svg viewBox="0 0 24 24"><g transform="translate(12,12) scale(1.25) translate(-12,-12)" stroke-width="1.52"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.5.4.8.9.9 1.5l.1.7h5.2l.1-.7c.1-.6.4-1.1.9-1.5A6 6 0 0 0 12 3z"/></g></svg>
-      </button>
+      </button>`}
     </div>
     <div class="curiosidade-cartao" id="curio-${lessonId}-${day.id}" hidden></div>
     <div class="acoes-legenda" id="curtir-leg-${lessonId}-${day.id}"></div>
