@@ -688,6 +688,13 @@
   h1.title{ font-family:'Unbounded', sans-serif; font-weight:800; font-size:clamp(34px, 6vw, 57.8px); margin:0 0 8px; line-height:1.05; letter-spacing:-0.02em; position:relative; z-index:3; background:linear-gradient(90deg, #fff 0%, var(--violet-light) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:title-shrink 5.5s ease-out forwards, text-fadein 0.8s ease-out 3.5s both;}
   @keyframes title-shrink{ 0%{font-size:clamp(54.4px, 12vw, 102px);} 80%{font-size:clamp(54.4px, 12vw, 102px);} 100%{font-size:clamp(34px, 6vw, 57.8px);}}
   .subtitle{ font-size:16.15px; color:#c9c4f0; max-width:520px; margin:0 auto 18px; position:relative; z-index:3;}
+  /* Uma linha so: periodo, texto biblico e a palavra-chave da semana lado a lado,
+     tudo abreviado. Antes o periodo vinha por extenso e ocupava duas linhas. */
+  .hero-meta{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; font-size:14px; letter-spacing:0.01em;}
+  .hero-meta-sep{ opacity:0.5;}
+  .hero-chave{ display:inline-flex; align-items:center; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.22);
+    color:#fff; padding:3px 11px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-size:11px;
+    font-weight:700; letter-spacing:0.08em; text-transform:uppercase; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .keyword-seal{ display:inline-flex; align-items:center; gap:10px; position:relative; z-index:3; background:linear-gradient(90deg, var(--violet), var(--pink)); color:#fff; padding:9px 20px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; box-shadow:0 8px 24px -8px rgba(255,93,143,0.6);}
   .keyword-seal b{color:#fff; font-size:13.5px; font-family:'Unbounded', sans-serif;}
   [data-theme="neutral"] .keyword-seal{ background:var(--violet); color:var(--on-violet); box-shadow:0 8px 24px -8px rgba(108,76,224,0.4); }
@@ -732,7 +739,9 @@
   .hbc-btn{background:#fff; color:#1a8c7e; border:none; padding:10px 18px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-weight:700; font-size:12px; white-space:nowrap;}
   .home-bible-card{transition:opacity .4s ease, transform .4s ease, max-height .4s ease; overflow:hidden;}
   .home-bible-card.hbc-fadeout{opacity:0; transform:translateY(-8px); max-height:0; margin-top:0; padding-top:0; padding-bottom:0;}
-  .dash-overall{ display:flex; align-items:center; justify-content:space-between; font-family:'JetBrains Mono', monospace; font-size:12px; margin-bottom:10px; gap:10px; flex-wrap:wrap;}
+  /* padding-right abre espaco para a foto/menu fixo no canto superior direito:
+     com a barra grudada no topo, o "(98%)" ficava por baixo dele. */
+  .dash-overall{ display:flex; align-items:center; justify-content:space-between; font-family:'JetBrains Mono', monospace; font-size:12px; margin-bottom:10px; gap:10px 14px; flex-wrap:wrap; padding-right:52px;}
   .dash-overall .label{color:var(--ink-soft); letter-spacing:0.04em; text-transform:uppercase;}
   .dash-overall .value{color:var(--violet); font-weight:700;}
   .dash-badge{ padding:4px 12px; border-radius:100px; font-size:11px; font-weight:700; background:linear-gradient(90deg, var(--sun), var(--coral)); color:#5a2e00; border:none;}
@@ -2498,6 +2507,47 @@ function initSwipeNavigation(lessonId){
   }, {once: false});
 }
 
+// O cabecalho da licao mostrava o periodo e o texto biblico por extenso
+// ("27 de setembro a 3 de outubro · Gênesis 3"), o que ocupava duas linhas no
+// celular. Aqui tudo vira forma curta e a palavra-chave da semana entra ao lado.
+const MESES_ABREV = {janeiro:'jan', fevereiro:'fev', 'março':'mar', abril:'abr', maio:'mai',
+  junho:'jun', julho:'jul', agosto:'ago', setembro:'set', outubro:'out', novembro:'nov', dezembro:'dez'};
+
+function abreviarPeriodo(texto){
+  if(!texto) return '';
+  const m = texto.match(/^(\d{1,2})(?:\s+de\s+([\wçà-ú]+))?\s+a\s+(\d{1,2})(?:\s+de\s+([\wçà-ú]+))?/i);
+  if(!m) return texto;
+  const abrev = n => MESES_ABREV[(n||'').toLowerCase()] || n;
+  const d1 = m[1], d2 = m[3];
+  const mes1 = abrev(m[2] || m[4]), mes2 = abrev(m[4] || m[2]);
+  if(!mes1) return texto;
+  return mes1 === mes2 ? `${d1}–${d2} ${mes1}` : `${d1} ${mes1} – ${d2} ${mes2}`;
+}
+
+// Abreviacoes dos 66 livros (padrao da Sociedade Biblica do Brasil).
+const LIVROS_ABREV = {'Gênesis':'Gn','Êxodo':'Êx','Levítico':'Lv','Números':'Nm','Deuteronômio':'Dt',
+  'Josué':'Js','Juízes':'Jz','Rute':'Rt','1 Samuel':'1Sm','2 Samuel':'2Sm','1 Reis':'1Rs','2 Reis':'2Rs',
+  '1 Crônicas':'1Cr','2 Crônicas':'2Cr','Esdras':'Ed','Neemias':'Ne','Ester':'Et','Jó':'Jó','Salmo':'Sl',
+  'Salmos':'Sl','Provérbios':'Pv','Eclesiastes':'Ec','Cantares':'Ct','Cântico dos Cânticos':'Ct',
+  'Isaías':'Is','Jeremias':'Jr','Lamentações':'Lm','Ezequiel':'Ez','Daniel':'Dn','Oseias':'Os','Oséias':'Os',
+  'Joel':'Jl','Amós':'Am','Obadias':'Ob','Jonas':'Jn','Miqueias':'Mq','Miquéias':'Mq','Naum':'Na',
+  'Habacuque':'Hc','Sofonias':'Sf','Ageu':'Ag','Zacarias':'Zc','Malaquias':'Ml',
+  'Mateus':'Mt','Marcos':'Mc','Lucas':'Lc','João':'Jo','Atos':'At','Romanos':'Rm',
+  '1 Coríntios':'1Co','2 Coríntios':'2Co','Gálatas':'Gl','Efésios':'Ef','Filipenses':'Fp','Colossenses':'Cl',
+  '1 Tessalonicenses':'1Ts','2 Tessalonicenses':'2Ts','1 Timóteo':'1Tm','2 Timóteo':'2Tm','Tito':'Tt',
+  'Filemom':'Fm','Hebreus':'Hb','Tiago':'Tg','1 Pedro':'1Pe','2 Pedro':'2Pe','1 João':'1Jo','2 João':'2Jo',
+  '3 João':'3Jo','Judas':'Jd','Apocalipse':'Ap'};
+
+function abreviarRef(ref){
+  if(!ref) return '';
+  // Os nomes compostos ("1 Coríntios") precisam ser testados antes dos simples.
+  const nomes = Object.keys(LIVROS_ABREV).sort((a,b)=>b.length-a.length);
+  return ref.split(/\s*;\s*/).map(parte => {
+    const achado = nomes.find(n => parte.toLowerCase().startsWith(n.toLowerCase()));
+    return achado ? LIVROS_ABREV[achado] + parte.slice(achado.length) : parte;
+  }).join('; ');
+}
+
 async function renderLessonDetail(lessonId, fromList){
   // 🔥 Carregar dados do Firebase (sincronizar com nuvem)
   // So busca na nuvem quando ha usuario logado: as regras do banco exigem
@@ -2533,8 +2583,14 @@ async function renderLessonDetail(lessonId, fromList){
   html += `<div class="eyebrow">${t('lesson.licaoJovem')} ${numeroDaLicao(lessonId)}</div>
     <h1 class="title">${content ? content.title : meta.title}</h1>`;
   if(content){
-    const abbrevBible = (content.bibleref || '').replace(/João/g, 'Jo').replace(/Romanos/g, 'Rm').replace(/Coríntios/g, 'Co').replace(/Gálatas/g, 'Gl').replace(/Efésios/g, 'Ef').replace(/Filipenses/g, 'Fp').replace(/Colossenses/g, 'Cl').replace(/Tessalonicenses/g, 'Ts').replace(/Timóteo/g, 'Tm').replace(/Tito/g, 'Tt').replace(/Filemom/g, 'Flm').replace(/Hebreus/g, 'Hb').replace(/Tiago/g, 'Tg').replace(/Pedro/g, 'Pd').replace(/Judas/g, 'Jd').replace(/Apocalipse/g, 'Ap');
-    html += `<p class="subtitle">${content.daterange} · ${abbrevBible}</p>`;
+    const abbrevBible = abreviarRef(content.bibleref);
+    const periodo = abreviarPeriodo(content.daterange);
+    html += `<p class="subtitle hero-meta">
+      <span>${periodo}</span>
+      <span class="hero-meta-sep">·</span>
+      <span>${abbrevBible}</span>
+      ${content.keyword ? `<span class="hero-chave" title="${t('lesson.palavraChave')}">${content.keyword}</span>` : ''}
+    </p>`;
   } else {
     html += `<p class="subtitle">${meta.dateLabel}</p>`;
   }
@@ -6054,6 +6110,7 @@ const UI_STRINGS = {
     'lesson.comecouHoje': '🔥 Começou hoje',
     'lesson.diasSeguidos': '🔥 ${n} dias seguidos',
     'lesson.licaoJovem': 'Lição Jovem',
+    'lesson.palavraChave': 'Palavra-chave da semana',
     'lesson.conteudoConstrucao': 'Conteúdo em construção',
     'lesson.conteudoConstrucaoTexto': 'Essa lição ainda não foi extraída e parafraseada do PDF. Peça pra eu montar a Lição ${n} e ela aparece aqui com todos os dias, versículos e quiz — igual às Lições 3 e 4.',
     'lesson.comeceUmDia': 'Comece um dia abaixo',
@@ -6485,6 +6542,7 @@ const UI_STRINGS = {
     'lesson.comecouHoje': '🔥 Started today',
     'lesson.diasSeguidos': '🔥 ${n} days in a row',
     'lesson.licaoJovem': 'Youth Lesson',
+    'lesson.palavraChave': 'Key word of the week',
     'lesson.conteudoConstrucao': 'Content coming soon',
     'lesson.conteudoConstrucaoTexto': "This lesson hasn't been extracted and paraphrased from the PDF yet. Ask me to build Lesson ${n} and it will show up here with all the days, verses, and quiz — just like Lessons 3 and 4.",
     'lesson.comeceUmDia': 'Start a day below',
@@ -6916,6 +6974,7 @@ const UI_STRINGS = {
     'lesson.comecouHoje': '🔥 Empezó hoy',
     'lesson.diasSeguidos': '🔥 ${n} días seguidos',
     'lesson.licaoJovem': 'Lección Joven',
+    'lesson.palavraChave': 'Palabra clave de la semana',
     'lesson.conteudoConstrucao': 'Contenido en construcción',
     'lesson.conteudoConstrucaoTexto': 'Esta lección todavía no fue extraída y parafraseada del PDF. Pídeme que arme la Lección ${n} y va a aparecer aquí con todos los días, versículos y quiz — igual que las Lecciones 3 y 4.',
     'lesson.comeceUmDia': 'Empieza un día abajo',
