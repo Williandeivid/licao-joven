@@ -75,26 +75,43 @@
      isso pra empurrar o menu pra cima na hora certa. Dentro do app nativo
      (Capacitor) isso normalmente da' 0 e nao muda nada. */
   (function(){
-    function syncBottomGap(){
+    var espera = null;
+
+    function medirFolga(){
+      var vv = window.visualViewport;
+      if (!vv) return 0;
+      /* So a diferenca de altura interessa. O offsetTop entra em jogo quando a pagina
+         "estica" no fim do rolar (rubber band) e no zoom: durante o impulso ele muda a
+         cada quadro e era o que fazia o menu descolar da base ao subir rapido. */
+      var folga = Math.round(window.innerHeight - vv.height);
+      if (folga < 24) return 0;      /* barra de rolagem horizontal, nao a de endereco */
+      if (folga > 160) return 160;
+      return folga;
+    }
+
+    function aplicar(){
       try{
-        var vv = window.visualViewport;
-        var gap = 0;
-        if (vv) gap = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
-        /* Uma barra de rolagem horizontal tambem entra nessa conta (uns 15px) e fazia
-           o menu "flutuar", com pedaco da pagina aparecendo embaixo dele. So a barra de
-           endereco do navegador interessa aqui, e ela e' bem mais alta que isso. */
-        if (gap < 24) gap = 0;
-        if (gap > 160) gap = 160;
-        document.documentElement.style.setProperty('--vv-bottom-gap', gap + 'px');
+        document.documentElement.style.setProperty('--vv-bottom-gap', medirFolga() + 'px');
       }catch(e){}
     }
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', syncBottomGap);
-      window.visualViewport.addEventListener('scroll', syncBottomGap);
+
+    /* A barra de endereco do navegador entra e sai no meio do gesto, e os valores so
+       ficam confiaveis quando o rolar para. Por isso nada e' aplicado durante o
+       movimento: espera-se o viewport sossegar. Sem isso, subir rapido deixava o menu
+       flutuando no meio da tela por uns instantes. */
+    function aplicarQuandoParar(){
+      clearTimeout(espera);
+      espera = setTimeout(aplicar, 220);
     }
-    window.addEventListener('load', syncBottomGap);
-    window.addEventListener('orientationchange', syncBottomGap);
-    syncBottomGap();
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', aplicarQuandoParar);
+      window.visualViewport.addEventListener('scroll', aplicarQuandoParar);
+    }
+    window.addEventListener('scroll', aplicarQuandoParar, { passive:true });
+    window.addEventListener('load', aplicar);
+    window.addEventListener('orientationchange', aplicarQuandoParar);
+    aplicar();
   })();
 </script>
 <script type="importmap">
@@ -1743,7 +1760,8 @@
     background:rgba(255,255,255,0.92); backdrop-filter:blur(14px);
     border-top:2px solid var(--border); display:flex; justify-content:center; gap:6px;
     padding:10px 16px calc(10px + var(--safe-bottom));
-    transition:transform .28s ease;
+    /* a folga so muda quando o rolar para, e desliza em vez de pular */
+    transition:transform .28s ease, bottom .2s ease;
   }
   [data-theme="dark"] .bottomnav{ background:rgba(42,42,62,0.98); border-top-color:#332d54; }
   [data-theme="rainbow-vibrant"] .bottomnav,
