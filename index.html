@@ -967,6 +967,21 @@
   .acao-curtir.curtido svg{fill:var(--heart); stroke:var(--heart);}
   .acao-curtir.pulsa svg{animation:coracaoPulsa .45s ease;}
   @keyframes coracaoPulsa{0%{transform:scale(1)}30%{transform:scale(1.3)}60%{transform:scale(.92)}100%{transform:scale(1)}}
+  /* A lampada mora encostada na ponta direita da linha, separada do trio
+     curtir/comentar/compartilhar pelo vazio: ela nao e' uma acao social do dia,
+     e' um extra. Mesmo traco monocromatico dos outros icones, sem cor propria. */
+  .acao-curiosidade{margin-left:auto;}
+  .acao-curiosidade[aria-expanded="true"]{color:var(--violet); background:var(--tint-violet);}
+  .curiosidade-cartao{
+    background:var(--tint-violet); border-radius:14px; padding:12px 14px; margin-top:6px;
+    font-size:13.5px; line-height:1.5; color:var(--ink); animation:curioAbre .2s ease-out;
+  }
+  .curiosidade-cartao[hidden]{display:none;}
+  @keyframes curioAbre{from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;}}
+  .curiosidade-fonte{
+    display:block; margin-top:7px; font-family:'JetBrains Mono', monospace; font-size:10.5px;
+    letter-spacing:0.04em; color:var(--ink-soft);
+  }
   .acoes-legenda{font-size:13.5px; color:var(--ink); line-height:1.4;}
   .acoes-legenda:empty{display:none;}
   /* Linha que só os administradores enxergam */
@@ -2207,6 +2222,42 @@ function seededRandom(seed){
   t ^= t + Math.imul(t ^ t >>> 7, t | 61);
   return ((t ^ t >>> 14) >>> 0) / 4294967296;
 }
+/* ===== CURIOSIDADE DO DIA =====
+   Conteudo de exemplo, so para ver o peso na tela: a lista de verdade vem depois,
+   num arquivo proprio e nos 3 idiomas. Criterio do conteudo: fonte de fora da
+   igreja, fato verificavel, nada doutrinario, no maximo 3 linhas.
+   A escolha e' pelo dia (mesma semente do quiz), entao nao muda a cada recarga. */
+const CURIOSIDADES = [
+  { etiqueta:'manuscritos',
+    texto:'O rolo de Isaías achado no mar Morto tem quase 2.000 anos e traz o livro quase inteiro. Dá para vê-lo hoje, exposto no Santuário do Livro, em Jerusalém.',
+    fonte:'Israel Museum, Jerusalém' },
+  { etiqueta:'arqueologia',
+    texto:'Em 1993 apareceu em Tel Dan um pedaço de pedra do século 9 a.C. com a expressão "casa de Davi" — a menção mais antiga ao rei fora da Bíblia.',
+    fonte:'Israel Antiquities Authority' },
+  { etiqueta:'engenharia',
+    texto:'O túnel de Ezequias tem 533 metros cavados na rocha por duas equipes que começaram em pontas opostas. Elas se encontraram no meio, e a água corre ali até hoje.',
+    fonte:'Biblical Archaeology Society' }
+];
+
+function curiosidadeDoDia(lessonId, dayId){
+  if(!CURIOSIDADES.length) return null;
+  return CURIOSIDADES[Math.abs(hashStr(lessonId + '-' + dayId)) % CURIOSIDADES.length];
+}
+
+function toggleCuriosidade(lessonId, dayId){
+  const cartao = document.getElementById(`curio-${lessonId}-${dayId}`);
+  const botao = cartao && cartao.parentElement.querySelector('.acao-curiosidade');
+  if(!cartao || !botao) return;
+  const abrindo = cartao.hidden;
+  if(abrindo){
+    const c = curiosidadeDoDia(lessonId, dayId);
+    if(!c) return;
+    cartao.innerHTML = `${escaparHtml(c.texto)}<span class="curiosidade-fonte">${t('curiosidade.fonte')}: ${escaparHtml(c.fonte)}</span>`;
+  }
+  cartao.hidden = !abrindo;
+  botao.setAttribute('aria-expanded', abrindo ? 'true' : 'false');
+}
+
 function hashStr(s){
   let h = 0;
   for(let i=0;i<s.length;i++){ h = (Math.imul(31,h) + s.charCodeAt(i)) | 0; }
@@ -2374,7 +2425,11 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
       <button class="acao acao-compartilhar" onclick="compartilharDia(${lessonId}, '${day.id}')" title="${t('acoes.compartilhar')}" data-i18n-title="acoes.compartilhar">
         <svg viewBox="0 0 24 24"><path d="M22 3L9.2 10.1M22 3l-6.5 18-3.3-8.6L3 9.4 22 3z"/></svg>
       </button>
+      <button class="acao acao-curiosidade" onclick="toggleCuriosidade(${lessonId}, '${day.id}')" aria-expanded="false" aria-controls="curio-${lessonId}-${day.id}" title="${t('curiosidade.botao')}" data-i18n-title="curiosidade.botao">
+        <svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.5.4.8.9.9 1.5l.1.7h5.2l.1-.7c.1-.6.4-1.1.9-1.5A6 6 0 0 0 12 3z"/></svg>
+      </button>
     </div>
+    <div class="curiosidade-cartao" id="curio-${lessonId}-${day.id}" hidden></div>
     <div class="acoes-legenda" id="curtir-leg-${lessonId}-${day.id}"></div>
     <div class="acoes-admin" id="stat-${lessonId}-${day.id}" hidden></div>
     <button class="acoes-ver-cmt" id="cmt-ver-${lessonId}-${day.id}" onclick="toggleComentarios(${lessonId}, '${day.id}')" hidden></button>
@@ -6318,6 +6373,8 @@ const UI_STRINGS = {
     'acoes.curtirMinusculo': 'curtir',
     'acoes.curtirComentario': 'Curtir comentário',
     'acoes.compartilhar': 'Compartilhar',
+    'curiosidade.botao': 'Curiosidade do dia',
+    'curiosidade.fonte': 'fonte',
     'acoes.licao': 'Lição',
     'acoes.estudeNoApp': 'Estude esse dia no app Lição Jovem:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · ESCOLA SABATINA',
@@ -6750,6 +6807,8 @@ const UI_STRINGS = {
     'acoes.curtirMinusculo': 'like',
     'acoes.curtirComentario': 'Like comment',
     'acoes.compartilhar': 'Share',
+    'curiosidade.botao': 'Fact of the day',
+    'curiosidade.fonte': 'source',
     'acoes.licao': 'Lesson',
     'acoes.estudeNoApp': 'Study this day in the Lição Jovem app:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · SABBATH SCHOOL',
@@ -7182,6 +7241,8 @@ const UI_STRINGS = {
     'acoes.curtirMinusculo': 'dar me gusta',
     'acoes.curtirComentario': 'Me gusta el comentario',
     'acoes.compartilhar': 'Compartir',
+    'curiosidade.botao': 'Curiosidad del día',
+    'curiosidade.fonte': 'fuente',
     'acoes.licao': 'Lección',
     'acoes.estudeNoApp': 'Estudia este día en la app Lição Jovem:',
     'acoes.rodapeImagem': 'LIÇÃO JOVEM · ESCUELA SABÁTICA',
