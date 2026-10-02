@@ -707,7 +707,9 @@
      Aparece uma vez por dia, na primeira abertura, e so para quem ja tem 2 dias ou
      mais de sequencia. Toque na faixa fecha na hora. */
   .abertura{
-    position:fixed; top:0; left:0; right:0; z-index:200; cursor:pointer;
+    /* pointer-events so na faixa: o resto (inclusive a parte transparente do
+       degrade) deixa o toque passar para o botao fixo do canto superior. */
+    position:fixed; top:0; left:0; right:0; z-index:200; pointer-events:none;
     padding-top:var(--safe-top);
     background:linear-gradient(180deg, #230f24 0%, #1a0d1e 72%, rgba(20,13,24,0) 100%);
     box-shadow:0 18px 40px -22px rgba(255,46,99,0.75);
@@ -722,7 +724,9 @@
   }
   #abertura-faisca{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
 
-  .ab-faixa{ position:relative; z-index:2; padding:10px 14px 18px; display:grid; gap:8px; }
+  .ab-faixa{ position:relative; z-index:2; padding:10px 14px 18px; display:grid; gap:8px;
+    pointer-events:auto; cursor:pointer; overflow:hidden; }
+  .abertura.saindo{ pointer-events:none; }
 
   .ab-barras{ display:flex; gap:10px; align-items:flex-start; }
   .ab-lado{ flex:1 1 0; min-width:0; display:grid; gap:4px; }
@@ -738,23 +742,31 @@
     font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:0.14em;
     text-transform:uppercase; color:#c7a9bd;
   }
-  .ab-energia{
-    display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:2px;
-    background:rgba(0,0,0,0.5); padding:2px; border-radius:5px; border:1px solid rgba(255,255,255,0.14);
+  /* Barras de grafico em vez de blocos iguais: alturas crescendo da esquerda para
+     a direita e a mesma inclinacao do numero, para o conjunto ler como "placar
+     subindo" e nao como medidor de bateria. */
+  .ab-energia{ display:flex; align-items:flex-end; gap:3px; height:24px; padding:0 2px; transform:skewX(-9deg); }
+  .ab-bloco{
+    flex:1 1 0; min-width:0; border-radius:2px 2px 0 0;
+    background:rgba(255,255,255,0.1); box-shadow:inset 0 -1px 0 rgba(255,255,255,0.14);
   }
-  .ab-bloco{ height:10px; border-radius:2px; background:rgba(255,255,255,0.08); }
+  .ab-bloco:nth-child(1){height:9px}  .ab-bloco:nth-child(2){height:11px}
+  .ab-bloco:nth-child(3){height:13px} .ab-bloco:nth-child(4){height:16px}
+  .ab-bloco:nth-child(5){height:18px} .ab-bloco:nth-child(6){height:21px}
+  .ab-bloco:nth-child(7){height:24px}
   .ab-bloco.on{
     background:linear-gradient(180deg,#ffc857,#ff6a1f);
-    box-shadow:0 0 8px rgba(255,106,31,0.7); animation:ab-acende .22s ease-out both;
+    box-shadow:0 0 8px rgba(255,106,31,0.7); transform-origin:bottom;
+    animation:ab-acende .22s cubic-bezier(.2,1.4,.4,1) both;
   }
   .ab-lado.dir .ab-bloco.on{ background:linear-gradient(180deg,#ffd9f0,#ff2e63); box-shadow:0 0 8px rgba(255,46,99,0.7); }
-  @keyframes ab-acende{ from{transform:scaleY(0.2); opacity:0;} to{transform:none; opacity:1;} }
+  @keyframes ab-acende{ from{transform:scaleY(0); opacity:0;} to{transform:scaleY(1); opacity:1;} }
 
   /* linha de baixo da faixa: numero + rotulo de um lado, grito do outro */
   .ab-centro{ display:flex; align-items:baseline; justify-content:center; gap:8px; min-height:32px; padding-bottom:2px; }
   .ab-numero{
-    font-family:'Unbounded', sans-serif; font-weight:900; font-size:30px; line-height:1;
-    color:#fff; transform:skewX(-9deg); font-variant-numeric:tabular-nums; flex:0 0 auto;
+    font-family:'Unbounded', sans-serif; font-weight:900; font-size:clamp(22px, 7vw, 30px);
+    line-height:1; color:#fff; transform:skewX(-9deg); font-variant-numeric:tabular-nums; flex:0 0 auto;
     text-shadow:0 0 16px rgba(255,106,31,0.9), 2px 2px 0 #ff2e63, 4px 4px 0 rgba(0,0,0,0.4);
     animation:ab-soco .5s cubic-bezier(.2,1.5,.4,1) .3s both;
   }
@@ -771,13 +783,15 @@
   }
   .ab-recorde{
     font-family:'JetBrains Mono', monospace; font-size:9.5px; letter-spacing:0.1em; color:#c7a9bd;
+    min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
     animation:ab-sobe .4s ease-out .66s both;
   }
   @keyframes ab-sobe{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  .ab-grito[hidden]{ display:none; }
   .ab-grito{
-    font-family:'Unbounded', sans-serif; font-weight:900; font-size:13.5px; color:#ffc857;
+    font-family:'Unbounded', sans-serif; font-weight:900; font-size:clamp(11px, 3.6vw, 13.5px); color:#ffc857;
     white-space:nowrap; transform:rotate(-4deg); margin-left:auto; flex:0 0 auto; text-shadow:2px 2px 0 #ff2e63, 0 0 18px rgba(255,46,99,0.8);
-    animation:ab-grita .9s ease-out 1.05s both;
+    animation:ab-grita .7s ease-out .8s both;
   }
   @keyframes ab-grita{
     0%{ opacity:0; transform:rotate(-4deg) scale(.3); }
@@ -786,9 +800,18 @@
     100%{ opacity:1; transform:rotate(-4deg) scale(1); }
   }
 
+  .ab-pular{
+    flex:0 0 auto; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22);
+    color:#e8d9d2; font-family:'JetBrains Mono', monospace; font-size:9.5px;
+    letter-spacing:0.12em; text-transform:uppercase; padding:5px 10px; border-radius:100px;
+    cursor:pointer; animation:ab-sobe .4s ease-out .7s both;
+  }
+  .ab-pular:hover{ background:rgba(255,255,255,0.2); }
+  .ab-pular:focus-visible{ outline:2px solid #ffc857; outline-offset:2px; }
+
   @media (prefers-reduced-motion: reduce){
     .abertura, .abertura.saindo, .ab-lado.esq, .ab-lado.dir, .ab-bloco.on,
-    .ab-numero, .ab-rotulo, .ab-recorde, .ab-grito{ animation:none; }
+    .ab-numero, .ab-rotulo, .ab-recorde, .ab-grito, .ab-pular{ animation:none; }
   }
 
   .back-btn{
@@ -3189,6 +3212,10 @@ async function marcarConcluido(btn){
   // Sem isto, marcar um dia passado salvava certo mas a régua de dias e o
   // calendário continuavam mostrando o dia como não estudado até recarregar.
   atualizarMarcacoesDoDia(lessonId, dayId);
+
+  // A celebracao vem aqui, e nao na abertura do app: e' agora que o numero sobe
+  // de verdade e que o bloco da semana acende. Nao se espera o Firebase.
+  mostrarAberturaSequencia().catch(()=>{});
 
   // Historico privado do ranking: roda sempre, mesmo sem login e sem
   // opt-in (so grava local; se estiver logado, sobe sozinho no proximo sync).
@@ -6576,9 +6603,10 @@ const UI_STRINGS = {
     'abertura.diasSeguidos': 'dias seguidos',
     'abertura.diaSeguido': 'dia seguido',
     'abertura.semanaPerfeita': 'semana perfeita',
-    'abertura.grito': 'VALENDO!',
+    'abertura.grito': 'SEQUÊNCIA +1!',
     'abertura.gritoSemana': 'SEMANA PERFEITA!',
     'abertura.pular': 'pular',
+    'abertura.resumoA11y': '${n} dias seguidos. ${d} de 7 dias nesta semana.',
     'stats.minEssaSemana': 'min essa semana',
     'stats.legendaDiasBiblia': 'Dias de Bíblia',
     'stats.legendaDiasLicao': 'Dias de Lição',
@@ -7016,9 +7044,10 @@ const UI_STRINGS = {
     'abertura.diasSeguidos': 'days in a row',
     'abertura.diaSeguido': 'day in a row',
     'abertura.semanaPerfeita': 'perfect week',
-    'abertura.grito': "LET'S GO!",
+    'abertura.grito': 'STREAK +1!',
     'abertura.gritoSemana': 'PERFECT WEEK!',
     'abertura.pular': 'skip',
+    'abertura.resumoA11y': '${n} days in a row. ${d} of 7 days this week.',
     'stats.minEssaSemana': 'min this week',
     'stats.legendaDiasBiblia': 'Bible Days',
     'stats.legendaDiasLicao': 'Lesson Days',
@@ -7456,9 +7485,10 @@ const UI_STRINGS = {
     'abertura.diasSeguidos': 'días seguidos',
     'abertura.diaSeguido': 'día seguido',
     'abertura.semanaPerfeita': 'semana perfecta',
-    'abertura.grito': '¡VAMOS!',
+    'abertura.grito': '¡RACHA +1!',
     'abertura.gritoSemana': '¡SEMANA PERFECTA!',
     'abertura.pular': 'saltar',
+    'abertura.resumoA11y': '${n} días seguidos. ${d} de 7 días esta semana.',
     'stats.minEssaSemana': 'min esta semana',
     'stats.legendaDiasBiblia': 'Días de Biblia',
     'stats.legendaDiasLicao': 'Días de Lección',
@@ -11421,28 +11451,29 @@ window.addEventListener('load', async function(){
 
   // Se chegou por link compartilhado, vai direto para o dia.
   await abrirDiaDoLink();
-
-  // Abertura da sequencia: por ultimo, para nao atrasar nada do app.
-  try { await mostrarAberturaSequencia(); } catch(e){ /* nunca pode travar a abertura do app */ }
 });
 
 /* ===== ABERTURA DA SEQUENCIA =====
    Faixa no topo, estilo "comeco de luta": as duas barras entram pelos lados, o
    numero de dias chega batendo e o grito fecha. Regras:
-   - uma vez por dia, na primeira abertura do app;
-   - so para quem ja tem 2 dias ou mais de sequencia (com 1 nao ha o que celebrar);
-   - qualquer toque, tecla ou o botao pula na hora;
-   - quem desliga animacao no sistema ve a mesma faixa parada, por 1,6s. */
+   - aparece ao CONCLUIR o dia, que e' quando o numero sobe. Na abertura do app
+     ele ainda e' o de ontem (computeDailyStreakSync conta a partir de ontem
+     enquanto hoje nao tem nada), entao celebrar la seria celebrar o que ainda
+     nao aconteceu - e quem lembra da sequencia ao abrir ja e' o streak-toast;
+   - uma vez por dia, pela data local (dateKey), nao pela data UTC;
+   - so com 2 dias ou mais de sequencia (com 1 nao ha o que celebrar);
+   - o botao pular, qualquer toque na faixa ou qualquer tecla fecham na hora;
+   - a faixa nao captura toque fora dela: o botao do canto continua clicavel;
+   - quem desliga animacao no sistema ve a mesma faixa parada, por 1,2s. */
 let _aberturaFaiscas = [];
 
 function _aberturaJaFoiHoje(){
   try{
-    const hoje = new Date().toISOString().slice(0,10);
-    return localStorage.getItem('abertura-sequencia') === hoje;
+    return localStorage.getItem('abertura-sequencia') === dateKey(new Date());
   }catch(e){ return false; }
 }
 function _marcarAberturaDeHoje(){
-  try{ localStorage.setItem('abertura-sequencia', new Date().toISOString().slice(0,10)); }catch(e){}
+  try{ localStorage.setItem('abertura-sequencia', dateKey(new Date())); }catch(e){}
 }
 
 async function mostrarAberturaSequencia(){
@@ -11451,13 +11482,20 @@ async function mostrarAberturaSequencia(){
   if (!el) return;
 
   const seq = await computeDailyStreak();
-  if (!seq || seq < 2) { _marcarAberturaDeHoje(); return; }
+  /* Sem marcar o dia: quem concluiu com 1 dia de sequencia ainda pode ver a
+     faixa quando a sequencia chegar a 2. */
+  if (!seq || seq < 2) return;
 
   const progressMap = buildProgressMap();
   const hoje = new Date();
   const domingo = new Date(hoje); domingo.setDate(hoje.getDate() - hoje.getDay());
   const naSemana = computeDaysInRange(progressMap, domingo, hoje);
   const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Dia comum: placar seco e curto, sem fagulha e sem grito. O estouro fica para
+     os marcos - senao vira paisagem e para de significar alguma coisa. */
+  const MARCOS = [7, 14, 30, 50, 100, 150, 200, 300, 365];
+  const semanaCheia = naSemana >= 7;
+  const ehMarco = MARCOS.indexOf(seq) !== -1 || semanaCheia;
 
   // lado esquerdo: a pessoa; lado direito: a semana cheia (o "adversario")
   document.getElementById('ab-nome').textContent = primeiroNome() || t('abertura.voce');
@@ -11469,31 +11507,26 @@ async function mostrarAberturaSequencia(){
 
   document.getElementById('ab-numero').textContent = seq;
   document.getElementById('ab-rotulo').textContent = (seq === 1 ? t('abertura.diaSeguido') : t('abertura.diasSeguidos'));
-  document.getElementById('ab-recorde').textContent = naSemana >= 7 ? t('abertura.semanaPerfeita') : '';
-  document.getElementById('ab-grito').textContent = naSemana >= 7 ? t('abertura.gritoSemana') : t('abertura.grito');
+  document.getElementById('ab-recorde').textContent = semanaCheia ? t('abertura.semanaPerfeita') : '';
+  const grito = document.getElementById('ab-grito');
+  grito.textContent = semanaCheia ? t('abertura.gritoSemana') : t('abertura.grito');
+  grito.hidden = !ehMarco;
 
-  // As animacoes do CSS rodam uma vez por elemento: sem reiniciar, a segunda
-  // exibicao (teste pelo console, ou dois dias no mesmo aparelho) ficaria parada.
-  ['ab-numero','ab-rotulo','ab-recorde','ab-grito'].forEach(_aberturaReiniciar);
-  document.querySelectorAll('#abertura .ab-lado').forEach(_aberturaReiniciar);
+  document.getElementById('ab-pular').textContent = t('abertura.pular');
+  document.getElementById('ab-faixa').setAttribute('aria-label',
+    t('abertura.resumoA11y').replace('${n}', seq).replace('${d}', naSemana));
 
   el.hidden = false;
   _marcarAberturaDeHoje();
 
-  const fechar = () => _fecharAbertura(el);
+  const fechar = () => { document.removeEventListener('keydown', fechar); _fecharAbertura(el); };
   el.addEventListener('click', fechar, { once:true });
-  document.addEventListener('keydown', fechar, { once:true });
+  document.addEventListener('keydown', fechar);
 
-  if (!calmo) setTimeout(() => _aberturaFaiscar(), 380);
-  setTimeout(fechar, calmo ? 1600 : 3000);
-}
-
-function _aberturaReiniciar(alvo){
-  const el = typeof alvo === 'string' ? document.getElementById(alvo) : alvo;
-  if (!el) return;
-  el.style.animation = 'none';
-  void el.offsetWidth;
-  el.style.animation = '';
+  if (!calmo && ehMarco) setTimeout(() => _aberturaFaiscar(), 360);
+  /* 1,8s no marco; no dia comum a coreografia termina em ~1s e nao ha por que
+     segurar a faixa no topo depois disso. */
+  setTimeout(fechar, calmo ? 1000 : (ehMarco ? 1800 : 1200));
 }
 
 function _aberturaMontarBarra(id, cheios, calmo){
@@ -11544,8 +11577,11 @@ function _aberturaFaiscar(){
 function _fecharAbertura(el){
   if (!el || el.hidden || el.classList.contains('saindo')) return;
   _aberturaFaiscas = [];
+  /* Com animacao desligada a saida nao existe: esperar 360ms so faria o toque
+     parecer que nao respondeu. */
+  const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   el.classList.add('saindo');
-  setTimeout(() => { el.hidden = true; el.classList.remove('saindo'); }, 360);
+  setTimeout(() => { el.hidden = true; el.classList.remove('saindo'); }, calmo ? 0 : 360);
 }
 
 // Para testar sem esperar o dia seguinte: rodar verAbertura() no console.
@@ -11558,8 +11594,8 @@ function verAbertura(){
 <!-- ABERTURA DA SEQUENCIA -->
 <div id="abertura" class="abertura" hidden>
   <canvas id="abertura-faisca" aria-hidden="true"></canvas>
-  <div class="ab-faixa" aria-hidden="true">
-    <div class="ab-barras">
+  <div class="ab-faixa" id="ab-faixa" role="status">
+    <div class="ab-barras" aria-hidden="true">
       <div class="ab-lado esq">
         <div class="ab-nome" id="ab-nome">—</div>
         <div class="ab-energia" id="ab-energia-esq"></div>
@@ -11576,6 +11612,7 @@ function verAbertura(){
       <span class="ab-rotulo" id="ab-rotulo">—</span>
       <span class="ab-recorde" id="ab-recorde"></span>
       <span class="ab-grito" id="ab-grito">—</span>
+      <button class="ab-pular" id="ab-pular" type="button">—</button>
     </div>
   </div>
 </div>
