@@ -709,9 +709,6 @@
      tudo abreviado. Antes o periodo vinha por extenso e ocupava duas linhas. */
   .hero-meta{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; font-size:14px; letter-spacing:0.01em;}
   .hero-meta-sep{ opacity:0.5;}
-  .hero-chave{ display:inline-flex; align-items:center; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.22);
-    color:#fff; padding:3px 11px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-size:11px;
-    font-weight:700; letter-spacing:0.08em; text-transform:uppercase; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .keyword-seal{ display:inline-flex; align-items:center; gap:10px; position:relative; z-index:3; background:linear-gradient(90deg, var(--violet), var(--pink)); color:#fff; padding:9px 20px; border-radius:100px; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; box-shadow:0 8px 24px -8px rgba(255,93,143,0.6);}
   .keyword-seal b{color:#fff; font-size:13.5px; font-family:'Unbounded', sans-serif;}
   [data-theme="neutral"] .keyword-seal{ background:var(--violet); color:var(--on-violet); box-shadow:0 8px 24px -8px rgba(108,76,224,0.4); }
@@ -2682,7 +2679,9 @@ async function renderLessonDetail(lessonId, fromList){
   // O selo sai vazio ate o progresso da nuvem chegar - senao ele aparecia
   // com o numero do aparelho e trocava na frente da pessoa segundos depois.
   if (currentUser) html += saudacaoHeroHTML();
-  html += `<div class="eyebrow">${t('lesson.licaoJovem')} ${numeroDaLicao(lessonId)}</div>
+  // A palavra-chave da semana entra no proprio selo "Licao Jovem N": ela estava
+  // como um terceiro item na linha de baixo e so somava coisa na tela.
+  html += `<div class="eyebrow">${t('lesson.licaoJovem')} ${numeroDaLicao(lessonId)}${content && content.keyword ? ' · ' + content.keyword : ''}</div>
     <h1 class="title">${content ? content.title : meta.title}</h1>`;
   if(content){
     const abbrevBible = abreviarRef(content.bibleref);
@@ -2691,7 +2690,6 @@ async function renderLessonDetail(lessonId, fromList){
       <span>${periodo}</span>
       <span class="hero-meta-sep">·</span>
       <span>${abbrevBible}</span>
-      ${content.keyword ? `<span class="hero-chave" title="${t('lesson.palavraChave')}">${content.keyword}</span>` : ''}
     </p>`;
   } else {
     html += `<p class="subtitle">${meta.dateLabel}</p>`;
