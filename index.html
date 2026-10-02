@@ -701,6 +701,96 @@
   [data-theme="neutral"] .keyword-seal b{ color:#fff; }
   [data-theme="rainbow-forest"] .keyword-seal{ background:var(--violet); color:var(--on-violet); box-shadow:0 8px 24px -8px rgba(95,201,109,0.4); }
   [data-theme="rainbow-forest"] .keyword-seal b{ color:#fff; }
+  /* ===== ABERTURA DA SEQUENCIA (faixa de HUD, estilo comeco de luta) =====
+     Mora so na faixa de cima: as duas barras entram pelos lados, o numero de dias
+     chega batendo e a faixa sobe de volta sozinha. O app continua visivel embaixo.
+     Aparece uma vez por dia, na primeira abertura, e so para quem ja tem 2 dias ou
+     mais de sequencia. Toque na faixa fecha na hora. */
+  .abertura{
+    position:fixed; top:0; left:0; right:0; z-index:200; cursor:pointer;
+    padding-top:var(--safe-top);
+    background:linear-gradient(180deg, #230f24 0%, #1a0d1e 72%, rgba(20,13,24,0) 100%);
+    box-shadow:0 18px 40px -22px rgba(255,46,99,0.75);
+    animation:ab-desce .42s cubic-bezier(.2,.9,.3,1.15) both;
+  }
+  @keyframes ab-desce{ from{ transform:translateY(-100%); } to{ transform:none; } }
+  .abertura.saindo{ animation:ab-sobe-fora .4s ease-in forwards; }
+  @keyframes ab-sobe-fora{ to{ transform:translateY(-110%); opacity:0; } }
+  .abertura::after{
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:0.16;
+    background:repeating-linear-gradient(180deg, rgba(0,0,0,0.6) 0 1px, transparent 1px 3px);
+  }
+  #abertura-faisca{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+
+  .ab-faixa{ position:relative; z-index:2; padding:10px 14px 18px; display:grid; gap:8px; }
+
+  .ab-barras{ display:flex; gap:10px; align-items:flex-start; }
+  .ab-lado{ flex:1 1 0; min-width:0; display:grid; gap:4px; }
+  .ab-lado.esq{ animation:ab-vem-esq .45s cubic-bezier(.2,.9,.3,1.2) both; }
+  .ab-lado.dir{ animation:ab-vem-dir .45s cubic-bezier(.2,.9,.3,1.2) both; text-align:right; }
+  @keyframes ab-vem-esq{ from{opacity:0; transform:translateX(-120%);} to{opacity:1; transform:none;} }
+  @keyframes ab-vem-dir{ from{opacity:0; transform:translateX(120%);} to{opacity:1; transform:none;} }
+  .ab-nome{
+    font-family:'Unbounded', sans-serif; font-weight:800; font-size:12px; color:#fff;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-shadow:0 2px 6px rgba(0,0,0,0.6);
+  }
+  .ab-tag{
+    font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:0.14em;
+    text-transform:uppercase; color:#c7a9bd;
+  }
+  .ab-energia{
+    display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:2px;
+    background:rgba(0,0,0,0.5); padding:2px; border-radius:5px; border:1px solid rgba(255,255,255,0.14);
+  }
+  .ab-bloco{ height:10px; border-radius:2px; background:rgba(255,255,255,0.08); }
+  .ab-bloco.on{
+    background:linear-gradient(180deg,#ffc857,#ff6a1f);
+    box-shadow:0 0 8px rgba(255,106,31,0.7); animation:ab-acende .22s ease-out both;
+  }
+  .ab-lado.dir .ab-bloco.on{ background:linear-gradient(180deg,#ffd9f0,#ff2e63); box-shadow:0 0 8px rgba(255,46,99,0.7); }
+  @keyframes ab-acende{ from{transform:scaleY(0.2); opacity:0;} to{transform:none; opacity:1;} }
+
+  /* linha de baixo da faixa: numero + rotulo de um lado, grito do outro */
+  .ab-centro{ display:flex; align-items:baseline; justify-content:center; gap:8px; min-height:32px; padding-bottom:2px; }
+  .ab-numero{
+    font-family:'Unbounded', sans-serif; font-weight:900; font-size:30px; line-height:1;
+    color:#fff; transform:skewX(-9deg); font-variant-numeric:tabular-nums; flex:0 0 auto;
+    text-shadow:0 0 16px rgba(255,106,31,0.9), 2px 2px 0 #ff2e63, 4px 4px 0 rgba(0,0,0,0.4);
+    animation:ab-soco .5s cubic-bezier(.2,1.5,.4,1) .3s both;
+  }
+  @keyframes ab-soco{
+    0%{ transform:skewX(-9deg) scale(2.4); opacity:0; }
+    55%{ transform:skewX(-9deg) scale(.92); opacity:1; }
+    100%{ transform:skewX(-9deg) scale(1); opacity:1; }
+  }
+  .ab-rotulo{
+    font-family:'JetBrains Mono', monospace; font-size:10.5px; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase; color:#ffc857; min-width:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    animation:ab-sobe .4s ease-out .56s both;
+  }
+  .ab-recorde{
+    font-family:'JetBrains Mono', monospace; font-size:9.5px; letter-spacing:0.1em; color:#c7a9bd;
+    animation:ab-sobe .4s ease-out .66s both;
+  }
+  @keyframes ab-sobe{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  .ab-grito{
+    font-family:'Unbounded', sans-serif; font-weight:900; font-size:13.5px; color:#ffc857;
+    white-space:nowrap; transform:rotate(-4deg); margin-left:auto; flex:0 0 auto; text-shadow:2px 2px 0 #ff2e63, 0 0 18px rgba(255,46,99,0.8);
+    animation:ab-grita .9s ease-out 1.05s both;
+  }
+  @keyframes ab-grita{
+    0%{ opacity:0; transform:rotate(-4deg) scale(.3); }
+    22%{ opacity:1; transform:rotate(-4deg) scale(1.18); }
+    78%{ opacity:1; transform:rotate(-4deg) scale(1); }
+    100%{ opacity:1; transform:rotate(-4deg) scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .abertura, .abertura.saindo, .ab-lado.esq, .ab-lado.dir, .ab-bloco.on,
+    .ab-numero, .ab-rotulo, .ab-recorde, .ab-grito{ animation:none; }
+  }
+
   .back-btn{
     position:relative; z-index:2; display:inline-flex; align-items:center; gap:6px;
     background:rgba(255,255,255,0.12); color:#fff; border:none; padding:8px 16px; border-radius:100px;
@@ -6481,6 +6571,14 @@ const UI_STRINGS = {
     'lesson.versaoDaLicao': 'Versão da Lição',
     'lesson.mindmapLicaoFallback': 'Lição',
     'stats.diasEssaSemana': 'dias essa semana',
+    'abertura.voce': 'Você',
+    'abertura.semanaCheia': 'Semana cheia',
+    'abertura.diasSeguidos': 'dias seguidos',
+    'abertura.diaSeguido': 'dia seguido',
+    'abertura.semanaPerfeita': 'semana perfeita',
+    'abertura.grito': 'VALENDO!',
+    'abertura.gritoSemana': 'SEMANA PERFEITA!',
+    'abertura.pular': 'pular',
     'stats.minEssaSemana': 'min essa semana',
     'stats.legendaDiasBiblia': 'Dias de Bíblia',
     'stats.legendaDiasLicao': 'Dias de Lição',
@@ -6913,6 +7011,14 @@ const UI_STRINGS = {
     'lesson.versaoDaLicao': 'Lesson Version',
     'lesson.mindmapLicaoFallback': 'Lesson',
     'stats.diasEssaSemana': 'days this week',
+    'abertura.voce': 'You',
+    'abertura.semanaCheia': 'Full week',
+    'abertura.diasSeguidos': 'days in a row',
+    'abertura.diaSeguido': 'day in a row',
+    'abertura.semanaPerfeita': 'perfect week',
+    'abertura.grito': "LET'S GO!",
+    'abertura.gritoSemana': 'PERFECT WEEK!',
+    'abertura.pular': 'skip',
     'stats.minEssaSemana': 'min this week',
     'stats.legendaDiasBiblia': 'Bible Days',
     'stats.legendaDiasLicao': 'Lesson Days',
@@ -7345,6 +7451,14 @@ const UI_STRINGS = {
     'lesson.versaoDaLicao': 'Versión de la Lección',
     'lesson.mindmapLicaoFallback': 'Lección',
     'stats.diasEssaSemana': 'días esta semana',
+    'abertura.voce': 'Tú',
+    'abertura.semanaCheia': 'Semana completa',
+    'abertura.diasSeguidos': 'días seguidos',
+    'abertura.diaSeguido': 'día seguido',
+    'abertura.semanaPerfeita': 'semana perfecta',
+    'abertura.grito': '¡VAMOS!',
+    'abertura.gritoSemana': '¡SEMANA PERFECTA!',
+    'abertura.pular': 'saltar',
     'stats.minEssaSemana': 'min esta semana',
     'stats.legendaDiasBiblia': 'Días de Biblia',
     'stats.legendaDiasLicao': 'Días de Lección',
@@ -11307,8 +11421,164 @@ window.addEventListener('load', async function(){
 
   // Se chegou por link compartilhado, vai direto para o dia.
   await abrirDiaDoLink();
+
+  // Abertura da sequencia: por ultimo, para nao atrasar nada do app.
+  try { await mostrarAberturaSequencia(); } catch(e){ /* nunca pode travar a abertura do app */ }
 });
+
+/* ===== ABERTURA DA SEQUENCIA =====
+   Faixa no topo, estilo "comeco de luta": as duas barras entram pelos lados, o
+   numero de dias chega batendo e o grito fecha. Regras:
+   - uma vez por dia, na primeira abertura do app;
+   - so para quem ja tem 2 dias ou mais de sequencia (com 1 nao ha o que celebrar);
+   - qualquer toque, tecla ou o botao pula na hora;
+   - quem desliga animacao no sistema ve a mesma faixa parada, por 1,6s. */
+let _aberturaFaiscas = [];
+
+function _aberturaJaFoiHoje(){
+  try{
+    const hoje = new Date().toISOString().slice(0,10);
+    return localStorage.getItem('abertura-sequencia') === hoje;
+  }catch(e){ return false; }
+}
+function _marcarAberturaDeHoje(){
+  try{ localStorage.setItem('abertura-sequencia', new Date().toISOString().slice(0,10)); }catch(e){}
+}
+
+async function mostrarAberturaSequencia(){
+  if (_aberturaJaFoiHoje()) return;
+  const el = document.getElementById('abertura');
+  if (!el) return;
+
+  const seq = await computeDailyStreak();
+  if (!seq || seq < 2) { _marcarAberturaDeHoje(); return; }
+
+  const progressMap = buildProgressMap();
+  const hoje = new Date();
+  const domingo = new Date(hoje); domingo.setDate(hoje.getDate() - hoje.getDay());
+  const naSemana = computeDaysInRange(progressMap, domingo, hoje);
+  const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // lado esquerdo: a pessoa; lado direito: a semana cheia (o "adversario")
+  document.getElementById('ab-nome').textContent = primeiroNome() || t('abertura.voce');
+  document.getElementById('ab-tag-esq').textContent = naSemana + '/7';
+  document.getElementById('ab-meta-nome').textContent = t('abertura.semanaCheia');
+  document.getElementById('ab-tag-dir').textContent = '7/7';
+  _aberturaMontarBarra('ab-energia-esq', naSemana, calmo);
+  _aberturaMontarBarra('ab-energia-dir', 7, calmo);
+
+  document.getElementById('ab-numero').textContent = seq;
+  document.getElementById('ab-rotulo').textContent = (seq === 1 ? t('abertura.diaSeguido') : t('abertura.diasSeguidos'));
+  document.getElementById('ab-recorde').textContent = naSemana >= 7 ? t('abertura.semanaPerfeita') : '';
+  document.getElementById('ab-grito').textContent = naSemana >= 7 ? t('abertura.gritoSemana') : t('abertura.grito');
+
+  // As animacoes do CSS rodam uma vez por elemento: sem reiniciar, a segunda
+  // exibicao (teste pelo console, ou dois dias no mesmo aparelho) ficaria parada.
+  ['ab-numero','ab-rotulo','ab-recorde','ab-grito'].forEach(_aberturaReiniciar);
+  document.querySelectorAll('#abertura .ab-lado').forEach(_aberturaReiniciar);
+
+  el.hidden = false;
+  _marcarAberturaDeHoje();
+
+  const fechar = () => _fecharAbertura(el);
+  el.addEventListener('click', fechar, { once:true });
+  document.addEventListener('keydown', fechar, { once:true });
+
+  if (!calmo) setTimeout(() => _aberturaFaiscar(), 380);
+  setTimeout(fechar, calmo ? 1600 : 3000);
+}
+
+function _aberturaReiniciar(alvo){
+  const el = typeof alvo === 'string' ? document.getElementById(alvo) : alvo;
+  if (!el) return;
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = '';
+}
+
+function _aberturaMontarBarra(id, cheios, calmo){
+  const barra = document.getElementById(id);
+  if (!barra) return;
+  barra.innerHTML = '';
+  for (let i = 0; i < 7; i++){
+    const b = document.createElement('div');
+    b.className = 'ab-bloco' + (i < cheios ? ' on' : '');
+    if (i < cheios && !calmo) b.style.animationDelay = (0.25 + i * 0.05) + 's';
+    barra.appendChild(b);
+  }
+}
+
+function _aberturaFaiscar(){
+  const canvas = document.getElementById('abertura-faisca');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const r = canvas.getBoundingClientRect();
+  canvas.width = r.width * dpr; canvas.height = r.height * dpr;
+  const cx = canvas.width / 2, cy = canvas.height * 0.72;
+  _aberturaFaiscas = [];
+  for (let i = 0; i < 34; i++){
+    const ang = Math.random() * Math.PI * 2;
+    const vel = (3 + Math.random() * 8) * dpr;
+    _aberturaFaiscas.push({
+      x: cx, y: cy, vx: Math.cos(ang) * vel, vy: Math.sin(ang) * vel - 2 * dpr,
+      vida: 1, tam: (1.5 + Math.random() * 3) * dpr,
+      cor: ['#ffc857', '#ff6a1f', '#ff2e63'][i % 3]
+    });
+  }
+  (function desenhar(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = _aberturaFaiscas.length - 1; i >= 0; i--){
+      const p = _aberturaFaiscas[i];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.4 * dpr; p.vida -= 0.022;
+      if (p.vida <= 0){ _aberturaFaiscas.splice(i, 1); continue; }
+      ctx.globalAlpha = Math.max(0, p.vida);
+      ctx.fillStyle = p.cor;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.tam, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (_aberturaFaiscas.length) requestAnimationFrame(desenhar);
+  })();
+}
+
+function _fecharAbertura(el){
+  if (!el || el.hidden || el.classList.contains('saindo')) return;
+  _aberturaFaiscas = [];
+  el.classList.add('saindo');
+  setTimeout(() => { el.hidden = true; el.classList.remove('saindo'); }, 360);
+}
+
+// Para testar sem esperar o dia seguinte: rodar verAbertura() no console.
+function verAbertura(){
+  try{ localStorage.removeItem('abertura-sequencia'); }catch(e){}
+  return mostrarAberturaSequencia();
+}
 </script>
+
+<!-- ABERTURA DA SEQUENCIA -->
+<div id="abertura" class="abertura" hidden>
+  <canvas id="abertura-faisca" aria-hidden="true"></canvas>
+  <div class="ab-faixa" aria-hidden="true">
+    <div class="ab-barras">
+      <div class="ab-lado esq">
+        <div class="ab-nome" id="ab-nome">—</div>
+        <div class="ab-energia" id="ab-energia-esq"></div>
+        <div class="ab-tag" id="ab-tag-esq">—</div>
+      </div>
+      <div class="ab-lado dir">
+        <div class="ab-nome" id="ab-meta-nome">—</div>
+        <div class="ab-energia" id="ab-energia-dir"></div>
+        <div class="ab-tag" id="ab-tag-dir">7/7</div>
+      </div>
+    </div>
+    <div class="ab-centro">
+      <span class="ab-numero" id="ab-numero">0</span>
+      <span class="ab-rotulo" id="ab-rotulo">—</span>
+      <span class="ab-recorde" id="ab-recorde"></span>
+      <span class="ab-grito" id="ab-grito">—</span>
+    </div>
+  </div>
+</div>
 
 <!-- VERSION SELECTOR MODAL -->
 <div id="version-modal" class="version-modal">
