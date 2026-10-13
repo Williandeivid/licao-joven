@@ -1280,6 +1280,7 @@
   .opt[disabled]{cursor:default;}
   .reveal-btn{ font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; background:var(--void); color:var(--lime); border:none; padding:11px 20px; border-radius:100px; cursor:pointer; margin-top:8px;}
   .reveal-btn:hover{background:var(--void-2);}
+  .reveal-btn[hidden]{display:none;}
   .gabarito{display:none; margin-top:16px; background:var(--void); color:#fff; padding:14px 18px; border-radius:14px; font-family:'JetBrains Mono', monospace; font-size:12.5px; line-height:1.9;}
   .gabarito.show{display:block;}
   .quiz-result{ display:none; margin:20px 0; padding:18px 22px; border-radius:18px; background:linear-gradient(120deg, var(--violet), var(--pink)); color:#fff; font-family:'JetBrains Mono', monospace; font-size:13.5px; font-weight:700; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; box-shadow:0 14px 28px -14px rgba(255,93,143,0.5);}
@@ -2510,7 +2511,7 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
       </div>`;
     });
     html += `<div class="quiz-result ${savedQuiz?'show':''}"><span>${t('lesson.voceLevou')}<b class="big" data-time-final>${savedQuiz?formatTime(savedQuiz.time):'--'}</b></span><span>${t('lesson.acertos')}<b class="big" data-score-final>${savedQuiz?savedQuiz.correct+'/10 ('+Math.round(savedQuiz.correct/10*100)+'%)':'--/10'}</b></span></div>
-    <button class="reveal-btn" onclick="toggleGabarito(this)">${t('lesson.verGabaritoCompleto')}</button>
+    <button class="reveal-btn" onclick="toggleGabarito(this)" ${savedQuiz ? '' : 'hidden'}>${t('lesson.verGabaritoCompleto')}</button>
     <div class="gabarito">${newAnswers.map((a,i)=>(i+1)+'-'+a).join(' · ')}</div>
     </div>`;
   }
@@ -2520,7 +2521,8 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
     day.tf.items.forEach((t,i)=>{
       html += `<div class="tf-item" data-q="${i+1}"><span>${i+1}. ${t}</span><div class="tf-btns"><button data-v="V">V</button><button data-v="F">F</button></div></div>`;
     });
-    html += `<button class="reveal-btn" onclick="toggleGabarito(this)">${t('lesson.verGabarito')}</button>
+    const tfRespondido = progress.tf && progress.tf[day.id];
+    html += `<button class="reveal-btn" onclick="toggleGabarito(this)" ${tfRespondido ? '' : 'hidden'}>${t('lesson.verGabarito')}</button>
     <div class="gabarito">${day.tf.answers.map((a,i)=>(i+1)+'-'+a).join(' · ')}</div></div>`;
   }
 
@@ -3084,8 +3086,13 @@ function toggleVerse(el){
 }
 function toggleGabarito(btn){
   const g = btn.nextElementSibling;
+  const abrindo = !g.classList.contains('show');
   g.classList.toggle('show');
-  btn.textContent = g.classList.contains('show') ? 'Ocultar gabarito' : btn.textContent.replace('Ocultar','Ver');
+  // O rotulo estava fixo em portugues e trocava por substituicao de texto, o
+  // que quebrava nos outros idiomas. Agora guarda o rotulo original no proprio
+  // botao e alterna entre as duas chaves.
+  if (!btn.dataset.rotulo) btn.dataset.rotulo = btn.textContent.trim();
+  btn.textContent = abrindo ? t('lesson.ocultarGabarito') : btn.dataset.rotulo;
 }
 
 // Estima quanto tempo leva pra ler o conteúdo de um dia (texto da lição + referências
@@ -3338,6 +3345,8 @@ function bindDayInteractions(lessonId, content, progress){
             resultBox.querySelector('[data-score-final]').textContent = localState.correct+'/10 ('+pct+'%)';
             resultBox.classList.add('show');
             localState.done = true;
+            const verGab = quizEl.querySelector('.reveal-btn');
+            if (verGab) verGab.hidden = false;
 
             const p = progressCache[lessonId] || {days:{}, quiz:{}};
             if(!p.quiz) p.quiz = {};
@@ -3405,6 +3414,8 @@ function bindDayInteractions(lessonId, content, progress){
           // foram respondidas - mesmo padrao do quiz de multipla escolha.
           if(tfState.answered === tfItems.length){
             tfState.done = true;
+            const verGabTf = tfEl.querySelector('.reveal-btn');
+            if (verGabTf) verGabTf.hidden = false;
             const elapsed = Date.now() - tfState.startTime;
 
             const p = progressCache[lessonId] || {days:{}, quiz:{}};
@@ -6206,6 +6217,7 @@ const UI_STRINGS = {
     'lesson.verGabaritoCompleto': 'Ver gabarito completo',
     'lesson.verdadeiroOuFalso': 'Verdadeiro ou Falso',
     'lesson.verGabarito': 'Ver gabarito',
+    'lesson.ocultarGabarito': 'Ocultar gabarito',
     'lesson.voltarLista': '← Voltar para a lista',
     'lesson.comecouHoje': '🔥 Começou hoje',
     'lesson.diasSeguidos': '🔥 ${n} dias seguidos',
@@ -6640,6 +6652,7 @@ const UI_STRINGS = {
     'lesson.verGabaritoCompleto': 'See full answer key',
     'lesson.verdadeiroOuFalso': 'True or False',
     'lesson.verGabarito': 'See answer key',
+    'lesson.ocultarGabarito': 'Hide answer key',
     'lesson.voltarLista': '← Back to the list',
     'lesson.comecouHoje': '🔥 Started today',
     'lesson.diasSeguidos': '🔥 ${n} days in a row',
@@ -7074,6 +7087,7 @@ const UI_STRINGS = {
     'lesson.verGabaritoCompleto': 'Ver solucionario completo',
     'lesson.verdadeiroOuFalso': 'Verdadero o Falso',
     'lesson.verGabarito': 'Ver solucionario',
+    'lesson.ocultarGabarito': 'Ocultar solucionario',
     'lesson.voltarLista': '← Volver a la lista',
     'lesson.comecouHoje': '🔥 Empezó hoy',
     'lesson.diasSeguidos': '🔥 ${n} días seguidos',
