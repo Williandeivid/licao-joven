@@ -6472,6 +6472,7 @@ const UI_STRINGS = {
     'admin.planoSub': 'Quantas pessoas estão lendo e em que ponto',
     'admin.planoResumo': '${pessoas} pessoa(s) lendo · mais usado: ${plano} (${quantos}) · média de ${media} capítulo(s)',
     'admin.planoVazio': 'Ninguém começou um plano ainda.',
+    'admin.diaEmAndamento': '(hoje ainda está correndo)',
     'admin.quemEstaLendo': 'Quem está lendo',
     'admin.pessoa': 'Pessoa',
     'admin.dias': 'Dias',
@@ -6906,6 +6907,7 @@ const UI_STRINGS = {
     'admin.planoSub': 'How many people are reading and how far along',
     'admin.planoResumo': '${pessoas} person(s) reading · most used: ${plano} (${quantos}) · ${media} chapter(s) on average',
     'admin.planoVazio': 'No one has started a plan yet.',
+    'admin.diaEmAndamento': '(today is still running)',
     'admin.quemEstaLendo': 'Who is reading',
     'admin.pessoa': 'Person',
     'admin.dias': 'Days',
@@ -7340,6 +7342,7 @@ const UI_STRINGS = {
     'admin.planoSub': 'Cuántas personas están leyendo y en qué punto',
     'admin.planoResumo': '${pessoas} persona(s) leyendo · más usado: ${plano} (${quantos}) · promedio de ${media} capítulo(s)',
     'admin.planoVazio': 'Nadie ha empezado un plan todavía.',
+    'admin.diaEmAndamento': '(hoy todavía está corriendo)',
     'admin.quemEstaLendo': 'Quién está leyendo',
     'admin.pessoa': 'Persona',
     'admin.dias': 'Días',
@@ -9347,14 +9350,31 @@ async function carregarAcompanhamentoAdmin(lessonId){
   carregarPlanoAdmin();
 }
 
-// Onde a turma para no meio da semana: do dia mais cheio até o último dia.
+// Dias da licao cuja data ja chegou. Sem isto, no meio da semana o painel
+// contava sexta e sabado - que ainda nem aconteceram - como se fossem
+// desistencia, e mostrava "0 no ultimo dia (0%)" toda quinta-feira.
+function diasJaChegaram(licao, dias){
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const passados = dias.filter(d => dayCalendarDate(licao, d.id) <= hoje);
+  return passados.length ? passados : dias;   // licao que ainda nem comecou
+}
+
+function ehDiaDeHoje(licao, dia){
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  return dayCalendarDate(licao, dia.id).getTime() === hoje.getTime();
+}
+
+// Onde a turma para no meio da semana: do dia mais cheio até o último dia que
+// ja chegou.
 function funilDaSemana(licao, dias){
-  const porDia = dias.map(d => Object.values((statsLicao[licao] || {})[d.id] || {}).filter(p => p && p.c).length);
+  const jaForam = diasJaChegaram(licao, dias);
+  const porDia = jaForam.map(d => Object.values((statsLicao[licao] || {})[d.id] || {}).filter(p => p && p.c).length);
   const maior = Math.max(...porDia, 0);
   if (!maior) return '';
   const ultimo = porDia[porDia.length - 1];
   const pct = Math.round(ultimo / maior * 100);
-  return `<p class="admin-total">${t('admin.funil').replace('${inicio}', maior).replace('${fim}', ultimo).replace('${pct}', pct)}</p>`;
+  const correndo = ehDiaDeHoje(licao, jaForam[jaForam.length - 1]) ? ' ' + t('admin.diaEmAndamento') : '';
+  return `<p class="admin-total">${t('admin.funil').replace('${inicio}', maior).replace('${fim}', ultimo).replace('${pct}', pct)}${correndo}</p>`;
 }
 
 // Quem está lendo, um por linha: primeiro nome, dias concluídos e média do
@@ -9362,6 +9382,9 @@ function funilDaSemana(licao, dias){
 // admin vê, e só o primeiro nome (o mesmo que já aparece no ranking).
 function listaDeQuemEstaLendo(licao, dias){
   const gente = {};
+  // So os dias que ja chegaram: dividir por 7 numa quinta-feira fazia quem nao
+  // faltou um dia sequer aparecer como "5/7", parecendo 71% de presenca.
+  dias = diasJaChegaram(licao, dias);
   dias.forEach(d => {
     Object.entries((statsLicao[licao] || {})[d.id] || {}).forEach(([uid, p]) => {
       if (!p) return;
