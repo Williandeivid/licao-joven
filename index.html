@@ -9886,7 +9886,7 @@ async function gerarImagemStories(lessonId, dayId){
   ctx.fillText(t('acoes.rodapeImagem'), margem, 1600);
   ctx.fillStyle = 'rgba(255,255,255,.7)';
   ctx.font = '500 30px "Plus Jakarta Sans", sans-serif';
-  ctx.fillText(location.host, margem, 1648);
+  ctx.fillText(new URL(enderecoPublico()).host, margem, 1648);
 
   // JPEG: ~1/6 do tamanho do PNG, e o stories aceita igual.
   return new Promise(res => cv.toBlob(res, 'image/jpeg', 0.92));
@@ -11375,12 +11375,22 @@ function autoLoadOfficialContent(lessonId, dayId){
   setTimeout(() => loadOfficialContent(lessonId, dayId), 100);
 }
 
-// Link que abre o app direto na lição e no dia. Montado a partir do endereço
-// em que o app está rodando: funciona no pages.dev hoje e num domínio próprio
-// depois, sem ninguém precisar lembrar de trocar. (O link fixo anterior,
-// licoes-jovens.com, nunca foi registrado.)
+// Endereco publico do app, para links e imagens que saem daqui.
+// Normalmente e' o proprio endereco onde o app esta rodando - assim funciona no
+// pages.dev hoje e num dominio proprio depois, sem ninguem lembrar de trocar.
+// MAS dentro do app das lojas o Capacitor serve os arquivos de "localhost", e
+// era por isso que tudo que o pessoal compartilhava pelo aplicativo saia com um
+// link "localhost" que ninguem consegue abrir. Nesse caso cai no endereco fixo.
+function enderecoPublico(){
+  const local = /^(localhost|127\.0\.0\.1|\[?::1\]?)$/i.test(location.hostname)
+    || location.hostname === ''
+    || !/^https?:$/i.test(location.protocol);   // capacitor:// e file://
+  return local ? LINK_DO_APP : (location.origin + location.pathname);
+}
+
+// Link que abre o app direto na lição e no dia.
 function linkDoDia(lessonId, dayId){
-  const u = new URL(location.origin + location.pathname);
+  const u = new URL(enderecoPublico());
   u.searchParams.set('licao', lessonId);
   u.searchParams.set('dia', dayId);
   return u.toString();
