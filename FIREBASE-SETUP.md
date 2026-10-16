@@ -246,10 +246,41 @@ Nada de criar nós na mão. Nada de uid.
         ".write": "auth != null && auth.uid == $uid",
         ".validate": "newData.hasChildren(['em']) && newData.child('em').isNumber() && (!newData.hasChild('n') || newData.child('n').isBoolean()) && (!newData.hasChild('nm') || (newData.child('nm').isString() && newData.child('nm').val().length <= 40))"
       } }
+    },
+
+    "medias": {
+      ".read": "auth != null",
+      "$licao": { "$dia": { "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
+      } } }
     }
   }
 }
 ```
+
+### Médias da turma (novo)
+
+Guarda **só a nota**, em porcentagem, sem nome: `medias/{licao}/{dia}/{uid} = 86`.
+Serve para desenhar a linha da média da turma por cima da linha da nota de cada
+pessoa, no gráfico de notas.
+
+| Regra | Efeito |
+|---|---|
+| `.read: auth != null` | qualquer pessoa logada lê, porque a linha da média aparece para todo mundo |
+| `.write` só no próprio `$uid` | ninguém grava nota no lugar de outro |
+| `.validate` número de 0 a 100 | impede gravar texto ou nota fora da escala |
+
+Por que não guardar a média já somada: somar exigiria transação, e duas pessoas
+terminando o quiz ao mesmo tempo corromperiam o número. Guardando uma nota por
+pessoa, cada escrita é independente e a média é calculada na hora de desenhar.
+
+O app **só desenha a linha quando há 4 respostas ou mais** naquele dia. Com um
+grupo de 13 pessoas, a média de duas respostas é praticamente a nota de alguém
+identificável.
+
+Enquanto esta regra não estiver publicada, a leitura volta `401`, o app segue
+funcionando e o gráfico simplesmente não mostra a linha da turma.
 
 ### Visitas (desde 23/09)
 

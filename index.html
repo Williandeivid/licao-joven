@@ -643,6 +643,17 @@
   .timer-icon, .fav-star-btn svg, .celebrate-banner svg, .placeholder-box svg, .cal-streak-icon, .cal-view-icon svg, .cal-mini-icon, .stats-card svg, .header-icon, .gear-btn svg, .conta-avatar svg, .profile-avatar svg, .dayed-icon, .bible-subtab svg, .theme-toggle svg{filter:saturate(0);}
   /* Chart data (not an icon) - keep its own teal/violet colors, matching the legend swatches */
   .stats-card svg.stats-chart-colored{filter:none;}
+  .chart-wrap{position:relative;}
+  .pt-toque{cursor:pointer;}
+  .chart-tip{
+    position:absolute; transform:translate(-50%, -112%); pointer-events:none;
+    background:var(--heading); color:#fff; border-radius:10px; padding:6px 10px;
+    font-family:'JetBrains Mono', monospace; font-size:11px; line-height:1.45;
+    white-space:nowrap; box-shadow:0 8px 20px -10px rgba(0,0,0,0.5); z-index:5;
+  }
+  .chart-tip[hidden]{display:none;}
+  .chart-tip b{display:block; font-weight:700;}
+  .period-toggle.modo{margin-top:6px;}
   body::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
     background:
@@ -1383,6 +1394,10 @@
   .ranking-panel.active{display:block;}
   .ranking-row{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px;}
   .ranking-row.me{background:var(--tint-violet); font-weight:700;}
+  /* Do 11o lugar em diante a lista rola dentro de si mesma. */
+  .ranking-resto{max-height:214px; overflow-y:auto; border-top:1px solid var(--border2); margin-top:6px; padding-top:4px;}
+  .trofeu{width:22px; height:22px; display:block;}
+  .lg-tracejada{background:repeating-linear-gradient(90deg, var(--ink-soft) 0 4px, transparent 4px 7px);}
   .ranking-rank{font-family:'JetBrains Mono', monospace; font-weight:800; color:var(--ink-soft); width:28px; flex-shrink:0;}
   .ranking-name{flex:1; min-width:0; font-size:14px; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .ranking-score{font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--violet); font-size:13px; flex-shrink:0;}
@@ -2968,6 +2983,40 @@ async function toggleVerseLive(el){
 
   openVerseModal(refLabel, `${versionSwitchRow(idioma,versaoInicial,book,chapter,v1,v2)}<span class="vpop-loading">${t('bible.buscandoTexto')}</span><br>${externalLink}`, {book,chapter,v1,v2,label:refLabel});
   await renderVerseVersion(idioma, versaoInicial, bookMeta, chapter, v1, v2, externalLink);
+  contabilizarVersiculoLido(el, book, chapter, v1, v2);
+}
+
+// Quem abre as referencias biblicas da licao le bem mais do que o texto do
+// resumo, e ate agora isso nao contava em lugar nenhum. Cada referencia conta
+// UMA vez por dia: abrir e fechar tres vezes nao triplica o tempo.
+async function contabilizarVersiculoLido(el, book, chapter, v1, v2){
+  try{
+    const secao = el.closest && el.closest('[id^="day-"]');
+    const container = document.getElementById('detail-container');
+    if(!secao || !container || !container.dataset.lessonId) return;
+    const lessonId = parseInt(container.dataset.lessonId);
+    const dayId = secao.id.replace('day-', '');
+
+    const corpo = document.getElementById('verse-modal-body');
+    const texto = corpo ? (corpo.innerText || '') : '';
+    const palavras = texto.split(/\s+/).filter(Boolean).length;
+    if(palavras < 5) return;          // ainda carregando, ou deu erro
+
+    const chave = book + '-' + chapter + '-' + v1 + '-' + v2;
+    const progress = progressCache[lessonId] || {days:{}, quiz:{}};
+    if(!progress.days) progress.days = {};
+    const reg = progress.days[dayId] && typeof progress.days[dayId] === 'object'
+      ? progress.days[dayId] : {studied: !!progress.days[dayId], estMinutes: 0};
+    reg.versLidos = reg.versLidos || {};
+    if(reg.versLidos[chave]) return;  // ja contou
+
+    reg.versLidos[chave] = true;
+    // Mesma regra do resto do app: 200 palavras por minuto, minimo de 1.
+    reg.versMin = (reg.versMin || 0) + Math.max(1, Math.round(palavras / 200));
+    progress.days[dayId] = reg;
+    progressCache[lessonId] = progress;
+    await saveProgress(lessonId, progress);
+  }catch(e){ /* contagem de leitura nunca pode atrapalhar a leitura */ }
 }
 
 async function switchVerseVersion(version, book, chapter, v1, v2){
@@ -3352,6 +3401,7 @@ function bindDayInteractions(lessonId, content, progress){
             if(!p.quiz) p.quiz = {};
             if(!p.days) p.days = {};
             p.quiz[day.id] = {correct: localState.correct, total: 10, time: elapsed, doneAt: dateKey(new Date())};
+            registrarNotaMedia(lessonId, day.id, localState.correct, 10);
             const estMinutes = estimateDayReadingMinutes(lessonId, day.id);
             p.days[day.id] = registroDoDia(p.days[day.id], estMinutes);
             progressCache[lessonId] = p;
@@ -3998,7 +4048,8 @@ function buildProgressMap(){
       if(studied || quiz || tf){
         if(!map[key]) map[key] = {studied:false, pct:null, date, time:0};
         if(studied) map[key].studied = true;
-        map[key].time = (estMinutes * 60000) + (quiz ? (quiz.time || 0) : 0) + (tf ? (tf.time || 0) : 0);
+        const versMin = (dayEntry && typeof dayEntry === 'object' && dayEntry.versMin) || 0;
+      map[key].time = ((estMinutes + versMin) * 60000) + (quiz ? (quiz.time || 0) : 0) + (tf ? (tf.time || 0) : 0);
         // pct mescla quiz e Verdadeiro/Falso quando os dois existem no dia
         // (a maioria) - com so um dos dois, usa so ele. Usado pela media do
         // ranking e por qualquer outro lugar que le buildProgressMap.
@@ -4012,6 +4063,7 @@ function buildProgressMap(){
           ? Math.round(notasPonderadas.reduce((a,b)=>a+b,0)/notasPonderadas.length*100) : null;
         const quizPct = quiz ? quiz.correct/quiz.total*100 : null;
         const tfPct = tf ? tf.correct/tf.total*100 : null;
+        if(quizPct !== null || tfPct !== null) map[key].ref = content.id + '-' + day.id;
         if(quizPct !== null && tfPct !== null) map[key].pct = Math.round((quizPct+tfPct)/2);
         else if(quizPct !== null) map[key].pct = Math.round(quizPct);
         else if(tfPct !== null) map[key].pct = Math.round(tfPct);
@@ -4285,6 +4337,14 @@ function setTimeChartPeriod(days){
   renderStats();
 }
 
+// "Separado" mostra licao e plano biblico em duas linhas; "Total" soma os dois
+// numa linha so, que e' o tempo de estudo de verdade do dia.
+let timeChartModo = 'separado';
+function setTimeChartModo(modo){
+  timeChartModo = modo;
+  renderStats();
+}
+
 function buildTimeSeries(progressMap, days){
   const series = [];
   const today = new Date(); today.setHours(0,0,0,0);
@@ -4338,6 +4398,10 @@ function renderTimeChart(progressMap){
     <button class="${timeChartPeriod===90?'active':''}" onclick="setTimeChartPeriod(90)">${t('stats.periodo90')}</button>
     <button class="${timeChartPeriod===365?'active':''}" onclick="setTimeChartPeriod(365)">${t('stats.periodo365')}</button>
     <button class="${timeChartPeriod===null?'active':''}" onclick="setTimeChartPeriod(null)">${t('stats.periodoSempre')}</button>
+  </div>
+  <div class="period-toggle modo">
+    <button class="${timeChartModo==='separado'?'active':''}" onclick="setTimeChartModo('separado')">${t('stats.modoSeparado')}</button>
+    <button class="${timeChartModo==='total'?'active':''}" onclick="setTimeChartModo('total')">${t('stats.modoTotal')}</button>
   </div>`;
 
   if(!hasData){
@@ -4345,15 +4409,19 @@ function renderTimeChart(progressMap){
     return html;
   }
 
+  const total = timeChartModo === 'total';
   const w=340, h=180, padL=34, padR=12, padT=14, padB=26;
-  const maxMinRaw = Math.max(5, ...series.map(s=>Math.max(s.lessonMin, s.bibleMin)));
+  const maxMinRaw = total
+    ? Math.max(5, ...series.map(s=>s.lessonMin + s.bibleMin))
+    : Math.max(5, ...series.map(s=>Math.max(s.lessonMin, s.bibleMin)));
   const maxMin = Math.ceil(maxMinRaw/5)*5;
   const n = series.length;
   const baseY = h-padB;
   function xAt(i){ return padL + (n<=1?0:(i/(n-1))*(w-padL-padR)); }
   function yAt(v){ return padT + (h-padT-padB) - (v/maxMin)*(h-padT-padB); }
 
-  const lessonPts = series.map((s,i)=>({x:xAt(i), y:yAt(s.lessonMin)}));
+  const valorDe = s => total ? (s.lessonMin + s.bibleMin) : s.lessonMin;
+  const lessonPts = series.map((s,i)=>({x:xAt(i), y:yAt(valorDe(s))}));
   const biblePts = series.map((s,i)=>({x:xAt(i), y:yAt(s.bibleMin)}));
   const lessonLine = smoothLinePath(lessonPts);
   const bibleLine = smoothLinePath(biblePts);
@@ -4379,6 +4447,21 @@ function renderTimeChart(progressMap){
     xAxisSvg += `<text x="${x.toFixed(1)}" y="${h-8}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-soft)">${label}</text>`;
   }
 
+  // Alvos de toque bem maiores que o ponto desenhado: num grafico de 30 dias os
+  // pontos ficam a 10px um do outro e ninguem acerta um circulo de 3px.
+  let pontosTocaveis = '';
+  series.forEach((s,i)=>{
+    const v = valorDe(s);
+    if(!v && !s.bibleMin) return;
+    const rot = s.date.toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {day:'2-digit', month:'short'}).replace('.','');
+    const detalhe = total
+      ? `${v} min`
+      : `${s.lessonMin} min · ${s.bibleMin} min`;
+    pontosTocaveis += `<circle class="pt-toque" cx="${xAt(i).toFixed(1)}" cy="${yAt(v).toFixed(1)}" r="13" fill="transparent"
+      data-rot="${rot}" data-val="${detalhe}" data-modo="${total ? 'total' : 'separado'}"></circle>`;
+    pontosTocaveis += `<circle class="pt-visivel" cx="${xAt(i).toFixed(1)}" cy="${yAt(v).toFixed(1)}" r="2.5" fill="var(--violet)" opacity="0.65"></circle>`;
+  });
+
   let svg = `<svg class="stats-chart-colored" viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;">
     <defs>
       <linearGradient id="fillLesson" x1="0" y1="0" x2="0" y2="1">
@@ -4392,15 +4475,18 @@ function renderTimeChart(progressMap){
     </defs>
     ${yAxisSvg}
     <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${baseY}" stroke="var(--border)" stroke-width="1"/>
-    <path d="${bibleArea}" fill="url(#fillBible)" stroke="none"/>
+    ${total ? '' : `<path d="${bibleArea}" fill="url(#fillBible)" stroke="none"/>`}
     <path d="${lessonArea}" fill="url(#fillLesson)" stroke="none"/>
-    <path d="${bibleLine}" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="${lessonLine}" fill="none" stroke="var(--violet)" stroke-width="2.5" stroke-linecap="round"/>
+    ${total ? '' : `<path d="${bibleLine}" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round"/>`}
+    <path d="${lessonLine}" fill="none" stroke="var(--violet)" stroke-width="${total ? 3 : 2.5}" stroke-linecap="round"/>
+    ${pontosTocaveis}
     ${xAxisSvg}
   </svg>`;
 
-  html += svg;
-  html += `<div class="cal-legend"><span><i class="lg" style="background:var(--violet)"></i>${t('stats.legendaLicaoMin')}</span><span><i class="lg" style="background:var(--teal)"></i>${t('stats.legendaBibliaMin')}</span></div>`;
+  html += `<div class="chart-wrap">${svg}<div class="chart-tip" hidden></div></div>`;
+  html += total
+    ? `<div class="cal-legend"><span><i class="lg" style="background:var(--violet)"></i>${t('stats.legendaTotalMin')}</span></div>`
+    : `<div class="cal-legend"><span><i class="lg" style="background:var(--violet)"></i>${t('stats.legendaLicaoMin')}</span><span><i class="lg" style="background:var(--teal)"></i>${t('stats.legendaBibliaMin')}</span></div>`;
   return html;
 }
 
@@ -4465,14 +4551,109 @@ function renderScoreChart(progressMap){
     xAxisSvg += `<text x="${p.x.toFixed(1)}" y="${h-8}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-soft)">${label}</text>`;
   }
 
+  // Linha da turma: so nos dias em que ha respostas suficientes para a media
+  // nao denunciar ninguem. Tracejada e apagada, porque o destaque e' a sua nota.
+  const medias = mediasDaTurma || {};
+  const comMedia = entries.map(([k,v],i) => {
+    const m = v.ref && medias[v.ref];
+    return (m && m.n >= MIN_RESPOSTAS_MEDIA) ? {x: points[i].x, y: yAt(m.media), media: m.media, n: m.n} : null;
+  });
+  let mediaPath = '';
+  comMedia.forEach(p => { if(p) mediaPath += (mediaPath ? ' L' : 'M') + p.x.toFixed(1) + ',' + p.y.toFixed(1); });
+
   let svg = `<svg class="stats-chart-colored" viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;">
     ${yAxisSvg}
     <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h-padB}" stroke="var(--border)" stroke-width="1"/>
+    ${mediaPath ? `<path d="${mediaPath}" fill="none" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="5,4" opacity="0.75"/>` : ''}
     <path d="${path}" fill="none" stroke="var(--violet)" stroke-width="2.5"/>`;
-  points.forEach(p=>{ svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="var(--pink)"/>`; });
+  points.forEach((p,i)=>{
+    svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="var(--pink)"/>`;
+    const rot = p.date.toLocaleDateString(LOCALE_POR_IDIOMA[idiomaConteudoAtual] || 'pt-BR', {day:'2-digit', month:'short'}).replace('.','');
+    const m = comMedia[i];
+    const detalhe = m
+      ? `${p.pct}% · ${t('stats.turmaDoisPontos')} ${m.media}%`
+      : `${p.pct}%`;
+    svg += `<circle class="pt-toque" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="13" fill="transparent" data-rot="${rot}" data-val="${detalhe}"></circle>`;
+  });
   svg += xAxisSvg;
   svg += `</svg>`;
-  return svg;
+  let saida = `<div class="chart-wrap">${svg}<div class="chart-tip" hidden></div></div>`;
+  if(mediaPath){
+    saida += `<div class="cal-legend"><span><i class="lg" style="background:var(--violet)"></i>${t('stats.legendaSuaNota')}</span><span><i class="lg lg-tracejada"></i>${t('stats.legendaMediaTurma')}</span></div>`;
+  }
+  return saida;
+}
+
+// Um ouvinte so, delegado: o painel inteiro e' redesenhado a cada renderStats,
+// entao nao da' para prender ouvinte em cada ponto. Toque fora fecha o balao.
+document.addEventListener('click', (ev) => {
+  const alvo = ev.target.closest && ev.target.closest('.pt-toque');
+  document.querySelectorAll('.chart-tip').forEach(tip => {
+    if(!alvo || tip !== alvo.closest('.chart-wrap').querySelector('.chart-tip')) tip.hidden = true;
+  });
+  if(!alvo) return;
+  const wrap = alvo.closest('.chart-wrap');
+  const tip = wrap && wrap.querySelector('.chart-tip');
+  if(!tip) return;
+  const svg = alvo.ownerSVGElement;
+  const rSvg = svg.getBoundingClientRect();
+  const rWrap = wrap.getBoundingClientRect();
+  const caixa = alvo.getBoundingClientRect();
+  tip.innerHTML = `<b>${escaparHtml(alvo.dataset.rot || '')}</b>${escaparHtml(alvo.dataset.val || '')}`;
+  tip.hidden = false;
+  // centraliza no ponto, mas sem deixar o balao sair do cartao
+  const meio = caixa.left + caixa.width/2 - rWrap.left;
+  const metade = tip.offsetWidth/2;
+  tip.style.left = Math.max(metade + 2, Math.min(rWrap.width - metade - 2, meio)) + 'px';
+  tip.style.top = (caixa.top + caixa.height/2 - rWrap.top) + 'px';
+}, true);
+
+/* ===== MEDIA DA TURMA =====
+   Cada pessoa grava SO a propria nota em medias/{licao}/{dia}/{uid}. Ninguem
+   escreve no lugar de ninguem, e o no nao guarda nome - so o identificador.
+   A linha da media so e' desenhada com 4 respostas ou mais: com 13 pessoas no
+   grupo, a "media" de duas respostas e' praticamente a nota de alguem
+   identificavel.
+   Enquanto as regras novas do Firebase nao forem publicadas, a leitura volta
+   401, o mapa fica vazio e o grafico simplesmente nao mostra a linha. */
+const MIN_RESPOSTAS_MEDIA = 4;
+let mediasDaTurma = null;
+
+async function registrarNotaMedia(lessonId, dayId, acertos, total){
+  try{
+    const uid = getUserId();
+    if(!uid || !currentUser || !total) return;
+    const token = await getAuthToken();
+    if(!token) return;
+    await fetch(`${FIREBASE_DB}/medias/${lessonId}/${dayId}/${uid}.json?auth=${token}`, {
+      method: 'PUT',
+      body: JSON.stringify(Math.round(acertos / total * 100))
+    });
+    mediasDaTurma = null;   // forca reler na proxima vez
+  }catch(e){ /* media e' enfeite: nunca pode atrapalhar o salvamento da nota */ }
+}
+
+async function carregarMediasDaTurma(){
+  if(mediasDaTurma) return mediasDaTurma;
+  mediasDaTurma = {};
+  try{
+    if(!currentUser) return mediasDaTurma;
+    const token = await getAuthToken();
+    if(!token) return mediasDaTurma;
+    const r = await fetch(`${FIREBASE_DB}/medias.json?auth=${token}`);
+    if(!r.ok) return mediasDaTurma;     // 401: regras ainda nao publicadas
+    const dados = await r.json();
+    Object.keys(dados || {}).forEach(licao => {
+      Object.keys(dados[licao] || {}).forEach(dia => {
+        const notas = Object.values(dados[licao][dia] || {}).filter(v => typeof v === 'number');
+        if(notas.length) mediasDaTurma[licao + '-' + dia] = {
+          media: Math.round(notas.reduce((a,b)=>a+b,0) / notas.length),
+          n: notas.length
+        };
+      });
+    });
+  }catch(e){}
+  return mediasDaTurma;
 }
 
 function getWeekKey(dateObj){
@@ -4550,6 +4731,11 @@ async function saveGoals(){
 function renderStats(){
   const container = document.getElementById('stats-container');
   if(!container) return;
+  // As medias da turma chegam depois; quando chegarem, redesenha uma vez so.
+  if(mediasDaTurma === null){
+    mediasDaTurma = {};
+    carregarMediasDaTurma().then(m => { if(Object.keys(m).length) renderStats(); });
+  }
   const progressMap = buildProgressMap();
   const dailyStreak = computeDailyStreakSync(progressMap);
   const totalStudied = Object.values(progressMap).filter(v=>v.studied).length;
@@ -4758,12 +4944,23 @@ async function carregarRankingTab(tipo){
 
     const top = lista.slice(0, 50);
     const meuIndex = lista.findIndex(item => item.uid === meuId);
-    let html = top.map((item, i) => `
+
+    // Trofeu so quando ha podio de verdade: com duas pessoas na lista, "medalha
+    // de prata" e' constrangedor.
+    const temPodio = lista.length >= 3;
+    const linha = (item, i) => `
       <div class="ranking-row${item.uid===meuId?' me':''}">
-        <span class="ranking-rank">${i+1}º</span>
+        <span class="ranking-rank">${temPodio && i < 3 ? trofeuSvg(i) : (i+1)+'º'}</span>
         <span class="ranking-name">${escaparHtml(comSufixoIgrejaDistrito(item.nome || t('ranking.alguem'), item.igreja, item.distrito))}</span>
         <span class="ranking-score">${Number(item.pontos) || 0} ${t('ranking.pts')}</span>
-      </div>`).join('');
+      </div>`;
+
+    // Os 10 primeiros ficam a' vista; do 11o em diante entra numa area rolavel,
+    // para a lista nao empurrar o resto da tela para baixo.
+    let html = top.slice(0, 10).map(linha).join('');
+    if(top.length > 10){
+      html += `<div class="ranking-resto">` + top.slice(10).map((item,i)=>linha(item, i+10)).join('') + `</div>`;
+    }
 
     if(meuIndex >= 50){
       const item = lista[meuIndex];
@@ -4784,6 +4981,19 @@ async function carregarRankingTab(tipo){
     console.warn('⚠️ Não carregou o ranking:', e.message);
     panel.innerHTML = `<p class="conta-note">${t('ranking.carregarFalhou')}</p>`;
   }
+}
+
+// Trofeu do podio: ouro, prata e bronze. Desenho unico, so muda a cor - e o
+// numero da posicao continua no title, para leitor de tela e para quem nao
+// distingue as cores.
+function trofeuSvg(i){
+  const cores = ['#f5b301', '#b9c2cc', '#c57b41'];
+  const pos = (i+1) + 'º';
+  return `<svg class="trofeu" viewBox="0 0 24 24" role="img" aria-label="${pos}"><title>${pos}</title>
+    <path d="M8 3h8v5a4 4 0 0 1-8 0V3z" fill="${cores[i]}"/>
+    <path d="M8 4H5.5a2.5 2.5 0 0 0 2.5 4.5M16 4h2.5a2.5 2.5 0 0 1-2.5 4.5" fill="none" stroke="${cores[i]}" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 12v4M9 20h6l-.6-3H9.6L9 20z" fill="none" stroke="${cores[i]}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
 }
 
 // ============ DAY EDITOR MODAL ============
@@ -6299,6 +6509,12 @@ const UI_STRINGS = {
     'stats.periodoSempre': 'Sempre',
     'stats.semTempo': 'Ainda sem tempo registrado neste período. Complete um quiz ou edite um dia no calendário.',
     'stats.legendaLicaoMin': 'Lição (min/dia)',
+    'stats.modoSeparado': 'Separado',
+    'stats.modoTotal': 'Total',
+    'stats.legendaTotalMin': 'Total por dia (min)',
+    'stats.legendaSuaNota': 'Sua nota',
+    'stats.legendaMediaTurma': 'Média da turma',
+    'stats.turmaDoisPontos': 'turma:',
     'stats.legendaBibliaMin': 'Plano bíblico (min/dia)',
     'stats.semQuizzes': 'Ainda sem quizzes respondidos. Responda o quiz de um dia pra ver sua evolução aqui.',
     'stats.diaCompleto': 'Dia completo! 🔥',
@@ -6735,6 +6951,12 @@ const UI_STRINGS = {
     'stats.periodoSempre': 'Always',
     'stats.semTempo': 'No time logged for this period yet. Complete a quiz or edit a day on the calendar.',
     'stats.legendaLicaoMin': 'Lesson (min/day)',
+    'stats.modoSeparado': 'Separate',
+    'stats.modoTotal': 'Total',
+    'stats.legendaTotalMin': 'Daily total (min)',
+    'stats.legendaSuaNota': 'Your score',
+    'stats.legendaMediaTurma': 'Group average',
+    'stats.turmaDoisPontos': 'group:',
     'stats.legendaBibliaMin': 'Bible plan (min/day)',
     'stats.semQuizzes': 'No quizzes answered yet. Answer a day\'s quiz to see your progress here.',
     'stats.diaCompleto': 'Complete day! 🔥',
@@ -7171,6 +7393,12 @@ const UI_STRINGS = {
     'stats.periodoSempre': 'Siempre',
     'stats.semTempo': 'Todavía no hay tiempo registrado en este período. Completa un quiz o edita un día en el calendario.',
     'stats.legendaLicaoMin': 'Lección (min/día)',
+    'stats.modoSeparado': 'Separado',
+    'stats.modoTotal': 'Total',
+    'stats.legendaTotalMin': 'Total por día (min)',
+    'stats.legendaSuaNota': 'Tu nota',
+    'stats.legendaMediaTurma': 'Media del grupo',
+    'stats.turmaDoisPontos': 'grupo:',
     'stats.legendaBibliaMin': 'Plan bíblico (min/día)',
     'stats.semQuizzes': 'Todavía no hay quizzes respondidos. Responde el quiz de un día para ver tu evolución aquí.',
     'stats.diaCompleto': '¡Día completo! 🔥',
