@@ -75,6 +75,31 @@ As demais lições têm quiz de sábado; essas ficaram sem.
 
 ## 🟡 Próximo
 
+### Grifo nos termos-chave das lições do 4º trimestre
+O destaque já existe e já funciona nos dois temas: `<mark class="hl">` pinta o
+fundo em verde no tema claro e, no escuro, troca para **letra colorida sem
+fundo** (`[data-theme="dark"] mark.hl{ background:none; color:#c3f26a; }`).
+Os temas de leitura e cinza têm as suas próprias versões.
+
+**O que falta:** o 4º trimestre inteiro está sem grifo nenhum.
+
+| Trimestre | Lições | Dias com grifo |
+|---|---|---|
+| 3º | 1 a 13 | **91 de 91** |
+| 4º | 14 a 26 | **0 de 91** |
+
+**O que fazer:** em cada dia das lições 14 a 26, envolver em `<mark class="hl">`
+os termos ou a frase-chave do `body` — o que a pessoa precisa levar daquele dia.
+Um ou dois por dia, não mais: grifo em tudo é o mesmo que grifo em nada.
+
+**Onde:** `LESSONS_CONTENT`, campo `body` de cada dia. O 3º trimestre serve de
+referência de dose e de critério.
+
+**Cuidado:** o grifo entra no texto em português. As traduções (`licoes-en.json`
+e `licoes-es.json`) casam por posição, então o `<mark>` precisa existir nas três
+ou a frase destacada fica diferente em cada idioma.
+
+
 ### Willian e Josias como gerentes
 Hoje admin é por `uid` em `config/admins/{uid}`. Funciona, mas exige que cada
 pessoa entre no app primeiro para o uid existir.
