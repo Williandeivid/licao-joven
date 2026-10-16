@@ -642,7 +642,7 @@
   /* Monocromatic icons only - not images or decorative SVGs */
   .timer-icon, .fav-star-btn svg, .celebrate-banner svg, .placeholder-box svg, .cal-streak-icon, .cal-view-icon svg, .cal-mini-icon, .stats-card svg, .header-icon, .gear-btn svg, .conta-avatar svg, .profile-avatar svg, .dayed-icon, .bible-subtab svg, .theme-toggle svg{filter:saturate(0);}
   /* Chart data (not an icon) - keep its own teal/violet colors, matching the legend swatches */
-  .stats-card svg.stats-chart-colored{filter:none;}
+  .stats-card svg.stats-chart-colored, .stats-card svg.trofeu{filter:none;}
   .chart-wrap{position:relative;}
   .pt-toque{cursor:pointer;}
   .chart-tip{
@@ -1394,9 +1394,20 @@
   .ranking-panel.active{display:block;}
   .ranking-row{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px;}
   .ranking-row.me{background:var(--tint-violet); font-weight:700;}
-  /* Do 11o lugar em diante a lista rola dentro de si mesma. */
-  .ranking-resto{max-height:214px; overflow-y:auto; border-top:1px solid var(--border2); margin-top:6px; padding-top:4px;}
+  /* Do 11o lugar em diante, so com o botao. */
+  .ranking-resto{border-top:1px solid var(--border2); margin-top:6px; padding-top:4px;}
+  .ranking-resto[hidden]{display:none;}
+  .ranking-mais{
+    display:block; width:100%; margin-top:8px; padding:10px; border:none; cursor:pointer;
+    background:var(--tint-violet); color:var(--violet); border-radius:12px;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700;
+    letter-spacing:0.08em; text-transform:uppercase;
+  }
+  .ranking-mais:hover{filter:brightness(0.97);}
   .trofeu{width:22px; height:22px; display:block;}
+  /* Os tres do podio em negrito, alem do trofeu. */
+  .ranking-row.podio{font-weight:700;}
+  .ranking-row.podio .ranking-name, .ranking-row.podio .ranking-score{font-weight:700;}
   .lg-tracejada{background:repeating-linear-gradient(90deg, var(--ink-soft) 0 4px, transparent 4px 7px);}
   .ranking-rank{font-family:'JetBrains Mono', monospace; font-weight:800; color:var(--ink-soft); width:28px; flex-shrink:0;}
   .ranking-name{flex:1; min-width:0; font-size:14px; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
@@ -4949,17 +4960,19 @@ async function carregarRankingTab(tipo){
     // de prata" e' constrangedor.
     const temPodio = lista.length >= 3;
     const linha = (item, i) => `
-      <div class="ranking-row${item.uid===meuId?' me':''}">
+      <div class="ranking-row${item.uid===meuId?' me':''}${temPodio && i < 3 ? ' podio' : ''}">
         <span class="ranking-rank">${temPodio && i < 3 ? trofeuSvg(i) : (i+1)+'º'}</span>
         <span class="ranking-name">${escaparHtml(comSufixoIgrejaDistrito(item.nome || t('ranking.alguem'), item.igreja, item.distrito))}</span>
         <span class="ranking-score">${Number(item.pontos) || 0} ${t('ranking.pts')}</span>
       </div>`;
 
-    // Os 10 primeiros ficam a' vista; do 11o em diante entra numa area rolavel,
-    // para a lista nao empurrar o resto da tela para baixo.
+    // Os 10 primeiros ficam a' vista; do 11o em diante so aparece quando a
+    // pessoa pede, num botao - sem area rolavel dentro da pagina, que confunde
+    // com a rolagem da tela.
     let html = top.slice(0, 10).map(linha).join('');
     if(top.length > 10){
-      html += `<div class="ranking-resto">` + top.slice(10).map((item,i)=>linha(item, i+10)).join('') + `</div>`;
+      html += `<div class="ranking-resto" hidden>` + top.slice(10).map((item,i)=>linha(item, i+10)).join('') + `</div>`;
+      html += `<button class="ranking-mais" onclick="alternarRestoDoRanking(this)" data-mais="${escaparHtml(t('ranking.verMais').replace('${n}', top.length - 10))}" data-menos="${escaparHtml(t('ranking.verMenos'))}">${t('ranking.verMais').replace('${n}', top.length - 10)}</button>`;
     }
 
     if(meuIndex >= 50){
@@ -4986,6 +4999,14 @@ async function carregarRankingTab(tipo){
 // Trofeu do podio: ouro, prata e bronze. Desenho unico, so muda a cor - e o
 // numero da posicao continua no title, para leitor de tela e para quem nao
 // distingue as cores.
+function alternarRestoDoRanking(btn){
+  const resto = btn.previousElementSibling;
+  if(!resto) return;
+  const abrindo = resto.hidden;
+  resto.hidden = !abrindo;
+  btn.textContent = abrindo ? btn.dataset.menos : btn.dataset.mais;
+}
+
 function trofeuSvg(i){
   const cores = ['#f5b301', '#b9c2cc', '#c57b41'];
   const pos = (i+1) + 'º';
@@ -6591,6 +6612,8 @@ const UI_STRINGS = {
     'ranking.ninguemSemana': 'Ninguém no ranking essa semana ainda. Seja o primeiro!',
     'ranking.ninguemTrimestre': 'Ninguém no ranking esse trimestre ainda. Seja o primeiro!',
     'ranking.alguem': 'Alguém',
+    'ranking.verMais': 'Ver mais ${n}',
+    'ranking.verMenos': 'Ver menos',
     'ranking.pts': 'pts',
     'ranking.comoPontua': 'Pontos: dias estudados (60) + notas dos quizzes (40). Fazer depois do dia vale menos (−15% por dia de atraso) e responder o quiz mais rápido vale mais.',
     'conta.meusFavoritos': 'Meus versículos favoritos',
@@ -7033,6 +7056,8 @@ const UI_STRINGS = {
     'ranking.ninguemSemana': "No one's on the leaderboard this week yet. Be the first!",
     'ranking.ninguemTrimestre': "No one's on the leaderboard this quarter yet. Be the first!",
     'ranking.alguem': 'Someone',
+    'ranking.verMais': 'Show ${n} more',
+    'ranking.verMenos': 'Show less',
     'ranking.pts': 'pts',
     'ranking.comoPontua': 'Points: days studied (60) + quiz scores (40). Doing an activity after its day is worth less (−15% per day late), and answering the quiz faster is worth more.',
     'conta.meusFavoritos': 'My favorite verses',
@@ -7475,6 +7500,8 @@ const UI_STRINGS = {
     'ranking.ninguemSemana': 'Todavía nadie está en el ranking esta semana. ¡Sé el primero!',
     'ranking.ninguemTrimestre': 'Todavía nadie está en el ranking este trimestre. ¡Sé el primero!',
     'ranking.alguem': 'Alguien',
+    'ranking.verMais': 'Ver ${n} más',
+    'ranking.verMenos': 'Ver menos',
     'ranking.pts': 'pts',
     'ranking.comoPontua': 'Puntos: días estudiados (60) + notas de los quizzes (40). Hacerlo después del día vale menos (−15% por día de atraso) y responder el quiz más rápido vale más.',
     'conta.meusFavoritos': 'Mis versículos favoritos',
