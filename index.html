@@ -4904,8 +4904,13 @@ function _raioCurto(svg, x1, y1, x2, y2, atraso){
   requestAnimationFrame(() => g.classList.add('dispara'));
 }
 
+/* Devolve true se conseguiu comemorar. Pode nao conseguir: na visao de MES, a
+   semana que comeca num mes e termina no outro aparece pela metade (o resto dos
+   dias esta na tela do mes vizinho), e quem navegou para outro mes nao tem
+   nenhuma das celulas na tela. Nesses casos a comemoracao NAO e' gasta - fica
+   guardada para quando a pessoa estiver olhando a semana certa. */
 async function eletrizarSemana(grade){
-  if(!grade) return;
+  if(!grade) return false;
   const semana = semanaIdDeHoje();
   const domingo = new Date(semana + 'T00:00:00');
   const celulas = [];
@@ -4914,13 +4919,16 @@ async function eletrizarSemana(grade){
     const c = grade.querySelector(`.cal-day[data-dia="${dateKey(d)}"]`);
     if(c) celulas.push(c);
   }
-  if(celulas.length < 7) return;
+  // Com a semana partida entre dois meses, eletriza os dias que estao a' vista:
+  // metade da semana piscando e' melhor que nada acontecendo. Abaixo de 3 dias
+  // nao vale - o efeito fica sem leitura.
+  if(celulas.length < 3) return false;
 
   const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   celulas.forEach(c => c.classList.add('unificado'));
   if(calmo){
     setTimeout(() => celulas.forEach(c => c.classList.remove('unificado')), 900);
-    return;
+    return true;
   }
 
   grade.classList.add('eletrico');
@@ -4934,7 +4942,7 @@ async function eletrizarSemana(grade){
   for(let onda = 0; onda < 2; onda++){
     const base = onda * 560;
     const primeira = celulas[0].getBoundingClientRect();
-    const ultima = celulas[6].getBoundingClientRect();
+    const ultima = celulas[celulas.length - 1].getBoundingClientRect();
     const meioY = primeira.top - rg.top + primeira.height / 2;
     for(let k = 0; k < 2; k++){
       _raioCurto(svg,
@@ -4951,6 +4959,7 @@ async function eletrizarSemana(grade){
     grade.classList.remove('eletrico');
     celulas.forEach(c => c.classList.remove('carregado', 'unificado'));
   }, 420);
+  return true;
 }
 
 // Espera o calendario aparecer de verdade na tela antes de comemorar.
@@ -4975,13 +4984,21 @@ function agendarRaioDaSemana(){
     const naTela = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
     if(naTela / r.height < 0.6) return;
     feito = true;
-    window.removeEventListener('scroll', olhar);
-    try{
-      localStorage.removeItem(SEMANA_PENDENTE);
-      localStorage.setItem(SEMANA_JA_FOI, pendente);
-    }catch(e){}
     // um respiro antes de disparar: a pessoa ainda esta parando de rolar
-    setTimeout(() => eletrizarSemana(grade), 320);
+    setTimeout(async () => {
+      const comemorou = await eletrizarSemana(grade);
+      if(comemorou){
+        try{
+          localStorage.removeItem(SEMANA_PENDENTE);
+          localStorage.setItem(SEMANA_JA_FOI, pendente);
+        }catch(e){}
+      }else{
+        // a semana nao estava inteira na tela (visao de mes com a semana
+        // partida, ou outro mes aberto): deixa guardado e volta a espreitar
+        feito = false;
+        window.addEventListener('scroll', olhar, { passive: true });
+      }
+    }, 320);
   }
 
   window.addEventListener('scroll', olhar, { passive: true });
