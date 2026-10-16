@@ -667,6 +667,7 @@
   .pt-chip{display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--ink-soft);}
   .pt-chip i{width:9px; height:9px; border-radius:3px; flex:0 0 auto;}
   .pt-chip b{color:var(--heading); font-weight:700;}
+  .streak-totais{display:inline-block; margin-top:5px; font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-soft); letter-spacing:0.04em;}
   .stats-sub{font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--ink-soft); text-align:center; margin:8px 0 0;}
   body::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
@@ -4926,6 +4927,11 @@ function renderStats(){
       return d >= start && d <= end;
     }).length;
   })();
+  // Total do ano, pelo ano do calendario - o app ja' guarda a data de cada dia.
+  const totalNoAno = (function(){
+    const ano = String(new Date().getFullYear());
+    return Object.entries(progressMap).filter(([k, v]) => v.studied && k.slice(0,4) === ano).length;
+  })();
   const goals = userGoals || {name:'', bibleMin:0, lessonMin:0, scoreGoal:0};
 
   const todayKey = dateKey(new Date());
@@ -4977,7 +4983,8 @@ function renderStats(){
             .replace(/\$\{s1\}/g, s1)
             .replace(/\$\{n2\}/g, totalStudied)
             .replace(/\$\{dia2\}/g, t('stats.dia') + s2)
-            .replace(/\$\{s2\}/g, s2);
+            .replace(/\$\{s2\}/g, s2)
+            .replace(/\$\{ano\}/g, totalNoAno);
         })()}</div>
       </div>
     </div>
@@ -6706,7 +6713,7 @@ const UI_STRINGS = {
     'stats.sequenciaPrefix': 'Sequência de',
     'stats.dia': 'dia',
     'stats.dias': 'dias',
-    'stats.streakLabel': '${dia1} seguido${s1} com pelo menos 1 atividade (lição ou plano bíblico).<br>Total de ${n2} ${dia2} concluído${s2} no trimestre.',
+    'stats.streakLabel': '${dia1} seguido${s1} com pelo menos 1 atividade (lição ou plano bíblico).<br><span class="streak-totais">${n2} no trimestre · ${ano} no ano</span>',
     'stats.verSemana': 'Ver semana',
     'stats.verMes': 'Ver mês',
     'stats.legendaLicao': 'Lição',
@@ -7162,7 +7169,7 @@ const UI_STRINGS = {
     'stats.sequenciaPrefix': 'Streak of',
     'stats.dia': 'day',
     'stats.dias': 'days',
-    'stats.streakLabel': '${dia1} in a row with at least 1 activity (lesson or Bible plan).<br>Total of ${n2} ${dia2} completed this quarter.',
+    'stats.streakLabel': '${dia1} in a row with at least 1 activity (lesson or Bible plan).<br><span class="streak-totais">${n2} this quarter · ${ano} this year</span>',
     'stats.verSemana': 'View week',
     'stats.verMes': 'View month',
     'stats.legendaLicao': 'Lesson',
@@ -7618,7 +7625,7 @@ const UI_STRINGS = {
     'stats.sequenciaPrefix': 'Racha de',
     'stats.dia': 'día',
     'stats.dias': 'días',
-    'stats.streakLabel': '${dia1} seguido${s1} con al menos 1 actividad (lección o plan bíblico).<br>Total de ${n2} ${dia2} completado${s2} en el trimestre.',
+    'stats.streakLabel': '${dia1} seguido${s1} con al menos 1 actividad (lección o plan bíblico).<br><span class="streak-totais">${n2} en el trimestre · ${ano} en el año</span>',
     'stats.verSemana': 'Ver semana',
     'stats.verMes': 'Ver mes',
     'stats.legendaLicao': 'Lección',
