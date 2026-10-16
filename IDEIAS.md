@@ -378,3 +378,5 @@ aparece em português (`IDIOMAS_COM_CURIOSIDADE` no index.html).
 | Congelamento estilo Duolingo | não — mecânica de engajamento sem serventia ao estudo |
 | Aparência por tipo de aparelho | sim — celular e computador guardam preferências separadas |
 | Ordem dos comentários | cronológica, mais antigo primeiro |
+| Repositório público com o texto da lição | **sim, mantém** — decisão do Willian em 16/10/2026. A igreja foi informada; se houver objeção, que venha por e-mail. Não reabrir sem um pedido formal da CPB ou da igreja |
+| Nome do app | **Sinergia JA**, em todo lugar — título, lojas, convite, QR e compartilhamento |
