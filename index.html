@@ -941,6 +941,11 @@
   .skeleton-line.paragraph{width:100%; opacity:0.8;}
   .skeleton-line.paragraph:last-child{width:85%; opacity:0.6;}
   /* #5 - Imagens responsivas */
+  /* Rede de seguranca contra a tela "dar zoom" no app: qualquer imagem, grafico
+     ou canvas que nasca maior que a coluna passa a ser limitado a ela. Sem isso
+     um unico elemento largo empurra a pagina inteira e a WebView do Android
+     reduz o zoom para caber - foi o que acontecia na aba Progresso. */
+  img, svg, canvas, video, iframe{ max-width:100%; }
   .source-panel img{max-width:100%; height:auto; border-radius:8px; margin:12px 0;}
   /* #6 - Citações com estilo melhorado */
   .source-panel blockquote{border-left:4px solid var(--violet); padding-left:16px; margin:16px 0; color:var(--ink-soft); font-style:italic; line-height:1.7;}
