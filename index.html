@@ -1404,6 +1404,16 @@
     letter-spacing:0.08em; text-transform:uppercase;
   }
   .ranking-mais:hover{filter:brightness(0.97);}
+  .link-discreto{
+    display:block; width:100%; margin-top:10px; padding:7px 0; border:none; background:none;
+    cursor:pointer; color:var(--ink-soft); font-family:'JetBrains Mono', monospace;
+    font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; text-align:center;
+  }
+  .link-discreto::after{content:' BE'; opacity:.6;}
+  .link-discreto.aberto::after{content:' B4';}
+  .link-discreto:hover{color:var(--violet);}
+  .bloco-discreto{margin-top:4px;}
+  .bloco-discreto[hidden]{display:none;}
   .trofeu{width:22px; height:22px; display:block;}
   /* Os tres do podio em negrito, alem do trofeu. */
   .ranking-row.podio{font-weight:700;}
@@ -4884,12 +4894,10 @@ function renderStats(){
       ${renderCalendarMonth(progressMap)}
     </div>
     <div class="stats-card">
-      <h3><svg viewBox="0 0 24 24"><rect x="3" y="10" width="4" height="10"/><rect x="10" y="4" width="4" height="16"/><rect x="17" y="7" width="4" height="13"/></svg>${t('stats.diasBibliaLicao')}</h3>
-      ${renderBibleDaysVsLessonsChart(progressMap)}
-    </div>
-    <div class="stats-card">
       <h3><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>${t('stats.tempoPorDia')}</h3>
       ${renderTimeChart(progressMap)}
+      <button class="link-discreto" onclick="alternarBlocoDiscreto(this)">${t('stats.diasBibliaLicao')}</button>
+      <div class="bloco-discreto" hidden>${renderBibleDaysVsLessonsChart(progressMap)}</div>
     </div>
     <div class="stats-card">
       <h3><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>${t('stats.notaQuizzes')}</h3>
@@ -4999,6 +5007,15 @@ async function carregarRankingTab(tipo){
 // Trofeu do podio: ouro, prata e bronze. Desenho unico, so muda a cor - e o
 // numero da posicao continua no title, para leitor de tela e para quem nao
 // distingue as cores.
+// Bloco que so aparece se a pessoa pedir. Mesma ideia da lampada da
+// curiosidade: o que e' periferico nao ocupa espaco de quem nao quer ver.
+function alternarBlocoDiscreto(btn){
+  const bloco = btn.nextElementSibling;
+  if(!bloco) return;
+  bloco.hidden = !bloco.hidden;
+  btn.classList.toggle('aberto', !bloco.hidden);
+}
+
 function alternarRestoDoRanking(btn){
   const resto = btn.previousElementSibling;
   if(!resto) return;
