@@ -95,6 +95,13 @@ Um ou dois por dia, não mais: grifo em tudo é o mesmo que grifo em nada.
 **Onde:** `LESSONS_CONTENT`, campo `body` de cada dia. O 3º trimestre serve de
 referência de dose e de critério.
 
+**Discrição é requisito, não detalhe** (decisão do Willian em 16/10/2026). O
+grifo marca, não grita. No tema escuro o que existe hoje já está no tom certo:
+letra colorida, sem fundo. **No tema claro o fundo verde `#b8e356` é o ponto
+alto demais** — vale baixar para uma faixa mais fina e menos saturada antes de
+aplicar nas 91 novas, senão a página do 4º trimestre vai ficar mais barulhenta
+que a do 3º.
+
 **Cuidado:** o grifo entra no texto em português. As traduções (`licoes-en.json`
 e `licoes-es.json`) casam por posição, então o `<mark>` precisa existir nas três
 ou a frase destacada fica diferente em cada idioma.
