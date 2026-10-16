@@ -4798,7 +4798,10 @@ function renderSemanasChart(){
   if(chaves.length < 3) return '';   // com uma ou duas semanas nao ha o que ver
 
   const semanaAtual = (function(){ const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() - d.getDay()); return dateKey(d); })();
-  const ultimas = chaves.slice(-13);
+  // Semanas do trimestre, nao um numero fixo: trimestre de 14 licoes tem 14.
+  const { start, end } = getQuarterRange();
+  const semanasDoTrimestre = Math.round((end - start) / (7*86400000)) + 1;
+  const ultimas = chaves.slice(-Math.max(3, semanasDoTrimestre));
   const maxPontos = Math.max(100, ...ultimas.map(k => h[k].pontos || 0));
   const w = 320, alt = 120, padB = 16, padT = 10, baseY = alt - padB;
   const larg = Math.max(10, Math.min(20, (w - 16) / ultimas.length - 6));
@@ -4911,7 +4914,18 @@ function renderStats(){
   }
   const progressMap = buildProgressMap();
   const dailyStreak = computeDailyStreakSync(progressMap);
-  const totalStudied = Object.values(progressMap).filter(v=>v.studied).length;
+  // "Total no trimestre" contava TODOS os dias ja' estudados, de qualquer
+  // trimestre - por isso aparecia 59 numa semana em que o trimestre tinha
+  // acabado de comecar. O intervalo vem das licoes do trimestre
+  // (getQuarterRange), entao trimestre de 14 licoes funciona sozinho.
+  const totalStudied = (function(){
+    const { start, end } = getQuarterRange();
+    return Object.entries(progressMap).filter(([k, v]) => {
+      if(!v.studied) return false;
+      const d = new Date(k + 'T00:00:00');
+      return d >= start && d <= end;
+    }).length;
+  })();
   const goals = userGoals || {name:'', bibleMin:0, lessonMin:0, scoreGoal:0};
 
   const todayKey = dateKey(new Date());
