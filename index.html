@@ -11932,6 +11932,19 @@ async function buscarOficialDaRede(lessonId, dayId){
       return text;
     }
 
+    // O texto da Adventech usa as duas formas de enfase do markdown: asterisco
+    // e sublinhado. So o asterisco era convertido, entao a assinatura do sabado
+    // aparecia literalmente como "_Homero Nascimento - Lider do ..._".
+    // O sublinhado so vale na borda de uma palavra: senao nome de arquivo e
+    // endereco com _ virariam italico no meio da frase.
+    function formatarEnfase(texto){
+      return texto
+        .replace(/\*\*([^*]+)\*\*/g, '<mark class="hl"><strong>$1</strong></mark>')
+        .replace(/(^|[^\w])__([^_\n]+)__(?![\w])/g, '$1<mark class="hl"><strong>$2</strong></mark>')
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        .replace(/(^|[^\w])_([^_\n]+)_(?![\w])/g, '$1<em>$2</em>');
+    }
+
     // Depois: processar linha por linha
     const lines = content.split('\n');
     const processedLines = [];
@@ -11964,9 +11977,7 @@ async function buscarOficialDaRede(lessonId, dayId){
       else if(trimmed.startsWith('- ')) {
         if(!inList) { processedLines.push('<ul style="margin:12px 0;padding-left:20px;">'); inList = true; }
         const text = trimmed.slice(2);
-        let formatted = text
-          .replace(/\*\*([^*]+)\*\*/g, '<mark class="hl"><strong>$1</strong></mark>')
-          .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        let formatted = formatarEnfase(text)
           .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:var(--violet);">$1</a>');
         formatted = formatBibleReferences(formatted);
         processedLines.push(`<li style="margin-bottom:6px;">${formatted}</li>`);
@@ -11980,9 +11991,7 @@ async function buscarOficialDaRede(lessonId, dayId){
       // Parágrafos
       else if(trimmed) {
         if(inList) { processedLines.push('</ul>'); inList = false; }
-        let formatted = trimmed
-          .replace(/\*\*([^*]+)\*\*/g, '<mark class="hl"><strong>$1</strong></mark>')
-          .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        let formatted = formatarEnfase(trimmed)
           .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:var(--violet);text-decoration:underline;">$1</a>');
         formatted = formatBibleReferences(formatted);
         processedLines.push(`<p style="margin-bottom:13px;line-height:1.7;">${formatted}</p>`);
