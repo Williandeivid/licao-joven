@@ -686,6 +686,10 @@
   @media (prefers-reduced-motion: reduce){ .raios-semana g.dispara, .cal-day.carregado{ animation:none; } }
 
   .streak-totais{display:inline-block; margin-top:5px; font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--ink-soft); letter-spacing:0.04em;}
+  .bloco-discreto.explicacao{font-size:13px; line-height:1.75; color:var(--ink-soft); padding:4px 2px 2px;}
+  .bloco-discreto.explicacao b{color:var(--ink);}
+  .bloco-discreto.explicacao p{margin:0 0 9px;}
+  .bloco-discreto.explicacao p:last-child{margin:0;}
   .stats-sub{font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--ink-soft); text-align:center; margin:8px 0 0;}
   body::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
@@ -1150,12 +1154,15 @@
     font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; text-transform:uppercase;
   }
   .admin-tabela{margin-top:12px; display:flex; flex-direction:column; gap:2px; font-size:13.5px;}
-  .admin-linha{display:grid; grid-template-columns:1fr auto auto auto; gap:10px; align-items:center; padding:7px 10px; border-radius:8px;}
+  /* minmax(0,1fr) na primeira coluna e gap menor: com fonte do sistema grande
+     numa tela de 320px, as colunas de numero empurravam a tabela para fora. */
+  .admin-linha{display:grid; grid-template-columns:minmax(0,1fr) auto auto auto; gap:6px; align-items:center; padding:7px 10px; border-radius:8px;}
+  .admin-linha > span:first-child{min-width:0; overflow-wrap:anywhere;}
   .admin-linha:nth-child(odd){background:var(--tint-violet);}
   .admin-linha.cabecalho{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); background:none;}
-  .admin-linha span:not(:first-child){min-width:44px; text-align:right; font-variant-numeric:tabular-nums;}
+  .admin-linha span:not(:first-child){min-width:38px; text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
   .admin-linha b{color:var(--violet);}
-  .admin-tabela.tres .admin-linha{grid-template-columns:1fr auto auto;}
+  .admin-tabela.tres .admin-linha{grid-template-columns:minmax(0,1fr) auto auto;}
   .admin-erradas{margin:0 0 4px; padding-left:18px; font-size:12.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:6px;}
   .admin-erradas b{color:var(--violet);}
   .admin-pergunta{color:var(--ink); font-size:12px;}
@@ -3309,7 +3316,6 @@ async function marcarConcluido(btn){
   // Sem isto, marcar um dia passado salvava certo mas a régua de dias e o
   // calendário continuavam mostrando o dia como não estudado até recarregar.
   atualizarMarcacoesDoDia(lessonId, dayId);
-  verificarSemanaFechada();
 
   // Historico privado do ranking: roda sempre, mesmo sem login e sem
   // opt-in (so grava local; se estiver logado, sobe sozinho no proximo sync).
@@ -4855,8 +4861,7 @@ function renderSemanasChart(){
    calendario aparece de fato na tela, uma vez por semana.
    Se a pessoa fechar o app antes de descer, o aviso continua guardado e toca na
    proxima vez que ela abrir o Progresso. */
-const SEMANA_PENDENTE = 'semana-fechada-pendente';
-const SEMANA_JA_FOI   = 'semana-fechada-comemorada';
+const SEMANA_JA_FOI = 'semana-fechada-comemorada';
 
 function semanaIdDeHoje(){
   const d = new Date(); d.setHours(0,0,0,0);
@@ -4864,23 +4869,27 @@ function semanaIdDeHoje(){
   return dateKey(d);
 }
 
-// Chamada depois de marcar dia ou terminar quiz: se a semana fechou agora,
-// agenda a comemoracao em vez de tocar no vazio.
-function verificarSemanaFechada(){
+// A semana esta fechada? Calculado na hora, a partir do progresso. Antes isso
+// era um "aviso guardado" gravado na hora de marcar o dia - e aviso guardado se
+// perde: quem marcasse o ultimo dia em outro aparelho, ou limpasse os dados,
+// nunca mais veria a comemoracao daquela semana.
+function semanaEstaFechada(){
   try{
-    const semana = semanaIdDeHoje();
-    if(localStorage.getItem(SEMANA_JA_FOI) === semana) return;
     const progressMap = buildProgressMap();
-    const domingo = new Date(semana + 'T00:00:00');
-    let feitos = 0;
+    const domingo = new Date(semanaIdDeHoje() + 'T00:00:00');
     for(let i = 0; i < 7; i++){
       const d = new Date(domingo); d.setDate(domingo.getDate() + i);
       const info = progressMap[dateKey(d)];
-      if(info && info.studied) feitos++;
+      if(!info || !info.studied) return false;
     }
-    if(feitos >= 7) localStorage.setItem(SEMANA_PENDENTE, semana);
-  }catch(e){}
+    return true;
+  }catch(e){ return false; }
 }
+
+// Uma vez por dia: a chave guarda semana + dia. Assim, enquanto a semana
+// estiver fechada, a pessoa reve a comemoracao uma vez a cada dia que abrir -
+// e nao mais que isso, por mais que role a tela para cima e para baixo.
+function marcaDeHoje(){ return semanaIdDeHoje() + '|' + dateKey(new Date()); }
 
 // Desenha um raio curto: halo azul desfocado atras, nucleo branco fino na
 // frente - e' a dupla camada que separa um raio de um risco na tela.
@@ -4966,12 +4975,13 @@ async function eletrizarSemana(grade){
 // Medindo o retangulo na rolagem em vez de IntersectionObserver: o observer
 // depende de a aba estar considerada visivel pelo navegador e devolve 0 em
 // varias situacoes (aba em segundo plano, painel escondido, WebView). A conta
-// na mao funciona em qualquer lugar e custa quase nada - so roda enquanto a
-// comemoracao esta pendente, e se desliga no primeiro disparo.
+// na mao funciona em qualquer lugar e custa quase nada - so roda enquanto ha
+// comemoracao a fazer, e se desliga no primeiro disparo.
 function agendarRaioDaSemana(){
-  let pendente = null;
-  try{ pendente = localStorage.getItem(SEMANA_PENDENTE); }catch(e){}
-  if(!pendente || pendente !== semanaIdDeHoje()) return;
+  let jaFoi = null;
+  try{ jaFoi = localStorage.getItem(SEMANA_JA_FOI); }catch(e){}
+  if(jaFoi === marcaDeHoje()) return;        // ja' comemorou hoje
+  if(!semanaEstaFechada()) return;
 
   const grade = document.querySelector('#stats-container .cal-grid');
   if(!grade) return;
@@ -4984,17 +4994,15 @@ function agendarRaioDaSemana(){
     const naTela = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
     if(naTela / r.height < 0.6) return;
     feito = true;
+    window.removeEventListener('scroll', olhar);
     // um respiro antes de disparar: a pessoa ainda esta parando de rolar
     setTimeout(async () => {
       const comemorou = await eletrizarSemana(grade);
       if(comemorou){
-        try{
-          localStorage.removeItem(SEMANA_PENDENTE);
-          localStorage.setItem(SEMANA_JA_FOI, pendente);
-        }catch(e){}
+        try{ localStorage.setItem(SEMANA_JA_FOI, marcaDeHoje()); }catch(e){}
       }else{
         // a semana nao estava inteira na tela (visao de mes com a semana
-        // partida, ou outro mes aberto): deixa guardado e volta a espreitar
+        // partida, ou outro mes aberto): volta a espreitar
         feito = false;
         window.addEventListener('scroll', olhar, { passive: true });
       }
@@ -5232,7 +5240,6 @@ function renderStats(){
     </div>
     <div class="ranking-panel active" data-panel="semana"><p class="conta-note">${t('common.carregando')}</p></div>
     <div class="ranking-panel" data-panel="trimestre"></div>
-    <p class="conta-note" style="margin-top:10px;">${t('ranking.comoPontua')}</p>
   </div>
 
   <div class="stats-section-label">${t('stats.historico')}</div>
@@ -5243,6 +5250,8 @@ function renderStats(){
     <div class="stats-card">
       <h3><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${t('stats.pontosTitulo')}</h3>
       ${renderPontosChart(progressMap)}
+      <button class="link-discreto" onclick="alternarBlocoDiscreto(this)">${t('stats.comoPontua')}</button>
+      <div class="bloco-discreto explicacao" hidden>${t('stats.comoPontuaTexto')}</div>
       <button class="link-discreto" onclick="alternarBlocoDiscreto(this)">${t('stats.ritmoTitulo')}</button>
       <div class="bloco-discreto" hidden>${renderRitmoSemana(progressMap)}</div>
       ${(function(){ const g = renderSemanasChart(); return g ? `<button class="link-discreto" onclick="alternarBlocoDiscreto(this)">${t('stats.semanasTitulo')}</button><div class="bloco-discreto" hidden>${g}</div>` : ''; })()}
@@ -5262,7 +5271,7 @@ function renderStats(){
       ${renderScoreChart(progressMap)}
     </div>
   </div>
-  <footer>${t('stats.instrucao')}</footer>`;
+  `;
   container.innerHTML = html;
   carregarRankingTab('semana');
 }
@@ -6873,7 +6882,6 @@ const UI_STRINGS = {
     'stats.semana': 'Esta semana',
     'stats.trimestre': 'Trimestre',
     'stats.historico': 'Histórico',
-    'stats.instrucao': 'Toque em um dia do calendário pra registrar ou editar o que você fez.',
     'stats.sequenciaDias': 'Sequência de dias',
     'stats.tempoTotal': 'Tempo total de estudo',
     'stats.tempoPorDia': 'Tempo de estudo por dia',
@@ -6919,6 +6927,8 @@ const UI_STRINGS = {
     'stats.pontosNotaFalta': 'acerto a conquistar',
     'stats.pontosSemEstudo': 'dias sem estudo',
     'stats.pontosAindaVem': 'dias que ainda vêm',
+    'stats.comoPontua': 'Como a pontuação funciona',
+    'stats.comoPontuaTexto': '<p>São <b>100 pontos por semana</b>, divididos em duas partes.</p><p><b>60 pelos dias.</b> Cada dia estudado vale um sétimo desses 60. Estudar no próprio dia vale o valor cheio; no dia seguinte vale 85%, e vai caindo até o mínimo de 10%.</p><p><b>40 pela nota.</b> A média dos seus acertos nos quizzes da semana, com o mesmo desconto por atraso. Ela ainda é multiplicada por um fator de tempo: responder em até 1 minuto vale o valor cheio e, a partir de 5 minutos, vale metade.</p><p>Dias que ainda não chegaram <b>não contam contra você</b> — eles aparecem em cinza na barra.</p>',
     'stats.ritmoTitulo': 'O ritmo da sua semana',
     'stats.ritmoSub': 'em quantas semanas do trimestre você estudou em cada dia',
     'stats.semanasTitulo': 'Suas semanas',
@@ -7002,7 +7012,6 @@ const UI_STRINGS = {
     'ranking.verMais': 'Ver mais ${n}',
     'ranking.verMenos': 'Ver menos',
     'ranking.pts': 'pts',
-    'ranking.comoPontua': 'Pontos: dias estudados (60) + notas dos quizzes (40). Fazer depois do dia vale menos (−15% por dia de atraso) e responder o quiz mais rápido vale mais.',
     'conta.meusFavoritos': 'Meus versículos favoritos',
     'conta.semFavoritos': 'Nenhum favorito ainda. Toque na estrela ⭐ ao ler um versículo ou capítulo, na Bíblia ou no Plano Bíblico, pra salvar aqui.',
     'conta.zerarTudoNota': 'Apaga lições, plano bíblico e metas — sem volta',
@@ -7329,7 +7338,6 @@ const UI_STRINGS = {
     'stats.semana': 'This week',
     'stats.trimestre': 'Quarter',
     'stats.historico': 'History',
-    'stats.instrucao': 'Tap a day on the calendar to log or edit what you did.',
     'stats.sequenciaDias': 'Day streak',
     'stats.tempoTotal': 'Total study time',
     'stats.tempoPorDia': 'Study time per day',
@@ -7375,6 +7383,8 @@ const UI_STRINGS = {
     'stats.pontosNotaFalta': 'score still open',
     'stats.pontosSemEstudo': 'days without study',
     'stats.pontosAindaVem': 'days still to come',
+    'stats.comoPontua': 'How the score works',
+    'stats.comoPontuaTexto': '<p>There are <b>100 points per week</b>, split in two.</p><p><b>60 for the days.</b> Each day studied is worth a seventh of those 60. Studying on the day itself is worth full value; the next day is worth 85%, dropping to a floor of 10%.</p><p><b>40 for the score.</b> Your average on the quizzes of the week, with the same lateness discount. It is also multiplied by a time factor: answering within 1 minute is worth full value and, from 5 minutes on, half.</p><p>Days that have not arrived yet <b>do not count against you</b> — they show in grey on the bar.</p>',
     'stats.ritmoTitulo': 'Your week rhythm',
     'stats.ritmoSub': 'in how many weeks of the quarter you studied on each day',
     'stats.semanasTitulo': 'Your weeks',
@@ -7458,7 +7468,6 @@ const UI_STRINGS = {
     'ranking.verMais': 'Show ${n} more',
     'ranking.verMenos': 'Show less',
     'ranking.pts': 'pts',
-    'ranking.comoPontua': 'Points: days studied (60) + quiz scores (40). Doing an activity after its day is worth less (−15% per day late), and answering the quiz faster is worth more.',
     'conta.meusFavoritos': 'My favorite verses',
     'conta.semFavoritos': 'No favorites yet. Tap the star ⭐ while reading a verse or chapter, in the Bible or in the Bible Plan, to save it here.',
     'conta.zerarTudoNota': "Deletes lessons, Bible plan, and goals — can't be undone",
@@ -7785,7 +7794,6 @@ const UI_STRINGS = {
     'stats.semana': 'Esta semana',
     'stats.trimestre': 'Trimestre',
     'stats.historico': 'Historial',
-    'stats.instrucao': 'Toca un día del calendario para registrar o editar lo que hiciste.',
     'stats.sequenciaDias': 'Racha de días',
     'stats.tempoTotal': 'Tiempo total de estudio',
     'stats.tempoPorDia': 'Tiempo de estudio por día',
@@ -7831,6 +7839,8 @@ const UI_STRINGS = {
     'stats.pontosNotaFalta': 'acierto por conquistar',
     'stats.pontosSemEstudo': 'días sin estudio',
     'stats.pontosAindaVem': 'días que aún vienen',
+    'stats.comoPontua': 'Cómo funciona la puntuación',
+    'stats.comoPontuaTexto': '<p>Son <b>100 puntos por semana</b>, divididos en dos partes.</p><p><b>60 por los días.</b> Cada día estudiado vale un séptimo de esos 60. Estudiar el mismo día vale el valor completo; al día siguiente vale 85%, y baja hasta el mínimo de 10%.</p><p><b>40 por la nota.</b> El promedio de tus aciertos en los quizzes de la semana, con el mismo descuento por retraso. Además se multiplica por un factor de tiempo: responder en hasta 1 minuto vale el valor completo y, a partir de 5 minutos, la mitad.</p><p>Los días que aún no llegaron <b>no cuentan en tu contra</b> — aparecen en gris en la barra.</p>',
     'stats.ritmoTitulo': 'El ritmo de tu semana',
     'stats.ritmoSub': 'en cuántas semanas del trimestre estudiaste cada día',
     'stats.semanasTitulo': 'Tus semanas',
@@ -7914,7 +7924,6 @@ const UI_STRINGS = {
     'ranking.verMais': 'Ver ${n} más',
     'ranking.verMenos': 'Ver menos',
     'ranking.pts': 'pts',
-    'ranking.comoPontua': 'Puntos: días estudiados (60) + notas de los quizzes (40). Hacerlo después del día vale menos (−15% por día de atraso) y responder el quiz más rápido vale más.',
     'conta.meusFavoritos': 'Mis versículos favoritos',
     'conta.semFavoritos': 'Todavía no hay favoritos. Toca la estrella ⭐ al leer un versículo o capítulo, en la Biblia o en el Plan Bíblico, para guardarlo aquí.',
     'conta.zerarTudoNota': 'Borra lecciones, plan bíblico y metas — no se puede deshacer',
