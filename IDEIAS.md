@@ -412,3 +412,7 @@ aparece em português (`IDIOMAS_COM_CURIOSIDADE` no index.html).
 | Ordem dos comentários | cronológica, mais antigo primeiro |
 | Repositório público com o texto da lição | **sim, mantém** — decisão do Willian em 16/10/2026. A igreja foi informada; se houver objeção, que venha por e-mail. Não reabrir sem um pedido formal da CPB ou da igreja |
 | Nome do app | **Sinergia JA**, em todo lugar — título, lojas, convite, QR e compartilhamento |
+| Aba Resumo | **fica** — decisão do Willian em 16/10/2026. A ideia de retirar está encerrada; não reabrir |
+| Atribuição de origem no link compartilhado (`?de=`) | não — Willian dispensou em 16/10/2026 |
+| Fator de tempo do quiz (premia pressa) | mantém, mas como critério de **desempate**, não como peso do dia a dia — decisão de 16/10/2026 |
+| Ordem dos livros da Série do Conflito | ordem da história (Patriarcas → Profetas e Reis → Desejado → Atos → Conflito), na Biblioteca e no plano |
