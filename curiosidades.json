@@ -1,187 +1,1444 @@
 {
-  "versao": 1,
-  "atualizado": "2026-10-01",
-  "limites": { "curta": 95, "longa": 200, "fonte": 40 },
-  "observacao": "Fatos verificados em fonte primaria e reescritos com texto proprio. Nada copiado. Nada doutrinario. Faltam 61 itens para cobrir o ano sem repetir muito (182 dias: 26 licoes x 7). Proximos lotes sugeridos: cotidiano e materiais, mundo romano e viagem, patriarcas e Egito, profetas e templo.",
+  "versao": 2,
+  "atualizado": "2026-10-16",
+  "limites": {
+    "curta": 95,
+    "longa": 200,
+    "fonte": 40
+  },
+  "observacao": "Fatos verificados em fonte primaria e reescritos com texto proprio. Nada copiado. Nada doutrinario. 91 itens para 182 dias (26 licoes x 7): cada um aparece em media duas vezes no ano. Superlativo (\"o unico do mundo\") envelhece: revisar uma vez por ano.",
   "curiosidades": [
-    { "id": "tel-dan", "etiquetas": ["reis"], "categoria": "arqueologia",
-      "fonte": "The Jewish Museum, Nova York", "url": "https://thejewishmuseum.org/exhibitions/tel-dan-stele/",
-      "texto": { "pt": {
-        "curta": "Pedra de 2.800 anos cita a \"casa de Davi\": a menção mais antiga a Davi fora da Bíblia.",
-        "longa": "Em Tel Dan, em 1993, achou-se um bloco de basalto onde um rei inimigo se gaba de ter derrotado a \"casa de Davi\". É a citação mais antiga a Davi fora da Bíblia." } } },
-
-    { "id": "ketef-hinnom", "etiquetas": ["escrita"], "categoria": "manuscritos",
-      "fonte": "Museum of the Bible", "url": "https://www.museumofthebible.org/book-minute/the-silver-scrolls-ketef-hinnom-inscriptions",
-      "texto": { "pt": {
-        "curta": "O texto bíblico mais antigo que existe é um rolinho de prata do tamanho de um dedo.",
-        "longa": "Dois amuletos de prata achados em Jerusalém em 1979 trazem a bênção de Números 6. Têm uns 2.600 anos e levaram três anos para serem desenrolados sem virar pó." } } },
-
-    { "id": "en-gedi", "etiquetas": ["escrita"], "categoria": "manuscritos",
-      "fonte": "Science Advances (2016)", "url": "https://www.science.org/doi/10.1126/sciadv.1601247",
-      "texto": { "pt": {
-        "curta": "Um rolo virou carvão num incêndio e só foi lido 1.700 anos depois, por tomografia.",
-        "longa": "O rolo de En-Gedi queimou e ficou impossível de abrir. Em 2016, cientistas o desenrolaram digitalmente, sem encostar nele, e leram as duas primeiras colunas de Levítico." } } },
-
-    { "id": "rolo-isaias", "etiquetas": ["profetas", "escrita"], "categoria": "manuscritos",
-      "fonte": "The Israel Museum, Jerusalém", "url": "http://dss.collections.imj.org.il/isaiah",
-      "texto": { "pt": {
-        "curta": "O rolo de Isaías do mar Morto tem 7 metros, 2.100 anos, e está exposto em Jerusalém.",
-        "longa": "Achado em Qumran em 1947, o Grande Rolo de Isaías tem 7 m, 54 colunas e os 66 capítulos do livro. É mil anos mais velho que qualquer cópia hebraica conhecida antes dele." } } },
-
-    { "id": "sinaiticus", "etiquetas": ["escrita"], "categoria": "manuscritos",
-      "fonte": "Codex Sinaiticus Project", "url": "https://codexsinaiticus.org",
-      "texto": { "pt": {
-        "curta": "A Bíblia completa mais antiga que sobrou está picada entre quatro países diferentes.",
-        "longa": "O Codex Sinaiticus, do século 4, hoje está dividido entre Londres, Leipzig, São Petersburgo e o mosteiro do Sinai. Em 2009 as partes foram remontadas online, de graça." } } },
-
-    { "id": "p52", "etiquetas": ["escrita", "evangelhos"], "categoria": "manuscritos",
-      "fonte": "John Rylands Library", "url": "https://www.library.manchester.ac.uk/rylands/",
-      "texto": { "pt": {
-        "curta": "O pedaço mais antigo do Novo Testamento tem o tamanho de um cartão de crédito.",
-        "longa": "O fragmento P52, com umas linhas de João 18, mede 8,9 x 6,4 cm. Ficou anos numa caixa em Manchester até alguém reparar, em 1934, no que estava escrito nele." } } },
-
-    { "id": "grego-sem-espaco", "etiquetas": ["escrita"], "categoria": "lingua",
-      "fonte": "Codex Sinaiticus Project", "url": "https://codexsinaiticus.org",
-      "texto": { "pt": {
-        "curta": "Os manuscritos gregos não tinham espaço entre palavras nem pontuação. Nada.",
-        "longa": "Ler no século 1 era decifrar: o grego vinha tudosemespaconempontuacaonemmaiuscula. Papiro era caro, e economizar espaço valia mais do que facilitar a vida de quem lia." } } },
-
-    { "id": "hebraico-sem-vogais", "etiquetas": ["escrita"], "categoria": "lingua",
-      "fonte": "Biblical Archaeology Society", "url": "https://library.biblicalarchaeology.org/sidebar/who-were-the-masoretes/",
-      "texto": { "pt": {
-        "curta": "O hebraico bíblico foi escrito sem vogais por mais de mil anos.",
-        "longa": "Só consoantes. As vogais só foram marcadas por escribas em Tiberíades, entre os séculos 8 e 10, para travar a pronúncia antes que ela se perdesse de vez." } } },
-
-    { "id": "obelisco-negro", "etiquetas": ["reis"], "categoria": "arqueologia",
-      "fonte": "British Museum", "url": "https://www.britishmuseum.org/collection/object/W_1848-1104-1",
-      "texto": { "pt": {
-        "curta": "A imagem mais antiga de um rei de Israel mostra ele de joelhos, no British Museum.",
-        "longa": "No Obelisco Negro, de 825 a.C., o rei Jeú aparece curvado diante do assírio Salmaneser III. É a figura mais antiga de um rei israelita que chegou até nós." } } },
-
-    { "id": "estela-mesa", "etiquetas": ["reis"], "categoria": "arqueologia",
-      "fonte": "Musée du Louvre", "url": "https://collections.louvre.fr/en/ark:/53355/cl010171776",
-      "texto": { "pt": {
-        "curta": "Uma pedra que cita o rei Onri foi quebrada em pedaços e salva por um decalque de papel.",
-        "longa": "A Estela de Mesa, de 840 a.C., cita Onri, rei de Israel. Pouco depois de achada, em 1868, foi despedaçada — mas um decalque feito antes salvou o texto. Está no Louvre." } } },
-
-    { "id": "selo-ezequias", "etiquetas": ["reis"], "categoria": "arqueologia",
-      "fonte": "Hebrew University of Jerusalem", "url": "https://www.sciencedaily.com/releases/2015/12/151202132519.htm",
-      "texto": { "pt": {
-        "curta": "O selo do rei Ezequias apareceu num lixão antigo ao lado do Monte do Templo.",
-        "longa": "Um disco de barro de 13 mm com \"Ezequias, filho de Acaz, rei de Judá\" saiu em 2015 de um depósito de lixo em Jerusalém. É o 1º selo de um rei de Judá achado em escavação." } } },
-
-    { "id": "tunel-ezequias", "etiquetas": ["reis", "templo"], "categoria": "arqueologia",
-      "fonte": "Istanbul Archaeological Museums", "url": "https://www.biblicalarchaeology.org/daily/biblical-artifacts/the-siloam-pool-inscription/",
-      "texto": { "pt": {
-        "curta": "Duas equipes cavaram um túnel de 533 m dentro da rocha e se encontraram no meio.",
-        "longa": "O túnel de Ezequias leva água por 533 m sob Jerusalém. Uma inscrição achada em 1880 conta a hora em que os dois times, cavando de pontas opostas, ouviram a picareta do outro." } } },
-
-    { "id": "racoes-joaquim", "etiquetas": ["exilio"], "categoria": "arqueologia",
-      "fonte": "Pergamonmuseum, Berlim", "url": "https://www.smb.museum/en/museums-institutions/pergamonmuseum/",
-      "texto": { "pt": {
-        "curta": "Existem recibos de comida em barro com o nome de um rei de Judá preso na Babilônia.",
-        "longa": "Tabuletas achadas perto do Portão de Ishtar listam rações de óleo para \"Joaquim, rei de Judá\" e para os filhos dele. Estão no Museu de Pérgamo, em Berlim." } } },
-
-    { "id": "nebo-sarsequim", "etiquetas": ["exilio", "profetas"], "categoria": "arqueologia",
-      "fonte": "British Museum", "url": "https://www.britishmuseum.org/collection",
-      "texto": { "pt": {
-        "curta": "Uma tabuleta ficou 130 anos numa gaveta de museu até alguém ler o nome escrito nela.",
-        "longa": "Em 2007, um pesquisador abriu uma caixa no British Museum e leu \"Nebo-Sarsequim\", oficial babilônico citado em Jeremias 39. O barro estava ali, sem tradução, desde 1920." } } },
-
-    { "id": "pedra-magdala", "etiquetas": ["templo", "evangelhos"], "categoria": "arqueologia",
-      "fonte": "Israel Antiquities Authority", "url": "https://www.biblicalarchaeology.org/daily/ancient-cultures/ancient-israel/the-magdala-stone/",
-      "texto": { "pt": {
-        "curta": "A imagem mais antiga da menorá do Templo foi feita por quem talvez a tenha visto.",
-        "longa": "A Pedra de Magdala, achada em 2009 numa sinagoga do século 1, traz a menorá esculpida. É a representação mais antiga conhecida, e foi feita com o Templo ainda de pé." } } },
-
-    { "id": "tanque-siloe", "etiquetas": ["evangelhos"], "categoria": "arqueologia",
-      "fonte": "Israel Antiquities Authority", "url": "https://www.biblicalarchaeology.org/daily/biblical-sites-places/jerusalem/the-siloam-pool-where-jesus-cured-the-blind-man/",
-      "texto": { "pt": {
-        "curta": "Uma equipe consertando esgoto em 2004 esbarrou no tanque de Siloé por acidente.",
-        "longa": "Trabalhadores trocavam um cano em Jerusalém quando apareceram dois degraus de pedra. Era o tanque de Siloé do século 1, perdido havia séculos. A obra parou na hora." } } },
-
-    { "id": "calcanhar-prego", "etiquetas": ["evangelhos"], "categoria": "arqueologia",
-      "fonte": "Biblical Archaeology Society", "url": "https://www.biblicalarchaeology.org/daily/biblical-topics/crucifixion/a-tomb-in-jerusalem-reveals-the-history-of-crucifixion-and-roman-crucifixion-methods/",
-      "texto": { "pt": {
-        "curta": "Só um crucificado já foi achado em Jerusalém: um prego entortado num calcanhar.",
-        "longa": "Em 1968, numa urna funerária, apareceu um calcanhar atravessado por um prego de 11,5 cm. Ele entortou num nó da madeira e não pôde ser arrancado — por isso a prova sobrou." } } },
-
-    { "id": "barco-galileia", "etiquetas": ["evangelhos", "cotidiano"], "categoria": "arqueologia",
-      "fonte": "Museu Yigal Allon, Ginosar", "url": "https://www.biblicalarchaeology.org/daily/biblical-artifacts/the-galilee-boat/",
-      "texto": { "pt": {
-        "curta": "Uma seca em 1986 revelou um barco de pesca do século 1 no mar da Galileia.",
-        "longa": "Dois irmãos pescadores viram madeira na lama. O barco, de 8,2 m, passou 12 anos num banho de cera para não esfarelar. Nada o liga a Jesus, mas é o barco da época dele." } } },
-
-    { "id": "pedra-pilatos", "etiquetas": ["evangelhos"], "categoria": "arqueologia",
-      "fonte": "The Israel Museum, Jerusalém", "url": "https://www.imj.org.il/en/collections",
-      "texto": { "pt": {
-        "curta": "Existe uma única pedra no mundo com o nome de Pôncio Pilatos gravado.",
-        "longa": "Achada em 1961 em Cesareia, reaproveitada numa escada de teatro, a pedra traz \"Pôncio Pilatos, prefeito da Judeia\". É a única inscrição dele já encontrada." } } },
-
-    { "id": "priene", "etiquetas": ["paulo", "escrita"], "categoria": "lingua",
-      "fonte": "Bibelhaus Frankfurt", "url": "https://www.bibelhaus-frankfurt.de/en/bimumag/the-special-object/calendar-inscription-from-priene",
-      "texto": { "pt": {
-        "curta": "\"Evangelho\" era propaganda do império romano antes de ser palavra cristã.",
-        "longa": "Uma inscrição de 9 a.C. em Priene chama o aniversário do imperador Augusto de \"evangelho\" (euangelion) para o mundo. Os cristãos pegaram a palavra do marketing imperial." } } },
-
-    { "id": "purpura-tiro", "etiquetas": ["cotidiano", "paulo"], "categoria": "cotidiano",
-      "fonte": "University of Chicago Library", "url": "https://www.lib.uchicago.edu/collex/exhibits/originsof-color/organic-dyes-and-lakes/tyrian-purple/",
-      "texto": { "pt": {
-        "curta": "Para fazer 1 grama de púrpura, matavam cerca de 10 mil caramujos.",
-        "longa": "A púrpura de Tiro saía da glândula de caramujos murex: 10 mil bichos por grama. Por isso a cor custava mais que ouro e era roupa de imperador — e Lídia vendia isso." } } },
-
-    { "id": "mar-morto", "etiquetas": ["geografia"], "categoria": "geografia",
-      "fonte": "NASA Earth Observatory", "url": "https://earthobservatory.nasa.gov/world-of-change/DeadSea",
-      "texto": { "pt": {
-        "curta": "A margem do mar Morto é o ponto de terra mais baixo do planeta e afunda 1 m por ano.",
-        "longa": "Fica a uns 430 m abaixo do nível do mar. Com o rio Jordão desviado para irrigação, o nível cai mais de 1 m por ano e o chão em volta abre crateras." } } },
-
-    { "id": "luther-warren", "etiquetas": ["adventista"], "categoria": "historia-adventista",
-      "fonte": "Enciclopédia Adventista (ESDA)", "url": "https://encyclopedia.adventist.org/article?id=7AD1",
-      "texto": { "pt": {
-        "curta": "O primeiro clube de jovens adventistas foi criado por um garoto de 14 anos, num sótão.",
-        "longa": "Em 1879, em Hazelton (Michigan), Luther Warren, de 14 anos, e Harry Fenner, de 17, juntaram nove meninos num sótão. Dali saiu toda a estrutura de ministério jovem." } } },
-
-    { "id": "sucrilhos", "etiquetas": ["adventista"], "categoria": "historia-adventista",
-      "fonte": "National Inventors Hall of Fame", "url": "https://www.invent.org/inductees/john-h-kellogg",
-      "texto": { "pt": {
-        "curta": "O sucrilhos nasceu de um erro numa cozinha de hospital, em 1894.",
-        "longa": "No Sanatório de Battle Creek, uma massa de trigo ficou esquecida e fermentou. Passada no rolo, virou floco. Os irmãos Kellogg foram parar na justiça brigando pela patente." } } },
-
-    { "id": "loma-linda", "etiquetas": ["adventista"], "categoria": "historia-adventista",
-      "fonte": "Adventist Health Study", "url": "https://adventisthealthstudy.org/studies/AHS-1/findings-longevity",
-      "texto": { "pt": {
-        "curta": "Loma Linda, na Califórnia, é a única Blue Zone dos Estados Unidos.",
-        "longa": "Num estudo da Universidade de Loma Linda, homens adventistas viveram 7,3 anos a mais que outros californianos; mulheres, 4,4 anos. Entre os vegetarianos, 9,5 e 6,1." } } },
-
-    { "id": "relevos-laquis", "etiquetas": ["reis"], "categoria": "arqueologia",
-      "fonte": "British Museum", "url": "https://www.britishmuseum.org/collection",
-      "texto": { "pt": {
-        "curta": "Um rei assírio mandou esculpir 18 metros de parede só para contar um cerco.",
-        "longa": "Os relevos de Láquis cobriam a sala central do palácio de Senaqueribe em Nínive: 18 m de muralha, aríetes e prisioneiros, em sequência, como uma HQ. Hoje estão em Londres." } } },
-
-    { "id": "brasileiros-laquis", "etiquetas": ["reis", "geral"], "categoria": "arqueologia",
-      "fonte": "Levant 51/1 (2019); UNASP", "url": "https://www.afhu.org/2020/02/18/hebrew-university-team-unearths-canaanite-temple-at-lachish/",
-      "texto": { "pt": {
-        "curta": "Tem brasileiro escavando em Israel: uma equipe do Brasil cava em Láquis todo ano.",
-        "longa": "Em Tel Láquis, a expedição da Universidade Hebraica achou um templo canaanita de 1150 a.C. com joias de ouro. Uma equipe brasileira do UNASP trabalha na escavação." } } },
-
-    { "id": "qumran-fragmentos", "etiquetas": ["escrita"], "categoria": "manuscritos",
-      "fonte": "The Israel Museum, Jerusalém", "url": "https://www.deadseascrolls.org.il/learn-about-the-scrolls/discovery-sites",
-      "texto": { "pt": {
-        "curta": "São 25 mil fragmentos nos manuscritos do mar Morto. Uma caverna guardou 15 mil.",
-        "longa": "De 11 cavernas em Qumran saíram uns 25 mil pedaços de couro e papiro, remontados em cerca de 950 manuscritos. Só a caverna 4 rendeu 15 mil fragmentos." } } },
-
-    { "id": "delfos-galio", "etiquetas": ["paulo"], "categoria": "arqueologia",
-      "fonte": "Bible Odyssey (SBL)", "url": "https://www.bibleodyssey.org/articles/erastus-gallio-and-paul/",
-      "texto": { "pt": {
-        "curta": "Uma pedra quebrada na Grécia é o relógio que data a vida de Paulo.",
-        "longa": "A inscrição de Delfos fixa quando Gálio governou a Acaia: 51-52 d.C. Como Paulo foi julgado por ele em Corinto, dá para datar o resto da vida dele a partir daí." } } },
-
-    { "id": "ester-sem-deus", "etiquetas": ["geral", "exilio"], "categoria": "lingua",
-      "fonte": "Bible Odyssey (SBL)", "url": "https://www.bibleodyssey.org/articles/where-is-god-in-esther/",
-      "texto": { "pt": {
-        "curta": "O livro de Ester atravessa 10 capítulos sem citar Deus uma única vez.",
-        "longa": "Nem Deus, nem oração, nem Templo, nem lei. Ester e Cantares são os dois livros da Bíblia hebraica em que o nome de Deus simplesmente não aparece." } } }
+    {
+      "id": "tel-dan",
+      "etiquetas": [
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "The Jewish Museum, Nova York",
+      "url": "https://thejewishmuseum.org/exhibitions/tel-dan-stele/",
+      "texto": {
+        "pt": {
+          "curta": "Pedra de 2.800 anos cita a \"casa de Davi\": a menção mais antiga a Davi fora da Bíblia.",
+          "longa": "Em Tel Dan, em 1993, achou-se um bloco de basalto onde um rei inimigo se gaba de ter derrotado a \"casa de Davi\". É a citação mais antiga a Davi fora da Bíblia."
+        }
+      }
+    },
+    {
+      "id": "ketef-hinnom",
+      "etiquetas": [
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "Museum of the Bible",
+      "url": "https://www.museumofthebible.org/book-minute/the-silver-scrolls-ketef-hinnom-inscriptions",
+      "texto": {
+        "pt": {
+          "curta": "O texto bíblico mais antigo que existe é um rolinho de prata do tamanho de um dedo.",
+          "longa": "Dois amuletos de prata achados em Jerusalém em 1979 trazem a bênção de Números 6. Têm uns 2.600 anos e levaram três anos para serem desenrolados sem virar pó."
+        }
+      }
+    },
+    {
+      "id": "en-gedi",
+      "etiquetas": [
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "Science Advances (2016)",
+      "url": "https://www.science.org/doi/10.1126/sciadv.1601247",
+      "texto": {
+        "pt": {
+          "curta": "Um rolo virou carvão num incêndio e só foi lido 1.700 anos depois, por tomografia.",
+          "longa": "O rolo de En-Gedi queimou e ficou impossível de abrir. Em 2016, cientistas o desenrolaram digitalmente, sem encostar nele, e leram as duas primeiras colunas de Levítico."
+        }
+      }
+    },
+    {
+      "id": "rolo-isaias",
+      "etiquetas": [
+        "profetas",
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "http://dss.collections.imj.org.il/isaiah",
+      "texto": {
+        "pt": {
+          "curta": "O rolo de Isaías do mar Morto tem 7 metros, 2.100 anos, e está exposto em Jerusalém.",
+          "longa": "Achado em Qumran em 1947, o Grande Rolo de Isaías tem 7 m, 54 colunas e os 66 capítulos do livro. É mil anos mais velho que qualquer cópia hebraica conhecida antes dele."
+        }
+      }
+    },
+    {
+      "id": "sinaiticus",
+      "etiquetas": [
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "Codex Sinaiticus Project",
+      "url": "https://codexsinaiticus.org",
+      "texto": {
+        "pt": {
+          "curta": "A Bíblia completa mais antiga que sobrou está picada entre quatro países diferentes.",
+          "longa": "O Codex Sinaiticus, do século 4, hoje está dividido entre Londres, Leipzig, São Petersburgo e o mosteiro do Sinai. Em 2009 as partes foram remontadas online, de graça."
+        }
+      }
+    },
+    {
+      "id": "p52",
+      "etiquetas": [
+        "escrita",
+        "evangelhos"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "John Rylands Library",
+      "url": "https://www.library.manchester.ac.uk/rylands/",
+      "texto": {
+        "pt": {
+          "curta": "O pedaço mais antigo do Novo Testamento tem o tamanho de um cartão de crédito.",
+          "longa": "O fragmento P52, com umas linhas de João 18, mede 8,9 x 6,4 cm. Ficou anos numa caixa em Manchester até alguém reparar, em 1934, no que estava escrito nele."
+        }
+      }
+    },
+    {
+      "id": "grego-sem-espaco",
+      "etiquetas": [
+        "escrita"
+      ],
+      "categoria": "lingua",
+      "fonte": "Codex Sinaiticus Project",
+      "url": "https://codexsinaiticus.org",
+      "texto": {
+        "pt": {
+          "curta": "Os manuscritos gregos não tinham espaço entre palavras nem pontuação. Nada.",
+          "longa": "Ler no século 1 era decifrar: o grego vinha tudosemespaconempontuacaonemmaiuscula. Papiro era caro, e economizar espaço valia mais do que facilitar a vida de quem lia."
+        }
+      }
+    },
+    {
+      "id": "hebraico-sem-vogais",
+      "etiquetas": [
+        "escrita"
+      ],
+      "categoria": "lingua",
+      "fonte": "Biblical Archaeology Society",
+      "url": "https://library.biblicalarchaeology.org/sidebar/who-were-the-masoretes/",
+      "texto": {
+        "pt": {
+          "curta": "O hebraico bíblico foi escrito sem vogais por mais de mil anos.",
+          "longa": "Só consoantes. As vogais só foram marcadas por escribas em Tiberíades, entre os séculos 8 e 10, para travar a pronúncia antes que ela se perdesse de vez."
+        }
+      }
+    },
+    {
+      "id": "obelisco-negro",
+      "etiquetas": [
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection/object/W_1848-1104-1",
+      "texto": {
+        "pt": {
+          "curta": "A imagem mais antiga de um rei de Israel mostra ele de joelhos, no British Museum.",
+          "longa": "No Obelisco Negro, de 825 a.C., o rei Jeú aparece curvado diante do assírio Salmaneser III. É a figura mais antiga de um rei israelita que chegou até nós."
+        }
+      }
+    },
+    {
+      "id": "estela-mesa",
+      "etiquetas": [
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Musée du Louvre",
+      "url": "https://collections.louvre.fr/en/ark:/53355/cl010171776",
+      "texto": {
+        "pt": {
+          "curta": "Uma pedra que cita o rei Onri foi quebrada em pedaços e salva por um decalque de papel.",
+          "longa": "A Estela de Mesa, de 840 a.C., cita Onri, rei de Israel. Pouco depois de achada, em 1868, foi despedaçada — mas um decalque feito antes salvou o texto. Está no Louvre."
+        }
+      }
+    },
+    {
+      "id": "selo-ezequias",
+      "etiquetas": [
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Hebrew University of Jerusalem",
+      "url": "https://www.sciencedaily.com/releases/2015/12/151202132519.htm",
+      "texto": {
+        "pt": {
+          "curta": "O selo do rei Ezequias apareceu num lixão antigo ao lado do Monte do Templo.",
+          "longa": "Um disco de barro de 13 mm com \"Ezequias, filho de Acaz, rei de Judá\" saiu em 2015 de um depósito de lixo em Jerusalém. É o 1º selo de um rei de Judá achado em escavação."
+        }
+      }
+    },
+    {
+      "id": "tunel-ezequias",
+      "etiquetas": [
+        "reis",
+        "templo"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Istanbul Archaeological Museums",
+      "url": "https://www.biblicalarchaeology.org/daily/biblical-artifacts/the-siloam-pool-inscription/",
+      "texto": {
+        "pt": {
+          "curta": "Duas equipes cavaram um túnel de 533 m dentro da rocha e se encontraram no meio.",
+          "longa": "O túnel de Ezequias leva água por 533 m sob Jerusalém. Uma inscrição achada em 1880 conta a hora em que os dois times, cavando de pontas opostas, ouviram a picareta do outro."
+        }
+      }
+    },
+    {
+      "id": "racoes-joaquim",
+      "etiquetas": [
+        "exilio"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Pergamonmuseum, Berlim",
+      "url": "https://www.smb.museum/en/museums-institutions/pergamonmuseum/",
+      "texto": {
+        "pt": {
+          "curta": "Existem recibos de comida em barro com o nome de um rei de Judá preso na Babilônia.",
+          "longa": "Tabuletas achadas perto do Portão de Ishtar listam rações de óleo para \"Joaquim, rei de Judá\" e para os filhos dele. Estão no Museu de Pérgamo, em Berlim."
+        }
+      }
+    },
+    {
+      "id": "nebo-sarsequim",
+      "etiquetas": [
+        "exilio",
+        "profetas"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "Uma tabuleta ficou 130 anos numa gaveta de museu até alguém ler o nome escrito nela.",
+          "longa": "Em 2007, um pesquisador abriu uma caixa no British Museum e leu \"Nebo-Sarsequim\", oficial babilônico citado em Jeremias 39. O barro estava ali, sem tradução, desde 1920."
+        }
+      }
+    },
+    {
+      "id": "pedra-magdala",
+      "etiquetas": [
+        "templo",
+        "evangelhos"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Israel Antiquities Authority",
+      "url": "https://www.biblicalarchaeology.org/daily/ancient-cultures/ancient-israel/the-magdala-stone/",
+      "texto": {
+        "pt": {
+          "curta": "A imagem mais antiga da menorá do Templo foi feita por quem talvez a tenha visto.",
+          "longa": "A Pedra de Magdala, achada em 2009 numa sinagoga do século 1, traz a menorá esculpida. É a representação mais antiga conhecida, e foi feita com o Templo ainda de pé."
+        }
+      }
+    },
+    {
+      "id": "tanque-siloe",
+      "etiquetas": [
+        "evangelhos"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Israel Antiquities Authority",
+      "url": "https://www.biblicalarchaeology.org/daily/biblical-sites-places/jerusalem/the-siloam-pool-where-jesus-cured-the-blind-man/",
+      "texto": {
+        "pt": {
+          "curta": "Uma equipe consertando esgoto em 2004 esbarrou no tanque de Siloé por acidente.",
+          "longa": "Trabalhadores trocavam um cano em Jerusalém quando apareceram dois degraus de pedra. Era o tanque de Siloé do século 1, perdido havia séculos. A obra parou na hora."
+        }
+      }
+    },
+    {
+      "id": "calcanhar-prego",
+      "etiquetas": [
+        "evangelhos"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Biblical Archaeology Society",
+      "url": "https://www.biblicalarchaeology.org/daily/biblical-topics/crucifixion/a-tomb-in-jerusalem-reveals-the-history-of-crucifixion-and-roman-crucifixion-methods/",
+      "texto": {
+        "pt": {
+          "curta": "Só um crucificado já foi achado em Jerusalém: um prego entortado num calcanhar.",
+          "longa": "Em 1968, numa urna funerária, apareceu um calcanhar atravessado por um prego de 11,5 cm. Ele entortou num nó da madeira e não pôde ser arrancado — por isso a prova sobrou."
+        }
+      }
+    },
+    {
+      "id": "barco-galileia",
+      "etiquetas": [
+        "evangelhos",
+        "cotidiano"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Museu Yigal Allon, Ginosar",
+      "url": "https://www.biblicalarchaeology.org/daily/biblical-artifacts/the-galilee-boat/",
+      "texto": {
+        "pt": {
+          "curta": "Uma seca em 1986 revelou um barco de pesca do século 1 no mar da Galileia.",
+          "longa": "Dois irmãos pescadores viram madeira na lama. O barco, de 8,2 m, passou 12 anos num banho de cera para não esfarelar. Nada o liga a Jesus, mas é o barco da época dele."
+        }
+      }
+    },
+    {
+      "id": "pedra-pilatos",
+      "etiquetas": [
+        "evangelhos"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "https://www.imj.org.il/en/collections",
+      "texto": {
+        "pt": {
+          "curta": "Existe uma única pedra no mundo com o nome de Pôncio Pilatos gravado.",
+          "longa": "Achada em 1961 em Cesareia, reaproveitada numa escada de teatro, a pedra traz \"Pôncio Pilatos, prefeito da Judeia\". É a única inscrição dele já encontrada."
+        }
+      }
+    },
+    {
+      "id": "priene",
+      "etiquetas": [
+        "paulo",
+        "escrita"
+      ],
+      "categoria": "lingua",
+      "fonte": "Bibelhaus Frankfurt",
+      "url": "https://www.bibelhaus-frankfurt.de/en/bimumag/the-special-object/calendar-inscription-from-priene",
+      "texto": {
+        "pt": {
+          "curta": "\"Evangelho\" era propaganda do império romano antes de ser palavra cristã.",
+          "longa": "Uma inscrição de 9 a.C. em Priene chama o aniversário do imperador Augusto de \"evangelho\" (euangelion) para o mundo. Os cristãos pegaram a palavra do marketing imperial."
+        }
+      }
+    },
+    {
+      "id": "purpura-tiro",
+      "etiquetas": [
+        "cotidiano",
+        "paulo"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "University of Chicago Library",
+      "url": "https://www.lib.uchicago.edu/collex/exhibits/originsof-color/organic-dyes-and-lakes/tyrian-purple/",
+      "texto": {
+        "pt": {
+          "curta": "Para fazer 1 grama de púrpura, matavam cerca de 10 mil caramujos.",
+          "longa": "A púrpura de Tiro saía da glândula de caramujos murex: 10 mil bichos por grama. Por isso a cor custava mais que ouro e era roupa de imperador — e Lídia vendia isso."
+        }
+      }
+    },
+    {
+      "id": "mar-morto",
+      "etiquetas": [
+        "geografia"
+      ],
+      "categoria": "geografia",
+      "fonte": "NASA Earth Observatory",
+      "url": "https://earthobservatory.nasa.gov/world-of-change/DeadSea",
+      "texto": {
+        "pt": {
+          "curta": "A margem do mar Morto é o ponto de terra mais baixo do planeta e afunda 1 m por ano.",
+          "longa": "Fica a uns 430 m abaixo do nível do mar. Com o rio Jordão desviado para irrigação, o nível cai mais de 1 m por ano e o chão em volta abre crateras."
+        }
+      }
+    },
+    {
+      "id": "luther-warren",
+      "etiquetas": [
+        "adventista"
+      ],
+      "categoria": "historia-adventista",
+      "fonte": "Enciclopédia Adventista (ESDA)",
+      "url": "https://encyclopedia.adventist.org/article?id=7AD1",
+      "texto": {
+        "pt": {
+          "curta": "O primeiro clube de jovens adventistas foi criado por um garoto de 14 anos, num sótão.",
+          "longa": "Em 1879, em Hazelton (Michigan), Luther Warren, de 14 anos, e Harry Fenner, de 17, juntaram nove meninos num sótão. Dali saiu toda a estrutura de ministério jovem."
+        }
+      }
+    },
+    {
+      "id": "sucrilhos",
+      "etiquetas": [
+        "adventista"
+      ],
+      "categoria": "historia-adventista",
+      "fonte": "National Inventors Hall of Fame",
+      "url": "https://www.invent.org/inductees/john-h-kellogg",
+      "texto": {
+        "pt": {
+          "curta": "O sucrilhos nasceu de um erro numa cozinha de hospital, em 1894.",
+          "longa": "No Sanatório de Battle Creek, uma massa de trigo ficou esquecida e fermentou. Passada no rolo, virou floco. Os irmãos Kellogg foram parar na justiça brigando pela patente."
+        }
+      }
+    },
+    {
+      "id": "loma-linda",
+      "etiquetas": [
+        "adventista"
+      ],
+      "categoria": "historia-adventista",
+      "fonte": "Adventist Health Study",
+      "url": "https://adventisthealthstudy.org/studies/AHS-1/findings-longevity",
+      "texto": {
+        "pt": {
+          "curta": "Loma Linda, na Califórnia, é a única Blue Zone dos Estados Unidos.",
+          "longa": "Num estudo da Universidade de Loma Linda, homens adventistas viveram 7,3 anos a mais que outros californianos; mulheres, 4,4 anos. Entre os vegetarianos, 9,5 e 6,1."
+        }
+      }
+    },
+    {
+      "id": "relevos-laquis",
+      "etiquetas": [
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "Um rei assírio mandou esculpir 18 metros de parede só para contar um cerco.",
+          "longa": "Os relevos de Láquis cobriam a sala central do palácio de Senaqueribe em Nínive: 18 m de muralha, aríetes e prisioneiros, em sequência, como uma HQ. Hoje estão em Londres."
+        }
+      }
+    },
+    {
+      "id": "brasileiros-laquis",
+      "etiquetas": [
+        "reis",
+        "geral"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Levant 51/1 (2019); UNASP",
+      "url": "https://www.afhu.org/2020/02/18/hebrew-university-team-unearths-canaanite-temple-at-lachish/",
+      "texto": {
+        "pt": {
+          "curta": "Tem brasileiro escavando em Israel: uma equipe do Brasil cava em Láquis todo ano.",
+          "longa": "Em Tel Láquis, a expedição da Universidade Hebraica achou um templo canaanita de 1150 a.C. com joias de ouro. Uma equipe brasileira do UNASP trabalha na escavação."
+        }
+      }
+    },
+    {
+      "id": "qumran-fragmentos",
+      "etiquetas": [
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "https://www.deadseascrolls.org.il/learn-about-the-scrolls/discovery-sites",
+      "texto": {
+        "pt": {
+          "curta": "São 25 mil fragmentos nos manuscritos do mar Morto. Uma caverna guardou 15 mil.",
+          "longa": "De 11 cavernas em Qumran saíram uns 25 mil pedaços de couro e papiro, remontados em cerca de 950 manuscritos. Só a caverna 4 rendeu 15 mil fragmentos."
+        }
+      }
+    },
+    {
+      "id": "delfos-galio",
+      "etiquetas": [
+        "paulo"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Bible Odyssey (SBL)",
+      "url": "https://www.bibleodyssey.org/articles/erastus-gallio-and-paul/",
+      "texto": {
+        "pt": {
+          "curta": "Uma pedra quebrada na Grécia é o relógio que data a vida de Paulo.",
+          "longa": "A inscrição de Delfos fixa quando Gálio governou a Acaia: 51-52 d.C. Como Paulo foi julgado por ele em Corinto, dá para datar o resto da vida dele a partir daí."
+        }
+      }
+    },
+    {
+      "id": "ester-sem-deus",
+      "etiquetas": [
+        "geral",
+        "exilio"
+      ],
+      "categoria": "lingua",
+      "fonte": "Bible Odyssey (SBL)",
+      "url": "https://www.bibleodyssey.org/articles/where-is-god-in-esther/",
+      "texto": {
+        "pt": {
+          "curta": "O livro de Ester atravessa 10 capítulos sem citar Deus uma única vez.",
+          "longa": "Nem Deus, nem oração, nem Templo, nem lei. Ester e Cantares são os dois livros da Bíblia hebraica em que o nome de Deus simplesmente não aparece."
+        }
+      }
+    },
+    {
+      "id": "carta-media",
+      "etiquetas": [
+        "paulo",
+        "cotidiano"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "E. R. Richards, IVP (2004)",
+      "url": "https://www.ivpress.com/paul-and-first-century-letter-writing",
+      "texto": {
+        "pt": {
+          "curta": "A carta comum da época tinha umas 90 palavras. Romanos tem mais de 7 mil.",
+          "longa": "Papiro era caro, e carta era curta: as particulares que sobraram têm cerca de 90 palavras, e as de Cícero, umas 300. Romanos passa de 7 mil. Ninguém escrevia assim naquele tempo."
+        }
+      }
+    },
+    {
+      "id": "pergaminho-rebanho",
+      "etiquetas": [
+        "escrita",
+        "cotidiano"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "Codex Sinaiticus Project",
+      "url": "https://www.codexsinaiticus.org/en/project/conservation_physDesc.aspx",
+      "texto": {
+        "pt": {
+          "curta": "Para fazer uma Bíblia em pergaminho era preciso o couro de uns 360 animais.",
+          "longa": "Cada folha do Codex Sinaiticus é pele de bezerro ou de ovelha, raspada e esticada. Foram mais de 1.400 páginas de 41 cm de altura: um rebanho inteiro virou um único livro."
+        }
+      }
+    },
+    {
+      "id": "tinta-fuligem",
+      "etiquetas": [
+        "escrita",
+        "cotidiano"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "https://www.deadseascrolls.org.il/learn-about-the-scrolls/introduction",
+      "texto": {
+        "pt": {
+          "curta": "A tinta dos rolos era fuligem com goma: escrita que uma esponja molhada apagava.",
+          "longa": "Fuligem de lamparina, goma e água, aplicada com uma cana cortada em bico. Como o preto não penetrava o couro, o erro podia ser lavado e o pergaminho, reaproveitado."
+        }
+      }
+    },
+    {
+      "id": "lamparina-azeite",
+      "etiquetas": [
+        "cotidiano",
+        "evangelhos"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "https://www.imj.org.il/en/collections",
+      "texto": {
+        "pt": {
+          "curta": "A lamparina de barro cabia menos que uma colher de azeite e apagava em poucas horas.",
+          "longa": "Casa do século 1 se iluminava com um pavio de linho num bico de barro. A chama era do tamanho de uma vela, e quem precisava da noite toda tinha de levantar para reabastecer."
+        }
+      }
+    },
+    {
+      "id": "padarias-pompeia",
+      "etiquetas": [
+        "cotidiano",
+        "geral"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "Parco Archeologico di Pompei",
+      "url": "https://pompeiisites.org/en/",
+      "texto": {
+        "pt": {
+          "curta": "Pompeia tinha mais de 30 padarias, com mós de pedra giradas por burro.",
+          "longa": "Cada padaria tinha moinhos de lava em forma de ampulheta, forno abobadado e balcão virado para a rua. Quem morava em apartamento não tinha onde assar o próprio pão."
+        }
+      }
+    },
+    {
+      "id": "peso-beka",
+      "etiquetas": [
+        "templo",
+        "cotidiano"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Israel Antiquities Authority",
+      "url": "https://www.antiquities.org.il/",
+      "texto": {
+        "pt": {
+          "curta": "Antes de existir moeda, pagava-se prata pesada na balança, com pesos de pedra.",
+          "longa": "Em Jerusalém apareceu um peso de pedra com a palavra \"beka\" gravada ao contrário, em espelho — provável erro de quem gravou. Valia meio siclo e ia no prato oposto à prata."
+        }
+      }
+    },
+    {
+      "id": "mikvaot-jerusalem",
+      "etiquetas": [
+        "cotidiano",
+        "evangelhos"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Israel Antiquities Authority",
+      "url": "https://www.antiquities.org.il/",
+      "texto": {
+        "pt": {
+          "curta": "A Jerusalém do século 1 tinha centenas de piscinas de banho cavadas na rocha.",
+          "longa": "São os mikvaot: tanques com degraus, escavados na pedra e usados para banho ritual. Apareceram às centenas na cidade, inclusive dentro de casas comuns e de oficinas."
+        }
+      }
+    },
+    {
+      "id": "denario-dia",
+      "etiquetas": [
+        "cotidiano",
+        "evangelhos"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "Um denário de prata era o pagamento de um dia inteiro de trabalho no campo.",
+          "longa": "A moeda cabia na ponta do dedo e pesava uns 3,8 g de prata. Com ela se comprava a comida do dia. Era o retrato do imperador no metal que garantia o valor da peça."
+        }
+      }
+    },
+    {
+      "id": "lepton-menor-moeda",
+      "etiquetas": [
+        "cotidiano",
+        "evangelhos"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "https://www.imj.org.il/en/collections",
+      "texto": {
+        "pt": {
+          "curta": "A menor moeda que circulava na Judeia tinha 1 cm e saía torta do martelo.",
+          "longa": "O leptón de bronze media uns 10 mm e valia uma fração mínima do denário. Era batido a martelo, peça por peça, entre dois cunhos — e quase nenhum exemplar sai redondo."
+        }
+      }
+    },
+    {
+      "id": "vidro-soprado",
+      "etiquetas": [
+        "cotidiano",
+        "evangelhos"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "Corning Museum of Glass",
+      "url": "https://renvenetian.cmog.org/chapter/earliest-inflated-glass",
+      "texto": {
+        "pt": {
+          "curta": "O vidro soprado mais antigo já datado saiu do lixo de uma oficina de Jerusalém.",
+          "longa": "Em 1971, uma escavação no Bairro Judeu achou tubos e frasquinhos jogados fora por um vidreiro por volta de 50 a.C. Foi o sopro que tornou a garrafa de vidro coisa barata."
+        }
+      }
+    },
+    {
+      "id": "prensas-ecrom",
+      "etiquetas": [
+        "cotidiano",
+        "geral"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "ASOR / Tel Miqne-Ekron",
+      "url": "https://asor.org/?p=70370",
+      "texto": {
+        "pt": {
+          "curta": "Uma única cidade filisteia tinha mais de cem prensas de azeite funcionando.",
+          "longa": "Em Tel Miqne-Ecrom, cada prensa ocupava uma sala com bacia de pedra e pesos pendurados. No século 7 a.C. a cidade era uma fábrica de azeite do tamanho de um bairro."
+        }
+      }
+    },
+    {
+      "id": "nardo-perfume",
+      "etiquetas": [
+        "cotidiano",
+        "evangelhos"
+      ],
+      "categoria": "cotidiano",
+      "fonte": "Kew Science, Plants of the World",
+      "url": "https://powo.science.kew.org/",
+      "texto": {
+        "pt": {
+          "curta": "O nardo vinha dos Himalaias em caravana — por isso o frasco custava um ano de salário.",
+          "longa": "A planta do nardo só cresce nas montanhas da Ásia Central. O óleo chegava ao Mediterrâneo em frascos lacrados de alabastro, depois de milhares de quilômetros em lombo de animal."
+        }
+      }
+    },
+    {
+      "id": "telhado-cafarnaum",
+      "etiquetas": [
+        "cotidiano",
+        "evangelhos"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Studium Biblicum Franciscanum",
+      "url": "https://www.custodia.org/en/sanctuaries/capernaum",
+      "texto": {
+        "pt": {
+          "curta": "O telhado das casas de Cafarnaum era barro sobre galhos: dava para abrir um buraco.",
+          "longa": "As escavações franciscanas mostraram casas de basalto empilhado sem argamassa e cobertura de vigas, palha e barro batido. Subia-se por escada externa, e o teto valia como outro quarto."
+        }
+      }
+    },
+    {
+      "id": "purpura-timna",
+      "etiquetas": [
+        "cotidiano",
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Archaeology Magazine (AIA)",
+      "url": "https://archaeology.org/news/2021/01/28/210129-israel-purple-dye",
+      "texto": {
+        "pt": {
+          "curta": "Sobrou um pedaço de lã tingida de púrpura com 3.000 anos, no meio do deserto.",
+          "longa": "Em Timna, no vale do cobre, o clima seco guardou fios e um pingente de tecido tingidos com púrpura de caramujo. É o tecido roxo mais antigo já achado na região."
+        }
+      }
+    },
+    {
+      "id": "oxirrinco-lixo",
+      "etiquetas": [
+        "escrita",
+        "cotidiano"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "Universidade de Oxford (papirologia)",
+      "url": "https://www.papyrology.ox.ac.uk/",
+      "texto": {
+        "pt": {
+          "curta": "Um lixão no Egito guardou meio milhão de papéis: contas, cartas e lição de casa.",
+          "longa": "Em Oxirrinco, escavadores de 1896 abriram montes de lixo de 9 m cheios de papiro. Nove de cada dez pedaços são papelada comum: imposto, lista de compras, bilhete de família."
+        }
+      }
+    },
+    {
+      "id": "via-appia",
+      "etiquetas": [
+        "paulo",
+        "geografia"
+      ],
+      "categoria": "historia",
+      "fonte": "UNESCO, Patrimônio Mundial",
+      "url": "https://whc.unesco.org/en/list/1708/",
+      "texto": {
+        "pt": {
+          "curta": "A Via Ápia tem pedras de 2.300 anos ainda no lugar, e dá para caminhar nelas hoje.",
+          "longa": "Entrou na lista da Unesco em 2024. Aberta em 312 a.C. para ligar Roma ao sul da Itália, tem base de pedra britada, blocos de lava encaixados por cima e valas de drenagem ao lado."
+        }
+      }
+    },
+    {
+      "id": "tabula-peutinger",
+      "etiquetas": [
+        "paulo",
+        "geografia"
+      ],
+      "categoria": "historia",
+      "fonte": "Biblioteca Nacional da Áustria",
+      "url": "https://www.onb.ac.at/en/",
+      "texto": {
+        "pt": {
+          "curta": "O mapa das estradas romanas é uma tira de quase 7 metros por 34 centímetros.",
+          "longa": "A Tabula Peutingeriana, cópia medieval de um mapa romano, achata o império numa faixa comprida. Serve para contar dias de viagem entre cidades, não para mostrar a forma da terra."
+        }
+      }
+    },
+    {
+      "id": "mare-clausum",
+      "etiquetas": [
+        "paulo",
+        "geografia"
+      ],
+      "categoria": "historia",
+      "fonte": "Vegécio, De Re Militari (séc. 4)",
+      "url": "https://www.thelatinlibrary.com/vegetius4.html",
+      "texto": {
+        "pt": {
+          "curta": "O mar fechava no inverno: de novembro a março, navio de carga não saía do porto.",
+          "longa": "Vegécio registra o costume romano. Sem bússola, navegar dependia de estrela e de costa à vista; nuvem baixa e tempestade tiravam as duas, e o comércio simplesmente parava."
+        }
+      }
+    },
+    {
+      "id": "navio-trigo",
+      "etiquetas": [
+        "paulo",
+        "geografia"
+      ],
+      "categoria": "historia",
+      "fonte": "L. Casson, Ships and Seamanship",
+      "url": "https://press.princeton.edu/books/paperback/9780691014775/ships-and-seamanship-in-the-ancient-world",
+      "texto": {
+        "pt": {
+          "curta": "Os navios de trigo de Alexandria tinham uns 55 m e levavam centenas de pessoas.",
+          "longa": "Eram os maiores cargueiros do Mediterrâneo, feitos para abastecer Roma de pão. Passageiro era carga secundária: quem viajava dormia no convés, em cima dos sacos de trigo."
+        }
+      }
+    },
+    {
+      "id": "vindolanda-convite",
+      "etiquetas": [
+        "escrita",
+        "mulheres"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "Roman Inscriptions of Britain",
+      "url": "https://romaninscriptionsofbritain.org/inscriptions/TabVindol291",
+      "texto": {
+        "pt": {
+          "curta": "O convite de aniversário mais antigo que existe foi escrito por uma mulher, em madeira.",
+          "longa": "Numa tabuinha de Vindolanda, na fronteira da Britânia, Cláudia Severa chama a amiga para a festa dela. O recado final é da própria mão dela: o latim escrito por mulher mais antigo."
+        }
+      }
+    },
+    {
+      "id": "efeso-teatro",
+      "etiquetas": [
+        "paulo",
+        "geografia"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Instituto Arqueológico Austríaco",
+      "url": "https://epub.oeaw.ac.at/8268-9",
+      "texto": {
+        "pt": {
+          "curta": "O teatro de Éfeso cabia mais de 20 mil pessoas, talhado na encosta do morro.",
+          "longa": "Os austríacos escavam Éfeso desde 1894. A plateia foi cortada na rocha em três andares, de frente para a avenida que descia até o porto, e a acústica dispensava reforço."
+        }
+      }
+    },
+    {
+      "id": "diolkos",
+      "etiquetas": [
+        "paulo",
+        "geografia"
+      ],
+      "categoria": "historia",
+      "fonte": "Int. J. of Nautical Archaeology",
+      "url": "https://ancientportsantiques.com/wp-content/uploads/Documents/PLACES/GreecePeloponnesus/Diolkos-Werner1997.pdf",
+      "texto": {
+        "pt": {
+          "curta": "Em Corinto, navio inteiro atravessava por terra, sobre rodas, numa pista de pedra.",
+          "longa": "O Diolkos cruzava o istmo no ponto mais estreito, calçado de calcário. Descarregava-se a carga, puxava-se o casco, e se evitava a volta pelo sul da Grécia, famosa por naufrágio."
+        }
+      }
+    },
+    {
+      "id": "erasto-corinto",
+      "etiquetas": [
+        "paulo"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Tyndale Bulletin 40 (1989)",
+      "url": "https://tyndalebulletin.org/article/30545.pdf",
+      "texto": {
+        "pt": {
+          "curta": "Um político de Corinto pagou o chão da praça do próprio bolso e mandou gravar isso.",
+          "longa": "Ao lado do teatro, uma inscrição latina diz que Erasto calçou aquele piso por conta própria, em troca do cargo de edil. As letras eram de bronze, encaixadas uma a uma na pedra."
+        }
+      }
+    },
+    {
+      "id": "frontino-agua",
+      "etiquetas": [
+        "paulo",
+        "geral"
+      ],
+      "categoria": "historia",
+      "fonte": "Frontino, De Aquis (97 d.C.)",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Frontinus/De_Aquis/home.html",
+      "texto": {
+        "pt": {
+          "curta": "O chefe da água de Roma escreveu um relatório em 97 d.C. e ele sobreviveu inteiro.",
+          "longa": "Frontino lista aqueduto por aqueduto, a vazão de cada um e os canos clandestinos que descobriu na rede. É o manual de saneamento mais antigo que chegou completo até hoje."
+        }
+      }
+    },
+    {
+      "id": "cidadania-bronze",
+      "etiquetas": [
+        "paulo"
+      ],
+      "categoria": "historia",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "O veterano romano carregava a cidadania no bolso: duas placas de bronze lacradas.",
+          "longa": "São os diplomas militares. O texto ia gravado em duas folhas de bronze, amarradas e seladas por sete testemunhas, com a cópia oficial afixada em Roma para qualquer conferência."
+        }
+      }
+    },
+    {
+      "id": "insulae-roma",
+      "etiquetas": [
+        "paulo",
+        "cotidiano"
+      ],
+      "categoria": "historia",
+      "fonte": "Parco Archeologico di Ostia Antica",
+      "url": "https://www.ostiaantica.beniculturali.it/en/",
+      "texto": {
+        "pt": {
+          "curta": "Em Roma se morava em prédio de até cinco andares, sem água encanada lá em cima.",
+          "longa": "As insulae de Ostia mostram o modelo: loja embaixo, apartamentos acima, escada estreita no meio. Água e esgoto só no térreo — quanto mais alto o andar, mais barato e pior."
+        }
+      }
+    },
+    {
+      "id": "pergamo-pergaminho",
+      "etiquetas": [
+        "escrita",
+        "geografia"
+      ],
+      "categoria": "historia",
+      "fonte": "Plínio, o Velho, História Natural",
+      "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.02.0137",
+      "texto": {
+        "pt": {
+          "curta": "A palavra \"pergaminho\" é o nome de uma cidade: Pérgamo, na atual Turquia.",
+          "longa": "A biblioteca de lá disputava com Alexandria. Conta-se que o Egito cortou a venda de papiro para atrapalhar e a cidade passou a preparar pele de animal: pergamena, pergaminho."
+        }
+      }
+    },
+    {
+      "id": "sardes-sinagoga",
+      "etiquetas": [
+        "geografia",
+        "mulheres"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Sardis Expedition (Harvard)",
+      "url": "https://sardisexpedition.org/essays/about-synagogue",
+      "texto": {
+        "pt": {
+          "curta": "A maior sinagoga antiga achada fora de Israel tem mais de 60 m e fica na Turquia.",
+          "longa": "Em Sardes, o prédio ocupava um canto do ginásio da cidade, com piso de mosaico. Umas 80 inscrições gregas nomeiam quem pagou cada pedaço, entre eles mulheres e ourives."
+        }
+      }
+    },
+    {
+      "id": "laodiceia-agua",
+      "etiquetas": [
+        "geografia",
+        "cotidiano"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Universidade Pamukkale, Laodiceia",
+      "url": "https://gcris.pau.edu.tr/handle/11499/18738",
+      "texto": {
+        "pt": {
+          "curta": "Em Laodiceia a água chegava morna e ia entupindo os canos, que viravam pedra.",
+          "longa": "A cidade puxava água de uma fonte a uns 8 km. O calcário dissolvido grudava por dentro dos tubos de barro e travertino, e havia tampas de limpeza para desentupir de vez em quando."
+        }
+      }
+    },
+    {
+      "id": "grafite-pompeia",
+      "etiquetas": [
+        "cotidiano",
+        "escrita"
+      ],
+      "categoria": "lingua",
+      "fonte": "Parco Archeologico di Pompei",
+      "url": "https://pompeiisites.org/en/",
+      "texto": {
+        "pt": {
+          "curta": "Pompeia tem milhares de frases riscadas nas paredes, e a maioria é bobagem.",
+          "longa": "Os muros guardam propaganda eleitoral, preço de pão, declaração de amor e ofensa a vizinho. É o latim falado de gente comum, escrito do jeito que ela escrevia, com erro e tudo."
+        }
+      }
+    },
+    {
+      "id": "estela-merneptah",
+      "etiquetas": [
+        "exodo",
+        "geral"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Min. de Antiguidades do Egito",
+      "url": "https://egymonuments.gov.eg/",
+      "texto": {
+        "pt": {
+          "curta": "A menção mais antiga ao nome \"Israel\" fora da Bíblia está numa pedra egípcia.",
+          "longa": "A estela de Merneptá, de cerca de 1208 a.C., lista povos derrotados pelo faraó. O sinal usado ao lado de \"Israel\" o marca como povo, e não como cidade ou território."
+        }
+      }
+    },
+    {
+      "id": "cartas-amarna",
+      "etiquetas": [
+        "patriarcas",
+        "escrita"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Vorderasiatisches Museum, Berlim",
+      "url": "https://www.smb.museum/en/museums-institutions/vorderasiatisches-museum/home/",
+      "texto": {
+        "pt": {
+          "curta": "A diplomacia entre Egito e Canaã era feita em barro, e numa língua de terceiros.",
+          "longa": "As cerca de 380 cartas de Amarna são tabuletas em acádio, o idioma neutro da época. Reis de cidades como Jerusalém e Megido pedem tropa, ouro e socorro ao faraó — e reclamam muito."
+        }
+      }
+    },
+    {
+      "id": "beni-hassan",
+      "etiquetas": [
+        "patriarcas"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Min. de Antiguidades do Egito",
+      "url": "https://egymonuments.gov.eg/",
+      "texto": {
+        "pt": {
+          "curta": "Uma pintura de 3.900 anos mostra uma caravana semita entrando no Egito de roupa listrada.",
+          "longa": "No túmulo de Khnumhotep II, em Beni Hassan, 37 estrangeiros aparecem com burros, lanças, uma lira e tecido colorido. O escriba anotou ao lado quem eram e quantos chegaram."
+        }
+      }
+    },
+    {
+      "id": "tijolos-palha",
+      "etiquetas": [
+        "exodo",
+        "cotidiano"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "The Metropolitan Museum of Art",
+      "url": "https://www.metmuseum.org/art/collection",
+      "texto": {
+        "pt": {
+          "curta": "Pintura egípcia mostra o passo a passo do tijolo: barro, palha, molde de madeira e sol.",
+          "longa": "No túmulo do vizir Rekhmire, operários tiram lama do tanque, misturam palha, batem a massa no molde e põem a secar. A palha entrava para o tijolo não rachar ao perder água."
+        }
+      }
+    },
+    {
+      "id": "proto-sinaitico",
+      "etiquetas": [
+        "escrita",
+        "exodo"
+      ],
+      "categoria": "lingua",
+      "fonte": "Egypt Exploration Society",
+      "url": "https://www.ees.ac.uk/",
+      "texto": {
+        "pt": {
+          "curta": "O alfabeto que você está lendo começou em minas de turquesa, riscado por operários.",
+          "longa": "Em Serabit el-Khadim, no Sinai, trabalhadores semitas adaptaram hieróglifos para escrever a língua deles, com um sinal por som. Dessas garatujas saiu toda a escrita alfabética."
+        }
+      }
+    },
+    {
+      "id": "mumia-70-dias",
+      "etiquetas": [
+        "patriarcas",
+        "cotidiano"
+      ],
+      "categoria": "historia",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "Embalsamar um egípcio importante levava 70 dias, e uns 40 eram só de corpo no sal.",
+          "longa": "O corpo era aberto, limpo e coberto de natrão, um sal mineral que seca a carne por dentro. Depois vinham óleo, resina e as faixas de linho, camada sobre camada, até fechar os 70."
+        }
+      }
+    },
+    {
+      "id": "livro-dos-sonhos",
+      "etiquetas": [
+        "patriarcas",
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "British Museum, pap. Chester Beatty",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "O Egito tinha manual de interpretar sonhos, em papiro, com resposta boa e ruim.",
+          "longa": "O Papiro Chester Beatty III lista dezenas de sonhos e o que cada um queria dizer, com o veredito \"bom\" ou \"ruim\" escrito em tinta vermelha. Ler sonho era profissão, com apostila."
+        }
+      }
+    },
+    {
+      "id": "mari-tabuletas",
+      "etiquetas": [
+        "patriarcas",
+        "escrita"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Musée du Louvre",
+      "url": "https://collections.louvre.fr/",
+      "texto": {
+        "pt": {
+          "curta": "Um palácio na Síria guardava 25 mil cartas de barro: o arquivo inteiro de um reino.",
+          "longa": "Mari caiu em 1760 a.C. e o arquivo real ficou enterrado no lugar. As tabuletas tratam de rebanho, casamento, tratado e até de profissão de profeta, com nomes e costumes da época."
+        }
+      }
+    },
+    {
+      "id": "avaris-delta",
+      "etiquetas": [
+        "patriarcas",
+        "exodo"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Instituto Arqueológico Austríaco",
+      "url": "https://www.oeai.at/en/",
+      "texto": {
+        "pt": {
+          "curta": "No delta do Nilo havia um bairro semita inteiro, com casas no estilo de Canaã.",
+          "longa": "Em Tell el-Dabaa, a escavação austríaca encontrou Avaris: cerâmica, sepultura com burro e planta de casa vindas de fora, numa cidade de estrangeiros que cresceu dentro do Egito."
+        }
+      }
+    },
+    {
+      "id": "hamurabi",
+      "etiquetas": [
+        "patriarcas",
+        "escrita"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Musée du Louvre",
+      "url": "https://collections.louvre.fr/",
+      "texto": {
+        "pt": {
+          "curta": "O código de Hamurabi é uma pedra preta de 2,25 m, em pé, com 282 leis gravadas.",
+          "longa": "Escrito por volta de 1750 a.C., trata de preço, aluguel, herança, honorário de cirurgião e boi que machuca gente. Ficava em praça pública: a lei era para ser lida, não guardada."
+        }
+      }
+    },
+    {
+      "id": "prata-pesada",
+      "etiquetas": [
+        "patriarcas",
+        "cotidiano"
+      ],
+      "categoria": "historia",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "Moeda foi inventada mais de mil anos depois de Abraão, na Lídia, atual Turquia.",
+          "longa": "Até então, prata circulava em pedaço, anel ou barra, e cada pagamento passava pela balança. As primeiras moedas, de ouro e prata misturados, são do século 7 a.C."
+        }
+      }
+    },
+    {
+      "id": "carros-tutancamon",
+      "etiquetas": [
+        "exodo",
+        "cotidiano"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Griffith Institute, Oxford",
+      "url": "https://tutankhamun.griffith.ox.ac.uk/",
+      "texto": {
+        "pt": {
+          "curta": "O carro de guerra egípcio era tão leve que um homem sozinho levantava do chão.",
+          "longa": "Os seis carros do túmulo de Tutancâmon são de madeira curvada a vapor, couro e roda de seis raios. Leves assim, corriam muito — e afundavam em qualquer terreno molhado."
+        }
+      }
+    },
+    {
+      "id": "papiro-anastasi",
+      "etiquetas": [
+        "patriarcas",
+        "exodo"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "British Museum, pap. Anastasi VI",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "Um guarda de fronteira egípcio registrou por escrito a passagem de pastores com fome.",
+          "longa": "No Papiro Anastasi VI, o escriba de um forte do delta informa ao superior que deixou tribos de Edom entrarem com os rebanhos até os lagos, para os animais não morrerem."
+        }
+      }
+    },
+    {
+      "id": "pi-ramses",
+      "etiquetas": [
+        "exodo",
+        "geografia"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Roemer- und Pelizaeus-Museum",
+      "url": "https://www.rpmuseum.de/",
+      "texto": {
+        "pt": {
+          "curta": "A capital Pi-Ramessés saiu do mapa porque foi desmontada e levada pedra por pedra.",
+          "longa": "O Nilo mudou de braço e a cidade secou. Faraós seguintes carregaram obeliscos e portais para Tânis, e por séculos se cavou no lugar errado. Sob os campos de Qantir sobrou a planta."
+        }
+      }
+    },
+    {
+      "id": "nilometro",
+      "etiquetas": [
+        "exodo",
+        "geografia"
+      ],
+      "categoria": "historia",
+      "fonte": "Min. de Antiguidades do Egito",
+      "url": "https://egymonuments.gov.eg/",
+      "texto": {
+        "pt": {
+          "curta": "O Egito media a cheia do Nilo numa escada de pedra para calcular o imposto do ano.",
+          "longa": "São os nilômetros: poços com degraus numerados na margem do rio. Cheia alta demais destruía, baixa demais virava fome, e o número do ano definia quanto o lavrador ia pagar."
+        }
+      }
+    },
+    {
+      "id": "ostraca-laquis",
+      "etiquetas": [
+        "profetas",
+        "exilio"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "https://www.imj.org.il/en/collections",
+      "texto": {
+        "pt": {
+          "curta": "Numa carta militar de 2.600 anos, o soldado avisa que o sinal de fogo sumiu do horizonte.",
+          "longa": "São 21 óstraca achados na guarita de Láquis, escritos a tinta em caco de vaso. Num deles o posto relata que não vê mais os sinais de Azeca — e a Babilônia estava chegando."
+        }
+      }
+    },
+    {
+      "id": "ostraca-arad",
+      "etiquetas": [
+        "profetas",
+        "escrita"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Universidade de Tel Aviv",
+      "url": "https://english.tau.ac.il/node/2665",
+      "texto": {
+        "pt": {
+          "curta": "Um forte judaíta deixou 18 bilhetes de ordem, e a letra é de 12 pessoas diferentes.",
+          "longa": "Em Tel Arad, análise de computador somada a perícia grafotécnica separou as mãos. Pedido de vinho e farinha escrito até por soldado de baixa patente: muita gente ali sabia escrever."
+        }
+      }
+    },
+    {
+      "id": "calendario-gezer",
+      "etiquetas": [
+        "escrita",
+        "cotidiano"
+      ],
+      "categoria": "lingua",
+      "fonte": "Istanbul Archaeological Museums",
+      "url": "https://muze.gen.tr/muze-detay/istanbularkeoloji",
+      "texto": {
+        "pt": {
+          "curta": "O calendário de Gezer é o ano agrícola em sete linhas, numa pedra de caber na mão.",
+          "longa": "Lista os meses pelo trabalho de cada um: colher, semear, podar, cortar linho. A letra é tão irregular que muitos leem ali um exercício de aluno, do século 10 a.C."
+        }
+      }
+    },
+    {
+      "id": "selo-eliana",
+      "etiquetas": [
+        "mulheres",
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Israel Antiquities Authority",
+      "url": "https://www.antiquities.org.il/",
+      "texto": {
+        "pt": {
+          "curta": "Um selo de pedra de 2.500 anos traz o nome de uma mulher: Eliana, filha de Gael.",
+          "longa": "Selo era assinatura, e quase todos os achados pertencem a homens. O de Eliana, achado na Cidade de Davi, nomeia o pai e não o marido — sinal de que ela fechava negócio sozinha."
+        }
+      }
+    },
+    {
+      "id": "bulas-queimadas",
+      "etiquetas": [
+        "profetas",
+        "exilio"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Israel Antiquities Authority",
+      "url": "https://www.antiquities.org.il/",
+      "texto": {
+        "pt": {
+          "curta": "O incêndio que destruiu Jerusalém queimou os documentos e cozinhou as assinaturas.",
+          "longa": "Bula é a pelota de barro que lacrava o rolo de papiro amarrado. Em 586 a.C. o fogo consumiu o papel e endureceu o lacre: sobrou o nome do dono e a marca do cordão atrás."
+        }
+      }
+    },
+    {
+      "id": "maquete-templo",
+      "etiquetas": [
+        "templo",
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Universidade Hebraica de Jerusalém",
+      "url": "https://www.biblicalarchaeology.org/daily/biblical-artifacts/artifacts-and-the-bible/breaking-news-evidence-of-cultic-activity-in-judah-discovered-at-khirbet-qeiyafa/",
+      "texto": {
+        "pt": {
+          "curta": "Em Khirbet Qeiyafa acharam maquetes de templo com leões na porta e pássaros no teto.",
+          "longa": "Uma é de barro, com 20 cm; a outra, de calcário pintado de vermelho, com 35 cm. São caixas com porta, do século 10 a.C., e mostram como era a fachada de um templo da região."
+        }
+      }
+    },
+    {
+      "id": "pedra-trombeta",
+      "etiquetas": [
+        "templo"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "The Israel Museum, Jerusalém",
+      "url": "https://www.imj.org.il/en/collections",
+      "texto": {
+        "pt": {
+          "curta": "Uma pedra caiu do alto do Monte do Templo em 70 d.C. e a inscrição dela sobreviveu.",
+          "longa": "Achada em 1968 no pé do muro, traz em hebraico a expressão \"ao lugar do toque de trombeta\". Marcava a esquina de onde um sacerdote anunciava as horas à cidade inteira."
+        }
+      }
+    },
+    {
+      "id": "pedra-aviso-templo",
+      "etiquetas": [
+        "templo",
+        "evangelhos"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Istanbul Archaeological Museums",
+      "url": "https://muze.gen.tr/muze-detay/istanbularkeoloji",
+      "texto": {
+        "pt": {
+          "curta": "Uma placa em grego avisava até onde o estrangeiro podia ir, em letras pintadas de vermelho.",
+          "longa": "Achada em 1871 perto do Monte do Templo, a pedra proibia o não judeu de passar da grade, sob pena de morte. O sulco das letras ainda guarda resto da tinta vermelha original."
+        }
+      }
+    },
+    {
+      "id": "liras-ur",
+      "etiquetas": [
+        "musica",
+        "geral"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "British Museum",
+      "url": "https://www.britishmuseum.org/collection",
+      "texto": {
+        "pt": {
+          "curta": "As liras mais antigas que sobraram têm 4.500 anos e cabeça de touro feita de ouro.",
+          "longa": "Vieram do cemitério real de Ur, no atual Iraque, escavado nos anos 1920. A madeira havia apodrecido, e os arqueólogos despejaram gesso no vazio do solo para recuperar a forma."
+        }
+      }
+    },
+    {
+      "id": "trombetas-tutancamon",
+      "etiquetas": [
+        "musica",
+        "exodo"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Griffith Institute, Oxford",
+      "url": "https://tutankhamun.griffith.ox.ac.uk/object-records/175",
+      "texto": {
+        "pt": {
+          "curta": "As duas trombetas de Tutancâmon voltaram a tocar em 1939, ao vivo, pela rádio.",
+          "longa": "Uma é de prata, com 58 cm; a outra, de bronze. Na transmissão feita no museu do Cairo, a luz caiu e o músico tocou à luz de vela. A de prata havia rachado no ensaio."
+        }
+      }
+    },
+    {
+      "id": "partitura-ugarit",
+      "etiquetas": [
+        "musica",
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "Revue d'Assyriologie (h.6)",
+      "url": "https://www.persee.fr/collection/assyr",
+      "texto": {
+        "pt": {
+          "curta": "A partitura mais antiga que chegou quase completa tem 3.400 anos e é cuneiforme.",
+          "longa": "A tabuleta h.6, do palácio de Ugarit, traz a letra em cima e, embaixo, nomes de intervalos de lira com números. A leitura é discutida: existe mais de uma versão gravada dela."
+        }
+      }
+    },
+    {
+      "id": "tamborins-mulheres",
+      "etiquetas": [
+        "mulheres",
+        "musica"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "C. Meyers, Jewish Women's Archive",
+      "url": "https://jwa.org/encyclopedia/article/women-with-hand-drums-dancing-bible",
+      "texto": {
+        "pt": {
+          "curta": "Nas estatuetas de barro de Israel, quem toca tambor de mão é sempre mulher.",
+          "longa": "São figuras pequenas, dos séculos 8 e 7 a.C., segurando um disco junto ao peito. Em praticamente todas a pessoa é feminina — o tamborim parece ter sido instrumento de mulher."
+        }
+      }
+    },
+    {
+      "id": "babata",
+      "etiquetas": [
+        "mulheres",
+        "escrita"
+      ],
+      "categoria": "manuscritos",
+      "fonte": "Jewish Women's Archive",
+      "url": "https://jwa.org/encyclopedia/article/babatha",
+      "texto": {
+        "pt": {
+          "curta": "A mulher mais documentada da antiguidade judaica levou 35 papéis para dentro de uma caverna.",
+          "longa": "Babata guardou numa bolsa de couro contrato de casamento, escritura de terra e processo por tutela. Fugia dos romanos em 135 d.C., e nunca voltou para buscar a bolsa."
+        }
+      }
+    },
+    {
+      "id": "ostraca-samaria",
+      "etiquetas": [
+        "reis",
+        "cotidiano"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "Harvard Museum of the Ancient NE",
+      "url": "https://hmane.harvard.edu/",
+      "texto": {
+        "pt": {
+          "curta": "O palácio de Samaria dava recibo de vinho e azeite escrito em caco de vaso.",
+          "longa": "Os 102 óstraca anotam remetente, aldeia e carga. Viraram fonte de geografia: pelos nomes dos lugares dá para desenhar a rede que abastecia o palácio do reino do norte."
+        }
+      }
+    },
+    {
+      "id": "julia-severa",
+      "etiquetas": [
+        "mulheres",
+        "geografia"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "MAMA, Universidade de Oxford",
+      "url": "https://mama.csad.ox.ac.uk/",
+      "texto": {
+        "pt": {
+          "curta": "Uma inscrição na Turquia diz que o prédio da sinagoga foi construído por uma mulher.",
+          "longa": "Em Acmônia, Júlia Severa — gente rica da cidade, e nem judia — bancou a obra, e três líderes da comunidade reformaram o prédio depois. O nome dela ficou gravado na pedra."
+        }
+      }
+    },
+    {
+      "id": "megido-marfim",
+      "etiquetas": [
+        "musica",
+        "reis"
+      ],
+      "categoria": "arqueologia",
+      "fonte": "ISAC, Universidade de Chicago",
+      "url": "https://isac.uchicago.edu/",
+      "texto": {
+        "pt": {
+          "curta": "Numa placa de marfim de Megido, alguém toca lira de nove cordas na festa do rei.",
+          "longa": "O marfim, de uns 3.200 anos, mostra o soberano sentado com a taça na mão e o músico ao lado. Saiu da escavação de Megido nos anos 1930 e hoje está em Chicago."
+        }
+      }
+    }
   ]
 }

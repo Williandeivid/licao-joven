@@ -53,6 +53,52 @@ for (const l of LICOES) {
   }
 }
 
+// --- alternativas que entregam a resposta pelo TAMANHO.
+// Medido em 16/10/2026 nas 1.560 perguntas existentes: em 56% delas a resposta
+// certa era a mais longa das quatro (o acaso daria 25%), e quem chutasse sempre
+// a alternativa maior tiraria 5,6/10 sem ler nada. Dai a media da turma de 98%.
+// Esta checagem existe para o problema nao voltar nas licoes novas.
+//
+// LIMITE_MAIS_LONGA: ate 40% das perguntas de uma licao podem ter a certa como
+// a mais longa. Acima disso o padrao ja' e' perceptivel para quem responde.
+// LIMITE_DIFERENCA: uma alternativa certa com 8+ caracteres a mais que a maior
+// errada e' um caso grave sozinho - nao precisa de padrao, ja' denuncia.
+//
+// NAO existe regra de "alternativa curta demais". A primeira versao tinha, e
+// acusava pergunta boa: "Ana / Maria / Priscila / Lidia", "Quatro / Duas /
+// Sete / Doze" e listas de referencia biblica sao curtas de proposito e nao
+// entregam nada. O defeito nunca e' o tamanho - e' a DESPROPORCAO entre a
+// certa e as erradas, que as duas regras acima ja' medem.
+const LIMITE_MAIS_LONGA = 0.40;
+const LIMITE_DIFERENCA = 8;
+
+for (const l of LICOES) {
+  let perguntas = 0, maisLonga = 0;
+  const graves = [];
+  for (const d of l.days) {
+    if (!d.quiz || !d.quiz.questions) continue;
+    d.quiz.questions.forEach((q, i) => {
+      if (!q.opts || !d.quiz.answers || !d.quiz.answers[i]) return;
+      const idx = String(d.quiz.answers[i]).charCodeAt(0) - 65;
+      const certa = q.opts[idx];
+      if (typeof certa !== 'string') return;
+      perguntas++;
+      const erradas = q.opts.filter((_, k) => k !== idx);
+      const maiorErrada = Math.max(...erradas.map(o => String(o).length));
+      if (certa.length > maiorErrada) maisLonga++;
+      if (certa.length - maiorErrada >= LIMITE_DIFERENCA) graves.push(`${d.id} q${i + 1}`);
+    });
+  }
+  if (!perguntas) continue;
+  const proporcao = maisLonga / perguntas;
+  if (proporcao > LIMITE_MAIS_LONGA) {
+    aviso(`licao ${l.id}: em ${Math.round(proporcao * 100)}% das perguntas a resposta certa e' a mais longa (limite ${Math.round(LIMITE_MAIS_LONGA * 100)}%) - da' para acertar sem ler`);
+  }
+  if (graves.length) {
+    aviso(`licao ${l.id}: ${graves.length} pergunta(s) com a certa ${LIMITE_DIFERENCA}+ caracteres maior que a maior errada: ${graves.slice(0, 6).join(', ')}${graves.length > 6 ? '...' : ''}`);
+  }
+}
+
 // --- traducoes: o gabarito NAO vai no JSON traduzido, ele casa por posicao.
 // Se a contagem de perguntas ou de alternativas divergir, o quiz traduzido
 // fica errado em silencio. Por isso a checagem e de quantidade e ordem.

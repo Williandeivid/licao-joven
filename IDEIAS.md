@@ -75,6 +75,38 @@ As demais lições têm quiz de sábado; essas ficaram sem.
 
 ## 🟡 Próximo
 
+### Grifo nos termos-chave das lições do 4º trimestre
+O destaque já existe e já funciona nos dois temas: `<mark class="hl">` pinta o
+fundo em verde no tema claro e, no escuro, troca para **letra colorida sem
+fundo** (`[data-theme="dark"] mark.hl{ background:none; color:#c3f26a; }`).
+Os temas de leitura e cinza têm as suas próprias versões.
+
+**O que falta:** o 4º trimestre inteiro está sem grifo nenhum.
+
+| Trimestre | Lições | Dias com grifo |
+|---|---|---|
+| 3º | 1 a 13 | **91 de 91** |
+| 4º | 14 a 26 | **0 de 91** |
+
+**O que fazer:** em cada dia das lições 14 a 26, envolver em `<mark class="hl">`
+os termos ou a frase-chave do `body` — o que a pessoa precisa levar daquele dia.
+Um ou dois por dia, não mais: grifo em tudo é o mesmo que grifo em nada.
+
+**Onde:** `LESSONS_CONTENT`, campo `body` de cada dia. O 3º trimestre serve de
+referência de dose e de critério.
+
+**Discrição é requisito, não detalhe** (decisão do Willian em 16/10/2026). O
+grifo marca, não grita. No tema escuro o que existe hoje já está no tom certo:
+letra colorida, sem fundo. **No tema claro o fundo verde `#b8e356` é o ponto
+alto demais** — vale baixar para uma faixa mais fina e menos saturada antes de
+aplicar nas 91 novas, senão a página do 4º trimestre vai ficar mais barulhenta
+que a do 3º.
+
+**Cuidado:** o grifo entra no texto em português. As traduções (`licoes-en.json`
+e `licoes-es.json`) casam por posição, então o `<mark>` precisa existir nas três
+ou a frase destacada fica diferente em cada idioma.
+
+
 ### Willian e Josias como gerentes
 Hoje admin é por `uid` em `config/admins/{uid}`. Funciona, mas exige que cada
 pessoa entre no app primeiro para o uid existir.
@@ -364,7 +396,14 @@ Regras que valeram para as 30 e devem continuar valendo:
 - nada anterior a ~3000 a.C., para não esbarrar em discussão de cronologia;
 - superlativo ("o único do mundo") envelhece: revisar uma vez por ano.
 
-Pendente: traduzir as 30 para inglês e espanhol. Enquanto isso, a lâmpada só
+O acervo tem **91 itens** desde 16/10/2026 (30 do primeiro lote + 61 do
+segundo), para os 182 dias do ano — cada um aparece em média duas vezes.
+Num ano, 66 dos 91 chegam à tela: os outros estão em etiquetas que nenhuma
+lição do trimestre puxa. Para subir esse número é só mapear mais lições às
+etiquetas novas (`patriarcas`, `exodo`, `mulheres`, `musica`, `exilio`,
+`adventista`) em `ETIQUETAS_DA_LICAO`.
+
+Pendente: traduzir as 91 para inglês e espanhol. Enquanto isso, a lâmpada só
 aparece em português (`IDIOMAS_COM_CURIOSIDADE` no index.html).
 
 ## Decisões já tomadas (não reabrir sem motivo novo)
@@ -380,3 +419,7 @@ aparece em português (`IDIOMAS_COM_CURIOSIDADE` no index.html).
 | Ordem dos comentários | cronológica, mais antigo primeiro |
 | Repositório público com o texto da lição | **sim, mantém** — decisão do Willian em 16/10/2026. A igreja foi informada; se houver objeção, que venha por e-mail. Não reabrir sem um pedido formal da CPB ou da igreja |
 | Nome do app | **Sinergia JA**, em todo lugar — título, lojas, convite, QR e compartilhamento |
+| Aba Resumo | **fica** — decisão do Willian em 16/10/2026. A ideia de retirar está encerrada; não reabrir |
+| Atribuição de origem no link compartilhado (`?de=`) | não — Willian dispensou em 16/10/2026 |
+| Fator de tempo do quiz (premia pressa) | mantém, mas como critério de **desempate**, não como peso do dia a dia — decisão de 16/10/2026 |
+| Ordem dos livros da Série do Conflito | ordem da história (Patriarcas → Profetas e Reis → Desejado → Atos → Conflito), na Biblioteca e no plano |
