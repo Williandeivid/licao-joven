@@ -3,67 +3,16 @@
 Lista viva. Cada item tem contexto suficiente para alguém pegar e executar
 sem precisar reconstruir a conversa.
 
-Última revisão: 13 de setembro de 2026
+Última revisão: 17 de outubro de 2026
 
 ---
 
 ## 🔴 Corrigir
 
-### Compartilhar no WhatsApp manda para um link que não existe
-O item "Compartilhar" do menu ⋮ de cada dia monta a mensagem com
-`https://licoes-jovens.com`. Esse domínio **não está registrado** — o RDAP da
-Verisign devolve `404` e o endereço não responde.
+*Saíram daqui em 17/10/2026, porque já foram corrigidos: link do WhatsApp para
+um domínio que não existia, "Baixar PDF" que baixava .txt, a tirinha do domingo
+que nunca aparecia e a rajada de 503 no conteúdo oficial.*
 
-Dois problemas: quem recebe a mensagem cai num link morto; e qualquer pessoa
-pode registrar `licoes-jovens.com` hoje e passar a receber todo o tráfego vindo
-dos compartilhamentos do app.
-
-**Correção imediata:** trocar pelo endereço real, `licaojovem-iasd.pages.dev`,
-até existir domínio próprio. Melhor ainda: montar o link com o dia específico,
-para quem recebe cair direto na lição compartilhada.
-
-**Onde:** `compartilharWhatsApp()`.
-
----
-
-### "Baixar PDF" baixa um arquivo .txt
-O item do menu ⋮ se chama "Baixar PDF", mas `exportarPDF()` gera um `Blob` de
-`text/plain` e salva como `licao-11-qua.txt`. Ou renomear para "Baixar texto",
-ou gerar PDF de verdade.
-
-**Detalhe junto:** as duas funções fecham o menu com
-`document.querySelector('.menu-3pontos-btn')`, que pega o **primeiro** botão da
-página, não o que foi clicado.
-
----
-
-### A tirinha do domingo nunca aparece
-O código da aba Resumo mostra a tirinha do trimestre no domingo só se a lição
-tiver o campo `quarter`:
-
-```js
-if(day.id === 'dom' && meta && meta.quarter){ ... }
-```
-
-Mas nenhuma entrada de `LESSONS_META` tem esse campo — são todas `{id, title}`.
-A condição nunca é verdadeira e a tirinha nunca foi exibida. Resolve junto com
-**Trimestre num lugar só**: usar a constante única em vez de `meta.quarter`.
-
----
-
-### Rajada de requisições ao conteúdo oficial
-Em 11/09 o app acumulou ~490 erros `503` por carregamento e o conteúdo oficial
-não abria. Em 12/09 voltou ao normal (`200`), então foi queda passageira do
-GitHub — mas a causa que provavelmente disparou o limite continua:
-`fetchOfficialContent` é chamada para os **7 dias de uma vez** via `Promise.all`.
-
-**O que fazer:** espaçar as chamadas (uma por vez, ou 2 em paralelo), respeitar o
-cache de 7 dias que já existe antes de pedir de novo, e não repetir a busca
-quando a anterior falhou com 503.
-
-**Onde:** `fetchOfficialContent()` e a chamada com `Promise.all` logo abaixo.
-
----
 
 ### Quizzes de sábado das lições 8 a 13
 Existiam na versão de 17 de agosto e se perderam na restauração do backup de 14.
@@ -81,12 +30,13 @@ fundo em verde no tema claro e, no escuro, troca para **letra colorida sem
 fundo** (`[data-theme="dark"] mark.hl{ background:none; color:#c3f26a; }`).
 Os temas de leitura e cinza têm as suas próprias versões.
 
-**O que falta:** o 4º trimestre inteiro está sem grifo nenhum.
+**O que falta:** lições 15 a 26. A **14 já está grifada e no ar** desde
+17/10/2026 — um grifo por dia, sete no total; serve de medida para as outras.
 
 | Trimestre | Lições | Dias com grifo |
 |---|---|---|
 | 3º | 1 a 13 | **91 de 91** |
-| 4º | 14 a 26 | **0 de 91** |
+| 4º | 14 a 26 | **7 de 91** (só a lição 14) |
 
 **O que fazer:** em cada dia das lições 14 a 26, envolver em `<mark class="hl">`
 os termos ou a frase-chave do `body` — o que a pessoa precisa levar daquele dia.
