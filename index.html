@@ -2360,8 +2360,12 @@ function curiosidadeDoDia(lessonId, dayId){
   const acervo = (CURIOSIDADES || []).filter(c => c.texto && c.texto[idiomaConteudoAtual]);
   if (!acervo.length) return null;
   const etiquetas = (ETIQUETAS_DA_LICAO[lessonId] || []);
-  let grupo = acervo.filter(c => c.etiquetas.some(e => etiquetas.indexOf(e) !== -1));
-  if (grupo.length < 4) grupo = acervo;
+  const doTema = acervo.filter(c => c.etiquetas.some(e => etiquetas.indexOf(e) !== -1));
+  /* O grupo precisa dar pelo menos uma por dia da semana. Curto demais, a
+     mesma curiosidade volta no trimestre inteiro - entao o tema vem na frente
+     e o resto do acervo completa, em vez de o tema ser jogado fora. */
+  const grupo = doTema.length >= 7 ? doTema
+    : doTema.concat(acervo.filter(c => doTema.indexOf(c) === -1));
   /* Passo primo em cima da posicao do dia no ano (0..181), e nao um hash: assim
      dois dias seguidos nunca caem na mesma curiosidade, o que o hash deixava
      acontecer dentro de um grupo pequeno. */
@@ -2396,9 +2400,9 @@ const ETIQUETAS_DA_LICAO = {
   1:['evangelhos'], 2:['evangelhos'], 3:['evangelhos'], 4:['evangelhos'], 5:['evangelhos'],
   6:['evangelhos'], 7:['evangelhos'], 8:['evangelhos'], 9:['evangelhos'], 10:['evangelhos'],
   11:['evangelhos'], 12:['evangelhos'], 13:['escrita'],
-  14:['geral'], 15:['profetas'], 16:['profetas','reis'], 17:['paulo'], 18:['escrita'],
-  19:['profetas','escrita'], 20:['profetas','escrita'], 21:['paulo','escrita'], 22:['evangelhos'],
-  23:['reis'], 24:['reis'], 25:['paulo'], 26:['reis','templo']
+  14:['geral','patriarcas'], 15:['profetas','templo'], 16:['profetas','reis'], 17:['paulo'], 18:['escrita'],
+  19:['profetas','escrita'], 20:['profetas','escrita'], 21:['paulo','escrita','geografia'], 22:['evangelhos'],
+  23:['exodo','reis'], 24:['mulheres','musica'], 25:['paulo'], 26:['reis','templo','musica']
 };
 
 function hashStr(s){
