@@ -24,6 +24,28 @@ As demais lições têm quiz de sábado; essas ficaram sem.
 
 ## 🟡 Próximo
 
+### Duas abas abertas do app no mesmo navegador
+**O que já existe:** quando o app vai para segundo plano, ele solta a conexão
+com o Firebase depois de 10 s (`soltarConexaoAoVivo` + `visibilitychange`), e
+solta na hora quando a aba fecha (`pagehide`). Isso foi feito porque o plano
+gratuito aguenta 100 conexões simultâneas e cada aba esquecida segurava uma.
+
+**O que falta:** nada impede abrir o app em duas abas do mesmo navegador. As
+duas ficam vivas, cada uma com seu estado e sua conexão, e a última a gravar
+vence — dá para perder uma marcação feita na outra aba.
+
+**Como resolver:** `BroadcastChannel` (ou uma chave no `localStorage` com
+carimbo de tempo). A aba nova avisa que chegou; a antiga, se não estiver em
+uso, mostra um aviso discreto "o app está aberto em outra aba" e para de
+gravar. Sem modal, sem fechar nada à força.
+
+**Junto disso:** o cronômetro do quiz (`localState.timerInterval`) continua
+correndo se a pessoa sai no meio e volta depois. Como o fator de tempo premia
+quem responde rápido, isso só prejudica quem foi interrompido. Pausar quando
+`document.hidden` fica verdadeiro resolve.
+
+---
+
 ### Grifo nos termos-chave das lições do 4º trimestre
 O destaque já existe e já funciona nos dois temas: `<mark class="hl">` pinta o
 fundo em verde no tema claro e, no escuro, troca para **letra colorida sem
