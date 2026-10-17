@@ -3,6 +3,9 @@
 Lista viva. Cada item tem contexto suficiente para alguém pegar e executar
 sem precisar reconstruir a conversa.
 
+A receita fixa de cada lição nova (grifo, quiz, curiosidades, conferências
+antes de publicar) está em **PADRAO-DA-LICAO.md**.
+
 Última revisão: 17 de outubro de 2026
 
 ---
@@ -23,6 +26,25 @@ As demais lições têm quiz de sábado; essas ficaram sem.
 ---
 
 ## 🟡 Próximo
+
+### Convidar para o ranking na hora do login
+Hoje a pessoa entra com a conta Google e o ranking simplesmente passa a
+existir — quem não abre a aba Progresso pode nunca descobrir que participa de
+alguma coisa. A ideia é **perguntar na hora do login**, uma vez só: "quer
+aparecer no ranking da sua turma?", com Sim/Não e a explicação de uma linha do
+que entra (nome e pontos, nada mais).
+
+**Por que na hora do login:** é o único momento em que se tem a atenção da
+pessoa e em que a pergunta não interrompe nada. Depois disso ela vira um
+ajuste escondido que ninguém procura.
+
+**Cuidados:** a resposta fica guardada no perfil (`usuarios/$uid`), dá para
+mudar depois na aba Conta, e quem diz não continua tendo os pontos contados
+para si — só não aparece na lista dos outros. A regra do Firebase já valida o
+que vai para `ranking` e `ranking_trimestre`; o campo novo é só um "aparecer
+sim/não" lido antes de gravar.
+
+---
 
 ### Duas abas abertas do app no mesmo navegador
 **O que já existe:** quando o app vai para segundo plano, ele solta a conexão
