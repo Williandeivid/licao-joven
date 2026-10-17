@@ -1418,7 +1418,20 @@
 
   /* ===== NEW: mind map (Sábado) ===== */
   .mindmap-wrap{ margin:10px 0 26px; padding:20px; background:linear-gradient(135deg,var(--bg),var(--tint-violet)); border-radius:20px; border:2px solid var(--border);}
-  .mindmap-wrap h4{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:0.647rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--violet); margin:0 0 12px;}
+  .mindmap-wrap .rev-h{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:0.647rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--violet); margin:0 0 12px; font-weight:700;}
+  .rev-kw{ font-family:'Unbounded', sans-serif; font-weight:800; color:var(--ink); font-size:clamp(15px,4.6vw,20px); line-height:1.15; text-align:center; margin:0; overflow-wrap:anywhere;}
+  .rev-sub{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.06em; color:var(--ink-soft); text-align:center; margin:4px 0 12px;}
+  .rev-lista{ display:grid; gap:2px;}
+  .rev-dia{ display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:10px; align-items:start; width:100%; padding:11px 2px; background:none; border:0; border-top:1px solid var(--border); text-align:left; font:inherit; color:inherit; cursor:pointer;}
+  .rev-dia:first-child{ border-top:0;}
+  .rev-rot{ font-family:'JetBrains Mono', monospace; font-weight:700; font-size:11px; line-height:1.4; color:var(--dcor);}
+  .rev-titulo{ display:block; font-weight:700; font-size:13.5px; line-height:1.3; color:var(--ink); overflow-wrap:anywhere;}
+  .rev-apoio{ display:block; font-size:11.5px; line-height:1.4; color:var(--ink-soft); margin-top:2px; overflow-wrap:anywhere;}
+  .rev-ok{ font-size:12px; line-height:1.4; color:var(--ink-soft);}
+  .rev-dia.pulado .rev-titulo, .rev-dia.pulado .rev-rot{ opacity:0.45;}
+  .rev-dia.pulado .rev-apoio{ opacity:0.35;}
+  .rev-rodape{ margin:12px 0 0; text-align:center; font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; color:var(--ink-soft);}
+  @media (max-width:430px){ .mindmap-wrap{ padding:16px 12px;} }
 
   /* ===== NEW: STATS VIEW ===== */
   /* 64px nas laterais: o botao flutuante (⋮) mora no canto superior direito, e o
@@ -1931,10 +1944,6 @@
   .review-section h4{font-family:'Unbounded', sans-serif; font-size:1rem; color:var(--violet); margin:0 0 8px; display:flex; align-items:center; gap:8px;}
   .review-badge{display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:800; background:var(--pink); color:#fff; padding:3px 8px; border-radius:6px;}
 
-  .radial-mindmap{width:100%; max-width:500px; margin:20px auto; padding:20px; background:var(--card); border-radius:16px; box-shadow:0 8px 24px -8px rgba(28,23,53,0.25);}
-  .radial-mindmap h3{font-family:'Unbounded', sans-serif; font-weight:700; color:var(--ink); text-align:center; margin:0 0 16px;}
-  .radial-mindmap svg{display:block; width:100%;}
-
   /* ===== VERSION SELECTOR MODAL ===== */
   .version-modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:100; align-items:center; justify-content:center;}
   .version-modal.show{display:flex;}
@@ -2441,55 +2450,44 @@ function shuffleOptions(opts, correctLetter, seed){
   return {opts:newOpts, correct:String.fromCharCode(65+newCorrectIdx)};
 }
 
-function wrapMindMapLabel(title, maxWidth, fontSize){
-  const avgCharWidth = fontSize * 0.56;
-  const maxChars = Math.max(4, Math.floor(maxWidth / avgCharWidth));
-  const words = title.split(' ');
-  const lines = [];
-  let current = '';
-  words.forEach(w=>{
-    const test = current ? current+' '+w : w;
-    if(test.length > maxChars && current){
-      lines.push(current);
-      current = w;
-    } else {
-      current = test;
-    }
-  });
-  if(current) lines.push(current);
-  return lines;
-}
+// Revisao da semana, no sabado: a lição inteira num olhar, com o que ja foi
+// estudado em destaque e o que ficou para tras apagado.
+// Era um SVG radial com seis bolhas. Saiu porque nao cabia: o quadro de 400
+// renderizava a 243px no celular e o texto das bolhas ficava entre 3,9 e
+// 5,5px - metade do minimo legivel. Em lista o mesmo texto sai em 13,5px, a
+// palavra-chave para de vazar do circulo, e a cor passa a ser so a inicial do
+// dia (texto em var(--ink), que todos os temas garantem legivel).
+function renderMindMap(content, lessonId, progress){
+  const days = content.days.filter(d => d.id !== 'sab');
+  const feitos = days.filter(d => progress.days && progress.days[d.id]).length;
 
-function renderMindMap(content){
-  const days = content.days.filter(d=>d.id!=='sab');
-  const cx=200, cy=190, r=140;
-  const nodeR = 38;
-  const nodes = days.map((d,i)=>{
-    const angle = (Math.PI*2/days.length)*i - Math.PI/2;
-    return { x: cx+r*Math.cos(angle), y: cy+r*Math.sin(angle), title:d.title, colorVar: DAY_COLORS[i%7] };
-  });
-  let svg = `<svg viewBox="0 0 400 380" style="width:100%;height:auto;max-width:420px;display:block;margin:0 auto;">`;
-  nodes.forEach(n=>{
-    svg += `<line x1="${cx}" y1="${cy}" x2="${n.x.toFixed(1)}" y2="${n.y.toFixed(1)}" stroke="var(${n.colorVar})" stroke-width="2" opacity="0.5"/>`;
-  });
-  svg += `<circle cx="${cx}" cy="${cy}" r="54" fill="var(--void)"/>`;
-  svg += `<text x="${cx}" y="${cy-3}" text-anchor="middle" fill="#fff" font-family="Unbounded" font-weight="800" font-size="13">${content.keyword}</text>`;
-  svg += `<text x="${cx}" y="${cy+15}" text-anchor="middle" fill="#a89ee0" font-family="JetBrains Mono" font-size="9">Lição ${content.id}</text>`;
-  nodes.forEach(n=>{
-    svg += `<circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="${nodeR}" fill="var(${n.colorVar})"/>`;
-    const maxTextWidth = nodeR * 1.7;
-    let fontSize = 9;
-    let lines = wrapMindMapLabel(n.title, maxTextWidth, fontSize);
-    if(lines.length > 3){ fontSize = 7.8; lines = wrapMindMapLabel(n.title, maxTextWidth, fontSize); }
-    if(lines.length > 3){ lines = lines.slice(0,3); lines[2] += '…'; }
-    const lineHeight = fontSize + 2.5;
-    const startY = n.y - ((lines.length-1)*lineHeight)/2;
-    lines.forEach((line, li)=>{
-      svg += `<text x="${n.x.toFixed(1)}" y="${(startY+li*lineHeight+3).toFixed(1)}" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-weight="700" font-size="${fontSize}">${line}</text>`;
-    });
-  });
-  svg += `</svg>`;
-  return `<div class="mindmap-wrap"><h4>${t('lesson.mapaMentalSemana')}</h4>${svg}</div>`;
+  const linhas = days.map((d, i) => {
+    const ok = !!(progress.days && progress.days[d.id]);
+    // Mesmo rotulo da regua de dias: ja resolvido nos tres idiomas.
+    const rot = dayDisplayDate(lessonId, d.id, idiomaConteudoAtual).split(' · ')[0].slice(0, 3);
+    // keyideas so existe em portugues; en/es caem no summary, que e traduzido.
+    const apoio = idiomaConteudoAtual === 'pt'
+      ? ((d.keyideas || '').split(' · ').filter(Boolean)[0] || '')
+      : resumirTexto(d.summary || '', 80);
+    return `<button type="button" class="rev-dia${ok ? '' : ' pulado'}"
+        style="--dcor:var(${DAY_COLORS[i % 7]})" data-day="${d.id}"
+        onclick="scrollToDay('${d.id}')">
+      <span class="rev-rot">${rot}</span>
+      <span class="rev-txt">
+        <span class="rev-titulo">${escaparHtml(d.title)}</span>
+        ${apoio ? `<span class="rev-apoio">${escaparHtml(apoio)}</span>` : ''}
+      </span>
+      <span class="rev-ok">${ok ? '✓' : ''}</span>
+    </button>`;
+  }).join('');
+
+  return `<section class="mindmap-wrap" aria-labelledby="rev-h-${content.id}">
+    <h3 id="rev-h-${content.id}" class="rev-h">${t('lesson.mapaMentalSemana')}</h3>
+    <p class="rev-kw">${escaparHtml(content.keyword || '')}</p>
+    <div class="rev-sub">${t('lesson.licaoJovem')} ${numeroDaLicao(content.id)}</div>
+    <div class="rev-lista">${linhas}</div>
+    <p class="rev-rodape">${t('lesson.revisaoConcluidos').replace('${n}', feitos).replace('${t}', days.length)}</p>
+  </section>`;
 }
 
 // Alguns dias trazem um rotulo especial (ex.: "Domingo · 28 de junho · Momento
@@ -2551,7 +2549,7 @@ function renderDayCard(lessonId, day, idx, progress, content, meta){
   html += `</div>`; // Fecha source-panel resumo
 
   if(day.id === 'sab'){
-    html += renderMindMap(content);
+    html += renderMindMap(content, lessonId, progress);
   }
 
   html += `<div class="concluir-wrap">
@@ -3277,6 +3275,21 @@ function atualizarMarcacoesDoDia(lessonId, dayId){
 
     // 3. Selo de sequência no hero
     atualizarSeloSequencia();
+
+    // 4. Revisão da semana, no sábado: a linha daquele dia acende sem recarregar
+    const rev = document.querySelector(`.rev-dia[data-day="${dayId}"]`);
+    if(rev){
+      rev.classList.remove('pulado');
+      const ok = rev.querySelector('.rev-ok');
+      if(ok) ok.textContent = '✓';
+      const lista = rev.closest('.rev-lista');
+      const rodape = rev.closest('.mindmap-wrap').querySelector('.rev-rodape');
+      if(lista && rodape){
+        const n = lista.querySelectorAll('.rev-dia:not(.pulado)').length;
+        rodape.textContent = t('lesson.revisaoConcluidos')
+          .replace('${n}', n).replace('${t}', lista.children.length);
+      }
+    }
   }catch(e){
     console.warn('⚠️ Não atualizou as marcações do dia:', e.message);
   }
@@ -7325,12 +7338,12 @@ const UI_STRINGS = {
     'stats.semRegistroDia': 'Nada registrado neste dia.',
     'stats.vemDoApp': 'O que aparece aqui é o que você fez no app. Não dá para alterar na mão.',
     'lesson.mapaMentalSemana': 'Mapa mental da semana',
+    'lesson.revisaoConcluidos': '${n} de ${t} dias concluídos',
     'lesson.tirinhaOriginal': 'Tirinha original · ComTexto Bíblico, Lição ${n}',
     'lesson.textoBaseSemana': 'Texto-base da semana:',
     'lesson.semConteudoData': 'Sem conteúdo disponível para essa data.',
     'lesson.licaoNaoMontada': 'Essa lição ainda não foi montada.',
     'lesson.versaoDaLicao': 'Versão da Lição',
-    'lesson.mindmapLicaoFallback': 'Lição',
     'stats.diasEssaSemana': 'dias essa semana',
     'stats.minEssaSemana': 'min essa semana',
     'stats.legendaDiasBiblia': 'Dias de Bíblia',
@@ -7786,12 +7799,12 @@ const UI_STRINGS = {
     'stats.semRegistroDia': 'Nothing recorded on this day.',
     'stats.vemDoApp': 'What you see here is what you did in the app. It cannot be changed by hand.',
     'lesson.mapaMentalSemana': "This week's mind map",
+    'lesson.revisaoConcluidos': '${n} of ${t} days completed',
     'lesson.tirinhaOriginal': 'Original comic strip · ComTexto Bíblico, Lesson ${n}',
     'lesson.textoBaseSemana': "This week's key text:",
     'lesson.semConteudoData': 'No content available for that date.',
     'lesson.licaoNaoMontada': "This lesson hasn't been built yet.",
     'lesson.versaoDaLicao': 'Lesson Version',
-    'lesson.mindmapLicaoFallback': 'Lesson',
     'stats.diasEssaSemana': 'days this week',
     'stats.minEssaSemana': 'min this week',
     'stats.legendaDiasBiblia': 'Bible Days',
@@ -8247,12 +8260,12 @@ const UI_STRINGS = {
     'stats.semRegistroDia': 'Nada registrado en este día.',
     'stats.vemDoApp': 'Lo que aparece aquí es lo que hiciste en la app. No se puede cambiar a mano.',
     'lesson.mapaMentalSemana': 'Mapa mental de la semana',
+    'lesson.revisaoConcluidos': '${n} de ${t} días completados',
     'lesson.tirinhaOriginal': 'Tira original · ComTexto Bíblico, Lección ${n}',
     'lesson.textoBaseSemana': 'Texto base de la semana:',
     'lesson.semConteudoData': 'Sin contenido disponible para esa fecha.',
     'lesson.licaoNaoMontada': 'Esta lección todavía no fue armada.',
     'lesson.versaoDaLicao': 'Versión de la Lección',
-    'lesson.mindmapLicaoFallback': 'Lección',
     'stats.diasEssaSemana': 'días esta semana',
     'stats.minEssaSemana': 'min esta semana',
     'stats.legendaDiasBiblia': 'Días de Biblia',
@@ -9147,33 +9160,6 @@ function renderQuizFeedback(correct, explanation, nextReviewDays = null) {
   else if (nextReviewDays) html += `<p class="review-reminder">${t('lesson.proximaRevisaoDias').replace('${n}', nextReviewDays)}</p>`;
   html += `</div>`;
   return html;
-}
-
-// ============ RADIAL MIND MAP (SATURDAY) ============
-function generateRadialMindMap(lessonId) {
-  const lesson = LESSONS_CONTENT.find(l => l.id === lessonId);
-  if (!lesson) return '';
-  const centerKeyword = lesson.keyword || t('lesson.mindmapLicaoFallback');
-  const dayColors = ['#6c4ce0', '#ff5d8f', '#2fd6c8', '#ffc857', '#ff8a5c', '#8e6cff', '#22b8a6'];
-  const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-  let svg = `<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:500px;">
-    <defs><filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/></filter></defs>`;
-  svg += `<circle cx="300" cy="300" r="50" fill="#6c4ce0" filter="url(#shadow)"/>
-          <text x="300" y="308" text-anchor="middle" font-family="Unbounded, sans-serif" font-weight="800" font-size="13" fill="#fff">${centerKeyword.substring(0, 12)}</text>`;
-  lesson.days.forEach((day, i) => {
-    const angle = (i / 7) * 360 * (Math.PI / 180);
-    const radius = 200;
-    const x = 300 + radius * Math.cos(angle);
-    const y = 300 + radius * Math.sin(angle);
-    const color = dayColors[i];
-    const keyIdea = day.title ? day.title.split(/[\s,]/)[0].substring(0, 10) : 'Dia';
-    svg += `<line x1="300" y1="300" x2="${x}" y2="${y}" stroke="${color}" stroke-width="3" opacity="0.6"/>
-            <circle cx="${x}" cy="${y}" r="35" fill="${color}" filter="url(#shadow)"/>
-            <text x="${x}" y="${y - 5}" text-anchor="middle" font-family="Unbounded, sans-serif" font-weight="700" font-size="12" fill="#fff">${dayNames[i]}</text>
-            <text x="${x}" y="${y + 12}" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#fff" opacity="0.9">${keyIdea}</text>`;
-  });
-  svg += `</svg>`;
-  return svg;
 }
 
 // ============ INIT ============
