@@ -71,6 +71,10 @@ for (const l of LICOES) {
 // certa e as erradas, que as duas regras acima ja' medem.
 const LIMITE_MAIS_LONGA = 0.40;
 const LIMITE_DIFERENCA = 8;
+// Ser "a mais longa" por 1 ou 2 caracteres nao entrega nada a ninguem
+// ("Cinco" contra "Quatro", "Jeremias 36:20-32" contra "Jeremias 36:1-19").
+// So conta para a proporcao quando a diferenca da' para notar de relance.
+const MARGEM_QUE_SE_NOTA = 3;
 
 for (const l of LICOES) {
   let perguntas = 0, maisLonga = 0;
@@ -85,7 +89,7 @@ for (const l of LICOES) {
       perguntas++;
       const erradas = q.opts.filter((_, k) => k !== idx);
       const maiorErrada = Math.max(...erradas.map(o => String(o).length));
-      if (certa.length > maiorErrada) maisLonga++;
+      if (certa.length - maiorErrada >= MARGEM_QUE_SE_NOTA) maisLonga++;
       if (certa.length - maiorErrada >= LIMITE_DIFERENCA) graves.push(`${d.id} q${i + 1}`);
     });
   }
