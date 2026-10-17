@@ -396,7 +396,14 @@ Regras que valeram para as 30 e devem continuar valendo:
 - nada anterior a ~3000 a.C., para não esbarrar em discussão de cronologia;
 - superlativo ("o único do mundo") envelhece: revisar uma vez por ano.
 
-Pendente: traduzir as 30 para inglês e espanhol. Enquanto isso, a lâmpada só
+O acervo tem **91 itens** desde 16/10/2026 (30 do primeiro lote + 61 do
+segundo), para os 182 dias do ano — cada um aparece em média duas vezes.
+Num ano, 66 dos 91 chegam à tela: os outros estão em etiquetas que nenhuma
+lição do trimestre puxa. Para subir esse número é só mapear mais lições às
+etiquetas novas (`patriarcas`, `exodo`, `mulheres`, `musica`, `exilio`,
+`adventista`) em `ETIQUETAS_DA_LICAO`.
+
+Pendente: traduzir as 91 para inglês e espanhol. Enquanto isso, a lâmpada só
 aparece em português (`IDIOMAS_COM_CURIOSIDADE` no index.html).
 
 ## Decisões já tomadas (não reabrir sem motivo novo)
